@@ -299,6 +299,7 @@ x3dom.registerNodeType(
             this.addField_SFNode('color', x3dom.nodeTypes.X3DColorNode);
 
             this._mesh._primType = "LINES";
+            x3dom.Utils.needLineWidth = true;
         },
         {
             nodeChanged: function() {
@@ -379,6 +380,7 @@ x3dom.registerNodeType(
             this.addField_MFInt32(ctx, 'colorIndex', []);
 
             this._mesh._primType = 'LINES';
+            x3dom.Utils.needLineWidth = true;
         },
         {
             nodeChanged: function()
