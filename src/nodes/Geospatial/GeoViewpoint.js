@@ -223,7 +223,11 @@ x3dom.registerNodeType(
 
                 // also transform centerOfRotation for initial view                
                 this._vf.centerOfRotation = this.getGeoCenterOfRotation(this._geoSystem, this._geoOrigin, this._geoCenterOfRotation);
-                
+                // needs to have current transform applied
+                // since the current transform only seems to affect the location and orientation
+                // hmm, CurrentTransform not updated yet ...
+                // this._vf.centerOfRotation = parentTransform.multMatrixPnt(this._vf.centerOfRotation); 
+
                 // borrowed from Viewpoint.js
             
                 this._projMatrix = null;
@@ -265,7 +269,9 @@ x3dom.registerNodeType(
 
             getCenterOfRotation: function() {
                 // is already transformed to GC
-                return this._vf.centerOfRotation;
+                // return is expected in world coords.
+                return this.getCurrentTransform().multMatrixPnt(this._vf.centerOfRotation); 
+                // return this._vf.centerOfRotation;
             },
             
             getGeoCenterOfRotation: function(geoSystem, geoOrigin, geoCenterOfRotation) {
@@ -380,6 +386,15 @@ x3dom.registerNodeType(
                 this._viewMatrix = this.getInitViewMatrix(this._vf.orientation, this._vf.geoSystem, this._cf.geoOrigin, this._vf.position);
                 // also reset center of Rotation; is not done for regular viewpoint
                 this._vf.centerOfRotation = this.getGeoCenterOfRotation(this._vf.geoSystem, this._cf.geoOrigin, this._geoCenterOfRotation);
+                // needs to have current transform applied
+                // since the current transform only seems to affect the location and orientation
+                // this._vf.centerOfRotation = this.getCurrentTransform().multMatrixPnt(this._vf.centerOfRotation);
+                // revert to centerOfRotation having local coords
+                
+                //Reset navigation helpers of the viewarea
+                if(this._nameSpace.doc._viewarea) {
+                    this._nameSpace.doc._viewarea.resetNavHelpers();
+                }
             },
 
             getNear: function() {
