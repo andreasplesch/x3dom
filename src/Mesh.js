@@ -357,7 +357,7 @@ x3dom.Mesh.prototype.calcTexCoords = function(mode)
     {
         for (var i=0, j=0, n=this._normals[0].length; i<n; i+=3)
         {
-            this._texCoords[0][j++] = Math.asin( Math.abs(this._normals[0][i+2] ));
+            this._texCoords[0][j++] = Math.asin( Math.abs(this._normals[0][i+2] ))/Math.PI;
             this._texCoords[0][j++] = 0;
         }
     }
