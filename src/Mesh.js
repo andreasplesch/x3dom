@@ -353,6 +353,14 @@ x3dom.Mesh.prototype.calcTexCoords = function(mode)
             this._texCoords[0][j++] = 0.5 + this._normals[0][i+1] / 2.0;
         }
     }
+    else if (mode.toLowerCase() === "slope")
+    {
+        for (var i=0, j=0, n=this._normals[0].length; i<n; i+=3)
+        {
+            this._texCoords[0][j++] = 0.5 + this._normals[0][i+2] / 2.0;
+            this._texCoords[0][j++] = 0;
+        }
+    }
     else    // "plane" is x3d default mapping
     {
         var min = new x3dom.fields.SFVec3f(0, 0, 0),
