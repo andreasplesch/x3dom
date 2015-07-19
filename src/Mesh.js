@@ -354,6 +354,25 @@ x3dom.Mesh.prototype.calcTexCoords = function(mode)
         }
     }
     
+    else if (mode.toLowerCase() === "geo-height" && x3dom.nodeTypes.GeoCoordinate)
+    {
+    	//check if geospatial component available; by checking if GeoCoordinate exists
+    	var min, max, S = 0, steps;
+		if (this._parent._cf.texCoord.node._vf.parameter)
+		{
+			var parameter = this._parent._cf.texCoord.node._vf.parameter;
+			if (parameter.length > 0) { min = parameter[0]; }
+			if (parameter.length > 1) { max = parameter[1]; }
+			if (parameter.length > 2) { steps = parameter[2]; }
+		}
+		var geoSystem = new x3dom.fields.MFString(['GD', 'WE']);
+		if (this._parent._vf.geoSystem) { geoSystem = this._parent._vf.geoSystem };
+		//should find geocoordinate node
+		//probably need to check if coord exists first
+		if (this._parent._cf.coord.node._vf.geoSystem) { geoSystem = this._parent._cf.coord.node._vf.geoSystem };
+		// 
+    }
+    
     else if (mode.toLowerCase() === "slope")
     {
 		var min = 0, max = 90, S = 0, steps;
