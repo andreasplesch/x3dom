@@ -356,7 +356,7 @@ x3dom.Mesh.prototype.calcTexCoords = function(mode)
     else if (mode.toLowerCase() === "slope")
     {
 	var min = 0, max = 90;
-	if (this._parent._cf.texcoord.node._vf.parameter)
+	if (this._parent._cf.texCoord.node._vf.parameter)
 	{
 		var parameter = this._parent._cf.texCoord.node._vf.parameter;
 		if (parameter.length > 0) { min = parameter[0]; }
