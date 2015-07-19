@@ -355,21 +355,23 @@ x3dom.Mesh.prototype.calcTexCoords = function(mode)
     }
     else if (mode.toLowerCase() === "slope")
     {
-	var min = 0, max = 90;
+	var min = 0, max = 90, S = 0, steps;
 	if (this._parent._cf.texCoord.node._vf.parameter)
 	{
 		var parameter = this._parent._cf.texCoord.node._vf.parameter;
 		if (parameter.length > 0) { min = parameter[0]; }
 		if (parameter.length > 1) { max = parameter[1]; }
+		if (parameter.length > 2) { steps = parameter[2]; }
 	}
     for (var i=0, j=0, n=this._normals[0].length; i<n; i+=3)
         {
-            this._texCoords[0][j++] = 
-            	Math.min ( 1,
-		            Math.max ( 0, 
-	            		( Math.acos( Math.abs( this._normals[0][i+1] )) * 180 / Math.PI - min ) / (max - min)
-            		)
+            S = ( Math.acos( Math.abs( this._normals[0][i+1] )) * 180 / Math.PI - min ) / (max - min);
+    		S = Math.min ( 1,
+	            	Math.max ( 0, S )
         		);
+        	if (steps) { S = Math.floor( S * steps ) / steps; } 
+    		this._texCoords[0][j++] = S; 
+            
             this._texCoords[0][j++] = 0;
         }
     }
