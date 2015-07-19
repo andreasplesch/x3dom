@@ -369,7 +369,13 @@ x3dom.Mesh.prototype.calcTexCoords = function(mode)
 		if (this._parent._vf.geoSystem) { geoSystem = this._parent._vf.geoSystem };
 		//should find geocoordinate node
 		//probably need to check if coord exists first
-		if (this._parent._cf.coord.node._vf.geoSystem) { geoSystem = this._parent._cf.coord.node._vf.geoSystem };
+		if (this._parent._cf.coord)
+		{
+			if (this._parent._cf.coord.node._vf.geoSystem) 
+			{ 
+				geoSystem = this._parent._cf.coord.node._vf.geoSystem;
+			}
+		}
 		// 
     }
     
