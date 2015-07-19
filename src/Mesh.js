@@ -367,6 +367,7 @@ x3dom.Mesh.prototype.calcTexCoords = function(mode)
 	    for (var i=0, j=0, n=this._normals[0].length; i<n; i+=3)
 	        {
 	            S = ( Math.acos( Math.abs( this._normals[0][i+1] )) * 180 / Math.PI - min ) / (max - min);
+	    		//clamping is probably done elsewhere as well since required by spec.
 	    		S = Math.min ( 1,
 		            	Math.max ( 0, S )
 	        		);
@@ -402,9 +403,10 @@ x3dom.Mesh.prototype.calcTexCoords = function(mode)
 		for (var k=0, l=0, m=this._positions[0].length; k<m; k+=3)
         {
             S = (this._positions[0][k+1] - min) / range;
-            S = Math.min ( 1,
-		            	Math.max ( 0, S )
-	        		);
+            //clamping is probably done elsewhere as well since required by spec.
+    		S = Math.min ( 1,
+	            	Math.max ( 0, S )
+        		);
         	if (steps) { S = Math.floor( S * steps ) / steps; } 
             this._texCoords[0][l++] = S;
             this._texCoords[0][l++] = 0;
