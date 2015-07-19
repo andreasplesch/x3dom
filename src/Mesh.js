@@ -388,21 +388,25 @@ x3dom.Mesh.prototype.calcTexCoords = function(mode)
 			if (parameter.length > 2) { steps = parameter[2]; }
 		}
 		//determine data range if not provided
-		if (min === undefined)
+		if (max === undefined)
 		{
 			var minpos = new x3dom.fields.SFVec3f(0, 0, 0),
 	            maxpos = new x3dom.fields.SFVec3f(0, 0, 0);
 	        var vol = this.getVolume();
 	
 	        vol.getBounds(minpos, maxpos);
-	        //var dia = maxpos.subtract(minpos);
 	        min = minpos.y;
 	        max = maxpos.y;
 		}
 		var range = max - min;
 		for (var k=0, l=0, m=this._positions[0].length; k<m; k+=3)
         {
-            this._texCoords[0][l++] = (this._positions[0][k+1] - min) / range;
+            S = (this._positions[0][k+1] - min) / range;
+            S = Math.min ( 1,
+		            	Math.max ( 0, S )
+	        		);
+        	if (steps) { S = Math.floor( S * steps ) / steps; } 
+            this._texCoords[0][l++] = S;
             this._texCoords[0][l++] = 0;
         }
 		
