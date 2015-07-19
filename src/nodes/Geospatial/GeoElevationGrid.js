@@ -222,7 +222,7 @@ x3dom.registerNodeType(
                             numTexComponents = 3;
                         }
                     }
-                    else if (texCoordnode._vf.mode) {
+                    else if (texCoordNode._vf.mode) {
                         texMode = texCoordNode._vf.mode;
                     }
                 }
