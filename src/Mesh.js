@@ -353,28 +353,60 @@ x3dom.Mesh.prototype.calcTexCoords = function(mode)
             this._texCoords[0][j++] = 0.5 + this._normals[0][i+1] / 2.0;
         }
     }
+    
     else if (mode.toLowerCase() === "slope")
     {
-	var min = 0, max = 90, S = 0, steps;
-	if (this._parent._cf.texCoord.node._vf.parameter)
-	{
-		var parameter = this._parent._cf.texCoord.node._vf.parameter;
-		if (parameter.length > 0) { min = parameter[0]; }
-		if (parameter.length > 1) { max = parameter[1]; }
-		if (parameter.length > 2) { steps = parameter[2]; }
-	}
-    for (var i=0, j=0, n=this._normals[0].length; i<n; i+=3)
-        {
-            S = ( Math.acos( Math.abs( this._normals[0][i+1] )) * 180 / Math.PI - min ) / (max - min);
-    		S = Math.min ( 1,
-	            	Math.max ( 0, S )
-        		);
-        	if (steps) { S = Math.floor( S * steps ) / steps; } 
-    		this._texCoords[0][j++] = S; 
-            
-            this._texCoords[0][j++] = 0;
-        }
+		var min = 0, max = 90, S = 0, steps;
+		if (this._parent._cf.texCoord.node._vf.parameter)
+		{
+			var parameter = this._parent._cf.texCoord.node._vf.parameter;
+			if (parameter.length > 0) { min = parameter[0]; }
+			if (parameter.length > 1) { max = parameter[1]; }
+			if (parameter.length > 2) { steps = parameter[2]; }
+		}
+	    for (var i=0, j=0, n=this._normals[0].length; i<n; i+=3)
+	        {
+	            S = ( Math.acos( Math.abs( this._normals[0][i+1] )) * 180 / Math.PI - min ) / (max - min);
+	    		S = Math.min ( 1,
+		            	Math.max ( 0, S )
+	        		);
+	        	if (steps) { S = Math.floor( S * steps ) / steps; } 
+	    		this._texCoords[0][j++] = S; 
+	            
+	            this._texCoords[0][j++] = 0;
+	        }
     }
+    
+    else if (mode.toLowerCase() === "height")
+    {
+		var min, max, S = 0, steps;
+		if (this._parent._cf.texCoord.node._vf.parameter)
+		{
+			var parameter = this._parent._cf.texCoord.node._vf.parameter;
+			if (parameter.length > 0) { min = parameter[0]; }
+			if (parameter.length > 1) { max = parameter[1]; }
+			if (parameter.length > 2) { steps = parameter[2]; }
+		}
+		//determine data range if not provided
+		if (min === undefined)
+		{
+			var minpos = new x3dom.fields.SFVec3f(0, 0, 0),
+	            maxpos = new x3dom.fields.SFVec3f(0, 0, 0);
+	        var vol = this.getVolume();
+	
+	        vol.getBounds(minpos, maxpos);
+	        //var dia = maxpos.subtract(minpos);
+	        min = minpos.y;
+	        max = maxpos.y;
+		}
+		for (var k=0, l=0, m=this._positions[0].length; k<m; k+=3)
+        {
+            this._texCoords[0][l++] = (this._positions[0][k+S] - sMin) / sDenom;
+            this._texCoords[0][l++] = (this._positions[0][k+T] - tMin) / tDenom;
+        }
+		
+    }
+		
     else    // "plane" is x3d default mapping
     {
         var min = new x3dom.fields.SFVec3f(0, 0, 0),
