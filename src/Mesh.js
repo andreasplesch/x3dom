@@ -376,7 +376,19 @@ x3dom.Mesh.prototype.calcTexCoords = function(mode)
 				geoSystem = this._parent._cf.coord.node._vf.geoSystem;
 			}
 		}
-		// 
+		//revise
+		for (var k=0, l=0, m=this._positions[0].length; k<m; k+=3)
+        {
+            S = (this._positions[0][k+1] - min) / range;
+            //clamping is probably done elsewhere as well since required by spec.
+    		S = Math.min ( 1,
+	            	Math.max ( 0, S )
+        		);
+        	if (steps) { S = Math.floor( S * steps ) / steps; } 
+            this._texCoords[0][l++] = S;
+            this._texCoords[0][l++] = 0;
+        }
+		
     }
     
     else if (mode.toLowerCase() === "slope")
