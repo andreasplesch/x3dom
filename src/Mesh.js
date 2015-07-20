@@ -392,7 +392,7 @@ x3dom.Mesh.prototype.calcTexCoords = function(mode)
         	coordGC.z = this._positions[0][k+2];
         	coordsGC.push(coordGC);
         }
-		var coordsGD = x3dom.nodeTypes.GeoCoordinate.prototype.GCtoGD(geoSystem, geoOrigin, coordsGC);
+		var coordsGD = x3dom.nodeTypes.GeoCoordinate.prototype.GCtoGD(geoSystem, coordsGC);
 		if (max === undefined)
 		{
 			var z, len = coordsGD.length, min = Infinity, max = -Infinity;
