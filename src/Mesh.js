@@ -366,7 +366,9 @@ x3dom.Mesh.prototype.calcTexCoords = function(mode)
 			if (parameter.length > 2) { steps = parameter[2]; }
 		}
 		var geoSystem = new x3dom.fields.MFString(['GD', 'WE']);
-		if (this._parent._vf.geoSystem) { geoSystem = this._parent._vf.geoSystem };
+		var geoOrigin;
+		if (this._parent._vf.geoSystem) { geoSystem = this._parent._vf.geoSystem ; }
+		if (this._parent._cf.geoOrigin) { geoOrigin = this._parent._cf.geoOrigin ; }
 		//should find geocoordinate node
 		//probably need to check if coord exists first
 		if (this._parent._cf.coord)
@@ -375,11 +377,36 @@ x3dom.Mesh.prototype.calcTexCoords = function(mode)
 			{ 
 				geoSystem = this._parent._cf.coord.node._vf.geoSystem;
 			}
+			if (this._parent._cf.coord.node._cf.geoOrigin) 
+			{ 
+				geoOrigin = this._parent._cf.coord.node._cf.geoOrigin;
+			}
 		}
 		//revise
+		var coordsGC = new x3dom.fields.MFVec3f();
 		for (var k=0, l=0, m=this._positions[0].length; k<m; k+=3)
         {
-            S = (this._positions[0][k+1] - min) / range;
+            var coordGC = new x3dom.fields.SFVec3f();
+			coordGC.x = this._positions[0][k+1];
+        	coordGC.y = this._positions[0][k+1];
+        	coordGC.z = this._positions[0][k+2];
+        	coordsGC.push(coordGC);
+        }
+		var coordsGD = x3dom.nodeTypes.GeoCoordinate.prototype.GCtoGD(geoSystem, geoOrigin, coordsGC);
+		if (max === undefined)
+		{
+			var z, len = coordsGD.length, min = Infinity, max = -Infinity;
+  			while (len--)
+  			{
+  				z = coordsGD[len].z;
+    			if (z < min) { min = z;	}
+    			if (z > max) { max = z; }
+  			}
+		}
+		var range = max - min;
+		for (var k=0, l=0, m=coordsGD.length; k<m; k++)
+        {
+            S = (coordsGD[k].z - min) / range;
             //clamping is probably done elsewhere as well since required by spec.
     		S = Math.min ( 1,
 	            	Math.max ( 0, S )
