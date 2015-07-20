@@ -385,10 +385,10 @@ x3dom.Mesh.prototype.calcTexCoords = function(mode)
 		//revise
 		var coordsGC = new x3dom.fields.MFVec3f();
 		for (var k=0, l=0, m=this._positions[0].length; k<m; k+=3)
-        {
-            var coordGC = new x3dom.fields.SFVec3f();
+       	{
+        	var coordGC = new x3dom.fields.SFVec3f();
 			coordGC.x = this._positions[0][k];
-        	coordGC.y = this._positions[0][k+1];
+       		coordGC.y = this._positions[0][k+1];
         	coordGC.z = this._positions[0][k+2];
         	coordsGC.push(coordGC);
         }
