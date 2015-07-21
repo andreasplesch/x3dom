@@ -444,7 +444,7 @@ x3dom.Mesh.prototype.calcTexCoords = function(mode)
 	    else 
 	    {
 	    	x3dom.debug.logWarning("requested geo-height mode needs the geospatial component. Falling back default texture coordinates.");
-	    	this.calcTexCoords();
+	    	this.calcTexCoords("plane");
 	    }
     }
     else if (mode.toLowerCase() === "slope")
