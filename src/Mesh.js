@@ -356,95 +356,96 @@ x3dom.Mesh.prototype.calcTexCoords = function(mode)
     
     //check if geospatial component available; by checking if GeoCoordinate exists
     //TODO add debug note that geospatial component s required
-    else if (mode.toLowerCase() === "geo-height" && x3dom.nodeTypes.GeoCoordinate)
+    else if (mode.toLowerCase() === "geo-height")
     {
-    	var min, max, S = 0, steps;
-		if (this._parent._cf.texCoord.node._vf.parameter)
-		{
-			var parameter = this._parent._cf.texCoord.node._vf.parameter;
-			if (parameter.length > 0) { min = parameter[0]; }
-			if (parameter.length > 1) { max = parameter[1]; }
-			if (parameter.length > 2) { steps = parameter[2]; }
-		}
-		var geoSystem = new x3dom.fields.MFString(['GD', 'WE']);
-		var geoOrigin;
-		if (this._parent._vf.geoSystem) { geoSystem = this._parent._vf.geoSystem ; }
-		if (this._parent._cf.geoOrigin) { geoOrigin = this._parent._cf.geoOrigin ; }
-		//should find geocoordinate node
-		if (this._parent._cf.coord)
-		{
-			if (this._parent._cf.coord.node._vf.geoSystem) 
-			{ 
-				geoSystem = this._parent._cf.coord.node._vf.geoSystem;
-			}
-			if (this._parent._cf.coord.node._cf.geoOrigin) 
-			{ 
-				geoOrigin = this._parent._cf.coord.node._cf.geoOrigin;
-			}
-		}
-		//account for geoOrigin
-		//by default identity matrix
-		var geoTransform = new x3dom.fields.SFMatrix4f();
-		
-        if (geoOrigin.node)
-        {
-        	 var originGC = x3dom.nodeTypes.GeoCoordinate.prototype.OriginToGC(geoOrigin);
-			//undo geoOrigin translation
-			geoTransform.setTranslate(originGC);
-
-			if(geoOrigin.node._vf.rotateYUp)
+    	if (x3dom.nodeTypes.GeoCoordinate)
+	    {
+	    	var min, max, S = 0, steps;
+			if (this._parent._cf.texCoord.node._vf.parameter)
 			{
-				var rotMatOrigin = x3dom.nodeTypes.GeoLocation.prototype.getGeoRotMat(geoSystem, originGC);
-				//undo GeoOrigin rotation from child node before translation
-				geoTransform = geoTransform.mult(rotMatOrigin);
+				var parameter = this._parent._cf.texCoord.node._vf.parameter;
+				if (parameter.length > 0) { min = parameter[0]; }
+				if (parameter.length > 1) { max = parameter[1]; }
+				if (parameter.length > 2) { steps = parameter[2]; }
 			}
-        	//undo rotateYUp
-        	//undo translation
-        	//as transformation matrix
-        	//recalc all coords
-        	//for(var i=0; i<coordsGC.length; ++i)
-			//	gc[i] = matrix.multMatrixPnt(coords[i]);
-        }
-		
-		//revise
-		
-		var coordsGC = new x3dom.fields.MFVec3f();
-		for (var k=0, l=0, m=this._positions[0].length; k<m; k+=3)
-       	{
-        	var coordGC = new x3dom.fields.SFVec3f();
-			coordGC.x = this._positions[0][k];
-       		coordGC.y = this._positions[0][k+1];
-        	coordGC.z = this._positions[0][k+2];
-        	//transform according to geoOrigin
-        	coordsGC.push(geoTransform.multMatrixPnt(coordGC));
-        }
-        
-        var coordsGD = x3dom.nodeTypes.GeoCoordinate.prototype.GCtoGD(geoSystem, coordsGC);
-		if (max === undefined)
-		{
-			var z, len = coordsGD.length, min = Infinity, max = -Infinity;
-  			while (len--)
-  			{
-  				z = coordsGD[len].z;
-    			if (z < min) { min = z;	}
-    			if (z > max) { max = z; }
-  			}
-		}
-		var range = max - min;
-		for (var k=0, l=0, m=coordsGD.length; k<m; k++)
-        {
-            S = (coordsGD[k].z - min) / range;
-            //clamping is probably done elsewhere as well since required by spec.
-    		S = Math.min ( 1,
-	            	Math.max ( 0, S )
-        		);
-        	if (steps) { S = Math.floor( S * steps ) / steps; } 
-            this._texCoords[0][l++] = S;
-            this._texCoords[0][l++] = 0;
-        }
-		
+	
+			var geoSystem = new x3dom.fields.MFString(['GD', 'WE']);
+			var geoOrigin;
+			if (this._parent._vf.geoSystem) { geoSystem = this._parent._vf.geoSystem ; }
+			if (this._parent._cf.geoOrigin) { geoOrigin = this._parent._cf.geoOrigin ; }
+			//should find geocoordinate node
+			if (this._parent._cf.coord)
+			{
+				if (this._parent._cf.coord.node._vf.geoSystem) 
+				{ 
+					geoSystem = this._parent._cf.coord.node._vf.geoSystem;
+				}
+				if (this._parent._cf.coord.node._cf.geoOrigin) 
+				{ 
+					geoOrigin = this._parent._cf.coord.node._cf.geoOrigin;
+				}
+			}
+			//account for geoOrigin
+			//by default identity matrix
+			var geoTransform = new x3dom.fields.SFMatrix4f();
+			
+	        if (geoOrigin.node)
+	        {
+	        	 var originGC = x3dom.nodeTypes.GeoCoordinate.prototype.OriginToGC(geoOrigin);
+				//undo geoOrigin translation
+				geoTransform.setTranslate(originGC);
+	
+				if(geoOrigin.node._vf.rotateYUp)
+				{
+					var rotMatOrigin = x3dom.nodeTypes.GeoLocation.prototype.getGeoRotMat(geoSystem, originGC);
+					//undo GeoOrigin rotation from child node before translation
+					geoTransform = geoTransform.mult(rotMatOrigin);
+				}
+	        }
+			
+			var coordsGC = new x3dom.fields.MFVec3f();
+			for (var k=0, l=0, m=this._positions[0].length; k<m; k+=3)
+	       	{
+	        	var coordGC = new x3dom.fields.SFVec3f();
+				coordGC.x = this._positions[0][k];
+	       		coordGC.y = this._positions[0][k+1];
+	        	coordGC.z = this._positions[0][k+2];
+	        	//transform according to geoOrigin
+	        	coordsGC.push(geoTransform.multMatrixPnt(coordGC));
+	        }
+	        
+	        //needs geoSystem for ellipsoid
+	        var coordsGD = x3dom.nodeTypes.GeoCoordinate.prototype.GCtoGD(geoSystem, coordsGC);
+			
+			if (max === undefined)
+			{
+				var z, len = coordsGD.length, min = Infinity, max = -Infinity;
+	  			while (len--)
+	  			{
+	  				z = coordsGD[len].z;
+	    			if (z < min) { min = z;	}
+	    			if (z > max) { max = z; }
+	  			}
+			}
+			var range = max - min;
+			for (var k=0, l=0, m=coordsGD.length; k<m; k++)
+	        {
+	            S = (coordsGD[k].z - min) / range;
+	            //clamping is probably done elsewhere as well since required by spec.
+	    		S = Math.min ( 1,
+		            	Math.max ( 0, S )
+	        		);
+	        	if (steps) { S = Math.floor( S * steps ) / steps; } 
+	            this._texCoords[0][l++] = S;
+	            this._texCoords[0][l++] = 0;
+	        }
+			
+	    }
+	    else 
+	    {
+	    	x3dom.debug.logInfo("requested geo-height mode needs the geospatial component. Falling back default texture coordinates.");
+	    }
     }
-    
     else if (mode.toLowerCase() === "slope")
     {
 		var min = 0, max = 90, S = 0, steps;
