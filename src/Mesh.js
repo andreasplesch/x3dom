@@ -354,9 +354,10 @@ x3dom.Mesh.prototype.calcTexCoords = function(mode)
         }
     }
     
+    //check if geospatial component available; by checking if GeoCoordinate exists
+    //TODO add debug note that geospatial component s required
     else if (mode.toLowerCase() === "geo-height" && x3dom.nodeTypes.GeoCoordinate)
     {
-    	//check if geospatial component available; by checking if GeoCoordinate exists
     	var min, max, S = 0, steps;
 		if (this._parent._cf.texCoord.node._vf.parameter)
 		{
@@ -370,7 +371,6 @@ x3dom.Mesh.prototype.calcTexCoords = function(mode)
 		if (this._parent._vf.geoSystem) { geoSystem = this._parent._vf.geoSystem ; }
 		if (this._parent._cf.geoOrigin) { geoOrigin = this._parent._cf.geoOrigin ; }
 		//should find geocoordinate node
-		//probably need to check if coord exists first
 		if (this._parent._cf.coord)
 		{
 			if (this._parent._cf.coord.node._vf.geoSystem) 
@@ -382,7 +382,32 @@ x3dom.Mesh.prototype.calcTexCoords = function(mode)
 				geoOrigin = this._parent._cf.coord.node._cf.geoOrigin;
 			}
 		}
+		//account for geoOrigin
+		//by default identity matrix
+		var geoTransform = new x3dom.fields.SFMatrix4f();
+		
+        if (geoOrigin.node)
+        {
+        	 var originGC = x3dom.nodeTypes.GeoCoordinate.prototype.OriginToGC(geoOrigin);
+			//undo geoOrigin translation
+			geoTransform.setTranslate(originGC);
+
+			if(geoOrigin.node._vf.rotateYUp)
+			{
+				var rotMatOrigin = x3dom.nodeTypes.GeoLocation.prototype.getGeoRotMat(geoSystem, originGC);
+				//undo GeoOrigin rotation from child node before translation
+				geoTransform = geoTransform.mult(rotMatOrigin);
+			}
+        	//undo rotateYUp
+        	//undo translation
+        	//as transformation matrix
+        	//recalc all coords
+        	//for(var i=0; i<coordsGC.length; ++i)
+			//	gc[i] = matrix.multMatrixPnt(coords[i]);
+        }
+		
 		//revise
+		
 		var coordsGC = new x3dom.fields.MFVec3f();
 		for (var k=0, l=0, m=this._positions[0].length; k<m; k+=3)
        	{
@@ -390,9 +415,11 @@ x3dom.Mesh.prototype.calcTexCoords = function(mode)
 			coordGC.x = this._positions[0][k];
        		coordGC.y = this._positions[0][k+1];
         	coordGC.z = this._positions[0][k+2];
-        	coordsGC.push(coordGC);
+        	//transform according to geoOrigin
+        	coordsGC.push(geoTransform.multMatrixPnt(coordGC));
         }
-		var coordsGD = x3dom.nodeTypes.GeoCoordinate.prototype.GCtoGD(geoSystem, coordsGC);
+        
+        var coordsGD = x3dom.nodeTypes.GeoCoordinate.prototype.GCtoGD(geoSystem, coordsGC);
 		if (max === undefined)
 		{
 			var z, len = coordsGD.length, min = Infinity, max = -Infinity;
