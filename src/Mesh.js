@@ -443,7 +443,8 @@ x3dom.Mesh.prototype.calcTexCoords = function(mode)
 	    }
 	    else 
 	    {
-	    	x3dom.debug.logInfo("requested geo-height mode needs the geospatial component. Falling back default texture coordinates.");
+	    	x3dom.debug.logWarning("requested geo-height mode needs the geospatial component. Falling back default texture coordinates.");
+	    	this.calcTexCoords();
 	    }
     }
     else if (mode.toLowerCase() === "slope")
