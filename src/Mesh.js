@@ -354,6 +354,69 @@ x3dom.Mesh.prototype.calcTexCoords = function(mode)
         }
     }
     
+    else if (mode.toLowerCase() === "slope")
+    {
+		var min = 0, max = 90, S = 0, steps;
+		if (this._parent._cf.texCoord.node._vf.parameter)
+		{
+			var parameter = this._parent._cf.texCoord.node._vf.parameter;
+			if (parameter.length > 0) { min = parameter[0]; }
+			if (parameter.length > 1) { max = parameter[1]; }
+			if (parameter.length > 2) { steps = parameter[2]; }
+		}
+		
+		var range = max - min;
+	    for (var i=0, j=0, n=this._normals[0].length; i<n; i+=3)
+	        {
+	        	S = ( Math.acos( Math.abs( this._normals[0][i+1] )) * 180 / Math.PI - min ) / range;
+	    		//clamping is probably done elsewhere as well since required by spec.
+	    		S = Math.min ( 1,
+		            	Math.max ( 0, S )
+	        		);
+	        	if (steps) { S = Math.floor( S * steps ) / steps; } 
+	    		
+	    		this._texCoords[0][j++] = S; 
+	            this._texCoords[0][j++] = 0;
+	        }
+    }
+    
+    else if (mode.toLowerCase() === "height")
+    {
+		var min, max, S = 0, steps;
+		if (this._parent._cf.texCoord.node._vf.parameter)
+		{
+			var parameter = this._parent._cf.texCoord.node._vf.parameter;
+			if (parameter.length > 0) { min = parameter[0]; }
+			if (parameter.length > 1) { max = parameter[1]; }
+			if (parameter.length > 2) { steps = parameter[2]; }
+		}
+		//determine data range if not provided
+		if (max === undefined)
+		{
+			var minpos = new x3dom.fields.SFVec3f(0, 0, 0),
+	            maxpos = new x3dom.fields.SFVec3f(0, 0, 0);
+	        var vol = this.getVolume();
+	
+	        vol.getBounds(minpos, maxpos);
+	        min = minpos.y;
+	        max = maxpos.y;
+		}
+		var range = max - min;
+		for (var k=0, l=0, m=this._positions[0].length; k<m; k+=3)
+        {
+            S = (this._positions[0][k+1] - min) / range;
+            //clamping is probably done elsewhere as well since required by spec.
+    		S = Math.min ( 1,
+	            	Math.max ( 0, S )
+        		);
+        	if (steps) { S = Math.floor( S * steps ) / steps; }
+        	
+            this._texCoords[0][l++] = S;
+            this._texCoords[0][l++] = 0;
+        }
+		
+    }
+    
     //check if geospatial component available; by checking if GeoCoordinate exists
     else if (mode.toLowerCase() === "geo-height")
     {
@@ -426,7 +489,9 @@ x3dom.Mesh.prototype.calcTexCoords = function(mode)
 	    			if (z > max) { max = z; }
 	  			}
 			}
+			
 			var range = max - min;
+			
 			for (var k=0, l=0, m=coordsGD.length; k<m; k++)
 	        {
 	            S = (coordsGD[k].z - min) / range;
@@ -506,24 +571,22 @@ x3dom.Mesh.prototype.calcTexCoords = function(mode)
 	        	coordsGC.push(geoTransform.multMatrixPnt(coordGC));
 	        }
 	        
-	        //needs geoSystem for ellipsoid
-	        
-	        var coordsGD = x3dom.nodeTypes.GeoCoordinate.prototype.GCtoGD(geoSystem, coordsGC);
-			
 			var range = max - min;
 			var normal = new x3dom.fields.SFVec3f();
+			
 			for (var k=0, l=0, m=coordsGC.length; k<m; k++)
 	        {
 	        	normal.x = this._normals[0][k*3+0];
 	        	normal.y = this._normals[0][k*3+1];
 	        	normal.z = this._normals[0][k*3+2];
 	        	
-	        	//roate normal back if YUp
+	        	//rotate normal back if YUp
 	        	if (rotMatOrigin) { normal = rotMatOrigin.multMatrixPnt(normal); }
 	        	
+	        	//coordsGc is the local vertical
 	        	var slope = Math.acos(Math.abs(normal.dot(coordsGC[k].normalize())));
 	            
-	            S = ( slope * 180 / Math.PI - min ) / (max - min);
+	            S = ( slope * 180 / Math.PI - min ) / range;
 	    		//clamping is probably done elsewhere as well since required by spec.
 	    		S = Math.min ( 1,
 		            	Math.max ( 0, S )
@@ -539,66 +602,6 @@ x3dom.Mesh.prototype.calcTexCoords = function(mode)
 	    	x3dom.debug.logWarning("requested geo-slope mode needs the geospatial component. Falling back to default texture coordinates.");
 	    	this.calcTexCoords("plane");
 	    }
-    }
-    
-    else if (mode.toLowerCase() === "slope")
-    {
-		var min = 0, max = 90, S = 0, steps;
-		if (this._parent._cf.texCoord.node._vf.parameter)
-		{
-			var parameter = this._parent._cf.texCoord.node._vf.parameter;
-			if (parameter.length > 0) { min = parameter[0]; }
-			if (parameter.length > 1) { max = parameter[1]; }
-			if (parameter.length > 2) { steps = parameter[2]; }
-		}
-	    for (var i=0, j=0, n=this._normals[0].length; i<n; i+=3)
-	        {
-	        	S = ( Math.acos( Math.abs( this._normals[0][i+1] )) * 180 / Math.PI - min ) / (max - min);
-	    		//clamping is probably done elsewhere as well since required by spec.
-	    		S = Math.min ( 1,
-		            	Math.max ( 0, S )
-	        		);
-	        	if (steps) { S = Math.floor( S * steps ) / steps; } 
-	    		this._texCoords[0][j++] = S; 
-	            
-	            this._texCoords[0][j++] = 0;
-	        }
-    }
-    
-    else if (mode.toLowerCase() === "height")
-    {
-		var min, max, S = 0, steps;
-		if (this._parent._cf.texCoord.node._vf.parameter)
-		{
-			var parameter = this._parent._cf.texCoord.node._vf.parameter;
-			if (parameter.length > 0) { min = parameter[0]; }
-			if (parameter.length > 1) { max = parameter[1]; }
-			if (parameter.length > 2) { steps = parameter[2]; }
-		}
-		//determine data range if not provided
-		if (max === undefined)
-		{
-			var minpos = new x3dom.fields.SFVec3f(0, 0, 0),
-	            maxpos = new x3dom.fields.SFVec3f(0, 0, 0);
-	        var vol = this.getVolume();
-	
-	        vol.getBounds(minpos, maxpos);
-	        min = minpos.y;
-	        max = maxpos.y;
-		}
-		var range = max - min;
-		for (var k=0, l=0, m=this._positions[0].length; k<m; k+=3)
-        {
-            S = (this._positions[0][k+1] - min) / range;
-            //clamping is probably done elsewhere as well since required by spec.
-    		S = Math.min ( 1,
-	            	Math.max ( 0, S )
-        		);
-        	if (steps) { S = Math.floor( S * steps ) / steps; } 
-            this._texCoords[0][l++] = S;
-            this._texCoords[0][l++] = 0;
-        }
-		
     }
 		
     else    // "plane" is x3d default mapping
