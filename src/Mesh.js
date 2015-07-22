@@ -511,9 +511,14 @@ x3dom.Mesh.prototype.calcTexCoords = function(mode)
 	        var coordsGD = x3dom.nodeTypes.GeoCoordinate.prototype.GCtoGD(geoSystem, coordsGC);
 			
 			var range = max - min;
+			var normal = new x3dom.fields.SFVec3f();
 			for (var k=0, l=0, m=coordsGC.length; k<m; k++)
 	        {
-	        	var slope = Math.abs( Math.PI/2 - Math.acos(this._normals[0][k*3+1].dot(coordsGC[k].normalize())));
+	        	normal.x = this._normals[0][k*3+0];
+	        	normal.y = this._normals[0][k*3+1];
+	        	normal.z = this._normals[0][k*3+2];
+	        	
+	        	var slope = Math.abs( Math.PI/2 - Math.acos(normal.dot(coordsGC[k].normalize())));
 	            
 	            S = ( slope * 180 / Math.PI - min ) / (max - min);
 	    		//clamping is probably done elsewhere as well since required by spec.
