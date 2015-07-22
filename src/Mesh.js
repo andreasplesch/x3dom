@@ -518,6 +518,9 @@ x3dom.Mesh.prototype.calcTexCoords = function(mode)
 	        	normal.y = this._normals[0][k*3+1];
 	        	normal.z = this._normals[0][k*3+2];
 	        	
+	        	//roate normal back if YUp
+	        	if (rotMatOrigin) { normal = rotMatOrigin.multMatrixPnt(normal); }
+	        	
 	        	var slope = Math.acos(Math.abs(normal.dot(coordsGC[k].normalize())));
 	            
 	            S = ( slope * 180 / Math.PI - min ) / (max - min);
