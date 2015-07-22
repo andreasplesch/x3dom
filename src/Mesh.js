@@ -518,7 +518,7 @@ x3dom.Mesh.prototype.calcTexCoords = function(mode)
 	        	normal.y = this._normals[0][k*3+1];
 	        	normal.z = this._normals[0][k*3+2];
 	        	
-	        	var slope = Math.abs( Math.PI/2 - Math.acos(normal.dot(coordsGC[k].normalize())));
+	        	var slope = Math.acos(Math.abs(normal.dot(coordsGC[k].normalize())));
 	            
 	            S = ( slope * 180 / Math.PI - min ) / (max - min);
 	    		//clamping is probably done elsewhere as well since required by spec.
