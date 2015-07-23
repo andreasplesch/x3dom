@@ -177,7 +177,7 @@ x3dom.registerNodeType(
 						
 						this._currentRotation = x3dom.fields.Quaternion.rotateFromTo(this._initialSphereIntersectionVector, vecToHitPoint);
 						
-						this._currentRotation = this._currentRotation.multiply(this._vf.offset);
+						this._currentRotation = this._vf.offset.multiply(this._currentRotation);
 						
 						// output rotationChanged_event, given in local sphere sensor coordinates
 						this.postMessage('rotation_changed',  this._currentRotation);
