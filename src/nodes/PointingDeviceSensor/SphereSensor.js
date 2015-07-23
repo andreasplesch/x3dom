@@ -177,7 +177,7 @@ x3dom.registerNodeType(
 						
 						this._currentRotation = x3dom.fields.Quaternion.rotateFromTo(this._initialSphereIntersectionVector, vecToHitPoint);
 						
-						this._currentRotation = this._vf.offset.multiply(this._currentRotation);
+						this._currentRotation = this._currentRotation.multiply(this._vf.offset);
 						
 						// output rotationChanged_event, given in local sphere sensor coordinates
 						this.postMessage('rotation_changed',  this._currentRotation);
@@ -196,7 +196,7 @@ x3dom.registerNodeType(
              */
             _stopDragging: function()
             {
-                x3dom.nodeTypes.X3DDragSensorNode.prototype._stopDragging.call(this);
+                //x3dom.nodeTypes.X3DDragSensorNode.prototype._stopDragging.call(this);
 
                 if (this._vf.autoOffset)
                 {
