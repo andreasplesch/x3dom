@@ -202,6 +202,8 @@ x3dom.registerNodeType(
                 {
                     this._vf.offset = this._currentRotation;
 					this.postMessage('offset_changed', this._vf.offset);
+					//also needs updating
+                    this._rotationMatrix = this._vf.offset.toMatrix();
                 }
 				
 				this._currentRotation = new x3dom.fields.Quaternion();
