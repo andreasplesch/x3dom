@@ -60,7 +60,7 @@ x3dom.registerNodeType(
              * @type {x3dom.fields.Quaternion}
              * @private
              */
-            this._currentRotation = new x3dom.fields.Quaternion();
+            this._currentRotation = null;
 			
 			/**
              * Rotation matrix, derived from the current value of the offset field
@@ -175,9 +175,10 @@ x3dom.registerNodeType(
 						
 						var vecToHitPoint = hitPoint.subtract(this._localOrigin).normalize();
 						
+						// mskes new object
 						this._currentRotation = x3dom.fields.Quaternion.rotateFromTo(this._initialSphereIntersectionVector, vecToHitPoint);
 						
-						this._currentRotation = this._currentRotation.multiply(this._vf.offset);
+						this._currentRotation.multiply(this._vf.offset);
 						
 						// output rotationChanged_event, given in local sphere sensor coordinates
 						this.postMessage('rotation_changed',  this._currentRotation);
