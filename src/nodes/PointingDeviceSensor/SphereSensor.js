@@ -60,7 +60,7 @@ x3dom.registerNodeType(
              * @type {x3dom.fields.Quaternion}
              * @private
              */
-            this._currentRotation = null;
+            this._currentRotation = new x3dom.fields.Quaternion();
 			
 			/**
              * Rotation matrix, derived from the current value of the offset field
@@ -99,7 +99,7 @@ x3dom.registerNodeType(
 				//console.log(viewarea, x, y, wx, wy, wz);
                 x3dom.nodeTypes.X3DDragSensorNode.prototype._startDragging.call(this, viewarea, x, y, wx, wy, wz);
 				
-				this._currentRotation = new x3dom.fields.Quaternion();
+				this._currentRotation = x3dom.fields.Quaternion();
 				
 				this._viewArea = viewarea;	
 				
