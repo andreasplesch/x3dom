@@ -97,7 +97,7 @@ x3dom.registerNodeType(
             _startDragging: function(viewarea, x, y, wx, wy, wz)
             {
 				//console.log(viewarea, x, y, wx, wy, wz);
-                x3dom.nodeTypes.X3DDragSensorNode.prototype._startDragging.call(this, viewarea, x, y, wx, wy, wz);
+                		x3dom.nodeTypes.X3DDragSensorNode.prototype._startDragging.call(this, viewarea, x, y, wx, wy, wz);
 				
 				this._currentRotation = new x3dom.fields.Quaternion();
 				
@@ -197,15 +197,15 @@ x3dom.registerNodeType(
              */
             _stopDragging: function()
             {
-                //x3dom.nodeTypes.X3DDragSensorNode.prototype._stopDragging.call(this);
+                x3dom.nodeTypes.X3DDragSensorNode.prototype._stopDragging.call(this);
 
                 if (this._vf.autoOffset)
                 {
             		this._vf.offset = this._currentRotation;
-					this.postMessage('offset_changed', this._vf.offset);
+			this.postMessage('offset_changed', this._vf.offset);
                 }
 				
-				this._currentRotation = new x3dom.fields.Quaternion();
+		this._currentRotation = new x3dom.fields.Quaternion();
             }
 
             //----------------------------------------------------------------------------------------------------------------------
