@@ -99,7 +99,7 @@ x3dom.registerNodeType(
 				//console.log(viewarea, x, y, wx, wy, wz);
                 x3dom.nodeTypes.X3DDragSensorNode.prototype._startDragging.call(this, viewarea, x, y, wx, wy, wz);
 				
-				//this._currentRotation = x3dom.fields.Quaternion();
+				this._currentRotation = new x3dom.fields.Quaternion();
 				
 				this._viewArea = viewarea;	
 				
@@ -203,13 +203,9 @@ x3dom.registerNodeType(
                 {
             		this._vf.offset = this._currentRotation;
 					this.postMessage('offset_changed', this._vf.offset);
-					//also needs updating
-					this._rotationMatrix = this._vf.offset.toMatrix();
                 }
 				
-				// was this._currentRotation = new x3dom.fields.Quaternion();
-				// just reset
-				//this._currentRotation.x = 0;
+				this._currentRotation = new x3dom.fields.Quaternion();
             }
 
             //----------------------------------------------------------------------------------------------------------------------
