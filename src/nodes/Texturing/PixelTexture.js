@@ -57,7 +57,7 @@ x3dom.registerNodeType(
                 this._imageSrc.width = img.width;
                 this._imageSrc.height = img.height;
                 this._imageSrc.comp = img.comp;
-                this._imageSrc.setPixels(img.array.getPixels());
+                this._imageSrc.setPixels(img.getPixels());
                 if (this._vf.dimensions)
                 {
                     //do sanity checking
