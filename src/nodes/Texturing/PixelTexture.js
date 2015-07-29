@@ -66,7 +66,7 @@ x3dom.registerNodeType(
                     width = this._imageSrc.width;
                     xScale = width/xsize;
                     yScale = height/ysize;
-                    for (y = 0; x < ysize; y++)
+                    for (y = 0; y < ysize; y++)
                     {
                         ySrc = y*yScale;
                         for (x = 0; x < xsize; x++)
