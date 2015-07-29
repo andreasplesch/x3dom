@@ -51,7 +51,7 @@ x3dom.registerNodeType(
         {
             nodeChanged: function()
             {
-                var this._imageSrc = this._vf.image.copy();
+                this._imageSrc = this._vf.image.copy();
                 if (this._vf.dimensions)
                 {
                     //do sanity checking
