@@ -36,9 +36,49 @@ x3dom.registerNodeType(
              * @instance
              */
             this.addField_SFImage(ctx, 'image', 0, 0, 0);
+            
+            /**
+             * rescaled dimensions of image.
+             * @var {x3dom.fields.SFImage} image
+             * @memberof x3dom.nodeTypes.PixelTexture
+             * @initvalue 0,0,0
+             * @field x3d
+             * @instance
+             */
+            this.addField_MFInt32(ctx, 'dimensions', []);
         
         },
         {
+            nodeChanged: function()
+            {
+                var this._imageSrc = this._vf.image.copy;
+                if (this._vf.dimensions)
+                {
+                    //do sanity checking
+                    var x, y, xsize, ysize, height, width, xSrc, ySrc, xScale, yScale ;
+                    xsize = this._vf.dimension[0];
+                    ysize = this._vf.dimension[1];
+                    var image = new x3dom.fields.SFImage();
+                    image.comp = this._imageSrc.comp;
+                    image.width = xsize;
+                    image.height = ysize;
+                    height = this._imageSrc.height;
+                    width = this._imageSrc.width;
+                    xScale = width/xsize;
+                    yScale = height/ysize;
+                    for (y = 0; x < ysize; y++)
+                    {
+                        ySrc = y*yScale;
+                        for (x = 0; x < xsize; x++)
+                        {
+                            //scale to src
+                            xSrc = x*xScale;
+                            image.setPixel(x, y, this._imageSrc.getPixel(xSrc, ySrc));
+                        }
+                    }
+                    this._vf.image = image;
+                }
+            }
             fieldChanged: function(fieldName)
             {
                 if (fieldName == "image") {
