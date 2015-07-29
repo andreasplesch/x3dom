@@ -52,7 +52,7 @@ x3dom.registerNodeType(
             nodeChanged: function()
             {
                 var img = this._vf.image;
-                
+                //copy function does not work, do it here
                 this._imageSrc = new x3dom.fields.SFImage();
                 this._imageSrc.width = img.width;
                 this._imageSrc.height = img.height;
@@ -68,6 +68,8 @@ x3dom.registerNodeType(
                     image.comp = this._imageSrc.comp;
                     image.width = xsize;
                     image.height = ysize;
+                    //set length, so that setPixel works
+                    image.array.length = xsize * ysize * image.comp;
                     height = this._imageSrc.height;
                     width = this._imageSrc.width;
                     xScale = width/xsize;
