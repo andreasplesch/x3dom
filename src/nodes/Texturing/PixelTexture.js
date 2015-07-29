@@ -56,8 +56,8 @@ x3dom.registerNodeType(
                 {
                     //do sanity checking
                     var x, y, xsize, ysize, height, width, xSrc, ySrc, xScale, yScale ;
-                    xsize = this._vf.dimension[0];
-                    ysize = this._vf.dimension[1];
+                    xsize = this._vf.dimensions[0];
+                    ysize = this._vf.dimensions[1];
                     var image = new x3dom.fields.SFImage();
                     image.comp = this._imageSrc.comp;
                     image.width = xsize;
