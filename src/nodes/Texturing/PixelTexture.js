@@ -54,7 +54,10 @@ x3dom.registerNodeType(
                 var img = this._vf.image;
                 
                 this._imageSrc = new x3dom.fields.SFImage();
-                this._imageSrc = x3dom.fields.SFImage(img.width, img.height, img.comp, img.array);
+                this._imageSrc.width = img.width;
+                this._imageSrc.height = img.height;
+                this._imageSrc.comp = img.comp;
+                this._imageSrc.setPixels(img.array.getPixels());
                 if (this._vf.dimensions)
                 {
                     //do sanity checking
