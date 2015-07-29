@@ -85,12 +85,12 @@ x3dom.registerNodeType(
                     
                     for (y = 0; y < image.height; y++)
                     {
-                        ySrc = y_shift + y * yScale;
+                        ySrc = Math.floor(y_shift + y * yScale);
                         
                         for (x = 0; x < image.width; x++)
                         {
                             //scale to src
-                            xSrc = x_shift + x * xScale;
+                            xSrc = Math.floor(x_shift + x * xScale);
                             //think about interpolation
                             //nearest neighbor sampling
                             image.setPixel(x, y, this._imageSrc.getPixel(xSrc, ySrc));
