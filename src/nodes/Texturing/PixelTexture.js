@@ -64,11 +64,15 @@ x3dom.registerNodeType(
                     var x, y, xsize, ysize, height, width, xSrc, ySrc, xScale, yScale ;
                     xsize = this._vf.dimensions[0];
                     ysize = this._vf.dimensions[1];
-                    var image = new x3dom.fields.SFImage();
-                    image.comp = this._imageSrc.comp;
-                    image.width = xsize;
-                    image.height = ysize;
-                    //set length, so that setPixel works
+                    var comp = this._imageSrc.comp;
+                    
+                    var image = new x3dom.fields.SFImage(xsize, ysize, comp, Array(xsize*ysize*comp));
+                    
+                    // var image = new x3dom.fields.SFImage();
+                    // image.comp = this._imageSrc.comp;
+                    // image.width = xsize;
+                    // image.height = ysize;
+                    // set length, so that setPixel works
                     image.array.length = xsize * ysize * image.comp;
                     height = this._imageSrc.height;
                     width = this._imageSrc.width;
