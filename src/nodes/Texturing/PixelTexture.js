@@ -75,7 +75,7 @@ x3dom.registerNodeType(
                     image.width = Math.abs(target_width);
                     image.height = Math.abs(target_height);
                     // set length, so that setPixel works
-                    image.array.length = target_width * target_height * comp;
+                    image.array.length = image.width * image.height * comp;
                     height = this._imageSrc.height;
                     width = this._imageSrc.width;
                     xScale = width/target_width;
