@@ -52,7 +52,9 @@ x3dom.registerNodeType(
             nodeChanged: function()
             {
                 var img = this._vf.image;
-                this._imageSrc = new x3dom.fields.SFImage(img.width, img.height, img.comp, img.array);
+                
+                this._imageSrc = new x3dom.fields.SFImage();
+                this._imageSrc = x3dom.fields.SFImage(img.width, img.height, img.comp, img.array);
                 if (this._vf.dimensions)
                 {
                     //do sanity checking
