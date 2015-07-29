@@ -78,7 +78,8 @@ x3dom.registerNodeType(
                     }
                     this._vf.image = image;
                 }
-            }
+            },
+            
             fieldChanged: function(fieldName)
             {
                 if (fieldName == "image") {
