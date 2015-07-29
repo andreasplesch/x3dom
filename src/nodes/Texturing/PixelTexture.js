@@ -58,33 +58,41 @@ x3dom.registerNodeType(
                 this._imageSrc.height = img.height;
                 this._imageSrc.comp = img.comp;
                 this._imageSrc.setPixels(img.getPixels());
+                
                 if (this._vf.dimensions)
                 {
                     //do sanity checking
-                    var x, y, xsize, ysize, height, width, xSrc, ySrc, xScale, yScale ;
-                    xsize = this._vf.dimensions[0];
-                    ysize = this._vf.dimensions[1];
-                    var comp = this._imageSrc.comp;
+                    var x, y, target_width, target_height, comp, 
+                        height, width, xSrc, ySrc, x_shift, y_shift, xScale, yScale ;
+                    target_width = this._vf.dimensions[0];
+                    target_height = this._vf.dimensions[1];
                     
-                    var image = new x3dom.fields.SFImage(xsize, ysize, comp, Array(xsize*ysize*comp));
+                    comp = this._imageSrc.comp;
                     
-                    // var image = new x3dom.fields.SFImage();
-                    // image.comp = this._imageSrc.comp;
-                    // image.width = xsize;
-                    // image.height = ysize;
+                    var image = new x3dom.fields.SFImage();
+                    image.comp = comp;
+                    // allow negative dmension for mirroring
+                    image.width = Math.abs(target_width);
+                    image.height = Math.abs(target_height);
                     // set length, so that setPixel works
-                    image.array.length = xsize * ysize * image.comp;
+                    image.array.length = target_width * target_height * comp;
                     height = this._imageSrc.height;
                     width = this._imageSrc.width;
-                    xScale = width/xsize;
-                    yScale = height/ysize;
-                    for (y = 0; y < ysize; y++)
+                    xScale = width/target_width;
+                    x_shift = xScale < 0 ? width - 1 : 0 ;
+                    yScale = height/target_height;
+                    y_shift = yScale < 0 ? height - 1 : 0 ;
+                    
+                    for (y = 0; y < target_height; y++)
                     {
-                        ySrc = y*yScale;
-                        for (x = 0; x < xsize; x++)
+                        ySrc = y_shift + y * yScale;
+                        
+                        for (x = 0; x < target_width; x++)
                         {
                             //scale to src
-                            xSrc = x*xScale;
+                            xSrc = x_shift + x * xScale;
+                            //think about interpolation
+                            //nearest neighbor sampling
                             image.setPixel(x, y, this._imageSrc.getPixel(xSrc, ySrc));
                         }
                     }
