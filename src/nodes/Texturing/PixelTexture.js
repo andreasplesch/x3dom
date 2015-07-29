@@ -79,9 +79,9 @@ x3dom.registerNodeType(
                     height = this._imageSrc.height;
                     width = this._imageSrc.width;
                     xScale = width/target_width;
-                    x_shift = xScale < 0 ? width + xscale : 0 ;
+                    x_shift = xScale < 0 ? width + xScale : 0 ;
                     yScale = height/target_height;
-                    y_shift = yScale < 0 ? height + yscale : 0 ;
+                    y_shift = yScale < 0 ? height + yScale : 0 ;
                     
                     for (y = 0; y < image.height; y++)
                     {
