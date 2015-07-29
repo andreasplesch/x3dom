@@ -83,11 +83,11 @@ x3dom.registerNodeType(
                     yScale = height/target_height;
                     y_shift = yScale < 0 ? height - 1 : 0 ;
                     
-                    for (y = 0; y < target_height; y++)
+                    for (y = 0; y < image.height; y++)
                     {
                         ySrc = y_shift + y * yScale;
                         
-                        for (x = 0; x < target_width; x++)
+                        for (x = 0; x < image.width; x++)
                         {
                             //scale to src
                             xSrc = x_shift + x * xScale;
