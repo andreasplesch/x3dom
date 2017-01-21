@@ -309,7 +309,7 @@ x3dom.shader.DynamicShaderPicking.prototype.generateFragmentShader = function(gl
     }
 
     if(pickMode != 1 && pickMode != 2) {
-        shader += "float d = pow( length(worldCoord) / sceneSize, 0.15 );\n"; //AP use sqrt to emphasize closer d
+        shader += "float d = pow( length(worldCoord) / sceneSize, 0.1 );\n"; //AP use sqrt to emphasize closer d
     }
 
     if(pickMode == 0) { //Default Picking
