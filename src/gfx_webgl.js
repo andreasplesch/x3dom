@@ -2964,7 +2964,7 @@ x3dom.gfx_webgl = (function () {
 
                 dist = (pixelData[index    ] / 255.0) * denom +
                        (pixelData[index + 1] / 255.0);
-                dist = Math.pow(dist, 1/0.15) ; //AP pixelData is pow scaled
+                dist = Math.pow(dist, 1/0.1) ; //AP pixelData is pow scaled
 		    
                 line = viewarea.calcViewRay(x, y, cctowc);
 
@@ -2973,7 +2973,7 @@ x3dom.gfx_webgl = (function () {
                 index = 4;      // get right pixel
                 dist = (pixelData[index    ] / 255.0) * denom +
                        (pixelData[index + 1] / 255.0);
-                dist = Math.pow(dist, 1/0.15) ; //AP pixelData is pow scaled
+                dist = Math.pow(dist, 1/0.1) ; //AP pixelData is pow scaled
 		    
                 lineoff = viewarea.calcViewRay(x + pixelOffset, y, cctowc);
 
@@ -2983,7 +2983,7 @@ x3dom.gfx_webgl = (function () {
                 index = 8;      // get top pixel
                 dist = (pixelData[index    ] / 255.0) * denom +
                        (pixelData[index + 1] / 255.0);
-                dist = Math.pow(dist, 1/0.15) ; //AP pixelData is pow scaled
+                dist = Math.pow(dist, 1/0.1) ; //AP pixelData is pow scaled
 		    
                 lineoff = viewarea.calcViewRay(x, y - pixelOffset, cctowc);
 
@@ -2997,7 +2997,7 @@ x3dom.gfx_webgl = (function () {
                          65536 * pixelData[index + 1];
 
                 dist = pixelData[index] / 255.0;
-                dist = Math.pow(dist, 1/0.15) ; //AP pixelData is pow scaled
+                dist = Math.pow(dist, 1/0.1) ; //AP pixelData is pow scaled
 		    
                 line = viewarea.calcViewRay(x, y, cctowc);
 
@@ -3005,7 +3005,7 @@ x3dom.gfx_webgl = (function () {
 
                 index = 4;      // get right pixel
                 dist = pixelData[index] / 255.0;
-                dist = Math.pow(dist, 1/0.15) ; //AP pixelData is pow scaled
+                dist = Math.pow(dist, 1/0.1) ; //AP pixelData is pow scaled
 
                 lineoff = viewarea.calcViewRay(x + pixelOffset, y, cctowc);
 
@@ -3014,7 +3014,7 @@ x3dom.gfx_webgl = (function () {
 
                 index = 8;      // get top pixel
                 dist = pixelData[index] / 255.0;
-                dist = Math.pow(dist, 1/0.15) ; //AP pixelData is pow scaled
+                dist = Math.pow(dist, 1/0.1) ; //AP pixelData is pow scaled
 
                 lineoff = viewarea.calcViewRay(x, y - pixelOffset, cctowc);
 
