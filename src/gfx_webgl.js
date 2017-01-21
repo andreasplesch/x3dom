@@ -2997,7 +2997,7 @@ x3dom.gfx_webgl = (function () {
                          65536 * pixelData[index + 1];
 
                 dist = pixelData[index] / 255.0;
-                //dist = dist * dist ; //AP pixelData is sqrt
+                dist = dist * dist ; //AP pixelData is sqrt
 		    
                 line = viewarea.calcViewRay(x, y, cctowc);
 
@@ -3005,6 +3005,7 @@ x3dom.gfx_webgl = (function () {
 
                 index = 4;      // get right pixel
                 dist = pixelData[index] / 255.0;
+                dist = dist * dist ; //AP pixelData is sqrt
 
                 lineoff = viewarea.calcViewRay(x + pixelOffset, y, cctowc);
 
@@ -3013,6 +3014,7 @@ x3dom.gfx_webgl = (function () {
 
                 index = 8;      // get top pixel
                 dist = pixelData[index] / 255.0;
+                dist = dist * dist ; //AP pixelData is sqrt
 
                 lineoff = viewarea.calcViewRay(x, y - pixelOffset, cctowc);
 
