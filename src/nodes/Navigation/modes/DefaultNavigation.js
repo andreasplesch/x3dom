@@ -27,6 +27,7 @@ x3dom.DefaultNavigation.prototype.zoom = function(view, zoomAmount)
     var viewpoint = view._scene.getViewpoint();
 
     var d = (view._scene._lastMax.subtract(view._scene._lastMin)).length();
+    d = Math.min(d, viewpoint.getFar()); // use zfar if smaller to allow for large scenes with defined zfar
     d = ((d < x3dom.fields.Eps) ? 1 : d) * navi._vf.speed;
 
     vec = new x3dom.fields.SFVec3f(0, 0, d*(zoomAmount)/view._height);
