@@ -2960,10 +2960,11 @@ x3dom.gfx_webgl = (function () {
             var dist, line, lineoff, right, up;
 
             if (pickMode == 0) {
-                objId += 256 * pixelData[index + 2];
+                //objId += 256 * pixelData[index + 2]; now only 1 byte
 
-                dist = (pixelData[index    ] / 255.0) * denom +
-                       (pixelData[index + 1] / 255.0);
+                dist = (pixelData[index    ] / 255.0) * denom * denom + // now 3 byte pos.
+                       (pixelData[index + 1] / 255.0) * denom +
+                       (pixelData[index + 2] / 255.0);
 
                 line = viewarea.calcViewRay(x, y, cctowc);
 
