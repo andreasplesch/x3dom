@@ -293,8 +293,9 @@ x3dom.shader.DynamicShaderPicking.prototype.generateFragmentShader = function(gl
 
     if(properties.VERTEXID) {
         if(pickMode == 0 || pickMode == 4) { //Default Picking || Picking with 32bit precision
-            shader += "color.ba = idCoord;\n";
-        } else if(pickMode == 3) { //Picking with 24bit precision
+            //shader += "color.ba = idCoord;\n";
+			shader += "color.a = idCoord.y;\n";//only use lower byte
+		} else if(pickMode == 3) { //Picking with 24bit precision
             shader += "color.gba = idCoord;\n";
         }
 
@@ -309,13 +310,19 @@ x3dom.shader.DynamicShaderPicking.prototype.generateFragmentShader = function(gl
     }
 
     if(pickMode != 1 && pickMode != 2) {
-        shader += "float d = length(worldCoord) / sceneSize;\n";
+        //shader += "float d = length(worldCoord) / sceneSize;\n";
+    	shader += "float d = 256.0 * 256.0 * 256.0 * length(worldCoord) / sceneSize;\n";
     }
 
     if(pickMode == 0) { //Default Picking
-        shader += "vec2 comp = fract(d * vec2(256.0, 1.0));\n";
-        shader += "color.rg = comp - (comp.rr * vec2(0.0, 1.0/256.0));\n";
-    } else if(pickMode == 3) { //Picking with 24bit precision
+//         shader += "vec2 comp = fract(d * vec2(256.0, 1.0));\n";
+//         shader += "color.rg = comp - (comp.rr * vec2(0.0, 1.0/256.0));\n";
+		shader += "float h = floor(d / 256.0);\n";
+		shader += "color.r = d - (h * 256.0);\n";
+		shader += "color.b = floor(h / 256.0);\n";
+		shader += "color.g = h - (color.b * 256.0);\n";
+		shader += "color.rgb = idCoord.bgr / 255.0;\n";
+	} else if(pickMode == 3) { //Picking with 24bit precision
         shader += "color.r = d;\n";
     }
 
