@@ -321,7 +321,7 @@ x3dom.shader.DynamicShaderPicking.prototype.generateFragmentShader = function(gl
 		shader += "color.r = d - (h * 256.0);\n";
 		shader += "color.b = floor(h / 256.0);\n";
 		shader += "color.g = h - (color.b * 256.0);\n";
-		shader += "color.rgb = idCoord.bgr / 255.0;\n";
+		shader += "color.rgb = color.bgr / 255.0;\n";
 	} else if(pickMode == 3) { //Picking with 24bit precision
         shader += "color.r = d;\n";
     }
