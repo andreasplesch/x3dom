@@ -272,6 +272,26 @@ x3dom.shader.DynamicShaderPicking.prototype.generateFragmentShader = function(gl
     if(properties.CLIPPLANES) {
         shader += x3dom.shader.clipPlanes(properties.CLIPPLANES);
     }
+    
+    // utility function to convert float to vec4
+    shader += "vec4 encode_float (float val) {\n";
+    // TODO: correctly handle denormal numbers
+    // http://www.2ality.com/2012/04/number-encoding.html
+    shader += "float a = abs(val);\n";                           // encode absolute value + sign
+    shader += "float exp = floor(log2(a));\n";                 // number of powers of 2
+    shader += "float mant = pow(2.,log2(a)-exp) * pow(2.,23.);\n";  // multiply to fill 24 bits (implied leading 1)
+    shader += "float mant1 = floor(mant / 256. / 256.);\n";    // first 8 bits of mantissa
+    shader += "float mant2 = mod(floor(mant / 256.),256.);\n"; // second 8 bits
+    shader += "float mant3 = mod(mant,256.);\n";               // third 8 bits
+
+    shader += "float sign = 128.-128.*(a/val);\n";			// sign bit is 256 or 0
+    shader += "float e = (sign+exp+127.)/510.;\n";		// exponent and sign
+    shader += "float m1 = (mant1-(128.*(1.-mod(exp+127.,2.))))/255.;\n"; // handle leading bit
+    shader += "float m2 = (mant2)/255.;\n";				// middle part
+    shader += "float m3 = (mant3+.5)/255.;\n";			// scale to 0 - 255
+
+    shader += "return vec4(m3,m2,m1,e);\n";
+    }
 
 	/*******************************************************************************
 	* Generate main function
@@ -293,8 +313,8 @@ x3dom.shader.DynamicShaderPicking.prototype.generateFragmentShader = function(gl
 
     if(properties.VERTEXID) {
         if(pickMode == 0 || pickMode == 4) { //Default Picking || Picking with 32bit precision
-            //shader += "color.ba = idCoord;\n";
-			shader += "color.a = idCoord.y;\n";//only use lower byte
+            shader += "color.ba = idCoord;\n";
+			//shader += "color.a = idCoord.y;\n";//only use lower byte
 		} else if(pickMode == 3) { //Picking with 24bit precision
             shader += "color.gba = idCoord;\n";
         }
@@ -310,18 +330,20 @@ x3dom.shader.DynamicShaderPicking.prototype.generateFragmentShader = function(gl
     }
 
     if(pickMode != 1 && pickMode != 2) {
-        //shader += "float d = length(worldCoord) / sceneSize;\n";
-    	shader += "float d = 256.0 * 256.0 * 256.0 * length(worldCoord) / sceneSize;\n";
+        shader += "float d = length(worldCoord) / sceneSize;\n";
+    	//shader += "float d = 256.0 * 256.0 * 256.0 * length(worldCoord) / sceneSize;\n";
     }
 
     if(pickMode == 0) { //Default Picking
 //         shader += "vec2 comp = fract(d * vec2(256.0, 1.0));\n";
 //         shader += "color.rg = comp - (comp.rr * vec2(0.0, 1.0/256.0));\n";
-		shader += "float h = floor(d / 256.0);\n";
-		shader += "color.r = d - (h * 256.0);\n";
-		shader += "color.b = floor(h / 256.0);\n";
-		shader += "color.g = h - (color.b * 256.0);\n";
-		shader += "color.rgb = color.rgb / 255.0;\n";
+// 		shader += "float h = floor(d / 256.0);\n";
+// 		shader += "color.r = d - (h * 256.0);\n";
+// 		shader += "color.b = floor(h / 256.0);\n";
+// 		shader += "color.g = h - (color.b * 256.0);\n";
+// 		shader += "color.rgb = color.rgb / 255.0;\n";
+        //try truncated floating point, only exponent and first 7+1bit mantissa
+        shader += "color.rg = float_encode(d).ba;\n";
 	} else if(pickMode == 3) { //Picking with 24bit precision
         shader += "color.r = d;\n";
     }
