@@ -274,7 +274,7 @@ x3dom.shader.DynamicShaderPicking.prototype.generateFragmentShader = function(gl
     }
     
     // utility function to convert float to vec4
-    shader += "vec4 encode_float (float val) {\n";
+    shader += "\n vec4 encode_float (float val) {\n";
     // TODO: correctly handle denormal numbers
     // http://www.2ality.com/2012/04/number-encoding.html
     shader += "float a = abs(val);\n";                           // encode absolute value + sign
@@ -290,7 +290,7 @@ x3dom.shader.DynamicShaderPicking.prototype.generateFragmentShader = function(gl
     shader += "float m2 = (mant2)/255.;\n";				// middle part
     shader += "float m3 = (mant3+.5)/255.;\n";			// scale to 0 - 255
 
-    shader += "return vec4(m3,m2,m1,e);\n }";
+    shader += "return vec4(m3,m2,m1,e);\n }\n\n";
     
 
 	/*******************************************************************************
@@ -343,7 +343,7 @@ x3dom.shader.DynamicShaderPicking.prototype.generateFragmentShader = function(gl
 // 		shader += "color.g = h - (color.b * 256.0);\n";
 // 		shader += "color.rgb = color.rgb / 255.0;\n";
         //try truncated floating point, only exponent and first 7+1bit mantissa
-        shader += "color.rg = float_encode(d).ba;\n";
+        shader += "color.rg = encode_float(d).ba;\n";
 	} else if(pickMode == 3) { //Picking with 24bit precision
         shader += "color.r = d;\n";
     }
