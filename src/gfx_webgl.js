@@ -2965,12 +2965,12 @@ x3dom.gfx_webgl = (function () {
                 function pixel2dist(index) {
                     //convert from raw truncated floats to float
                     // with bufferArrays
-                    // pixelData is UInt8ArrayBuffer
+                    // pixelData is Uint8ArrayBuffer
                     converter[0] = 0; // truncated
                     converter[1] = 0;
                     converter[2] = pixelData[index];
                     converter[3] = pixelData[index + 1];
-                    return new Float32Array(converter.buffer);
+                    return (new Float32Array(converter.buffer)) * sceneSize;
 //                     return (pixelData[index    ] / 255.0) * denom * denom + // now 3 byte pos.
 //                            (pixelData[index + 1] / 255.0) * denom +
 //                            (pixelData[index + 2] / 255.0);
