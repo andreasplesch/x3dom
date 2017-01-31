@@ -290,8 +290,8 @@ x3dom.shader.DynamicShaderPicking.prototype.generateFragmentShader = function(gl
     shader += "float m2 = (mant2)/255.;\n";				// middle part
     shader += "float m3 = (mant3+.5)/255.;\n";			// scale to 0 - 255
 
-    shader += "return vec4(m3,m2,m1,e);\n";
-    }
+    shader += "return vec4(m3,m2,m1,e);\n }";
+    
 
 	/*******************************************************************************
 	* Generate main function
