@@ -2957,7 +2957,7 @@ x3dom.gfx_webgl = (function () {
             var pixelOffset = 1.0 / scene._webgl.pickScale;
             var denom = 1.0 / 256.0;
             var dist, line, lineoff, right, up;
-            var converter = new UInt8Array(4);
+            var converter = new Uint8Array(4);
                     
             if (pickMode == 0) {
                 //objId += 256 * pixelData[index + 2]; now only 1 byte
