@@ -2940,7 +2940,6 @@ x3dom.gfx_webgl = (function () {
         // for deriving shadow ids together with shape ids
         var baseID = x3dom.nodeTypes.Shape.objectID + 2;
 
-
         // render to texture for reading pixel values
         this.renderPickingPass(gl, scene, mat_view, mat_scene, from, sceneSize, pickMode, x, y, 2, 2);
 
@@ -2958,13 +2957,23 @@ x3dom.gfx_webgl = (function () {
             var pixelOffset = 1.0 / scene._webgl.pickScale;
             var denom = 1.0 / 256.0;
             var dist, line, lineoff, right, up;
-            
+            var converter = new UInt8Array(4);
+                    
             if (pickMode == 0) {
                 //objId += 256 * pixelData[index + 2]; now only 1 byte
+                objId += 256 * pixelData[index + 2]; // back to 2 byte
                 function pixel2dist(index) {
-                    return (pixelData[index    ] / 255.0) * denom * denom + // now 3 byte pos.
-                           (pixelData[index + 1] / 255.0) * denom +
-                           (pixelData[index + 2] / 255.0);
+                    //convert from raw truncated floats to float
+                    // with bufferArrays
+                    // pixelData is UInt8ArrayBuffer
+                    converter[0] = 0; // truncated
+                    converter[1] = 0;
+                    converter[2] = pixelData[index];
+                    converter[3] = pixelData[index + 1];
+                    return new Float32Array(converter.buffer);
+//                     return (pixelData[index    ] / 255.0) * denom * denom + // now 3 byte pos.
+//                            (pixelData[index + 1] / 255.0) * denom +
+//                            (pixelData[index + 2] / 255.0);
                 };
 
                 dist = pixel2dist(index);
@@ -3036,6 +3045,7 @@ x3dom.gfx_webgl = (function () {
                 pickPos.z = pixelData[index + 2];
             }
             //x3dom.debug.logInfo(pickPos + " / " + objId);
+            converter = null ; //free
 
             var eventType = "shadowObjectIdChanged";
             var shadowObjectIdChanged, event;
