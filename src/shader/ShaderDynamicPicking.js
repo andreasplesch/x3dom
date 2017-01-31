@@ -330,7 +330,8 @@ x3dom.shader.DynamicShaderPicking.prototype.generateFragmentShader = function(gl
     }
 
     if(pickMode != 1 && pickMode != 2) {
-        shader += "float d = length(worldCoord) / sceneSize;\n";
+        //shader += "float d = length(worldCoord) / sceneSize;\n";
+        shader += "float d = length(worldCoord);\n";
     	//shader += "float d = 256.0 * 256.0 * 256.0 * length(worldCoord) / sceneSize;\n";
     }
 
@@ -345,7 +346,8 @@ x3dom.shader.DynamicShaderPicking.prototype.generateFragmentShader = function(gl
         //try truncated floating point, only exponent and first 7+1bit mantissa
         shader += "color.rg = encode_float(d).ba;\n";
 	} else if(pickMode == 3) { //Picking with 24bit precision
-        shader += "color.r = d;\n";
+        //shader += "color.r = d;\n";
+        shader += "color.r = d / sceneSize;\n";
     }
 
     shader += "gl_FragColor = color;\n";
