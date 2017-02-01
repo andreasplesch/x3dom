@@ -296,7 +296,7 @@ x3dom.shader.DynamicShaderPicking.prototype.generateFragmentShader = function(gl
     shader += "\n vec2 repack_fvec4 (vec4 fvec) {\n";
     shader += "float exp = mod(fvec[3], 64.0) * 64.0; \n"; // remove sign bit and highest exp bit 
     shader += "float man2hi = floor(fvec[1] / 64.0) * 64.0; \n"; // extract highest 2 bit of mant2
-    shader += "return vec2(fvec4[2], man2hi + exp);\n }\n\n";
+    shader += "return vec2(fvec[2], man2hi + exp);\n }\n\n";
 
 	/*******************************************************************************
 	* Generate main function
