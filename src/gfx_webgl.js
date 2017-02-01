@@ -2969,9 +2969,9 @@ x3dom.gfx_webgl = (function () {
                     // pixelData is Uint8ArrayBuffer
                     converter[0] = 0; // truncated
                     //converter[1] = 0;
-                    converter[1] = Math.floor(pixelData[index + 1] / 64) * 64; //hi 2 bit now mantissa 2
+                    converter[1] = Math.floor(pixelData[index + 1] / 32) * 32; //hi 3 bit now mantissa 2
                     converter[2] = pixelData[index];
-                    converter[3] = pixelData[index + 1] - converter[1] + 32; //bias adjustment
+                    converter[3] = pixelData[index + 1] - converter[1] + 48; //bias adjustment
                     return (new Float32Array(converter.buffer)) * sceneSize;
                     //return new Float32Array(converter.buffer);
 //                     return (pixelData[index    ] / 255.0) * denom * denom + // now 3 byte pos.
