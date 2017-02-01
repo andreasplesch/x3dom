@@ -295,8 +295,8 @@ x3dom.shader.DynamicShaderPicking.prototype.generateFragmentShader = function(gl
     // utility to pack positive floatvec4 into vec2
     shader += "\n vec2 repack_fvec4 (vec4 fvec) {\n";
     shader += "float exp = mod(fvec[3], 128.0); \n"; // remove sign bit
-    shader += "exp -= 32.0; \n"; // assume exp+bias>64<191, exp 32 to 63, makes exp 6bit
-    shader += "float man2hi = floor(fvec[1] / 64.0) * 64.0; \n"; // extract highest 2 bit of mant2
+    shader += "exp -= 48.0; \n"; // assume exp+bias>96<159, exp -31  to 32, makes exp 5bit
+    shader += "float man2hi = floor(fvec[1] / 32.0) * 32.0; \n"; // extract highest 3 bit of mant2
     shader += "return vec2(fvec[2], man2hi + exp);\n }\n\n";
 
 	/*******************************************************************************
