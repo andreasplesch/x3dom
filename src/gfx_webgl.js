@@ -2931,6 +2931,7 @@ x3dom.gfx_webgl = (function () {
 
         // get scalar scene size and adapted projection matrix
         var sceneSize = scene._lastMax.subtract(scene._lastMin).length();
+        sceneSize = Math.min(sceneSize, scene.getViewpoint().getFar()); //use zFar if closer to allow for smaller size
         var cctowc = viewarea.getCCtoWCMatrix();
 
         // restore correct scene bbox
@@ -2971,8 +2972,8 @@ x3dom.gfx_webgl = (function () {
                     converter[1] = Math.floor(pixelData[index + 1] / 64) * 64; //hi 2 bit now mantissa 2
                     converter[2] = pixelData[index];
                     converter[3] = pixelData[index + 1] - converter[1] + 32; //bias adjustment
-//                    return (new Float32Array(converter.buffer)) * sceneSize;
-                    return new Float32Array(converter.buffer);
+                    return (new Float32Array(converter.buffer)) * sceneSize;
+                    //return new Float32Array(converter.buffer);
 //                     return (pixelData[index    ] / 255.0) * denom * denom + // now 3 byte pos.
 //                            (pixelData[index + 1] / 255.0) * denom +
 //                            (pixelData[index + 2] / 255.0);
