@@ -292,6 +292,11 @@ x3dom.shader.DynamicShaderPicking.prototype.generateFragmentShader = function(gl
 
     shader += "return vec4(m3,m2,m1,e);\n }\n\n";
     
+    // utility to pack positive floatvec4 into vec2
+    shader += "\n vec2 repack_fvec4 (vec4 fvec) {\n";
+    shader += "float exp = floor(fvec[3] / 64.0); \n"; // remove sign bit and highest exp bit 
+    shader += "float man2hi = floor(fvec[1] / 64.0) * 64.0; \n";//extract highest 2 bit of mant2
+    shader += "return vec2(man2hi + exp, fvec4[2]);\n }\n\n";
 
 	/*******************************************************************************
 	* Generate main function
@@ -344,7 +349,7 @@ x3dom.shader.DynamicShaderPicking.prototype.generateFragmentShader = function(gl
 // 		shader += "color.g = h - (color.b * 256.0);\n";
 // 		shader += "color.rgb = color.rgb / 255.0;\n";
         //try truncated floating point, only exponent and first 7+1bit mantissa
-        shader += "color.rg = encode_float(d).ba;\n";
+        shader += "color.rg = repack_fvec4(encode_float(d)*255.0)/255.0;\n";
 	} else if(pickMode == 3) { //Picking with 24bit precision
         shader += "color.r = d;\n";
         //shader += "color.r = d / sceneSize;\n";
