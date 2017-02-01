@@ -336,8 +336,8 @@ x3dom.shader.DynamicShaderPicking.prototype.generateFragmentShader = function(gl
     }
 
     if(pickMode != 1 && pickMode != 2) {
-        //shader += "float d = length(worldCoord) / sceneSize;\n";
-        shader += "float d = length(worldCoord);\n";
+        shader += "float d = length(worldCoord) / sceneSize;\n";
+        //shader += "float d = length(worldCoord);\n";
     	//shader += "float d = 256.0 * 256.0 * 256.0 * length(worldCoord) / sceneSize;\n";
     }
 
