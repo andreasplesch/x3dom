@@ -55,12 +55,14 @@ x3dom.DefaultNavigation.prototype.navigateTo = function(view, timeStamp)
     var savedPickingInfo = null;
     
     var needNavAnim = (view._currentInputType == x3dom.InputTypes.NAVIGATION) &&
-                      ( navType === "game" ||
-                        (view._lastButton > 0 &&
-                        (navType.indexOf("fly") >= 0 ||
-                         navType === "walk" ||
-                         navType === "helicopter" ||
-                         navType.substr(0, 5) === "looka")) );
+                      //( navType === "game" ||
+                      //(
+                            view._lastButton > 0 //&&
+//                         (navType.indexOf("fly") >= 0 ||
+//                          navType === "walk" ||
+//                          navType === "helicopter" ||
+//                          navType.substr(0, 5) === "looka"))
+                        );
     
     view._deltaT = timeStamp - view._lastTS;
     
@@ -162,8 +164,8 @@ x3dom.DefaultNavigation.prototype.navigateTo = function(view, timeStamp)
             view._from = view._flyMat.e3();
             view._at = view._from.subtract(view._flyMat.e2());
 
-            if (navType === "helicopter")
-                view._at.y = view._from.y;
+//             if (navType === "helicopter")
+//                 view._at.y = view._from.y;
 
             /*
              //lookat, lookaround
@@ -193,122 +195,122 @@ x3dom.DefaultNavigation.prototype.navigateTo = function(view, timeStamp)
         var q, temp, fin;
         var lv, sv, up;
 
-        if (navType === "game")
-        {
-            view._pitch += view._dy;
-            view._yaw   += view._dx;
+//         if (navType === "game")
+//         {
+//             view._pitch += view._dy;
+//             view._yaw   += view._dx;
 
-            if (view._pitch >=  89) view._pitch = 89;
-            if (view._pitch <= -89) view._pitch = -89;
-            if (view._yaw >=  360) view._yaw -= 360;
-            if (view._yaw < 0) view._yaw = 360 + view._yaw;
+//             if (view._pitch >=  89) view._pitch = 89;
+//             if (view._pitch <= -89) view._pitch = -89;
+//             if (view._yaw >=  360) view._yaw -= 360;
+//             if (view._yaw < 0) view._yaw = 360 + view._yaw;
             
-            view._dx = 0;
-            view._dy = 0;
+//             view._dx = 0;
+//             view._dy = 0;
 
-            var xMat = x3dom.fields.SFMatrix4f.rotationX(view._pitch / 180 * Math.PI);
-            var yMat = x3dom.fields.SFMatrix4f.rotationY(view._yaw / 180 * Math.PI);
+//             var xMat = x3dom.fields.SFMatrix4f.rotationX(view._pitch / 180 * Math.PI);
+//             var yMat = x3dom.fields.SFMatrix4f.rotationY(view._yaw / 180 * Math.PI);
 
-            var fPos = x3dom.fields.SFMatrix4f.translation(view._eyePos);
+//             var fPos = x3dom.fields.SFMatrix4f.translation(view._eyePos);
 
-            view._flyMat = xMat.mult(yMat).mult(fPos);
+//             view._flyMat = xMat.mult(yMat).mult(fPos);
 
-            // Finally check floor for terrain following (TODO: optimize!)
-            var flyMat = view._flyMat.inverse();
+//             // Finally check floor for terrain following (TODO: optimize!)
+//             var flyMat = view._flyMat.inverse();
 
-            var tmpFrom = flyMat.e3();
-            tmpUp = new x3dom.fields.SFVec3f(0, -1, 0);
+//             var tmpFrom = flyMat.e3();
+//             tmpUp = new x3dom.fields.SFVec3f(0, -1, 0);
 
-            tmpAt = tmpFrom.add(tmpUp);
-            tmpUp = flyMat.e0().cross(tmpUp).normalize();
+//             tmpAt = tmpFrom.add(tmpUp);
+//             tmpUp = flyMat.e0().cross(tmpUp).normalize();
 
-            tmpMat = x3dom.fields.SFMatrix4f.lookAt(tmpFrom, tmpAt, tmpUp);
-            tmpMat = tmpMat.inverse();
+//             tmpMat = x3dom.fields.SFMatrix4f.lookAt(tmpFrom, tmpAt, tmpUp);
+//             tmpMat = tmpMat.inverse();
 
-            view._scene._nameSpace.doc.ctx.pickValue(view, view._width/2, view._height/2,
-                        view._lastButton, tmpMat, view.getProjectionMatrix().mult(tmpMat));
+//             view._scene._nameSpace.doc.ctx.pickValue(view, view._width/2, view._height/2,
+//                         view._lastButton, tmpMat, view.getProjectionMatrix().mult(tmpMat));
 
-            if (view._pickingInfo.pickObj)
-            {
-                dist = view._pickingInfo.pickPos.subtract(tmpFrom).length();
-                //x3dom.debug.logWarning("Floor collision at dist=" + dist.toFixed(4));
+//             if (view._pickingInfo.pickObj)
+//             {
+//                 dist = view._pickingInfo.pickPos.subtract(tmpFrom).length();
+//                 //x3dom.debug.logWarning("Floor collision at dist=" + dist.toFixed(4));
 
-                tmpFrom.y += (avatarHeight - dist);
-                flyMat.setTranslate(tmpFrom);
+//                 tmpFrom.y += (avatarHeight - dist);
+//                 flyMat.setTranslate(tmpFrom);
 
-                view._eyePos = flyMat.e3().negate();
-                view._flyMat = flyMat.inverse();
+//                 view._eyePos = flyMat.e3().negate();
+//                 view._flyMat = flyMat.inverse();
 
-                view._pickingInfo.pickObj = null;
-            }
+//                 view._pickingInfo.pickObj = null;
+//             }
 
-            view._scene.getViewpoint().setView(view._flyMat);
+//             view._scene.getViewpoint().setView(view._flyMat);
 
-            return needNavAnim;
-        }   // game
-        else if (navType === "helicopter") {
-            var typeParams = navi.getTypeParams();
+//             return needNavAnim;
+//         }   // game
+//         else if (navType === "helicopter") {
+//             var typeParams = navi.getTypeParams();
 
             
 
-            if (view._lastButton & 2) // up/down levelling
-            {
-                var stepUp = 200 * userYstep;
-                typeParams[1] += stepUp;
-                navi.setTypeParams(typeParams);
-            }
+//             if (view._lastButton & 2) // up/down levelling
+//             {
+//                 var stepUp = 200 * userYstep;
+//                 typeParams[1] += stepUp;
+//                 navi.setTypeParams(typeParams);
+//             }
 
-            if (view._lastButton & 1) {  // forward/backward motion
-                step = 300 * userYstep;
-            }
-            else {
-                step = 0;
-            }
+//             if (view._lastButton & 1) {  // forward/backward motion
+//                 step = 300 * userYstep;
+//             }
+//             else {
+//                 step = 0;
+//             }
             
-            theta = typeParams[0];
-            view._from.y = typeParams[1];
-            view._at.y = view._from.y;
+//             theta = typeParams[0];
+//             view._from.y = typeParams[1];
+//             view._at.y = view._from.y;
 
-            // rotate around the up vector
-            q = x3dom.fields.Quaternion.axisAngle(view._up, phi);
-            temp = q.toMatrix();
+//             // rotate around the up vector
+//             q = x3dom.fields.Quaternion.axisAngle(view._up, phi);
+//             temp = q.toMatrix();
 
-            fin = x3dom.fields.SFMatrix4f.translation(view._from);
-            fin = fin.mult(temp);
+//             fin = x3dom.fields.SFMatrix4f.translation(view._from);
+//             fin = fin.mult(temp);
 
-            temp = x3dom.fields.SFMatrix4f.translation(view._from.negate());
-            fin = fin.mult(temp);
+//             temp = x3dom.fields.SFMatrix4f.translation(view._from.negate());
+//             fin = fin.mult(temp);
 
-            view._at = fin.multMatrixPnt(view._at);
+//             view._at = fin.multMatrixPnt(view._at);
 
-            // rotate around the side vector
-            lv = view._at.subtract(view._from).normalize();
-            sv = lv.cross(view._up).normalize();
-            up = sv.cross(lv).normalize();
+//             // rotate around the side vector
+//             lv = view._at.subtract(view._from).normalize();
+//             sv = lv.cross(view._up).normalize();
+//             up = sv.cross(lv).normalize();
 
-            lv = lv.multiply(step);
+//             lv = lv.multiply(step);
 
-            view._from = view._from.add(lv);
-            view._at = view._at.add(lv);
+//             view._from = view._from.add(lv);
+//             view._at = view._at.add(lv);
 
-            // rotate around the side vector
-            q = x3dom.fields.Quaternion.axisAngle(sv, theta);
-            temp = q.toMatrix();
+//             // rotate around the side vector
+//             q = x3dom.fields.Quaternion.axisAngle(sv, theta);
+//             temp = q.toMatrix();
 
-            fin = x3dom.fields.SFMatrix4f.translation(view._from);
-            fin = fin.mult(temp);
+//             fin = x3dom.fields.SFMatrix4f.translation(view._from);
+//             fin = fin.mult(temp);
 
-            temp = x3dom.fields.SFMatrix4f.translation(view._from.negate());
-            fin = fin.mult(temp);
+//             temp = x3dom.fields.SFMatrix4f.translation(view._from.negate());
+//             fin = fin.mult(temp);
 
-            var at = fin.multMatrixPnt(view._at);
+//             var at = fin.multMatrixPnt(view._at);
 
-            view._flyMat = x3dom.fields.SFMatrix4f.lookAt(view._from, at, up);
+//             view._flyMat = x3dom.fields.SFMatrix4f.lookAt(view._from, at, up);
 
-            view._scene.getViewpoint().setView(view._flyMat.inverse());
+//             view._scene.getViewpoint().setView(view._flyMat.inverse());
 
-            return needNavAnim;
-        }   // helicopter
+//             return needNavAnim;
+//         }   // helicopter
 
         // rotate around the up vector
         q = x3dom.fields.Quaternion.axisAngle(view._up, phi);
@@ -340,32 +342,32 @@ x3dom.DefaultNavigation.prototype.navigateTo = function(view, timeStamp)
         view._at = fin.multMatrixPnt(view._at);
 
         // forward along view vector
-        if (navType.substr(0, 5) !== "looka")
-        {
-            var currProjMat = view.getProjectionMatrix();
+//         if (navType.substr(0, 5) !== "looka")
+//         {
+//             var currProjMat = view.getProjectionMatrix();
 
-            if (navType !== "freefly") {
-                if (step < 0) {
-                    // backwards: negate viewing direction
-                    tmpMat = new x3dom.fields.SFMatrix4f();
-                    tmpMat.setValue(view._last_mat_view.e0(), view._last_mat_view.e1(),
-                                    view._last_mat_view.e2().negate(), view._last_mat_view.e3());
+//             if (navType !== "freefly") {
+//                 if (step < 0) {
+//                     // backwards: negate viewing direction
+//                     tmpMat = new x3dom.fields.SFMatrix4f();
+//                     tmpMat.setValue(view._last_mat_view.e0(), view._last_mat_view.e1(),
+//                                     view._last_mat_view.e2().negate(), view._last_mat_view.e3());
 
-                    view._scene._nameSpace.doc.ctx.pickValue(view, view._width/2, view._height/2,
-                                view._lastButton, tmpMat, currProjMat.mult(tmpMat));
-                }
-                else {
-                    view._scene._nameSpace.doc.ctx.pickValue(view, view._width/2, view._height/2, view._lastButton);
-                }
-                if (view._pickingInfo.pickObj)
-                {
-                    dist = view._pickingInfo.pickPos.subtract(view._from).length();
+//                     view._scene._nameSpace.doc.ctx.pickValue(view, view._width/2, view._height/2,
+//                                 view._lastButton, tmpMat, currProjMat.mult(tmpMat));
+//                 }
+//                 else {
+//                     view._scene._nameSpace.doc.ctx.pickValue(view, view._width/2, view._height/2, view._lastButton);
+//                 }
+//                 if (view._pickingInfo.pickObj)
+//                 {
+//                     dist = view._pickingInfo.pickPos.subtract(view._from).length();
 
-                    if (dist <= avatarRadius) {
-                        step = 0;
-                    }
-                }
-            }
+//                     if (dist <= avatarRadius) {
+//                         step = 0;
+//                     }
+//                 }
+//             }
 
             lv = view._at.subtract(view._from).normalize().multiply(step);
 
