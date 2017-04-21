@@ -388,9 +388,9 @@ x3dom.DefaultNavigation.prototype.navigateTo = function(view, timeStamp)
 
                 if (view._pickingInfo.pickObj)
                 {
-                    dist = view._pickingInfo.pickPos.subtract(view._from).length()/walkDamper;
+                    dist = view._pickingInfo.pickPos.subtract(view._from).length();
 
-                    view._at = view._at.add(up.multiply(avatarHeight - dist));
+                    view._at = view._at.add(up.multiply((avatarHeight - dist)/walkDamper));
                     view._from = view._from.add(up.multiply(avatarHeight - dist));
                 }
             }
