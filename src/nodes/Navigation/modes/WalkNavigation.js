@@ -342,32 +342,32 @@ x3dom.DefaultNavigation.prototype.navigateTo = function(view, timeStamp)
         view._at = fin.multMatrixPnt(view._at);
 
         // forward along view vector
-//         if (navType.substr(0, 5) !== "looka")
-//         {
-//             var currProjMat = view.getProjectionMatrix();
+        if (navType.substr(0, 5) !== "looka")
+        {
+            var currProjMat = view.getProjectionMatrix();
 
-//             if (navType !== "freefly") {
-//                 if (step < 0) {
-//                     // backwards: negate viewing direction
-//                     tmpMat = new x3dom.fields.SFMatrix4f();
-//                     tmpMat.setValue(view._last_mat_view.e0(), view._last_mat_view.e1(),
-//                                     view._last_mat_view.e2().negate(), view._last_mat_view.e3());
+            if (navType !== "freefly") {
+                if (step < 0) {
+                    // backwards: negate viewing direction
+                    tmpMat = new x3dom.fields.SFMatrix4f();
+                    tmpMat.setValue(view._last_mat_view.e0(), view._last_mat_view.e1(),
+                                    view._last_mat_view.e2().negate(), view._last_mat_view.e3());
 
-//                     view._scene._nameSpace.doc.ctx.pickValue(view, view._width/2, view._height/2,
-//                                 view._lastButton, tmpMat, currProjMat.mult(tmpMat));
-//                 }
-//                 else {
-//                     view._scene._nameSpace.doc.ctx.pickValue(view, view._width/2, view._height/2, view._lastButton);
-//                 }
-//                 if (view._pickingInfo.pickObj)
-//                 {
-//                     dist = view._pickingInfo.pickPos.subtract(view._from).length();
+                    view._scene._nameSpace.doc.ctx.pickValue(view, view._width/2, view._height/2,
+                                view._lastButton, tmpMat, currProjMat.mult(tmpMat));
+                }
+                else {
+                    view._scene._nameSpace.doc.ctx.pickValue(view, view._width/2, view._height/2, view._lastButton);
+                }
+                if (view._pickingInfo.pickObj)
+                {
+                    dist = view._pickingInfo.pickPos.subtract(view._from).length();
 
-//                     if (dist <= avatarRadius) {
-//                         step = 0;
-//                     }
-//                 }
-//             }
+                    if (dist <= avatarRadius) {
+                        step = 0;
+                    }
+                }
+            }
 
             lv = view._at.subtract(view._from).normalize().multiply(step);
 
