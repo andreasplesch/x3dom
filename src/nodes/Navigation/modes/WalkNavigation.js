@@ -56,7 +56,7 @@ x3dom.DefaultNavigation.prototype.navigateTo = function(view, timeStamp)
     
     var needNavAnim = (view._currentInputType == x3dom.InputTypes.NAVIGATION) &&
                       //( navType === "game" ||
-                      //(
+                      (
                             view._lastButton > 0 //&&
 //                         (navType.indexOf("fly") >= 0 ||
 //                          navType === "walk" ||
