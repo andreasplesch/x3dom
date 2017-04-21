@@ -342,11 +342,12 @@ x3dom.DefaultNavigation.prototype.navigateTo = function(view, timeStamp)
         view._at = fin.multMatrixPnt(view._at);
 
         // forward along view vector
-        if (navType.substr(0, 5) !== "looka")
+        //if (navType.substr(0, 5) !== "looka")
         {
             var currProjMat = view.getProjectionMatrix();
 
-            if (navType !== "freefly") {
+            //if (navType !== "freefly")
+            {
                 if (step < 0) {
                     // backwards: negate viewing direction
                     tmpMat = new x3dom.fields.SFMatrix4f();
@@ -375,7 +376,7 @@ x3dom.DefaultNavigation.prototype.navigateTo = function(view, timeStamp)
             view._from = view._from.add(lv);
 
             // finally attach to ground when walking
-            if (navType === "walk")
+            //if (navType === "walk")
             {
                 tmpAt = view._from.addScaled(up, -1.0);
                 tmpUp = sv.cross(up.negate()).normalize();  // lv
