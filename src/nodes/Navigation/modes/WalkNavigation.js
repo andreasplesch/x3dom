@@ -48,7 +48,7 @@ x3dom.WalkNavigation.prototype.onDrag = function(view, x, y, buttonState)
 };
 
 // other event handlers from DefaultNavigation could also be simplified
-x3dom.DefaultNavigation.prototype.navigateTo = function(view, timeStamp)
+x3dom.WalkNavigation.prototype.navigateTo = function(view, timeStamp)
 {
     var navi = this.navi;
     var navType = navi.getType();
