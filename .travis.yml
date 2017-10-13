@@ -6,5 +6,5 @@ install:
 script:
   - python manage.py --build
 after_script:
-  - du dist
+  - du -ah dist
   
