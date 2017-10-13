@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/andreasplesch/x3dom.svg?branch=testCI)](https://travis-ci.org/andreasplesch/x3dom)
+branch testCI[![Build Status](https://travis-ci.org/andreasplesch/x3dom.svg?branch=testCI)](https://travis-ci.org/andreasplesch/x3dom)
+
 Welcome to X3DOM 
 ================
 X3DOM is a framework for integrating and manipulating (X)3D scenes as HTML5
