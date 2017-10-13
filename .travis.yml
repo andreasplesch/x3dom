@@ -4,4 +4,4 @@ python:
 install:
   - pip install argparse
 script:
-  - python manage.py --build
+  - PYTHON_PATH=tools/ python manage.py --build
