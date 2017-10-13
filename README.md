@@ -1,4 +1,4 @@
-branch testCI[![Build Status](https://travis-ci.org/andreasplesch/x3dom.svg?branch=testCI)](https://travis-ci.org/andreasplesch/x3dom)
+branch testCI: [![Build Status](https://travis-ci.org/andreasplesch/x3dom.svg?branch=testCI)](https://travis-ci.org/andreasplesch/x3dom)
 
 Welcome to X3DOM 
 ================
