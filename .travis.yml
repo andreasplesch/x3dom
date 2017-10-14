@@ -5,13 +5,15 @@ install:
   - pip install argparse
 script:
   - python manage.py --build
+  - mkdir deploy
+  - mv dist deploy/
 after_script:
-  - du -ah dist
+  - du -ah deploy
   - env
 deploy:
   provider: surge
   skip_cleanup: true
-  project: ./dist/
+  project: ./deploy/
   domain: x3dom-dev.surge.sh
   on:
     all_branches: true
