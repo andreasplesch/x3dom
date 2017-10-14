@@ -10,9 +10,10 @@ addons:
 script:
   - python manage.py --build
   - mkdir -p deploy/dev-$TRAVIS_COMMIT
+  - wget -r -nH -np -P deploy http://x3dom-dev.surge.sh 
   - cp dist/x3dom.* dist/x3dom-full.* deploy/dev-$TRAVIS_COMMIT
-  - ln -s deploy/dev-$TRAVIS_COMMIT deploy/latest
-  - tree -h -H './' deploy/ > deploy/index.html
+  - cp dist/x3dom.* dist/x3dom-full.* deploy/latest
+  - tree -h -H '.' deploy/ > deploy/index.html
 after_script:
   - du -ah deploy
   - env
