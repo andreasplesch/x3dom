@@ -5,8 +5,8 @@ install:
   - pip install argparse
 script:
   - python manage.py --build
-  - mkdir deploy
-  - mv dist deploy/
+  - mkdir -p deploy/dev-$TRAVIS_COMMIT
+  - cp dist/x3dom.* dist/x3dom-full.* deploy/dev-$TRAVIS_COMMIT
 after_script:
   - du -ah deploy
   - env
