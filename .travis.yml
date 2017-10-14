@@ -9,9 +9,16 @@ after_script:
   - du -ah dist
   - env
 deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_PUBLIC_REPO_TOKEN # Set in travis-ci.org dashboard
-  local_dir: dist
-  on:
-    all_branches: true
+  # provider: pages
+  # skip_cleanup: true
+  # github_token: $GITHUB_PUBLIC_REPO_TOKEN # Set in travis-ci.org dashboard
+  # local_dir: dist
+  # on:
+  #   all_branches: true
+  provider: surge
+    skip_cleanup: true
+    project: ./dist/
+    domain: x3dom-dev.surge.sh
+    on:
+      all_branches: true
+      
