@@ -13,14 +13,8 @@ script:
   - python manage.py --build
   - cp dist/x3dom.* dist/x3dom-full.* deploy/dev-$TRAVIS_COMMIT
   - cp dist/x3dom.* dist/x3dom-full.* deploy/latest
-  - tree -h -C -D -H '.' -T 'x3dom CI builds' deploy/ > deploy/index.html
-after_script:
+  - tree -h -C -D -H '.' -T 'x3dom PR builds: ${TRAVIS_PULL_REQUEST} #' deploy/ > deploy/index.html
+after_success:
   - du -ah deploy
   - env
-deploy:
-  provider: surge
-  skip_cleanup: true
-  project: ./deploy/
-  domain: x3dom-dev.surge.sh
-  on:
-    all_branches: true
+  - surge --project deploy --domain x3dom-dev.surge.sh
