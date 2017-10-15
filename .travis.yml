@@ -17,4 +17,4 @@ script:
 after_success:
   - du -ah deploy
   - env
-  - surge --project deploy --domain x3dom-dev.surge.sh
+  - surge --project ./deploy --domain x3dom-dev.surge.sh
