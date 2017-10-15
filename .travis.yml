@@ -14,7 +14,7 @@ script:
   - python manage.py --build
   - cp dist/x3dom.* dist/x3dom-full.* deploy/dev-$TRAVIS_COMMIT
   - cp dist/x3dom.* dist/x3dom-full.* deploy/latest
-  - tree -h -C -D -H '.' -R -T "x3dom PR  $TRAVIS_PULL_REQUEST build:" deploy/ > deploy/index.html
+  - tree -h -C -D -H '.' -R -T 'x3dom PR ${TRAVIS_PULL_REQUEST} build:' deploy/ > deploy/index.html
 after_success:
   - du -ah deploy
   - env
