@@ -1,0 +1,26 @@
+language: python
+python:
+  - 2.7
+install:
+  - pip install argparse
+addons:
+  apt:
+    packages:
+    - tree
+script:
+  - mkdir -p deploy/dev-$TRAVIS_COMMIT deploy/latest
+  - ( wget -e robots=off -r -nH -np -X /latest -S -P deploy http://x3dom-dev.surge.sh; exit 0 ) 
+  - python manage.py --build
+  - cp dist/x3dom.* dist/x3dom-full.* deploy/dev-$TRAVIS_COMMIT
+  - cp dist/x3dom.* dist/x3dom-full.* deploy/latest
+  - tree -h -C -D -H '.' -T 'x3dom CI builds' deploy/ > deploy/index.html
+after_script:
+  - du -ah deploy
+  - env
+deploy:
+  provider: surge
+  skip_cleanup: true
+  project: ./deploy/
+  domain: x3dom-dev.surge.sh
+  on:
+    all_branches: true
