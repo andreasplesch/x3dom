@@ -12,14 +12,20 @@ addons:
 env:
   - SURGE_LOGIN=x3domsurge@gmail.com SURGE_TOKEN=66e909183b62ec798569f7ffb3e95d8a SURGE_DOMAIN=x3dom-builds.surge.sh
 script:
-  - mkdir -p deploy/dev-$TRAVIS_COMMIT deploy/latest
-#  - ( wget -e robots=off -r -nH -np -X /latest -S -P deploy http://x3dom-dev.surge.sh; exit 0 ) 
   - python manage.py --build
+  - mkdir -p deploy/latest
 after_success:
-  - cp dist/x3dom.* dist/x3dom-full.* deploy/dev-$TRAVIS_COMMIT
+  - ( wget -e robots=off -r -nH -np -X /latest -S -P deploy http://x3dom-dev.surge.sh; exit 0 )
+  - ( wget -e robots=off -r -nH -np --accept-regex='build_?' -S http://x3dom-dev.surge.sh/latest; exit 0 )  
   - cp dist/x3dom.* dist/x3dom-full.* deploy/latest
+  - lastbuild=$(ls latest/build_?); lastbuild=${lastbuild: -1};
+  - build=$((lastbuild+1 % 10))
+  - touch deploy/latest/build_$build
+  - rm -rf deploy/build_$build
+  - cp -r deploy/latest deploy/build_$build
+  - touch deploy/build_${build}/commit_$TRAVIS_COMMIT
   - tree -h -C -D -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} build:" deploy/ > deploy/index.html
-  - tree -h -C -D -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} commit ${TRAVIS_COMMIT}:" deploy/dev-$TRAVIS_COMMIT > deploy/dev-${TRAVIS_COMMIT}/index.html
+  - tree -h -C -D -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} commit ${TRAVIS_COMMIT}:" deploy/build_$build > deploy/build_${build}/index.html
   - tree -h -C -D -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} build/latest:" deploy/latest > deploy/latest/index.html
   - du -ah deploy
   - env
