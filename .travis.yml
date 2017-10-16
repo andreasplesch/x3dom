@@ -17,8 +17,8 @@ after_success:
  # - cp dist/x3dom.* dist/x3dom-full.* deploy/latest
   - tree -h -C -D -H '.' -R -L 2 -T "x3dom PR ${TRAVIS_PULL_REQUEST} build:" deploy/ > deploy/index.html
   - ln -s ./deploy/dev-$TRAVIS_COMMIT ./deploy/latest
-  - ls -la deploy
-  - mv deploy/latest/*html deploy/latest/index.html
+  - ls -la deploy/*
+  - mv deploy/dev-${TRAVIS_COMMIT}/*html deploy/dev-${TRAVIS_COMMIT}/index.html
   - du -ah deploy
   - env
   - surge --project ./deploy --domain x3dom-dev.surge.sh
