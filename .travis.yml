@@ -9,14 +9,14 @@ addons:
     packages:
     - tree
 script:
-  - mkdir -p deploy/dev-$TRAVIS_COMMIT
+  - mkdir -p deploy/dev-$TRAVIS_COMMIT deploy/latest
 #  - ( wget -e robots=off -r -nH -np -X /latest -S -P deploy http://x3dom-dev.surge.sh; exit 0 ) 
   - python manage.py --build
 after_success:
   - cp dist/x3dom.* dist/x3dom-full.* deploy/dev-$TRAVIS_COMMIT
- # - cp dist/x3dom.* dist/x3dom-full.* deploy/latest
-  - ln -s ./deploy/dev-$TRAVIS_COMMIT ./deploy/latest
+  - cp dist/x3dom.* dist/x3dom-full.* deploy/latest
   - tree -h -C -D -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} build:" deploy/ > deploy/index.html
+  - tree -h -C -D -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} commit ${TRAVIS_COMMIT}:" deploy/dev-$TRAVIS_COMMIT > deploy/dev-${TRAVIS_COMMIT}/index.html
   - tree -h -C -D -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} build/latest:" deploy/latest > deploy/latest/index.html
   - du -ah deploy
   - env
