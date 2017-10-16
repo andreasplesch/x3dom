@@ -15,8 +15,9 @@ script:
 after_success:
   - cp dist/x3dom.* dist/x3dom-full.* deploy/dev-$TRAVIS_COMMIT
  # - cp dist/x3dom.* dist/x3dom-full.* deploy/latest
-  - tree -h -C -D -H '.' -R -T "x3dom PR ${TRAVIS_PULL_REQUEST} build:" deploy/ > deploy/index.html
-  - ln -s ./deploy/dev-$TRAVIS_COMMIT deploy/latest
+  - tree -h -C -D -H '.' -R -L 2 -T "x3dom PR ${TRAVIS_PULL_REQUEST} build:" deploy/ > deploy/index.html
+  - ln -s ./deploy/dev-$TRAVIS_COMMIT ./deploy/latest
+  - ls -la deploy
   - mv deploy/latest/*html deploy/latest/index.html
   - du -ah deploy
   - env
