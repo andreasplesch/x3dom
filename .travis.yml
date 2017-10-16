@@ -18,7 +18,8 @@ after_success:
   - ( wget -e robots=off -r -nH -np -X /latest -S -P deploy http://x3dom-dev.surge.sh; exit 0 )
   - ( wget -e robots=off -r -nH -np --accept-regex='build_?' -S http://x3dom-dev.surge.sh/latest; exit 0 )  
   - cp dist/x3dom.* dist/x3dom-full.* deploy/latest
-  - lastbuild=$(ls latest/build_?); lastbuild=${lastbuild: -1};
+  - >
+    lastbuild=$(ls latest/build_?); lastbuild=${lastbuild: -1}
   - build=$((lastbuild+1 % 10))
   - touch deploy/latest/build_$build
   - rm -rf deploy/build_$build
