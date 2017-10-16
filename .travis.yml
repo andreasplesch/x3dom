@@ -10,9 +10,7 @@ addons:
     - tree
 # nothin sensitive there
 env:
-  - SURGE_LOGIN=x3domsurge@gmail.com
-  - SURGE_TOKEN=66e909183b62ec798569f7ffb3e95d8a
-  - SURGE_DOMAIN=x3dom-builds.surge.sh
+  - SURGE_LOGIN=x3domsurge@gmail.com SURGE_TOKEN=66e909183b62ec798569f7ffb3e95d8a SURGE_DOMAIN=x3dom-builds.surge.sh
 script:
   - mkdir -p deploy/dev-$TRAVIS_COMMIT deploy/latest
 #  - ( wget -e robots=off -r -nH -np -X /latest -S -P deploy http://x3dom-dev.surge.sh; exit 0 ) 
