@@ -22,7 +22,9 @@ after_success:
     lastbuild=$(ls latest/build_?); lastbuild=${lastbuild: -1}
   - build=$((lastbuild+1 % 10))
   - touch deploy/latest/build_$build
+  - touch deploy/latest/$(date)
   - rm -rf deploy/build_$build
+  - rm -rf deploy/dev*
   - cp -r deploy/latest deploy/build_$build
   - touch deploy/build_${build}/commit_$TRAVIS_COMMIT
   - tree -h -C -D -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} build:" deploy/ > deploy/index.html
