@@ -27,9 +27,9 @@ after_success:
   - rm -rf deploy/dev*
   - cp -r deploy/latest deploy/build_$build
   - touch deploy/build_${build}/commit_$TRAVIS_COMMIT
-  - tree -h -C -D -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} build:" deploy/ > deploy/index.html
-  - tree -h -C -D -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} commit ${TRAVIS_COMMIT}:" deploy/build_$build > deploy/build_${build}/index.html
-  - tree -h -C -D -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} build/latest:" deploy/latest > deploy/latest/index.html
+  - tree -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} build:" deploy/ > deploy/index.html
+  - tree -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} commit ${TRAVIS_COMMIT}:" deploy/build_$build > deploy/build_${build}/index.html
+  - tree -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} build/latest:" deploy/latest > deploy/latest/index.html
   - du -ah deploy
   - env
   - surge --project ./deploy --domain ${SURGE_DOMAIN}
