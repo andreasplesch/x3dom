@@ -5,10 +5,12 @@ python:
 env:
   - SURGE_LOGIN=x3domsurge@gmail.com SURGE_TOKEN=66e909183b62ec798569f7ffb3e95d8a SURGE_DOMAIN=x3dom-builds.surge.sh
 install:
-  - "# ***************************************"
-  - "# * HTTP://X3DOM-BUILDS.SURGE.SH/LATEST *"
-  - "# * for finished and recent build       *"
-  - "# ***************************************"
+  - "# **********************************************"
+  - "# *                                            *"
+  - "# *     HTTP://X3DOM-BUILDS.SURGE.SH/LATEST    *"
+  - "# *      for finished and recent builds        *"
+  - "# *                                            *"
+  - "# **********************************************"
   - echo -e "\e[0;45m http://${SURGE_DOMAIN}/latest \e[0m for build result"
   - pip install argparse
   - npm install -g surge
