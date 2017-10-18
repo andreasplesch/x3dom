@@ -12,7 +12,7 @@ addons:
 env:
   - SURGE_LOGIN=x3domsurge@gmail.com SURGE_TOKEN=66e909183b62ec798569f7ffb3e95d8a SURGE_DOMAIN=x3dom-builds.surge.sh
 script:
-  - python manage.py --build
+  - python manage.py --build > build.log
   - mkdir -p deploy/latest
 after_success:
   - ( wget -e robots=off -r -nH -np -X /latest -S -P deploy $SURGE_DOMAIN; exit 0 )
@@ -30,6 +30,8 @@ after_success:
   - tree -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} build:" deploy/ > deploy/index.html
   - tree -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} commit ${TRAVIS_COMMIT}:" deploy/build_$build > deploy/build_${build}/index.html
   - tree -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} build/latest:" deploy/latest > deploy/latest/index.html
+  - surge --project ./deploy --domain ${SURGE_DOMAIN}
   - du -ah deploy
   - env
-  - surge --project ./deploy --domain ${SURGE_DOMAIN}
+  - cat build.log
+  
