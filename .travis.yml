@@ -5,6 +5,11 @@ python:
 env:
   - SURGE_LOGIN=x3domsurge@gmail.com SURGE_TOKEN=66e909183b62ec798569f7ffb3e95d8a SURGE_DOMAIN=x3dom-builds.surge.sh
 install:
+  - |
+    # ***************************************
+    # * HTTP://X3DOM-BUILDS.SURGE.SH/LATEST *
+    # * for finished and recent build       *
+    # ***************************************
   - echo -e "\e[0;45m http://${SURGE_DOMAIN}/latest \e[0m for build result"
   - pip install argparse
   - npm install -g surge
@@ -28,6 +33,7 @@ after_success:
   - rm -rf deploy/dev*
   - cp -r deploy/latest deploy/build_$build
   - touch deploy/build_${build}/commit_$TRAVIS_COMMIT
+  - touch deploy/build_${build}/PR_NUMBER_$TRAVIS_PULL_REQUEST
   - tree -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} build:" deploy/ > deploy/index.html
   - tree -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} commit ${TRAVIS_COMMIT}:" deploy/build_$build > deploy/build_${build}/index.html
   - tree -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} build/latest:" deploy/latest > deploy/latest/index.html
