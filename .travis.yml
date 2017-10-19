@@ -46,6 +46,9 @@ after_success:
   - tree -I index.html -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} build:" deploy/ > deploy/index.html
   - tree -I index.html -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} commit ${TRAVIS_COMMIT}:" deploy/build_$build > deploy/build_${build}/index.html
   - tree -I index.html -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} build/latest:" deploy/latest > deploy/latest/index.html
+  - "# link to commit and PR on github"
+  - sed -i "s=./commit_${TRAVIS_COMMIT}=https://github.com/andreasplesch/x3dom/commit/${TRAVIS_COMMIT}=" deploy/latest/index.html
+  - sed -i "s=./PR_NUMBER_${TRAVIS_PULL_REQUEST}=https://github.com/andreasplesch/x3dom/pull/${TRAVIS_PULL_REQUEST}=" deploy/latest/index.html
   - surge --project ./deploy --domain ${SURGE_DOMAIN}
   - "# just for logging purposes"
   - du -ah deploy
