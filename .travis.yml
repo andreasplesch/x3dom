@@ -36,28 +36,27 @@ after_success:
   - >
     lastbuild=$(ls latest/build_?); lastbuild=${lastbuild: -1}
   - build=$(((lastbuild+1) % 10))
-  - touch deploy/latest/build_$build
-  - touch deploy/latest/$(date +%F_%R)
-  - touch deploy/latest/commit_$TRAVIS_COMMIT
-  - touch deploy/latest/PR_NUMBER_$TRAVIS_PULL_REQUEST
-  - rm -rf deploy/build_$build
-  - "# rm -rf deploy/dev*"
-  - cp -r deploy/latest deploy/build_$build
-  - tree -r -I index.html -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} build:" deploy/ > deploy/index.html
+  - cd deploy
+  - touch latest/build_$build
+  - touch latest/$(date +%F_%R)
+  - touch latest/commit_$TRAVIS_COMMIT
+  - touch latest/PR_NUMBER_$TRAVIS_PULL_REQUEST
+  - rm -rf build_$build
+  - cp -r latest build_$build
+  - tree -r -I index.html -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} build:" ./ > index.html
   - "# link to commit and PR on github"
-  - sed -i 's=./.*commit_\(.*commit\)=https://github.com/${TRAVIS_REPO_SLUG}/commit/\1=' deploy/index.html
-  - sed -i 's=./.*PR_NUMBER_\(.*PR\)=https://github.com/${TRAVIS_REPO_SLUG}/pull/\1=' deploy/index.html
-  - tree -I index.html -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} commit ${TRAVIS_COMMIT}:" deploy/build_$build > deploy/build_${build}/index.html
+  - sed -i "s=./.*commit_\(.*commit\)=https://github.com/${TRAVIS_REPO_SLUG}/commit/\1=" index.html
+  - sed -i "s=./.*PR_NUMBER_\(.*PR\)=https://github.com/${TRAVIS_REPO_SLUG}/pull/\1=" index.html
+  - tree -I index.html -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} commit ${TRAVIS_COMMIT}:" ./build_$build > ./build_${build}/index.html
   - "# link to commit and PR on github"
-  - sed -i "s=./commit_${TRAVIS_COMMIT}=https://github.com/${TRAVIS_REPO_SLUG}/commit/${TRAVIS_COMMIT}=" deploy/build_${build}/index.html
-  - sed -i "s=./PR_NUMBER_${TRAVIS_PULL_REQUEST}=https://github.com/${TRAVIS_REPO_SLUG}/pull/${TRAVIS_PULL_REQUEST}=" deploy/build_${build}/index.html
-  - tree -I index.html -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} build/latest:" deploy/latest > deploy/latest/index.html
+  - sed -i "s=./commit_${TRAVIS_COMMIT}=https://github.com/${TRAVIS_REPO_SLUG}/commit/${TRAVIS_COMMIT}=" ./build_${build}/index.html
+  - sed -i "s=./PR_NUMBER_${TRAVIS_PULL_REQUEST}=https://github.com/${TRAVIS_REPO_SLUG}/pull/${TRAVIS_PULL_REQUEST}=" ./build_${build}/index.html
+  - tree -I index.html -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} build/latest:" ./latest > ./latest/index.html
   - "# link to commit and PR on github"
-  - sed -i "s=./commit_${TRAVIS_COMMIT}=https://github.com/${TRAVIS_REPO_SLUG}/commit/${TRAVIS_COMMIT}=" deploy/latest/index.html
-  - sed -i "s=./PR_NUMBER_${TRAVIS_PULL_REQUEST}=https://github.com/${TRAVIS_REPO_SLUG}/pull/${TRAVIS_PULL_REQUEST}=" deploy/latest/index.html
-  - surge --project ./deploy --domain $SURGE_DOMAIN
+  - sed -i "s=./commit_${TRAVIS_COMMIT}=https://github.com/${TRAVIS_REPO_SLUG}/commit/${TRAVIS_COMMIT}=" ./latest/index.html
+  - sed -i "s=./PR_NUMBER_${TRAVIS_PULL_REQUEST}=https://github.com/${TRAVIS_REPO_SLUG}/pull/${TRAVIS_PULL_REQUEST}=" ./latest/index.html
+  - surge --project ./ --domain $SURGE_DOMAIN
   - "# just for logging purposes"
-  - du -ah deploy
+  - du -ah ./
   - env
-  - cat build.log
- 
+  - cat ../build.log
