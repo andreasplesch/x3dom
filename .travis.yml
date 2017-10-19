@@ -43,7 +43,10 @@ after_success:
   - rm -rf deploy/build_$build
   - "# rm -rf deploy/dev*"
   - cp -r deploy/latest deploy/build_$build
-  - tree -I index.html -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} build:" deploy/ > deploy/index.html
+  - tree -r -I index.html -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} build:" deploy/ > deploy/index.html
+  - "# link to commit and PR on github"
+  - sed -i 's=./.*commit_\(.*commit\)=https://github.com/${TRAVIS_REPO_SLUG}/commit/\1=' index.html
+  - sed -i 's=./.*PR_NUMBER_\(.*PR\)=https://github.com/${TRAVIS_REPO_SLUG}/pull/\1=' index.html
   - tree -I index.html -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} commit ${TRAVIS_COMMIT}:" deploy/build_$build > deploy/build_${build}/index.html
   - "# link to commit and PR on github"
   - sed -i "s=./commit_${TRAVIS_COMMIT}=https://github.com/${TRAVIS_REPO_SLUG}/commit/${TRAVIS_COMMIT}=" deploy/build_${build}/index.html
