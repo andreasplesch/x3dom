@@ -1,10 +1,11 @@
 language: python
 python:
   - 2.7
-cache:
-  pip: true
-  directories:
-    - /home/travis/.nvm/versions/node/v7.4.0/
+# caching takes longer than installing
+# cache:
+#  pip: true
+#  directories:
+#    - /home/travis/.nvm/versions/node/v7.4.0/
 # nothin sensitive there
 env:
   - SURGE_LOGIN=x3domsurge@gmail.com SURGE_TOKEN=66e909183b62ec798569f7ffb3e95d8a SURGE_DOMAIN=x3dom-builds.surge.sh
@@ -29,7 +30,7 @@ script:
   - python manage.py --build > build.log
   - mkdir -p deploy/latest
 after_success:
-  - ( wget -e robots=off -r -nH -np -X /latest -S -P deploy $SURGE_DOMAIN; exit 0 )
+  - ( wget -e robots=off -r -nH -np -X /latest,/build_?? -S -P deploy $SURGE_DOMAIN; exit 0 )
   - ( wget -e robots=off -r -nH -np --accept-regex='build_.+' -S ${SURGE_DOMAIN}/latest/index.html; exit 0 )  
   - cp dist/x3dom.* dist/x3dom-full.* deploy/latest
   - >
@@ -37,15 +38,16 @@ after_success:
   - build=$(((lastbuild+1) % 10))
   - touch deploy/latest/build_$build
   - touch deploy/latest/$(date +%F_%R)
+  - touch deploy/latest/commit_$TRAVIS_COMMIT
+  - touch deploy/latest/PR_NUMBER_$TRAVIS_PULL_REQUEST
   - rm -rf deploy/build_$build
-  - rm -rf deploy/dev*
+  - "# rm -rf deploy/dev*"
   - cp -r deploy/latest deploy/build_$build
-  - touch deploy/build_${build}/commit_$TRAVIS_COMMIT
-  - touch deploy/build_${build}/PR_NUMBER_$TRAVIS_PULL_REQUEST
   - tree -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} build:" deploy/ > deploy/index.html
   - tree -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} commit ${TRAVIS_COMMIT}:" deploy/build_$build > deploy/build_${build}/index.html
   - tree -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} build/latest:" deploy/latest > deploy/latest/index.html
   - surge --project ./deploy --domain ${SURGE_DOMAIN}
+  - "# just for logging purposes"
   - du -ah deploy
   - env
   - cat build.log
