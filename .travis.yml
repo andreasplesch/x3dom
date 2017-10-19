@@ -34,7 +34,7 @@ after_success:
   - cp dist/x3dom.* dist/x3dom-full.* deploy/latest
   - >
     lastbuild=$(ls latest/build_?); lastbuild=${lastbuild: -1}
-  - build=$((lastbuild+1 % 10))
+  - build=$(((lastbuild+1) % 10))
   - touch deploy/latest/build_$build
   - touch deploy/latest/$(date +%F_%R)
   - rm -rf deploy/build_$build
