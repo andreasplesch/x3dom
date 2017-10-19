@@ -51,12 +51,13 @@ after_success:
   - touch latest/$PR_MARK
   - rm -rf $BUILD
   - cp -r latest $BUILD
-  - tree -r -I index.html -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} build:" ./ > index.html
+  - tree -r -I index.html -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} commit ${TRAVIS_COMMIT} build:" ./ > index.html
   - "# link to commit and PR on github"
   - sed -i "s=./.*commit_\(.*commit\)=${COMMIT_URL}/\1=" index.html
   - sed -i "s=./.*PR_NUMBER_\(.*PR\)=${PR_URL}/\1=" index.html
   - tree -I index.html -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} commit ${TRAVIS_COMMIT}:" ./$BUILD > ./${BUILD}/index.html
-#  - "# link to commit and PR on github"
+  - "# link title to commit on github"
+  - sed -i "s-<h1>.*</h1>-<h1>PR ${TRAVIS_PULL_REQUEST}<a href=\"${COMMIT_URL}\">commit ${TRAVIS_COMMIT}</a></h1>-" ./${BUILD}/index.html
 #  - sed -i "s=./commit_${TRAVIS_COMMIT}=${COMMIT_URL}/${TRAVIS_COMMIT}=" ./${BUILD}/index.html
 #  - sed -i "s=./PR_NUMBER_${TRAVIS_PULL_REQUEST}=${PR_URL}/${TRAVIS_PULL_REQUEST}=" ./${BUILD}/index.html
   - tree -I index.html -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} build/latest:" ./latest > ./latest/index.html
