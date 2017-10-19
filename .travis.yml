@@ -55,15 +55,12 @@ after_success:
   - "# link to commit and PR on github"
   - sed -i "s=./.*commit_\(.*commit\)=${COMMIT_URL}/\1=" index.html
   - sed -i "s=./.*PR_NUMBER_\(.*PR\)=${PR_URL}/\1=" index.html
-  - tree -I index.html -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} commit ${TRAVIS_COMMIT}:" ./$BUILD > ./${BUILD}/index.html
-  - "# link title to commit on github"
-  - sed -i "s-<h1>.*</h1>-<h1>PR ${TRAVIS_PULL_REQUEST}<a href=\"${COMMIT_URL}\">commit ${TRAVIS_COMMIT}</a></h1>-" ./${BUILD}/index.html
-#  - sed -i "s=./commit_${TRAVIS_COMMIT}=${COMMIT_URL}/${TRAVIS_COMMIT}=" ./${BUILD}/index.html
-#  - sed -i "s=./PR_NUMBER_${TRAVIS_PULL_REQUEST}=${PR_URL}/${TRAVIS_PULL_REQUEST}=" ./${BUILD}/index.html
-  - tree -I index.html -h -C -h -H '.' -T "x3dom PR ${TRAVIS_PULL_REQUEST} build/latest:" ./latest > ./latest/index.html
-#  - "# link to commit and PR on github"
-#  - sed -i "s=./commit_${TRAVIS_COMMIT}=${COMMIT_URL}/${TRAVIS_COMMIT}=" ./latest/index.html
-#  - sed -i "s=./PR_NUMBER_${TRAVIS_PULL_REQUEST}=${PR_URL}/${TRAVIS_PULL_REQUEST}=" ./latest/index.html
+  - tree -I index.html -h -C -h -H '.' -T "title" ./$BUILD > ./${BUILD}/index.html
+  - "# link title to PR and commit on github"
+  - sed -i "s-<h1 >.*</h1>-<h1><a href=\"${PR_URL}\">PR ${TRAVIS_PULL_REQUEST}</a> <a href=\"${COMMIT_URL}\">commit ${TRAVIS_COMMIT}</a></h1>-" ./${BUILD}/index.html
+  - tree -I index.html -h -C -h -H '.' -T "title" ./latest > ./latest/index.html
+  - "# link title to PR and commit on github"
+  - sed -i "s-<h1 >.*</h1>-<h1><a href=\"${PR_URL}\">PR ${TRAVIS_PULL_REQUEST}</a> <a href=\"${COMMIT_URL}\">commit ${TRAVIS_COMMIT}</a></h1>-" ./latest/index.html
   - surge --project ./ --domain $SURGE_DOMAIN
   - "# just for logging purposes"
   - du -ah ./
