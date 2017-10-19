@@ -46,7 +46,7 @@ after_success:
     PR_URL=https://github.com/${TRAVIS_REPO_SLUG}/pull
   - cd deploy
   - touch latest/$BUILD
-  - touch latest/$(date +%F_%R)
+  - touch latest/$(date +%F\ %R)
   - touch latest/$COMMIT_MARK
   - touch latest/$PR_MARK
   - rm -rf $BUILD
