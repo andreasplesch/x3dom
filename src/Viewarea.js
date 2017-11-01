@@ -981,7 +981,7 @@ x3dom.Viewarea.prototype.onMousePress = function (x, y, buttonState)
     this._needNavigationMatrixUpdate = true;
 
     this.prepareEvents(x, y, buttonState, "onmousedown");
-    this.prepareEvents(x, y, 0, "onmouseover");	
+    this.prepareEvents(x, y, 0, "onmouseover");	// simulate, in case mouse not moved after last click
     this._pickingInfo.lastClickObj = this._pickingInfo.pickObj;
     this._pickingInfo.firstObj = this._pickingInfo.pickObj;
 
