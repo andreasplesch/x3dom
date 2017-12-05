@@ -52,7 +52,7 @@ x3dom.glTF.glTFLoader.prototype.getMesh = function(shape,shaderProgram, gl, mesh
             }
         }
     }
-    this.updateMesh(shape, shaderProgram, gl, mesh);
+    this.updateMesh(shape, shaderProgram, gl, mesh, new x3dom.fields.SFMatrix4f());
 };
 
 x3dom.glTF.glTFLoader.prototype.reset = function(shape, gl)
