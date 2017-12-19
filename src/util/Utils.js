@@ -236,14 +236,12 @@ x3dom.Utils.tryNRRDTexture2D = function(texture, gl, doc, src, bgnd, crossOrigin
         texture.height = texHeight;
 
         doc.needRender = true;
-        //doc.downloadCount--; // spinner
-
+        
         cb(true);
     };
     
     nrrdXhr.onerror = function() {
-      //doc.downloadCount--; // spinner
-      cb(false);
+      	cb(false);
     };
 
     x3dom.RequestManager.addRequest(nrrdXhr);
