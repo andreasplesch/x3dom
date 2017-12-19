@@ -140,28 +140,43 @@ x3dom.Utils.createTexture2D = function(gl, doc, src, bgnd, crossOrigin, scale, g
 	};
 
 	image.onerror = function(error) {
-    // Try loading the image as a compressed texture, if the extension is provided
-    // by the platform.
-    // Copyrigth (C) 2014 TOSHIBA
-    // Dual licensed under the MIT and GPL licenses.
-    // Based on code originally provided by　http://www.x3dom.org
+        
+        // Try nrrd as nrrd volume
+        if(decodeURI(src).match(/\/.*\.nrrd[^\/]*$/)){ // only try with .nrrd extension after last /
+            doc.downloadCount++;
+            x3dom.Utils.tryNRRDTexture2D(texture, gl, doc, src, bgnd,
+                crossOrigin, genMipMaps, function(success){
+                    if(!success){ 
+                        x3dom.debug.logError("[Utils|createTexture2D] Can't load nrrd Image: " + src);
+                    }
+                    doc.downloadCount--;
+                    return;
+            });
+            doc.downloadCount--;
+            return; // do not try dds
+        }
+        
+        // Try loading the image as a compressed texture, if the extension is provided
+        // by the platform.
+        // Copyrigth (C) 2014 TOSHIBA
+        // Dual licensed under the MIT and GPL licenses.
+        // Based on code originally provided by　http://www.x3dom.org
 
-   if(x3dom.caps.EXTENSIONS.indexOf('WEBGL_compressed_texture_s3tc') !== -1){
-  		x3dom.Utils.tryCompressedTexture2D(texture, gl, doc, src, bgnd,
-  		    crossOrigin, genMipMaps, function(success){
-  		  if(success){
-	      }else{
-          x3dom.debug.logError("[Utils|createTexture2D] Can't load Image: " + src);
-		    }
-        doc.downloadCount--;
-		  });
-	  }else{
-      x3dom.debug.logError("[Utils|createTexture2D] Can't load Image: " + src);
-	    doc.downloadCount--;
-    }
-	};
-
-	return texture;
+        if(x3dom.caps.EXTENSIONS.indexOf('WEBGL_compressed_texture_s3tc') !== -1){
+            x3dom.Utils.tryCompressedTexture2D(texture, gl, doc, src, bgnd,
+                crossOrigin, genMipMaps, function(success){
+                    if(success){
+                    } else {
+                        x3dom.debug.logError("[Utils|createTexture2D] Can't load Image: " + src);
+                    }
+                    doc.downloadCount--;
+            });
+        } else {
+            x3dom.debug.logError("[Utils|createTexture2D] Can't load Image: " + src);
+            doc.downloadCount--;
+        }
+    };
+    return texture;
 };
 
 /*****************************************************************************
