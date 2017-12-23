@@ -127,10 +127,11 @@ x3dom.nrrd.parse = function (buffer) {
         case 'ascii':
             ret.data = parseNRRDTextData(ret.buffer, ret.type, ret.sizes);
             break;
-          case 'gzip': // AP: experimental
+        case 'gzip': // AP: experimental
             ret.data = parseNRRDRawData(x3dom.Utils.gunzip(ret.buffer), ret.type, ret.sizes, {
                 endian: ret.endian, blockSize: ret.blockSize
             });
+            break;
         default:
             console.warn("Unsupported NRRD encoding: " + ret.encoding);
         }
