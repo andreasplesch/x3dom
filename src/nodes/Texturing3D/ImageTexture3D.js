@@ -164,6 +164,10 @@ x3dom.registerNodeType(
                     nrrd = x3dom.nrrd.parse(response);
                     that._loaded = true;
                     //console.log(nrrd, response);
+                    Object.keys(nrrd).filter(function(key){return !(key == 'data' || key == 'buffer' || key == 'keys')})
+                        .forEach(function(key){
+                            x3dom.debug.logInfo("nrrd "+key+": "+nrrd[key].toString());
+                    });
                     if (nrrd.dimension != 3 && (nrrd.dimension != 4 && nrrd.sizes[0] == 1 )) { 
                         x3dom.debug.logWarning("only nrrd with 3 or 4 dimensions, here: " + nrrd.dimension);
                     }
