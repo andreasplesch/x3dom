@@ -196,7 +196,7 @@ x3dom.registerNodeType(
       
             tryURLs: function(dataURLs, callback) {
                 
-                that = this;
+                var that = this;
                 //recursive
                 var fetchFirst = function (urls) {
                     if (urls.length == 0) {return Promise.rejected('no URL');}
