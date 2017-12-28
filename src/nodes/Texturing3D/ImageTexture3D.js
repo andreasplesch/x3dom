@@ -155,7 +155,6 @@ x3dom.registerNodeType(
         {    
             nodeChanged: function (){
                 
-                //peek inside to set dimensions
                 var nrrd ;
                 var that = this;
                 this.tryURLs( this._vf.url ).then( processNRRD ).catch(function(){console.log("no nrrd");});
@@ -168,10 +167,14 @@ x3dom.registerNodeType(
                         .forEach(function(key){
                             x3dom.debug.logInfo("nrrd "+key+": "+nrrd[key].toString());
                     });
-                    if (nrrd.dimension != 3 && (nrrd.dimension != 4 && nrrd.sizes[0] == 1 )) { 
+                    if (nrrd.dimension != 3 && (nrrd.dimension != 4 && nrrd.sizes[0] > 4 )) { 
                         x3dom.debug.logWarning("only nrrd with 3 or 4 dimensions, here: " + nrrd.dimension);
+                        return;
                     }
+                    //check for uchar ?
                     that.setFields(nrrd.sizes);
+                    that._ImageTextureAtlas._isCanvas = true;
+                    that._ImageTextureAtlas._canvas =  that.nrrdToAtlasCanvas(nrrd);
                     nrrd = null;
                     that._xmlNode.parentElement._x3domNode.addChild(that._ImageTextureAtlas, 'voxels');
                     that._xmlNode.parentElement._x3domNode.nodeChanged();
@@ -179,24 +182,28 @@ x3dom.registerNodeType(
                 }
             },
       
-            setFields: function(sizes) {
+            setFields: function(sizes, pOf2) {
               
                 var numberOfSlices = sizes[sizes.length - 1];
                 this._ImageTextureAtlas._vf.numberOfSlices = numberOfSlices;
                 var width = Math.sqrt(numberOfSlices);
-                this._ImageTextureAtlas._vf.slicesOverX = x3dom.Utils.nextBestPowerOfTwo(width);
-                this._ImageTextureAtlas._vf.slicesOverY = x3dom.Utils.nextBestPowerOfTwo(numberOfSlices / this._ImageTextureAtlas._vf.slicesOverX);
-              
+                this._ImageTextureAtlas._vf.slicesOverX = !pOf2 ? Math.round(width)
+                                                                : x3dom.Utils.nextBestPowerOfTwo(width);
+                this._ImageTextureAtlas._vf.slicesOverY = !pOf2 ? Math.ceil(numberOfSlices / this._ImageTextureAtlas._vf.slicesOverX)
+                                                                : x3dom.Utils.nextHighestPowerOfTwo(numberOfSlices / this._ImageTextureAtlas._vf.slicesOverX);
+               
             },
       
             tryURLs: function(dataURLs, callback) {
                 
+                that = this;
                 //recursive
-              
                 var fetchFirst = function (urls) {
                     if (urls.length == 0) {return Promise.rejected('no URL');}
+                    that._nameSpace.doc.downloadCount++;
                     return fetch(urls[0]).then(
                         function(response){
+                            that._nameSpace.doc.downloadCount--; 
                             if (response.ok) {
                                 console.log('fetch ok', urls, response);
                                 return response.arrayBuffer().then(
@@ -211,12 +218,78 @@ x3dom.registerNodeType(
                             return fetchFirst(urls.slice(1));
                         },
                         function(reason){
+                            that._nameSpace.doc.downloadCount--;
                             console.log('fetch rejected', reason);
                             return fetchFirst(urls.slice(1));
                         }
                     )
                 };              
                 return fetchFirst(dataURLs);             
+            },
+        
+            nrrdToAtlasCanvas: function(nrrd) {
+                var colors = 1;
+                if (nrrd.dimension == 4) {
+                  colors = nrrd.sizes[0];
+                  nrrd.sizes = nrrd.sizes.slice(1);
+                }
+                var sliceWidth = nrrd.sizes[0];
+                var sliceWidthBytes = sliceWidth * colors;
+                var sliceHeight = nrrd.sizes[1];
+                var sliceSize = sliceWidthBytes * sliceHeight;
+
+                var numberOfSlices = nrrd.sizes[2];
+                var slicesOverX = this._ImageTextureAtlas._vf.slicesOverX;
+                var slicesOverY = this._ImageTextureAtlas._vf.slicesOverY;
+      
+                var texWidth = slicesOverX * nrrd.sizes[0]; //
+                var texHeight = slicesOverY * sliceHeight;
+                var texData = new Uint8ClampedArray(texWidth * 4 * texHeight);
+      
+                var offset = 0, row, x, y, i, col, sliceLine;
+                var colorOffset = {
+                  "1": {"g":0,"b":0,"a":255},
+                  "2": {"g":0,"b":0,"a":1},
+                  "3": {"g":1,"b":2,"a":255},
+                  "4": {"g":1,"b":2,"a":3}
+                };
+                var colorsClamped = Math.min(colors, 4);
+                for (row = 0; row < slicesOverY; row++) {
+                    for(y = 0; y < sliceHeight; y++) {
+                        i = row * slicesOverX * sliceSize + y * sliceWidthBytes; 
+                        for (col = 0; col < slicesOverX; col++) {
+                            sliceLine = nrrd.data.subarray(i, i + sliceWidthBytes);
+                            for (x = 0; x < sliceWidthBytes; x += colors) {
+                                texData[offset++] = sliceLine[x];
+                                texData[offset++] = sliceLine[x+colorOffset[colorsClamped].g];
+                                texData[offset++] = sliceLine[x+colorOffset[colorsClamped].b];
+                                texData[offset++] = colorOffset[colorsClamped].a == 255
+                                                    ? 255
+                                                    : sliceLine[x+colorOffset[colorsClamped].a];
+                            }
+                            i += sliceSize;
+                            if (i > nrrd.data.byteLength) break // done
+                        }
+                        if (i > nrrd.data.byteLength) break
+                    }
+                    if (i > nrrd.data.byteLength) break
+                };        
+    
+                var texAtlas = new ImageData(texData, texWidth, texHeight);
+                var cv = document.createElement('canvas');
+                var ctx = cv.getContext('2d');
+                cv.width = texWidth;
+                cv.height = texHeight;
+                ctx.putImageData(texAtlas, 0, 0);
+                return cv ;
+                //this._ImageTextureAtlas._needPerFrameUpdate = true;
+                //this._ImageTextureAtlas._isCanvas = true;
+                //this._ImageTextureAtlas._canvas =  cv;
+                //var cvURL;
+                //cvURL = cv.toBlob(function(blob){
+                // return URL.createObjectURL(blob);
+                //});
+                //this._ImageTextureAtlas._vf.url = [cvURL];
             }
         }
     )
