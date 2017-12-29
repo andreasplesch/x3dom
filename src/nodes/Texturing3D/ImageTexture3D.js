@@ -157,12 +157,14 @@ x3dom.registerNodeType(
                 
                 var nrrd ;
                 var that = this;
-                this.tryURLs( this._vf.url ).then( processNRRD ).catch(function(){console.log("no nrrd");});
+                that._nameSpace.doc.downloadCount++;
+                this.tryURLs( this._vf.url ).then( processNRRD )
+                    .catch(function(){that._nameSpace.doc.downloadCount--;});
                 function processNRRD (response) {
+                    that._nameSpace.doc.downloadCount--;
                     if (that._loaded) { return; }
                     nrrd = x3dom.nrrd.parse(response);
                     that._loaded = true;
-                    //console.log(nrrd, response);
                     Object.keys(nrrd).filter(function(key){return !(key == 'data' || key == 'buffer' || key == 'keys')})
                         .forEach(function(key){
                             x3dom.debug.logInfo("nrrd "+key+": "+nrrd[key].toString());
@@ -205,7 +207,7 @@ x3dom.registerNodeType(
                         function(response){
                             that._nameSpace.doc.downloadCount--; 
                             if (response.ok) {
-                                console.log('fetch ok', urls, response);
+                                console.log('fetch ok', urls);
                                 return response.arrayBuffer().then(
                                     function(buffer) {
                                         if (buffer && buffer.byteLength > 0) return buffer;
