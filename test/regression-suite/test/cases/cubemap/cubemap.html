@@ -11,7 +11,7 @@
     <X3D xmlns='http://www.web3d.org/specifications/x3d-namespace' showStat='false' showLog='true' width="800px" height="600px">
       <Scene DEF='scene'>
         <Viewpoint position="0 0 4"></Viewpoint>
-        <Background id='back1' 
+        <!--Background id='back1' 
             backUrl='"./ocean_3_back.jpg"' bottomUrl='"./ocean_3_bottom.jpg"'
             frontUrl='"./ocean_3_front.jpg"' leftUrl='"./ocean_3_left.jpg"'
             rightUrl='"./ocean_3_right.jpg"' topUrl='"./ocean_3_top.jpg"'>
@@ -20,18 +20,18 @@
             backUrl='"./bBK.png"' bottomUrl='"./bDN.png"'
             frontUrl='"./bFR.png"' leftUrl='"./bLF.png"'
             rightUrl='"./bRT.png"' topUrl='"./bUP.png"'>
-        </Background>
+        </Background-->
         <Transform>
           <Shape>
             <Appearance>
                 <Material diffuseColor=".7 .7 .7" specularColor=".5 .5 .5" ></Material>
                 <ComposedCubeMapTexture repeatS="false" repeatT="false">
-                    <ImageTexture containerField="back" url="./ocean_3_back.jpg"></ImageTexture>
-                    <ImageTexture containerField="bottom" url="./ocean_3_bottom.jpg"></ImageTexture>
+                    <ImageTexture containerField="back" url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/cubemap/ocean_3_back.jpg"></ImageTexture>
+                    <ImageTexture containerField="bottom" url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/cubemap/ocean_3_bottom.jpg"></ImageTexture>
                     <ImageTexture containerField="front" crossorigin='anonymous' url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/cubemap/ocean_3_front.jpg"></ImageTexture>
-                    <ImageTexture containerField="left" url="./ocean_3_left.jpg"></ImageTexture>
-                    <ImageTexture containerField="right" url="./ocean_3_right.jpg"></ImageTexture>
-                    <ImageTexture containerField="top" url="./ocean_3_top.jpg"></ImageTexture>
+                    <ImageTexture containerField="left" url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/cubemap/ocean_3_left.jpg"></ImageTexture>
+                    <ImageTexture containerField="right" url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/cubemap/ocean_3_right.jpg"></ImageTexture>
+                    <ImageTexture containerField="top" url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/cubemap/ocean_3_top.jpg"></ImageTexture>
                 </ComposedCubeMapTexture>
 
             </Appearance>
