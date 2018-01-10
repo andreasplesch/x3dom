@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge" />
+
+      <script type="text/javascript" src="../../../../x3dom-full_include.js"></script>
+  </head>
+  
+  <body>
+
+    <X3D xmlns='http://www.web3d.org/specifications/x3d-namespace' showStat='false' showLog='true' width="800px" height="600px">
+      <Scene DEF='scene'>
+        <Viewpoint position="0 0 4"></Viewpoint>
+        <Background id='back1' 
+            backUrl='"https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/cubemap/ocean_3_back.jpg"'
+            bottomUrl='"https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/cubemap/ocean_3_bottom.jpg"'
+            frontUrl='"https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/cubemap/ocean_3_front.jpg"' 
+            leftUrl='"https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/cubemap/ocean_3_left.jpg"'
+            rightUrl='"https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/cubemap/ocean_3_right.jpg"'
+            topUrl='"https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/cubemap/ocean_3_top.jpg"'>
+        </Background>
+        <!--Background id='back2' 
+            backUrl='"./bBK.png"' bottomUrl='"./bDN.png"'
+            frontUrl='"./bFR.png"' leftUrl='"./bLF.png"'
+            rightUrl='"./bRT.png"' topUrl='"./bUP.png"'>
+        </Background-->
+        <Transform>
+          <Shape>
+            <Appearance>
+                <Material diffuseColor=".7 .7 .7" specularColor=".5 .5 .5" ></Material>
+                <ComposedCubeMapTexture repeatS="false" repeatT="false">
+                    <PixelTexture containerField="back" url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/cubemap/ocean_3_back.jpg"></ImageTexture>
+                    <PixelTexture containerField="bottom" url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/cubemap/ocean_3_bottom.jpg"></ImageTexture>
+                    <PixelTexture containerField="front" crossorigin='anonymous' url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/cubemap/ocean_3_front.jpg"></ImageTexture>
+                    <PixelTexture containerField="left" url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/cubemap/ocean_3_left.jpg"></ImageTexture>
+                    <PixelTexture containerField="right" url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/cubemap/ocean_3_right.jpg"></ImageTexture>
+                    <PixelTexture containerField="top" url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/cubemap/ocean_3_top.jpg"></ImageTexture>
+                    
+                </ComposedCubeMapTexture>
+
+            </Appearance>
+            <Sphere solid="false" ></Sphere>
+          </Shape>
+        </Transform>
+      </Scene>
+    </X3D>
+  </body>
+</html>
