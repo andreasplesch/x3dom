@@ -835,7 +835,7 @@ x3dom.shader.DynamicShader.prototype.generateFragmentShader = function(gl, prope
 					if (properties.CSSHADER) {
                         shader += "color.rgb *= mix(vec3(1.0,1.0,1.0), envColor.rgb, environmentFactor);\n";
                     }else{
-                        shader += "color.rgb *= mix(vec3(1.0,1.0,1.0), envColor.rgb, 1.0);\n";
+                        shader += "color.rgb *= envColor.rgb;\n";
                     }
 				}
 			}else{
