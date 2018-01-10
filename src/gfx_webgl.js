@@ -2164,7 +2164,7 @@ x3dom.gfx_webgl = (function () {
             sp.shininess = mat._vf.shininess;
             sp.ambientIntensity = mat._vf.ambientIntensity;
             sp.transparency = mat._vf.transparency;
-            sp.environmentFactor = 0;
+            sp.environmentFactor = 0.0;
             if (x3dom.isa(mat, x3dom.nodeTypes.TwoSidedMaterial)) {
                 twoSidedMat = true;
                 sp.backDiffuseColor = mat._vf.backDiffuseColor.toGL();
