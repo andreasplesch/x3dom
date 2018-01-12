@@ -61,7 +61,7 @@
     var vp=x3d.querySelector('viewpoint');
     vp.position='0,0,0'; // center of sphere
     vp.orientation='0,0,1,3.1415' // look to front
-    x3d.runtime.ready=function() {
+    x3d.onload=function(){
       var objectUrl;
       x3d.querySelector('canvas').toBlob(function(blob) {
         objectUrl = URL.createObjectUrl(blob); });
