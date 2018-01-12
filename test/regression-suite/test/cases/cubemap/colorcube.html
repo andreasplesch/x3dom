@@ -59,8 +59,8 @@
     var scene=document.querySelector('Scene');
     x3d.appendChild(scene.cloneNode(true));
     var vp=x3d.querySelector('viewpoint');
-    vp.position='0,0,0'; // center of sphere
-    vp.orientation='0,0,1,3.1415' // look to front
+    vp.setAttribute('position','0,0,0'); // center of sphere
+    vp.setAttribute('orientation','0,1,0,3.1415'); // look to front
     x3d.onload=function(){
       var objectUrl;
       x3d.querySelector('canvas').toBlob(function(blob) {
