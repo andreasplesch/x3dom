@@ -25,7 +25,7 @@
             rightUrl='"./bRT.png"' topUrl='"./bUP.png"'>
         </Background-->
         <Group DEF='MIRROR_SCENE'>
-          <Transform translation='0 0 -10'>
+          <Transform translation='0 0 10'>
             <Shape>
               <Appearance></Appearance>
               <Box></Box>
@@ -54,8 +54,19 @@
   </body>
   <script>
     var x3d=document.createElement('X3D');
+    x3d.setAttribute('width','256');
+    x3d.setAttribute('height','256');
     var scene=document.querySelector('Scene');
     x3d.appendChild(scene.cloneNode(true));
+    var vp=x3d.querySelector('viewpoint');
+    vp.position='0,0,0'; // center of sphere
+    vp.orientation='0,0,1,3.1415' // look to front
     document.body.appendChild(x3d);
+    var objectUrl;
+    x3d.querySelector('canvas').toBlob(function(blob) {
+      objectUrl = URL.createObjectUrl(blob); });
+    scene.querySelector('ImageTexture[containerField=front]').url = objectUrl;
+    
+    
   </script>
 </html>
