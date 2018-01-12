@@ -39,21 +39,11 @@
                 <ComposedCubeMapTexture repeatS="false" repeatT="false">
                     <ImageTexture containerField="back" url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/imageFormats/test_image.jpg"></ImageTexture>
                     <ImageTexture containerField="bottom" url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/imageFormats/test_image.png"></ImageTexture>
-                    <!--ImageTexture containerField="front" crossorigin='anonymous' url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/imageFormats/test_image.jpg"></ImageTexture-->
-                    <RenderedTexture containerField="front" id='myRenderedTexture' update='always' dimensions='512 512 4' 
-                                     repeatS='false' repeatT='false' >
-                      <Shape USE='mirrorSphere' containerField='excludeNodes' ></Shape>                      
-                      <Background skyColor='1 1 1' groundColor='1 1 1' containerField='background'></Background>
-                      <Viewpoint id='myMirrorTextureViewPoint' orientation='0 1 0 3.1415' zNear="0.1" zFar="1000" containerField='viewpoint' ></Viewpoint>
-                      <Group USE='MIRROR_SCENE'>                         
-                      </Group>
-                    </RenderedTexture>
+                    <ImageTexture containerField="front" url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/imageFormats/test_image.jpg"></ImageTexture>
                     <ImageTexture containerField="left" url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/imageFormats/test_image.gif"></ImageTexture>
                     <ImageTexture containerField="right" url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/imageFormats/test_image.gif"></ImageTexture>
-                    <ImageTexture containerField="top" url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/imageFormats/test_image.png"></ImageTexture-->
-                    
+                    <ImageTexture containerField="top" url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/imageFormats/test_image.png"></ImageTexture>
                 </ComposedCubeMapTexture>
-
             </Appearance>
             <Sphere solid="false" ></Sphere>
           </Shape>
@@ -62,4 +52,14 @@
       </Scene>
     </X3D>
   </body>
+  <script>
+    var x3d=document.createElement('X3D');
+    var scene=document.querySelector('Scene');
+    x3d.appendChild(scene.cloneNode(true);
+    document.body.appendChild(x3d);
+    
+                  
+    
+    
+  </script>
 </html>
