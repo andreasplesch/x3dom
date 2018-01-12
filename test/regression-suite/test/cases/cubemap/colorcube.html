@@ -71,7 +71,7 @@
       var cv=x3d.querySelector('canvas');
       x3d.runtime.enterFrame=function(){
         cv.toBlob(function(blob) {
-          URL.revokeObjectURL(objectUrl);
+          //URL.revokeObjectURL(objectUrl);
           objectUrl = URL.createObjectURL(blob);
           scene.querySelector('ImageTexture[containerField=front]').url = objectUrl;
         });
