@@ -66,9 +66,10 @@
     document.onload=function(){
       var objectUrl;
       x3d.querySelector('canvas').toBlob(function(blob) {
-        var objectUrl = URL.createObjectURL(blob); });
-      scene.querySelector('ImageTexture[containerField=front]').url = objectUrl;
-    }
+        objectUrl = URL.createObjectURL(blob);
+        scene.querySelector('ImageTexture[containerField=front]').url = objectUrl;
+      });
+    };
     document.body.appendChild(x3d);
     
   </script>
