@@ -50,8 +50,8 @@
         </Transform>
         <TimeSensor DEF='TS' cycleInterval="2" loop="true"></TimeSensor>
         <OrientationInterpolator DEF='OI' keys='0 0.5 1' keyValues='0 1 0 0, 0 1 0 3.14, 0 1 0 6.28'></OrientationInterpolator>
-        <ROUTE fromNode='TS' fromField='fraction' toNode="OI' toField='fraction'></ROUTE>
-        <ROUTE fromNode='OI' fromField='value' toNode="BoxTrafo' toField='orientation'></ROUTE>
+        <ROUTE fromNode='TS' fromField='fraction' toNode='OI' toField='fraction'></ROUTE>
+        <ROUTE fromNode='OI' fromField='value' toNode='BoxTrafo' toField='orientation'></ROUTE>
                                 
       </Scene>
     </X3D>
