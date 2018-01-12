@@ -69,15 +69,17 @@
     document.onload=function(){
       var objectUrl;
       var cv=x3d.querySelector('canvas');
+      var skip=1;
       x3d.runtime.enterFrame=function(){
+        if (skip-- !-- 0) return;
+        skip=10;
         cv.toBlob(function(blob) {
-          //URL.revokeObjectURL(objectUrl);
+          URL.revokeObjectURL(objectUrl);
           objectUrl = URL.createObjectURL(blob);
           scene.querySelector('ImageTexture[containerField=front]').url = objectUrl;
         });
       };
     };
     document.body.appendChild(x3d);
-    
   </script>
 </html>
