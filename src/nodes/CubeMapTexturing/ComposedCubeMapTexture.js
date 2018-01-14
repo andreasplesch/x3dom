@@ -94,9 +94,9 @@ x3dom.registerNodeType(
         {
             nodeChanged: function() {
                 this._update = [this._cf.back, this._cf.front, this._cf.bottom, this._cf.top, this._cf.left, this._cf.right].some(
-                    function(node) {
-                        return x3dom.isa(node, x3dom.nodeTypes.RenderedTexture) &&
-                            node._vf.update == 'always';
+                    function(field) {
+                        return x3dom.isa(field.node, x3dom.nodeTypes.RenderedTexture) &&
+                            field.node._vf.update == 'always';
                     });
             },
         
