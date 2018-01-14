@@ -88,19 +88,32 @@ x3dom.registerNodeType(
              */
             this.addField_SFNode('right',  x3dom.nodeTypes.Texture);
             this._type = "environmentMap";
+            this._texids = 0;
         
         },
         {
             getTexUrl: function() {
                 return [
-                    this._nameSpace.getURL(this._cf.back.node._vf.url[0]),
-                    this._nameSpace.getURL(this._cf.front.node._vf.url[0]),
-                    this._nameSpace.getURL(this._cf.bottom.node._vf.url[0]),
-                    this._nameSpace.getURL(this._cf.top.node._vf.url[0]),
-                    this._nameSpace.getURL(this._cf.left.node._vf.url[0]),
-                    this._nameSpace.getURL(this._cf.right.node._vf.url[0])
+                    this.getUrlOrID(this._cf.back),
+                    this.getUrlOrID(this._cf.front),
+                    this.getUrlOrID(this._cf.bottom),
+                    this.getUrlOrID(this._cf.top),
+                    this.getUrlOrID(this._cf.left),
+                    this.getUrlOrID(this._cf.right)
+//                     this._nameSpace.getURL(this._cf.front.node._vf.url[0]),
+//                     this._nameSpace.getURL(this._cf.bottom.node._vf.url[0]),
+//                     this._nameSpace.getURL(this._cf.top.node._vf.url[0]),
+//                     this._nameSpace.getURL(this._cf.left.node._vf.url[0]),
+//                     this._nameSpace.getURL(this._cf.right.node._vf.url[0])
                 ];
-            }
+            },
+            getUrlOrID: function(texField) {
+                var texNode = texField.node;
+                if (x3dom.isa(x3dom.nodeTypes.ImageTexture, texNode)) {
+                    return this._nameSpace.getURL(texNode._vf.url[0]);
+                }
+                return texNode._DEF || this._texids++;
+            }   
         }
     )
 );
