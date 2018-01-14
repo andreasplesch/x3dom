@@ -474,6 +474,7 @@ x3dom.Utils.createTextureCube = function(gl, doc, src, bgnd, crossOrigin, scale,
                     if (rt[0]=="_RT") {
                         var fbo = doc._nodeBag.renderTextures[rt[1]]._webgl.fbo;
                         //var pixels = new Float32Array(fbo.width * fbo.height * 4);
+                        gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
                         gl.bindFramebuffer(gl.FRAMEBUFFER, fbo.fbo);
                         //gl.readPixels(0,0,fbo.width,fbo.height,gl.RGBA,gl.FLOAT, pixels);
                         //pixels = new Uint8Array(pixels.map(function(i){return i * 256.0;}))
@@ -482,6 +483,7 @@ x3dom.Utils.createTextureCube = function(gl, doc, src, bgnd, crossOrigin, scale,
                         gl.copyTexImage2D(face, 0, gl.RGBA, 0, 0, fbo.width, fbo.height, 0);
                         gl.bindTexture(gl.TEXTURE_CUBE_MAP, null);
                         gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+                        gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
                     }else{
                         x3dom.debug.logError("[Utils|createTextureCube] Can't load all of CubeMap: "+src);
                     }
