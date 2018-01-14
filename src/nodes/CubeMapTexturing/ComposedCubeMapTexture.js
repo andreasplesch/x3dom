@@ -109,7 +109,7 @@ x3dom.registerNodeType(
             },
             getUrlOrID: function(texField) {
                 var texNode = texField.node;
-                if (x3dom.isa(x3dom.nodeTypes.ImageTexture, texNode)) {
+                if (x3dom.isa(texNode, x3dom.nodeTypes.ImageTexture)) {
                     return this._nameSpace.getURL(texNode._vf.url[0]);
                 }
                 return texNode._DEF || this._texids++;
