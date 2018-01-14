@@ -472,7 +472,7 @@ x3dom.Utils.createTextureCube = function(gl, doc, src, bgnd, crossOrigin, scale,
 		        {
                     var rt = src.split(":");
                     if (rt[0]=="_RT") {
-                        var fbo = doc._nodebag.renderTextures[rt[1]]._webgl.fbo;
+                        var fbo = doc._nodeBag.renderTextures[rt[1]]._webgl.fbo;
                         var pixels = new Float32Array(fbo.width * fbo.height * 4);
                         gl.bindFramebuffer(gl.FRAMEBUFFER, fbo.fbo);
                         gl.readPixels(0,0,fbo.width,fbo.height,gl.RGBA,gl.FLOAT, pixels);
