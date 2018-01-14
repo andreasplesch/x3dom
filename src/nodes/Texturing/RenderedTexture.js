@@ -190,7 +190,18 @@ x3dom.registerNodeType(
              * @instance
              */
             this.addField_SFBool(ctx, 'oculusRiftVersion', 1);
-
+        
+            /**
+             * Sets the url to a resource.
+             * @var {x3dom.fields.MFString} url
+             * @memberof x3dom.nodeTypes.X3DTextureNode
+             * @initvalue []
+             * @field x3dom
+             * @instance
+             */
+            //this.addField_MFString(ctx, 'url', []); //already added
+        
+            this._vf.url = ["_RT:"+this._idx++]; // use URL to access nodebag
 
             x3dom.debug.assert(this._vf.dimensions.length >= 3,
                 "RenderedTexture.dimensions requires at least 3 entries.");
