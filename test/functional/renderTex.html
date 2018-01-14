@@ -25,6 +25,7 @@
             skyAngle='0.9 1.5 1.57' skyColor='0.21 0.18 0.66 0.2 0.44 0.85 0.51 0.81 0.95 0.77 0.8 0.82' 
             groundAngle='0.9 1.5 1.57' groundColor='0.6 0.7 0.1 0.4 0.7 0.2 0.1 0.6 0.1 0 0.3 0.1'
         ></Background-->
+	<Group DEF='theScene'>
         <Transform DEF='trans1' translation='-2 2 0'>
           <Shape DEF='GEO'>
             <Appearance>
@@ -42,6 +43,7 @@
         <Transform DEF='trans4' translation='2 -2 0'>
           <Shape USE='GEO'></Shape>
         </Transform>
+      	</Group>
         <Transform DEF='trans' translation='0 0 -10'>
           <Transform DEF='matTrans'>
             <Shape DEF='aNode'>
@@ -53,7 +55,7 @@
                 <RenderedTexture DEF='FBO' update='always' dimensions='512 512 4'>
                   <Shape USE='aNode' containerField='excludeNodes' ></Shape>
                   <Background USE='back' containerField='background' ></Background>
-                  <Viewpoint DEF='view3' containerField='viewpoint' zNear="1" zFar="1000" ></Viewpoint>
+                  <Viewpoint DEF='view3' position='0 0 -10' orientation='0 1 0 3.14' containerField='viewpoint' zNear="1" zFar="1000" ></Viewpoint>
                   <Group>
                      <Shape DEF="sphereShape">
 						<Appearance>
@@ -64,6 +66,7 @@
                      <Transform DEF='transRT' translation='4 0 0'>
                         <Shape USE='GEO'></Shape>
                      </Transform>
+		  	<Group USE='theScene'></Group>
                   </Group>
                   <textureProperties boundaryModeS='CLAMP_TO_EDGE' boundaryModeT='CLAMP_TO_EDGE'
                                    magnificationFilter='LINEAR' minificationFilter='LINEAR_MIPMAP_LINEAR'
