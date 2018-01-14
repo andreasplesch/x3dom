@@ -405,7 +405,7 @@ x3dom.Utils.createTextureCube = function(gl, doc, src, bgnd, crossOrigin, scale,
 
 	for (var i=0; i<faces.length; i++) {
 		var face = faces[i];
-
+		
 		var image = new Image();
 
         switch(crossOrigin.toLowerCase()) {
@@ -469,9 +469,10 @@ x3dom.Utils.createTextureCube = function(gl, doc, src, bgnd, crossOrigin, scale,
 
 		image.onerror = function()
 		{
+			texture.pendingTextureLoads--;
 			doc.downloadCount--;
-
-			x3dom.debug.logError("[Utils|createTextureCube] Can't load CubeMap!");
+			
+			x3dom.debug.logError("[Utils|createTextureCube] Can't load all of CubeMap!");
 		};
 
 		// backUrl, frontUrl, bottomUrl, topUrl, leftUrl, rightUrl (for bgnd)
