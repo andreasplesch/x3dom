@@ -15,7 +15,7 @@
         <Viewpoint id='view1' position='0 0 12'></Viewpoint>
         <Viewpoint id='view2' containerField='viewpoint' zNear="0.1" zFar="10000"
                    DEF='view2' position="0 0 -20" orientation="0 1 0 3.14159265" ></Viewpoint>
-        <Background id='back' 
+        <!--Background id='back' 
             backUrl="media/texture/generic/ocean_3_back.jpg"
             bottomUrl="media/texture/generic/ocean_3_bottom.jpg"
             frontUrl="media/texture/generic/ocean_3_front.jpg"
@@ -24,11 +24,11 @@
             topUrl="media/texture/generic/ocean_3_top.jpg"
             skyAngle='0.9 1.5 1.57' skyColor='0.21 0.18 0.66 0.2 0.44 0.85 0.51 0.81 0.95 0.77 0.8 0.82' 
             groundAngle='0.9 1.5 1.57' groundColor='0.6 0.7 0.1 0.4 0.7 0.2 0.1 0.6 0.1 0 0.3 0.1'
-        ></Background>
+        ></Background-->
         <Transform DEF='trans1' translation='-2 2 0'>
           <Shape DEF='GEO'>
             <Appearance>
-              <ImageTexture repeatS='false' repeatT='false' url='"media/texture/generic/crate.gif"'></ImageTexture>
+              <ImageTexture repeatS='false' repeatT='false' url='"https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/functional/media/texture/generic/crate.gif"'></ImageTexture>
             </Appearance>
             <Box ></Box>
           </Shape>
@@ -86,8 +86,8 @@
     </X3D>
 	</div>
     <div class="group">    
-	    <input type="button" value=" view1.bind "  onclick="document.getElementById('view1').setAttribute('bind','true');" />
-		<input type="button" value=" view2.bind "  onclick="document.getElementById('view2').setAttribute('bind','true');" />
+    	<input type="button" value=" view1.bind "  onclick="document.getElementById('view1').setAttribute('bind','true');" />
+	<input type="button" value=" view2.bind "  onclick="document.getElementById('view2').setAttribute('bind','true');" />
     </div>
   </body>
 </html>
