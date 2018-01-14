@@ -480,7 +480,6 @@ x3dom.Utils.createTextureCube = function(gl, doc, src, bgnd, crossOrigin, scale,
                         gl.bindTexture(gl.TEXTURE_CUBE_MAP, texture);
                         gl.texImage2D(face, 0, fbo.width, fbo.height, 0, gl.RGBA, gl.RGBA, gl.FLOAT, pixels);
                         gl.bindTexture(gl.TEXTURE_CUBE_MAP, null);
-                    }
                     }else{
                         x3dom.debug.logError("[Utils|createTextureCube] Can't load all of CubeMap: "+image.src);
                     }
