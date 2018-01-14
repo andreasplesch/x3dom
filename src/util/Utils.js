@@ -473,14 +473,15 @@ x3dom.Utils.createTextureCube = function(gl, doc, src, bgnd, crossOrigin, scale,
                     var rt = src.split(":");
                     if (rt[0]=="_RT") {
                         var fbo = doc._nodeBag.renderTextures[rt[1]]._webgl.fbo;
-                        var pixels = new Float32Array(fbo.width * fbo.height * 4);
+                        //var pixels = new Float32Array(fbo.width * fbo.height * 4);
                         gl.bindFramebuffer(gl.FRAMEBUFFER, fbo.fbo);
-                        gl.readPixels(0,0,fbo.width,fbo.height,gl.RGBA,gl.FLOAT, pixels);
-                        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-                        pixels = new Uint8Array(pixels.map(function(i){return i * 256.0;}))
+                        //gl.readPixels(0,0,fbo.width,fbo.height,gl.RGBA,gl.FLOAT, pixels);
+                        //pixels = new Uint8Array(pixels.map(function(i){return i * 256.0;}))
                         gl.bindTexture(gl.TEXTURE_CUBE_MAP, texture);
-                        gl.texImage2D(face, 0, gl.RGBA, fbo.width, fbo.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
+                        //gl.texImage2D(face, 0, gl.RGBA, fbo.width, fbo.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
+                        gl.copyTexImage2D(face, 0, gl.RGBA, 0, 0, fbo.width, fbo.height, 0);
                         gl.bindTexture(gl.TEXTURE_CUBE_MAP, null);
+                        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
                     }else{
                         x3dom.debug.logError("[Utils|createTextureCube] Can't load all of CubeMap: "+src);
                     }
