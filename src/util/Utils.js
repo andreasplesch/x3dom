@@ -467,10 +467,10 @@ x3dom.Utils.createTextureCube = function(gl, doc, src, bgnd, crossOrigin, scale,
 			};
 		})( texture, face, image, bgnd );
 
-		image.onerror = (function(texture, face, image, doc) {
+		image.onerror = (function(texture, face, image, doc, src) {
             return function ()
 		        {
-                    var rt = image.src.split(":");
+                    var rt = src.split(":");
                     if (rt[0]=="_RT") {
                         var fbo = doc._nodebag.renderTextures[rt[1]]._webgl.fbo;
                         var pixels = new Float32Array(fbo.width * fbo.height * 4);
@@ -481,12 +481,12 @@ x3dom.Utils.createTextureCube = function(gl, doc, src, bgnd, crossOrigin, scale,
                         gl.texImage2D(face, 0, fbo.width, fbo.height, 0, gl.RGBA, gl.RGBA, gl.FLOAT, pixels);
                         gl.bindTexture(gl.TEXTURE_CUBE_MAP, null);
                     }else{
-                        x3dom.debug.logError("[Utils|createTextureCube] Can't load all of CubeMap: "+image.src);
+                        x3dom.debug.logError("[Utils|createTextureCube] Can't load all of CubeMap: "+src);
                     }
                     texture.pendingTextureLoads--;
                     doc.downloadCount--;
 		        };
-            })(texture, face, image, doc);
+            })(texture, face, image, doc, src[i]);
 
 		// backUrl, frontUrl, bottomUrl, topUrl, leftUrl, rightUrl (for bgnd)
 		image.src = src[i];
