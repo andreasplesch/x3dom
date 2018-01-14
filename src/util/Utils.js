@@ -453,7 +453,7 @@ x3dom.Utils.createTextureCube = function(gl, doc, src, bgnd, crossOrigin, scale,
                     //Save image size also for cube tex
                     texture.width  = width;
                     texture.height = height;
-					texture.textureCubeReady = true;
+					texture.textureCubeReady =  =true;
 
                     if (genMipMaps) {
                         gl.bindTexture(gl.TEXTURE_CUBE_MAP, texture);
@@ -467,19 +467,27 @@ x3dom.Utils.createTextureCube = function(gl, doc, src, bgnd, crossOrigin, scale,
 			};
 		})( texture, face, image, bgnd );
 
-		image.onerror = (function(texture, face) {
+		image.onerror = (function(texture, face, image, doc) {
             return function ()
 		        {
-                    gl.bindTexture(gl.TEXTURE_CUBE_MAP, texture);
-                    var data = new Uint8Array(width*height*4);
-                    gl.texImage2D(face, 0, width, height, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, data);
-                    gl.bindTexture(gl.TEXTURE_CUBE_MAP, null);
+                    var rt = image.src.split(":");
+                    if (rt[0]=="_RT") {
+                        var fbo = doc._nodebag.renderTextures[rt[1]]._webgl.fbo;
+                        var pixels = new Float32Array(fbo.width * fbo.height * 4);
+                        gl.bindFramebuffer(gl.FRAMEBUFFER, fbo.fbo);
+                        gl.readPixels(0,0,fbo.width,fbo.height,gl.RGBA,gl.FLOAT, pixels);
+                        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+                        gl.bindTexture(gl.TEXTURE_CUBE_MAP, texture);
+                        gl.texImage2D(face, 0, fbo.width, fbo.height, 0, gl.RGBA, gl.RGBA, gl.FLOAT, pixels);
+                        gl.bindTexture(gl.TEXTURE_CUBE_MAP, null);
+                    }
+                    }else{
+                        x3dom.debug.logError("[Utils|createTextureCube] Can't load all of CubeMap: "+image.src);
+                    }
                     texture.pendingTextureLoads--;
                     doc.downloadCount--;
-
-                    x3dom.debug.logError("[Utils|createTextureCube] Can't load all of CubeMap!");
 		        };
-            })(texture, face);
+            })(texture, face, image, doc);
 
 		// backUrl, frontUrl, bottomUrl, topUrl, leftUrl, rightUrl (for bgnd)
 		image.src = src[i];
