@@ -471,7 +471,8 @@ x3dom.Utils.createTextureCube = function(gl, doc, src, bgnd, crossOrigin, scale,
             return function ()
 		        {
                     gl.bindTexture(gl.TEXTURE_CUBE_MAP, texture);
-                    gl.texImage2D(face, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, null);
+					var data = new Uint8Array([0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255]);
+                    gl.texImage2D(face, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, data);
                     gl.bindTexture(gl.TEXTURE_CUBE_MAP, null);
                     texture.pendingTextureLoads--;
                     doc.downloadCount--;
