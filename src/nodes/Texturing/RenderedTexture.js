@@ -201,7 +201,7 @@ x3dom.registerNodeType(
              */
             //this.addField_MFString(ctx, 'url', []); //already added
         
-            this._vf.url = ["_RT:"+this._idx++]; // use URL to access nodebag
+            this._vf.url[0] = "_RT:" + (ctx.doc._nodeBag.renderTextures.length-1); // use URL to access nodebag
 
             x3dom.debug.assert(this._vf.dimensions.length >= 3,
                 "RenderedTexture.dimensions requires at least 3 entries.");
