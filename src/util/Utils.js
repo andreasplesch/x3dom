@@ -453,7 +453,7 @@ x3dom.Utils.createTextureCube = function(gl, doc, src, bgnd, crossOrigin, scale,
                     //Save image size also for cube tex
                     texture.width  = width;
                     texture.height = height;
-					texture.textureCubeReady =  =true;
+					texture.textureCubeReady = true;
 
                     if (genMipMaps) {
                         gl.bindTexture(gl.TEXTURE_CUBE_MAP, texture);
