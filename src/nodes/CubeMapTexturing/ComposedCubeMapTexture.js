@@ -112,6 +112,9 @@ x3dom.registerNodeType(
                 if (x3dom.isa(texNode, x3dom.nodeTypes.ImageTexture)) {
                     return this._nameSpace.getURL(texNode._vf.url[0]);
                 }
+                if (x3dom.isa(texNode, x3dom.nodeTypes.ComposedCubeMapTexture) {
+                    return texNode._vf.url[0];
+                }
                 return texNode._DEF || this._texids++;
             }   
         }
