@@ -393,8 +393,14 @@ x3dom.Texture.prototype.updateTexture = function()
 	}
 	else if (x3dom.isa(tex, x3dom.nodeTypes.X3DEnvironmentTextureNode))
 	{
-		this.texture = this.cache.getTextureCube(gl, doc, tex.getTexUrl(), false,
-		                                         tex._vf.crossOrigin, tex._vf.scale, this.genMipMaps);
+        if (tex._update) {
+            this.texture = null;
+            this.texture = x3dom.Utils.createTextureCube(gl, doc, tex.getTexUrl(), false,
+                                                         tex._vf.crossOrigin, tex._vf.scale, this.genMipMaps);
+        }else{
+		    this.texture = this.cache.getTextureCube(gl, doc, tex.getTexUrl(), false,
+		                                             tex._vf.crossOrigin, tex._vf.scale, this.genMipMaps);
+        }
 	}
 	else
 	{
