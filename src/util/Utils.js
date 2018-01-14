@@ -467,13 +467,18 @@ x3dom.Utils.createTextureCube = function(gl, doc, src, bgnd, crossOrigin, scale,
 			};
 		})( texture, face, image, bgnd );
 
-		image.onerror = function()
-		{
-			texture.pendingTextureLoads--;
-			doc.downloadCount--;
-			
-			x3dom.debug.logError("[Utils|createTextureCube] Can't load all of CubeMap!");
-		};
+		image.onerror = (function(texture, face) {
+            return function ()
+		        {
+                    gl.bindTexture(gl.TEXTURE_CUBE_MAP, texture);
+                    gl.texImage2D(face, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, null);
+                    gl.bindTexture(gl.TEXTURE_CUBE_MAP, null);
+                    texture.pendingTextureLoads--;
+                    doc.downloadCount--;
+
+                    x3dom.debug.logError("[Utils|createTextureCube] Can't load all of CubeMap!");
+		        };
+            })(texture, face);
 
 		// backUrl, frontUrl, bottomUrl, topUrl, leftUrl, rightUrl (for bgnd)
 		image.src = src[i];
