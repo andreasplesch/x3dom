@@ -4195,13 +4195,13 @@ x3dom.gfx_webgl = (function () {
             var faces = [gl.TEXTURE_CUBE_MAP_NEGATIVE_Z, gl.TEXTURE_CUBE_MAP_POSITIVE_Z,
 				        gl.TEXTURE_CUBE_MAP_NEGATIVE_Y, gl.TEXTURE_CUBE_MAP_POSITIVE_Y,
 				        gl.TEXTURE_CUBE_MAP_NEGATIVE_X, gl.TEXTURE_CUBE_MAP_POSITIVE_X];
-            var fields = ["back", "front", "bottom", "top", "left", "right"];
+            var fields = ["back", "front", "bottom", "top", "left", "right"]; //move out
             var fbo = rt._webgl.fbo;
             //find face
             i = fields.findIndex(function(field) {
                 return rt._parentNodes[0]._cf[field].node == rt; 
             });
-            var face = faces[i]; //todo
+            var face = faces[i]; 
             gl.bindFramebuffer(gl.FRAMEBUFFER, fbo.fbo);
             gl.bindTexture(gl.TEXTURE_CUBE_MAP, rt._parentNodes[0]._x3domTexture.texture);
             gl.copyTexImage2D(face, 0, gl.RGBA, 0, 0, fbo.width, fbo.height, 0);
