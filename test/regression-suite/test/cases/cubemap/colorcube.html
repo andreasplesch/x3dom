@@ -46,7 +46,7 @@
                     <!--ImageTexture containerField="front" url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/imageFormats/test_image.jpg"></ImageTexture-->
                     <!--ImageTexture containerField="left" url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/imageFormats/test_image.gif"></ImageTexture-->
                     <!--ImageTexture containerField="right" url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/imageFormats/test_image.gif"></ImageTexture-->
-                    <!--ImageTexture containerField="top" url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/imageFormats/test_image.png"></ImageTexture-->
+                    <ImageTexture containerField="top" url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/imageFormats/test_image.png"></ImageTexture>
                     <RenderedTexture containerField='front'  update='always' dimensions='256 256 4' DEF='rt'>
                       <!--Shape USE='mirrorSphere' containerField='excludeNodes' ></Shape-->
                       <Background USE='back1' containerField='background' ></Background>
@@ -98,8 +98,8 @@
                                    generateMipMaps='true' id='texProps'>
                       </textureProperties>
                     </RenderedTexture>
-                    <RenderedTexture containerField='top' update='always' dimensions='256 256 4' DEF='rt'>
-                      <!--Shape USE='mirrorSphere' containerField='excludeNodes' ></Shape-->
+                    <!--RenderedTexture containerField='top' update='always' dimensions='256 256 4' DEF='rt'>
+   
                       <Background USE='back1' containerField='background' ></Background>
                       <Viewpoint fieldOfView='1.5708' position='0 0 0' orientation=''0, -0.7071068, 0.7071068 3.141592' containerField='viewpoint' zNear="0.1" zFar="1000" ></Viewpoint>
                       <Group USE='MIRROR_SCENE'></Group>
@@ -107,7 +107,7 @@
                                    magnificationFilter='LINEAR' minificationFilter='LINEAR_MIPMAP_LINEAR'
                                    generateMipMaps='true' id='texProps'>
                       </textureProperties>
-                    </RenderedTexture>
+                    </RenderedTexture-->
                 </ComposedCubeMapTexture>
             </Appearance>
             <Sphere solid="false" ></Sphere>
