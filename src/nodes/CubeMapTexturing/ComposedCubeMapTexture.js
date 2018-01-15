@@ -89,7 +89,7 @@ x3dom.registerNodeType(
             this.addField_SFNode('right',  x3dom.nodeTypes.Texture);
             this._type = "environmentMap";
             this._texids = 0;
-            this._update = false;
+            this._update = false; //not used
         },
         {
             nodeChanged: function() {
@@ -97,7 +97,8 @@ x3dom.registerNodeType(
                     function(field) {
                         return x3dom.isa(field.node, x3dom.nodeTypes.RenderedTexture) &&
                             field.node._vf.update == 'always';
-                    });
+                    }); // not used
+                
             },
         
             getTexUrl: function() {
