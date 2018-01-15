@@ -35,7 +35,7 @@
         <Transform>
           <Shape DEF='mirrorSphere'>
             <Appearance>
-                <Material diffuseColor=".7 .7 .7" specularColor=".5 .5 .5" shininess='100.0'></Material>
+                <Material diffuseColor=".9 .9 .9" specularColor=".5 .5 .5" shininess='10.0'></Material>
                 <ComposedCubeMapTexture repeatS="false" repeatT="false">
                     <!--ImageTexture containerField="back" url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/imageFormats/test_image.jpg"></ImageTexture-->
                     <ImageTexture containerField="bottom" url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/regression-suite/test/cases/imageFormats/test_image.png"></ImageTexture>
@@ -53,7 +53,7 @@
                                    generateMipMaps='true' id='texProps'>
                       </textureProperties>
                     </RenderedTexture>
-                    <RenderedTexture containerField='back' update='none' dimensions='256 256 4' DEF='rt'>
+                    <!--RenderedTexture containerField='back' update='none' dimensions='256 256 4' DEF='rt'>
                       <Shape USE='mirrorSphere' containerField='excludeNodes' ></Shape>
                       <Background USE='back1' containerField='background' ></Background>
                       <Viewpoint position='0 0 0' orientation='0 1 0 0' containerField='viewpoint' zNear="0.1" zFar="1000" ></Viewpoint>
@@ -62,7 +62,7 @@
                                    magnificationFilter='LINEAR' minificationFilter='LINEAR_MIPMAP_LINEAR'
                                    generateMipMaps='true' id='texProps'>
                       </textureProperties>
-                    </RenderedTexture>
+                    </RenderedTexture-->
                 </ComposedCubeMapTexture>
             </Appearance>
             <Sphere solid="false" ></Sphere>
