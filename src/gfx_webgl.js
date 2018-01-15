@@ -4199,7 +4199,7 @@ x3dom.gfx_webgl = (function () {
             var fbo = rt._webgl.fbo;
             //find face
             i = fields.findIndex(function(field) {
-                return rt._parentNodes[0]._cf[field] == rt; 
+                return rt._parentNodes[0]._cf[field].node == rt; 
             });
             var face = faces[i]; //todo
             gl.bindFramebuffer(gl.FRAMEBUFFER, fbo.fbo);
