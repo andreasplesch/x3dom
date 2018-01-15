@@ -27,7 +27,7 @@
         <Group DEF='MIRROR_SCENE'>
           <Transform DEF='circler'>
           <Transform DEF='BoxTrafo' translation='0 0 5'>
-            <Shape>
+            <Shape DEF='blueBox'>
               <Appearance>
                 <Material diffuseColor=".6 .6 .9" specularColor=".5 .5 .5" shininess='10.0'></Material>
               </Appearance>
@@ -37,7 +37,13 @@
           </Transform>
           <Transform rotation='1 0 0 1.57'>
             <Transform USE='circler'></Transform>
-          </Transform>              
+          </Transform>
+          <Transform translation='3 0 0'>
+            <Shape USE='blueBox'></Shape>
+          </Transform>
+          <Transform translation='-3 0 0'>
+            <Shape USE='blueBox'></Shape>
+          </Transform>
         </Group>
         <Transform rotation='0 0 1 0'>
         <Transform DEF='mirrorTrafo'>
