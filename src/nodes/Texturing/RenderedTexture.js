@@ -284,7 +284,9 @@ x3dom.registerNodeType(
                 }
                 else {
                     var mat_viewpoint = view.getCurrentTransform();
-                    ret_mat = view.getViewMatrix().mult(mat_viewpoint.inverse());
+                    ret_mat = view.getViewMatrix().mult(
+                        cubemap ? mat_viewpoint
+                                : mat_viewpoint.inverse());
                 }
                 
                  if (cubemap) { //to compensate for gl origin convention
