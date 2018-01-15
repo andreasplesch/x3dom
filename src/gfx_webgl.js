@@ -4192,8 +4192,16 @@ x3dom.gfx_webgl = (function () {
         /* update affected cube maps */
         // just first for now
         if (x3dom.isa(rt._parentNodes[0], x3dom.nodeTypes.ComposedCubeMapTexture)) {
+            var faces = [gl.TEXTURE_CUBE_MAP_NEGATIVE_Z, gl.TEXTURE_CUBE_MAP_POSITIVE_Z,
+				        gl.TEXTURE_CUBE_MAP_NEGATIVE_Y, gl.TEXTURE_CUBE_MAP_POSITIVE_Y,
+				        gl.TEXTURE_CUBE_MAP_NEGATIVE_X, gl.TEXTURE_CUBE_MAP_POSITIVE_X];
+            var fields = ["back", "front", "bottom", "top", "left", "right"];
             var fbo = rt._webgl.fbo;
-            var face; //todo
+            //find face
+            i = fields.findIndex(function(field) {
+                return rt._parentNodes[0]._cf[field] == rt; 
+            };
+            var face = faces[i]; //todo
             gl.bindFramebuffer(gl.FRAMEBUFFER, fbo.fbo);
             gl.bindTexture(gl.TEXTURE_CUBE_MAP, rt._parentNodes[0]._x3domTexture.texture);
             gl.copyTexImage2D(face, 0, gl.RGBA, 0, 0, fbo.width, fbo.height, 0);
