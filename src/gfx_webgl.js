@@ -4176,7 +4176,7 @@ x3dom.gfx_webgl = (function () {
 
         gl.flush();
         this.stateManager.bindFramebuffer(gl.FRAMEBUFFER, null);
-
+        
         if (rt._webgl.fbo.mipMap) {
             gl.bindTexture(gl.TEXTURE_2D, rt._webgl.fbo.tex);
             gl.generateMipmap(gl.TEXTURE_2D);
@@ -4187,6 +4187,18 @@ x3dom.gfx_webgl = (function () {
             if (arr[i] !== 0) {
                 rt._cf.excludeNodes.nodes[i]._vf.render = true;
             }
+        }
+        
+        /* update affected cube maps */
+        // just first for now
+        if (x3dom.isa(rt._parentNodes[0], x3dom.nodeTypes.ComposedCubeMapTexture)) {
+            var fbo = rt._webgl.fbo;
+            var face; //todo
+            gl.bindFramebuffer(gl.FRAMEBUFFER, fbo.fbo);
+            gl.bindTexture(gl.TEXTURE_CUBE_MAP, rt._parentNodes[0]._x3domTexture.texture);
+            gl.copyTexImage2D(face, 0, gl.RGBA, 0, 0, fbo.width, fbo.height, 0);
+            gl.bindTexture(gl.TEXTURE_CUBE_MAP, null);
+            gl.bindFramebuffer(gl.FRAMEBUFFER, null);
         }
     };
 
