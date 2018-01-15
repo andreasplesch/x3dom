@@ -209,7 +209,7 @@ x3dom.registerNodeType(
                 "RenderedTexture.dimensions requires at least 3 entries.");
             this._clearParents = true;
             this._needRenderUpdate = true;
-            //this._zrot = x3dom.fields.Quaternion.parseAxisAngle("0 0 1 3.141592").toMatrix();
+            this._zrot = x3dom.fields.Quaternion.parseAxisAngle("0 0 1 3.141592").toMatrix();
             
             this.checkDepthTextureSupport = function() {
                 if(this._vf.depthMap && x3dom.caps.DEPTH_TEXTURE === null)
@@ -287,9 +287,9 @@ x3dom.registerNodeType(
                     ret_mat = view.getViewMatrix().mult(mat_viewpoint.inverse());
                 }
                 
-//                 if (cubemap) { //to compensate for gl origin convention
-//                     retmat = this._zrot.mult(ret_mat);
-//                 }
+                 if (cubemap) { //to compensate for gl origin convention
+                     retmat = this._zrot.mult(ret_mat);
+                 }
                 
                 var stereoMode = this._vf.stereoMode.toUpperCase();
                 if (stereoMode != "NONE") {
