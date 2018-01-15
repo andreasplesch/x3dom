@@ -192,14 +192,16 @@ x3dom.registerNodeType(
             this.addField_SFBool(ctx, 'oculusRiftVersion', 1);
         
             /**
-             * Sets the url to a resource.
-             * @var {x3dom.fields.MFString} url
-             * @memberof x3dom.nodeTypes.X3DTextureNode
-             * @initvalue []
+             * Very experimental field for cube map mode.
+             * @var {x3dom.fields.SFFloat} cubemap
+             * @memberof x3dom.nodeTypes.RenderedTexture
+             * @initvalue false
              * @field x3dom
              * @instance
              */
-            //this.addField_MFString(ctx, 'url', []); //already added
+            this.addField_SFBool(ctx, 'cubemap', false);
+        
+           
         
             this._vf.url[0] = "_RT:" + (ctx.doc._nodeBag.renderTextures.length-1); // use URL to access nodebag
 
@@ -207,6 +209,7 @@ x3dom.registerNodeType(
                 "RenderedTexture.dimensions requires at least 3 entries.");
             this._clearParents = true;
             this._needRenderUpdate = true;
+            this._zrot = x3dom.fields.Quaternion.parseAxisAngle("0 0 1 3.141592").toMatrix();
             
             this.checkDepthTextureSupport = function() {
                 if(this._vf.depthMap && x3dom.caps.DEPTH_TEXTURE === null)
@@ -269,12 +272,13 @@ x3dom.registerNodeType(
                 var scene = this._nameSpace.doc._scene;
                 var vbP = scene.getViewpoint();
                 var view = this._cf.viewpoint.node;
+                var cubemap = this._vf.cubemap;
                 var ret_mat = null;
 
                 if (view === null || view === vbP) {
                     ret_mat = this._nameSpace.doc._viewarea.getViewMatrix();
                 }
-                else if (locScene && locScene !== scene) {
+                else if (locScene && locScene !== scene && !cubemap) {
                     // in case of completely local scene do not transform local viewpoint
                     ret_mat = view.getViewMatrix()
                 }
@@ -282,7 +286,11 @@ x3dom.registerNodeType(
                     var mat_viewpoint = view.getCurrentTransform();
                     ret_mat = view.getViewMatrix().mult(mat_viewpoint.inverse());
                 }
-
+                
+                if (cubemap) { //to compensate for gl origin convention
+                    retmat = this._zrot.mult(ret_mat);
+                }
+                
                 var stereoMode = this._vf.stereoMode.toUpperCase();
                 if (stereoMode != "NONE") {
                     var d = this._vf.interpupillaryDistance / 2;
