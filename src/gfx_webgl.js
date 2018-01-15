@@ -4200,7 +4200,7 @@ x3dom.gfx_webgl = (function () {
             //find face
             i = fields.findIndex(function(field) {
                 return rt._parentNodes[0]._cf[field] == rt; 
-            };
+            });
             var face = faces[i]; //todo
             gl.bindFramebuffer(gl.FRAMEBUFFER, fbo.fbo);
             gl.bindTexture(gl.TEXTURE_CUBE_MAP, rt._parentNodes[0]._x3domTexture.texture);
