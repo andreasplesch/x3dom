@@ -288,7 +288,7 @@ x3dom.registerNodeType(
                 }
                 
                  if (cubemap) { //to compensate for gl origin convention
-                     ret_mat = this._zrot.mult(ret_mat);
+                     ret_mat = ret_mat.mult(this._zrot);
                  }
                 
                 var stereoMode = this._vf.stereoMode.toUpperCase();
