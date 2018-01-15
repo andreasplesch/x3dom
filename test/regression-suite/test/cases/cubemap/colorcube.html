@@ -38,11 +38,16 @@
           <Transform rotation='1 0 0 1.57'>
             <Transform USE='circler'></Transform>
           </Transform>
-          <Transform translation='3 0 0'>
+          <Transform translation='4 0 0'>
             <Shape USE='blueBox'></Shape>
           </Transform>
-          <Transform translation='-3 0 0'>
-            <Shape USE='blueBox'></Shape>
+          <Transform translation='-4 0 0'>
+            <Shape>
+              <Appearance>
+                <Material diffuseColor=".9 .6 .9" specularColor=".5 .5 .5" shininess='10.0'></Material>
+              </Appearance>
+              <Box></Box>
+            </Shape>
           </Transform>
         </Group>
         <Transform rotation='0 0 1 0'>
