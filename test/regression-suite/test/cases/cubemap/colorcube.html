@@ -102,12 +102,14 @@
         <TimeSensor DEF='TS' cycleInterval="4" loop="true"></TimeSensor>
         <OrientationInterpolator DEF='OI' key='0 0.5 1' keyValue='0 1 0 0, 0 1 0 3.14, 0 1 0 6.28'></OrientationInterpolator>
         <PositionInterpolator DEF='PI' key='0 0.25 0.5 0.75 1' keyValue='0 -2 0, 0 2 0, 0 -2 0, 0 2 0, 0 -2 0'></OrientationInterpolator>
+        <PositionInterpolator DEF='PIX' key='0 0.25 0.5 0.75 1' keyValue='-2 0 0, 2 0 0, -2 0 0, 2 0 0, -2 0 0'></OrientationInterpolator>
         <ROUTE fromNode='TS' fromField='fraction_changed' toNode='OI' toField='set_fraction'></ROUTE>
         <ROUTE fromNode='TS' fromField='fraction_changed' toNode='PI' toField='set_fraction'></ROUTE>
+        <ROUTE fromNode='TS' fromField='fraction_changed' toNode='PIX' toField='set_fraction'></ROUTE>
         <ROUTE fromNode='OI' fromField='value_changed' toNode='BoxTrafo' toField='rotation'></ROUTE>
         <ROUTE fromNode='OI' fromField='value_changed' toNode='circler' toField='rotation'></ROUTE>
         <ROUTE fromNode='PI' fromField='value_changed' toNode='circler' toField='translation'></ROUTE>
-        <ROUTE fromNode='PI' fromField='value_changed' toNode='mirrorTrafo' toField='translation'></ROUTE>
+        <ROUTE fromNode='PIX' fromField='value_changed' toNode='mirrorTrafo' toField='translation'></ROUTE>
       </Scene>
     </X3D>
   </body>
