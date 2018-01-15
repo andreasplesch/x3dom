@@ -4201,10 +4201,12 @@ x3dom.gfx_webgl = (function () {
             i = fields.findIndex(function(field) {
                 return rt._parentNodes[0]._cf[field].node == rt; 
             });
-            var face = faces[i]; 
+            var face = faces[i];
             gl.bindFramebuffer(gl.FRAMEBUFFER, fbo.fbo);
             gl.bindTexture(gl.TEXTURE_CUBE_MAP, rt._parentNodes[0]._x3domTexture.texture);
+            gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
             gl.copyTexImage2D(face, 0, gl.RGBA, 0, 0, fbo.width, fbo.height, 0);
+            gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
             gl.bindTexture(gl.TEXTURE_CUBE_MAP, null);
             gl.bindFramebuffer(gl.FRAMEBUFFER, null);
         }
