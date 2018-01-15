@@ -25,11 +25,13 @@
             rightUrl='"./bRT.png"' topUrl='"./bUP.png"'>
         </Background-->
         <Group DEF='MIRROR_SCENE'>
+          <Transform DEF='circler'>
           <Transform DEF='BoxTrafo' translation='0 0 10'>
             <Shape>
               <Appearance></Appearance>
               <Box></Box>
             </Shape>
+          </Transform>
           </Transform>
         </Group>  
         <Transform>
@@ -72,6 +74,7 @@
         <OrientationInterpolator DEF='OI' key='0 0.5 1' keyValue='0 1 0 0, 0 1 0 3.14, 0 1 0 6.28'></OrientationInterpolator>
         <ROUTE fromNode='TS' fromField='fraction_changed' toNode='OI' toField='set_fraction'></ROUTE>
         <ROUTE fromNode='OI' fromField='value_changed' toNode='BoxTrafo' toField='rotation'></ROUTE>
+        <ROUTE fromNode='OI' fromField='value_changed' toNode='circler' toField='rotation'></ROUTE>
       </Scene>
     </X3D>
   </body>
