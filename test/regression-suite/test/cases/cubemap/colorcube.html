@@ -38,8 +38,8 @@
           <Transform rotation='1 0 0 1.57'>
             <Transform USE='circler'></Transform>
           </Transform>              
-        </Group>  
-        <Transform>
+        </Group>
+        <Transform DEF='mirrorTrafo'>
           <Shape DEF='mirrorSphere'>
             <Appearance>
                 <Material diffuseColor=".9 .9 .9" specularColor=".5 .5 .5" shininess='10.0'></Material>
@@ -105,6 +105,7 @@
         <ROUTE fromNode='OI' fromField='value_changed' toNode='BoxTrafo' toField='rotation'></ROUTE>
         <ROUTE fromNode='OI' fromField='value_changed' toNode='circler' toField='rotation'></ROUTE>
         <ROUTE fromNode='PI' fromField='value_changed' toNode='circler' toField='translation'></ROUTE>
+        <ROUTE fromNode='PI' fromField='value_changed' toNode='mirrorTrafo' toField='translation'></ROUTE>
       </Scene>
     </X3D>
   </body>
