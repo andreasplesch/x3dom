@@ -3382,7 +3382,7 @@ x3dom.gfx_webgl = (function () {
         var nearestFilt = false;
 
         if (x3dom.caps.FP_TEXTURES && !x3dom.caps.MOBILE) {
-            //type = gl.FLOAT;
+            type = gl.FLOAT;
             shadowType = gl.FLOAT;
             if (!x3dom.caps.FPL_TEXTURES) {
                 nearestFilt = true;             // TODO: use correct filtering for fp-textures
