@@ -382,6 +382,9 @@ function uploadDDSLevels(gl, ext, arrayBuffer, loadMipmaps) {
 x3dom.Utils.createTextureCube = function(gl, doc, src, bgnd, crossOrigin, scale, genMipMaps)
 {
 	var texture = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_CUBE_MAP, texture);
+    gl.bindTexture(gl.TEXTURE_CUBE_MAP, null);
+                                            
     var cubeFBO = gl.createFramebuffer();
     
 	var faces;
@@ -481,11 +484,13 @@ x3dom.Utils.createTextureCube = function(gl, doc, src, bgnd, crossOrigin, scale,
                         //gl.bindFramebuffer(gl.FRAMEBUFFER, fbo.fbo);
                         //gl.readPixels(0,0,fbo.width,fbo.height,gl.RGBA,gl.FLOAT, pixels);
                         //pixels = new Uint8Array(pixels.map(function(i){return i * 256.0;}))
-                        gl.bindTexture(gl.TEXTURE_CUBE_MAP, texture);
+                        //gl.bindTexture(gl.TEXTURE_CUBE_MAP, texture);
+                        gl.bindTexture(gl.TEXTURE_2D, fbo.tex);
                         //gl.texImage2D(face, 0, gl.RGBA, fbo.width, fbo.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
                         //gl.copyTexImage2D(face, 0, gl.RGBA, 0, 0, fbo.width, fbo.height, 0);
-                        gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, face, fbo.tex, 0); 
-                        gl.bindTexture(gl.TEXTURE_CUBE_MAP, null);
+                        gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, face, texture, 0); 
+                        //gl.bindTexture(gl.TEXTURE_CUBE_MAP, null);
+                        gl.bindTexture(gl.TEXTURE_2D, null);
                         gl.bindFramebuffer(gl.FRAMEBUFFER, null);
                         gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
                     }else{
