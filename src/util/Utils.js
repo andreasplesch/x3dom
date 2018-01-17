@@ -382,7 +382,8 @@ function uploadDDSLevels(gl, ext, arrayBuffer, loadMipmaps) {
 x3dom.Utils.createTextureCube = function(gl, doc, src, bgnd, crossOrigin, scale, genMipMaps)
 {
 	var texture = gl.createTexture();
-
+    var cubeFBO = gl.createFramebuffer();
+    
 	var faces;
 	if (bgnd) {
 		faces = [gl.TEXTURE_CUBE_MAP_POSITIVE_Z, gl.TEXTURE_CUBE_MAP_NEGATIVE_Z,
@@ -428,9 +429,9 @@ x3dom.Utils.createTextureCube = function(gl, doc, src, bgnd, crossOrigin, scale,
 		texture.pendingTextureLoads++;
 		doc.downloadCount++;
 
-		image.onload = (function(texture, face, image, swap) {
+		image.onload = (function(texture, face, image, swap, genMipMaps) {
 			return function() {
-				if (width == 0 && height == 0) {
+				if (width == 0 && height == 0) {//need to be passed to scope ?
 					width = image.width;
 					height = image.height;
 				}
@@ -465,22 +466,25 @@ x3dom.Utils.createTextureCube = function(gl, doc, src, bgnd, crossOrigin, scale,
 					doc.needRender = true;
 				}
 			};
-		})( texture, face, image, bgnd );
+		})( texture, face, image, bgnd, genMipMaps);
 
-		image.onerror = (function(texture, face, image, doc, src) {
+		image.onerror = (function(texture, face, image, doc, src, cubeFBO) {
             return function ()
 		        {
                     var rt = src.split(":");
                     if (rt[0]=="_RT") {
+                        gl.bindFramebuffer(gl.FRAMEBUFFER, cubeFBO);
+                        
                         var fbo = doc._nodeBag.renderTextures[rt[1]]._webgl.fbo;
                         //var pixels = new Float32Array(fbo.width * fbo.height * 4);
-                        gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-                        gl.bindFramebuffer(gl.FRAMEBUFFER, fbo.fbo);
+                        //gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+                        //gl.bindFramebuffer(gl.FRAMEBUFFER, fbo.fbo);
                         //gl.readPixels(0,0,fbo.width,fbo.height,gl.RGBA,gl.FLOAT, pixels);
                         //pixels = new Uint8Array(pixels.map(function(i){return i * 256.0;}))
                         gl.bindTexture(gl.TEXTURE_CUBE_MAP, texture);
                         //gl.texImage2D(face, 0, gl.RGBA, fbo.width, fbo.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
-                        gl.copyTexImage2D(face, 0, gl.RGBA, 0, 0, fbo.width, fbo.height, 0);
+                        //gl.copyTexImage2D(face, 0, gl.RGBA, 0, 0, fbo.width, fbo.height, 0);
+                        gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, face, fbo.tex, 0); 
                         gl.bindTexture(gl.TEXTURE_CUBE_MAP, null);
                         gl.bindFramebuffer(gl.FRAMEBUFFER, null);
                         gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
@@ -490,7 +494,7 @@ x3dom.Utils.createTextureCube = function(gl, doc, src, bgnd, crossOrigin, scale,
                     texture.pendingTextureLoads--;
                     doc.downloadCount--;
 		        };
-            })(texture, face, image, doc, src[i]);
+            })(texture, face, image, doc, src[i], cubeFBO);
 
 		// backUrl, frontUrl, bottomUrl, topUrl, leftUrl, rightUrl (for bgnd)
 		image.src = src[i];
