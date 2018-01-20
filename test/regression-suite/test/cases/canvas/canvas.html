@@ -201,7 +201,7 @@
         setInterval( function() { 
             draw(Math.random());
             // do some sort of "touch" here to invalidate gl objects
-            aCanvas.parentNode._x3domNode.fieldChanged("url");
+            myCanvas.parentNode._x3domNode.fieldChanged("url");
             sg.render();
         }, 100);
     }
