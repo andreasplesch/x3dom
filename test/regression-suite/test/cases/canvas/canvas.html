@@ -178,9 +178,12 @@
         */
         
         myCanvas.parentNode._x3domNode.fieldChanged("url");
-        document.getElementById("x3d").render();
+		
+		var sg = document.getElementById("x3d");
         
-        var aCanvas = document.getElementById("aCanvas");
+        sg.render();
+        
+        var aCanvas = sg.runtime.getCanvas();//document.getElementById("aCanvas");
         
         var validContextNames = ['moz-webgl', 'webkit-3d', 'experimental-webgl', 'webgl'];
         
@@ -194,7 +197,6 @@
         init();
         draw(1.0);
         
-        var sg = document.getElementById("x3d");
         
         setInterval( function() { 
             draw(Math.random());
