@@ -42,7 +42,7 @@ x3dom.gfx_webgl = (function () {
         var validContextNames = ['webgl', 'experimental-webgl', 'moz-webgl', 'webkit-3d'];
 
         if (tryWebGL2) {
-            validContextNames = ['webgl2','experimental-webgl2'].concat(validContextNames);
+            validContextNames = ['experimental-webgl2'].concat(validContextNames);
         }
 
         var ctx = null;
