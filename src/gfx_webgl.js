@@ -4202,6 +4202,7 @@ x3dom.gfx_webgl = (function () {
                 return rt._parentNodes[0]._cf[field].node == rt; 
             });
             //var face = faces[i];
+            i = rt._parentNodes[0]._face[rt._vf.url[0]];
             //gl.bindFramebuffer(gl.FRAMEBUFFER, fbo.fbo);
             gl.bindTexture(gl.TEXTURE_CUBE_MAP, rt._parentNodes[0]._x3domTexture.texture);
             //gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true); // no effect ?
