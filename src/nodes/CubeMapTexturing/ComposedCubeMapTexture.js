@@ -87,18 +87,27 @@ x3dom.registerNodeType(
              * @instance
              */
             this.addField_SFNode('right',  x3dom.nodeTypes.Texture);
+        
             this._type = "environmentMap";
             this._texids = 0;
-            this._update = false; //not used
+            this._face = {};
+            //this._update = false; //not used
         },
+                
         {
             nodeChanged: function() {
-                this._update = [this._cf.back, this._cf.front, this._cf.bottom, this._cf.top, this._cf.left, this._cf.right].some(
-                    function(field) {
-                        return x3dom.isa(field.node, x3dom.nodeTypes.RenderedTexture) &&
-                            field.node._vf.update == 'always';
-                    }); // not used
-                
+//                 this._update = [this._cf.back, this._cf.front, this._cf.bottom, this._cf.top, this._cf.left, this._cf.right].some(
+//                     function(field) {
+//                         return x3dom.isa(field.node, x3dom.nodeTypes.RenderedTexture) &&
+//                             field.node._vf.update == 'always';
+//                     }); // not used
+                //back reference to 
+                this._face[this.getUrlOrID(this._cf.back)] = 0; //'back';
+                this._face[this.getUrlOrID(this._cf.front)] = 1; //'front';
+                this._face[this.getUrlOrID(this._cf.bottom)] = 2; //'bottom';
+                this._face[this.getUrlOrID(this._cf.top)] = 3; //'top';
+                this._face[this.getUrlOrID(this._cf.left)] = 4; //'left';
+                this._face[this.getUrlOrID(this._cf.right)] = 5; //'right';
             },
         
             getTexUrl: function() {
@@ -116,6 +125,7 @@ x3dom.registerNodeType(
 //                     this._nameSpace.getURL(this._cf.right.node._vf.url[0])
                 ];
             },
+        
             getUrlOrID: function(texField) {
                 var texNode = texField.node;
                 if (x3dom.isa(texNode, x3dom.nodeTypes.ImageTexture)) {
