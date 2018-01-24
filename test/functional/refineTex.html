@@ -19,7 +19,10 @@
                     <Appearance>
                         <Material></Material>
                         <RefinementTexture id="refTex" url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/functional/gpuii/example_1" dimensions="1088 610 4" 
-							autoRefinement="true" maxLevel="7" repeatS="false" repeatT="false">
+							autoRefinement="true" maxLevel="7" repeatS="false" repeatT="false"
+                           stamp0='https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/functional/gpuii/stamps/0.gif'
+                           stamp1='https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/functional/gpuii/stamps/1.gif'
+                           >
                         </RefinementTexture>
                     </Appearance>
                     <Plane></Plane>
@@ -31,7 +34,10 @@
                     <Appearance>
                         <Material></Material>
                         <RefinementTexture id="refTexPOT" url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/functional/gpuii/room_1" dimensions="1024 1024 4" 
-							autoRefinement="true" maxLevel="7">
+						    autoRefinement="true" maxLevel="7"
+                           stamp0='https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/functional/gpuii/stamps/0.gif'
+                           stamp1='https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/functional/gpuii/stamps/1.gif'
+                           >
                           <textureProperties boundaryModeS='CLAMP_TO_EDGE' boundaryModeT='CLAMP_TO_EDGE'
                                 magnificationFilter='LINEAR' minificationFilter='LINEAR_MIPMAP_LINEAR'
                                 generateMipMaps='true'>
@@ -47,7 +53,10 @@
                     <Appearance>
                         <Material></Material>
                         <RefinementTexture id="refTexN" url="https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/functional/gpuii/example_2" dimensions="1216 404 4" 
-							autoRefinement="true" maxLevel="7" repeatS="false" repeatT="false">
+							autoRefinement="true" maxLevel="7" repeatS="false" repeatT="false"
+                           stamp0='https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/functional/gpuii/stamps/0.gif'
+                           stamp1='https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/functional/gpuii/stamps/1.gif'
+                           >
                         </RefinementTexture>
                     </Appearance>
                     <Plane></Plane>
@@ -82,7 +91,9 @@
 			tex.setAttribute("repeatS", "false");
 			tex.setAttribute("repeatT", "false");
 			tex.setAttribute("url", "https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/functional/gpuii/example_1");
-			tex.setAttribute("autoRefinement", "true");
+			tex.setAttribute("stamp0", 'https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/functional/gpuii/stamps/0.gif');
+            tex.setAttribute("stamp1", 'https://raw.githubusercontent.com/andreasplesch/x3dom/cubemap/test/functional/gpuii/stamps/1.gif');
+            tex.setAttribute("autoRefinement", "true");
 			tex.setAttribute("dimensions", "1088 610 4");
 			tex.setAttribute("maxLevel", "7");
 			
