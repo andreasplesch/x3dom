@@ -3913,7 +3913,7 @@ x3dom.gfx_webgl = (function () {
             var filename = rt._vf.url[0] + "/" + rt._currLoadLevel + "." + rt._vf.format;
 
             rt._webgl.texture = x3dom.Utils.createTexture2D(gl, rt._nameSpace.doc,
-                                rt._nameSpace.getURL(filename), false, false, false, false);
+                                rt._nameSpace.getURL(filename), false, rt._vf.crossOrigin, false, false);
 
             if (rt._vf.iterations % 2 === 0)
                 (rt._currLoadLevel % 2 !== 0) ? rt._repeat.x *= 2.0 : rt._repeat.y *= 2.0;
