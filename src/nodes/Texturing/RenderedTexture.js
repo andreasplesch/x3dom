@@ -201,10 +201,6 @@ x3dom.registerNodeType(
              */
             this.addField_SFBool(ctx, 'cubemap', false);
         
-           
-        
-            this._vf.url[0] = "_RT:" + (ctx.doc._nodeBag.renderTextures.length-1); // use URL to access nodebag
-
             x3dom.debug.assert(this._vf.dimensions.length >= 3,
                 "RenderedTexture.dimensions requires at least 3 entries.");
             this._clearParents = true;
@@ -222,6 +218,7 @@ x3dom.registerNodeType(
             {
                 this._clearParents = true;
                 this._needRenderUpdate = true;
+                this._vf.url[0] = "_RT:" + (this.findX3DDoc()._nodeBag.renderTextures.length-1); // use URL to access nodebag
             },
 
             fieldChanged: function(fieldName)
