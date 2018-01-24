@@ -115,6 +115,12 @@ x3dom.registerNodeType(
         
         },
         {
+            nodeChanged: function()
+            {
+                this._clearParents = true;
+                this._needRenderUpdate = true;
+            },
+        
             nextLevel: function() {
                 if (this._loadLevel < this._vf.maxLevel) {
                     this._loadLevel++;
