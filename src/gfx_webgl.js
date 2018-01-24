@@ -3898,9 +3898,9 @@ x3dom.gfx_webgl = (function () {
         // load stamp textures
         if (rt._currLoadLevel == 0 && (!scene._webgl.refinement.stamps[0] || !scene._webgl.refinement.stamps[1])) {
             scene._webgl.refinement.stamps[0] = this.cache.getTexture2D(gl, rt._nameSpace.doc,
-                                    rt._nameSpace.getURL(rt._vf.stamp0), false, false, false, false);
+                                    rt._nameSpace.getURL(rt._vf.stamp0), false, rt._vf.crossOrigin, false, false);
             scene._webgl.refinement.stamps[1] = this.cache.getTexture2D(gl, rt._nameSpace.doc,
-                                    rt._nameSpace.getURL(rt._vf.stamp1), false, false, false, false);
+                                    rt._nameSpace.getURL(rt._vf.stamp1), false, rt._vf.crossOrigin, false, false);
         }
 
         // load next level of image
