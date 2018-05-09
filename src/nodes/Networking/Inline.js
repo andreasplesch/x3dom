@@ -80,6 +80,8 @@ x3dom.registerNodeType(
                     //Remove the childs of the x3domNode
                     for (var i=0; i<this._childNodes.length; i++)
                     {
+                        //remove childSpace from parent (main) namespace
+                        if (this._childNodes[i]._nameSpace) this._nameSpace.removeSpace(this._childNodes[i]._nameSpace);
                         this.removeChild(this._childNodes[i]);
                     }
 
