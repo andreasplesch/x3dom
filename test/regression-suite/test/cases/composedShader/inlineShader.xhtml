@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+	<meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge" />
+    <script type="text/javascript" src="../../../../x3dom_include.js"></script>
+</head>
+
+<body>
+
+    <X3D xmlns='http://www.web3d.org/specifications/x3d-namespace' id='x3d'
+         showStat='false' showLog='false' width='800px' height='600px' backend='webgl2'>
+      <Scene>
+        <Transform DEF='TR'>
+          <Shape>
+            <Appearance>
+              <Material diffuseColor='0.5 0.5 0.9'/>
+              <ComposedShader language='GLSL'>
+                <field accessType='initializeOnly' name='decis' type='SFVec3f' value='0.95 0.44 0.22'/>
+                <ShaderPart>
+                  <![CDATA[
+#ifdef GL_ES
+  precision mediump float;
+#endif
+
+// the vertex shader is small enough we can uri it here
+// but the link also contains a 'toon.vs' for those interested
+
+    varying vec3 x3domnormal;
+    attribute vec3 normal;
+    attribute vec3 position;
+    uniform mat4 normalMatrix;
+    uniform mat4 modelViewProjectionMatrix;
+    void main()
+    {
+        x3domnormal=mat3(normalMatrix)*normal;
+        gl_Position=modelViewProjectionMatrix * vec4(position, 1.0);
+    }
+]]>
+                </ShaderPart>
+                <ShaderPart type='FRAGMENT'>
+                  <![CDATA[
+#ifdef GL_ES
+  precision mediump float;
+#endif
+
+varying vec3 x3domnormal;
+uniform vec3 decis;
+uniform vec3 light0_Location;
+
+void main()
+{
+        float intensity;
+        vec4 color;
+        vec3 n = normalize(x3domnormal);
+
+        intensity = dot(light0_Location,n);
+
+        if (intensity > decis[0])
+                color = vec4(0.0,0.5,0.5,1.0);
+        else if (intensity > decis[1])
+                color = vec4(0.6,0.3,0.3,1.0);
+        else if (intensity > decis[2])
+                color = vec4(1.0,0.2,0.2,1.0);
+        else
+                color = vec4(0.0,0.4,0.0,1.0);
+
+        gl_FragColor = color;
+}
+]]>
+                </ShaderPart>
+              </ComposedShader>
+              <ComposedShader language='GLSL'>
+        	<field accessType='initializeOnly' name='decis' type='SFVec3f' value='0.95 0.44 0.22'/>
+                <ShaderPart>
+                  <![CDATA[
+# toon.vs
+# http://www.web3d.org/x3d/content/examples/Basic/Shaders/toon.vs
+
+// the vertex shader is small enough we can uri it here
+// but the link also contains a 'toon.vs' for those interested
+
+    varying vec3 normal;
+    void main()
+    {
+        normal=gl_NormalMatrix*gl_Normal;
+        gl_Position=ftransform();
+    }
+]]>
+                </ShaderPart>
+                <ShaderPart type='FRAGMENT'>
+                  <![CDATA[
+# toon.fs
+# http://www.web3d.org/x3d/content/examples/Basic/Shaders/toon.fs
+varying vec3 normal;
+uniform vec3 decis;
+
+void main()
+{
+        float intensity;
+        vec4 color;
+        vec3 n = normalize(normal);
+
+        intensity = dot(vec3(gl_LightSource[0].position),n);
+
+        if (intensity > decis[0])
+                color = vec4(0.0,0.5,0.5,1.0);
+        else if (intensity > decis[1])
+                color = vec4(0.6,0.3,0.3,1.0);
+        else if (intensity > decis[2])
+                color = vec4(1.0,0.2,0.2,1.0);
+        else
+                color = vec4(0.0,0.4,0.0,1.0);
+
+        gl_FragColor = color;
+}
+]]>
+                </ShaderPart>
+              </ComposedShader>
+              <ComposedShader DEF='Cobweb' language='GLSL'>
+                <field accessType='initializeOnly' name='decis' type='SFVec3f' value='0.95 0.77 0.44'/>
+                <ShaderPart>
+                  <![CDATA[data:text/plain;charset=utf-8,
+
+precision mediump float;
+
+uniform mat4 x3d_ProjectionMatrix;
+uniform mat4 x3d_ModelViewMatrix;
+uniform mat3 x3d_NormalMatrix;
+
+attribute vec4 x3d_Vertex;
+attribute vec3 x3d_Normal;
+
+varying vec3 normal;
+
+void main()
+{
+	normal = x3d_NormalMatrix * x3d_Normal;
+	
+	gl_Position = x3d_ProjectionMatrix * x3d_ModelViewMatrix * x3d_Vertex;
+}
+]]>
+                </ShaderPart>
+                <ShaderPart DEF='_1' type='FRAGMENT'>
+                  <![CDATA[data:text/plain;charset=utf-8,
+
+precision mediump float;
+
+uniform vec3 x3d_LightDirection [x3d_MaxLights];
+
+varying vec3 normal;
+uniform vec3 decis;
+
+void main()
+{
+	float intensity;
+	vec4 color;
+	vec3 n = normalize (normal);
+
+	intensity = abs (dot (x3d_LightDirection [0], n));
+
+	if (intensity > decis[0])
+		color = vec4(0.0,0.5,0.5,1.0);
+	else if (intensity > decis[1])
+		color = vec4(0.6,0.3,0.3,1.0);
+	else if (intensity > decis[2])
+		color = vec4(1.0,0.2,0.2,1.0);
+	else
+		color = vec4(0.0,0.4,0.0,1.0);
+
+	gl_FragColor = color;
+} 
+]]>
+                </ShaderPart>
+              </ComposedShader>
+            </Appearance>
+            <Sphere radius='1.75'/>
+          </Shape>
+        </Transform>
+    <WorldInfo title='SimpleShader'>
+      <MetadataSet DEF='Titania' name='Titania' reference='http://titania.create3000.de'>
+        <MetadataSet DEF='Selection' containerField='value' name='Selection' reference='http://titania.create3000.de'>
+          <MetadataSet DEF='nodes' containerField='value' name='nodes' reference='http://titania.create3000.de'>
+            <!-- NULL -->
+          </MetadataSet>
+        </MetadataSet>
+        <MetadataSet DEF='NavigationInfo' containerField='value' name='NavigationInfo' reference='http://titania.create3000.de'>
+          <MetadataString DEF='type' containerField='value' name='type' reference='http://titania.create3000.de' value='"EXAMINE"'/>
+        </MetadataSet>
+        <MetadataSet DEF='Viewpoint' containerField='value' name='Viewpoint' reference='http://titania.create3000.de'>
+          <MetadataDouble DEF='position' containerField='value' name='position' reference='http://titania.create3000.de' value='6.24067728185014 0.00250837343276661 2.92117542307615'/>
+          <MetadataDouble DEF='orientation' containerField='value' name='orientation' reference='http://titania.create3000.de' value='-0.110173424710488 0.990158061907379 -0.0863065984000336 1.21146676119191'/>
+          <MetadataDouble DEF='centerOfRotation' containerField='value' name='centerOfRotation' reference='http://titania.create3000.de' value='-0.808320198626341 -0.358072370409949 0.22817191560906'/>
+        </MetadataSet>
+      </MetadataSet>
+    </WorldInfo>
+  </Scene>
+    </X3D>
+</body>
+</html>
