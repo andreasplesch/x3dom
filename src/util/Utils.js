@@ -140,29 +140,113 @@ x3dom.Utils.createTexture2D = function(gl, doc, src, bgnd, crossOrigin, scale, g
 	};
 
 	image.onerror = function(error) {
-    // Try loading the image as a compressed texture, if the extension is provided
-    // by the platform.
-    // Copyrigth (C) 2014 TOSHIBA
-    // Dual licensed under the MIT and GPL licenses.
-    // Based on code originally provided by　http://www.x3dom.org
+        
+        // Try nrrd as nrrd volume
+        if(decodeURI(src).match(/\/.*\.nrrd[^\/]*$/)){ // only try with .nrrd extension after last /
+            doc.downloadCount++; // keep spinner
+            x3dom.Utils.tryNRRDTexture2D(texture, gl, doc, src, bgnd,
+                crossOrigin, genMipMaps, function(success){
+                    if(!success){ 
+                        x3dom.debug.logError("[Utils|createTexture2D] Can't load nrrd Image: " + src);
+                    }
+                    doc.downloadCount--; //stop spinning
+                    return;
+            });
+            doc.downloadCount--;
+            return; // do not try dds
+        }
+        
+        // Try loading the image as a compressed texture, if the extension is provided
+        // by the platform.
+        // Copyrigth (C) 2014 TOSHIBA
+        // Dual licensed under the MIT and GPL licenses.
+        // Based on code originally provided by　http://www.x3dom.org
 
-   if(x3dom.caps.EXTENSIONS.indexOf('WEBGL_compressed_texture_s3tc') !== -1){
-  		x3dom.Utils.tryCompressedTexture2D(texture, gl, doc, src, bgnd,
-  		    crossOrigin, genMipMaps, function(success){
-  		  if(success){
-	      }else{
-          x3dom.debug.logError("[Utils|createTexture2D] Can't load Image: " + src);
-		    }
-        doc.downloadCount--;
-		  });
-	  }else{
-      x3dom.debug.logError("[Utils|createTexture2D] Can't load Image: " + src);
-	    doc.downloadCount--;
-    }
-	};
-
-	return texture;
+        if(x3dom.caps.EXTENSIONS.indexOf('WEBGL_compressed_texture_s3tc') !== -1){
+            x3dom.Utils.tryCompressedTexture2D(texture, gl, doc, src, bgnd,
+                crossOrigin, genMipMaps, function(success){
+                    if(success){
+                    } else {
+                        x3dom.debug.logError("[Utils|createTexture2D] Can't load Image: " + src);
+                    }
+                    doc.downloadCount--;
+            });
+        } else {
+            x3dom.debug.logError("[Utils|createTexture2D] Can't load Image: " + src);
+            doc.downloadCount--;
+        }
+    };
+    return texture;
 };
+
+/*****************************************************************************
+* load NRRD as volume texture
+* (c) 2017, A. Plesch
+* use nrrd.js to parse
+* convert to textureatlas compatible buffer
+* use luminance for efficiency
+*****************************************************************************/
+
+x3dom.Utils.tryNRRDTexture2D = function(texture, gl, doc, src, bgnd, crossOrigin, genMipMaps, cb)
+{
+    //start loading
+    nrrdXhr = new XMLHttpRequest();
+
+    nrrdXhr.open('GET', src, true);
+    nrrdXhr.responseType = "arraybuffer";
+    nrrdXhr.onload = function() {
+    
+        var nrrd = x3dom.nrrd.parse(this.response);
+        if (nrrd.dimension == 4) { nrrd.sizes = nrrd.sizes.slice(1); }
+        var sliceWidth = nrrd.sizes[0];
+        var sliceHeight = nrrd.sizes[1];
+        var sliceSize = sliceWidth * sliceHeight;
+
+        var numberOfSlices = nrrd.sizes[2];
+        var width = Math.sqrt(numberOfSlices);
+        var slicesOverX = x3dom.Utils.nextBestPowerOfTwo(width);
+        var slicesOverY = x3dom.Utils.nextBestPowerOfTwo(numberOfSlices / slicesOverX);
+        var texWidth = slicesOverX * sliceWidth;
+        var texHeight = slicesOverY * sliceHeight;
+        var texData = new Uint8Array(texWidth * texHeight); // reshape into ca. square, POT texture
+        var offset = 0, row, y, i, col, sliceLine;
+        for (row = 0; row < slicesOverY; row++) { //construct output line by line
+            for(y = 0; y < sliceHeight; y++) {
+                i = row * slicesOverX * sliceSize + y * sliceWidth; 
+                for (col = 0; col < slicesOverX; col++) {
+                    sliceLine = nrrd.data.subarray(i, i + sliceWidth);
+                    i += sliceSize;
+                    if (i > nrrd.data.byteLength) break // done
+                    texData.set(sliceLine, offset);
+                    offset += sliceWidth;
+                }
+            if (i > nrrd.data.byteLength) break
+            }
+            if (i > nrrd.data.byteLength) break
+        }   
+
+        gl.bindTexture(gl.TEXTURE_2D, texture);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.LUMINANCE, texWidth, texHeight, 0, gl.LUMINANCE, gl.UNSIGNED_BYTE, texData);
+        if (genMipMaps) { gl.generateMipmap(gl.TEXTURE_2D); }
+        //gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+        gl.bindTexture(gl.TEXTURE_2D, null);
+
+        texture.ready = true;
+        texture.width  = texWidth;
+        texture.height = texHeight;
+
+        doc.needRender = true;
+        
+        cb(true);
+    };
+    
+    nrrdXhr.onerror = function() {
+      	cb(false);
+    };
+
+    x3dom.RequestManager.addRequest(nrrdXhr);
+};
+
 
 /*****************************************************************************
 *  Creating textures from S3TC compressed files.

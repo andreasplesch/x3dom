@@ -8,7 +8,7 @@
 
 <body>
 <div class="group">
-    <X3D xmlns='http://www.web3d.org/specifications/x3d-namespace' id='x3d' showLog='true' x='0px' y='0px' width='800px' height='600px'>
+    <X3D backend='webgl2' xmlns='http://www.web3d.org/specifications/x3d-namespace' id='x3d' showLog='true' x='0px' y='0px' width='800px' height='600px'>
         <Scene DEF='scene'>
             <NavigationInfo headlight='false' ></NavigationInfo>
             <Background skyColor='0.200 0.200 0.200'></Background>
@@ -17,13 +17,13 @@
                     <Appearance DEF='_01_-_Default' >
                         <CommonSurfaceShader diffuseFactor='1.000 1.000 1.000' specularFactor='1.000 1.000 1.000' shininessFactor='0.145' alphaFactor='1.000' tangentTextureCoordinatesId='1' binormalTextureCoordinatesId='2' >
                             <SurfaceShaderTexture containerField='diffuseTexture' >
-                                <ImageTexture url='./diffuseMap01.png' ></ImageTexture>
+                                <ImageTexture url='http://raw.githubusercontent.com/andreasplesch/x3dom/master/test/regression-suite/test/cases/surfaceShader/diffuseMap01.png' ></ImageTexture>
                             </SurfaceShaderTexture>
                             <SurfaceShaderTexture containerField='specularTexture' >
-                                <ImageTexture url='./specularMap01.png' ></ImageTexture>
+                                <ImageTexture url='http://raw.githubusercontent.com/andreasplesch/x3dom/master/test/regression-suite/test/cases/surfaceShader/specularMap01.png' ></ImageTexture>
                             </SurfaceShaderTexture>
                             <SurfaceShaderTexture containerField='normalTexture' >
-                                <ImageTexture url='./normalMap01.png' ></ImageTexture>
+                                <ImageTexture url='http://raw.githubusercontent.com/andreasplesch/x3dom/master/test/regression-suite/test/cases/surfaceShader/normalMap01.png' ></ImageTexture>
                             </SurfaceShaderTexture>
                         </CommonSurfaceShader>
                     </Appearance>

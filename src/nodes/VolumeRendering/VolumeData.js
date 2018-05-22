@@ -104,6 +104,10 @@ x3dom.registerNodeType(
                 // therefore, try to mimic depth-first parsing scheme
                 if (!this._cf.appearance.node) 
                 {
+                    if (this._cf.voxels.node == null) {return;} // guard
+                    if (this._cf.renderStyle.node == null) {
+                      this.addChild(new x3dom.nodeTypes.OpacityMapVolumeStyle()); // default style
+                    }
                     var i;
 
                     this.addChild(new x3dom.nodeTypes.Appearance());

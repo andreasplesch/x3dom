@@ -166,7 +166,7 @@ x3dom.registerNodeType(
             {
                 Array.forEach(parent._parentNodes, function (shape) {
                     // THINKABOUTME: this is a bit ugly, cleanup more generically
-                    if (x3dom.isa(shape, x3dom.nodeTypes.Shape)) {
+                    if (x3dom.isa(shape, x3dom.nodeTypes.X3DShapeNode)) {
                         shape._dirty.texture = true;
                     }
                     else {
