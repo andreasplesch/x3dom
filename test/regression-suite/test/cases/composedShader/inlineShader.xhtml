@@ -50,7 +50,7 @@
 
 varying vec3 x3domnormal;
 uniform vec3 decis;
-uniform vec3 light0_Location;
+uniform vec3 light0_Direction;
 
 void main()
 {
@@ -58,7 +58,7 @@ void main()
         vec4 color;
         vec3 n = normalize(x3domnormal);
 
-        intensity = dot (light0_Location, n);
+        intensity = dot (light0_Direction, n);
 
         if (intensity > decis[0])
                 color = vec4(0.0,0.5,0.5,1.0);
