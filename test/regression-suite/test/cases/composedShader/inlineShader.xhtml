@@ -50,15 +50,15 @@
 
 varying vec3 x3domnormal;
 uniform vec3 decis;
-uniform vec3 light0_Location;
+uniform vec3 light0_Direction;
 
 void main()
 {
         float intensity;
         vec4 color;
         vec3 n = normalize(x3domnormal);
-
-        intensity = dot(light0_Location,n);
+#as x_ite
+        intensity = abs(dot(light0_Direction, n));
 
         if (intensity > decis[0])
                 color = vec4(0.0,0.5,0.5,1.0);
@@ -74,6 +74,7 @@ void main()
 ]]>
                 </ShaderPart>
               </ComposedShader>
+<!--
               <ComposedShader language='GLSL'>
         	<field accessType='initializeOnly' name='decis' type='SFVec3f' value='0.95 0.44 0.22'/>
                 <ShaderPart>
@@ -177,6 +178,7 @@ void main()
 ]]>
                 </ShaderPart>
               </ComposedShader>
+-->
             </Appearance>
             <Sphere radius='1.75'/>
           </Shape>
