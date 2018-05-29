@@ -63,6 +63,16 @@ x3dom.registerNodeType(
              * @instance
              */
             this.addField_SFBool(ctx, 'allowViewpointInside', true)
+        
+            /**
+             * Specifies the number of depth levels to be used for rendering. 
+             * @var {x3dom.fields.SFInt32} depthSteps
+             * @memberof x3dom.nodeTypes.X3DVolumeDataNode
+             * @initvalue 120
+             * @field x3dom
+             * @instance
+             */
+            this.addField_SFInt32(ctx, 'depthSteps', 120);
 
             //Neccesary for counting the textures which are added on each style, number of textures can be variable
             this._textureID = 0;
@@ -123,6 +133,7 @@ x3dom.registerNodeType(
             },
 
             defaultUniformsShaderText: function(numberOfSlices, slicesOverX, slicesOverY, needEyePosition){
+               var numberOfSteps = this._vf.depthSteps;
                var uniformsText = 
                 "uniform sampler2D uVolData;\n"+
                 "uniform vec3 dimensions;\n"+
@@ -150,7 +161,7 @@ x3dom.registerNodeType(
                     "uniform float light"+l+"_ShadowIntensity;\n";
                 }
                 uniformsText +=
-                "const float Steps = 60.0;\n"+
+                "const float Steps = "+ numberOfSteps.toPrecision(5)+";\n"+ // Steps configurable
                 "const float numberOfSlices = "+ numberOfSlices.toPrecision(5)+";\n"+
                 "const float slicesOverX = " + slicesOverX.toPrecision(5) +";\n"+
                 "const float slicesOverY = " + slicesOverY.toPrecision(5) +";\n";
