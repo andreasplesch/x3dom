@@ -10,7 +10,7 @@
 <script>
     function redNose()
     {
-        if(document.getElementById('Deer__MA_Nose').getAttribute('diffuseColor')!= '1 0 0')
+        if(document.getElementById('Deer__MA_Nose').getAttribute('diffuseColor') != '1 0 0')
             document.getElementById('Deer__MA_Nose').setAttribute('diffuseColor', '1 0 0');
         else
             document.getElementById('Deer__MA_Nose').setAttribute('diffuseColor', '0 0 0');
@@ -27,7 +27,7 @@
     <scene>
             <viewpoint position="-1.94639 1.79771 -2.89271" orientation="0.03886 0.99185 0.12133 3.75685"></viewpoint>
             <Inline nameSpaceName="Deer" mapDEFToID="true"
-                    onclick='redNose();' onload='attachlistener(this);' url="Deer.x3d" />
+                    onclick='redNose();' onload='attachlistener;' url="Deer.x3d" />
     </scene>
 </x3d>
 </body>
