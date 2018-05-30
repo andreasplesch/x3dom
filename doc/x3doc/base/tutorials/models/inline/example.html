@@ -23,7 +23,7 @@
     {
         document.querySelectorAll('Inline').forEach(function(inline) {
             var ns=inline.nameSpaceName;
-            inline.querySelector("#"+ns+"__MA_Nose").parentNode.setAttribute('onclick','redNose(event.target)');
+            inline.querySelector("#"+ns+"__MA_Nose").parentNode.parentNode.setAttribute('onclick','redNose(event.target)');
         });
     }
     
