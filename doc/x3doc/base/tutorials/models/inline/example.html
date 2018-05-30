@@ -12,6 +12,7 @@
     {
         var ns2color = {'Deer1':'1 0 0','Deer2':'0 1 0'};
         var color = ns2color[ns];
+        var noseMA = '#'+ns+'__MA_Nose';
         if(target.querySelector(noseMA).getAttribute('diffuseColor') != color)
             target.querySelector(noseMA).setAttribute('diffuseColor', color);
         else
