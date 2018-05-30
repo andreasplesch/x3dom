@@ -8,22 +8,29 @@
 <body>
 <h1>Using the Inline Node</h1>
 <script>
-    function redNose(target)
+    function redNose(ns,target)
     {
-        if(target.querySelector('#Deer__MA_Nose').getAttribute('diffuseColor') != '1 0 0')
-            target.querySelector('#Deer__MA_Nose').setAttribute('diffuseColor', '1 0 0');
+        var noseMA = '#'+ns+'__MA_Nose';
+        var ns2color = {'Deer1':'1 0 0','Deer2':'0 1 0'};
+        var color = ns2color[ns];
+        if(target.querySelector(noseMA).getAttribute('diffuseColor') != color)
+            target.querySelector(noseMA).setAttribute('diffuseColor', color);
         else
-            target.querySelector('#Deer__MA_Nose').setAttribute('diffuseColor', '0 0 0');
+            target.querySelector(noseMA).setAttribute('diffuseColor', '0 0 0');
     }
-    function attachlistener()
+    function attachlistener1()
     {
-        console.log("inline loaded");
+        console.log("inline 1 loaded");
+    }
+    function attachlistener2()
+    {
+        console.log("inline 1 loaded");
     }
     function attachlisteners()
     {
         document.querySelectorAll('Inline').forEach(function(inline) {
             var ns=inline.nameSpaceName;
-            inline.querySelector("#"+ns+"__MA_Nose").parentNode.parentNode.setAttribute('onclick','redNose(event.target)');
+            inline.querySelector("#"+ns+"__MA_Nose").parentNode.parentNode.setAttribute('onclick','redNose(ns,event.target)');
         });
     }
     
@@ -34,8 +41,12 @@
 <x3d width='500px' height='400px' onDownloadsFinished='attachlisteners();'>
     <scene>
             <viewpoint position="-1.94639 1.79771 -2.89271" orientation="0.03886 0.99185 0.12133 3.75685"></viewpoint>
-            <Inline nameSpaceName="Deer" mapDEFToID="true"
-                    _onclick='redNose(event.target);' onload='attachlistener();' url="Deer.x3d" />
+            <Inline nameSpaceName="Deer1" mapDEFToID="true"
+                    _onclick='redNose(event.target);' onload='attachlistener1();' url="Deer.x3d" ></Inline>
+            <Transform translation='2 0 0 '>
+                <Inline nameSpaceName="Deer2" mapDEFToID="true"
+                    _onclick='redNose(event.target);' onload='attachlistener2();' url="Deer.x3d" ></Inline>
+            </Transform>
     </scene>
 </x3d>
 </body>
