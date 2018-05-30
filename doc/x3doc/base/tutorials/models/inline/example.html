@@ -8,10 +8,8 @@
 <body>
 <h1>Using the Inline Node</h1>
 <script>
-    function redNose(target)
+    function redNose(target, ns)
     {
-        var ns=target.id.replace(/__.*/,'');
-        var noseMA = '#'+ns+'__MA_Nose';
         var ns2color = {'Deer1':'1 0 0','Deer2':'0 1 0'};
         var color = ns2color[ns];
         if(target.querySelector(noseMA).getAttribute('diffuseColor') != color)
@@ -31,7 +29,7 @@
     {
         document.querySelectorAll('Inline').forEach(function(inline) {
             var ns=inline.nameSpaceName;
-            inline.querySelector("#"+ns+"__MA_Nose").parentNode.parentNode.setAttribute('onclick','redNose(event.target)');
+            inline.querySelector("#"+ns+"__MA_Nose").parentNode.parentNode.setAttribute('onclick','redNose(event.target, "'+ns+'")');
         });
     }
     
