@@ -1368,7 +1368,7 @@ x3dom.Runtime.prototype.toggleProjection = function( perspViewID, orthoViewID )
  *
  *   > var element, x3d, jsobject, optionalUrl;
  *   > element = document.getElementById('the_x3delement');
- *   > x3d = element.runtime.createX3dFromJS(jsobject, optionalUrl);
+ *   > x3d = element.runtime.createX3DFromJS(jsobject, optionalUrl);
  *   > element.runtime.replaceWorld(x3d);
  *
  * Parameters:
@@ -1412,7 +1412,7 @@ x3dom.Runtime.prototype.replaceWorld = function(x3d) {
 };
 
 /**
- * APIFunction: createX3dFromJS
+ * APIFunction: createX3DFromJS
  *
  * Creates a x3d element from a JSON JavaScript X3D object
  *
@@ -1420,7 +1420,7 @@ x3dom.Runtime.prototype.replaceWorld = function(x3d) {
  *
  *   > var element, x3d, jsobject, optionalUrl;
  *   > element = document.getElementById('the_x3delement');
- *   > x3d = element.runtime.createX3dFromJS(jsobject, optionalUrl);
+ *   > x3d = element.runtime.createX3DFromJS(jsobject, optionalUrl);
  *   > element.runtime.replaceWorld(x3d);
  *
  * Parameters:
@@ -1441,19 +1441,19 @@ x3dom.Runtime.prototype.createX3DFromJS = function(jsobject, optionalURL) {
 };
 
 /**
- * APIFunction: createX3dFromString
+ * APIFunction: createX3DFromString
  *
  * Creates a x3d element from a JSON or XML String
  *
  * For example:
  *
- *   > var element, x3d, json, optionalUrl;
+ *   > var element, x3d, jsonOrXML, optionalUrl;
  *   > element = document.getElementById('the_x3delement');
- *   > x3d = element.runtime.createX3dFromJS(jsobject, optionalUrl);
+ *   > x3d = element.runtime.createX3DFromString(jsonOrXML, optionalUrl);
  *   > element.runtime.replaceWorld(x3d);
  *
  * Parameters:
- * 		json -- JSON of X3D object
+ * 		jsonOrXML -- JSON or XML of X3D object
  * 		optionalURL -- if specified, does a PROTO expansion on json.
  * 			JSON ExternProtoDeclare's are loaded relative to this
  * 			URL.
@@ -1477,7 +1477,7 @@ x3dom.Runtime.prototype.createX3DFromString = function(jsonOrXML, optionalURL) {
     }
 };
 /**
- * APIFunction: createX3dFromURLPromise
+ * APIFunction: createX3DFromURLPromise
  *
  * Creates a Promise resolved to the x3d element from a Url
  *
