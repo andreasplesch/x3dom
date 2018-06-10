@@ -4051,9 +4051,65 @@ x3dom.gfx_webgl = (function () {
             default:
                 break;
         }
-
+        
         var scene = viewarea._scene;
         var bgnd = null;
+
+        //===========================================================================
+        // Render Shadow Pass
+        //===========================================================================
+        var slights = viewarea.getLights();
+        var numLights = slights.length;
+        var mat_light;
+        var WCToLCMatrices = [];
+        var lMatrices = [];
+        var shadowCount = 0;
+
+        x3dom.Utils.startMeasure('shadow');
+
+        for (var p = 0; p < numLights; p++) {
+            if (slights[p]._vf.shadowIntensity > 0.0) {
+
+                var lightMatrix = viewarea.getLightMatrix()[p];
+                var shadowMaps = scene._webgl.fboShadow[shadowCount];
+                var offset = Math.max(0.0, Math.min(1.0, slights[p]._vf.shadowOffset));
+
+                if (!x3dom.isa(slights[p], x3dom.nodeTypes.PointLight)) {
+                    //get cascade count
+                    var numCascades = Math.max(1, Math.min(slights[p]._vf.shadowCascades, 6));
+
+                    //calculate transformation matrices
+                    mat_light = viewarea.getWCtoLCMatricesCascaded(lightMatrix, slights[p], mat_proj);
+
+                    //render shadow pass
+                    for (i = 0; i < numCascades; i++) {
+                        this.renderShadowPass(gl, viewarea, mat_light[i], mat_view, shadowMaps[i], offset, false);
+                    }
+                }
+                else {
+                    //for point lights 6 render passes
+                    mat_light = viewarea.getWCtoLCMatricesPointLight(lightMatrix, slights[p], mat_proj);
+                    for (i = 0; i < 6; i++) {
+                        this.renderShadowPass(gl, viewarea, mat_light[i], mat_view, shadowMaps[i], offset, false);
+                    }
+                }
+                shadowCount++;
+
+                //save transformations for shadow rendering
+                WCToLCMatrices[WCToLCMatrices.length] = mat_light;
+                lMatrices[lMatrices.length] = lightMatrix;
+            }
+        }
+
+        //One pass for depth of scene from camera view (to enable post-processing shading)
+        if (shadowCount > 0 || x3dom.SSAO.isEnabled(scene)) {
+            this.renderShadowPass(gl, viewarea, mat_scene, mat_view, scene._webgl.fboScene, 0.0, true);
+            var shadowTime = x3dom.Utils.stopMeasure('shadow');
+            this.x3dElem.runtime.addMeasurement('SHADOW', shadowTime);
+        }
+        else {
+            this.x3dElem.runtime.removeMeasurement('SHADOW');
+        }
 
         var mat_view = rt.getViewMatrix();
         var mat_proj = rt.getProjectionMatrix();
