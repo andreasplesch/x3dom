@@ -4054,6 +4054,11 @@ x3dom.gfx_webgl = (function () {
         
         var scene = viewarea._scene;
         var bgnd = null;
+        var mat_view = rt.getViewMatrix();
+        var mat_proj = rt.getProjectionMatrix();
+        var mat_scene = mat_proj.mult(mat_view);
+
+
 
         //===========================================================================
         // Render Shadow Pass
@@ -4110,10 +4115,6 @@ x3dom.gfx_webgl = (function () {
         else {
             this.x3dElem.runtime.removeMeasurement('SHADOW');
         }
-
-        var mat_view = rt.getViewMatrix();
-        var mat_proj = rt.getProjectionMatrix();
-        var mat_scene = mat_proj.mult(mat_view);
 
         var lightMatrix = viewarea.getLightMatrix()[0];
         var mat_light = viewarea.getWCtoLCMatrix(lightMatrix);
