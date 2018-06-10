@@ -58,8 +58,8 @@
                       <DirectionalLight shadowintensity="0.7" shadowcascades="2" shadowfiltersize="3" shadowmapsize="1024" shadowsplitfactor="1" shadowsplitoffset="0.1" direction=' 0.7  0.2 -0.5' intensity='0.85' color='1 1 1'></DirectionalLight>
                 <DirectionalLight shadowintensity="0.7" shadowcascades="2" shadowfiltersize="3" shadowmapsize="1024" shadowsplitfactor="1" shadowsplitoffset="0.1" direction='-0.7 -0.2  0.5' intensity='0.6'  color='1 1 0.8'></DirectionalLight>
           
-                  <Shape USE='aNode' containerField='excludeNodes' ></Shape>
-                  <Background USE='back' containerField='background' ></Background>
+                  <Shape USE='aNode' containerField='_excludeNodes' ></Shape>
+                  <Background USE='back' containerField='_background' ></Background>
                   <Viewpoint DEF='view3' containerField='viewpoint' zNear="1" zFar="1000" ></Viewpoint>
                   <Group>
                      <Shape DEF="sphereShape">
@@ -71,6 +71,12 @@
                      <Transform DEF='transRT' translation='4 0 0'>
                         <Shape USE='GEO'></Shape>
                      </Transform>
+                     <Shape DEF="floor">
+						<Appearance>
+							<Material diffuseColor="0.1 0 0" specularColor=".5 .5 .5" ></Material>
+						</Appearance>
+                         <Box size='10 0. 10'></Box>
+				     </Shape>
                   </Group>
                   <textureProperties boundaryModeS='CLAMP_TO_EDGE' boundaryModeT='CLAMP_TO_EDGE'
                                    magnificationFilter='LINEAR' minificationFilter='LINEAR_MIPMAP_LINEAR'
