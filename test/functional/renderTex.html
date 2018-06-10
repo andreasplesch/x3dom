@@ -14,7 +14,7 @@
       <Scene DEF='scene'>
         <NavigationInfo headLight="false" ></NavigationInfo>
          <DirectionalLight direction='-0.7 -0.2  0.5' intensity='0.6'  color='1 1 0.8'></DirectionalLight>
-         <DirectionalLight shadowintensity="0.7" shadowcascades="2" shadowfiltersize="3" shadowmapsize="1024" shadowsplitfactor="1" shadowsplitoffset="0.1" direction=' 0.7  0.2 -0.5' intensity='0.85' color='1 1 1'></DirectionalLight>
+         <DirectionalLight shadowintensity="0.7" shadowcascades="2" shadowfiltersize="3" shadowmapsize="512" shadowsplitfactor="1" shadowsplitoffset="0.1" direction=' 0.7  0.2 -0.5' intensity='0.85' color='1 1 1'></DirectionalLight>
          <!--DirectionalLight shadowintensity="0.7" shadowcascades="2" shadowfiltersize="3" shadowmapsize="1024" shadowsplitfactor="1" shadowsplitoffset="0.1" direction='-0.7 -0.2  0.5' intensity='0.6'  color='1 1 0.8'></DirectionalLight-->
 
         <Viewpoint id='view1' position='0 0 12'></Viewpoint>
@@ -47,12 +47,12 @@
         <Transform DEF='trans4' translation='2 -2 0'>
           <Shape USE='GEO'></Shape>
         </Transform>
-        <Transform DEF='trans5' translation='0 -4 0'>
+        <Transform DEF='trans5' translation='0 -3 0'>
         <Shape DEF="floor">
             <Appearance>
                 <Material diffuseColor="0.5 0.5 0.5" specularColor=".5 .5 .5" ></Material>
             </Appearance>
-            <Box size='10 0. 10'></Box>
+            <Box size='10 0.2 10'></Box>
         </Shape>
         </Transform>
                   
@@ -83,7 +83,7 @@
                         <Appearance>
                             <Material diffuseColor="0.5 0.5 0.5" specularColor=".5 .5 .5" ></Material>
                         </Appearance>
-                        <Box size='10 0. 10'></Box>
+                        <Box size='10 0.2 10'></Box>
                     </Shape>
                   </Group>
                   <textureProperties boundaryModeS='CLAMP_TO_EDGE' boundaryModeT='CLAMP_TO_EDGE'
