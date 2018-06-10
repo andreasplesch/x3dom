@@ -4060,13 +4060,12 @@ x3dom.gfx_webgl = (function () {
         var mat_proj = rt.getProjectionMatrix();
         var mat_scene = mat_proj.mult(mat_view);
 
-
-
         //===========================================================================
         // Render Shadow Pass
         //===========================================================================
         var slights = viewarea.getLights();
         var numLights = slights.length;
+        var shadowedLights = viewarea.getShadowedLights();
         var mat_light;
         var WCToLCMatrices = [];
         var lMatrices = [];
@@ -4186,6 +4185,9 @@ x3dom.gfx_webgl = (function () {
                     this.renderShape(drawable, viewarea, slights, numLights,
                                      mat_view, mat_scene, mat_light, mat_proj, gl);
                 }
+                if (shadowCount > 0)
+                    this.renderShadows(gl, viewarea, shadowedLights, WCToLCMatrices, lMatrices, mat_view, mat_proj, mat_scene);
+
             }
         }
         else {
@@ -4229,6 +4231,9 @@ x3dom.gfx_webgl = (function () {
                     this.renderShape(drawable, viewarea, slights, numLights,
                                      mat_view, mat_scene, mat_light, mat_proj, gl);
                 }
+                if (shadowCount > 0)
+                this.renderShadows(gl, viewarea, shadowedLights, WCToLCMatrices, lMatrices, mat_view, mat_proj, mat_scene);
+
             }
         }
 
