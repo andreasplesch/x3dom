@@ -3724,6 +3724,12 @@ x3dom.gfx_webgl = (function () {
 
         var sortTime = x3dom.Utils.stopMeasure('sorting');
         this.x3dElem.runtime.addMeasurement('SORT', sortTime);
+        
+        // RT Pass first
+        for (rtl_i = 0; rtl_i < rtl_n; rtl_i++) {
+            this.renderRTPass(gl, viewarea, rentex[rtl_i]);
+        }
+
 
         //===========================================================================
         // Render Shadow Pass
@@ -3782,10 +3788,6 @@ x3dom.gfx_webgl = (function () {
         }
 
         mat_light = viewarea.getWCtoLCMatrix(viewarea.getLightMatrix()[0]);
-
-        for (rtl_i = 0; rtl_i < rtl_n; rtl_i++) {
-            this.renderRTPass(gl, viewarea, rentex[rtl_i]);
-        }
 
         // rendering
         x3dom.Utils.startMeasure('render');
