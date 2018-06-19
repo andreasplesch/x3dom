@@ -102,6 +102,55 @@ x3dom.registerNodeType(
              */
             this.addField_MFFloat(ctx, 'skinCoordWeight', []);
         
+            /**
+             *
+             * @var {x3dom.fields.MFFloat} stiffness
+             * @memberof x3dom.nodeTypes.HAnimJoint
+             * @initvalue 0 0 0
+             * @field x3dom
+             * @instance
+             */
+            this.addField_SFFloat(ctx, 'stiffness', '0 0 0');
+        
         }
     )
 );
+/*
+<ProtoDeclare name='Joint' appinfo='The Joint node is used as a building block to describe the articulations of the humanoid figure. Each articulation of the humanoid figure is represented by a Joint node each of which is organized into a hierarchy that describes the overall skeleton of the humanoid.' documentation=' http://H-Anim.org/Specifications/H-Anim2001/part1/Joint.html '>
+<ProtoInterface>
+<field name='name' type='SFString' accessType='inputOutput'/> 
+<field name='ulimit' type='MFFloat' accessType='inputOutput'/> 
+<field name='llimit' type='MFFloat' accessType='inputOutput'/> 
+<field name='limitOrientation' type='SFRotation' value='0 0 1 0' accessType='inputOutput'/> 
+<field name='skinCoordIndex' type='MFInt32' accessType='inputOutput'/> 
+<field name='skinCoordWeight' type='MFFloat' accessType='inputOutput'/> 
+<field name='stiffness' type='MFFloat' value='0 0 0' accessType='inputOutput'/> 
+<field name='translation' type='SFVec3f' value='0 0 0' accessType='inputOutput'/> 
+<field name='rotation' type='SFRotation' value='0 0 1 0' accessType='inputOutput'/> 
+<field name='scale' type='SFVec3f' value='1 1 1' accessType='inputOutput'/> 
+<field name='scaleOrientation' type='SFRotation' value='0 0 1 0' accessType='inputOutput'/> 
+<field name='center' type='SFVec3f' value='0 0 0' accessType='inputOutput'/> 
+<field name='bboxCenter' type='SFVec3f' value='0 0 0' accessType='initializeOnly'/> 
+<field name='bboxSize' type='SFVec3f' value='-1 -1 -1' accessType='initializeOnly'/> 
+<field name='children' type='MFNode' accessType='inputOutput'/> 
+<field name='addChildren' type='MFNode' accessType='inputOnly'/> 
+<field name='removeChildren' type='MFNode' accessType='inputOnly'/>
+</ProtoInterface> 
+<ProtoBody>
+<Transform DEF='JointTransform'>
+<IS>
+<connect nodeField='translation' protoField='translation'/> 
+<connect nodeField='rotation' protoField='rotation'/> 
+<connect nodeField='scale' protoField='scale'/> 
+<connect nodeField='scaleOrientation' protoField='scaleOrientation'/> 
+<connect nodeField='center' protoField='center'/> 
+<connect nodeField='bboxCenter' protoField='bboxCenter'/> 
+<connect nodeField='bboxSize' protoField='bboxSize'/> 
+<connect nodeField='children' protoField='children'/> 
+<connect nodeField='addChildren' protoField='addChildren'/> 
+<connect nodeField='removeChildren' protoField='removeChildren'/>
+</IS>
+</Transform>
+</ProtoBody>
+</ProtoDeclare> 
+*/
