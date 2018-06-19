@@ -366,6 +366,7 @@
                     {"file": "Extrusion.js"}
                 ]},
                 {"name": "H-Anim", "filePrefix": "nodes/H-Anim/", "files":[
+                    {"file": "X3DHAnimTransformNode.js"},
                     {"file": "HAnimDisplacer.js"},
                     {"file": "HAnimJoint.js"},
                     {"file": "HAnimSegment.js"},
