@@ -11,7 +11,7 @@
 x3dom.registerNodeType(
     "HAnimJoint",
     "H-Anim",
-    defineClass(x3dom.nodeTypes.Transform,
+    defineClass(x3dom.nodeTypes.X3DHAnimTransformNode,
         
         /**
          * Constructor for HAnimJoint
