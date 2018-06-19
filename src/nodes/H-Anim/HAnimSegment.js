@@ -96,3 +96,33 @@ x3dom.registerNodeType(
         }
     )
 );
+/*
+<ProtoDeclare name='Segment' appinfo='The Segment node is used describe the attributes of the physical links between the joints of the humanoid figure. Each body part (pelvis thigh calf etc.) of the humanoid figure is represented by a Segment node.' documentation=' http://H-Anim.org/Specifications/H-Anim2001/part1/Segment.html '>
+<ProtoInterface>
+<field name='name' type='SFString' accessType='inputOutput'/> 
+<field name='mass' type='SFFloat' value='0' accessType='inputOutput'/> 
+<field name='centerOfMass' type='SFVec3f' value='0 0 0' accessType='inputOutput'/> 
+<field name='momentsOfInertia' type='MFFloat' value='0 0 0 0 0 0 0 0 0' accessType='inputOutput'/> 
+<field name='bboxCenter' type='SFVec3f' value='0 0 0' accessType='initializeOnly'/> 
+<field name='bboxSize' type='SFVec3f' value='-1 -1 -1' accessType='initializeOnly'/> 
+<field name='children' type='MFNode' accessType='inputOutput'/> 
+<field name='addChildren' type='MFNode' accessType='inputOnly'/> 
+<field name='removeChildren' type='MFNode' accessType='inputOnly'/> 
+<field name='coord' type='SFNode' value='NULL' accessType='inputOutput' 
+ appinfo='contains Coordinate nodes'/> 
+<field name='displacers' type='MFNode' accessType='inputOutput' 
+ appinfo='contains Displacer nodes'/>
+</ProtoInterface> 
+<ProtoBody>
+<Group DEF='SegmentGroup'>
+<IS>
+<connect nodeField='bboxCenter' protoField='bboxCenter'/> 
+<connect nodeField='bboxSize' protoField='bboxSize'/> 
+<connect nodeField='children' protoField='children'/> 
+<connect nodeField='addChildren' protoField='addChildren'/> 
+<connect nodeField='removeChildren' protoField='removeChildren'/>
+</IS>
+</Group>
+</ProtoBody>
+</ProtoDeclare> 
+*/
