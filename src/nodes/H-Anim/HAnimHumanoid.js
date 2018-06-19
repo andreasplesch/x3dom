@@ -33,7 +33,7 @@ x3dom.registerNodeType(
              * @var {x3dom.fields.SFString} name
              * @memberof x3dom.nodeTypes.HAnimHumanoid
              * @initvalue ""
-             * @field x3dom
+             * @field x3d
              * @instance
              */
             this.addField_SFString(ctx, 'name', "");
@@ -43,7 +43,7 @@ x3dom.registerNodeType(
              * @var {x3dom.fields.SFString} version
              * @memberof x3dom.nodeTypes.HAnimHumanoid
              * @initvalue ""
-             * @field x3dom
+             * @field x3d
              * @instance
              */
             this.addField_SFString(ctx, 'version', "");
@@ -53,7 +53,7 @@ x3dom.registerNodeType(
              * @var {x3dom.fields.MFString} info
              * @memberof x3dom.nodeTypes.HAnimHumanoid
              * @initvalue []
-             * @field x3dom
+             * @field x3d
              * @instance
              */
             this.addField_MFString(ctx, 'info', []);
@@ -64,7 +64,7 @@ x3dom.registerNodeType(
              * @var {x3dom.fields.MFNode} joints
              * @memberof x3dom.nodeTypes.HAnimHumanoid
              * @initvalue x3dom.nodeTypes.HAnimJoint
-             * @field x3dom
+             * @field x3d
              * @instance
              */
             this.addField_MFNode('joints', x3dom.nodeTypes.HAnimJoint);
@@ -74,7 +74,7 @@ x3dom.registerNodeType(
              * @var {x3dom.fields.MFNode} segments
              * @memberof x3dom.nodeTypes.HAnimHumanoid
              * @initvalue x3dom.nodeTypes.HAnimSegment
-             * @field x3dom
+             * @field x3d
              * @instance
              */
             this.addField_MFNode('segments', x3dom.nodeTypes.HAnimSegment);
@@ -84,7 +84,7 @@ x3dom.registerNodeType(
              * @var {x3dom.fields.MFNode} sites
              * @memberof x3dom.nodeTypes.HAnimHumanoid
              * @initvalue x3dom.nodeTypes.HAnimSite
-             * @field x3dom
+             * @field x3d
              * @instance
              */
             this.addField_MFNode('sites', x3dom.nodeTypes.HAnimSite);
@@ -94,7 +94,7 @@ x3dom.registerNodeType(
              * @var {x3dom.fields.MFNode} skeleton
              * @memberof x3dom.nodeTypes.HAnimHumanoid
              * @initvalue x3dom.nodeTypes.HAnimJoint
-             * @field x3dom
+             * @field x3d
              * @instance
              */
             this.addField_MFNode('skeleton', x3dom.nodeTypes.HAnimJoint);
@@ -104,7 +104,7 @@ x3dom.registerNodeType(
              * @var {x3dom.fields.MFNode} skin
              * @memberof x3dom.nodeTypes.HAnimHumanoid
              * @initvalue x3dom.nodeTypes.X3DChildNode
-             * @field x3dom
+             * @field x3d
              * @instance
              */
             this.addField_MFNode('skin', x3dom.nodeTypes.X3DChildNode);
@@ -114,7 +114,7 @@ x3dom.registerNodeType(
              * @var {x3dom.fields.MFNode} skinCoord
              * @memberof x3dom.nodeTypes.HAnimHumanoid
              * @initvalue x3dom.nodeTypes.X3DCoordinateNode
-             * @field x3dom
+             * @field x3d
              * @instance
              */
             this.addField_MFNode('skinCoord', x3dom.nodeTypes.X3DCoordinateNode);
@@ -124,7 +124,7 @@ x3dom.registerNodeType(
              * @var {x3dom.fields.MFNode} skinNormal
              * @memberof x3dom.nodeTypes.HAnimHumanoid
              * @initvalue x3dom.nodeTypes.X3DNormalNode
-             * @field x3dom
+             * @field x3d
              * @instance
              */
             this.addField_MFNode('skinNormal', x3dom.nodeTypes.X3DNormalNode);
@@ -134,11 +134,71 @@ x3dom.registerNodeType(
              * @var {x3dom.fields.MFNode} viewpoints
              * @memberof x3dom.nodeTypes.HAnimHumanoid
              * @initvalue x3dom.nodeTypes.HAnimSite
-             * @field x3dom
+             * @field x3d
              * @instance
              */
             this.addField_MFNode('viewpoints', x3dom.nodeTypes.HAnimSite);
         
+            /**
+             *
+             * @var {x3dom.fields.MFVec3f} jointBindingPositions
+             * @memberof x3dom.nodeTypes.HAnimHumanoid
+             * @initvalue [0 0 0]
+             * @field x3d
+             * @instance
+             */
+            this.addField_MFVec3f('jointBindingPositions', '0 0 0');
+        
+            /**
+             *
+             * @var {x3dom.fields.MFVec3f} jointBindingRotations
+             * @memberof x3dom.nodeTypes.HAnimHumanoid
+             * @initvalue  [0 0 1 0]
+             * @field x3d
+             * @instance
+             */
+            this.addField_MFRotation('jointBindingRotations', '0 0 1 0');
+        
+            /**
+             *
+             * @var {x3dom.fields.MFVec3f} jointBindingScales
+             * @memberof x3dom.nodeTypes.HAnimHumanoid
+             * @initvalue [1 1 1]
+             * @field x3d
+             * @instance
+             */
+            this.addField_MFVec3f('jointBindingScales', '1 1 1');
+        
+            /**
+             *
+             * @var {x3dom.fields.MFVec3f} skeletalConfiguration
+             * @memberof x3dom.nodeTypes.HAnimHumanoid
+             * @initvalue 'BASIC'
+             * @field x3d
+             * @instance
+             */
+            this.addField_SFString('skeletalConfiguration', 'BASIC');
+        
+            /**
+             *
+             * @var {x3dom.fields.MFVec3f} skinBindingCoords
+             * @memberof x3dom.nodeTypes.HAnimHumanoid
+             * @initvalue []
+             * @field x3d
+             * @instance
+             */
+            this.addField_MFVec3f('skinBindingCoords', '');
+ 
+            /**
+             *
+             * @var {x3dom.fields.MFVec3f} skinBindingNormals
+             * @memberof x3dom.nodeTypes.HAnimHumanoid
+             * @initvalue []
+             * @field x3d
+             * @instance
+             */
+            this.addField_MFVec3f('skinBindingNormals', '');
+           
         },
         {
             // TODO skeleton   contains the HumanoidRoot Joint object functionality: map similar to children of Group
@@ -151,3 +211,69 @@ x3dom.registerNodeType(
         }
     )
 );
+/*
+<ProtoDeclare name='Humanoid' appinfo='The Humanoid node serves as overall container for the Joint Segment Site and Viewpoint nodes which define the skeleton geometry and landmarks of the humanoid figure. Additionally the node provides a means for defining information about the author copyright and usage restrictions of the model.' documentation=' http://H-Anim.org/Specifications/H-Anim2001/part1/Humanoid.html '>
+<ProtoInterface>
+<!-- H-Anim v1.1 field definitions --> 
+<field name='name' type='SFString' accessType='inputOutput'/> 
+<field name='version' type='SFString' value='1.1' accessType='inputOutput' 
+ appinfo='legal values: 1.1 or 2.0'/> 
+<field name='humanoidVersion' type='SFString' accessType='inputOutput' 
+ appinfo='Version of the humanoid being modeled. Hint: H-anim version 2.0'/> 
+<field name='info' type='MFString' accessType='inputOutput'/> 
+<field name='translation' type='SFVec3f' value='0 0 0' accessType='inputOutput'/> 
+<field name='rotation' type='SFRotation' value='0 0 1 0' accessType='inputOutput'/> 
+<field name='center' type='SFVec3f' value='0 0 0' accessType='inputOutput'/> 
+<field name='scale' type='SFVec3f' value='1 1 1' accessType='inputOutput'/> 
+<field name='scaleOrientation' type='SFRotation' value='0 0 1 0' accessType='inputOutput'/> 
+<field name='bboxCenter' type='SFVec3f' value='0 0 0' accessType='initializeOnly'/> 
+<field name='bboxSize' type='SFVec3f' value='-1 -1 -1' accessType='initializeOnly'/> 
+<field name='humanoidBody' type='MFNode' accessType='inputOutput' 
+ appinfo='H-Anim 1.1 field container for body geometry Hint: replaced by 2.0 skeleton' 
+ documentation=' http://H-Anim.org/Specifications/H-Anim1.1/#humanoid '/> 
+<field name='skeleton' type='MFNode' accessType='inputOutput' 
+ appinfo='H-Anim 2.0 field container for body geometry Hint: replaces 1.1 humanoidBody' 
+ documentation=' http://H-Anim.org/Specifications/H-Anim2001/part1/Humanoid.html '/> 
+<field name='joints' type='MFNode' accessType='inputOutput' 
+ appinfo='Container field for Joint nodes'/> 
+<field name='segments' type='MFNode' accessType='inputOutput' 
+ appinfo='Container field for Segment nodes'/> 
+<field name='sites' type='MFNode' accessType='inputOutput' 
+ appinfo='Container field for Site nodes'/> 
+<field name='viewpoints' type='MFNode' accessType='inputOutput' 
+ appinfo='Container field for Viewpoint nodes'/> 
+<field name='skinCoord' type='SFNode' value='NULL' accessType='inputOutput' 
+ appinfo='Hint: H-anim version 2.0'/> 
+<field name='skinNormal' type='SFNode' value='NULL' accessType='inputOutput' 
+ appinfo='Hint: H-anim version 2.0'/>
+</ProtoInterface> 
+<ProtoBody>
+<Transform DEF='HumanoidTransform'>
+<IS>
+<connect nodeField='translation' protoField='translation'/> 
+<connect nodeField='rotation' protoField='rotation'/> 
+<connect nodeField='scale' protoField='scale'/> 
+<connect nodeField='scaleOrientation' protoField='scaleOrientation'/> 
+<connect nodeField='center' protoField='center'/> 
+<connect nodeField='bboxCenter' protoField='bboxCenter'/> 
+<connect nodeField='bboxSize' protoField='bboxSize'/>
+</IS> 
+<Group DEF='HumanoidGroup1'>
+<IS>
+<connect nodeField='children' protoField='humanoidBody'/>
+</IS>
+</Group> 
+<Group DEF='HumanoidGroup2'>
+<IS>
+<connect nodeField='children' protoField='skeleton'/>
+</IS>
+</Group> 
+<Group DEF='HumanoidGroup3'>
+<IS>
+<connect nodeField='children' protoField='viewpoints'/>
+</IS>
+</Group>
+</Transform>
+</ProtoBody>
+</ProtoDeclare> 
+*/
