@@ -6,55 +6,7 @@
  * (C)2009 Fraunhofer IGD, Darmstadt, Germany
  * Dual licensed under the MIT and GPL
  */
-x3dom.registerNodeType(
-    "Transform",
-    "Grouping",
-    defineClass(x3dom.nodeTypes.X3DTransformNode,
-        
-        /**
-         * Constructor for Transform
-         * @constructs x3dom.nodeTypes.Transform
-         * @x3d 3.3
-         * @component Grouping
-         * @status experimental
-         * @extends x3dom.nodeTypes.X3DTransformNode
-         * @param {Object} [ctx=null] - context object, containing initial settings like namespace
-         * @classdesc The Transform node is a grouping node that defines a coordinate system for its children that is relative to the coordinate systems of its ancestors.
-         * The translation, rotation, scale, scaleOrientation and center fields define a geometric 3D transformation.
-         */
-        function (ctx) {
-            x3dom.nodeTypes.Transform.superClass.call(this, ctx);
 
-
-            
-        },
-        {
-            fieldChanged: function (fieldName)
-            {
-                if (fieldName == "center" || fieldName == "translation" ||
-                    fieldName == "rotation" || fieldName == "scale" ||
-                    fieldName == "scaleOrientation")
-                {
-                    // P' = T * C * R * SR * S * -SR * -C * P
-                    this._trafo = x3dom.fields.SFMatrix4f.translation(
-                        this._vf.translation.add(this._vf.center)).
-                        mult(this._vf.rotation.toMatrix()).
-                        mult(this._vf.scaleOrientation.toMatrix()).
-                        mult(x3dom.fields.SFMatrix4f.scale(this._vf.scale)).
-                        mult(this._vf.scaleOrientation.toMatrix().inverse()).
-                        mult(x3dom.fields.SFMatrix4f.translation(this._vf.center.negate()));
-
-                    this.invalidateVolume();
-                    //this.invalidateCache();
-                }
-                else if (fieldName == "render") {
-                    this.invalidateVolume();
-                    //this.invalidateCache();
-                }
-            }
-        }
-    )
-);
 // ### HAnimHumanoid ###
 x3dom.registerNodeType(
     "HAnimHumanoid",
