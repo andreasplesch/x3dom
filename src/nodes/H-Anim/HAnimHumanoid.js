@@ -147,7 +147,7 @@ x3dom.registerNodeType(
              * @field x3d
              * @instance
              */
-            this.addField_MFVec3f(ctx, 'jointBindingPositions', '0 0 0');
+            this.addField_MFVec3f(ctx, 'jointBindingPositions', [0, 0, 0]);
         
             /**
              *
@@ -157,7 +157,7 @@ x3dom.registerNodeType(
              * @field x3d
              * @instance
              */
-            this.addField_MFRotation(ctx, 'jointBindingRotations', '0 0 1 0');
+            this.addField_MFRotation(ctx, 'jointBindingRotations', [0, 0, 1, 0]);
         
             /**
              *
@@ -167,7 +167,7 @@ x3dom.registerNodeType(
              * @field x3d
              * @instance
              */
-            this.addField_MFVec3f(ctx, 'jointBindingScales', '1 1 1');
+            this.addField_MFVec3f(ctx, 'jointBindingScales', [1, 1, 1]);
         
             /**
              *
@@ -187,7 +187,7 @@ x3dom.registerNodeType(
              * @field x3d
              * @instance
              */
-            this.addField_MFVec3f(ctx, 'skinBindingCoords', '');
+            this.addField_MFVec3f(ctx, 'skinBindingCoords', []);
  
             /**
              *
@@ -197,7 +197,7 @@ x3dom.registerNodeType(
              * @field x3d
              * @instance
              */
-            this.addField_MFVec3f(ctx, 'skinBindingNormals', '');
+            this.addField_MFVec3f(ctx, 'skinBindingNormals', []);
            
         },
         {
