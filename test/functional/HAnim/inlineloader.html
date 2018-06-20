@@ -13,15 +13,20 @@
 		<Viewpoint position='0 0 10'></Viewpoint>
 		<Background skyColor='0 0 0'></Background>
 	    <Transform>
-			<Inline id="deleteTest" nameSpaceName="test1" mapDEFToID="true" url="JoeHAnimKick1a.x3d" ></Inline>
+			<Inline id="inline" nameSpaceName="test1" mapDEFToID="true" url="JoeHAnimKick1a.x3d" ></Inline>
 		</Transform>
 	  </Scene>
     </X3D>
     <label for="x3d-select">Choose an example:</label>
-    <select id="x3d-select">
+    <select id="x3d-select" onchange='handleChange'>
+        <option>HAnimSpecificationLOA3Illustrated.x3d</option>
         <option>JoeHAnimKick1a.x3d</option>
         <option value="none" selected>--Please choose an option--</option>
     </select>
 </body>
-    
+<script>
+    const inline - document.querySelector('#inline');
+    function handleChange(event) {
+        inline.url = event.value;
+    }
 </html>
