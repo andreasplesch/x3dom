@@ -14,7 +14,7 @@
         <HAnimJoint DEF='Joe_HumanoidRoot' containerField='skeleton' center='0 0.875 0' name='HumanoidRoot'>
           <HAnimSite DEF='Joe_RootView1' name='RootFront'>
             <Transform DEF='hanimcordsys' scale='0.175 0.175 0.175'>
-              <Inline url='"JointCoordinateAxes.x3dv"'/>
+              <Inline url='"JointCoordinateAxes.x3d"'/>
               <Viewpoint description='hanimcoord View'/>
             </Transform>
           </HAnimSite>
@@ -227,7 +227,7 @@
     <PositionInterpolator DEF='ballTransInterp' key='0 0.4 0.409 1' keyValue='-1 0.4 -1 0 0.07 0 0.05 0.06 0.05 2 4 10'/>
     <OrientationInterpolator DEF='ballRotInterp' key='0 0.4 0.41 0.71 1' keyValue='1 0 1 0.25 -1 0 -1 1.35 -1 1 -1 3.35 -1 0.2 -1 3 -1 0.2 -1 3'/>
     <Transform DEF='scenecordsys' scale='0.275 0.275 0.275'>
-      <Inline url='"JointCoordinateAxes.x3dv"'/>
+      <Inline url='"JointCoordinateAxes.x3d"'/>
     </Transform>
     <Transform DEF='Circle0' scale='1.175 1 1.175'>
       <Shape>
