@@ -11,7 +11,7 @@
 x3dom.registerNodeType(
     "HAnimHumanoid",
     "H-Anim",
-    defineClass(x3dom.nodeTypes.X3DHAnimTransformNode,
+    defineClass(x3dom.nodeTypes.Transform,//X3DHAnimTransformNode,
         
         /**
          * Constructor for HAnimHumanoid
@@ -203,6 +203,18 @@ x3dom.registerNodeType(
             // TODO skeleton   contains the HumanoidRoot Joint object functionality: map similar to children of Group
             // TODO skeleton   add functionality for HAnimSite also (unaffected by internal transformations)
             // TODO joints     add functionality
+            fieldChanged: function(fieldName)
+            {
+                switch(fieldName)
+                {
+                    case "joints":
+                        //find drawable and remove
+                        break;
+                    default:
+                        // nothing
+                        break;
+                }
+            }
             // TODO segments   add functionality
             // TODO sites      add functionality
             // TODO skin...    add functionality
