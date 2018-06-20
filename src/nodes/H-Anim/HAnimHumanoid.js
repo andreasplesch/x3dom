@@ -200,9 +200,13 @@ x3dom.registerNodeType(
            
         },
         {
+            nodeChanged: function()
+            {
+                //check for joints MFNodes
+            },
             // TODO skeleton   contains the HumanoidRoot Joint object functionality: map similar to children of Group
             // TODO skeleton   add functionality for HAnimSite also (unaffected by internal transformations)
-            // TODO joints     add functionality
+            // TODO joints     add functionality=ignore USE nodes of field
             fieldChanged: function(fieldName)
             {
                 switch(fieldName)
