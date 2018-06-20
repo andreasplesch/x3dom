@@ -266,7 +266,7 @@ x3dom.registerNodeType(
                 switch(fieldName)
                 {
                     case "joints":
-                        //find drawable and remove
+                        // nothing
                         break;
                     default:
                         // nothing
