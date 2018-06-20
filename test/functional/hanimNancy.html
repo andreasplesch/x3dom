@@ -240,10 +240,10 @@
         </HAnimJoint>
     </HAnimJoint>
 </HAnimJoint>
-<!--HAnimJoint USE='hanim_HumanoidRoot'></HAnimJoint>
+<!--HAnimJoint USE='hanim_HumanoidRoot'></HAnimJoint-->
 <HAnimJoint USE='hanim_sacroiliac'></HAnimJoint>
 <HAnimJoint USE='hanim_l_hip'></HAnimJoint>
-<HAnimJoint USE='hanim_l_knee'></HAnimJoint>
+<!--HAnimJoint USE='hanim_l_knee'></HAnimJoint>
 <HAnimJoint USE='hanim_l_ankle'></HAnimJoint>
 <HAnimJoint USE='hanim_r_hip'></HAnimJoint>
 <HAnimJoint USE='hanim_r_knee'></HAnimJoint>
@@ -274,9 +274,9 @@
 <HAnimSegment USE='hanim_c4'></HAnimSegment>
 <HAnimSegment USE='hanim_skull'></HAnimSegment-->
 <Viewpoint DEF='InclinedView' containerField='viewpoints' description='Inclined View' orientation='-0.113 0.993 0.0347 0.671' position='1.62 1.05 2.06'></Viewpoint>
-<!--Viewpoint DEF='FrontView' containerField='viewpoints' description='Front View' position='0 0.854 2.57665'></Viewpoint>
+<Viewpoint DEF='FrontView' containerField='viewpoints' description='Front View' position='0 0.854 2.57665'></Viewpoint>
 <Viewpoint DEF='SideView' containerField='viewpoints' description='Side View' orientation='0 1 0 1.57079' position='2.5929 0.854 0'></Viewpoint>
-<Viewpoint DEF='TopView' containerField='viewpoints' description='Top View' orientation='1 0 0 -1.57079' position='0 3.4495 0'></Viewpoint-->
+<Viewpoint DEF='TopView' containerField='viewpoints' description='Top View' orientation='1 0 0 -1.57079' position='0 3.4495 0'></Viewpoint>
 </HAnimHumanoid>
 <WorldInfo info='&quot;Copyright (c) 1997. 3Name3D / Yglesias Wallock Divekar, Inc.&quot;' title='Nancy - an H-Anim compliant avatar by 3Name3D'></WorldInfo>
 <NavigationInfo avatarSize='0.15 1.53 0.75' speed='0.5' type='&quot;EXAMINE&quot;'></NavigationInfo>
@@ -384,7 +384,7 @@
     </Transform>
 </Group>
 <Group DEF='Animations'>
-    <!--Group DEF='Stand_Animation'>
+    <Group DEF='Stand_Animation'>
         <OrientationInterpolator DEF='r_ankleRotInterp_Stand' key='0.0 1.0' keyValue='0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0'></OrientationInterpolator>
         <OrientationInterpolator DEF='r_kneeRotInterp_Stand' key='0.0 1.0' keyValue='0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0'></OrientationInterpolator>
         <OrientationInterpolator DEF='r_hipRotInterp_Stand' key='0.0 1.0' keyValue='0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0'></OrientationInterpolator>
@@ -404,7 +404,7 @@
         <OrientationInterpolator DEF='whole_bodyRotInterp_Stand' key='0.0 1.0' keyValue='0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0'></OrientationInterpolator>
         <PositionInterpolator DEF='whole_bodyTranInterp_Stand' key='0.0 1.0' keyValue='0.0 0.0 0.0 0.0 0.0 0.0'></PositionInterpolator>
         <TimeSensor DEF='Stand_Time' cycleInterval='0.009999999776482582'></TimeSensor>
-    </Group-->
+    </Group>
     <Group DEF='Walk_Animation'>
         <OrientationInterpolator DEF='r_ankleRotInterp_BasicWalk' key='0.0 0.125 0.2083 0.375 0.4583 0.5 0.6667 0.75 0.7917 0.9167 1.0' keyValue='0.0 0.0 1.0 0.0 -1.0 0.0 0.0 0.3533 -1.0 0.0 0.0 0.1072 1.0 0.0 0.0 0.2612 1.0 0.0 0.0 0.1268 -1.0 0.0 0.0 0.01793 -1.0 0.0 0.0 0.05824 -1.0 0.0 0.0 0.2398 -1.0 0.0 0.0 0.35 -1.0 0.0 0.0 0.3322 0.0 0.0 1.0 0.0'></OrientationInterpolator>
         <OrientationInterpolator DEF='r_kneeRotInterp_BasicWalk' key='0.0 0.125 0.2083 0.2917 0.375 0.5 0.6667 0.7917 0.9167 1.0' keyValue='1.0 0.0 0.0 0.8573 1.0 0.0 0.0 0.8926 1.0 0.0 0.0 0.5351 1.0 0.0 0.0 0.1756 1.0 0.0 0.0 0.1194 1.0 0.0 0.0 0.3153 1.0 0.0 0.0 0.09354 1.0 0.0 0.0 0.08558 1.0 0.0 0.0 0.2475 1.0 0.0 0.0 0.8573'></OrientationInterpolator>
