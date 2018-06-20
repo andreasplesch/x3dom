@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 3.0//EN" "http://www.web3d.org/specifications/x3d-3.0.dtd">
+<X3D xmlns:xsd='http://www.w3.org/2001/XMLSchema-instance' profile='Full' version='3.0' xsd:noNamespaceSchemaLocation='http://www.web3d.org/specifications/x3d-3.0.xsd'>
+  <Scene DEF='scene'>
+    <NavigationInfo DEF='_1' headlight='false' type='"EXAMINE" "ANY"'/>
+    <Group DEF='_2'>
+      <Group DEF='ARROW'>
+        <Shape DEF='_3'>
+          <Appearance DEF='ARROW_APPEARANCE'>
+            <Material DEF='_4' diffuseColor='0.3 0.3 1' emissiveColor='0.3 0.3 0.33'/>
+          </Appearance>
+          <Cylinder bottom='false' top='false' radius='0.025'/>
+        </Shape>
+        <Transform DEF='_5' translation='0 1 0'>
+          <Shape DEF='ARROW_POINTER'>
+            <Appearance USE='ARROW_APPEARANCE'/>
+            <Cone bottomRadius='0.05' height='0.1'/>
+          </Shape>
+        </Transform>
+        <Transform DEF='_6' rotation='1 0 0 3.1416' translation='0 -1 0'>
+          <Shape USE='ARROW_POINTER'/>
+        </Transform>
+      </Group>
+      <Transform DEF='_7' translation='0 1.08 0'>
+        <Billboard DEF='_8'>
+          <Shape DEF='_9'>
+            <Appearance DEF='LABEL_APPEARANCE'>
+              <Material DEF='_10' diffuseColor='1 1 0.3' emissiveColor='0.33 0.33 0.1'/>
+            </Appearance>
+            <Text DEF='_11' string='"Y"'>
+              <FontStyle DEF='LABEL_FONT' family='"SANS"' justify='"MIDDLE"' size='0.2'/>
+            </Text>
+          </Shape>
+        </Billboard>
+      </Transform>
+    </Group>
+    <Transform DEF='_12' rotation='0 0 1 -1.5708'>
+      <Group DEF='_13'>
+        <Group USE='ARROW'/>
+        <Transform DEF='_14' rotation='0 0 1 1.5708' translation='0.072 1.1 0'>
+          <Billboard DEF='_15'>
+            <Shape DEF='_16'>
+              <Appearance USE='LABEL_APPEARANCE'/>
+              <Text DEF='_17' string='"X"'>
+                <FontStyle USE='LABEL_FONT'/>
+              </Text>
+            </Shape>
+          </Billboard>
+        </Transform>
+      </Group>
+    </Transform>
+    <Transform DEF='_18' rotation='1 0 0 1.5708'>
+      <Group DEF='_19'>
+        <Group USE='ARROW'/>
+        <Transform DEF='_20' rotation='1 0 0 -1.5708' translation='0 1.1 0.072'>
+          <Billboard DEF='_21'>
+            <Shape DEF='_22'>
+              <Appearance USE='LABEL_APPEARANCE'/>
+              <Text DEF='_23' string='"Z"'>
+                <FontStyle USE='LABEL_FONT'/>
+              </Text>
+            </Shape>
+          </Billboard>
+        </Transform>
+      </Group>
+    </Transform>
+  </Scene>
+</X3D>
