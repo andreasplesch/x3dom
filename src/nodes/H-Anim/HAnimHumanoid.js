@@ -200,6 +200,59 @@ x3dom.registerNodeType(
            
         },
         {
+            collectDrawableObjects: function (transform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes)
+            {
+                // check if multi parent sub-graph, don't cache in that case
+                if (singlePath && (this._parentNodes.length > 1))
+                    singlePath = false;
+
+                // an invalid world matrix or volume needs to be invalidated down the hierarchy
+                if (singlePath && (invalidateCache = invalidateCache || this.cacheInvalid()))
+                    this.invalidateCache();
+
+                // check if sub-graph can be culled away or render flag was set to false
+                planeMask = drawableCollection.cull(transform, this.graphState(), singlePath, planeMask);
+                if (planeMask < 0) {
+                    return;
+                }
+
+                var cnode, childTransform;
+
+                if (singlePath) {
+                    // rebuild cache on change and reuse world transform
+                    if (!this._graph.globalMatrix) {
+                        this._graph.globalMatrix = this.transformMatrix(transform);
+                    }
+                    childTransform = this._graph.globalMatrix;
+                }
+                else {
+                    childTransform = this.transformMatrix(transform);
+                }
+
+                var n = this._childNodes.length;
+
+                if (x3dom.nodeTypes.ClipPlane.count > 0) {
+                    var localClipectPlanes = [];
+
+                    for (var j = 0; j < n; j++) {
+                        if ( (cnode = this._childNodes[j]) ) {
+                            if (x3dom.isa(cnode, x3dom.nodeTypes.ClipPlane) && cnode._vf.on && cnode._vf.enabled) {
+                                localClipPlanes.push({plane: cnode, trafo: childTransform});
+                            }
+                        }
+                    }
+
+                    clipPlanes = localClipPlanes.concat(clipPlanes);
+                }
+
+                for (var i=0; i<n; i++) {
+                    if ( (cnode = this._childNodes[i]) ) {
+                        // do not collect from joints and segments both deprecated
+                        
+                        cnode.collectDrawableObjects(childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes);
+                    }
+                }
+            },
             nodeChanged: function()
             {
                 //check for joints MFNodes
