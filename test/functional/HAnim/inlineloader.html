@@ -27,7 +27,7 @@
 <script>
     const inline = document.querySelector('#inline');
     function handleChange(event) {
-        inline.seAttribute('url', event.value);
+        inline.seAttribute('url', event.target.options[event.target.selectedIndex].value);
     }
 </script>
 </html>
