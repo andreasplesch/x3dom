@@ -1,0 +1,328 @@
+#X3D V3.0 utf8
+PROFILE Immersive
+META "filename" "SixViewpointTour3.x3dv"
+
+# [meta] reference: Web3D.org Bindable-Nodes, Viewpoint:
+
+NavigationInfo { 
+  type ["EXAMINE" "ANY"] 
+  headlight FALSE
+}
+
+Viewpoint {
+  description "Box Front View "
+  position 0 0 10
+  orientation 0 1 0 0 
+  centerOfRotation 0 0 0 
+}
+Viewpoint {
+  description "Box Rear View"
+  position 0 0 -10
+  orientation 0 1 0 3.14
+}
+Viewpoint {
+  description "Box Top View"
+  position 0 10 0
+  orientation -1 0 0 1.57
+}
+Viewpoint {
+  description "Box Bottom View"
+  position 0 -10 0
+  orientation 1 0 0 1.57
+}
+Viewpoint {
+  description "Box Box Left View"
+  position -10 0 0
+  orientation 0 -1 0 1.57
+}
+Viewpoint {
+  description "Box Right View"
+  position 10 0 0
+  orientation 0 1 0 1.57
+}
+
+DEF Tour Viewpoint {
+  description "Box Tour Views"
+  position 0 0 10
+  orientation 0 1 0 0
+}
+
+Background {
+  backUrl "textures/bgBack.jpg" 
+  leftUrl "textures/bgLeft.jpg"
+  bottomUrl "textures/bgBot.jpg" 
+  frontUrl "textures/bgFront.jpg" 
+  rightUrl "textures/bgRight.jpg" 
+  topUrl "textures/bgTop.jpg" 
+}
+
+DEF SceneViewpointDataHudProximity ProximitySensor {
+  center 0 0 0 
+  size 100 100 100
+}
+
+DEF ViewpointDataHud Transform { 
+  children [
+    Transform { translation 2.5 3 -10 scale 0.6 0.6 0.6
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0 0 0 specularColor 0 0 0  
+              ambientIntensity 0.0 shininess 0.0 emissiveColor 1 0 0 
+            }
+          }
+          geometry DEF PositionString Text { string [ "Position"]
+            fontStyle FontStyle { family [ "SANS"  ] style "BOLD" 
+            }
+          }
+        }
+      ]
+    }
+    Transform { translation 2.5 2.5 -10 scale 0.6 0.6 0. 
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0 0 0 specularColor 0 0 0  
+              ambientIntensity 0.0 shininess 0.0 emissiveColor 1 0 0 
+            }
+          }
+          geometry DEF OrientationString Text { string [ "Orientation" ]
+            fontStyle FontStyle { family [ "SANS"  ] style "BOLD" 
+            } 
+          }
+        }
+      ]
+    }
+  ]
+}
+
+DEF PositionData Script {
+  outputOnly MFString position 
+  inputOnly SFVec3f printPosition
+  initializeOnly SFString sep ", "
+  url "ecmascript: 
+    function printPosition (value,ts) {
+      var x = Math.round(value.x*100)/100; // simple 2 decimal digits
+      var y = Math.round(value.y*100)/100;
+      var z = Math.round(value.z*100)/100;
+      position = new MFString ( x + sep + y + sep + z );
+    }
+  "
+}
+
+DEF OrientationData Script {
+  outputOnly MFString orientation 
+  inputOnly SFRotation printOrientation
+  initializeOnly SFString sep ", "
+  url "ecmascript: 
+    function printOrientation (value,ts) {
+      var x = Math.round(value.x*100)/100;
+      var y = Math.round(value.y*100)/100;
+      var z = Math.round(value.z*100)/100;
+      var angle = Math.round(value.angle*100)/100;
+      orientation = new MFString ( x + sep + y + sep + z + sep + angle );
+    }
+  "
+}
+
+ROUTE SceneViewpointDataHudProximity.position_changed TO PositionData.printPosition
+ROUTE SceneViewpointDataHudProximity.orientation_changed TO OrientationData.printOrientation
+
+ROUTE PositionData.position TO PositionString.string
+ROUTE OrientationData.orientation TO OrientationString.string
+
+ROUTE SceneViewpointDataHudProximity.position_changed TO ViewpointDataHud.translation
+ROUTE SceneViewpointDataHudProximity.orientation_changed TO ViewpointDataHud.rotation
+
+# Box 
+DEF boxfront Shape {
+  appearance Appearance {
+    material Material { }
+    texture ImageTexture {
+      url [ "textures/boxfront.jpg" ]
+    }
+  }
+  geometry IndexedFaceSet {
+    coordIndex [ 0 1 2 3 -1 ]
+    coord Coordinate {
+      point [ -1 -1 1, 1 -1 1, 1 1 1, -1 1 1 ]
+    }
+    texCoordIndex [ 0 1 2 3 -1 ]
+    texCoord TextureCoordinate {
+      point [ 0 0 1 0 1 1 0 1 ]
+    }
+  }
+}
+DEF boxright Shape {
+  appearance Appearance {
+    material Material { }
+    texture ImageTexture {
+      url [ "textures/boxright.jpg" ]
+    }
+  }
+  geometry IndexedFaceSet {
+    coordIndex [ 0 1 2 3 -1 ]
+    coord Coordinate {
+      point [ 1 -1 1, 1 -1 -1, 1 1 -1, 1 1 1 ]
+    }
+    texCoordIndex [ 0 1 2 3 -1 ]
+    texCoord TextureCoordinate {
+      point [ 0 0 1 0 1 1 0 1 ]
+    }
+  }
+}
+DEF boxrear Shape {
+  appearance Appearance {
+    material Material { }
+    texture ImageTexture {
+      url [ "textures/boxrear.jpg" ]
+    }
+  }
+  geometry IndexedFaceSet {
+    coordIndex [ 0 1 2 3 -1 ]
+    coord Coordinate {
+      point [ 1 -1 -1, -1 -1 -1, -1 1 -1, 1 1 -1 ]
+    }
+    texCoordIndex [ 0 1 2 3 -1 ]
+    texCoord TextureCoordinate {
+      point [ 0 0 1 0 1 1 0 1 ]
+    }
+  }
+}
+DEF boxleft Shape {
+  appearance Appearance {
+    material Material { }
+    texture ImageTexture {
+      url [ "textures/boxleft.jpg" ]
+    }
+  }
+  geometry IndexedFaceSet {
+    coordIndex [ 0 1 2 3 -1  ]
+    coord Coordinate {
+      point [ -1 -1 1, -1 1 1, -1 1 -1, -1 -1 -1 ]
+    }
+    texCoordIndex [ 1 2 3 0 -1 ]
+    texCoord TextureCoordinate {
+      point [ 0 0 1 0 1 1 0 1 ]
+    }
+  }
+}
+DEF boxtop Shape {
+  appearance Appearance {
+    material Material { }
+    texture ImageTexture {
+      url [ "textures/boxtop.jpg" ]
+    }
+  }
+  geometry IndexedFaceSet {
+    coordIndex [ 0 1 2 3 -1 ]
+    coord Coordinate {
+      point [ -1 1 1, 1 1 1, 1 1 -1, -1 1 -1 ]
+    }
+    texCoordIndex [ 0 1 2 3 -1 ]
+    texCoord TextureCoordinate {
+      point [ 0 0 1 0 1 1 0 1 ]
+    }
+  }
+}
+DEF boxbottom Shape {
+  appearance Appearance {
+    material Material { }
+    texture ImageTexture {
+      url [ "textures/boxbottom.jpg" ]
+    }
+  }
+  geometry IndexedFaceSet {
+    coordIndex [  0 1 2 3 -1  ]
+    coord Coordinate {
+      point [ -1 -1 -1, 1 -1 -1, 1 -1 1, -1 -1 1 ]
+    }
+    texCoordIndex [ 0 1 2 3 -1 ]
+    texCoord TextureCoordinate {
+      point [ 0 0 1 0 1 1 0 1 ]
+    }
+  }
+}
+
+DEF TourTime TimeSensor { cycleInterval 66 loop TRUE }
+
+DEF TourPosition PositionInterpolator {
+ key [ 0.0 0.125 0.25 0.378 0.5 0.625 0.75 0.875 1.0 ]
+ keyValue [ 0 0 10, -10 0 0, 0 0 -10, 10 0 0, 0 0 10, 0 10 0, 0 0 10, 0 -10 0, 0 0 10 ]}
+
+DEF TourOrientation OrientationInterpolator {
+ key [ 0.0 0.125 0.25 0.378 0.5 0.625 0.75 0.875 1.0 ]
+ keyValue [ 0 1 0 0, 0 -1 0 1.57, 0 1 0 3.14, 0 1 0 1.57, 0 1 0 0, -1 0 0 1.57, 0 1 0 0, 1 0 0 1.57, 0 1 0 0 ]}
+
+ROUTE TourTime.fraction_changed TO TourOrientation.set_fraction
+ROUTE TourOrientation.value_changed TO Tour.orientation 
+ROUTE TourTime.fraction_changed TO TourPosition.set_fraction
+ROUTE TourPosition.value_changed TO Tour.position 
+
+DEF MainHAimStageAndModels Transform { # latest at: 
+  translation 0 0 0 
+  children [ Inline { url ["0MainStageScene0816.x3dv"] } ]}
+
+#DirectionalLight { direction 0 1 1 intensity 1 global TRUE }
+#DirectionalLight { direction -1 -1 -1 intensity 1 global TRUE }
+#DirectionalLight { direction 1 1 -1 intensity 1 global TRUE }
+
+DEF HAnimStage Group { # geometry for stage
+ children [ 
+  DEF cordsysfloor Transform { scale 2.0 2.0 2.0 
+   children [ Inline { url ["JointCoordinateAxes.x3dv"] } ] }
+  DEF StageGeometry Transform { rotation 0 0 1 0 translation 0 -0.01 0 scale 1 0.01 1
+   children [
+    Shape { appearance Appearance { material Material { transparency 0.6 } } geometry Box { size 9 1 9 } }
+    DEF Circle0 Transform { scale 1 1 1 
+     children [ 
+      Shape { appearance DEF LineColor Appearance { # Orbit Path Line
+       material Material { specularColor 0 0 1 shininess 1 ambientIntensity 1 diffuseColor 0.7 0 0.9 emissiveColor 0.45 0.45 1 } }
+       geometry DEF Orbit1 IndexedLineSet { coord Coordinate {
+        point [ 1 0 0, 0.995 0 -0.105, 0.979 0 -0.208, 0.951 0 -0.309, 0.914 0 -0.407, 0.866 0 -0.5, 0.809 0 -0.588, 0.743 0 -0.669, 0.669 0 -0.743, 0.588 0 -0.809, 0.5 0 -0.866, 0.407 0 -0.914, 0.309 0 -0.951, 0.208 0 -0.978, 0.105 0 -0.995, 0 0 -1,  -0.105 0 -0.994522, -0.208 0 -0.978, -0.309 0 -0.951, -0.407 0 -0.914, -0.5 0 -0.866, -0.588 0 -0.809, -0.669 0 -0.743, -0.743 0 -0.669, -0.809 0 -0.588, -0.866 0 -0.5, -0.914 0 -0.407, -0.951 0 -0.309, -0.978 0 -0.208, -0.995 0 -0.105, -1 0 0, -0.995 0 0.105, -0.978 0 0.208, -0.951 0 0.309, -0.914 0 0.407, -0.866 0 0.5, -0.809 0 0.588, -0.743 0 0.669, -0.669 0 0.743, -0.588 0 0.809, -0.5 0 0.866, -0.407 0 0.914, -0.309 0 0.951, -0.208 0 0.978, -0.105 0 0.995, 0 0 1, 0.105 0 0.995, 0.208 0 0.978, 0.309 0 0.951, 0.407 0 0.914, 0.5 0 0.866, 0.588 0 0.809, 0.669 0 0.743, 0.743 0 0.669, 0.809 0 0.588, 0.866 0 0.5, 0.914 0 0.407, 0.951 0 0.309, 0.978 0 0.208, 0.995 0 0.104, 1 0 0 ]}
+         coordIndex [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, -1 ]}
+      }
+     ]
+    }
+    DEF Circle1 Transform { scale 0.5 1 0.5 
+     children [ 
+      Shape { 
+       appearance USE LineColor
+       geometry USE Orbit1 
+      }
+     ]
+    }
+    DEF Circle2 Transform { scale 0.25 1 0.25 
+     children [ 
+      Shape { 
+       appearance USE LineColor
+       geometry USE Orbit1 
+      }
+     ]
+    }
+    DEF Circle3 Transform { scale 2 1 2 
+     children [ 
+      Shape { 
+       appearance USE LineColor
+       geometry USE Orbit1 
+      }
+     ]
+    }
+    DEF Circle4 Transform { scale 3 1 3 
+     children [ 
+      Shape { 
+       appearance USE LineColor
+       geometry USE Orbit1 
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
+
+
+
+

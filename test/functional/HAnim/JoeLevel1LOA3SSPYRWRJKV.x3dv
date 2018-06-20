@@ -1,0 +1,2058 @@
+﻿#X3D V3.0 utf8
+PROFILE Immersive
+COMPONENT H-Anim:1
+
+META "Joe" "20090328 20130628 http://www.hypermultimedia.com/acontents.htm#X3DHANIM"
+
+DEF JoeTest_WorldInfo WorldInfo {
+ title "JoeLevel1LOA3SSPYRWRJK.x3dv"
+}
+
+NavigationInfo {
+ headlight FALSE
+ speed 0.5
+ type [ "EXAMINE" "ANY" ]
+}
+
+DEF IllustrationGeometry Group { 
+ children [ 
+  Transform { translation 0 2.1 0 scale 2 2 2  # Yellow box joint locations
+   children [ DEF jointbox Shape { geometry IndexedFaceSet { coord Coordinate { point [ 0 0.01 0, -0.01 0 0, 0 0 0.01,  0.01 0 0, 0 0 -0.01, 0 -0.01 0 ] } coordIndex [ 0 1 2 -1, 0 2 3 -1, 0 3 4 -1, 0 4 1 -1, 5 2 1 -1, 5 3 2 -1, 5 4 3 -1, 5 1 4 -1 ] creaseAngle 0.1  } appearance Appearance { material Material { ambientIntensity 0.5 shininess 0.7 diffuseColor 1 1 0 emissiveColor 0 0 0 specularColor 1 1 0 } } } ]
+  }
+  Transform { translation 0 2.2 0 scale 2 2 2  # Red box Site locations
+   children [ DEF sitebox Shape { geometry  IndexedFaceSet { coord Coordinate { point [ 0 0.01 0, -0.01 0 0, 0 0 0.01, 0.01 0 0, 0 0 -0.01, 0 -0.01 0 ] } coordIndex [ 0, 1, 2, -1, 0, 2, 3, -1, 0, 3, 4, -1, 0, 4, 1, -1, 5, 2, 1, -1, 5, 3, 2, -1, 5, 4, 3, -1, 5, 1, 4, -1 ] creaseAngle 0.1 } appearance Appearance { material  Material {  ambientIntensity 0.5 shininess 0.7 diffuseColor 1 0 0 emissiveColor 0 0 0 specularColor 1 0 0 } } } ]
+  }
+  Transform { translation 0 2.3 0 scale 2 2 2  # Green Segment Line Joint hierarchy
+   children [ 
+    Shape { geometry IndexedLineSet { coord Coordinate { point [ 0 0 0, 0.2 0 0 ] } coordIndex [ 0 1 -1 ] } appearance DEF SegmentLine Appearance { material Material { diffuseColor 0 1 0 emissiveColor 0 1 0 specularColor 0 1 0  } } } 
+   ]
+  }
+  Transform { translation 0 2.4 0 scale 2 2 2  # Red Site Parent Joint Line Site hierarchy
+   children [ 
+    Shape { geometry IndexedLineSet { coord Coordinate { point [ 0 0 0, 0.2 0 0 ] } coordIndex [ 0 1 -1 ] } appearance DEF SiteParentLine Appearance { material Material { diffuseColor 1 0 0 emissiveColor 1 0 0 specularColor 1 0 0  } } } 
+   ]
+  }
+ ]
+}
+
+DEF SpecHumanoid Group { children [ 
+ DEF humanoid HAnimHumanoid { 
+
+  viewpoints [ 
+   DEF hanim_view_InclinedView1 HAnimSite { name "view_hanim_InclinedView" 
+   translation 1.62 1.05 2.06 
+   rotation -0.113 0.993 0.0347 0.671
+    children [ 
+     DEF hanim_InclinedView Viewpoint { description "view_hanim_InclinedView"
+      position 0 0 0 
+      orientation 0 0 1 0  
+      centerOfRotation 0 0 0 
+     }
+    ]
+   }
+   DEF hanim_view_FrontView HAnimSite { name "view_hanim_FrontView" 
+   translation 0 0.85 2.58 
+   rotation 0 0 1 0
+    children [ 
+     DEF hanim_FrontView Viewpoint { description "view_hanim_FrontView"
+      position 0 0 0 
+      orientation 0 0 1 0 
+      centerOfRotation 0 0.9 0.0 
+     }
+    ]
+   }
+   DEF hanim_view_BackView HAnimSite { name "view_hanim_BackView" 
+   translation 0 0.85 -2.58 
+   rotation 0 1 0 3.14
+    children [ 
+     DEF hanim_BackView Viewpoint { description "view_hanim_BackView"
+      position 0 0 0 
+      orientation 0 0 1 0 
+      centerOfRotation 0 0.9 0.0 
+     }
+    ]
+   }
+   DEF hanim_view_LeftEyeView HAnimSite { name "view_hanim_LeftEyeView" 
+   translation 0.034 1.64 0.05  
+   rotation 0 1 0 3.14
+    children [ 
+     DEF hanim_LeftEyeView Viewpoint { description "view_hanim_LeftEyeView"
+      position 0 0 0 
+      orientation 0 0 1 0 
+      centerOfRotation 0.034 1.64 0.05 
+     }
+    ]
+   }
+   DEF hanim_view_RightEyeView HAnimSite { name "view_hanim_RightEyeView" 
+   translation -0.034 1.64 0.05 
+   rotation 0 1 0 3.14
+    children [ 
+     DEF hanim_RightEyeView Viewpoint { description "view_hanim_RightEyeView"
+      position 0 0 0 
+      orientation 0 0 1 0 
+      centerOfRotation -0.034 1.64 0.5 
+     }
+    ]
+   }
+   DEF hanim_view_l_SideView HAnimSite { name "view_hanim_l_SideView" 
+   translation 2.6 0.854 0 
+   rotation 0 1 0 1.5708
+    children [ 
+     DEF hanim_l_SideView Viewpoint { description "view_hanim_l_SideView"
+      position 0 0 0 
+      orientation 0 0 1 0 
+      centerOfRotation 0 0.9 0.0 
+     }
+    ]
+   }
+   DEF hanim_view_TopView HAnimSite { name "view_hanim_TopView" 
+   translation 0 3.5 0 
+   rotation 1 0 0 -1.57
+    children [ 
+     DEF hanim_TopView Viewpoint { description "view_hanim_TopView"
+      position 0 0 0 
+      orientation 0 0 1 0 
+      centerOfRotation 0 0.9 0.0 
+     }
+    ]
+   }
+   DEF hanim_view_RightHandFront HAnimSite { name "view_hanim_RightHandFrontView" 
+   translation -0.3 0.75 0.45 
+   rotation 0 0 1 0
+    children [ 
+     DEF hanim_RightHandFront Viewpoint { description "view_hanim_RightHandFrontView"
+      position 0 0 0 
+      orientation 0 0 1 0 
+      centerOfRotation 0 0.7 0.0 
+     }
+    ]
+   }
+   DEF hanim_view_LeftHandFront HAnimSite { name "view_hanim_LeftHandFront" 
+   translation 0.3 0.75 0.45 
+   rotation 0 0 1 0
+    children [ 
+     DEF hanim_LeftHandFront Viewpoint { description "view_hanim_LeftHandFront"
+      position 0 0 0 
+      orientation 0 0 1 0 
+      centerOfRotation 0.0 0.7 0.0 
+     }
+    ]
+   }
+   DEF hanim_view_InclinedView2 HAnimSite { name "view_hanim_InclinedView2" 
+   translation -1.62 1.05 2.06 
+   rotation -0.113 -0.993 0.0347 0.671
+    children [ 
+     DEF hanim_InclinedView2 Viewpoint { description "view_hanim_InclinedView2"
+      position 0 0 0 
+      orientation 0 0 1 0 
+      centerOfRotation 0 0.9 0.0 
+     }
+    ]
+   }
+   DEF hanim_view_FrontViewClose HAnimSite { name "view_hanim_FrontViewClose" 
+   translation 0 0.854 1.575 
+   rotation 0 0 1 0
+    children [ 
+     DEF hanim_IFrontViewClose Viewpoint { description "view_hanim_FrontViewClose"
+      position 0 0 0 
+      orientation 0 0 1 0 
+      centerOfRotation 0 0.0 1.575 
+     }
+    ]
+   }
+   DEF hanim_view_SideViewClose HAnimSite { name "view_hanim_SideViewClose" 
+   translation 1.56 0.854 0 
+   rotation 0 1 0 1.5708
+    children [ 
+     DEF hanim_ISideViewClose Viewpoint { description "view_hanim_SideViewClose"
+      position 0 0 0 
+      orientation 0 0 1 0 
+      centerOfRotation 1.6 0.0 0 
+     }
+    ]
+   }
+   DEF hanim_view_HeadFrontClose HAnimSite { name "view_hanim_HeadFrontViewClose" 
+   translation 0 1.5 1 
+   rotation 0 0 1 0
+    children [ 
+     DEF hanim_HeadFrontClose Viewpoint { description "view_hanim_HeadFrontViewClose"
+      position 0 0 0 
+      orientation 0 0 1 0 
+      centerOfRotation 0 0.0 1.0 
+     }
+    ]
+   }
+   DEF hanim_view_ChestFrontClose HAnimSite { name "view_hanim_ChestFrontViewClose" 
+   translation 0 1.2 1 
+   rotation 0 0 1 0
+    children [ 
+     DEF hanim_ChestFrontClose Viewpoint { description "view_hanim_ChestFrontViewClose"
+      position 0 0 0 
+      orientation 0 0 1 0 
+      centerOfRotation 0 0.0 1.0 
+     }
+    ]
+   }
+   DEF hanim_view_IPelvisFrontClose HAnimSite { name "view_hanim_PelvisFrontViewClose" 
+   translation 0 0.8 1 
+   rotation 0 0 1 0
+    children [ 
+     DEF hanim_IPelvisFrontClose Viewpoint { description "view_hanim_PelvisFrontViewClose"
+      position 0 0 0 
+      orientation 0 0 1 0 
+      centerOfRotation 0 0.0 1.0 
+     }
+    ]
+   }
+   DEF hanim_view_IKneesFrontClose HAnimSite { name "view_hanim_KneesFrontViewClose" 
+   translation 0 0.4 1 
+   rotation 0 0 1 0
+    children [ 
+     DEF hanim_IKneesFrontClose Viewpoint { description "view_hanim_KneesFrontViewClose"
+      position 0 0 0 
+      orientation 0 0 1 0 
+      centerOfRotation 0 0.4 0 
+     }
+    ]
+   }
+   DEF hanim_view_IFeetFrontClose HAnimSite { name "view_hanim_KneesFrontViewClose" 
+   translation 0 0 1 
+   rotation 0 0 1 0
+    children [ 
+     DEF hanim_IKneesFrontClose Viewpoint { description "view_hanim_KneesFrontViewClose"
+      position 0 0 0 
+      orientation 0 0 1 0 
+      centerOfRotation 0 0 0 
+     }
+    ]
+   }
+  ]
+  skeleton [
+  DEF hanim_HumanoidRoot HAnimJoint { name "HumanoidRoot" center 0.0000 0.8240 0.0277 children [ 
+   DEF hanim_sacrum HAnimSegment { name "sacrum" children [ 
+DEF cordsysr_RootRelativetoScene000 Transform { translation 0.0 0.0 0.0 scale 0.175 0.175 0.175 
+ children [ Inline { url ["JointCoordinateAxes.x3dv"] } ] }
+    Transform { translation 0.0000 0.8240 0.0277 children [ USE jointbox ] }
+     Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0000 0.8240 0.0277, 0.0000 0.9149 0.0016, 0.0028 1.0568 -0.0776 ] } coordIndex [ 0, 1, -1, 0, 2, -1 ] } appearance USE SegmentLine } ]}
+   DEF hanim_sacroiliac HAnimJoint { name "sacroiliac" center 0.0000 0.9149 0.0016 children [ 
+    DEF hanim_pelvis HAnimSegment { name "pelvis" children [ 
+     Transform { translation 0.0000 0.9149 0.0016 children [ USE jointbox ] }
+     Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0000 0.9149 0.0016, 0.0961 0.9124 -0.0001, -0.0950 0.9171 0.0029 ] } coordIndex [ 0 1 -1, 0 2 -1 ] } appearance USE SegmentLine } 
+     Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0000 0.9149 0.0016, -0.1525 1.0628 0.0035, -0.1689 0.8419 0.0352, 0.1612 1.0537 0.0008, 0.1677 0.8336 0.0303, -0.0887 1.0021 0.1112, 0.0925 0.9983 0.1052, -0.0716 1.0190 -0.1138, 0.0774 1.0190 -0.1151, 0.0034 0.8266 0.0257 ] } coordIndex [ 0 1 -1, 0 2 -1, 0 3 -1, 0 4 -1, 0 5 -1, 0 6 -1, 0 7 -1, 0 8 -1, 0 9 -1 ] } appearance USE SiteParentLine } 
+     DEF hanim_r_iliocristale HAnimSite { name "r_iliocristale" translation -0.1525 1.0628 0.0035 children [ USE sitebox ] }
+     DEF hanim_r_trochanterion HAnimSite { name "r_trochanterion" translation -0.1689 0.8419 0.0352 children [ USE sitebox ] }
+     DEF hanim_l_iliocristale HAnimSite { name "l_iliocristale" translation 0.1612 1.0537 0.0008 children [ USE sitebox ] }
+     DEF hanim_l_trochanterion HAnimSite { name "l_trochanterion" translation 0.1677 0.8336 0.0303 children [ USE sitebox ] }
+     DEF hanim_r_asis HAnimSite { name "r_asis" translation -0.0887 1.0021 0.1112 children [ USE sitebox ] }
+     DEF hanim_l_asis HAnimSite { name "l_asis" translation 0.0925 0.9983 0.1052 children [ USE sitebox ] }
+     DEF hanim_r_psis HAnimSite { name "r_psis" translation -0.0716 1.0190 -0.1138 children [ USE sitebox ] }
+     DEF hanim_l_psis HAnimSite { name "l_psis" translation 0.0774 1.0190 -0.1151 children [ USE sitebox ] }
+     DEF hanim_crotch HAnimSite { name "crotch" translation 0.0034 0.8266 0.0257 children [ USE sitebox ] } ]}
+    DEF hanim_l_hip HAnimJoint { name "l_hip" center 0.0961 0.9124 -0.0001 children [ 
+     DEF hanim_l_thigh HAnimSegment { name "l_thigh" children [ 
+      Transform { translation 0.0961 0.9124 -0.0001 children [ USE jointbox ] }
+      Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0961 0.9124 -0.0001, 0.1040 0.4867 0.0308 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } 
+      Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0961 0.9124 -0.0001, 0.0993 0.4881 -0.0309, 0.1598 0.4967 0.0297, 0.0398 0.4946 0.0303 ] } coordIndex [ 0 1 -1, 0 2 -1, 0 3 -1 ] } appearance USE SiteParentLine } 
+      DEF hanim_l_knee_crease HAnimSite { name "l_knee_crease" translation 0.0993 0.4881 -0.0309 children [ USE sitebox ] }
+      DEF hanim_l_femoral_lateral_epicn HAnimSite { name "l_femoral_lateral_epicn" translation 0.1598 0.4967 0.0297 children [ USE sitebox ] }
+      DEF hanim_l_femoral_medial_epicn HAnimSite { name "l_femoral_medial_epicn" translation 0.0398 0.4946 0.0303 children [ USE sitebox ] } ]}
+     DEF hanim_l_knee HAnimJoint { name "l_knee" center 0.1040 0.4867 0.0308 children [ 
+      DEF hanim_l_calf HAnimSegment { name "l_calf" children [ 
+       Transform { translation 0.1040 0.4867 0.0308 children [ USE jointbox ] }
+       Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.1040 0.4867 0.0308, 0.1101 0.0656 -0.0736 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+      DEF hanim_l_ankle HAnimJoint { name "l_ankle" center 0.1101 0.0656 -0.0736 children [ 
+       DEF hanim_l_hindfoot HAnimSegment { name "l_hindfoot" children [ 
+        Transform { translation 0.1101 0.0656 -0.0736 children [ USE jointbox ] }
+        Shape { geometry IndexedLineSet { coord Coordinate { point [  0.1101 0.0656 -0.0736, 0.1086 0.0001 -0.0368 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine }
+        Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.1101 0.0656 -0.0736, 0.1308 0.0597 -0.1032, 0.0890 0.0716 -0.0881, 0.0890 0.0575 -0.0943, 0.0974 0.0259 -0.1171 ] } coordIndex [ 0 1 -1, 0 2 -1, 0 3 -1, 0 4 -1 ] } appearance USE SiteParentLine }
+        DEF hanim_l_lateral_malleolus HAnimSite { name "l_lateral_malleolus" translation 0.1308 0.0597 -0.1032 children [ USE sitebox ] }
+        DEF hanim_l_medial_malleolus HAnimSite { name "l_medial_malleolus" translation 0.0890 0.0716 -0.0881 children [ USE sitebox ] }
+        DEF hanim_l_sphyrion HAnimSite { name "l_sphyrion" translation 0.0890 0.0575 -0.0943 children [ USE sitebox ] }
+        DEF hanim_l_calcaneous_post HAnimSite { name "l_calcaneous_post" translation 0.0974 0.0259 -0.1171 children [ USE sitebox ] } ]}
+       DEF hanim_l_subtalar HAnimJoint { name "l_subtalar" center 0.1086 0.0001 -0.0368 children [ 
+        DEF hanim_l_l_midproximal HAnimSegment { name "l_midproximal" children [ 
+         Transform { translation 0.1086 0.0001 -0.0368 children [ USE jointbox ] }
+         Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.1086 0.0001 -0.0368, 0.1086 0.0001 0.0368 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+        DEF hanim_l_midtarsal HAnimJoint { name "l_midtarsal" center 0.1086 0.0001 0.0368 children [ 
+         DEF hanim_l_middistal HAnimSegment { name "l_middistal" children [ 
+          Transform { translation 0.1086 0.0001 0.0368 children [ USE jointbox ] }
+          Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.1086 0.0001 0.0368, 0.1086 0.0000 0.0762 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } 
+          Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.1086 0.0001 -0.0368, 0.0816 0.0232 0.0106 ] } coordIndex [ 0 1 -1 ] } appearance USE SiteParentLine } 
+         DEF hanim_l_metatarsal_pha1 HAnimSite { name "l_metatarsal_pha1" translation 0.0816 0.0232 0.0106 children [ USE sitebox ] } ]}
+         DEF hanim_l_metatarsal HAnimJoint { name "l_metatarsal" center 0.1086 0.0000 0.0762 children [ 
+          DEF hanim_l_forefoot HAnimSegment { name "l_forefoot" children [ 
+           Transform { translation 0.1086 0.0000 0.0762 children [ USE jointbox ] }
+           Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.1086 0.0000 0.0762, 0.1354 0.0016 0.1476 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } 
+           Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.1086 0.0000 0.0762, 0.1354 0.0016 0.1476, 0.1825 0.0070 0.0928, 0.1195 0.0079 0.1433 ] } coordIndex [ 0 1 -1, 0 2 -1, 0 3 -1 ] } appearance USE SiteParentLine } 
+           DEF hanim_l_forefoot_tip HAnimSite { name "l_forefoot_tip" translation 0.1354 0.0016 0.1476 children [ USE sitebox ] }
+           DEF hanim_l_metatarsal_pha5 HAnimSite { name "l_metatarsal_pha5" translation 0.1825 0.0070 0.0928 children [ USE sitebox ] }
+           DEF hanim_l_digit2 HAnimSite { name "l_digit2" translation 0.1195 0.0079 0.1433 children [ USE sitebox ] } ]} ]} ]} ]} ]} ]} ]}
+    DEF hanim_r_hip HAnimJoint { name "r_hip" center -0.0950 0.9171 0.0029 children [ 
+     DEF hanim_r_thigh HAnimSegment { name "r_thigh" children [ 
+      Transform { translation -0.0950 0.9171 0.0029 children [ USE jointbox ] }
+      Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.0950 0.9171 0.0029, -0.0867 0.4913 0.0318 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } 
+      Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.0950 0.9171 0.0029, -0.0825 0.4932 -0.0326, -0.1421 0.4992 0.0310, -0.0221 0.5014 0.0289 ] } coordIndex [ 0 1 -1, 0 2 -1, 0 3 -1 ] } appearance USE SiteParentLine }
+      DEF hanim_r_knee_crease HAnimSite { name "r_knee_crease" translation -0.0825 0.4932 -0.0326 children [ USE sitebox ] }
+      DEF hanim_r_femoral_lateral_epicn HAnimSite { name "r_femoral_lateral_epicn" translation -0.1421 0.4992 0.0310 children [ USE sitebox ] }
+      DEF hanim_r_femoral_medial_epicn HAnimSite { name "r_femoral_medial_epicn" translation -0.0221 0.5014 0.0289 children [  USE sitebox ] } ]}
+     DEF hanim_r_knee HAnimJoint { name "r_knee" center -0.0867 0.4913 0.0318 children [ 
+      DEF hanim_r_calf HAnimSegment { name "r_calf" children [ 
+DEF cordsysr_knee Transform { translation -0.0867 0.4913 0.0318 scale 0.175 0.175 0.175 
+ children [ Inline { url ["JointCoordinateAxes.x3dv"] } ] }
+       Transform { translation -0.0867 0.4913 0.0318 children [ USE jointbox ] }
+       Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.0867 0.4913 0.0318, -0.0801 0.0712 -0.0766 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+      DEF hanim_r_ankle HAnimJoint { name "r_ankle" center -0.0801 0.0712 -0.0766 children [ 
+       DEF hanim_r_hindfoot HAnimSegment { name "r_hindfoot" children [ 
+        Transform { translation -0.0801 0.0712 -0.0766 children [ USE jointbox ] }
+        Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.0801 0.0712 -0.0766, -0.0801 0.0000 -0.0368 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine }
+        Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.0801 0.0712 -0.0766, -0.1006 0.0658 -0.1075, -0.0591 0.0760 -0.0928, -0.0603 0.0610 -0.1002, -0.0692 0.0297 -0.1221 ] } coordIndex [ 0 1 -1, 0 2 -1, 0 3 -1, 0 4 -1 ] } appearance USE SiteParentLine } 
+        DEF hanim_r_lateral_malleolus HAnimSite { name "r_lateral_malleolus" translation -0.1006 0.0658 -0.1075 children [ USE sitebox ] }
+        DEF hanim_r_medial_malleolus HAnimSite { name "r_medial_malleolus" translation -0.0591 0.0760 -0.0928 children [ USE sitebox ] }
+        DEF hanim_r_sphyrion HAnimSite { name "r_sphyrion" translation -0.0603 0.0610 -0.1002 children [ USE sitebox ] }
+        DEF hanim_r_calcaneous_post HAnimSite { name "r_calcaneous_post" translation -0.0692 0.0297 -0.1221 children [ USE sitebox ] } ]}
+       DEF hanim_r_subtalar HAnimJoint { name "r_subtalar" center -0.0801 0.0000 -0.0368 children [ 
+        DEF hanim_r_midproximal HAnimSegment { name "r_midproximal" children [ 
+         Transform { translation -0.0801 0.0000 -0.0368 children [ USE jointbox ] }
+         Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.0801 0.0000 -0.0368, -0.0801 0.0000 0.0368 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+        DEF hanim_r_midtarsal HAnimJoint { name "r_midtarsal" center -0.0801 0.0000 0.0368 children [ 
+         DEF hanim_r_middistal HAnimSegment { name "r_middistal" children [ 
+          Transform { translation -0.0801 0.0000 0.0368 children [ USE jointbox ] }
+          Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.0801 0.0000 -0.0368, -0.0801 0.0039 0.0732 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } 
+          Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.0801 0.0000 0.0368, -0.0521 0.0260 0.0127 ] } coordIndex [ 0 1 -1 ] } appearance USE SiteParentLine }
+          DEF hanim_r_metatarsal_pha1 HAnimSite { name "r_metatarsal_pha1" translation -0.0521 0.0260 0.0127 children [ USE sitebox ] } ]}
+         DEF hanim_r_metatarsal HAnimJoint { name "r_metatarsal" center -0.0801 0.0039 0.0732 children [ 
+          DEF hanim_r_forefoot HAnimSegment { name "r_forefoot" children [ 
+           Transform { translation -0.0801 0.0039 0.0732 children [ USE jointbox ] }
+           Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.0801 0.0039 0.0732, -0.1043 -0.0227 0.1450 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } 
+           Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.0801 0.0039 0.0732, -0.1043 -0.0227 0.1450, -0.1523 0.0166 0.0895, -0.0883 0.0134 0.1383 ] } coordIndex [ 0 1 -1, 0 2 -1, 0 3 -1 ] } appearance USE SiteParentLine }
+           DEF hanim_r_forefoot_tip HAnimSite { name "r_forefoot_tip" translation -0.1043 -0.0227 0.1450 children [ USE sitebox ] }
+           DEF hanim_r_metatarsal_pha5 HAnimSite { name "r_metatarsal_pha5" translation -0.1523 0.0166 0.0895 children [ USE sitebox ] }
+           DEF hanim_r_digit2 HAnimSite { name "r_digit2" translation -0.0883 0.0134 0.1383 children [ USE sitebox ] } ]} ]} ]} ]} ]} ]} ]} ]}
+   DEF hanim_vl5 HAnimJoint { name "vl5" center 0.0028 1.0568 -0.0776 children [ 
+    DEF hanim_l5 HAnimSegment { name "l5" children [ 
+DEF cordsysvl5 Transform { translation 0.0028 1.0568 -0.0776 scale 0.175 0.175 0.175 
+ children [ Inline { url ["JointCoordinateAxes.x3dv"] } ] }
+     Transform { translation 0.0028 1.0568 -0.0776 children [ USE jointbox ] }
+     Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0028 1.0568 -0.0776, 0.0035 1.0925 -0.0787 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } 
+     Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0028 1.0568 -0.0776, 0.005 1.0915 -0.1091, 0.0069 1.0966 0.1017 ] } coordIndex [ 0 1 -1, 0 2 -1 ] } appearance USE SiteParentLine } 
+     DEF hanim_waist_preferred_post HAnimSite { name "waist_preferred_post" translation 0.005 1.0915 -0.1091 children [ USE sitebox ] }
+     DEF hanim_navel HAnimSite { name "navel" translation 0.0069 1.0966 0.1017 children [ USE sitebox ] } ]}
+    DEF hanim_vl4 HAnimJoint { name "vl4" center 0.0035 1.0925 -0.0787 children [ 
+     DEF hanim_l4 HAnimSegment { name "l4" children [ 
+      Transform { translation 0.0035 1.0925 -0.0787 children [ USE jointbox ] }
+      Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0035 1.0925 -0.0787, 0.0041 1.1276 -0.0796 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+     DEF hanim_vl3 HAnimJoint { name "vl3" center 0.0041 1.1276 -0.0796 children [ 
+      DEF hanim_l3 HAnimSegment { name "l3" children [ 
+       Transform { translation 0.0041 1.1276 -0.0796 children [ USE jointbox ] }
+       Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0041 1.1276 -0.0796, 0.0045 1.1546 -0.0800 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+      DEF hanim_vl2 HAnimJoint { name "vl2" center 0.0045 1.1546 -0.0800 children [ 
+       DEF hanim_l2 HAnimSegment { name "l2" children [ 
+        Transform { translation 0.0045 1.1546 -0.0800 children [ USE jointbox ] }
+        Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0045 1.1546 -0.0800, 0.0048 1.1912 -0.0805 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } 
+        Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0045 1.1546 -0.0800, -0.0711 1.1941 0.1016, 0.0871 1.1925 0.0992, 0.0049 1.1908 -0.1113 ] } coordIndex [ 0 1 -1, 0 2 -1, 0 3 -1 ] } appearance USE SiteParentLine }
+        DEF hanim_r_rib10 HAnimSite { name "r_rib10" translation -0.0711 1.1941 0.1016 children [ USE sitebox ] }
+        DEF hanim_l_rib10 HAnimSite { name "l_rib10" translation 0.0871 1.1925 0.0992 children [ USE sitebox ] }
+        DEF hanim_rib10_midspine HAnimSite { name "rib10_midspine" translation 0.0049 1.1908 -0.1113 children [ USE sitebox ] } ]}
+       DEF hanim_vl1 HAnimJoint { name "vl1" center 0.0048 1.1912 -0.0805 children [ 
+        DEF hanim_l1 HAnimSegment { name "l1" children [ 
+         Transform { translation 0.0048 1.1912 -0.0805 children [ USE jointbox ] }
+         Shape { geometry IndexedLineSet { coord Coordinate { point [0.0048 1.1912 -0.0805, 0.0051 1.2278 -0.0808 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+        DEF hanim_vt12 HAnimJoint { name "vt12" center 0.0051 1.2278 -0.0808 children [ 
+         DEF hanim_t12 HAnimSegment { name "t12" children [ 
+          Transform { translation 0.0051 1.2278 -0.0808 children [ USE jointbox ] }
+          Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0051 1.2278 -0.0808, 0.0053 1.2679 -0.0810 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+         DEF hanim_vt11 HAnimJoint { name "vt11" center 0.0053 1.2679 -0.0810 children [ 
+          DEF hanim_t11 HAnimSegment { name "t11" children [ 
+           Transform { translation 0.0053 1.2679 -0.0810 children [ USE jointbox ] }
+           Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0053 1.2679 -0.0810, 0.0056 1.2848 -0.0822 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}  
+          DEF hanim_vt10 HAnimJoint { name "vt10" center 0.0056 1.2848 -0.0822 children [ 
+           DEF hanim_t10 HAnimSegment { name "t10" children [ 
+            Transform { translation 0.0056 1.2848 -0.0822 children [ USE jointbox ] }
+            Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0056 1.2848 -0.0822, 0.0057 1.3126 -0.0838 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } 
+            Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0056 1.2848 -0.0822, 0.0085 1.2995 0.1147 ] } coordIndex [ 0 1 -1 ] } appearance USE SiteParentLine } 
+            DEF hanim_substernale HAnimSite { name "substernale" translation 0.0085 1.2995 0.1147 children [ USE sitebox ] } ]}
+           DEF hanim_vt9 HAnimJoint { name "vt9" center 0.0057 1.3126 -0.0838 children [ 
+            DEF hanim_t9 HAnimSegment { name "t9" children [ 
+             Transform { translation 0.0057 1.3126 -0.0838 children [ USE jointbox ] }
+             Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0057 1.3126 -0.0838, 0.0057 1.3382 -0.0845 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } 
+             Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0057 1.3126 -0.0838, -0.0736 1.3385 0.1217, 0.0918 1.3382 0.1192, 0.0057 1.3382 -0.0845 ] } coordIndex [ 0 1 -1, 0 2 -1, 0 3 -1 ] } appearance USE SiteParentLine } 
+             DEF hanim_r_thelion HAnimSite { name "r_thelion" translation -0.0736 1.3385 0.1217 children [ USE sitebox ] }
+             DEF hanim_l_thelion HAnimSite { name "l_thelion" translation 0.0918 1.3382 0.1192 children [ USE sitebox ] } ]}
+            DEF hanim_vt8 HAnimJoint { name "vt8" center 0.0057 1.3382 -0.0845 children [ 
+             DEF hanim_t8 HAnimSegment { name "t8" children [ 
+              Transform { translation 0.0057 1.3382 -0.0845 children [ USE jointbox ] }
+              Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0057 1.3382 -0.0845, 0.0058 1.3625 -0.0833 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}     
+             DEF hanim_vt7 HAnimJoint { name "vt7" center 0.0058 1.3625 -0.0833 children [ 
+              DEF hanim_t7 HAnimSegment { name "t7" children [ 
+               Transform { translation 0.0058 1.3625 -0.0833 children [ USE jointbox ] }
+               Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0058 1.3625 -0.0833, 0.0059 1.3866 -0.0800 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]} 
+              DEF hanim_vt6 HAnimJoint { name "vt6" center 0.0059 1.3866 -0.0800 children [ 
+               DEF hanim_t6 HAnimSegment { name "t6" children [ 
+                Transform { translation 0.0059 1.3866 -0.0800 children [ USE jointbox ] }
+                Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0059 1.3866 -0.0800, 0.0060 1.4102 -0.0745 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+               DEF hanim_vt5 HAnimJoint { name "vt5" center 0.0060 1.4102 -0.0745 children [ 
+                DEF hanim_t5 HAnimSegment { name "t5" children [ 
+                 Transform { translation 0.0060 1.4102 -0.0745 children [ USE jointbox ] }
+                 Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0060 1.4102 -0.0745, 0.0061 1.4320 -0.0675 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                DEF hanim_vt4 HAnimJoint { name "vt4" center 0.0061 1.4320 -0.0675 children [ 
+                 DEF hanim_t4 HAnimSegment { name "t4" children [ 
+                  Transform { translation 0.0061 1.4320 -0.0675 children [ USE jointbox ] }
+                  Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0061 1.4320 -0.0675, 0.0062 1.4583 -0.0570 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                 DEF hanim_vt3 HAnimJoint { name "vt3" center 0.0062 1.4583 -0.0570 children [ 
+                  DEF hanim_t3 HAnimSegment { name "t3" children [ 
+                   Transform { translation  0.0062 1.4583 -0.0570 children [ USE jointbox ] }
+                   Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0062 1.4583 -0.0570, 0.0063 1.4761 -0.0484 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                  DEF hanim_vt2 HAnimJoint { name "vt2" center 0.0063 1.4761 -0.0484 children [ 
+                   DEF hanim_t2 HAnimSegment { name "t2" children [ 
+                    Transform { translation 0.0063 1.4761 -0.0484 children [ USE jointbox ] }
+                    Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0063 1.4761 -0.0484, 0.0065 1.4951 -0.0387 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                   DEF hanim_vt1 HAnimJoint { name "vt1" center 0.0065 1.4951 -0.0387 children [ 
+                    DEF hanim_t1 HAnimSegment { name "t1" children [ 
+                     Transform { translation 0.0065 1.4951 -0.0387 children [ USE jointbox ] }
+                     Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0065 1.4951 -0.0387, 0.0066 1.5132 -0.0301, 0.0820 1.4488 -0.0353, -0.0694 1.4600 -0.0330 ] } coordIndex [ 0 1 -1, 0 2 -1, 0 3 -1 ] } appearance USE SegmentLine } 
+                     Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0065 1.4951 -0.0387, 0.0084 1.4714 0.0551, 0.0064 1.520 -0.0815 ] } coordIndex [ 0 1 -1, 0 2 -1 ] } appearance USE SiteParentLine } 
+                     DEF hanim_suprasternale HAnimSite { name "suprasternale" translation 0.0084 1.4714 0.0551 children [ USE sitebox ] }
+                     DEF hanim_cervicale HAnimSite { name "cervicale" translation 0.0064 1.520 -0.0815 children [ USE sitebox ] } ]}
+                    DEF hanim_vc7 HAnimJoint { name "vc7" center 0.0066 1.5132 -0.0301 children [ 
+                     DEF hanim_c7 HAnimSegment { name "c7" children [ 
+                      Transform { translation 0.0066 1.5132 -0.0301 children [ USE jointbox ] }
+                      Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0066 1.5132 -0.0301, 0.0066 1.5357 -0.0143 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } 
+                      Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0066 1.5132 -0.0301, -0.0419 1.5149 -0.0220, 0.0646 1.5141 -0.0380 ] } coordIndex [ 0 1 -1, 0 2 -1 ] } appearance USE SiteParentLine } 
+                      DEF hanim_r_neck_base HAnimSite { name "r_neck_base" translation -0.0419 1.5149 -0.0220 children [ USE sitebox ] }
+                      DEF hanim_l_neck_base HAnimSite { name "l_neck_base" translation 0.0646 1.5141 -0.0380 children [ USE sitebox ] } ]}
+                     DEF hanim_vc6 HAnimJoint { name "vc6" center 0.0066 1.5357 -0.0143 children [ 
+                      DEF hanim_c6 HAnimSegment { name "c6" children [ 
+                       Transform { translation 0.0066 1.5357 -0.0143 children [ USE jointbox ] }
+                       Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0066 1.5357 -0.0143, 0.0066 1.5520 -0.0082 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                      DEF hanim_vc5 HAnimJoint { name "vc5" center 0.0066 1.5520 -0.0082 children [ 
+                       DEF hanim_c5 HAnimSegment { name "c5" children [ 
+                        Transform { translation 0.0066 1.5520 -0.0082 children [ USE jointbox ] }
+                        Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0066 1.5520 -0.0082, 0.0066 1.5662 -0.0084 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                       DEF hanim_vc4 HAnimJoint { name "vc4" center 0.0066 1.5662 -0.0084 children [ 
+                        DEF hanim_c4 HAnimSegment { name "c4" children [ 
+                         Transform { translation 0.0066 1.5662 -0.0084 children [ USE jointbox ] }
+                         Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0066 1.5662 -0.0084, 0.0066 1.5800 -0.0103 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                        DEF hanim_vc3 HAnimJoint { name "vc3" center 0.0066 1.5800 -0.0103 children [ 
+                         DEF hanim_c3 HAnimSegment { name "c3" children [ 
+                          Transform { translation 0.0066 1.5800 -0.0103 children [ USE jointbox ] }
+                          Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0066 1.5662 -0.0084, 0.0066 1.5928 -0.0103 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                         DEF hanim_vc2 HAnimJoint { name "vc2" center 0.0066 1.5928 -0.0103 children [ 
+                          DEF hanim_c2 HAnimSegment { name "c2" children [ 
+                           Transform { translation 0.0066 1.5928 -0.0103 children [ USE jointbox ] }
+                           Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0066 1.5928 -0.0103, 0.0066 1.6144 -0.0034 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                          DEF hanim_vc1 HAnimJoint { name "vc1" center 0.0066 1.6144 -0.0034 children [ 
+                           DEF hanim_c1 HAnimSegment { name "c1" children [ 
+                            Transform { translation 0.0066 1.6144 -0.0034 children [ USE jointbox ] }
+                            Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0066 1.6144 -0.0034, 0.0044 1.6209 0.0236 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                           DEF hanim_skullbase HAnimJoint { name "skullbase" center 0.0044 1.6209 0.0236 children [ 
+                            DEF hanim_skull HAnimSegment { name "skull" children [ 
+DEF cordsysskullbase Transform { translation 0.0044 1.6209 0.0236 scale 0.175 0.175 0.175 
+ children [ Inline { url ["JointCoordinateAxes.x3dv"] } ] }
+                             Transform { translation 0.0044 1.6209 0.0236 children [ USE jointbox ] }
+                             Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0044 1.6209 0.0236,0.0336 1.6332 0.0502, -0.0236 1.6331 0.0510 ] } coordIndex [ 0 1 -1, 0 2 -1 ] } appearance USE SegmentLine }
+                             Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0044 1.6209 0.0236, 0.0050 1.7504 0.0055, 0.0058 1.6316 0.0852, -0.0237 1.6171 0.0752, 0.0341 1.6171 0.0752, 0.0061 1.5410 0.0805, -0.0646 1.6347 0.0302, -0.0520 1.5529 0.0347, 0.0739 1.6348 0.0282, 0.0631 1.5530 0.0330, 0.0039 1.5972 -0.0796 ] } coordIndex [ 0 1 -1, 0 2 -1, 0 3 -1, 0 4 -1, 0 5 -1, 0 6 -1, 0 7 -1, 0 8 -1, 0 9 -1, 0 10 -1 ] } appearance USE SiteParentLine }
+                             DEF hanim_skull_tip HAnimSite { name "skull_tip" translation 0.0050 1.7504 0.0055 children [ USE sitebox ] }
+                             DEF hanim_sellion HAnimSite { name "sellion" translation 0.0058 1.6316 0.0852 children [ USE sitebox ] }
+                             DEF hanim_r_infraorbitale HAnimSite { name "r_infraorbitale" translation  -0.0237 1.6171 0.0752 children [ USE sitebox ] }
+                             DEF hanim_l_infraorbitale HAnimSite { name "l_infraorbitale" translation 0.0341 1.6171 0.0752 children [ USE sitebox ] }
+                             DEF hanim_supramenton HAnimSite { name "supramenton" translation 0.0061 1.5410 0.0805 children [ USE sitebox ] }
+                             DEF hanim_r_tragion HAnimSite { name "r_tragion" translation -0.0646 1.6347 0.0302 children [ USE sitebox ] }
+                             DEF hanim_r_gonion HAnimSite { name "r_gonion" translation -0.0520 1.5529 0.0347 children [ USE sitebox ] }
+                             DEF hanim_l_tragion HAnimSite { name "l_tragion" translation 0.0739 1.6348 0.0282 children [ USE sitebox ] }
+                             DEF hanim_l_gonion HAnimSite { name "l_gonion" translation 0.0631 1.5530 0.0330 children [ USE sitebox ] }
+                             DEF hanim_nuchale HAnimSite { name "nuchale" translation 0.0039 1.5972 -0.0796 children [ USE sitebox ] } ]}
+                            DEF hanim_l_eyeball_joint HAnimJoint { name "l_eyeball_joint" center 0.0336 1.6332 0.0502 children [ 
+                             DEF hanim_l_eyeball HAnimSegment { name "l_eyeball" children [ 
+                              Transform { translation 0.0336 1.6332 0.0502 children [ USE jointbox ] } 
+                              Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0336 1.6332 0.0502, 0.0336 1.6332 0.0702 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]} ]}
+                            DEF hanim_r_eyeball_joint HAnimJoint { name "r_eyeball_joint" center -0.0236 1.6331 0.0510 children [ 
+                             DEF hanim_r_eyeball HAnimSegment { name "r_eyeball" children [ 
+                              Transform { translation -0.0236 1.6331 0.0510 children [ USE jointbox ] } 
+                              Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.0236 1.6331 0.0510, -0.0236 1.6331 0.0710 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]} ]} ]} ]} ]} ]} ]} ]} ]} ]}
+                    DEF hanim_l_sternoclavicular HAnimJoint { name "l_sternoclavicular" center 0.0820 1.4488 -0.0353 children [ 
+                     DEF hanim_l_clavicle HAnimSegment { name "l_clavicle" children [ 
+                      Transform { translation 0.0820 1.4488 -0.0353 children [ USE jointbox ] }
+                      Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0820 1.4488 -0.0353, 0.0962 1.4269 -0.0424 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } 
+                      Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0820 1.4488 -0.0353, 0.0271 1.4943 0.0394, 0.2032 1.4760 -0.0490, 0.1777 1.4065 -0.0075, 0.1706 1.4072 -0.0875 ] } coordIndex [ 0 1 -1, 0 2 -1, 0 3 -1, 0 4 -1 ] } appearance USE SiteParentLine } 
+                      DEF hanim_l_clavicale HAnimSite { name "l_clavicale" translation 0.0271 1.4943 0.0394 children [ USE sitebox ] }
+                      DEF hanim_l_acromion HAnimSite { name "l_acromion" translation 0.2032 1.4760 -0.0490 children [ USE sitebox ] }
+                      DEF hanim_l_axilla_ant HAnimSite { name "l_axilla_ant" translation 0.1777 1.4065 -0.0075 children [ USE sitebox ] }
+                      DEF hanim_l_axilla_post HAnimSite { name "l_axilla_post" translation 0.1706 1.4072 -0.0875 children [ USE sitebox ] } ]}
+                     DEF hanim_l_acromioclavicular HAnimJoint { name "l_acromioclavicular" center 0.0962 1.4269 -0.0424 children [ 
+                      DEF hanim_l_scapula HAnimSegment { name "l_scapula" children [ 
+                      Transform { translation 0.0962 1.4269 -0.0424 children [ USE jointbox ] }
+                      Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.0962 1.4269 -0.0424, 0.2029 1.4376 -0.0387 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                      DEF hanim_l_shoulder HAnimJoint { name "l_shoulder" center 0.2029 1.4376 -0.0387 children [ 
+                       DEF hanim_l_upperarm HAnimSegment { name "l_upperarm" children [ 
+                        Transform { translation 0.2029 1.4376 -0.0387 children [ USE jointbox ] }
+                        Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.2029 1.4376 -0.0387, 0.2014 1.1357 -0.0682 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } 
+                        Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.2029 1.4376 -0.0387, 0.2280 1.1482 -0.1100 ] } coordIndex [ 0 1 -1 ] } appearance USE SiteParentLine } 
+                        DEF hanim_l_humeral_lateral_epicn HAnimSite { name "l_humeral_lateral_epicn" translation 0.2280 1.1482 -0.1100 children [ USE sitebox ] } ]}
+                       DEF hanim_l_elbow HAnimJoint { name "l_elbow" center 0.2014 1.1357 -0.0682 children [ 
+                        DEF hanim_l_forearm HAnimSegment { name "l_forearm" children [ 
+                         Transform { translation 0.2014 1.1357 -0.0682 children [ USE jointbox ] }
+                         Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.2014 1.1357 -0.0682, 0.1984 0.8663 -0.0583 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } 
+                         Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.2014 1.1357 -0.0682, 0.1901 0.8645 -0.0415, 0.1962 1.1375 -0.1123, 0.1735 1.1272 -0.1113, 0.2182 1.1212 -0.1167  ] } coordIndex [ 0 1 -1, 0 2 -1, 0 3 -1, 0 4 -1 ] } appearance USE SiteParentLine } 
+                         DEF hanim_l_radial_styloid HAnimSite { name "l_radial_styloid" translation 0.1901 0.8645 -0.0415 children [ USE sitebox ] } 
+                         DEF hanim_l_olecranon HAnimSite { name "l_olecranon" translation 0.1962 1.1375 -0.1123 children [ USE sitebox ] }
+                         DEF hanim_l_humeral_medial_epicn HAnimSite { name "l_humeral_medial_epicn" translation 0.1735 1.1272 -0.1113 children [ USE sitebox ] }
+                         DEF hanim_l_radiale HAnimSite { name "l_radiale" translation 0.2182 1.1212 -0.1167 children [ USE sitebox ] } ]}
+                        DEF hanim_l_wrist HAnimJoint { name "l_wrist" center 0.1984 0.8663 -0.0583 children [ 
+                         DEF hanim_l_hand HAnimSegment { name "l_hand" children [ 
+                          Transform { translation  0.1984 0.8663 -0.0583 children [ USE jointbox ] }
+                          Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.1984 0.8663 -0.0583, 0.1924 0.8472 -0.0534, 0.1983 0.8024 -0.0280, 0.1987 0.8029 -0.0530, 0.1956 0.8019 -0.0794, 0.1925 0.8066 -0.1036 ] } coordIndex [ 0 1 -1, 0 2 -1, 0 3 -1, 0 4 -1, 0 5 -1 ] } appearance USE SegmentLine } 
+                          Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.1984 0.8663 -0.0583, 0.2009 0.8139 -0.0237, 0.2142 0.8529 -0.0648, 0.1929 0.7860 -0.1122  ] } coordIndex [ 0 1 -1, 0 2 -1, 0 3 -1 ] } appearance USE SiteParentLine } 
+                          DEF hanim_l_metacarpal_pha2 HAnimSite { name "l_metacarpal_pha2" translation 0.2009 0.8139 -0.0237 children [ USE sitebox ] }  
+                          DEF hanim_l_ulnar_styloid HAnimSite { name "l_ulnar_styloid" translation 0.2142 0.8529 -0.0648 children [ USE sitebox ] }
+                          DEF hanim_l_metacarpal_pha5 HAnimSite { name "l_metacarpal_pha5" translation 0.1929 0.7860 -0.1122 children [ USE sitebox ] } ]}
+                         DEF hanim_l_thumb1 HAnimJoint { name "l_thumb1" center 0.1924 0.8472 -0.0534 children [ 
+                          DEF hanim_l_thumb_metacarpal HAnimSegment { name "l_thumb_metacarpal" children [ 
+                           Transform { translation 0.1924 0.8472 -0.0534 children [ USE jointbox ] }
+                           Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.1924 0.8472 -0.0534, 0.1951 0.8226 0.0246 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                          DEF hanim_l_thumb2 HAnimJoint { name "l_thumb2" center 0.1951 0.8226 0.0246 children [ 
+                           DEF hanim_l_thumb_proximal HAnimSegment { name "l_thumb_proximal" children [ 
+                            Transform { translation 0.1951 0.8226 0.0246 children [ USE jointbox ] }
+                            Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.1951 0.8226 0.0246, 0.1955 0.8159 0.0464 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                           DEF hanim_l_thumb3 HAnimJoint { name "l_thumb3" center 0.1955 0.8159 0.0464 children [ 
+                            DEF hanim_l_thumb_distal HAnimSegment { name "l_thumb_distal" children [ 
+                             Transform { translation 0.1955 0.8159 0.0464 children [ USE jointbox ] }
+                             Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.1955 0.8159 0.0464, 0.1982 0.8061 0.0759 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } 
+                             Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.1955 0.8159 0.0464, 0.1982 0.8061 0.0759 ] } coordIndex [ 0 1 -1 ] } appearance USE SiteParentLine } 
+                             DEF hanim_l_thumb_distal_tip HAnimSite { name "l_thumb_distal_tip" translation 0.1982 0.8061 0.0759 children [ USE sitebox  ] } ]} ]} ]} ]} 
+                         DEF hanim_l_index0 HAnimJoint { name "l_index0" center 0.1983 0.8024 -0.0280 children [ 
+                          DEF hanim_l_index_metacarpal HAnimSegment { name "l_index_metacarpal" children [ 
+                           Transform { translation 0.1983 0.8024 -0.0280 children [ USE jointbox ] }
+                           Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.1983 0.8024 -0.0280, 0.1983 0.7815 -0.0280 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                          DEF hanim_l_index1 HAnimJoint { name "l_index1" center 0.1983 0.7815 -0.0280 children [ 
+                           DEF hanim_l_index_proximal HAnimSegment { name "l_index_proximal" children [ 
+                            Transform { translation  0.1983 0.7815 -0.0280 children [ USE jointbox ] }
+                            Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.1983 0.7815 -0.0280, 0.2017 0.7363 -0.0248 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                           DEF hanim_l_index2 HAnimJoint { name "l_index2" center 0.2017 0.7363 -0.0248 children [ 
+                            DEF hanim_l_index_middle HAnimSegment { name "l_index_middle" children [ 
+                             Transform { translation 0.2017 0.7363 -0.0248 children [ USE jointbox ] }
+                             Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.2017 0.7363 -0.0248, 0.2028 0.7139 -0.0236 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                            DEF hanim_l_index3 HAnimJoint { name "l_index3" center 0.2028 0.7139 -0.0236 children [ 
+                             DEF hanim_l_index_distal HAnimSegment { name "l_index_distal" children [ 
+                              Transform { translation 0.2028 0.7139 -0.0236 children [ USE jointbox ] }
+                              Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.2028 0.7139 -0.0236, 0.2089 0.6858 -0.0245 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } 
+                              Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.2028 0.7139 -0.0236, 0.2089 0.6858 -0.0245, 0.2056 0.6743 -0.0482 ] } coordIndex [ 0 1 -1, 0 2 -1 ] } appearance USE SiteParentLine } 
+                              DEF hanim_l_index_distal_tip HAnimSite { name "l_index_distal_tip" translation 0.2089 0.6858 -0.0245 children [ USE sitebox ] }
+                              DEF hanim_l_dactylion HAnimSite { name "l_dactylion" translation 0.2056 0.6743 -0.0482 children [ USE sitebox ] } ]} ]} ]} ]} ]}
+                         DEF hanim_l_middle0 HAnimJoint { name "l_middle0" center 0.1987 0.8029 -0.0530 children [ 
+                          DEF hanim_l_middle_metacarpal HAnimSegment { name "l_middle_metacarpal" children [ 
+                           Transform { translation 0.1987 0.8029 -0.0530 children [ USE jointbox ] }
+                           Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.1987 0.8029 -0.0530, 0.1987 0.7818 -0.0530 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                          DEF hanim_l_middle1 HAnimJoint { name "l_middle1" center 0.1987 0.7818 -0.0530 children [ 
+                           DEF hanim_l_middle_proximal HAnimSegment { name "l_middle_proximal" children [ 
+                            Transform { translation 0.1987 0.7818 -0.0530 children [ USE jointbox ] }
+                            Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.1987 0.7818 -0.0530, 0.2013 0.7273 -0.0503 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                           DEF hanim_l_middle2 HAnimJoint { name "l_middle2" center 0.2013 0.7273 -0.0503 children [ 
+                            DEF hanim_l_middle_middle HAnimSegment { name "l_middle_middle" children [ 
+                             Transform { translation 0.2013 0.7273 -0.0503 children [ USE jointbox ] }
+                             Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.2013 0.7273 -0.0503, 0.2026 0.7011 -0.0494 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                            DEF hanim_l_middle3 HAnimJoint { name "l_middle3" center 0.2026 0.7011 -0.0494 children [ 
+                             DEF hanim_l_middle_distal HAnimSegment { name "l_middle_distal" children [ 
+                              Transform { translation 0.2026 0.7011 -0.0494 children [ USE jointbox ] }
+                              Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.2026 0.7011 -0.0494, 0.2080 0.6731 -0.0491 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } 
+                              Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.2026 0.7011 -0.0494, 0.2080 0.6731 -0.0491 ] } coordIndex [ 0 1 -1 ] } appearance USE SiteParentLine } 
+                              DEF hanim_l_middle_distal_tip HAnimSite { name "l_middle_distal_tip" translation 0.2080 0.6731 -0.0491 children [ USE sitebox ] } ]} ]} ]} ]} ]}
+                         DEF hanim_l_ring0 HAnimJoint { name "l_ring0"center 0.1956 0.8019 -0.0794 children [ 
+                          DEF hanim_l_ring_metacarpal HAnimSegment { name "l_ring_metacarpal" children [ 
+                           Transform { translation 0.1956 0.8019 -0.0794 children [ USE jointbox ] }
+                           Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.1956 0.8019 -0.0794, 0.1956 0.7815 -0.0794 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                          DEF hanim_l_ring1 HAnimJoint { name "l_ring1" center 0.1956 0.7815 -0.0794 children [ 
+                           DEF hanim_l_ring_proximal HAnimSegment { name "l_ring_proximal" children [ 
+                            Transform { translation 0.1956 0.7815 -0.0794 children [ USE jointbox ] }
+                            Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.1956 0.7815 -0.0794, 0.1973 0.7287 -0.0777 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                           DEF hanim_l_ring2 HAnimJoint { name "l_ring2" center 0.1973 0.7287 -0.0777 children [ 
+                            DEF hanim_l_ring_middle HAnimSegment { name "l_ring_middle" children [ 
+                             Transform { translation 0.1973 0.7287 -0.0777 children [ USE jointbox ] }
+                             Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.1973 0.7287 -0.0777, 0.1983 0.7045 -0.0767 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                            DEF hanim_l_ring3 HAnimJoint { name "l_ring3" center 0.1983 0.7045 -0.0767 children [ 
+                             DEF hanim_l_ring_distal HAnimSegment { name "l_ring_distal" children [ 
+                              Transform { translation 0.1983 0.7045 -0.0767 children [ USE jointbox ] }
+                              Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.1983 0.7045 -0.0767, 0.2035 0.6750 -0.0756 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } 
+                              Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.1983 0.7045 -0.0767, 0.2035 0.6750 -0.0756 ] } coordIndex [ 0 1 -1 ] } appearance USE SiteParentLine }
+                              DEF hanim_l_ring_distal_tip HAnimSite { name "l_ring_distal_tip" translation 0.2035 0.6750 -0.0756 children [ USE sitebox ] } ]} ]} ]} ]} ]} 
+                         DEF hanim_l_pinky0 HAnimJoint { name "l_pinky0" center 0.1925 0.8066 -0.1036 children [ 
+                          DEF hanim_l_pinky_metacarpal HAnimSegment { name "l_pinky_metacarpal" children [ 
+                           Transform { translation 0.1925 0.8066 -0.1036 children [ USE jointbox ] }
+                           Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.1925 0.8066 -0.1036, 0.1925 0.7866 -0.1036 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                          DEF hanim_l_pinky1 HAnimJoint { name "l_pinky1" center 0.1925 0.7866 -0.1036 children [ 
+                           DEF hanim_l_pinky_proximal HAnimSegment { name "l_pinky_proximal" children [ 
+                            Transform { translation 0.1925 0.7866 -0.1036 children [ USE jointbox ] }
+                            Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.1925 0.7866 -0.1036, 0.1938 0.7452 -0.1024 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                           DEF hanim_l_pinky2 HAnimJoint { name "l_pinky2" center 0.1938 0.7452 -0.1024 children [ 
+                            DEF hanim_l_pinky_middle HAnimSegment { name "l_pinky_middle" children [ 
+                             Transform { translation 0.1938 0.7452 -0.1024 children [ USE jointbox ] }
+                             Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.1938 0.7452 -0.1024, 0.1948 0.7277 -0.1017 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                            DEF hanim_l_pinky3 HAnimJoint { name "l_pinky3" center 0.1948 0.7277 -0.1017 children [ 
+                             DEF hanim_l_pinky_distal HAnimSegment { name "l_pinky_distal" children [ 
+                              Transform { translation 0.1948 0.7277 -0.1017 children [ USE jointbox ] }
+                              Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.1948 0.7277 -0.1017, 0.2014 0.7009 -0.1012 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } 
+                              Shape { geometry IndexedLineSet { coord Coordinate { point [ 0.1948 0.7277 -0.1017, 0.2014 0.7009 -0.1012 ] } coordIndex [ 0 1 -1 ] } appearance USE SiteParentLine } 
+                              DEF hanim_l_pinky_distal_tip HAnimSite { name "l_pinky_distal_tip" translation 0.2014 0.7009 -0.1012 children [ USE sitebox ] } ]} ]} ]} ]} ]} ]} ]} ]} ]} ]} 
+                    DEF hanim_r_sternoclavicular HAnimJoint { name "r_sternoclavicular" center -0.0694 1.4600 -0.0330 children [ 
+                     DEF hanim_r_clavicle HAnimSegment { name "r_clavicle" children [ 
+                      Transform { translation -0.0694 1.4600 -0.0330 children [ USE jointbox ] }
+                      Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.0694 1.4600 -0.0330, -0.0836 1.4281 -0.0401 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } 
+                      Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.0694 1.4600 -0.0330, -0.0115 1.4943 0.0400, -0.1905 1.4791 -0.0431, -0.1626 1.4072 -0.0031, -0.1603 1.4098 -0.0826  ] } coordIndex [ 0 1 -1, 0 2 -1, 0 3 -1, 0 4 -1 ] } appearance USE SiteParentLine } 
+                      DEF hanim_r_clavicale HAnimSite { name "r_clavicale" translation -0.0115 1.4943 0.0400 children [ USE sitebox ] }
+                      DEF hanim_r_acromion HAnimSite { name "r_acromion" translation -0.1905 1.4791 -0.0431 children [ USE sitebox ] }
+                      DEF hanim_r_axilla_ant HAnimSite { name "r_axilla_ant" translation -0.1626 1.4072 -0.0031 children [ USE sitebox ] }
+                      DEF hanim_r_axilla_post HAnimSite { name "r_axilla_post" translation -0.1603 1.4098 -0.0826 children [ USE sitebox ] } ]}
+                     DEF hanim_r_acromioclavicular HAnimJoint { name "r_acromioclavicular" center -0.0836 1.4281 -0.0401 children [ 
+                      DEF hanim_r_scapula HAnimSegment { name "r_scapula" children [ 
+                       Transform { translation -0.0836 1.4281 -0.0401 children [ USE jointbox ] }
+                       Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.0836 1.4281 -0.0401, -0.1907 1.4407 -0.0325 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                      DEF hanim_r_shoulder HAnimJoint { name "r_shoulder" center -0.1907 1.4407 -0.0325 children [ 
+                       DEF hanim_r_upperarm HAnimSegment { name "r_upperarm" children [ 
+                        Transform { translation -0.1907 1.4407 -0.0325 children [ USE jointbox ] }
+                        Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1907 1.4407 -0.0325, -0.1949 1.1388 -0.0620 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } 
+                        Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1907 1.4407 -0.0325, -0.2224 1.1517 -0.1033 ] } coordIndex [ 0 1 -1 ] } appearance USE SiteParentLine } 
+                        DEF hanim_r_humeral_lateral_epicn HAnimSite { name "r_humeral_lateral_epicn" translation -0.2224 1.1517 -0.1033 children [ USE sitebox ] } ]}
+                       DEF hanim_r_elbow HAnimJoint { name "r_elbow" center -0.1949 1.1388 -0.0620 children [ 
+                        DEF hanim_r_forearm HAnimSegment { name "r_forearm" children [ 
+                         Transform { translation  -0.1949 1.1388 -0.0620 children [ USE jointbox ] }
+                         Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1949 1.1388 -0.0620, -0.1959 0.8694 -0.0521 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } 
+                         Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1949 1.1388 -0.0620, -0.1884 0.8676 -0.0360, -0.1907 1.1405 -0.1065, -0.1680 1.1298 -0.1062, -0.2130 1.1305 -0.1091  ] } coordIndex [ 0 1 -1, 0 2 -1, 0 3 -1, 0 4 -1 ] } appearance USE SiteParentLine } 
+                         DEF hanim_r_radial_styloid HAnimSite { name "r_radial_styloid" translation -0.1884 0.8676 -0.0360 children [ USE sitebox ] }
+                         DEF hanim_r_olecranon HAnimSite { name "r_olecranon" translation -0.1907 1.1405 -0.1065 children [ USE sitebox ] }
+                         DEF hanim_r_humeral_medial_epicn HAnimSite { name "r_humeral_medial_epicn" translation -0.1680 1.1298 -0.1062 children [ USE sitebox ] }
+                         DEF hanim_r_radiale HAnimSite { name "r_radiale" translation -0.2130 1.1305 -0.1091 children [ USE sitebox ] } ]}
+                        DEF hanim_r_wrist HAnimJoint { name "r_wrist" center -0.1959 0.8694 -0.0521 children [ 
+                         DEF hanim_r_hand HAnimSegment { name "r_hand" children [ 
+                          Transform { translation -0.1959 0.8694 -0.0521 children [ USE jointbox ] }
+                          Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1959 0.8694 -0.0521, -0.1899 0.8502 -0.0473, -0.1961 0.8055 -0.0218, -0.1972 0.8060 -0.0468, -0.1951 0.8049 -0.0732, -0.1926 0.8096 -0.0975 ] } coordIndex [ 0 1 -1, 0 2 -1, 0 3 -1, 0 4 -1, 0 5 -1 ] } appearance USE SegmentLine } 
+                          Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1959 0.8694 -0.0521, -0.1977 0.8169 -0.0177, -0.2117 0.8562 -0.0584, -0.1929 0.7890 -0.1064 ] } coordIndex [ 0 1 -1, 0 2 -1, 0 3 -1 ] } appearance USE SiteParentLine } 
+                          DEF hanim_r_metacarpal_pha2 HAnimSite { name "r_metacarpal_pha2" translation -0.1977 0.8169 -0.0177 children [ USE sitebox ] }
+                          DEF hanim_r_ulnar_styloid HAnimSite { name "r_ulnar_styloid" translation -0.2117 0.8562 -0.0584 children [ USE sitebox ] }
+                          DEF hanim_r_metacarpal_pha5 HAnimSite { name "r_metacarpal_pha5" translation -0.1929 0.7890 -0.1064 children [  USE sitebox ] } ]}
+                         DEF hanim_r_thumb1 HAnimJoint { name "r_thumb1" center -0.1899 0.8502 -0.0473 children [ 
+                          DEF hanim_r_thumb_metacarpal HAnimSegment { name "r_thumb_metacarpal" children [ 
+                           Transform { translation -0.1899 0.8502 -0.0473 children [ USE jointbox ] }
+                           Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1899 0.8502 -0.0473, -0.1874 0.8256 0.0306 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]} 
+                          DEF hanim_r_thumb2 HAnimJoint { name "r_thumb2" center -0.1874 0.8256 0.0306 children [ 
+                           DEF hanim_r_thumb_proximal HAnimSegment { name "r_thumb_proximal" children [ 
+                            Transform { translation -0.1874 0.8256 0.0306 children [ USE jointbox ] }
+                            Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1874 0.8256 0.0306, -0.1864 0.8190 0.0506 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                           DEF hanim_r_thumb3 HAnimJoint { name "r_thumb3" center -0.1864 0.8190 0.0506 children [ 
+                            DEF hanim_r_thumb_distal HAnimSegment { name "r_thumb_distal" children [ 
+                             Transform { translation -0.1864 0.8190 0.0506 children [ USE jointbox ] }
+                             Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1864 0.8190 0.0506, -0.1869 0.8090 0.0820 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } 
+                             Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1864 0.8190 0.0506, -0.1869 0.8090 0.0820 ] } coordIndex [ 0 1 -1 ] } appearance USE SiteParentLine } 
+                             DEF hanim_r_thumb_distal_tip HAnimSite { name "r_thumb_distal_tip" translation -0.1869 0.8090 0.0820 children [ USE sitebox ] } ]} ]} ]} ]} 
+                         DEF hanim_r_index0 HAnimJoint { name "r_index0" center -0.1961 0.8055 -0.0218 children [ 
+                          DEF hanim_r_index_metacarpal HAnimSegment { name "r_index_metacarpal" children [ 
+                           Transform { translation -0.1961 0.8055 -0.0218 children [ USE jointbox ] }
+                           Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1961 0.8055 -0.0218, -0.1961 0.7846 -0.0218 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                          DEF hanim_r_index1 HAnimJoint { name "r_index1" center -0.1961 0.7846 -0.0218 children [ 
+                           DEF hanim_r_index_proximal HAnimSegment { name "r_index_proximal" children [ 
+                            Transform { translation -0.1961 0.7846 -0.0218 children [ USE jointbox ] }
+                            Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1961 0.7846 -0.0218, -0.1945 0.7169 -0.0173 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                           DEF hanim_r_index2 HAnimJoint { name "r_index2" center -0.1954 0.7393 -0.0185 children [ 
+                            DEF hanim_r_index_middle HAnimSegment { name "r_index_middle" children [ 
+                             Transform { translation -0.1954 0.7393 -0.0185 children [ USE jointbox ] }
+                             Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1954 0.7393 -0.0185, -0.1945 0.7169 -0.0173 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                            DEF hanim_r_index3 HAnimJoint { name "r_index3" center -0.1945 0.7169 -0.0173 children [ 
+                             DEF hanim_r_index_distal HAnimSegment { name "r_index_distal" children [ 
+                              Transform { translation -0.1945 0.7169 -0.0173 children [ USE jointbox ] }
+                              Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1945 0.7169 -0.0173, -0.1980 0.6883 -0.0180 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } 
+                              Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1945 0.7169 -0.0173, -0.1980 0.6883 -0.0180, -0.1941 0.6772 -0.0423 ] } coordIndex [ 0 1 -1, 0 2 -1 ] } appearance USE SiteParentLine }
+                              DEF hanim_r_index_distal_tip HAnimSite { name "r_index_distal_tip" translation  -0.1980 0.6883 -0.0180 children [ USE sitebox ] }
+                              DEF hanim_r_dactylion HAnimSite { name "r_dactylion" translation -0.1941 0.6772 -0.0423 children [ USE sitebox ] } ]} ]} ]} ]} ]} 
+                         DEF hanim_r_middle0 HAnimJoint { name "r_middle0" center -0.1972 0.8060 -0.0468 children [ 
+                          DEF hanim_r_middle_metacarpal HAnimSegment { name "r_middle_metacarpal" children [ 
+                           Transform { translation -0.1972 0.8060 -0.0468 children [ USE jointbox ] }
+                           Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1972 0.8060 -0.0468, -0.1972 0.7849 -0.0468 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                          DEF hanim_r_middle1 HAnimJoint { name "r_middle1" center -0.1972 0.7849 -0.0468 children [ 
+                           DEF hanim_r_middle_proximal HAnimSegment { name "r_middle_proximal" children [ 
+                            Transform { translation -0.1972 0.7849 -0.0468 children [ USE jointbox ] }
+                            Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1972 0.7849 -0.0468, -0.1950 0.7304 -0.0441 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                           DEF hanim_r_middle2 HAnimJoint { name "r_middle2" center -0.1950 0.7304 -0.0441 children [ 
+                            DEF hanim_r_middle_middle HAnimSegment { name "r_middle_middle" children [ 
+                             Transform { translation -0.1950 0.7304 -0.0441 children [ USE jointbox ] }
+                             Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1950 0.7304 -0.0441, -0.1939 0.7042 -0.0432 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                            DEF hanim_r_middle3 HAnimJoint { name "r_middle3" center -0.1939 0.7042 -0.0432 children [ 
+                             DEF hanim_r_middle_distal HAnimSegment { name "r_middle_distal" children [ 
+                              Transform { translation -0.1939 0.7042 -0.0432 children [ USE jointbox ] } 
+                              Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1939 0.7042 -0.0432, -0.1969 0.6758 -0.0427 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } 
+                              Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1939 0.7042 -0.0432, -0.1969 0.6758 -0.0427 ] } coordIndex [ 0 1 -1 ] } appearance USE SiteParentLine } 
+                              DEF hanim_r_middle_distal_tip HAnimSite { name "r_middle_distal_tip" translation -0.1969 0.6758 -0.0427 children [ USE sitebox ] } ]} ]} ]} ]} ]} 
+                         DEF hanim_r_ring0 HAnimJoint { name "r_ring0" center -0.1951 0.8049 -0.0732 children [ 
+                         DEF hanim_r_ring_metacarpal HAnimSegment { name "r_ring_metacarpal" children [ 
+                          Transform { translation -0.1951 0.8049 -0.0732 children [ USE jointbox ] }
+                          Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1951 0.8049 -0.0732, -0.1951 0.7845 -0.0732 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                          DEF hanim_r_ring1 HAnimJoint { name "r_ring1" center -0.1951 0.7845 -0.0732 children [ 
+                           DEF hanim_r_ring_proximal HAnimSegment { name "r_ring_proximal" children [ 
+                            Transform { translation -0.1951 0.7845 -0.0732 children [ USE jointbox ] }
+                            Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1951 0.7845 -0.0732, -0.1920 0.7318 -0.0716 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                           DEF hanim_r_ring2 HAnimJoint { name "r_ring2" center -0.1920 0.7318 -0.0716 children [ 
+                            DEF hanim_r_ring_middle HAnimSegment { name "r_ring_middle" children [ 
+                             Transform { translation -0.1920 0.7318 -0.0716 children [ USE jointbox ] }
+                             Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1920 0.7318 -0.0716, -0.1908 0.7077 -0.07063 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                            DEF hanim_r_ring3 HAnimJoint { name "r_ring3" center -0.1908 0.7077 -0.0706 children [ 
+                             DEF hanim_r_ring_distal HAnimSegment { name "r_ring_distal" children [ 
+                              Transform { translation -0.1908 0.7077 -0.0706 children [ USE jointbox ] }
+                              Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1908 0.7077 -0.0706, -0.1934 0.6778 -0.0693 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } 
+                              Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1908 0.7077 -0.0706, -0.1934 0.6778 -0.0693 ] } coordIndex [ 0 1 -1 ] } appearance USE SiteParentLine } 
+                              DEF hanim_r_ring_distal_tip HAnimSite { name "r_ring_distal_tip" translation -0.1934 0.6778 -0.0693 children [ USE sitebox ] } ]} ]} ]} ]} ]} 
+                         DEF hanim_r_pinky0 HAnimJoint { name "r_pinky0" center -0.1926 0.8096 -0.0975 children [ 
+                          DEF hanim_r_pinky_metacarpal HAnimSegment { name "r_pinky_metacarpal" children [ 
+                           Transform { translation -0.1926 0.8096 -0.0975 children [ USE jointbox ] }
+                           Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1926 0.8096 -0.0975, -0.1926 0.7896 -0.0975 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                          DEF hanim_r_pinky1 HAnimJoint { name "r_pinky1" center -0.1926 0.7896 -0.0975 children [ 
+                           DEF hanim_r_pinky_proximal HAnimSegment { name "r_pinky_proximal" children [ 
+                            Transform { translation -0.1926 0.7896 -0.0975 children [ USE jointbox ] }
+                            Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1926 0.7896 -0.0975, -0.1902 0.7483 -0.0963 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                           DEF hanim_r_pinky2 HAnimJoint { name "r_pinky2" center -0.1902 0.7483 -0.0963 children [ 
+                            DEF hanim_r_pinky_middle HAnimSegment { name "r_pinky_middle" children [ 
+                             Transform { translation -0.1902 0.7483 -0.0963 children [ USE jointbox ] }
+                             Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1902 0.7483 -0.0963, -0.1908 0.7540 -0.0960 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } ]}
+                            DEF hanim_r_pinky3 HAnimJoint { name "r_pinky3" center -0.1908 0.7540 -0.0960 children [ 
+                             DEF hanim_r_pinky_distal HAnimSegment { name "r_pinky_distal" children [ 
+                              Transform { translation -0.1908 0.7540 -0.0960 children [ USE jointbox ] }
+                              Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1908 0.7540 -0.0960, -0.1938 0.7035 -0.0949 ] } coordIndex [ 0 1 -1 ] } appearance USE SegmentLine } 
+                              Shape { geometry IndexedLineSet { coord Coordinate { point [ -0.1908 0.7540 -0.0960, -0.1938 0.7035 -0.0949 ] } coordIndex [ 0 1 -1 ] } appearance USE SiteParentLine } 
+                              DEF hanim_r_pinky_distal_tip HAnimSite { name "r_pinky_distal_tip" translation -0.1938 0.7035 -0.0949 children [ USE sitebox ] } ]} ]} ]} ]} ]} ]} ]} ]} ]} ]} ]} ]} ]} ]} ]} ]} ]} ]} ]} ]} ]} ]} ]} ]} ]} ]} ]} ]} ]} ]}
+
+
+DEF SceneViewpoints Group {
+children [
+DEF Scene_InclinedView Viewpoint { description "Scene_Inclined View"
+ position 1.62 1.05 2.06 orientation -0.113 0.993 0.0347 0.671 centerOfRotation 0 0.9 0.0 }
+DEF Scene_LeftEyeView Viewpoint { description "Scene_hanim_LeftEyeView"
+ position 0.034 1.64 0.05 orientation 0 1 0 3.14 centerOfRotation 0.034 1.64 0.05 }
+DEF Scene_RightEyeView Viewpoint { description "Scene_hanim_RightEyeView"
+ position -0.034 1.64 0.05 orientation 0 1 0 3.14 centerOfRotation -0.034 1.64 0.5 }
+DEF Scene_IFrontView Viewpoint { description "Scene_Front View"
+ position 0 0.854 2.57665 orientation 0 0 1 0 centerOfRotation 0.0 0.8240 0.0 }
+DEF Scene_ISideView Viewpoint { description "Scene_Side View"
+ position 2.6 0.8 0 orientation 0 1 0 1.57 centerOfRotation 0 0.8 0.0 }
+DEF Scene_ITopView Viewpoint { description "Scene_Top View"
+ position 0 3.4495 0 orientation 1 0 0 -1.5708 centerOfRotation 0.0 1.6 0.0 }
+DEF Scene_ILeftHandFront Viewpoint { description "Scene_LeftHandFront View"
+ position 0.3 0.75 0.45 orientation 0 0 1 0 centerOfRotation 0.2 0.87 0.0 }
+DEF Scene_IRightHandFront Viewpoint { description "Scene_RightHandFront View"
+ position -0.3 0.75 0.45 orientation 0 0 1 0 centerOfRotation -0.2 0.87 0.0 }
+DEF Scene_InclinedView2 Viewpoint { description "Scene_Inclined View2"
+ position -1.62 1.05 2.06 orientation -0.113 -0.993 0.0347 0.671 centerOfRotation 0.0 0.8240 0.0277 }
+DEF Scene_IFrontView Viewpoint { description "Scene_Front View2"
+ position 0 0.854 1.575 orientation 0 0 1 0 centerOfRotation 0.0 0.8 0.0 }
+DEF Scene_ISideView Viewpoint { description "Scene_Side View2"
+ position 1.5929 0.854 0 orientation 0 1 0 1.5708 centerOfRotation 0.0 0.8 0.0 }
+DEF Scene_IHeadFront Viewpoint { description "Scene_HeadFront View"
+ position 0 1.5 1 orientation 0 0 1 0 centerOfRotation 0.0 1.5 0.0 }
+DEF Scene_IChestFront Viewpoint { description "Scene_ChestFront View"
+ position 0 1.2 1 orientation 0 0 1 0 centerOfRotation 0.0 1.2 0.0 }
+DEF Scene_IPelvisFront Viewpoint { description "Scene_PelvisFront View"
+ position 0 0.8 1 orientation 0 0 1 0 centerOfRotation 0.0 0.8 0.0 }
+DEF Scene_IKneesFront Viewpoint { description "Scene_KneesFront View"
+ position 0 0.4 1 orientation 0 0 1 0 centerOfRotation 0.0 0.4 0.0 }
+DEF Scene_IFeetFront Viewpoint { description "Scene_KneesFront View"
+ position 0 0.0 1 orientation 0 0 1 0 centerOfRotation 0.0 0.0 0.0 }
+]}
+
+
+DEF StopAnimation Group {
+ children [
+  DEF StopTimer TimeSensor { cycleInterval 5.73 enabled TRUE loop TRUE }
+  DEF Stop_HumanoidRootTransInterp PositionInterpolator { key [0,0.5,1] keyValue [0 0 0,0 0 0,0 0 0] }
+  DEF Stop_HumanoidRootRotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_sacroiliacRotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_l_hipRotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_l_kneeRotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_l_ankleRotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_l_subtalarRotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_l_midtarsalRotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_l_metatarsalRotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_r_hipRotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_r_kneeRotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_r_ankleRotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_r_subtalarRotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_r_midtarsalRotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_r_metatarsalRotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_vl5RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_vl4RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_vl3RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_vl2RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_vl1RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_vt12RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_vt11RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_vt10RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_vt9RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_vt8RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_vt7RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_vt6RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_vt5RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_vt4RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_vt3RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_vt2RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_vt1RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_vc7RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_vc6RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_vc5RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_vc4RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_vc3RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_vc2RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_vc1RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_skullbaseRotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_l_eyeball_jointRotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_r_eyeball_jointRotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_l_sternoclavicularRotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_l_acromioclavicularRotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_l_shoulderRotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_l_elbowRotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_l_wristRotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_l_thumb1RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_l_thumb2RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_l_thumb3RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_l_index0RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_l_index1RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+  DEF Stop_l_index2RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_l_index3RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_l_middle0RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_l_middle1RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_l_middle2RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_l_middle3RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_l_ring0RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_l_ring1RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_l_ring2RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_l_ring3RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_l_pinky0RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_l_pinky1RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_l_pinky2RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_l_pinky3RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_r_sternoclavicularRotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_r_acromioclavicularRotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_r_shoulderRotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_r_elbowRotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_r_wristRotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_r_thumb1RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_r_thumb2RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_r_thumb3RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_r_index0RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_r_index1RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_r_index2RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_r_index3RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_r_middle0RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_r_middle1RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_r_middle2RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_r_middle3RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_r_ring0RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_r_ring1RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_r_ring2RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_r_ring3RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_r_pinky0RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_r_pinky1RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_r_pinky2RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
+  DEF Stop_r_pinky3RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
+
+  ROUTE StopTimer.fraction_changed TO Stop_HumanoidRootTransInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_HumanoidRootRotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_sacroiliacRotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_hipRotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_kneeRotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_ankleRotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_subtalarRotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_midtarsalRotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_metatarsalRotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_hipRotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_kneeRotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_ankleRotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_subtalarRotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_midtarsalRotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_metatarsalRotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_vl5RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_vl4RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_vl3RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_vl2RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_vl1RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_vt12RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_vt11RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_vt10RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_vt9RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_vt8RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_vt7RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_vt6RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_vt5RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_vt4RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_vt3RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_vt2RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_vt1RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_vc7RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_vc6RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_vc5RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_vc4RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_vc3RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_vc2RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_vc1RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_skullbaseRotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_eyeball_jointRotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_eyeball_jointRotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_sternoclavicularRotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_acromioclavicularRotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_shoulderRotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_elbowRotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_wristRotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_thumb1RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_thumb2RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_thumb3RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_index0RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_index1RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_index2RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_index3RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_middle0RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_middle1RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_middle2RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_middle3RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_ring0RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_ring1RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_ring2RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_ring3RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_pinky0RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_pinky1RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_pinky2RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_l_pinky3RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_sternoclavicularRotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_acromioclavicularRotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_shoulderRotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_elbowRotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_wristRotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_thumb1RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_thumb2RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_thumb3RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_index0RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_index1RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_index2RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_index3RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_middle0RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_middle1RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_middle2RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_middle3RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_ring0RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_ring1RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_ring2RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_ring3RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_pinky0RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_pinky1RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_pinky2RotInterp.set_fraction
+  ROUTE StopTimer.fraction_changed TO Stop_r_pinky3RotInterp.set_fraction
+  ROUTE Stop_HumanoidRootTransInterp.value_changed TO hanim_HumanoidRoot.translation
+  ROUTE Stop_HumanoidRootRotInterp.value_changed TO hanim_HumanoidRoot.rotation
+  ROUTE Stop_sacroiliacRotInterp.value_changed TO hanim_sacroiliac.rotation
+  ROUTE Stop_l_hipRotInterp.value_changed TO hanim_l_hip.rotation
+  ROUTE Stop_l_kneeRotInterp.value_changed TO hanim_l_knee.rotation
+  ROUTE Stop_l_ankleRotInterp.value_changed TO hanim_l_ankle.rotation
+  ROUTE Stop_l_subtalarRotInterp.value_changed TO hanim_l_subtalar.rotation
+  ROUTE Stop_l_midtarsalRotInterp.value_changed TO hanim_l_midtarsal.rotation
+  ROUTE Stop_l_metatarsalRotInterp.value_changed TO hanim_l_metatarsal.rotation
+  ROUTE Stop_r_hipRotInterp.value_changed TO hanim_r_hip.rotation
+  ROUTE Stop_r_kneeRotInterp.value_changed TO hanim_r_knee.rotation
+  ROUTE Stop_r_ankleRotInterp.value_changed TO hanim_r_ankle.rotation
+  ROUTE Stop_r_subtalarRotInterp.value_changed TO hanim_r_subtalar.rotation
+  ROUTE Stop_r_midtarsalRotInterp.value_changed TO hanim_r_midtarsal.rotation
+  ROUTE Stop_r_metatarsalRotInterp.value_changed TO hanim_r_metatarsal.rotation
+  ROUTE Stop_vl5RotInterp.value_changed TO hanim_vl5.rotation
+  ROUTE Stop_vl4RotInterp.value_changed TO hanim_vl4.rotation
+  ROUTE Stop_vl3RotInterp.value_changed TO hanim_vl3.rotation
+  ROUTE Stop_vl2RotInterp.value_changed TO hanim_vl2.rotation
+  ROUTE Stop_vl1RotInterp.value_changed TO hanim_vl1.rotation
+  ROUTE Stop_vt12RotInterp.value_changed TO hanim_vt12.rotation
+  ROUTE Stop_vt11RotInterp.value_changed TO hanim_vt11.rotation
+  ROUTE Stop_vt10RotInterp.value_changed TO hanim_vt10.rotation
+  ROUTE Stop_vt9RotInterp.value_changed TO hanim_vt9.rotation
+  ROUTE Stop_vt8RotInterp.value_changed TO hanim_vt8.rotation
+  ROUTE Stop_vt7RotInterp.value_changed TO hanim_vt7.rotation
+  ROUTE Stop_vt6RotInterp.value_changed TO hanim_vt6.rotation
+  ROUTE Stop_vt5RotInterp.value_changed TO hanim_vt5.rotation
+  ROUTE Stop_vt4RotInterp.value_changed TO hanim_vt4.rotation
+  ROUTE Stop_vt3RotInterp.value_changed TO hanim_vt3.rotation
+  ROUTE Stop_vt2RotInterp.value_changed TO hanim_vt2.rotation
+  ROUTE Stop_vt1RotInterp.value_changed TO hanim_vt1.rotation
+  ROUTE Stop_vc7RotInterp.value_changed TO hanim_vc7.rotation
+  ROUTE Stop_vc6RotInterp.value_changed TO hanim_vc6.rotation
+  ROUTE Stop_vc5RotInterp.value_changed TO hanim_vc5.rotation
+  ROUTE Stop_vc4RotInterp.value_changed TO hanim_vc4.rotation
+  ROUTE Stop_vc3RotInterp.value_changed TO hanim_vc3.rotation
+  ROUTE Stop_vc2RotInterp.value_changed TO hanim_vc2.rotation
+  ROUTE Stop_vc1RotInterp.value_changed TO hanim_vc1.rotation
+  ROUTE Stop_skullbaseRotInterp.value_changed TO hanim_skullbase.rotation
+  ROUTE Stop_l_eyeball_jointRotInterp.value_changed TO hanim_l_eyeball_joint.rotation
+  ROUTE Stop_r_eyeball_jointRotInterp.value_changed TO hanim_r_eyeball_joint.rotation
+  ROUTE Stop_l_sternoclavicularRotInterp.value_changed TO hanim_l_sternoclavicular.rotation
+  ROUTE Stop_l_acromioclavicularRotInterp.value_changed TO hanim_l_acromioclavicular.rotation
+  ROUTE Stop_l_shoulderRotInterp.value_changed TO hanim_l_shoulder.rotation
+  ROUTE Stop_l_elbowRotInterp.value_changed TO hanim_l_elbow.rotation
+  ROUTE Stop_l_wristRotInterp.value_changed TO hanim_l_wrist.rotation
+  ROUTE Stop_l_thumb1RotInterp.value_changed TO hanim_l_thumb1.rotation
+  ROUTE Stop_l_thumb2RotInterp.value_changed TO hanim_l_thumb2.rotation
+  ROUTE Stop_l_thumb3RotInterp.value_changed TO hanim_l_thumb3.rotation
+  ROUTE Stop_l_index0RotInterp.value_changed TO hanim_l_index0.rotation
+  ROUTE Stop_l_index1RotInterp.value_changed TO hanim_l_index1.rotation
+  ROUTE Stop_l_index2RotInterp.value_changed TO hanim_l_index2.rotation
+  ROUTE Stop_l_index3RotInterp.value_changed TO hanim_l_index3.rotation
+  ROUTE Stop_l_middle0RotInterp.value_changed TO hanim_l_middle0.rotation
+  ROUTE Stop_l_middle1RotInterp.value_changed TO hanim_l_middle1.rotation
+  ROUTE Stop_l_middle2RotInterp.value_changed TO hanim_l_middle2.rotation
+  ROUTE Stop_l_middle3RotInterp.value_changed TO hanim_l_middle3.rotation
+  ROUTE Stop_l_ring0RotInterp.value_changed TO hanim_l_ring0.rotation
+  ROUTE Stop_l_ring1RotInterp.value_changed TO hanim_l_ring1.rotation
+  ROUTE Stop_l_ring2RotInterp.value_changed TO hanim_l_ring2.rotation
+  ROUTE Stop_l_ring3RotInterp.value_changed TO hanim_l_ring3.rotation
+  ROUTE Stop_l_pinky0RotInterp.value_changed TO hanim_l_pinky0.rotation
+  ROUTE Stop_l_pinky1RotInterp.value_changed TO hanim_l_pinky1.rotation
+  ROUTE Stop_l_pinky2RotInterp.value_changed TO hanim_l_pinky2.rotation
+  ROUTE Stop_l_pinky3RotInterp.value_changed TO hanim_l_pinky3.rotation
+  ROUTE Stop_r_sternoclavicularRotInterp.value_changed TO hanim_r_sternoclavicular.rotation
+  ROUTE Stop_r_acromioclavicularRotInterp.value_changed TO hanim_r_acromioclavicular.rotation
+  ROUTE Stop_r_shoulderRotInterp.value_changed TO hanim_r_shoulder.rotation
+  ROUTE Stop_r_elbowRotInterp.value_changed TO hanim_r_elbow.rotation
+  ROUTE Stop_r_wristRotInterp.value_changed TO hanim_r_wrist.rotation
+  ROUTE Stop_r_thumb1RotInterp.value_changed TO hanim_r_thumb1.rotation
+  ROUTE Stop_r_thumb2RotInterp.value_changed TO hanim_r_thumb2.rotation
+  ROUTE Stop_r_thumb3RotInterp.value_changed TO hanim_r_thumb3.rotation
+  ROUTE Stop_r_index0RotInterp.value_changed TO hanim_r_index0.rotation
+  ROUTE Stop_r_index1RotInterp.value_changed TO hanim_r_index1.rotation
+  ROUTE Stop_r_index2RotInterp.value_changed TO hanim_r_index2.rotation
+  ROUTE Stop_r_index3RotInterp.value_changed TO hanim_r_index3.rotation
+  ROUTE Stop_r_middle0RotInterp.value_changed TO hanim_r_middle0.rotation
+  ROUTE Stop_r_middle1RotInterp.value_changed TO hanim_r_middle1.rotation
+  ROUTE Stop_r_middle2RotInterp.value_changed TO hanim_r_middle2.rotation
+  ROUTE Stop_r_middle3RotInterp.value_changed TO hanim_r_middle3.rotation
+  ROUTE Stop_r_ring0RotInterp.value_changed TO hanim_r_ring0.rotation
+  ROUTE Stop_r_ring1RotInterp.value_changed TO hanim_r_ring1.rotation
+  ROUTE Stop_r_ring2RotInterp.value_changed TO hanim_r_ring2.rotation
+  ROUTE Stop_r_ring3RotInterp.value_changed TO hanim_r_ring3.rotation
+  ROUTE Stop_r_pinky0RotInterp.value_changed TO hanim_r_pinky0.rotation
+  ROUTE Stop_r_pinky1RotInterp.value_changed TO hanim_r_pinky1.rotation
+  ROUTE Stop_r_pinky2RotInterp.value_changed TO hanim_r_pinky2.rotation
+  ROUTE Stop_r_pinky3RotInterp.value_changed TO hanim_r_pinky3.rotation
+ ]
+}
+
+DEF StandAnimation Group {
+ children [
+DEF StandTimer TimeSensor { cycleInterval 5.73 loop TRUE enabled TRUE }
+DEF Stand_r_metatarsalPitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.7, 1 ] keyValue [ 1 0 0 0, -1 0 0 0.015 1 0 0 0.17, -1 0 0 0.025, 1 0 0 0.01, 1 0 0 0 ]}
+DEF Stand_r_ankleRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Stand_r_kneeRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Stand_r_hipRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Stand_l_ankleRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Stand_l_kneeRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Stand_l_hipRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0  ] }
+DEF Stand_r_wristRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 -1 0.25, 0 0 1 0 ] }
+DEF Stand_r_elbowRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Stand_r_shoulderRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Stand_l_wristRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Stand_l_elbowRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Stand_l_shoulderRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Stand_headRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Stand_neckRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, -1 0 0 0.5, 0 0 1 0 ] }
+DEF Stand_l_eyeballRotInterp OrientationInterpolator { key [ 0, 0.4, 0.7, 1 ] keyValue [ 0 0 1 0, -1 0 0 0.5, 1 0 0 0.45, 0 0 1 0 ] }
+DEF Stand_r_eyeballRotInterp OrientationInterpolator { key [ 0, 0.4, 0.7, 1 ] keyValue [ 0 0 1 0, -1 0 0 0.5, 1 0 0 0.45, 0 0 1 0 ] }
+DEF Stand_lower_bodyRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Stand_upper_bodyRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Stand_whole_bodyRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Stand_whole_bodyTransInterp PositionInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 0, 0 0 0, 0 0 0 ] }
+DEF Stand_l_sternoclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Stand_l_acromioclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Stand_r_sternoclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Stand_r_acromioclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Stand_sacroiliacYaw OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Stand_vl5Yaw OrientationInterpolator { key [ 0, 0.2, 0.4, 0.5, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Stand_vc6Yaw OrientationInterpolator { key [0, 0.2, 0.4, 0.5, 0.6, 0.8, 1 ] keyValue [ 0 1 0 0, 0 1 0 0, 0 1 0 0, 0 1 0 0, -1 0 0 0, 0 -1 0 0, 0 1 0 0 ]}
+DEF Stand_l_thumb1Pitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [  0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Stand_r_thumb1Pitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 1 0 0 0, 1 0 0 0.5, 1 0 0 0.1, 1 0 0 0.27, 1 0 0 0.2, 1 0 0 0 ]}
+DEF Stand_r_index1Roll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.5, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0.1, 0 0 1 0.2, 0 0 1 0.3, 0 0 1 0, 0 0 1 0 ]}
+DEF Stand_r_index2Roll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.5, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0.4, 0 0 1 0.32, 0 0 1 0.25, 0 0 1 0.2, 0 0 1 0 ]}
+DEF Stand_r_index3Roll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.5, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0.2, 0 0 1 0.3, 0 0 1 0.35, 0 0 1 0.2, 0 0 1 0 ]}
+
+# ex Stand_
+ROUTE StandTimer.fraction_changed TO Stand_r_ankleRotInterp.set_fraction
+ROUTE StandTimer.fraction_changed TO Stand_r_kneeRotInterp.set_fraction
+ROUTE StandTimer.fraction_changed TO Stand_r_hipRotInterp.set_fraction
+ROUTE StandTimer.fraction_changed TO Stand_l_ankleRotInterp.set_fraction
+ROUTE StandTimer.fraction_changed TO Stand_l_kneeRotInterp.set_fraction
+ROUTE StandTimer.fraction_changed TO Stand_l_hipRotInterp.set_fraction
+ROUTE StandTimer.fraction_changed TO Stand_lower_bodyRotInterp.set_fraction
+ROUTE StandTimer.fraction_changed TO Stand_r_wristRotInterp.set_fraction
+ROUTE StandTimer.fraction_changed TO Stand_r_elbowRotInterp.set_fraction
+ROUTE StandTimer.fraction_changed TO Stand_r_shoulderRotInterp.set_fraction
+ROUTE StandTimer.fraction_changed TO Stand_l_wristRotInterp.set_fraction
+ROUTE StandTimer.fraction_changed TO Stand_l_elbowRotInterp.set_fraction
+ROUTE StandTimer.fraction_changed TO Stand_l_shoulderRotInterp.set_fraction
+ROUTE StandTimer.fraction_changed TO Stand_headRotInterp.set_fraction
+ROUTE StandTimer.fraction_changed TO Stand_neckRotInterp.set_fraction
+ROUTE StandTimer.fraction_changed TO Stand_l_eyeballRotInterp.set_fraction
+ROUTE StandTimer.fraction_changed TO Stand_r_eyeballRotInterp.set_fraction
+ROUTE StandTimer.fraction_changed TO Stand_upper_bodyRotInterp.set_fraction
+ROUTE StandTimer.fraction_changed TO Stand_whole_bodyRotInterp.set_fraction
+ROUTE StandTimer.fraction_changed TO Stand_whole_bodyTransInterp.set_fraction
+ROUTE StandTimer.fraction_changed TO Stand_l_sternoclavicularRoll.set_fraction 
+ROUTE StandTimer.fraction_changed TO Stand_l_acromioclavicularRoll.set_fraction 
+ROUTE StandTimer.fraction_changed TO Stand_r_sternoclavicularRoll.set_fraction 
+ROUTE StandTimer.fraction_changed TO Stand_r_acromioclavicularRoll.set_fraction 
+ROUTE StandTimer.fraction_changed TO Stand_r_metatarsalPitch.set_fraction 
+ROUTE StandTimer.fraction_changed TO Stand_sacroiliacYaw.set_fraction 
+ROUTE StandTimer.fraction_changed TO Stand_vl5Yaw.set_fraction 
+ROUTE StandTimer.fraction_changed TO Stand_vc6Yaw.set_fraction 
+ROUTE StandTimer.fraction_changed TO Stand_l_thumb1Pitch.set_fraction 
+ROUTE StandTimer.fraction_changed TO Stand_r_thumb1Pitch.set_fraction
+ROUTE StandTimer.fraction_changed TO Stand_r_index1Roll.set_fraction
+ROUTE StandTimer.fraction_changed TO Stand_r_index2Roll.set_fraction
+ROUTE StandTimer.fraction_changed TO Stand_r_index3Roll.set_fraction
+
+# ex Stand_
+ROUTE Stand_r_ankleRotInterp.value_changed TO hanim_r_ankle.rotation
+ROUTE Stand_r_kneeRotInterp.value_changed TO hanim_r_knee.rotation
+ROUTE Stand_r_hipRotInterp.value_changed TO hanim_r_hip.rotation
+ROUTE Stand_l_ankleRotInterp.value_changed TO hanim_l_ankle.rotation
+ROUTE Stand_l_kneeRotInterp.value_changed TO hanim_l_knee.rotation
+ROUTE Stand_l_hipRotInterp.value_changed TO hanim_l_hip.rotation
+ROUTE Stand_r_wristRotInterp.value_changed TO hanim_r_wrist.rotation
+ROUTE Stand_r_elbowRotInterp.value_changed TO hanim_r_elbow.rotation
+ROUTE Stand_r_shoulderRotInterp.value_changed TO hanim_r_shoulder.rotation
+ROUTE Stand_l_wristRotInterp.value_changed TO hanim_l_wrist.rotation
+ROUTE Stand_l_elbowRotInterp.value_changed TO hanim_l_elbow.rotation
+ROUTE Stand_l_shoulderRotInterp.value_changed TO hanim_l_shoulder.rotation
+ROUTE Stand_headRotInterp.value_changed TO hanim_skullbase.rotation
+ROUTE Stand_neckRotInterp.value_changed TO hanim_vc7.rotation
+ROUTE Stand_l_eyeballRotInterp.value_changed TO hanim_l_eyeball_joint.rotation
+ROUTE Stand_r_eyeballRotInterp.value_changed TO hanim_r_eyeball_joint.rotation
+ROUTE Stand_upper_bodyRotInterp.value_changed TO hanim_vl1.rotation
+ROUTE Stand_lower_bodyRotInterp.value_changed TO hanim_sacroiliac.rotation
+ROUTE Stand_whole_bodyRotInterp.value_changed TO hanim_HumanoidRoot.rotation
+ROUTE Stand_whole_bodyTransInterp.value_changed TO hanim_HumanoidRoot.translation
+ROUTE Stand_l_sternoclavicularRoll.value_changed TO hanim_l_sternoclavicular.rotation
+ROUTE Stand_l_acromioclavicularRoll.value_changed TO hanim_l_acromioclavicular.rotation
+ROUTE Stand_r_sternoclavicularRoll.value_changed TO hanim_r_sternoclavicular.rotation
+ROUTE Stand_r_acromioclavicularRoll.value_changed TO hanim_r_acromioclavicular.rotation
+ROUTE Stand_r_metatarsalPitch.value_changed TO hanim_l_metatarsal.rotation 
+ROUTE Stand_r_metatarsalPitch.value_changed TO hanim_r_metatarsal.rotation 
+ROUTE Stand_sacroiliacYaw.value_changed TO hanim_sacroiliac.rotation 
+ROUTE Stand_vl5Yaw.value_changed TO hanim_vl5.rotation 
+ROUTE Stand_vc6Yaw.value_changed TO hanim_vc6.rotation 
+ROUTE Stand_l_thumb1Pitch.value_changed TO hanim_l_thumb1.rotation
+ROUTE Stand_r_thumb1Pitch.value_changed TO hanim_r_thumb1.rotation
+ROUTE Stand_r_index1Roll.value_changed TO hanim_r_index1.rotation
+ROUTE Stand_r_index2Roll.value_changed TO hanim_r_index2.rotation
+ROUTE Stand_r_index2Roll.value_changed TO hanim_r_index3.rotation
+ROUTE Stand_r_index1Roll.value_changed TO hanim_r_middle1.rotation
+ROUTE Stand_r_index2Roll.value_changed TO hanim_r_middle2.rotation
+ROUTE Stand_r_index2Roll.value_changed TO hanim_r_middle3.rotation
+ROUTE Stand_r_index1Roll.value_changed TO hanim_r_ring1.rotation
+ROUTE Stand_r_index2Roll.value_changed TO hanim_r_ring2.rotation
+ROUTE Stand_r_index2Roll.value_changed TO hanim_r_ring3.rotation
+ROUTE Stand_r_index1Roll.value_changed TO hanim_r_pinky1.rotation
+ROUTE Stand_r_index2Roll.value_changed TO hanim_r_pinky2.rotation
+ROUTE Stand_r_index2Roll.value_changed TO hanim_r_pinky3.rotation
+]}
+
+DEF PitchesAnimation Group {
+ children [
+DEF PitchTimer TimeSensor { cycleInterval 5.73 loop TRUE enabled TRUE }
+DEF Pitch_r_metatarsalPitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.7, 1 ] keyValue [ 1 0 0 0, -1 0 0 0.5 -1 0 0 0.7, 1 0 0 0.75, -1 0 0 0.2, 1 0 0 0 ]}
+DEF Pitches_r_ankleRotInterp OrientationInterpolator { key [ 0, 0.25 0.5, 0.75 1 ] keyValue [ 0 0 1 0, 1 0 0 1.5, 0 0 1 0, -1 0 0 1.5, 0 0 1 0 ] }
+DEF Pitches_r_kneeRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Pitches_r_hipRotInterp OrientationInterpolator { key [ 0, 0.25 0.5, 0.75 1 ] keyValue [ 0 0 1 0, -1 0 0 1.5, 0 0 1 0, 1 0 0 1.5, 0 0 1 0 ] }
+DEF Pitches_l_ankleRotInterp OrientationInterpolator { key [ 0, 0.25 0.5, 0.75 1 ] keyValue [ 0 0 1 0, -1 0 0 1.5, 0 0 1 0, 1 0 0 1.5, 0 0 1 0 ] }
+DEF Pitches_l_kneeRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Pitches_l_hipRotInterp OrientationInterpolator { key [ 0, 0.25 0.5, 0.75 1 ] keyValue [0 0 1 0, 1 0 0 1.5, 0 0 1 0, -1 0 0 1.5, 0 0 1 0 ] }
+DEF Pitches_r_wristRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Pitches_r_elbowRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Pitches_r_shoulderRotInterp OrientationInterpolator { key [ 0, 0.25 0.5, 0.75 1 ] keyValue [0 0 1 0, 1 0 0 1.5, 0 0 1 0, -1 0 0 1.5, 0 0 1 0 ] }
+DEF Pitches_l_wristRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Pitches_l_elbowRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Pitches_l_shoulderRotInterp OrientationInterpolator { key [ 0, 0.25 0.5, 0.75 1 ] keyValue [0 0 1 0, -1 0 0 1.5, 0 0 1 0, 1 0 0 1.5, 0 0 1 0 ] }
+DEF Pitches_headRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Pitches_neckRotInterp OrientationInterpolator { key [ 0, 0.25, 0.55, 1 ] keyValue [ 0 0 1 0, 1 0 0 0.55, -1 0 0 1.05, 0 0 1 0 ] }
+DEF Pitches_lower_bodyRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Pitches_upper_bodyRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Pitches_whole_bodyRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Pitches_whole_bodyTransInterp PositionInterpolator { key [ 0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1 ] keyValue [ 0 0 0, 0 -0.15 0, 0 -0.7 0, 0 -0.15 0, 0 0 0, 0 -0.15 0, 0 -0.7 0, 0 -0.15 0, 0 0 0 ] }
+DEF Pitch_l_sternoclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Pitch_l_acromioclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Pitch_r_sternoclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Pitch_r_acromioclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Pitch_sacroiliacYaw OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Pitch_vl5Yaw OrientationInterpolator { key [ 0, 0.2, 0.4, 0.5, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Pitch_vc6Yaw OrientationInterpolator { key [0, 0.2, 0.4, 0.5, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Pitch_l_thumb1Pitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 1 0 0 0, 1 0 0 0.25, 1 0 0 0.3, 1 0 0 0.27, 1 0 0 0.2, 1 0 0 0 ]}
+DEF Pitch_r_thumb1Pitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 1 0 0 0, 1 0 0 0.25, 1 0 0 0.3, 1 0 0 0.27, 1 0 0 0.2, 1 0 0 0 ]}
+# ex Pitches_
+ROUTE PitchTimer.fraction_changed TO Pitches_r_ankleRotInterp.set_fraction
+ROUTE PitchTimer.fraction_changed TO Pitches_r_kneeRotInterp.set_fraction
+ROUTE PitchTimer.fraction_changed TO Pitches_r_hipRotInterp.set_fraction
+ROUTE PitchTimer.fraction_changed TO Pitches_l_ankleRotInterp.set_fraction
+ROUTE PitchTimer.fraction_changed TO Pitches_l_kneeRotInterp.set_fraction
+ROUTE PitchTimer.fraction_changed TO Pitches_l_hipRotInterp.set_fraction
+ROUTE PitchTimer.fraction_changed TO Pitches_lower_bodyRotInterp.set_fraction
+ROUTE PitchTimer.fraction_changed TO Pitches_r_wristRotInterp.set_fraction
+ROUTE PitchTimer.fraction_changed TO Pitches_r_elbowRotInterp.set_fraction
+ROUTE PitchTimer.fraction_changed TO Pitches_r_shoulderRotInterp.set_fraction
+ROUTE PitchTimer.fraction_changed TO Pitches_l_wristRotInterp.set_fraction
+ROUTE PitchTimer.fraction_changed TO Pitches_l_elbowRotInterp.set_fraction
+ROUTE PitchTimer.fraction_changed TO Pitches_l_shoulderRotInterp.set_fraction
+ROUTE PitchTimer.fraction_changed TO Pitches_headRotInterp.set_fraction
+ROUTE PitchTimer.fraction_changed TO Pitches_neckRotInterp.set_fraction
+ROUTE PitchTimer.fraction_changed TO Pitches_upper_bodyRotInterp.set_fraction
+ROUTE PitchTimer.fraction_changed TO Pitches_whole_bodyRotInterp.set_fraction
+ROUTE PitchTimer.fraction_changed TO Pitches_whole_bodyTransInterp.set_fraction
+ROUTE PitchTimer.fraction_changed TO Pitch_l_sternoclavicularRoll.set_fraction 
+ROUTE PitchTimer.fraction_changed TO Pitch_l_acromioclavicularRoll.set_fraction 
+ROUTE PitchTimer.fraction_changed TO Pitch_r_sternoclavicularRoll.set_fraction 
+ROUTE PitchTimer.fraction_changed TO Pitch_r_acromioclavicularRoll.set_fraction 
+ROUTE PitchTimer.fraction_changed TO Pitch_r_metatarsalPitch.set_fraction 
+ROUTE PitchTimer.fraction_changed TO Pitch_sacroiliacYaw.set_fraction 
+ROUTE PitchTimer.fraction_changed TO Pitch_vl5Yaw.set_fraction 
+ROUTE PitchTimer.fraction_changed TO Pitch_vc6Yaw.set_fraction 
+ROUTE PitchTimer.fraction_changed TO Pitch_l_thumb1Pitch.set_fraction 
+ROUTE PitchTimer.fraction_changed TO Pitch_r_thumb1Pitch.set_fraction 
+# ex Pitches_
+ROUTE Pitches_r_ankleRotInterp.value_changed TO hanim_r_ankle.rotation
+ROUTE Pitches_r_kneeRotInterp.value_changed TO hanim_r_knee.rotation
+ROUTE Pitches_r_hipRotInterp.value_changed TO hanim_r_hip.rotation
+ROUTE Pitches_l_ankleRotInterp.value_changed TO hanim_l_ankle.rotation
+ROUTE Pitches_l_kneeRotInterp.value_changed TO hanim_l_knee.rotation
+ROUTE Pitches_l_hipRotInterp.value_changed TO hanim_l_hip.rotation
+ROUTE Pitches_lower_bodyRotInterp.value_changed TO hanim_sacroiliac.rotation
+ROUTE Pitches_r_wristRotInterp.value_changed TO hanim_r_wrist.rotation
+ROUTE Pitches_r_elbowRotInterp.value_changed TO hanim_r_elbow.rotation
+ROUTE Pitches_r_shoulderRotInterp.value_changed TO hanim_r_shoulder.rotation
+ROUTE Pitches_l_wristRotInterp.value_changed TO hanim_l_wrist.rotation
+ROUTE Pitches_l_elbowRotInterp.value_changed TO hanim_l_elbow.rotation
+ROUTE Pitches_l_shoulderRotInterp.value_changed TO hanim_l_shoulder.rotation
+ROUTE Pitches_headRotInterp.value_changed TO hanim_skullbase.rotation
+ROUTE Pitches_neckRotInterp.value_changed TO hanim_vc4.rotation
+ROUTE Pitches_upper_bodyRotInterp.value_changed TO hanim_vl1.rotation
+ROUTE Pitches_whole_bodyRotInterp.value_changed TO hanim_HumanoidRoot.rotation
+ROUTE Pitches_whole_bodyTransInterp.value_changed TO hanim_HumanoidRoot.translation
+ROUTE Pitch_l_sternoclavicularRoll.value_changed TO hanim_l_sternoclavicular.rotation
+ROUTE Pitch_l_acromioclavicularRoll.value_changed TO hanim_l_acromioclavicular.rotation
+ROUTE Pitch_r_sternoclavicularRoll.value_changed TO hanim_r_sternoclavicular.rotation
+ROUTE Pitch_r_acromioclavicularRoll.value_changed TO hanim_r_acromioclavicular.rotation
+ROUTE Pitch_r_metatarsalPitch.value_changed TO hanim_l_metatarsal.rotation 
+ROUTE Pitch_r_metatarsalPitch.value_changed TO hanim_r_metatarsal.rotation 
+ROUTE Pitch_sacroiliacYaw.value_changed TO hanim_sacroiliac.rotation 
+ROUTE Pitch_vl5Yaw.value_changed TO hanim_vl5.rotation 
+ROUTE Pitch_vc6Yaw.value_changed TO hanim_vc6.rotation 
+ROUTE Pitch_l_thumb1Pitch.value_changed TO hanim_l_thumb1.rotation
+ROUTE Pitch_r_thumb1Pitch.value_changed TO hanim_r_thumb1.rotation
+]}
+
+DEF YawsAnimation Group {
+ children [
+DEF YawTimer TimeSensor { cycleInterval 5.73 loop TRUE enabled TRUE }
+DEF Yaw_r_metatarsalPitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.7, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Yaws_r_ankleRotInterp OrientationInterpolator { key [ 0, 0.25 0.5, 0.75 1 ] keyValue [ 0 0 1 0, 0 -1 0 1.5, 0 0 1 0, 0 1 0 1.5, 0 0 1 0 ] }
+DEF Yaws_r_kneeRotInterp OrientationInterpolator { key [ 0, 0.25 0.5, 0.75 1 ] keyValue [ 0 0 1 0, 0 1 0 1.5, 0 0 1 0, 0 -1 0 1.5, 0 0 1 0 ] }
+DEF Yaws_r_hipRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Yaws_l_ankleRotInterp OrientationInterpolator { key [ 0, 0.25 0.5, 0.75 1 ] keyValue [ 0 0 1 0, 0 1 0 1.5, 0 0 1 0, 0 -1 0 1.5, 0 0 1 0 ] }
+DEF Yaws_l_kneeRotInterp OrientationInterpolator { key [ 0, 0.25 0.5, 0.75 1 ] keyValue [ 0 0 1 0, 0 -1 0 1.5, 0 0 1 0, 0 1 0 1.5, 0 0 1 0 ] }
+DEF Yaws_l_hipRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Yaws_r_wristRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Yaws_r_elbowRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Yaws_r_shoulderRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Yaws_l_wristRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Yaws_l_elbowRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Yaws_l_shoulderRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Yaws_headRotInterp OrientationInterpolator { key [0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Yaws_neckRotInterp OrientationInterpolator { key [ 0, 0.25 0.5, 0.75 1 ] keyValue [ 0 0 1 0, 0 1 0 1.5, 0 0 1 0, 0 -1 0 1.5, 0 0 1 0 ] }
+DEF Yaws_upper_bodyRotInterp OrientationInterpolator { key [ 0, 0.25 0.5, 0.75 1 ] keyValue [ 0 0 1 0, 0 -1 0 1.5, 0 0 1 0, 0 1 0 1.5, 0 0 1 0 ] }
+DEF Yaws_lower_bodyRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Yaws_whole_bodyRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Yaws_whole_bodyTransInterp PositionInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 0, 0 0 0, 0 0 0 ] }
+DEF Yaw_l_sternoclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Yaw_l_acromioclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Yaw_r_sternoclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Yaw_r_acromioclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Yaw_sacroiliacYaw OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 1 0 0, 0 -1 0 0.1, 0 1 0 0, 0 1 0 0.24, 0 -1 0 0.4, 0 1 0 0 ]}
+DEF Yaw_vl5Yaw OrientationInterpolator { key [ 0, 0.2, 0.4, 0.5, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Yaw_vc6Yaw OrientationInterpolator { key [0, 0.2, 0.4, 0.5, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Yaw_l_thumb1Pitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Yaw_r_thumb1Pitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+# ex Yaws_
+ROUTE YawTimer.fraction_changed TO Yaws_r_ankleRotInterp.set_fraction
+ROUTE YawTimer.fraction_changed TO Yaws_r_kneeRotInterp.set_fraction
+ROUTE YawTimer.fraction_changed TO Yaws_r_hipRotInterp.set_fraction
+ROUTE YawTimer.fraction_changed TO Yaws_l_ankleRotInterp.set_fraction
+ROUTE YawTimer.fraction_changed TO Yaws_l_kneeRotInterp.set_fraction
+ROUTE YawTimer.fraction_changed TO Yaws_l_hipRotInterp.set_fraction
+ROUTE YawTimer.fraction_changed TO Yaws_lower_bodyRotInterp.set_fraction
+ROUTE YawTimer.fraction_changed TO Yaws_r_wristRotInterp.set_fraction
+ROUTE YawTimer.fraction_changed TO Yaws_r_elbowRotInterp.set_fraction
+ROUTE YawTimer.fraction_changed TO Yaws_r_shoulderRotInterp.set_fraction
+ROUTE YawTimer.fraction_changed TO Yaws_l_wristRotInterp.set_fraction
+ROUTE YawTimer.fraction_changed TO Yaws_l_elbowRotInterp.set_fraction
+ROUTE YawTimer.fraction_changed TO Yaws_l_shoulderRotInterp.set_fraction
+ROUTE YawTimer.fraction_changed TO Yaws_headRotInterp.set_fraction
+ROUTE YawTimer.fraction_changed TO Yaws_neckRotInterp.set_fraction
+ROUTE YawTimer.fraction_changed TO Yaws_upper_bodyRotInterp.set_fraction
+ROUTE YawTimer.fraction_changed TO Yaws_whole_bodyRotInterp.set_fraction
+ROUTE YawTimer.fraction_changed TO Yaws_whole_bodyTransInterp.set_fraction
+ROUTE YawTimer.fraction_changed TO Yaw_l_sternoclavicularRoll.set_fraction 
+ROUTE YawTimer.fraction_changed TO Yaw_l_acromioclavicularRoll.set_fraction 
+ROUTE YawTimer.fraction_changed TO Yaw_r_sternoclavicularRoll.set_fraction 
+ROUTE YawTimer.fraction_changed TO Yaw_r_acromioclavicularRoll.set_fraction 
+ROUTE YawTimer.fraction_changed TO Yaw_r_metatarsalPitch.set_fraction 
+ROUTE YawTimer.fraction_changed TO Yaw_sacroiliacYaw.set_fraction 
+ROUTE YawTimer.fraction_changed TO Yaw_vl5Yaw.set_fraction 
+ROUTE YawTimer.fraction_changed TO Yaw_vc6Yaw.set_fraction 
+ROUTE YawTimer.fraction_changed TO Yaw_l_thumb1Pitch.set_fraction 
+ROUTE YawTimer.fraction_changed TO Yaw_r_thumb1Pitch.set_fraction 
+# ex Yaws_
+ROUTE Yaws_r_ankleRotInterp.value_changed TO hanim_r_ankle.rotation
+ROUTE Yaws_r_kneeRotInterp.value_changed TO hanim_r_knee.rotation
+ROUTE Yaws_r_hipRotInterp.value_changed TO hanim_r_hip.rotation
+ROUTE Yaws_l_ankleRotInterp.value_changed TO hanim_l_ankle.rotation
+ROUTE Yaws_l_kneeRotInterp.value_changed TO hanim_l_knee.rotation
+ROUTE Yaws_l_hipRotInterp.value_changed TO hanim_l_hip.rotation
+ROUTE Yaws_lower_bodyRotInterp.value_changed TO hanim_sacroiliac.rotation
+ROUTE Yaws_r_wristRotInterp.value_changed TO hanim_r_wrist.rotation
+ROUTE Yaws_r_elbowRotInterp.value_changed TO hanim_r_elbow.rotation
+ROUTE Yaws_r_shoulderRotInterp.value_changed TO hanim_r_shoulder.rotation
+ROUTE Yaws_l_wristRotInterp.value_changed TO hanim_l_wrist.rotation
+ROUTE Yaws_l_elbowRotInterp.value_changed TO hanim_l_elbow.rotation
+ROUTE Yaws_l_shoulderRotInterp.value_changed TO hanim_l_shoulder.rotation
+ROUTE Yaws_headRotInterp.value_changed TO hanim_skullbase.rotation
+ROUTE Yaws_neckRotInterp.value_changed TO hanim_vc4.rotation
+ROUTE Yaws_upper_bodyRotInterp.value_changed TO hanim_vl1.rotation
+ROUTE Yaws_whole_bodyRotInterp.value_changed TO hanim_HumanoidRoot.rotation
+ROUTE Yaws_whole_bodyTransInterp.value_changed TO hanim_HumanoidRoot.translation
+ROUTE Yaw_l_sternoclavicularRoll.value_changed TO hanim_l_sternoclavicular.rotation
+ROUTE Yaw_l_acromioclavicularRoll.value_changed TO hanim_l_acromioclavicular.rotation
+ROUTE Yaw_r_sternoclavicularRoll.value_changed TO hanim_r_sternoclavicular.rotation
+ROUTE Yaw_r_acromioclavicularRoll.value_changed TO hanim_r_acromioclavicular.rotation
+ROUTE Yaw_r_metatarsalPitch.value_changed TO hanim_l_metatarsal.rotation 
+ROUTE Yaw_r_metatarsalPitch.value_changed TO hanim_r_metatarsal.rotation 
+ROUTE Yaw_sacroiliacYaw.value_changed TO hanim_sacroiliac.rotation 
+ROUTE Yaw_vl5Yaw.value_changed TO hanim_vl5.rotation 
+ROUTE Yaw_vc6Yaw.value_changed TO hanim_vc6.rotation 
+ROUTE Yaw_l_thumb1Pitch.value_changed TO hanim_l_thumb1.rotation
+ROUTE Yaw_r_thumb1Pitch.value_changed TO hanim_r_thumb1.rotation
+]}
+
+DEF RollsAnimation Group {
+ children [
+DEF RollTimer TimeSensor { cycleInterval 5.73 loop TRUE enabled TRUE }
+DEF Roll_r_metatarsalPitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.7, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Rolls_r_ankleRotInterp OrientationInterpolator { key [ 0, 0.25 0.5, 0.75 1 ] keyValue [ 0 0 1 0, 0 0 1 1.5, 0 0 1 0, 0 0 1 1.5, 0 0 1 0 ] }
+DEF Rolls_r_kneeRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Rolls_r_hipRotInterp OrientationInterpolator { key [ 0, 0.25 0.5, 0.75 1 ] keyValue [ 0 0 -1 0, 0 0 -1 1.5, 0 0 1 0, 0 0 -1 1.5, 0 0 1 0 ] }
+DEF Rolls_l_ankleRotInterp OrientationInterpolator { key [ 0, 0.25 0.5, 0.75 1 ] keyValue [ 0 0 1 0, 0 0 -1 1.5, 0 0 1 0, 0 0 -1 1.5, 0 0 1 0 ] }
+DEF Rolls_l_kneeRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Rolls_l_hipRotInterp OrientationInterpolator { key [ 0, 0.25 0.5, 0.75 1 ] keyValue [ 0 0 1 0, 0 0 1 1.5, 0 0 1 0, 0 0 1 1.5, 0 0 1 0 ] }
+DEF Rolls_r_wristRotInterp OrientationInterpolator { key [ 0, 0.25 0.5, 0.75 1 ] keyValue [ 0 0 1 0, 0 0 -1 1.5, 0 0 1 0, 0 0 1 1.5, 0 0 1 0 ] }
+DEF Rolls_r_elbowRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Rolls_r_shoulderRotInterp OrientationInterpolator { key [ 0, 0.25 0.5, 0.75 1 ] keyValue [ 0 0 1 0, 0 0 -1 1.5, 0 0 -1 3, 0 0 -1 1.5, 0 0 1 0 ] }
+DEF Rolls_l_wristRotInterp OrientationInterpolator { key [ 0, 0.25 0.5, 0.75 1 ] keyValue [ 0 0 1 0, 0 0 1 1.5, 0 0 1 0, 0 0 -1 1.5, 0 0 1 0 ] }
+DEF Rolls_l_elbowRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Rolls_l_shoulderRotInterp OrientationInterpolator { key [ 0, 0.25 0.5, 0.75 1 ] keyValue [ 0 0 1 0, 0 0 1 1.5, 0 0 1 3, 0 0 1 1.5, 0 0 1 0 ] }
+DEF Rolls_headRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Rolls_neckRotInterp OrientationInterpolator { key [ 0, 0.25 0.5, 0.75 1 ] keyValue [ 0 0 1 0, 0 0 1 1.25, 0 0 1 0, 0 0 -1 1.25, 0 0 1 0 ] }
+DEF Rolls_lower_bodyRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Rolls_upper_bodyRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Rolls_whole_bodyRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Rolls_whole_bodyTransInterp PositionInterpolator { key [ 0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1 ] keyValue [ 0 0 0, 0 -0.25 0, 0 -0.8 0, 0 -0.25 0, 0 0 0, 0 -0.25 0, 0 -0.8 0, 0 -0.25 0, 0 0 0 ] }
+DEF Roll_l_sternoclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0.2, 0 0 1 0.22, 0 0 1 0.2, 0 0 1 0, 0 0 1 0 ]}
+DEF Roll_l_acromioclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1  0.05, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Roll_r_sternoclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 -0.2, 0 0 1 -0.22, 0 0 1 -0.2, 0 0 1 0, 0 0 1 0 ]}
+DEF Roll_r_acromioclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 -0.05, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Roll_sacroiliacYaw OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Roll_vl5Yaw OrientationInterpolator { key [ 0, 0.2, 0.4, 0.5, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Roll_vc6Yaw OrientationInterpolator { key [0, 0.2, 0.4, 0.5, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Roll_l_thumb1Pitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Roll_r_thumb1Pitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+# ex Rolls_
+ROUTE RollTimer.fraction_changed TO Rolls_r_ankleRotInterp.set_fraction
+ROUTE RollTimer.fraction_changed TO Rolls_r_kneeRotInterp.set_fraction
+ROUTE RollTimer.fraction_changed TO Rolls_r_hipRotInterp.set_fraction
+ROUTE RollTimer.fraction_changed TO Rolls_l_ankleRotInterp.set_fraction
+ROUTE RollTimer.fraction_changed TO Rolls_l_kneeRotInterp.set_fraction
+ROUTE RollTimer.fraction_changed TO Rolls_l_hipRotInterp.set_fraction
+ROUTE RollTimer.fraction_changed TO Rolls_lower_bodyRotInterp.set_fraction
+ROUTE RollTimer.fraction_changed TO Rolls_r_wristRotInterp.set_fraction
+ROUTE RollTimer.fraction_changed TO Rolls_r_elbowRotInterp.set_fraction
+ROUTE RollTimer.fraction_changed TO Rolls_r_shoulderRotInterp.set_fraction
+ROUTE RollTimer.fraction_changed TO Rolls_l_wristRotInterp.set_fraction
+ROUTE RollTimer.fraction_changed TO Rolls_l_elbowRotInterp.set_fraction
+ROUTE RollTimer.fraction_changed TO Rolls_l_shoulderRotInterp.set_fraction
+ROUTE RollTimer.fraction_changed TO Rolls_headRotInterp.set_fraction
+ROUTE RollTimer.fraction_changed TO Rolls_neckRotInterp.set_fraction
+ROUTE RollTimer.fraction_changed TO Rolls_upper_bodyRotInterp.set_fraction
+ROUTE RollTimer.fraction_changed TO Rolls_whole_bodyRotInterp.set_fraction
+ROUTE RollTimer.fraction_changed TO Rolls_whole_bodyTransInterp.set_fraction
+ROUTE RollTimer.fraction_changed TO Roll_l_sternoclavicularRoll.set_fraction 
+ROUTE RollTimer.fraction_changed TO Roll_l_acromioclavicularRoll.set_fraction 
+ROUTE RollTimer.fraction_changed TO Roll_r_sternoclavicularRoll.set_fraction 
+ROUTE RollTimer.fraction_changed TO Roll_r_acromioclavicularRoll.set_fraction 
+ROUTE RollTimer.fraction_changed TO Roll_r_metatarsalPitch.set_fraction 
+ROUTE RollTimer.fraction_changed TO Roll_sacroiliacYaw.set_fraction 
+ROUTE RollTimer.fraction_changed TO Roll_vl5Yaw.set_fraction 
+ROUTE RollTimer.fraction_changed TO Roll_vc6Yaw.set_fraction 
+ROUTE RollTimer.fraction_changed TO Roll_l_thumb1Pitch.set_fraction 
+ROUTE RollTimer.fraction_changed TO Roll_r_thumb1Pitch.set_fraction 
+# ex Rolls_
+ROUTE Rolls_r_ankleRotInterp.value_changed TO hanim_r_ankle.rotation
+ROUTE Rolls_r_kneeRotInterp.value_changed TO hanim_r_knee.rotation
+ROUTE Rolls_r_hipRotInterp.value_changed TO hanim_r_hip.rotation
+ROUTE Rolls_l_ankleRotInterp.value_changed TO hanim_l_ankle.rotation
+ROUTE Rolls_l_kneeRotInterp.value_changed TO hanim_l_knee.rotation
+ROUTE Rolls_l_hipRotInterp.value_changed TO hanim_l_hip.rotation
+ROUTE Rolls_lower_bodyRotInterp.value_changed TO hanim_sacroiliac.rotation
+ROUTE Rolls_r_wristRotInterp.value_changed TO hanim_r_wrist.rotation
+ROUTE Rolls_r_elbowRotInterp.value_changed TO hanim_r_elbow.rotation
+ROUTE Rolls_r_shoulderRotInterp.value_changed TO hanim_r_shoulder.rotation
+ROUTE Rolls_l_wristRotInterp.value_changed TO hanim_l_wrist.rotation
+ROUTE Rolls_l_elbowRotInterp.value_changed TO hanim_l_elbow.rotation
+ROUTE Rolls_l_shoulderRotInterp.value_changed TO hanim_l_shoulder.rotation
+ROUTE Rolls_headRotInterp.value_changed TO hanim_skullbase.rotation
+ROUTE Rolls_neckRotInterp.value_changed TO hanim_vc4.rotation
+ROUTE Rolls_upper_bodyRotInterp.value_changed TO hanim_vl1.rotation
+ROUTE Rolls_whole_bodyRotInterp.value_changed TO hanim_HumanoidRoot.rotation
+ROUTE Rolls_whole_bodyTransInterp.value_changed TO hanim_HumanoidRoot.translation 
+ROUTE Roll_l_sternoclavicularRoll.value_changed TO hanim_l_sternoclavicular.rotation
+ROUTE Roll_l_acromioclavicularRoll.value_changed TO hanim_l_acromioclavicular.rotation
+ROUTE Roll_r_sternoclavicularRoll.value_changed TO hanim_r_sternoclavicular.rotation
+ROUTE Roll_r_acromioclavicularRoll.value_changed TO hanim_r_acromioclavicular.rotation
+ROUTE Roll_r_metatarsalPitch.value_changed TO hanim_l_metatarsal.rotation 
+ROUTE Roll_r_metatarsalPitch.value_changed TO hanim_r_metatarsal.rotation 
+ROUTE Roll_sacroiliacYaw.value_changed TO hanim_sacroiliac.rotation 
+ROUTE Roll_vl5Yaw.value_changed TO hanim_vl5.rotation 
+ROUTE Roll_vc6Yaw.value_changed TO hanim_vc6.rotation 
+ROUTE Roll_l_thumb1Pitch.value_changed TO hanim_l_thumb1.rotation
+ROUTE Roll_r_thumb1Pitch.value_changed TO hanim_r_thumb1.rotation
+]}
+
+DEF WalkAnimation Group {
+ children [
+DEF WalkTimer TimeSensor { cycleInterval 1.73 loop TRUE enabled TRUE }
+DEF Walk_r_metatarsalPitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.7, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Walk_r_ankleRotInterp OrientationInterpolator { key [ 0, 0.125, 0.2083, 0.375, 0.4583, 0.5, 0.6667, 0.75, 0.7917, 0.9167, 1 ] keyValue [ 0 0 1 0, -1 0 0 0.3533, -1 0 0 0.1072, 1 0 0 0.2612, 1 0 0 0.1268, -1 0 0 0.01793, -1 0 0 0.05824, -1 0 0 0.2398, -1 0 0 0.35, -1 0 0 0.3322, 0 0 1 0 ] }
+DEF Walk_r_kneeRotInterp OrientationInterpolator { key [ 0, 0.125, 0.2083, 0.2917, 0.375, 0.5, 0.6667, 0.7917, 0.9167, 1 ] keyValue [ 1 0 0 0.8573, 1 0 0 0.8926, 1 0 0 0.5351, 1 0 0 0.1756, 1 0 0 0.1194, 1 0 0 0.3153, 1 0 0 0.09354, 1 0 0 0.08558, 1 0 0 0.2475, 1 0 0 0.8573 ] }
+DEF Walk_r_hipRotInterp OrientationInterpolator { key [ 0, 0.125, 0.2083, 0.2917, 0.375, 0.5, 0.6667, 0.7917, 0.9167, 1 ] keyValue [ -0.5831 0.03511 0.8116 0.1481, -0.995 0.02296 0.09674 0.4683, -1 0.00192 0.007964 0.4732, -0.998 -0.0158 -0.06102 0.5079, -0.9911 -0.03541 -0.1286 0.5419, -0.9131 -0.06243 -0.403 0.3361, -0.4306 -0.07962 -0.899 0.07038, 1 0 0 0.2571, 0.9891 -0.02805 0.1444 0.3879, -0.5831 0.03511 0.8116 0.1481 ] }
+DEF Walk_l_ankleRotInterp OrientationInterpolator { key [ 0, 0.125, 0.2083, 0.375, 0.6667, 0.9167, 1 ] keyValue [ -1 0 0 0.06714, -1 0 0 0.2152, -1 0 0 0.3184, -1 0 0 0.4717,  -1 0 0 0.2912, 1 0 0 0.1222, -1 0 0 0.06714 ] }
+DEF Walk_l_kneeRotInterp OrientationInterpolator { key [ 0, 0.2083, 0.375, 0.5, 0.6667, 0.7917, 0.9167, 1 ] keyValue [ 1 0 0 0.3226, 1 0 0 0.1556, 1 0 0 0.08678, 1 0 0 0.8751, 1 0 0 1.131, 1 0 0 0.09961, 1 0 0 0.3942, 1 0 0 0.3226 ] }
+DEF Walk_l_hipRotInterp OrientationInterpolator { key [ 0, 0.25, 0.375, 0.5, 0.6667, 0.7917, 0.9167, 1 ] keyValue [ -0.873 0.06094 0.484 0.2865, 0.9963 -0.01057 0.08481 0.2488, 0.9965 0.01591 -0.08222 0.3836, -0.7018 -0.03223 -0.7117 0.1289, -1 0 0 0.5518, -0.9964 0.02231 0.0817 0.5351, -0.9809 0.04912 0.1881 0.5204, -0.873 0.06094 0.484 0.2865 ] }
+DEF Walk_lower_bodyRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 -1 0.1056, 0 0 1 0.09018, 0 0 -1 0.1056 ] }
+DEF Walk_r_wristRotInterp OrientationInterpolator { key [ 0, 0.375, 0.9167, 1 ] keyValue [ -0.8129 0.4759 -0.3357 0.1346, 0.1533 -0.9878 0.02582 0.3902, -0.5701 0.7604 -0.311 0.366, -0.8129 0.4759 -0.3357 0.1346 ] }
+DEF Walk_r_elbowRotInterp OrientationInterpolator { key [ 0, 0.375, 0.9167, 1 ] keyValue [ -1 0 0 0.411508, -1 0 0 0.0925011, -1 0 0 0.572568, -1 0 0 0.411508 ] }
+DEF Walk_r_shoulderRotInterp OrientationInterpolator { key [ 0, 0.375, 0.9167, 1 ] keyValue [ -1 0 0 0.09346, 1 0 0 0.3197, -1 0 0 0.1564, -1 0 0 0.09346 ] }
+DEF Walk_l_wristRotInterp OrientationInterpolator { key [ 0, 0.375, 0.9167, 1 ] keyValue [ 0 -1 0 0.461076, -0.330195 -0.927451 0.175516 0.538852, 0.0327774 -0.999314 -0.0172185 0.492033, 0 -1 0 0.461076 ] }
+DEF Walk_l_elbowRotInterp OrientationInterpolator { key [ 0, 0.375, 0.9167, 1 ] keyValue [ -1 0 0 0.0659878, -1 0 0 0.488383, -1 0 0 0.0177536, -1 0 0 0.0659878 ] }
+DEF Walk_l_shoulderRotInterp OrientationInterpolator { key [ 0, 0.375, 0.9167, 1 ] keyValue [ 1 0 0 0.1189, -1 0 0 0.1861, 1 0 0 0.3357, 1 0 0 0.1189 ] }
+DEF Walk_headRotInterp OrientationInterpolator { key [ 0, 0.375, 0.4167, 0.5, 0.5833, 0.6667, 0.75, 0.8333, 0.9167, 1 ] keyValue [ 0 -1 0 0.08642, 0 1 0 0.1825, 0 1 0 0.1505, 0 1 0 0.1053, 0 1 0 0.04391, 0 -1 0 0.03119, 0 -1 0 0.07936, 0 -1 0 0.1616, 0 -1 0 0.155, 0 -1 0 0.08642 ] }
+DEF Walk_neckRotInterp OrientationInterpolator { key [ 0, 1 ] keyValue [ 0 0 1 0, 0 0 1 0 ] }
+DEF Walk_upper_bodyRotInterp OrientationInterpolator { key [ 0, 0.2083, 0.375, 0.75, 0.8333, 1 ] keyValue [ 0 1 0 0.0826, -0.01972 -0.5974 0.8017 0.08231, 0.009296 -0.9648 0.2627 0.1734, -0.01238 0.9549 -0.2968 0.08732, -0.008125 0.9691 -0.2463 0.158, 0 1 0 0.0826 ] }
+DEF Walk_whole_bodyRotInterp OrientationInterpolator { key [ 0, 1 ] keyValue [ 0 0 1 0, 0 0 1 0 ] }
+DEF Walk_whole_bodyTranInterp PositionInterpolator { key [ 0, 0.04167, 0.125, 0.1667, 0.2083, 0.25, 0.2917, 0.375, 0.4583, 0.5, 0.5417, 0.5833, 0.625, 0.7083, 0.75, 0.7917, 0.875, 0.9167, 1 ] keyValue [ 0 -0.00928 0, 0 -0.003858 0, 0 -0.008847 0, 0 -0.01486 0, 0 -0.02641 0, 0 -0.03934 0, 0 -0.0502 0, 0 -0.07469 0, 0 -0.02732 0, 0 -0.01608 0, 0 -0.01129 0, 0 -0.005819 0, 0 -0.002004 0, 0 -0.002579 0, 0 -0.0143 0, 0 -0.03799 0, 0 -0.05648 0, 0 -0.045 0, 0 -0.00928 0 ] }
+DEF Walk_l_sternoclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Walk_l_acromioclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Walk_r_sternoclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Walk_r_acromioclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Walk_sacroiliacYaw OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Walk_vl5Yaw OrientationInterpolator { key [ 0, 0.2, 0.4, 0.5, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Walk_vc6Yaw OrientationInterpolator { key [0, 0.2, 0.4, 0.5, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Walk_l_thumb1Pitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 1 0 0 0, 1 0 0 0.25, 1 0 0 0.5, 1 0 0 0.7, 1 0 0 0.2, 1 0 0 0 ]}
+DEF Walk_r_thumb1Pitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 1 0 0 0, 1 0 0 0.25, 1 0 0 0.5, 1 0 0 0.7, 1 0 0 0.2, 1 0 0 0 ]}
+# ex Walk_
+ROUTE WalkTimer.fraction_changed TO Walk_r_ankleRotInterp.set_fraction
+ROUTE WalkTimer.fraction_changed TO Walk_r_kneeRotInterp.set_fraction
+ROUTE WalkTimer.fraction_changed TO Walk_r_hipRotInterp.set_fraction
+ROUTE WalkTimer.fraction_changed TO Walk_l_ankleRotInterp.set_fraction
+ROUTE WalkTimer.fraction_changed TO Walk_l_kneeRotInterp.set_fraction
+ROUTE WalkTimer.fraction_changed TO Walk_l_hipRotInterp.set_fraction
+ROUTE WalkTimer.fraction_changed TO Walk_lower_bodyRotInterp.set_fraction
+ROUTE WalkTimer.fraction_changed TO Walk_r_wristRotInterp.set_fraction
+ROUTE WalkTimer.fraction_changed TO Walk_r_elbowRotInterp.set_fraction
+ROUTE WalkTimer.fraction_changed TO Walk_r_shoulderRotInterp.set_fraction
+ROUTE WalkTimer.fraction_changed TO Walk_l_wristRotInterp.set_fraction
+ROUTE WalkTimer.fraction_changed TO Walk_l_elbowRotInterp.set_fraction
+ROUTE WalkTimer.fraction_changed TO Walk_l_shoulderRotInterp.set_fraction
+ROUTE WalkTimer.fraction_changed TO Walk_headRotInterp.set_fraction
+ROUTE WalkTimer.fraction_changed TO Walk_neckRotInterp.set_fraction
+ROUTE WalkTimer.fraction_changed TO Walk_upper_bodyRotInterp.set_fraction
+ROUTE WalkTimer.fraction_changed TO Walk_whole_bodyRotInterp.set_fraction
+ROUTE WalkTimer.fraction_changed TO Walk_whole_bodyTranInterp.set_fraction
+ROUTE WalkTimer.fraction_changed TO Walk_l_sternoclavicularRoll.set_fraction 
+ROUTE WalkTimer.fraction_changed TO Walk_l_acromioclavicularRoll.set_fraction 
+ROUTE WalkTimer.fraction_changed TO Walk_r_sternoclavicularRoll.set_fraction 
+ROUTE WalkTimer.fraction_changed TO Walk_r_acromioclavicularRoll.set_fraction 
+ROUTE WalkTimer.fraction_changed TO Walk_r_metatarsalPitch.set_fraction 
+ROUTE WalkTimer.fraction_changed TO Walk_sacroiliacYaw.set_fraction 
+ROUTE WalkTimer.fraction_changed TO Walk_vl5Yaw.set_fraction 
+ROUTE WalkTimer.fraction_changed TO Walk_vc6Yaw.set_fraction 
+ROUTE WalkTimer.fraction_changed TO Walk_l_thumb1Pitch.set_fraction 
+ROUTE WalkTimer.fraction_changed TO Walk_r_thumb1Pitch.set_fraction
+# ex Walk_
+ROUTE Walk_r_ankleRotInterp.value_changed TO hanim_r_ankle.rotation
+ROUTE Walk_r_kneeRotInterp.value_changed TO hanim_r_knee.rotation
+ROUTE Walk_r_hipRotInterp.value_changed TO hanim_r_hip.rotation
+ROUTE Walk_l_ankleRotInterp.value_changed TO hanim_l_ankle.rotation
+ROUTE Walk_l_kneeRotInterp.value_changed TO hanim_l_knee.rotation
+ROUTE Walk_l_hipRotInterp.value_changed TO hanim_l_hip.rotation
+ROUTE Walk_lower_bodyRotInterp.value_changed TO hanim_sacroiliac.rotation
+ROUTE Walk_r_wristRotInterp.value_changed TO hanim_r_wrist.rotation
+ROUTE Walk_r_elbowRotInterp.value_changed TO hanim_r_elbow.rotation
+ROUTE Walk_r_shoulderRotInterp.value_changed TO hanim_r_shoulder.rotation
+ROUTE Walk_l_wristRotInterp.value_changed TO hanim_l_wrist.rotation
+ROUTE Walk_l_elbowRotInterp.value_changed TO hanim_l_elbow.rotation
+ROUTE Walk_l_shoulderRotInterp.value_changed TO hanim_l_shoulder.rotation
+ROUTE Walk_headRotInterp.value_changed TO hanim_skullbase.rotation
+ROUTE Walk_neckRotInterp.value_changed TO hanim_vc4.rotation
+ROUTE Walk_upper_bodyRotInterp.value_changed TO hanim_vl1.rotation
+ROUTE Walk_whole_bodyRotInterp.value_changed TO hanim_HumanoidRoot.rotation
+ROUTE Walk_whole_bodyTranInterp.value_changed TO hanim_HumanoidRoot.translation
+ROUTE Walk_l_sternoclavicularRoll.value_changed TO hanim_l_sternoclavicular.rotation
+ROUTE Walk_l_acromioclavicularRoll.value_changed TO hanim_l_acromioclavicular.rotation
+ROUTE Walk_r_sternoclavicularRoll.value_changed TO hanim_r_sternoclavicular.rotation
+ROUTE Walk_r_acromioclavicularRoll.value_changed TO hanim_r_acromioclavicular.rotation
+ROUTE Walk_r_metatarsalPitch.value_changed TO hanim_l_metatarsal.rotation 
+ROUTE Walk_r_metatarsalPitch.value_changed TO hanim_r_metatarsal.rotation 
+ROUTE Walk_sacroiliacYaw.value_changed TO hanim_sacroiliac.rotation 
+ROUTE Walk_vl5Yaw.value_changed TO hanim_vl5.rotation 
+ROUTE Walk_vc6Yaw.value_changed TO hanim_vc6.rotation 
+ROUTE Walk_l_thumb1Pitch.value_changed TO hanim_l_thumb1.rotation
+ROUTE Walk_r_thumb1Pitch.value_changed TO hanim_r_thumb1.rotation
+]}
+
+DEF RunAnimation Group {
+ children [
+DEF RunTimer TimeSensor { cycleInterval 0.9 loop TRUE enabled TRUE }
+DEF Run_r_metatarsalPitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.7, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Run_l_hipRotInterp_Run OrientationInterpolator { key [ 0, 0.2182, 0.4909, 0.7455, 1 ] keyValue [ -0.99 0.033 0.040 1.42, -0.99 0.1328 0.067 0.42,  0.99 0.014 0.009 0.9, -0.99 0.0703 0.05 0.70, -0.99 0.033 0.040 1.42 ] }
+DEF Run_l_kneeRotInterp_Run OrientationInterpolator { key [ 0, 0.2182, 0.4909, 0.7455, 1 ] keyValue [ 1 0 0 1.01, 1 0 0 0.426, 1 0 0 0.705, 1 0 0 2.179, 1 0 0 1.01 ] }
+DEF Run_l_ankleRotInterp_Run OrientationInterpolator { key [ 0, 0.22, 0.30, 0.4, 1 ] keyValue [ 1 0 0 0.0374, -1 0 0 0.1037, -1 0 0 0.4328, 1 0 0 0.1929, 1 0 0 0.03574 ] }
+DEF Run_r_hipRotInterp_Run OrientationInterpolator { key [ 0, 0.2545, 0.4909, 0.7091, 1 ] keyValue [ 0.99 -0.014  0.009 0.9, -0.99 -0.0703 -0.05  0.70, -0.99 -0.033  0.040 1.42,  -0.99 -0.1328 -0.067 0.42,  0.99 -0.014  0.009 0.9, ] }
+DEF Run_r_kneeRotInterp_Run OrientationInterpolator { key [ 0, 0.2545, 0.4909, 0.7091, 1 ] keyValue [ 1 0 0 0.705, 1 0 0 2.179, 1 0 0 1.01, 1 0 0 0.426, 1 0 0 0.705 ] }
+DEF Run_r_ankleRotInterp_Run OrientationInterpolator { key [ 0, 0.4, 0.71, 0.8, 0.82, 1 ] keyValue [ 1 0 0 0.2323, -1 0 0 0.07843, -1 0 0 0.32, -1 0 0 0.374, -1 0 0 0.3478, 1 0 0 0.2323 ] }
+DEF Run_l_shoulderRotInterp_Run OrientationInterpolator { key [ 0, 0.2182, 0.4909, 0.7455, 1 ] keyValue [  0.99 -0.074 0.25 1.5,  0.99 -0.092 0.44 0.3, -0.99  0.136 0.25 0.85,  0.99 -0.081 0.38 0.4,  0.99 -0.074 0.25 1.5 ] }
+DEF Run_l_elbowRotInterp_Run OrientationInterpolator { key [ 0, 0.2182, 0.4909, 0.7455, 1 ] keyValue [ -1 0 0 1.85 -0.99 -0.19  0.18 1.35 -1 0 0 0.975 -0.99 -0.09 -0.02 1.55 -1 0 0 1.85 ] }
+DEF Run_l_wristRotInterp_Run OrientationInterpolator { key [ 0, 0.25 0.5 0.75 1 ] keyValue [ -0.25 -1.0 0.08 0.14, 0.25 1.0 0.08 0.14, 0 0 1 0, -0.25 1.0 0.08 -0.14, -0.25 1.0 0.08 0.14 ] }
+DEF Run_r_shoulderRotInterp_Run OrientationInterpolator { key [ 0, 0.2545, 0.4909, 0.7091, 1 ] keyValue [ -0.99  -0.136 -0.25 0.85, 0.99  0.081 -0.38 0.4,  0.99  0.074 -0.25 1.5,  0.99  0.081 -0.38 0.4, -0.99  -0.136 -0.25 0.85 ] }
+DEF Run_r_elbowRotInterp_Run OrientationInterpolator { key [ 0, 0.2545, 0.4909, 0.7091, 1 ] keyValue [ -1 0 0 0.975, -0.99 0.09 0.02 1.55, -1 0 0 1.85, -0.99 0.19 -0.18 1.35, -1 0 0 0.975 ] }
+DEF Run_r_wristRotInterp_Run OrientationInterpolator { key [ 0, 1 ] keyValue [ -0.917742 -0.237244 -0.318536 0.214273, -0.917742 -0.237244 -0.318536 0.214273 ] }
+DEF Run_lower_bodyRotInterp_Run OrientationInterpolator { key [ 0, 0.2182, 0.4909, 0.7455, 1 ] keyValue [ 0  -1 0 0.125 0 0 1 0 0  1 0 0.125 0 0 1 0 0 -1 0 0.125 ] }
+DEF Run_headRotInterp_Run OrientationInterpolator { key [ 0, 0.2545, 0.4909, 0.7091, 1  ] keyValue [ 1 0 0 0.08, 1 0 0 0.12, 1 0 0 0.30, 1 0 0 0.30, 1 0 0 0.08 ] }
+DEF Run_neckRotInterp_Run OrientationInterpolator { key [ 0, 0.2545, 0.4909, 0.7091, 1 ] keyValue [  0.7   0.0 0.0 0.40,  -0.7  -0.7 0.0 0.40,  0.0   0.0 0.0 0.40, -0.7   0.7 0.0 0.40,  0.7   0.0 0.0 0.40 ] }
+DEF Run_upper_bodyRotInterp_Run OrientationInterpolator { key [ 0, 0.2545, 0.4909, 0.7636, 1 ] keyValue [ 0.97  0.65   0.086  0.5, 0.9   0.003 -0.02   0.38, 0.95 -0.68  -0.086  0.5, 0.9   0.004 -0.025  0.4, 0.97  0.65   0.086  0.5 ] }
+DEF Run_whole_bodyRotInterp_Run OrientationInterpolator { key [ 0, 0.25 0.5 0.75 1 ] keyValue [ 1 0 0 0.06, 1 0 0 0.167, 1 0 0 0.06, 1 0 0 0.168, 1 0 0 0.06 ] }
+DEF Run_whole_bodyTranInterp_Run PositionInterpolator { key [ 0, 0.22, 0.3, 0.31, 0.5, 0.69, 0.7, 0.78, 1 ] keyValue [ 0 -0.01 0, 0 -0.037 0, 0 -0.049 0, 0 -0.037 0, 0 -0.01 0, 0 -0.037 0, 0 -0.049 0, 0 -0.037 0, 0 -0.01 0, ] }
+DEF Run_l_sternoclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Run_l_acromioclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Run_r_sternoclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Run_r_acromioclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Run_sacroiliacYaw OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Run_vl5Yaw OrientationInterpolator { key [ 0, 0.2, 0.4, 0.5, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Run_vc6Yaw OrientationInterpolator { key [0, 0.2, 0.4, 0.5, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Run_l_thumb1Pitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 1 0 0 0, 1 0 0 0.25, 1 0 0 0.7, 1 0 0 0.27, 1 0 0 0.2, 1 0 0 0 ]}
+DEF Run_r_thumb1Pitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 1 0 0 0, 1 0 0 0.25, 1 0 0 0.7, 1 0 0 0.27, 1 0 0 0.2, 1 0 0 0 ]}
+# ex Run_
+ROUTE RunTimer.fraction_changed TO Run_r_ankleRotInterp_Run.set_fraction
+ROUTE RunTimer.fraction_changed TO Run_r_kneeRotInterp_Run.set_fraction
+ROUTE RunTimer.fraction_changed TO Run_r_hipRotInterp_Run.set_fraction
+ROUTE RunTimer.fraction_changed TO Run_l_ankleRotInterp_Run.set_fraction
+ROUTE RunTimer.fraction_changed TO Run_l_kneeRotInterp_Run.set_fraction
+ROUTE RunTimer.fraction_changed TO Run_l_hipRotInterp_Run.set_fraction
+ROUTE RunTimer.fraction_changed TO Run_lower_bodyRotInterp_Run.set_fraction
+ROUTE RunTimer.fraction_changed TO Run_r_wristRotInterp_Run.set_fraction
+ROUTE RunTimer.fraction_changed TO Run_r_elbowRotInterp_Run.set_fraction
+ROUTE RunTimer.fraction_changed TO Run_r_shoulderRotInterp_Run.set_fraction
+ROUTE RunTimer.fraction_changed TO Run_l_wristRotInterp_Run.set_fraction
+ROUTE RunTimer.fraction_changed TO Run_l_elbowRotInterp_Run.set_fraction
+ROUTE RunTimer.fraction_changed TO Run_l_shoulderRotInterp_Run.set_fraction
+ROUTE RunTimer.fraction_changed TO Run_headRotInterp_Run.set_fraction
+ROUTE RunTimer.fraction_changed TO Run_neckRotInterp_Run.set_fraction
+ROUTE RunTimer.fraction_changed TO Run_upper_bodyRotInterp_Run.set_fraction
+ROUTE RunTimer.fraction_changed TO Run_whole_bodyRotInterp_Run.set_fraction
+ROUTE RunTimer.fraction_changed TO Run_whole_bodyTranInterp_Run.set_fraction
+ROUTE RunTimer.fraction_changed TO Run_l_sternoclavicularRoll.set_fraction 
+ROUTE RunTimer.fraction_changed TO Run_l_acromioclavicularRoll.set_fraction 
+ROUTE RunTimer.fraction_changed TO Run_r_sternoclavicularRoll.set_fraction 
+ROUTE RunTimer.fraction_changed TO Run_r_acromioclavicularRoll.set_fraction 
+ROUTE RunTimer.fraction_changed TO Run_r_metatarsalPitch.set_fraction 
+ROUTE RunTimer.fraction_changed TO Run_sacroiliacYaw.set_fraction 
+ROUTE RunTimer.fraction_changed TO Run_vl5Yaw.set_fraction 
+ROUTE RunTimer.fraction_changed TO Run_vc6Yaw.set_fraction 
+ROUTE RunTimer.fraction_changed TO Run_l_thumb1Pitch.set_fraction 
+ROUTE RunTimer.fraction_changed TO Run_r_thumb1Pitch.set_fraction
+# ex Run_ 
+ROUTE Run_r_ankleRotInterp_Run.value_changed TO hanim_r_ankle.rotation
+ROUTE Run_r_kneeRotInterp_Run.value_changed TO hanim_r_knee.rotation
+ROUTE Run_r_hipRotInterp_Run.value_changed TO hanim_r_hip.rotation
+ROUTE Run_l_ankleRotInterp_Run.value_changed TO hanim_l_ankle.rotation
+ROUTE Run_l_kneeRotInterp_Run.value_changed TO hanim_l_knee.rotation
+ROUTE Run_l_hipRotInterp_Run.value_changed TO hanim_l_hip.rotation
+ROUTE Run_r_wristRotInterp_Run.value_changed TO hanim_r_wrist.rotation
+ROUTE Run_r_elbowRotInterp_Run.value_changed TO hanim_r_elbow.rotation
+ROUTE Run_r_shoulderRotInterp_Run.value_changed TO hanim_r_shoulder.rotation
+ROUTE Run_l_wristRotInterp_Run.value_changed TO hanim_l_wrist.rotation
+ROUTE Run_l_elbowRotInterp_Run.value_changed TO hanim_l_elbow.rotation
+ROUTE Run_l_shoulderRotInterp_Run.value_changed TO hanim_l_shoulder.rotation
+ROUTE Run_lower_bodyRotInterp_Run.value_changed TO hanim_sacroiliac.rotation
+ROUTE Run_headRotInterp_Run.value_changed TO hanim_skullbase.rotation
+ROUTE Run_neckRotInterp_Run.value_changed TO hanim_vc4.rotation
+ROUTE Run_upper_bodyRotInterp_Run.value_changed TO hanim_vl1.rotation
+ROUTE Run_whole_bodyRotInterp_Run.value_changed TO hanim_HumanoidRoot.rotation
+ROUTE Run_whole_bodyTranInterp_Run.value_changed TO hanim_HumanoidRoot.translation
+ROUTE Run_l_sternoclavicularRoll.value_changed TO hanim_l_sternoclavicular.rotation
+ROUTE Run_l_acromioclavicularRoll.value_changed TO hanim_l_acromioclavicular.rotation
+ROUTE Run_r_sternoclavicularRoll.value_changed TO hanim_r_sternoclavicular.rotation
+ROUTE Run_r_acromioclavicularRoll.value_changed TO hanim_r_acromioclavicular.rotation
+ROUTE Run_r_metatarsalPitch.value_changed TO hanim_l_metatarsal.rotation 
+ROUTE Run_r_metatarsalPitch.value_changed TO hanim_r_metatarsal.rotation 
+ROUTE Run_sacroiliacYaw.value_changed TO hanim_sacroiliac.rotation 
+ROUTE Run_vl5Yaw.value_changed TO hanim_vl5.rotation 
+ROUTE Run_vc6Yaw.value_changed TO hanim_vc6.rotation 
+ROUTE Run_l_thumb1Pitch.value_changed TO hanim_l_thumb1.rotation
+ROUTE Run_r_thumb1Pitch.value_changed TO hanim_r_thumb1.rotation
+]}
+
+DEF JumpAnimation Group {
+ children [
+DEF JumpTimer TimeSensor { cycleInterval 3.73 loop TRUE enabled TRUE }
+DEF Jump_r_metatarsalPitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.7, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Jump_r_ankleRotInterp OrientationInterpolator { key [ 0, 0.10, 0.15, 0.25, 0.28, 0.32, 0.35, 0.64, 0.76, 0.84, 0.88, 0.92, 0.96, 1 ] keyValue [ 0 0 1 0, -1 0 0 0.6735, -1 0 0 0.6735, -1 0 0 0.3527, -1 0 0 0.3038, -1 0 0 0.07964, 1 0 0 1.3, 1 0 0 0.6509, 1 0 0 0.3001, -1 0 0 0.2087, -1 0 0 0.3756, -1 0 0 0.3279, -1 0 0 0.1193, 0 0 1 0 ] }
+DEF Jump_r_kneeRotInterp OrientationInterpolator { key [ 0, 0.20, 0.25, 0.30, 0.64, 0.76, 0.88, 1 ] keyValue [ 0 0 1 0, 1 0 0 2.5, 1 0 0 1.7, 0 0 1 0, 1 0 0 0.9507, 1 0 0 0.5845, 1 0 0 0.9054, 0 0 1 0 ] }
+DEF Jump_r_hipRotInterp OrientationInterpolator { key [ 0, 0.18, 0.24, 0.26, 0.28, 0.32, 0.48, 0.64, 0.76, 0.88, 1 ] keyValue [ 0 0 1 0, -1 0 0 1.63, -1 0 0 1.7, -1 0 0 1.55, -1 0 0 0.8943, -1 0 0 0.3698, 0 0 1 0, -1 0 0 0.4963, -1 0 0 0.3829, -1 0 0 0.5169, 0 0 1 0 ] }
+DEF Jump_l_ankleRotInterp OrientationInterpolator { key [ 0, 0.28, 0.32, 0.36, 0.4, 0.44, 0.48, 0.64, 0.76, 0.84, 0.88, 0.92, 0.96, 1 ]  keyValue [ 0 0 1 0, -1 0 0 0.625, -1 0 0 0.625, -1 0 0 0.3364, -1 0 0 0.2742, -1 0 0 0.05078, 1 0 0 0.2833, 1 0 0 0.6667, 1 0 0 0.2833, -1 0 0 0.2108, -1 0 0 0.375, -1 0 0 0.3146, -1 0 0 0.1174, 0 0 1 0 ] }
+DEF Jump_l_kneeRotInterp OrientationInterpolator { key [ 0, 0.28, 0.32, 0.48, 0.64, 0.76, 0.88, 1 ] keyValue [ 0 0 1 0, 1 0 0 2.047, 1 0 0 2.047, 0 0 1 0, 1 0 0 1.566, 1 0 0 0.5913, 1 0 0 0.9235, 0 0 1 0 ] }
+DEF Jump_l_hipRotInterp OrientationInterpolator { key [ 0, 0.28, 0.32, 0.36, 0.4, 0.44, 0.48, 0.64, 0.76, 0.88, 1 ] keyValue [ 0 0 1 0, 1 0 0 4.349, 1 0 0 4.349, 1 0 0 4.615, -1 0 0 0.9136, -1 0 0 0.3614, 0 0 1 0, -1 0 0 0.7869, -1 0 0 0.3918, -1 0 0 0.5433, 0 0 1 0 ] }
+DEF Jump_lower_bodyRotInterp OrientationInterpolator { key [ 0, 0.28, 0.32, 0.48, 0.76, 1 ] keyValue [ 0 0 1 0, 1 0 0 0.1892, 1 0 0 0.1892, 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Jump_r_wristRotInterp OrientationInterpolator { key [ 0, 0.28, 0.32, 0.64, 0.76, 1 ] keyValue [ 0 0 1 0, -0.0585279 0.983903 -0.168849 1.85956, -0.0585279 0.983903 -0.168849 1.85956, -0.00222418 0.99801 -0.0630095 1.46072, 0 1 0 0.497349, 0 0 1 0 ] }
+DEF Jump_r_elbowRotInterp OrientationInterpolator { key [ 0, 0.28, 0.32, 0.64, 0.76, 1 ] keyValue [ 0 0 1 0, -1 0 0 0.04151, -1 0 0 0.04151, -1 0 0 0.5855, -1 0 0 0.5852, 0 0 1 0 ] }
+DEF Jump_r_shoulderRotInterp OrientationInterpolator { key [ 0, 0.28, 0.32, 0.64, 0.76, 0.88, 1 ] keyValue [ 0 0 1 0, 0.9992 0.02042 0.03558 4.688, 0.9992 0.02042 0.03558 4.688, 0.9989 -0.04623 0.005159 4.079, -0.8687 -0.2525 -0.4261 1.501, -0.941 -0.2893 -0.1754 0.4788, 0 0 1 0 ] }
+DEF Jump_l_wristRotInterp OrientationInterpolator { key [ 0, 0.48, 0.52, 0.64, 0.76, 0.88, 1 ] keyValue [ 0 0 1 0, 0.0672928 0.989475 -0.128107 4.15574, 0.0672928 0.989475 -0.128107 4.15574, 0.00364942 0.999901 0.0135896 4.5822, 0 -1 0 0.655922, -0.00050618 -0.999999 0.0012782 1.28397, 0 0 1 0 ] }
+DEF Jump_l_elbowRotInterp OrientationInterpolator { key [ 0, 0.28, 0.32, 0.58, 0.72, 1 ] keyValue [ 0 0 1 0, -1 0 0 1.13, -1 0 0 1.7, -1 0 0 1.7, -1 0 0 0.4, 0 0 1 0 ] }
+DEF Jump_l_shoulderRotInterp OrientationInterpolator { key [ 0, 0.28, 0.32, 0.64, 0.76, 0.88, 1 ] keyValue [ 0 0 1 0, -0.9987 0.02554 0.04498 1.57, -0.9987 0.02554 0.04498 1.57, 1 0.0004113 0.003055 4.114, -0.8413 0.3238 0.4329 1.453, -0.877 0.4198 0.2337 0.6009, 0 0 1 0 ] }
+DEF Jump_headRotInterp OrientationInterpolator { key [ 0, 0.28, 0.32, 0.48, 0.76, 1 ] keyValue [ 0 0 1 0, -1 0 0 0.5989, -1 0 0 0.5989, -1 0 0 0.3216, 1 0 0 0.06503, 0 0 1 0 ] }
+DEF Jump_neckRotInterp OrientationInterpolator { key [ 0, 0.28, 0.32, 0.48, 0.76, 1 ] keyValue [ 0 0 1 0, -1 0 0 0.1942, -1 0 0 0.1942, 0 0 1 0, 1 0 0 0.2284, 0 0 1 0 ] }
+DEF Jump_upper_bodyRotInterp OrientationInterpolator { key [ 0, 0.22, 0.28, 0.34, 0.71, 0.88, 1 ] keyValue [ 0 0 1 0, 1 0 0 1.05, 1 0 0 1.051, -1 0 0 0.257, 1 0 0 0.2171, 1 0 0 0.3465, 0 0 1 0 ] }
+DEF Jump_whole_bodyRotInterp OrientationInterpolator { key [ 0, 0.28, 0.32, 0.48, 0.64, 0.76, 1 ] keyValue [ 0 0 1 0, 1 0 0 0.3273, 1 0 0 0.3273, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Jump_whole_bodyTranInterp PositionInterpolator { key [ 0, 0.04, 0.07, 0.11, 0.15, 0.19, 0.22, 0.25, 0.27, 0.31, 0.33, 0.35, 0.38, 0.53, 0.544, 0.76, 0.8, 0.84, 0.88, 0.92, 0.96, 1 ] keyValue [ 0 0 0, 0 -0.01264 -0.01289, 0 -0.04712 -0.03738, -0.0003345 -0.1049 -0.05353, -0.0005712 -0.1892 -0.06561, -0.0008233 -0.286 -0.06276, -0.0009591 -0.3795 -0.05148, -0.00106 -0.4484 -0.03656, -0.00106 -0.4484 -0.03656, -0.001122 -0.25 -0.1499, -0.0008616 -0.05 -0.06358, -0.0005128 0.15 -0.05488, 0.0004779 0.55 0.02732, 0.0001728 1.385 0.006873, 0.00017 1.395 0.0069, 0 0.35 0.02148, 0 -0.01299 -0.01057, 0 -0.06932 -0.01064, 0.0001365 -0.1037 -0.005059, 0.0001279 -0.07198 -0.007596, 0.000141 -0.01626 -0.004935, 0 0 0 ] }
+DEF Jump_l_sternoclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0.2, 0 0 1 0.22, 0 0 1 0.2, 0 0 1 0, 0 0 1 0 ]}
+DEF Jump_l_acromioclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1  0.05, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Jump_r_sternoclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 -0.2, 0 0 1 -0.22, 0 0 1 -0.2, 0 0 1 0, 0 0 1 0 ]}
+DEF Jump_r_acromioclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 -0.05, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Jump_sacroiliacYaw OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 1 0 0, 0 -1 0 0.1, 0 1 0 0, 0 1 -1 0.24, 0 -1 0 0.4, 0 1 0 0 ]}
+DEF Jump_vl5Yaw OrientationInterpolator { key [ 0, 0.2, 0.4, 0.5, 0.6, 0.8, 1 ] keyValue [ 0 1 0 0, 0 1 0 -0.1, 0 1 0 0, 0 1 0 0, 1 0 0 0.6, 0 1 0 0.1, 0 1 0 0 ]}
+DEF Jump_vc6Yaw OrientationInterpolator { key [0, 0.2, 0.4, 0.5, 0.6, 0.8, 1 ] keyValue [ 0 1 0 0, 0 1 0 0.8, 0 1 0 0, 0 1 0 0, -1 0 0 0.6, 0 -1 0 0.8, 0 1 0 0 ]}
+DEF Jump_l_thumb1Pitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 1 0 0 0, 1 0 0 0.5, 1 0 0 1.1, 1 0 0 0.7, 1 0 0 0.2, 1 0 0 0 ]}
+DEF Jump_r_thumb1Pitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 1 0 0 0, 1 0 0 0.5, 1 0 0 1.1, 1 0 0 0.7, 1 0 0 0.2, 1 0 0 0 ]}
+# ex Jump_
+ROUTE JumpTimer.fraction_changed TO Jump_r_ankleRotInterp.set_fraction
+ROUTE JumpTimer.fraction_changed TO Jump_r_kneeRotInterp.set_fraction
+ROUTE JumpTimer.fraction_changed TO Jump_r_hipRotInterp.set_fraction
+ROUTE JumpTimer.fraction_changed TO Jump_l_ankleRotInterp.set_fraction
+ROUTE JumpTimer.fraction_changed TO Jump_l_kneeRotInterp.set_fraction
+ROUTE JumpTimer.fraction_changed TO Jump_l_hipRotInterp.set_fraction
+ROUTE JumpTimer.fraction_changed TO Jump_lower_bodyRotInterp.set_fraction
+ROUTE JumpTimer.fraction_changed TO Jump_r_wristRotInterp.set_fraction
+ROUTE JumpTimer.fraction_changed TO Jump_r_elbowRotInterp.set_fraction
+ROUTE JumpTimer.fraction_changed TO Jump_r_shoulderRotInterp.set_fraction
+ROUTE JumpTimer.fraction_changed TO Jump_l_wristRotInterp.set_fraction
+ROUTE JumpTimer.fraction_changed TO Jump_l_elbowRotInterp.set_fraction
+ROUTE JumpTimer.fraction_changed TO Jump_l_shoulderRotInterp.set_fraction
+ROUTE JumpTimer.fraction_changed TO Jump_headRotInterp.set_fraction
+ROUTE JumpTimer.fraction_changed TO Jump_neckRotInterp.set_fraction
+ROUTE JumpTimer.fraction_changed TO Jump_upper_bodyRotInterp.set_fraction
+ROUTE JumpTimer.fraction_changed TO Jump_whole_bodyRotInterp.set_fraction
+ROUTE JumpTimer.fraction_changed TO Jump_whole_bodyTranInterp.set_fraction
+ROUTE JumpTimer.fraction_changed TO Jump_l_sternoclavicularRoll.set_fraction 
+ROUTE JumpTimer.fraction_changed TO Jump_l_acromioclavicularRoll.set_fraction 
+ROUTE JumpTimer.fraction_changed TO Jump_r_sternoclavicularRoll.set_fraction 
+ROUTE JumpTimer.fraction_changed TO Jump_r_acromioclavicularRoll.set_fraction 
+ROUTE JumpTimer.fraction_changed TO Jump_r_metatarsalPitch.set_fraction 
+ROUTE JumpTimer.fraction_changed TO Jump_sacroiliacYaw.set_fraction 
+ROUTE JumpTimer.fraction_changed TO Jump_vl5Yaw.set_fraction 
+ROUTE JumpTimer.fraction_changed TO Jump_vc6Yaw.set_fraction 
+ROUTE JumpTimer.fraction_changed TO Jump_l_thumb1Pitch.set_fraction 
+ROUTE JumpTimer.fraction_changed TO Jump_r_thumb1Pitch.set_fraction 
+# ex Jump_
+ROUTE Jump_r_ankleRotInterp.value_changed TO hanim_r_ankle.rotation
+ROUTE Jump_r_kneeRotInterp.value_changed TO hanim_r_knee.rotation
+ROUTE Jump_r_hipRotInterp.value_changed TO hanim_r_hip.rotation
+ROUTE Jump_l_ankleRotInterp.value_changed TO hanim_l_ankle.rotation
+ROUTE Jump_l_kneeRotInterp.value_changed TO hanim_l_knee.rotation
+ROUTE Jump_l_hipRotInterp.value_changed TO hanim_l_hip.rotation
+ROUTE Jump_lower_bodyRotInterp.value_changed TO hanim_sacroiliac.rotation
+ROUTE Jump_r_wristRotInterp.value_changed TO hanim_r_wrist.rotation
+ROUTE Jump_r_elbowRotInterp.value_changed TO hanim_r_elbow.rotation
+ROUTE Jump_r_shoulderRotInterp.value_changed TO hanim_r_shoulder.rotation
+ROUTE Jump_l_wristRotInterp.value_changed TO hanim_l_wrist.rotation
+ROUTE Jump_l_elbowRotInterp.value_changed TO hanim_l_elbow.rotation
+ROUTE Jump_l_shoulderRotInterp.value_changed TO hanim_l_shoulder.rotation
+ROUTE Jump_headRotInterp.value_changed TO hanim_skullbase.rotation
+ROUTE Jump_neckRotInterp.value_changed TO hanim_vc4.rotation
+ROUTE Jump_upper_bodyRotInterp.value_changed TO hanim_vl1.rotation
+ROUTE Jump_whole_bodyRotInterp.value_changed TO hanim_HumanoidRoot.rotation
+ROUTE Jump_whole_bodyTranInterp.value_changed TO hanim_HumanoidRoot.translation
+ROUTE Jump_l_sternoclavicularRoll.value_changed TO hanim_l_sternoclavicular.rotation
+ROUTE Jump_l_acromioclavicularRoll.value_changed TO hanim_l_acromioclavicular.rotation
+ROUTE Jump_r_sternoclavicularRoll.value_changed TO hanim_r_sternoclavicular.rotation
+ROUTE Jump_r_acromioclavicularRoll.value_changed TO hanim_r_acromioclavicular.rotation
+ROUTE Jump_r_metatarsalPitch.value_changed TO hanim_l_metatarsal.rotation 
+ROUTE Jump_r_metatarsalPitch.value_changed TO hanim_r_metatarsal.rotation 
+ROUTE Jump_sacroiliacYaw.value_changed TO hanim_sacroiliac.rotation 
+ROUTE Jump_vl5Yaw.value_changed TO hanim_vl5.rotation 
+ROUTE Jump_vc6Yaw.value_changed TO hanim_vc6.rotation 
+ROUTE Jump_l_thumb1Pitch.value_changed TO hanim_l_thumb1.rotation
+ROUTE Jump_r_thumb1Pitch.value_changed TO hanim_r_thumb1.rotation
+]}
+
+DEF KickAnimation Group {
+ children [
+DEF KickTimer TimeSensor { cycleInterval 3.73 loop TRUE enabled TRUE }
+DEF Kick_l_sternoclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0.2, 0 0 1 0.22, 0 0 1 0.2, 0 0 1 0, 0 0 1 0 ]}
+DEF Kick_l_acromioclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1  0.05, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Kick_l_shoulderRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 1.76, -0.25 0 1 1.76, 0 0 1 1.256, 0 0 1 0.05, 0 0 1 0 ]}
+DEF Kick_l_ForeArmPitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 1 0 0 0, 1 0 0 -0.55, -1 0.25 0 2.55, 1 0 0 0, 1 0 0 0, 1 0 0 0 ]}
+DEF Kick_l_wristRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 1 0 0.55, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Kick_l_thumb1Pitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 1 0 0 0, 1 0 0 0.5, 1 0 0 1.1, 1 0 0 0.7, 1 0 0 0.2, 1 0 0 0 ]}
+DEF Kick_r_sternoclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 -0.2, 0 0 1 -0.22, 0 0 1 -0.2, 0 0 1 0, 0 0 1 0 ]}
+DEF Kick_r_acromioclavicularRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 -0.05, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Kick_r_shoulderRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 -1.76, 0.25 0 1 -1.76, 0 0 1 -1.256, 0 0 1 -0.05, 0 0 1 0 ]}
+DEF Kick_r_ForeArmPitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 1 0 0 0, 1 0 0 -0.55, 1 0.25 0 -2.55, 1 0 0 0, 1 0 0 0, 1 0 0 0 ]}
+DEF Kick_r_wristRoll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 1 0 -0.55, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Kick_r_thumb1Pitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 1 0 0 0, 1 0 0 0.5, 1 0 0 1.1, 1 0 0 0.7, 1 0 0 0.2, 1 0 0 0 ]}
+DEF Kick_r_hipPitch OrientationInterpolator { key [ 0, 0.2, 0.3, 0.5, 0.6, 0.9, 1 ] keyValue [ 1 0 0 0, 1 0 0 0.9, -1 0 0 1.75, -1 0 0 2.25, -1 0 0 2.0, 1 0 0 0, 1 0 0 0 ]}
+DEF Kick_r_kneePitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 1 0 0 1.95, 1 0 0 1.75, -1 0 0 0.28, 1 0 0 0, 1 0 0 0 ]}
+DEF Kick_l_hipPitch OrientationInterpolator { key [ 0, 0.2, 0.3, 0.5, 0.6, 0.9, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Kick_l_kneePitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Kick_r_anklePitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.7, 1 ] keyValue [ 0 0 1 0, -1 0 0 0.9, -1 0 0 0.95, 1 0 0 0.75, -1 0 0 0.05, 1 0 0 0 ]}
+DEF Kick_r_metatarsalPitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.7, 1 ] keyValue [ 1 0 0 0, -1 0 0 0.5 -1 0 0 0.7, 1 0 0 0.75, -1 0 0 0.2, 1 0 0 0 ]}
+DEF Kick_sacroiliacYaw OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 1 0 0, 0 -1 0 0.1, 0 1 0 0, 0 1 -1 0.24, 0 -1 0 0.4, 0 1 0 0 ]}
+DEF Kick_vl5Yaw OrientationInterpolator { key [ 0, 0.2, 0.4, 0.5, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Kick_vc6Yaw OrientationInterpolator { key [0, 0.2, 0.4, 0.5, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+DEF Kick_lower_bodyRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Kick_upper_bodyRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Kick_whole_bodyRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
+DEF Kick_whole_bodyTransInterp PositionInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 0, 0 0 0, 0 0 0 ] }
+DEF Kick_neckRotInterp OrientationInterpolator { key [ 0, 0.25, 0.55, 1 ] keyValue [ 0 0 1 0, 1 0 0 0.7, 1 0 0 0.5, 0 0 1 0 ] }
+# ex Kick_
+ROUTE KickTimer.fraction_changed TO Kick_l_sternoclavicularRoll.set_fraction 
+ROUTE KickTimer.fraction_changed TO Kick_l_acromioclavicularRoll.set_fraction 
+ROUTE KickTimer.fraction_changed TO Kick_l_shoulderRoll.set_fraction 
+ROUTE KickTimer.fraction_changed TO Kick_l_ForeArmPitch.set_fraction 
+ROUTE KickTimer.fraction_changed TO Kick_l_wristRoll.set_fraction
+ROUTE KickTimer.fraction_changed TO Kick_l_thumb1Pitch.set_fraction 
+ROUTE KickTimer.fraction_changed TO Kick_r_sternoclavicularRoll.set_fraction 
+ROUTE KickTimer.fraction_changed TO Kick_r_acromioclavicularRoll.set_fraction 
+ROUTE KickTimer.fraction_changed TO Kick_r_shoulderRoll.set_fraction 
+ROUTE KickTimer.fraction_changed TO Kick_r_ForeArmPitch.set_fraction 
+ROUTE KickTimer.fraction_changed TO Kick_r_wristRoll.set_fraction 
+ROUTE KickTimer.fraction_changed TO Kick_r_thumb1Pitch.set_fraction 
+ROUTE KickTimer.fraction_changed TO Kick_r_hipPitch.set_fraction 
+ROUTE KickTimer.fraction_changed TO Kick_r_kneePitch.set_fraction 
+ROUTE KickTimer.fraction_changed TO Kick_l_hipPitch.set_fraction 
+ROUTE KickTimer.fraction_changed TO Kick_l_kneePitch.set_fraction 
+ROUTE KickTimer.fraction_changed TO Kick_r_anklePitch.set_fraction 
+ROUTE KickTimer.fraction_changed TO Kick_r_metatarsalPitch.set_fraction 
+ROUTE KickTimer.fraction_changed TO Kick_sacroiliacYaw.set_fraction 
+ROUTE KickTimer.fraction_changed TO Kick_vl5Yaw.set_fraction 
+ROUTE KickTimer.fraction_changed TO Kick_vc6Yaw.set_fraction 
+ROUTE KickTimer.fraction_changed TO Kick_lower_bodyRotInterp.set_fraction
+ROUTE KickTimer.fraction_changed TO Kick_upper_bodyRotInterp.set_fraction
+ROUTE KickTimer.fraction_changed TO Kick_whole_bodyRotInterp.set_fraction
+ROUTE KickTimer.fraction_changed TO Kick_whole_bodyTransInterp.set_fraction
+ROUTE KickTimer.fraction_changed TO Kick_neckRotInterp.set_fraction
+# ex Kick_
+ROUTE Kick_l_sternoclavicularRoll.value_changed TO hanim_l_sternoclavicular.rotation
+ROUTE Kick_l_acromioclavicularRoll.value_changed TO hanim_l_acromioclavicular.rotation
+ROUTE Kick_l_shoulderRoll.value_changed TO hanim_l_shoulder.rotation
+ROUTE Kick_l_ForeArmPitch.value_changed TO hanim_l_elbow.rotation
+ROUTE Kick_l_wristRoll.value_changed TO hanim_l_wrist.rotation
+ROUTE Kick_l_thumb1Pitch.value_changed TO hanim_l_thumb1.rotation
+ROUTE Kick_r_sternoclavicularRoll.value_changed TO hanim_r_sternoclavicular.rotation
+ROUTE Kick_r_acromioclavicularRoll.value_changed TO hanim_r_acromioclavicular.rotation
+ROUTE Kick_r_shoulderRoll.value_changed TO hanim_r_shoulder.rotation
+ROUTE Kick_r_ForeArmPitch.value_changed TO hanim_r_elbow.rotation
+ROUTE Kick_r_wristRoll.value_changed TO hanim_r_wrist.rotation
+ROUTE Kick_r_thumb1Pitch.value_changed TO hanim_r_thumb1.rotation
+ROUTE Kick_r_hipPitch.value_changed TO hanim_r_hip.rotation 
+ROUTE Kick_r_kneePitch.value_changed TO hanim_r_knee.rotation 
+ROUTE Kick_r_anklePitch.value_changed TO hanim_r_ankle.rotation 
+ROUTE Kick_r_metatarsalPitch.value_changed TO hanim_r_metatarsal.rotation 
+ROUTE Kick_l_hipPitch.value_changed TO hanim_l_hip.rotation 
+ROUTE Kick_l_kneePitch.value_changed TO hanim_l_knee.rotation 
+ROUTE Kick_r_anklePitch.value_changed TO hanim_l_ankle.rotation 
+ROUTE Kick_r_metatarsalPitch.value_changed TO hanim_l_metatarsal.rotation 
+ROUTE Kick_sacroiliacYaw.value_changed TO hanim_sacroiliac.rotation 
+ROUTE Kick_vl5Yaw.value_changed TO hanim_vl5.rotation 
+ROUTE Kick_vc6Yaw.value_changed TO hanim_vc6.rotation 
+ROUTE Kick_upper_bodyRotInterp.value_changed TO hanim_vl1.rotation
+ROUTE Kick_lower_bodyRotInterp.value_changed TO hanim_sacroiliac.rotation
+ROUTE Kick_whole_bodyRotInterp.value_changed TO hanim_HumanoidRoot.rotation
+ROUTE Kick_whole_bodyTransInterp.value_changed TO hanim_HumanoidRoot.translation
+ROUTE Kick_neckRotInterp.value_changed TO hanim_vc4.rotation
+]}
+
+DEF Interface Group { # stage and geometry with touchsensors to select animation
+ children [ 
+  DEF cordsysSceneFloor Transform { scale 0.175 0.175 0.175 
+   children [ Inline { url ["JointCoordinateAxes.x3dv"] } ] }
+  DEF HudProx ProximitySensor { center 0 0 0 size 50 50 50 }
+  DEF HudXform Transform { 
+   children [
+    Transform { translation -0.41 -0.01 -0.75 scale 0.02 0.02 0.02
+     children [
+      DEF Stand_Text Transform { translation 0.0 -0.9  0.0 
+       children [ 
+        DEF Stand_Touch TouchSensor { }
+        DEF StandText Shape { 
+         appearance Appearance { material DEF text_color Material { 
+          ambientIntensity 1 diffuseColor 0.819 0.521 0.169 specularColor 0.819 0.521 0.169 emissiveColor 0.819 0.521 0.169 } }
+         geometry Text { string ["Stand"] 
+          fontStyle FontStyle {
+            family [ "SANS"  ] 
+          }
+         }
+        }
+        DEF Stand_Back Shape {
+         appearance Appearance { material DEF Clear Material { 
+          ambientIntensity 1 emissiveColor 0 0.5 0 diffuseColor 0 0.5 0 
+          transparency 0.8 } } 
+         geometry DEF Backing IndexedFaceSet { 
+          coord Coordinate { point [ -0.2 -0.25 -0.01 3.0 -0.25 -0.01 3.0 1 -0.01 -0.2 1 -0.01 ] } coordIndex [ 0 1 2 3 -1 ] }
+        } 
+       ]
+      }
+      DEF Pitch_Text Transform { translation 0 -2.4 0
+       children [
+        DEF Pitch_Touch TouchSensor {  }
+        DEF PitchText Shape {
+         appearance Appearance { material USE text_color }
+         geometry Text { string ["Pitch"] 
+          fontStyle FontStyle {
+            family [ "SANS"  ] 
+          }
+         }
+        }
+        DEF Pitch_Back Shape {
+         appearance Appearance { material USE Clear }
+         geometry USE Backing 
+        }
+       ]
+      }
+      DEF Yaw_Text Transform { translation 0 -3.8 0
+       children [
+        DEF Yaw_Touch TouchSensor {  }
+        DEF YawText Shape {
+         appearance Appearance {  material USE text_color }
+         geometry Text { string ["Yaw"] 
+          fontStyle FontStyle {
+            family [ "SANS"  ] 
+          }
+         }
+        }
+        DEF Yaw_Back Shape {
+         appearance Appearance { material USE Clear }
+         geometry USE Backing
+        }
+       ]
+      }
+      DEF Roll_Text Transform { translation 0 -5.2 0
+       children [
+        DEF Roll_Touch TouchSensor {  }
+        DEF RollText Shape {
+         appearance Appearance { material USE text_color }
+         geometry Text { string ["Roll"] 
+          fontStyle FontStyle {
+            family [ "SANS"  ] 
+          }
+         }
+        }
+        DEF Roll_Back Shape {
+         appearance Appearance { material USE Clear }
+         geometry USE Backing
+        }
+       ]
+      }
+      DEF Walk_Text Transform { translation 0 -6.6 0
+       children [
+        DEF Walk_Touch TouchSensor {  }
+        DEF WalkText Shape {
+         appearance Appearance { material USE text_color }
+         geometry Text { string ["Walk"] 
+          fontStyle FontStyle {
+            family [ "SANS"  ] 
+          }
+         }
+        }
+        DEF Walk_Back Shape {
+         appearance Appearance { material USE Clear }
+         geometry USE Backing
+        }
+       ]
+      }
+      DEF Run_Text Transform { translation 0 -8 0
+       children [
+        DEF Run_Touch TouchSensor {  }
+        DEF RunText Shape {
+         appearance Appearance { material USE text_color }
+         geometry Text { string ["Run"] 
+          fontStyle FontStyle {
+            family [ "SANS"  ] 
+          }
+         }
+        }
+        DEF Run_Back Shape {
+         appearance Appearance { material USE Clear }
+         geometry USE Backing
+        }
+       ]
+      }
+      DEF Jump_Text Transform { translation 0 -9.4 0
+       children [
+        DEF Jump_Touch TouchSensor {  }
+        DEF JumpText Shape {
+         appearance Appearance { material USE text_color }
+         geometry Text { string ["Jump"] 
+          fontStyle FontStyle {
+            family [ "SANS"  ] 
+          }
+         }
+        }
+        DEF Jump_Back Shape {
+         appearance Appearance { material USE Clear }
+         geometry USE Backing
+        }
+       ]
+      }
+      DEF Kick_Text Transform { translation 0 -10.8 0
+       children [
+        DEF Kick_Touch TouchSensor {  }
+        DEF KickText Shape {
+         appearance Appearance { material USE text_color }
+         geometry Text { string ["Kick"] 
+          fontStyle FontStyle {
+            family [ "SANS"  ] 
+          }
+         }
+        }
+        DEF Kick_Back Shape {
+         appearance Appearance { material USE Clear }
+         geometry USE Backing
+        }
+       ]
+      }
+      DEF Stop_Text Transform { translation 0 0.4 0
+       children [
+        DEF Stop_Touch TouchSensor {  }
+        DEF StopText Shape {
+         appearance Appearance { material USE text_color }
+         geometry Text { string ["Default"] 
+          fontStyle FontStyle {
+            family [ "SANS"  ] 
+          }
+         }
+        }
+        DEF Stop_Back Shape {
+         appearance Appearance { material USE Clear }
+         geometry USE Backing
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ 
+ROUTE HudProx.position_changed TO HudXform.translation
+ROUTE HudProx.orientation_changed TO HudXform.rotation 
+
+ROUTE Stand_Touch.touchTime TO PitchTimer.stopTime
+ROUTE Stand_Touch.touchTime TO YawTimer.stopTime
+ROUTE Stand_Touch.touchTime TO RollTimer.stopTime
+ROUTE Stand_Touch.touchTime TO WalkTimer.stopTime
+ROUTE Stand_Touch.touchTime TO RunTimer.stopTime
+ROUTE Stand_Touch.touchTime TO JumpTimer.stopTime
+ROUTE Stand_Touch.touchTime TO KickTimer.stopTime
+ROUTE Stand_Touch.touchTime TO StopTimer.stopTime
+ROUTE Stand_Touch.touchTime TO StandTimer.startTime
+
+ROUTE Pitch_Touch.touchTime TO StandTimer.stopTime
+ROUTE Pitch_Touch.touchTime TO YawTimer.stopTime
+ROUTE Pitch_Touch.touchTime TO RollTimer.stopTime
+ROUTE Pitch_Touch.touchTime TO WalkTimer.stopTime
+ROUTE Pitch_Touch.touchTime TO RunTimer.stopTime
+ROUTE Pitch_Touch.touchTime TO JumpTimer.stopTime
+ROUTE Pitch_Touch.touchTime TO KickTimer.stopTime
+ROUTE Pitch_Touch.touchTime TO StopTimer.stopTime
+ROUTE Pitch_Touch.touchTime TO PitchTimer.startTime
+
+ROUTE Yaw_Touch.touchTime TO StandTimer.stopTime
+ROUTE Yaw_Touch.touchTime TO PitchTimer.stopTime
+ROUTE Yaw_Touch.touchTime TO RollTimer.stopTime
+ROUTE Yaw_Touch.touchTime TO WalkTimer.stopTime
+ROUTE Yaw_Touch.touchTime TO RunTimer.stopTime
+ROUTE Yaw_Touch.touchTime TO JumpTimer.stopTime
+ROUTE Yaw_Touch.touchTime TO KickTimer.stopTime
+ROUTE Yaw_Touch.touchTime TO StopTimer.stopTime
+ROUTE Yaw_Touch.touchTime TO YawTimer.startTime
+
+ROUTE Walk_Touch.touchTime TO StandTimer.stopTime
+ROUTE Walk_Touch.touchTime TO PitchTimer.stopTime
+ROUTE Walk_Touch.touchTime TO YawTimer.stopTime
+ROUTE Walk_Touch.touchTime TO RollTimer.stopTime
+ROUTE Walk_Touch.touchTime TO RunTimer.stopTime
+ROUTE Walk_Touch.touchTime TO JumpTimer.stopTime
+ROUTE Walk_Touch.touchTime TO KickTimer.stopTime
+ROUTE Walk_Touch.touchTime TO StopTimer.stopTime
+ROUTE Walk_Touch.touchTime TO WalkTimer.startTime
+
+ROUTE Roll_Touch.touchTime TO StandTimer.stopTime
+ROUTE Roll_Touch.touchTime TO PitchTimer.stopTime
+ROUTE Roll_Touch.touchTime TO YawTimer.stopTime
+ROUTE Roll_Touch.touchTime TO WalkTimer.stopTime
+ROUTE Roll_Touch.touchTime TO RunTimer.stopTime
+ROUTE Roll_Touch.touchTime TO JumpTimer.stopTime
+ROUTE Roll_Touch.touchTime TO KickTimer.stopTime
+ROUTE Roll_Touch.touchTime TO StopTimer.stopTime
+ROUTE Roll_Touch.touchTime TO RollTimer.startTime
+
+ROUTE Run_Touch.touchTime TO StandTimer.stopTime
+ROUTE Run_Touch.touchTime TO PitchTimer.stopTime
+ROUTE Run_Touch.touchTime TO YawTimer.stopTime
+ROUTE Run_Touch.touchTime TO RollTimer.stopTime
+ROUTE Run_Touch.touchTime TO WalkTimer.stopTime
+ROUTE Run_Touch.touchTime TO JumpTimer.stopTime
+ROUTE Run_Touch.touchTime TO KickTimer.stopTime
+ROUTE Run_Touch.touchTime TO StopTimer.stopTime
+ROUTE Run_Touch.touchTime TO RunTimer.startTime
+
+ROUTE Jump_Touch.touchTime TO StandTimer.stopTime
+ROUTE Jump_Touch.touchTime TO PitchTimer.stopTime
+ROUTE Jump_Touch.touchTime TO YawTimer.stopTime
+ROUTE Jump_Touch.touchTime TO RollTimer.stopTime
+ROUTE Jump_Touch.touchTime TO WalkTimer.stopTime
+ROUTE Jump_Touch.touchTime TO RunTimer.stopTime
+ROUTE Jump_Touch.touchTime TO KickTimer.stopTime
+ROUTE Jump_Touch.touchTime TO StopTimer.stopTime
+ROUTE Jump_Touch.touchTime TO JumpTimer.startTime
+
+ROUTE Kick_Touch.touchTime TO StandTimer.stopTime
+ROUTE Kick_Touch.touchTime TO PitchTimer.stopTime
+ROUTE Kick_Touch.touchTime TO YawTimer.stopTime
+ROUTE Kick_Touch.touchTime TO RollTimer.stopTime
+ROUTE Kick_Touch.touchTime TO WalkTimer.stopTime
+ROUTE Kick_Touch.touchTime TO RunTimer.stopTime
+ROUTE Kick_Touch.touchTime TO JumpTimer.stopTime
+ROUTE Kick_Touch.touchTime TO StopTimer.stopTime
+ROUTE Kick_Touch.touchTime TO KickTimer.startTime
+
+ROUTE Stop_Touch.touchTime TO StandTimer.stopTime
+ROUTE Stop_Touch.touchTime TO PitchTimer.stopTime
+ROUTE Stop_Touch.touchTime TO YawTimer.stopTime
+ROUTE Stop_Touch.touchTime TO RollTimer.stopTime
+ROUTE Stop_Touch.touchTime TO WalkTimer.stopTime
+ROUTE Stop_Touch.touchTime TO RunTimer.stopTime
+ROUTE Stop_Touch.touchTime TO JumpTimer.stopTime
+ROUTE Stop_Touch.touchTime TO KickTimer.stopTime
+ROUTE Stop_Touch.touchTime TO StopTimer.startTime
+
+ ]
+}
+
+
