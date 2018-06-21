@@ -61,7 +61,7 @@
           <Shape>
             <LineSet vertexCount='2'>
               <Coordinate point='0 0.824 0.0277 0 0.9149 0.0016'/>
-              <Color DEF='HAnimSegmentLineColorRGBA' color='1 1 0 1 1 0'/>
+              <Color DEF='HAnimSegmentLineColorRGBA' color='0 0 0 1 1 0'/>
             </LineSet>
           </Shape>
           <!-- HAnimSegment visualization line segment from parent <HAnimJoint name='HumanoidRoot'/> to <HAnimJoint name='vl5'/> -->
