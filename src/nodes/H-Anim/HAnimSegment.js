@@ -88,11 +88,11 @@ x3dom.registerNodeType(
              */
             this.addField_MFNode('displacers', x3dom.nodeTypes.HAnimDisplacer);
         
-        }//,
-        //{
+        },
+        {
             // TODO coord      add functionality
             // TODO displacers add functionality
-        //}
+        }
     )
 );
 /*
