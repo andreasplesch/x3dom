@@ -249,7 +249,7 @@ x3dom.registerNodeType(
                     if ( (cnode = this._childNodes[i]) ) {
                         // do not collect from joints and segments both deprecated
                         if (this._cf.joints.nodes.includes(cnode)) continue
-                        if (this._cf.segments.nodes.includes(cnode)) continue
+                        //if (this._cf.segments.nodes.includes(cnode)) continue
                         cnode.collectDrawableObjects(childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes);
                     }
                 }
