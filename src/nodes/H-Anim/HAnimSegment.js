@@ -27,7 +27,6 @@ x3dom.registerNodeType(
         function (ctx) {
             x3dom.nodeTypes.HAnimSegment.superClass.call(this, ctx);
 
-
             /**
              *
              * @var {x3dom.fields.SFString} name
@@ -89,11 +88,11 @@ x3dom.registerNodeType(
              */
             this.addField_MFNode('displacers', x3dom.nodeTypes.HAnimDisplacer);
         
-        },
-        {
+        }//,
+        //{
             // TODO coord      add functionality
             // TODO displacers add functionality
-        }
+        //}
     )
 );
 /*
