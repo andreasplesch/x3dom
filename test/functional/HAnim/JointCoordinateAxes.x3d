@@ -2,7 +2,7 @@
 <!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 3.0//EN" "http://www.web3d.org/specifications/x3d-3.0.dtd">
 <X3D xmlns:xsd='http://www.w3.org/2001/XMLSchema-instance' profile='Full' version='3.0' xsd:noNamespaceSchemaLocation='http://www.web3d.org/specifications/x3d-3.0.xsd'>
   <Scene DEF='scene'>
-    <NavigationInfo DEF='_1' headlight='false' type='"EXAMINE" "ANY"'/>
+    <!--NavigationInfo DEF='_1' headlight='false' type='"EXAMINE" "ANY"'/-->
     <Group DEF='_2'>
       <Group DEF='ARROW'>
         <Shape DEF='_3'>
