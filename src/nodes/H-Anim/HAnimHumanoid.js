@@ -245,14 +245,22 @@ x3dom.registerNodeType(
                     clipPlanes = localClipPlanes.concat(clipPlanes);
                 }
                 
-                for (var i=0; i<n; i++) {
-                    if ( (cnode = this._childNodes[i]) ) {
-                        // only collect from skeleton field
-                        if (this._cf.skeleton.nodes.includes(cnode))
-                            cnode.collectDrawableObjects(childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes);
-                        // skin, others TODO
-                    }
-                }
+                this._cf.skeleton.nodes.forEach(function(cnode){
+                   cnode.collectDrawableObjects(childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes);
+                });
+                
+                this._cf.skin.nodes.forEach(function(cnode){
+                   cnode.collectDrawableObjects(childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes);
+                });
+                
+//                 for (var i=0; i<n; i++) {
+//                     if ( (cnode = this._childNodes[i]) ) {
+//                         // only collect from skeleton field
+//                         if (this._cf.skeleton.nodes.includes(cnode))
+//                             cnode.collectDrawableObjects(childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes);
+//                         // skin, others TODO
+//                     }
+//                 }
             },
             nodeChanged: function()
             {
