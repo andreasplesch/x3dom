@@ -244,13 +244,13 @@ x3dom.registerNodeType(
 
                     clipPlanes = localClipPlanes.concat(clipPlanes);
                 }
-
+                
                 for (var i=0; i<n; i++) {
                     if ( (cnode = this._childNodes[i]) ) {
-                        // do not collect from joints and segments both deprecated
-                        if (this._cf.joints.nodes.includes(cnode)) continue
-                        if (this._cf.segments.nodes.includes(cnode)) continue
-                        cnode.collectDrawableObjects(childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes);
+                        // only collect from skeleton field
+                        if (this._cf.skeleton.nodes.includes(cnode))
+                            cnode.collectDrawableObjects(childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes);
+                        // skin, others TODO
                     }
                 }
             },
@@ -260,7 +260,7 @@ x3dom.registerNodeType(
             },
             // TODO skeleton   contains the HumanoidRoot Joint object functionality: map similar to children of Group
             // TODO skeleton   add functionality for HAnimSite also (unaffected by internal transformations)
-            // TODO joints     add functionality=ignore USE nodes of field
+            // TODO joints     add functionality
             fieldChanged: function(fieldName)
             {
                 switch(fieldName)
