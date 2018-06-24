@@ -36,6 +36,7 @@
     const inline = document.querySelector('#inline');
     function handleChange(event) {
         inline.setAttribute('url', event.target.options[event.target.selectedIndex].value);
+        document.querySelector('X3D').runtime.showAll('negZ');
     }
 </script>
 </html>
