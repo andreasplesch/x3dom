@@ -4026,10 +4026,10 @@
     <Group DEF='UserInterface'>
       <!-- Authoring hint: these axes are aligned within local coordinate system -->
       <Transform DEF='CoordinateAxesAdjustedScale' scale='0.175 0.175 0.175'>
-        <Inline DEF='CoordinateAxes' url='"../../X3dForWebAuthors/Chapter03-Grouping/CoordinateAxes.x3d" "http://X3dGraphics.com/examples/X3dForWebAuthors/Chapter03-Grouping/CoordinateAxes.x3d" "../../X3dForWebAuthors/Chapter03-Grouping/CoordinateAxes.wrl" "http://X3dGraphics.com/examples/X3dForWebAuthors/Chapter03-Grouping/CoordinateAxes.wrl"'/>
+        <Inline DEF='CoordinateAxes' url='"CoordinateAxes.x3d" "http://X3dGraphics.com/examples/X3dForWebAuthors/Chapter03-Grouping/CoordinateAxes.x3d" "../../X3dForWebAuthors/Chapter03-Grouping/CoordinateAxes.wrl" "http://X3dGraphics.com/examples/X3dForWebAuthors/Chapter03-Grouping/CoordinateAxes.wrl"'/>
       </Transform>
       <Transform DEF='cordsys' scale='0.175 0.175 0.175'>
-        <!-- <Inline bboxCenter='0.05143541 0.07883984 0.04731131' bboxSize='2.202872 2.25768 2.194624' url='"JointCoordinateAxes.x3dv"'/> -->
+        <Inline bboxCenter='0.05143541 0.07883984 0.04731131' bboxSize='2.202872 2.25768 2.194624' url='"JointCoordinateAxes.x3d"'/>
       </Transform>
 
       <Transform DEF='Stage' rotation='0 0 1 0' scale='1 0.0125 1' translation='0 -0.0125 0'>
@@ -4068,7 +4068,7 @@
       </Transform>
       <!--ProximitySensor DEF='HudProximitySensor' center='0 0 0' size='50 50 50'/-->
       <Transform DEF='HudXform'>
-        <Transform scale='0.12 0.12 0.12' translation='-0.55 0.25 -0.75'>
+        <Transform scale='0.12 0.12 0.12' translation='-0.55 1.25 0.75'>
           <Transform DEF='StandTransform' translation='0 -1 0'>
             <TouchSensor DEF='Stand_Touch'/>
             <Shape DEF='StandTextShape'>
