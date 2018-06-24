@@ -4066,9 +4066,9 @@
           </Shape>
         </Transform>
       </Transform>
-      <ProximitySensor DEF='HudProximitySensor' center='0 0 0' size='50 50 50'/>
+      <!--ProximitySensor DEF='HudProximitySensor' center='0 0 0' size='50 50 50'/-->
       <Transform DEF='HudXform'>
-        <Transform scale='0.02 0.02 0.02' translation='-0.55 0.25 -0.75'>
+        <Transform scale='0.12 0.12 0.12' translation='-0.55 0.25 -0.75'>
           <Transform DEF='StandTransform' translation='0 -1 0'>
             <TouchSensor DEF='Stand_Touch'/>
             <Shape DEF='StandTextShape'>
@@ -4226,8 +4226,8 @@
           </Transform>
         </Transform>
       </Transform>>
-      <ROUTE fromField='position_changed' fromNode='HudProximitySensor' toField='translation' toNode='HudXform'/>
-      <ROUTE fromField='orientation_changed' fromNode='HudProximitySensor' toField='rotation' toNode='HudXform'/>
+      <!--ROUTE fromField='position_changed' fromNode='HudProximitySensor' toField='translation' toNode='HudXform'/>
+      <ROUTE fromField='orientation_changed' fromNode='HudProximitySensor' toField='rotation' toNode='HudXform'/-->
     </Group>
     <Group DEF='BehaviorSynchronization'>
       <ROUTE fromField='touchTime' fromNode='Stand_Touch' toField='stopTime' toNode='PitchTimer'/>
