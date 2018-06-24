@@ -80,7 +80,7 @@
             <HAnimSegment DEF='hanim_l_upperarm' name='l_upperarm'>
               <Transform DEF='l_upperarm_adjust' center='0.182 1.22 -0.047' rotation='1 0 0 0.119' translation='0 0.0004203 -0.01665'>
                 <Shape USE='DiamondShape'/>
-              </HAnimSegment>
+              </Transform>
             </HAnimSegment>
             <HAnimJoint DEF='hanim_l_elbow' center='0.2014 1.1357 -0.0682' name='l_elbow'>
               <HAnimSegment DEF='hanim_l_forearm' name='l_forearm'>
