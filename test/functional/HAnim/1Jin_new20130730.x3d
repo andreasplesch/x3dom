@@ -1403,7 +1403,7 @@ texCoordIndex="0, 3, 2, -1, 2, 1, 0, -1, 1, 6, 5, -1, 5, 4, 1, -1, 7, 8, 2, -1, 
                 <Material DEF='text_color' ambientIntensity='1' diffuseColor='0.819 0.521 0.169' emissiveColor='0.819 0.521 0.169' specularColor='0.819 0.521 0.169'/>
               </Appearance>
               <Text solid='false' string='" Stand"'>
-                <FontStyle family="SANS"/>
+                <FontStyle justify='"BEGIN" "FIRST"' family="SANS"/>
               </Text>
             </Shape>
             <Shape DEF='Stand_Back'>
@@ -1422,7 +1422,7 @@ texCoordIndex="0, 3, 2, -1, 2, 1, 0, -1, 1, 6, 5, -1, 5, 4, 1, -1, 7, 8, 2, -1, 
                 <Material USE='text_color'/>
               </Appearance>
               <Text solid='false' string='" Pitch"'>
-                <FontStyle family="SANS"/>
+                <FontStyle justify='"BEGIN" "FIRST"' family="SANS"/>
               </Text>
             </Shape>
             <Shape DEF='Pitch_Back'>
@@ -1439,7 +1439,7 @@ texCoordIndex="0, 3, 2, -1, 2, 1, 0, -1, 1, 6, 5, -1, 5, 4, 1, -1, 7, 8, 2, -1, 
                 <Material USE='text_color'/>
               </Appearance>
               <Text solid='false' string='"  Yaw"'>
-                <FontStyle family="SANS"/>
+                <FontStyle justify='"BEGIN" "FIRST"' family="SANS"/>
               </Text>
             </Shape>
             <Shape DEF='Yaw_Back'>
@@ -1456,7 +1456,7 @@ texCoordIndex="0, 3, 2, -1, 2, 1, 0, -1, 1, 6, 5, -1, 5, 4, 1, -1, 7, 8, 2, -1, 
                 <Material USE='text_color'/>
               </Appearance>
               <Text solid='false' string='"  Roll"'>
-                <FontStyle family="SANS"/>
+                <FontStyle justify='"BEGIN" "FIRST"' family="SANS"/>
               </Text>
             </Shape>
             <Shape DEF='Roll_Back'>
@@ -1473,7 +1473,7 @@ texCoordIndex="0, 3, 2, -1, 2, 1, 0, -1, 1, 6, 5, -1, 5, 4, 1, -1, 7, 8, 2, -1, 
                 <Material USE='text_color'/>
               </Appearance>
               <Text solid='false' string='" Walk"'>
-                <FontStyle family="SANS"/>
+                <FontStyle justify='"BEGIN" "FIRST"' family="SANS"/>
               </Text>
             </Shape>
             <Shape DEF='Walk_Back'>
@@ -1490,7 +1490,7 @@ texCoordIndex="0, 3, 2, -1, 2, 1, 0, -1, 1, 6, 5, -1, 5, 4, 1, -1, 7, 8, 2, -1, 
                 <Material USE='text_color'/>
               </Appearance>
               <Text solid='false' string='"  Run"'>
-                <FontStyle family="SANS"/>
+                <FontStyle justify='"BEGIN" "FIRST"' family="SANS"/>
               </Text>
             </Shape>
             <Shape DEF='Run_Back'>
@@ -1507,7 +1507,7 @@ texCoordIndex="0, 3, 2, -1, 2, 1, 0, -1, 1, 6, 5, -1, 5, 4, 1, -1, 7, 8, 2, -1, 
                 <Material USE='text_color'/>
               </Appearance>
               <Text solid='false' string='" Jump"'>
-                <FontStyle family="SANS"/>
+                <FontStyle justify='"BEGIN" "FIRST"' family="SANS"/>
               </Text>
             </Shape>
             <Shape DEF='Jump_Back'>
@@ -1524,7 +1524,7 @@ texCoordIndex="0, 3, 2, -1, 2, 1, 0, -1, 1, 6, 5, -1, 5, 4, 1, -1, 7, 8, 2, -1, 
                 <Material USE='text_color'/>
               </Appearance>
               <Text solid='false' string='"  Kick"'>
-                <FontStyle family="SANS"/>
+                <FontStyle justify='"BEGIN" "FIRST"' family="SANS"/>
               </Text>
             </Shape>
             <Shape DEF='Kick_Back'>
@@ -1541,7 +1541,7 @@ texCoordIndex="0, 3, 2, -1, 2, 1, 0, -1, 1, 6, 5, -1, 5, 4, 1, -1, 7, 8, 2, -1, 
                 <Material USE='text_color'/>
               </Appearance>
               <Text solid='false' string='"Default"'>
-                <FontStyle family="SANS"/>
+                <FontStyle justify='"BEGIN" "FIRST"' family="SANS"/>
               </Text>
             </Shape>
             <Shape DEF='Stop_Back'>
