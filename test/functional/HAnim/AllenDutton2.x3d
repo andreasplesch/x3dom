@@ -309,7 +309,7 @@
       </Transform>
       <Collision DEF='HUD' enabled='false'>
         <Transform DEF='HudXform'>
-          <Transform scale='0.612 0.612 0.612' translation='0.01107 -0.025 5.08'>
+          <Transform scale='0.612 0.612 0.612' translation='0.01107 -1.025 1.08'>
             <Transform DEF='Stand_Text'>
               <TouchSensor DEF='Stand_Touch' description='click for behavior'/>
               <Shape DEF='Stand'>
