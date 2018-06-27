@@ -116,7 +116,7 @@ x3dom.registerNodeType(
              * @field x3d
              * @instance
              */
-            this.addField_MFNode('skinCoord', x3dom.nodeTypes.X3DCoordinateNode);
+            this.addField_SFNode('skinCoord', x3dom.nodeTypes.X3DCoordinateNode);
 
             /**
              *
@@ -126,7 +126,7 @@ x3dom.registerNodeType(
              * @field x3d
              * @instance
              */
-            this.addField_MFNode('skinNormal', x3dom.nodeTypes.X3DNormalNode);
+            this.addField_SFNode('skinNormal', x3dom.nodeTypes.X3DNormalNode);
 
             /**
              *
