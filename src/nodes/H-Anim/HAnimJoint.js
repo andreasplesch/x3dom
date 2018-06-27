@@ -112,7 +112,13 @@ x3dom.registerNodeType(
              */
             this.addField_SFFloat(ctx, 'stiffness', '0 0 0');
         
-        }   
+            //this._humanoid = null;
+        
+        }
+                //TODO: for skinned animation
+                //custom collectDrawableObjects which receives skinCoord and skinNormal fields
+                //or use fieldChanged and search for skinCoord
+                //or search for Humanoid, skinCoord at nodeChanged
     )
 );
 /*
