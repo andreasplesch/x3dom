@@ -114,7 +114,22 @@ x3dom.registerNodeType(
         
             //this._humanoid = null;
         
-        }
+        },
+        {
+            nodeChanged: function()
+            {
+                this._humanoid = _findRoot(this);
+                
+                var _findRoot = function(joint) {
+                    var parents = joint._parentNodes;
+                    if (parents.length == 0) return false;
+                    var found = parents.find(function(parent)
+                        {return x3dom.isa(parent, x3dom.nodeTypes.HAnimHumanoid);});
+                    if (found !== undefined) return found;
+                    return parents.find(_findRoot);
+            },
+            
+                
                 //TODO: for skinned animation
                 //custom collectDrawableObjects which receives skinCoord and skinNormal fields
                 //or use fieldChanged and search for skinCoord
