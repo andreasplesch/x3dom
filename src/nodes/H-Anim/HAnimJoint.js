@@ -120,7 +120,7 @@ x3dom.registerNodeType(
             {
                 this._humanoid = _findRoot(this._xmlNode);
                 
-                var _findRoot = function(domNode) {
+                function _findRoot(domNode) {
                     var parent = domNode.parentNode._x3domNode; //_parentNodes not yet available
                     if (x3dom.isa(parent, x3dom.nodeTypes.Scene)) return false
                     if (x3dom.isa(parent, x3dom.nodeTypes.HAnimHumanoid)) return parent
