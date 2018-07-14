@@ -118,16 +118,15 @@ x3dom.registerNodeType(
         {
             nodeChanged: function()
             {
-                this._humanoid = _findRoot(this);
+                this._humanoid = _findRoot(this._xmlNode);
                 
-                var _findRoot = function(joint) {
-                    var parents = joint._parentNodes;
-                    if (parents.length == 0) return false;
-                    var found = parents.find(function(parent)
-                        {return x3dom.isa(parent, x3dom.nodeTypes.HAnimHumanoid);});
-                    if (found !== undefined) return found;
-                    return parents.find(_findRoot);
-            },
+                var _findRoot = function(domNode) {
+                    var parent = domNode.parentNode._x3domNode; //_parentNodes not yet available
+                    if (x3dom.isa(parent, x3dom.nodeTypes.Scene)) return false
+                    if (x3dom.isa(parent, x3dom.nodeTypes.HAnimHumanoid)) return parent
+                    return _findRoot(parent._xmlNode);
+            }
+            
             
                 
                 //TODO: for skinned animation
