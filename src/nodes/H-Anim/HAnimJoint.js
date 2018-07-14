@@ -125,9 +125,9 @@ x3dom.registerNodeType(
                     if (x3dom.isa(parent, x3dom.nodeTypes.Scene)) return false
                     if (x3dom.isa(parent, x3dom.nodeTypes.HAnimHumanoid)) return parent
                     return _findRoot(parent._xmlNode);
+                }
             }
-            
-            
+        }    
                 
                 //TODO: for skinned animation
                 //custom collectDrawableObjects which receives skinCoord and skinNormal fields
