@@ -173,6 +173,19 @@ x3dom.registerNodeType(
                     clipPlanes = localClipPlanes.concat(clipPlanes);
                 }
                 
+                //skin
+                var skinCoord = this._humanoid._cf.skinCoord.node;
+                if (skinCoord) {
+                    var skinCoordIndex = this._vf.skinCoordIndex;
+                    if (skinCoordIndex.length !== 0) {
+                        var skinCoordWeight = this._vf.skinCoordWeight;
+                        //blend in contribution rel. to undeformed resting
+                        skinCoordIndex.forEach(function(index) {
+                            //update coord
+                        });
+                    }
+                }
+                
                 for (var i=0; i<n; i++) {
                     if ( (cnode = this._childNodes[i]) ) {
                         cnode.collectDrawableObjects(childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes);
