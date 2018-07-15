@@ -191,6 +191,7 @@ x3dom.registerNodeType(
                                     .multiply( skinCoordWeight[ Math.min( i, skinCoordWeight.length-1 ) ])
                                  ); //in case of not enough weights
                         });
+                        skinCoord._parentNodes[0].fieldChanged('coord'); // needs to be more general
                     }
                 }
                 
