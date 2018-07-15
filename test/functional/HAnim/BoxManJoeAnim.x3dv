@@ -1019,6 +1019,9 @@ DEF Pitch_vl5Yaw OrientationInterpolator { key [ 0, 0.2, 0.4, 0.5, 0.6, 0.8, 1 ]
 DEF Pitch_vc6Yaw OrientationInterpolator { key [0, 0.2, 0.4, 0.5, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
 DEF Pitch_l_thumb1Pitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 1 0 0 0, 1 0 0 0.25, 1 0 0 0.3, 1 0 0 0.27, 1 0 0 0.2, 1 0 0 0 ]}
 DEF Pitch_r_thumb1Pitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 1 0 0 0, 1 0 0 0.25, 1 0 0 0.3, 1 0 0 0.27, 1 0 0 0.2, 1 0 0 0 ]}
+
+]}
+
 # ex Pitches_
 ROUTE PitchTimer.fraction_changed TO Pitches_r_ankleRotInterp.set_fraction
 ROUTE PitchTimer.fraction_changed TO Pitches_r_kneeRotInterp.set_fraction
@@ -1078,7 +1081,6 @@ ROUTE Pitch_vl5Yaw.value_changed TO hanim_vl5.rotation
 #ROUTE Pitch_vc6Yaw.value_changed TO hanim_vc6.rotation 
 #ROUTE Pitch_l_thumb1Pitch.value_changed TO hanim_l_thumb1.rotation
 #ROUTE Pitch_r_thumb1Pitch.value_changed TO hanim_r_thumb1.rotation
-]}
 
 DEF YawsAnimation Group {
  children [
@@ -1204,6 +1206,8 @@ DEF Roll_vl5Yaw OrientationInterpolator { key [ 0, 0.2, 0.4, 0.5, 0.6, 0.8, 1 ] 
 DEF Roll_vc6Yaw OrientationInterpolator { key [0, 0.2, 0.4, 0.5, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
 DEF Roll_l_thumb1Pitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
 DEF Roll_r_thumb1Pitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+]}
+
 # ex Rolls_
 ROUTE RollTimer.fraction_changed TO Rolls_r_ankleRotInterp.set_fraction
 ROUTE RollTimer.fraction_changed TO Rolls_r_kneeRotInterp.set_fraction
@@ -1263,7 +1267,6 @@ ROUTE Roll_vl5Yaw.value_changed TO hanim_vl5.rotation
 #ROUTE Roll_vc6Yaw.value_changed TO hanim_vc6.rotation 
 #ROUTE Roll_l_thumb1Pitch.value_changed TO hanim_l_thumb1.rotation
 #ROUTE Roll_r_thumb1Pitch.value_changed TO hanim_r_thumb1.rotation
-]}
 
 DEF WalkAnimation Group {
  children [
@@ -1296,6 +1299,8 @@ DEF Walk_vl5Yaw OrientationInterpolator { key [ 0, 0.2, 0.4, 0.5, 0.6, 0.8, 1 ] 
 DEF Walk_vc6Yaw OrientationInterpolator { key [0, 0.2, 0.4, 0.5, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
 DEF Walk_l_thumb1Pitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 1 0 0 0, 1 0 0 0.25, 1 0 0 0.5, 1 0 0 0.7, 1 0 0 0.2, 1 0 0 0 ]}
 DEF Walk_r_thumb1Pitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 1 0 0 0, 1 0 0 0.25, 1 0 0 0.5, 1 0 0 0.7, 1 0 0 0.2, 1 0 0 0 ]}
+]}
+
 # ex Walk_
 ROUTE WalkTimer.fraction_changed TO Walk_r_ankleRotInterp.set_fraction
 ROUTE WalkTimer.fraction_changed TO Walk_r_kneeRotInterp.set_fraction
@@ -1355,7 +1360,6 @@ ROUTE Walk_vl5Yaw.value_changed TO hanim_vl5.rotation
 #ROUTE Walk_vc6Yaw.value_changed TO hanim_vc6.rotation 
 #ROUTE Walk_l_thumb1Pitch.value_changed TO hanim_l_thumb1.rotation
 #ROUTE Walk_r_thumb1Pitch.value_changed TO hanim_r_thumb1.rotation
-]}
 
 DEF RunAnimation Group {
  children [
@@ -1388,6 +1392,8 @@ DEF Run_vl5Yaw OrientationInterpolator { key [ 0, 0.2, 0.4, 0.5, 0.6, 0.8, 1 ] k
 DEF Run_vc6Yaw OrientationInterpolator { key [0, 0.2, 0.4, 0.5, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
 DEF Run_l_thumb1Pitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 1 0 0 0, 1 0 0 0.25, 1 0 0 0.7, 1 0 0 0.27, 1 0 0 0.2, 1 0 0 0 ]}
 DEF Run_r_thumb1Pitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 1 0 0 0, 1 0 0 0.25, 1 0 0 0.7, 1 0 0 0.27, 1 0 0 0.2, 1 0 0 0 ]}
+]}
+
 # ex Run_
 ROUTE RunTimer.fraction_changed TO Run_r_ankleRotInterp_Run.set_fraction
 ROUTE RunTimer.fraction_changed TO Run_r_kneeRotInterp_Run.set_fraction
@@ -1447,7 +1453,7 @@ ROUTE Run_vl5Yaw.value_changed TO hanim_vl5.rotation
 #ROUTE Run_vc6Yaw.value_changed TO hanim_vc6.rotation 
 #ROUTE Run_l_thumb1Pitch.value_changed TO hanim_l_thumb1.rotation
 #ROUTE Run_r_thumb1Pitch.value_changed TO hanim_r_thumb1.rotation
-]}
+
 
 DEF JumpAnimation Group {
  children [
@@ -1480,6 +1486,8 @@ DEF Jump_vl5Yaw OrientationInterpolator { key [ 0, 0.2, 0.4, 0.5, 0.6, 0.8, 1 ] 
 DEF Jump_vc6Yaw OrientationInterpolator { key [0, 0.2, 0.4, 0.5, 0.6, 0.8, 1 ] keyValue [ 0 1 0 0, 0 1 0 0.8, 0 1 0 0, 0 1 0 0, -1 0 0 0.6, 0 -1 0 0.8, 0 1 0 0 ]}
 DEF Jump_l_thumb1Pitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 1 0 0 0, 1 0 0 0.5, 1 0 0 1.1, 1 0 0 0.7, 1 0 0 0.2, 1 0 0 0 ]}
 DEF Jump_r_thumb1Pitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 1 0 0 0, 1 0 0 0.5, 1 0 0 1.1, 1 0 0 0.7, 1 0 0 0.2, 1 0 0 0 ]}
+]}
+
 # ex Jump_
 ROUTE JumpTimer.fraction_changed TO Jump_r_ankleRotInterp.set_fraction
 ROUTE JumpTimer.fraction_changed TO Jump_r_kneeRotInterp.set_fraction
@@ -1539,7 +1547,6 @@ ROUTE Jump_vl5Yaw.value_changed TO hanim_vl5.rotation
 #ROUTE Jump_vc6Yaw.value_changed TO hanim_vc6.rotation 
 #ROUTE Jump_l_thumb1Pitch.value_changed TO hanim_l_thumb1.rotation
 #ROUTE Jump_r_thumb1Pitch.value_changed TO hanim_r_thumb1.rotation
-]}
 
 DEF KickAnimation Group {
  children [
@@ -1570,6 +1577,8 @@ DEF Kick_upper_bodyRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValu
 DEF Kick_whole_bodyRotInterp OrientationInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0 ] }
 DEF Kick_whole_bodyTransInterp PositionInterpolator { key [ 0, 0.5, 1 ] keyValue [ 0 0 0, 0 0 0, 0 0 0 ] }
 DEF Kick_neckRotInterp OrientationInterpolator { key [ 0, 0.25, 0.55, 1 ] keyValue [ 0 0 1 0, 1 0 0 0.7, 1 0 0 0.5, 0 0 1 0 ] }
+]}
+
 # ex Kick_
 ROUTE KickTimer.fraction_changed TO Kick_l_sternoclavicularRoll.set_fraction 
 ROUTE KickTimer.fraction_changed TO Kick_l_acromioclavicularRoll.set_fraction 
@@ -1626,7 +1635,6 @@ ROUTE Kick_vl5Yaw.value_changed TO hanim_vl5.rotation
 ROUTE Kick_whole_bodyRotInterp.value_changed TO hanim_HumanoidRoot.rotation
 ROUTE Kick_whole_bodyTransInterp.value_changed TO hanim_HumanoidRoot.translation
 #ROUTE Kick_neckRotInterp.value_changed TO hanim_vc4.rotation
-]}
 
 DEF Interface Group { # stage and geometry with touchsensors to select animation
  children [ 
