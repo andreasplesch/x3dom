@@ -684,188 +684,190 @@ DEF StopAnimation Group {
   DEF Stop_r_pinky2RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }  
   DEF Stop_r_pinky3RotInterp OrientationInterpolator { key [0,0.5,1] keyValue [0 0 1 0,0 0 1 0,0 0 1 0] }
 
-  ROUTE StopTimer.fraction_changed TO Stop_HumanoidRootTransInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_HumanoidRootRotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_sacroiliacRotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_hipRotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_kneeRotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_ankleRotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_subtalarRotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_midtarsalRotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_metatarsalRotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_hipRotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_kneeRotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_ankleRotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_subtalarRotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_midtarsalRotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_metatarsalRotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_vl5RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_vl4RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_vl3RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_vl2RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_vl1RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_vt12RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_vt11RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_vt10RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_vt9RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_vt8RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_vt7RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_vt6RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_vt5RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_vt4RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_vt3RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_vt2RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_vt1RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_vc7RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_vc6RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_vc5RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_vc4RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_vc3RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_vc2RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_vc1RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_skullbaseRotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_eyeball_jointRotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_eyeball_jointRotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_sternoclavicularRotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_acromioclavicularRotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_shoulderRotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_elbowRotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_wristRotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_thumb1RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_thumb2RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_thumb3RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_index0RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_index1RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_index2RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_index3RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_middle0RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_middle1RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_middle2RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_middle3RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_ring0RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_ring1RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_ring2RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_ring3RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_pinky0RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_pinky1RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_pinky2RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_l_pinky3RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_sternoclavicularRotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_acromioclavicularRotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_shoulderRotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_elbowRotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_wristRotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_thumb1RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_thumb2RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_thumb3RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_index0RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_index1RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_index2RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_index3RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_middle0RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_middle1RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_middle2RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_middle3RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_ring0RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_ring1RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_ring2RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_ring3RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_pinky0RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_pinky1RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_pinky2RotInterp.set_fraction
-  ROUTE StopTimer.fraction_changed TO Stop_r_pinky3RotInterp.set_fraction
-  ROUTE Stop_HumanoidRootTransInterp.value_changed TO hanim_HumanoidRoot.translation
-  ROUTE Stop_HumanoidRootRotInterp.value_changed TO hanim_HumanoidRoot.rotation
-  #ROUTE Stop_sacroiliacRotInterp.value_changed TO hanim_sacroiliac.rotation
-  ROUTE Stop_l_hipRotInterp.value_changed TO hanim_l_hip.rotation
-  ROUTE Stop_l_kneeRotInterp.value_changed TO hanim_l_knee.rotation
-  ROUTE Stop_l_ankleRotInterp.value_changed TO hanim_l_ankle.rotation
-  #ROUTE Stop_l_subtalarRotInterp.value_changed TO hanim_l_subtalar.rotation
-  ROUTE Stop_l_midtarsalRotInterp.value_changed TO hanim_l_midtarsal.rotation
-  #ROUTE Stop_l_metatarsalRotInterp.value_changed TO hanim_l_metatarsal.rotation
-  ROUTE Stop_r_hipRotInterp.value_changed TO hanim_r_hip.rotation
-  ROUTE Stop_r_kneeRotInterp.value_changed TO hanim_r_knee.rotation
-  ROUTE Stop_r_ankleRotInterp.value_changed TO hanim_r_ankle.rotation
-  #ROUTE Stop_r_subtalarRotInterp.value_changed TO hanim_r_subtalar.rotation
-  ROUTE Stop_r_midtarsalRotInterp.value_changed TO hanim_r_midtarsal.rotation
-  #ROUTE Stop_r_metatarsalRotInterp.value_changed TO hanim_r_metatarsal.rotation
-  ROUTE Stop_vl5RotInterp.value_changed TO hanim_vl5.rotation
-  #ROUTE Stop_vl4RotInterp.value_changed TO hanim_vl4.rotation
-  #ROUTE Stop_vl3RotInterp.value_changed TO hanim_vl3.rotation
-  #ROUTE Stop_vl2RotInterp.value_changed TO hanim_vl2.rotation
-  #ROUTE Stop_vl1RotInterp.value_changed TO hanim_vl1.rotation
-  #ROUTE Stop_vt12RotInterp.value_changed TO hanim_vt12.rotation
-  #ROUTE Stop_vt11RotInterp.value_changed TO hanim_vt11.rotation
-  #ROUTE Stop_vt10RotInterp.value_changed TO hanim_vt10.rotation
-  #ROUTE Stop_vt9RotInterp.value_changed TO hanim_vt9.rotation
-  #ROUTE Stop_vt8RotInterp.value_changed TO hanim_vt8.rotation
-  #ROUTE Stop_vt7RotInterp.value_changed TO hanim_vt7.rotation
-  #ROUTE Stop_vt6RotInterp.value_changed TO hanim_vt6.rotation
-  #ROUTE Stop_vt5RotInterp.value_changed TO hanim_vt5.rotation
-  #ROUTE Stop_vt4RotInterp.value_changed TO hanim_vt4.rotation
-  #ROUTE Stop_vt3RotInterp.value_changed TO hanim_vt3.rotation
-  #ROUTE Stop_vt2RotInterp.value_changed TO hanim_vt2.rotation
-  #ROUTE Stop_vt1RotInterp.value_changed TO hanim_vt1.rotation
-  #ROUTE Stop_vc7RotInterp.value_changed TO hanim_vc7.rotation
-  #ROUTE Stop_vc6RotInterp.value_changed TO hanim_vc6.rotation
-  #ROUTE Stop_vc5RotInterp.value_changed TO hanim_vc5.rotation
-  #ROUTE Stop_vc4RotInterp.value_changed TO hanim_vc4.rotation
-  #ROUTE Stop_vc3RotInterp.value_changed TO hanim_vc3.rotation
-  #ROUTE Stop_vc2RotInterp.value_changed TO hanim_vc2.rotation
-  #ROUTE Stop_vc1RotInterp.value_changed TO hanim_vc1.rotation
-  ROUTE Stop_skullbaseRotInterp.value_changed TO hanim_skullbase.rotation
-  #ROUTE Stop_l_eyeball_jointRotInterp.value_changed TO hanim_l_eyeball_joint.rotation
-  #ROUTE Stop_r_eyeball_jointRotInterp.value_changed TO hanim_r_eyeball_joint.rotation
-  #ROUTE Stop_l_sternoclavicularRotInterp.value_changed TO hanim_l_sternoclavicular.rotation
-  #ROUTE Stop_l_acromioclavicularRotInterp.value_changed TO hanim_l_acromioclavicular.rotation
-  ROUTE Stop_l_shoulderRotInterp.value_changed TO hanim_l_shoulder.rotation
-  ROUTE Stop_l_elbowRotInterp.value_changed TO hanim_l_elbow.rotation
-  ROUTE Stop_l_wristRotInterp.value_changed TO hanim_l_wrist.rotation
-  #ROUTE Stop_l_thumb1RotInterp.value_changed TO hanim_l_thumb1.rotation
-  #ROUTE Stop_l_thumb2RotInterp.value_changed TO hanim_l_thumb2.rotation
-  #ROUTE Stop_l_thumb3RotInterp.value_changed TO hanim_l_thumb3.rotation
-  #ROUTE Stop_l_index0RotInterp.value_changed TO hanim_l_index0.rotation
-  #ROUTE Stop_l_index1RotInterp.value_changed TO hanim_l_index1.rotation
-  #ROUTE Stop_l_index2RotInterp.value_changed TO hanim_l_index2.rotation
-  #ROUTE Stop_l_index3RotInterp.value_changed TO hanim_l_index3.rotation
-  #ROUTE Stop_l_middle0RotInterp.value_changed TO hanim_l_middle0.rotation
-  #ROUTE Stop_l_middle1RotInterp.value_changed TO hanim_l_middle1.rotation
-  #ROUTE Stop_l_middle2RotInterp.value_changed TO hanim_l_middle2.rotation
-  #ROUTE Stop_l_middle3RotInterp.value_changed TO hanim_l_middle3.rotation
-  #ROUTE Stop_l_ring0RotInterp.value_changed TO hanim_l_ring0.rotation
-  #ROUTE Stop_l_ring1RotInterp.value_changed TO hanim_l_ring1.rotation
-  #ROUTE Stop_l_ring2RotInterp.value_changed TO hanim_l_ring2.rotation
-  #ROUTE Stop_l_ring3RotInterp.value_changed TO hanim_l_ring3.rotation
-  #ROUTE Stop_l_pinky0RotInterp.value_changed TO hanim_l_pinky0.rotation
-  #ROUTE Stop_l_pinky1RotInterp.value_changed TO hanim_l_pinky1.rotation
-  #ROUTE Stop_l_pinky2RotInterp.value_changed TO hanim_l_pinky2.rotation
-  #ROUTE Stop_l_pinky3RotInterp.value_changed TO hanim_l_pinky3.rotation
-  #ROUTE Stop_r_sternoclavicularRotInterp.value_changed TO hanim_r_sternoclavicular.rotation
-  #ROUTE Stop_r_acromioclavicularRotInterp.value_changed TO hanim_r_acromioclavicular.rotation
-  ROUTE Stop_r_shoulderRotInterp.value_changed TO hanim_r_shoulder.rotation
-  ROUTE Stop_r_elbowRotInterp.value_changed TO hanim_r_elbow.rotation
-  ROUTE Stop_r_wristRotInterp.value_changed TO hanim_r_wrist.rotation
-  #ROUTE Stop_r_thumb1RotInterp.value_changed TO hanim_r_thumb1.rotation
-  #ROUTE Stop_r_thumb2RotInterp.value_changed TO hanim_r_thumb2.rotation
-  #ROUTE Stop_r_thumb3RotInterp.value_changed TO hanim_r_thumb3.rotation
-  #ROUTE Stop_r_index0RotInterp.value_changed TO hanim_r_index0.rotation
-  #ROUTE Stop_r_index1RotInterp.value_changed TO hanim_r_index1.rotation
-  #ROUTE Stop_r_index2RotInterp.value_changed TO hanim_r_index2.rotation
-  #ROUTE Stop_r_index3RotInterp.value_changed TO hanim_r_index3.rotation
-  #ROUTE Stop_r_middle0RotInterp.value_changed TO hanim_r_middle0.rotation
-  #ROUTE Stop_r_middle1RotInterp.value_changed TO hanim_r_middle1.rotation
-  #ROUTE Stop_r_middle2RotInterp.value_changed TO hanim_r_middle2.rotation
-  #ROUTE Stop_r_middle3RotInterp.value_changed TO hanim_r_middle3.rotation
-  #ROUTE Stop_r_ring0RotInterp.value_changed TO hanim_r_ring0.rotation
-  #ROUTE Stop_r_ring1RotInterp.value_changed TO hanim_r_ring1.rotation
-  #ROUTE Stop_r_ring2RotInterp.value_changed TO hanim_r_ring2.rotation
-  #ROUTE Stop_r_ring3RotInterp.value_changed TO hanim_r_ring3.rotation
-  #ROUTE Stop_r_pinky0RotInterp.value_changed TO hanim_r_pinky0.rotation
-  #ROUTE Stop_r_pinky1RotInterp.value_changed TO hanim_r_pinky1.rotation
-  #ROUTE Stop_r_pinky2RotInterp.value_changed TO hanim_r_pinky2.rotation
-  #ROUTE Stop_r_pinky3RotInterp.value_changed TO hanim_r_pinky3.rotation
- ]
+   ]
 }
+
+ROUTE StopTimer.fraction_changed TO Stop_HumanoidRootTransInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_HumanoidRootRotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_sacroiliacRotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_hipRotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_kneeRotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_ankleRotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_subtalarRotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_midtarsalRotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_metatarsalRotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_hipRotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_kneeRotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_ankleRotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_subtalarRotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_midtarsalRotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_metatarsalRotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_vl5RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_vl4RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_vl3RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_vl2RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_vl1RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_vt12RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_vt11RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_vt10RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_vt9RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_vt8RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_vt7RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_vt6RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_vt5RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_vt4RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_vt3RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_vt2RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_vt1RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_vc7RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_vc6RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_vc5RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_vc4RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_vc3RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_vc2RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_vc1RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_skullbaseRotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_eyeball_jointRotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_eyeball_jointRotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_sternoclavicularRotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_acromioclavicularRotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_shoulderRotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_elbowRotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_wristRotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_thumb1RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_thumb2RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_thumb3RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_index0RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_index1RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_index2RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_index3RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_middle0RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_middle1RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_middle2RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_middle3RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_ring0RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_ring1RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_ring2RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_ring3RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_pinky0RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_pinky1RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_pinky2RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_l_pinky3RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_sternoclavicularRotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_acromioclavicularRotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_shoulderRotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_elbowRotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_wristRotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_thumb1RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_thumb2RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_thumb3RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_index0RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_index1RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_index2RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_index3RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_middle0RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_middle1RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_middle2RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_middle3RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_ring0RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_ring1RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_ring2RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_ring3RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_pinky0RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_pinky1RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_pinky2RotInterp.set_fraction
+ROUTE StopTimer.fraction_changed TO Stop_r_pinky3RotInterp.set_fraction
+ROUTE Stop_HumanoidRootTransInterp.value_changed TO hanim_HumanoidRoot.translation
+ROUTE Stop_HumanoidRootRotInterp.value_changed TO hanim_HumanoidRoot.rotation
+#ROUTE Stop_sacroiliacRotInterp.value_changed TO hanim_sacroiliac.rotation
+ROUTE Stop_l_hipRotInterp.value_changed TO hanim_l_hip.rotation
+ROUTE Stop_l_kneeRotInterp.value_changed TO hanim_l_knee.rotation
+ROUTE Stop_l_ankleRotInterp.value_changed TO hanim_l_ankle.rotation
+#ROUTE Stop_l_subtalarRotInterp.value_changed TO hanim_l_subtalar.rotation
+ROUTE Stop_l_midtarsalRotInterp.value_changed TO hanim_l_midtarsal.rotation
+#ROUTE Stop_l_metatarsalRotInterp.value_changed TO hanim_l_metatarsal.rotation
+ROUTE Stop_r_hipRotInterp.value_changed TO hanim_r_hip.rotation
+ROUTE Stop_r_kneeRotInterp.value_changed TO hanim_r_knee.rotation
+ROUTE Stop_r_ankleRotInterp.value_changed TO hanim_r_ankle.rotation
+#ROUTE Stop_r_subtalarRotInterp.value_changed TO hanim_r_subtalar.rotation
+ROUTE Stop_r_midtarsalRotInterp.value_changed TO hanim_r_midtarsal.rotation
+#ROUTE Stop_r_metatarsalRotInterp.value_changed TO hanim_r_metatarsal.rotation
+ROUTE Stop_vl5RotInterp.value_changed TO hanim_vl5.rotation
+#ROUTE Stop_vl4RotInterp.value_changed TO hanim_vl4.rotation
+#ROUTE Stop_vl3RotInterp.value_changed TO hanim_vl3.rotation
+#ROUTE Stop_vl2RotInterp.value_changed TO hanim_vl2.rotation
+#ROUTE Stop_vl1RotInterp.value_changed TO hanim_vl1.rotation
+#ROUTE Stop_vt12RotInterp.value_changed TO hanim_vt12.rotation
+#ROUTE Stop_vt11RotInterp.value_changed TO hanim_vt11.rotation
+#ROUTE Stop_vt10RotInterp.value_changed TO hanim_vt10.rotation
+#ROUTE Stop_vt9RotInterp.value_changed TO hanim_vt9.rotation
+#ROUTE Stop_vt8RotInterp.value_changed TO hanim_vt8.rotation
+#ROUTE Stop_vt7RotInterp.value_changed TO hanim_vt7.rotation
+#ROUTE Stop_vt6RotInterp.value_changed TO hanim_vt6.rotation
+#ROUTE Stop_vt5RotInterp.value_changed TO hanim_vt5.rotation
+#ROUTE Stop_vt4RotInterp.value_changed TO hanim_vt4.rotation
+#ROUTE Stop_vt3RotInterp.value_changed TO hanim_vt3.rotation
+#ROUTE Stop_vt2RotInterp.value_changed TO hanim_vt2.rotation
+#ROUTE Stop_vt1RotInterp.value_changed TO hanim_vt1.rotation
+#ROUTE Stop_vc7RotInterp.value_changed TO hanim_vc7.rotation
+#ROUTE Stop_vc6RotInterp.value_changed TO hanim_vc6.rotation
+#ROUTE Stop_vc5RotInterp.value_changed TO hanim_vc5.rotation
+#ROUTE Stop_vc4RotInterp.value_changed TO hanim_vc4.rotation
+#ROUTE Stop_vc3RotInterp.value_changed TO hanim_vc3.rotation
+#ROUTE Stop_vc2RotInterp.value_changed TO hanim_vc2.rotation
+#ROUTE Stop_vc1RotInterp.value_changed TO hanim_vc1.rotation
+ROUTE Stop_skullbaseRotInterp.value_changed TO hanim_skullbase.rotation
+#ROUTE Stop_l_eyeball_jointRotInterp.value_changed TO hanim_l_eyeball_joint.rotation
+#ROUTE Stop_r_eyeball_jointRotInterp.value_changed TO hanim_r_eyeball_joint.rotation
+#ROUTE Stop_l_sternoclavicularRotInterp.value_changed TO hanim_l_sternoclavicular.rotation
+#ROUTE Stop_l_acromioclavicularRotInterp.value_changed TO hanim_l_acromioclavicular.rotation
+ROUTE Stop_l_shoulderRotInterp.value_changed TO hanim_l_shoulder.rotation
+ROUTE Stop_l_elbowRotInterp.value_changed TO hanim_l_elbow.rotation
+ROUTE Stop_l_wristRotInterp.value_changed TO hanim_l_wrist.rotation
+#ROUTE Stop_l_thumb1RotInterp.value_changed TO hanim_l_thumb1.rotation
+#ROUTE Stop_l_thumb2RotInterp.value_changed TO hanim_l_thumb2.rotation
+#ROUTE Stop_l_thumb3RotInterp.value_changed TO hanim_l_thumb3.rotation
+#ROUTE Stop_l_index0RotInterp.value_changed TO hanim_l_index0.rotation
+#ROUTE Stop_l_index1RotInterp.value_changed TO hanim_l_index1.rotation
+#ROUTE Stop_l_index2RotInterp.value_changed TO hanim_l_index2.rotation
+#ROUTE Stop_l_index3RotInterp.value_changed TO hanim_l_index3.rotation
+#ROUTE Stop_l_middle0RotInterp.value_changed TO hanim_l_middle0.rotation
+#ROUTE Stop_l_middle1RotInterp.value_changed TO hanim_l_middle1.rotation
+#ROUTE Stop_l_middle2RotInterp.value_changed TO hanim_l_middle2.rotation
+#ROUTE Stop_l_middle3RotInterp.value_changed TO hanim_l_middle3.rotation
+#ROUTE Stop_l_ring0RotInterp.value_changed TO hanim_l_ring0.rotation
+#ROUTE Stop_l_ring1RotInterp.value_changed TO hanim_l_ring1.rotation
+#ROUTE Stop_l_ring2RotInterp.value_changed TO hanim_l_ring2.rotation
+#ROUTE Stop_l_ring3RotInterp.value_changed TO hanim_l_ring3.rotation
+#ROUTE Stop_l_pinky0RotInterp.value_changed TO hanim_l_pinky0.rotation
+#ROUTE Stop_l_pinky1RotInterp.value_changed TO hanim_l_pinky1.rotation
+#ROUTE Stop_l_pinky2RotInterp.value_changed TO hanim_l_pinky2.rotation
+#ROUTE Stop_l_pinky3RotInterp.value_changed TO hanim_l_pinky3.rotation
+#ROUTE Stop_r_sternoclavicularRotInterp.value_changed TO hanim_r_sternoclavicular.rotation
+#ROUTE Stop_r_acromioclavicularRotInterp.value_changed TO hanim_r_acromioclavicular.rotation
+ROUTE Stop_r_shoulderRotInterp.value_changed TO hanim_r_shoulder.rotation
+ROUTE Stop_r_elbowRotInterp.value_changed TO hanim_r_elbow.rotation
+ROUTE Stop_r_wristRotInterp.value_changed TO hanim_r_wrist.rotation
+#ROUTE Stop_r_thumb1RotInterp.value_changed TO hanim_r_thumb1.rotation
+#ROUTE Stop_r_thumb2RotInterp.value_changed TO hanim_r_thumb2.rotation
+#ROUTE Stop_r_thumb3RotInterp.value_changed TO hanim_r_thumb3.rotation
+#ROUTE Stop_r_index0RotInterp.value_changed TO hanim_r_index0.rotation
+#ROUTE Stop_r_index1RotInterp.value_changed TO hanim_r_index1.rotation
+#ROUTE Stop_r_index2RotInterp.value_changed TO hanim_r_index2.rotation
+#ROUTE Stop_r_index3RotInterp.value_changed TO hanim_r_index3.rotation
+#ROUTE Stop_r_middle0RotInterp.value_changed TO hanim_r_middle0.rotation
+#ROUTE Stop_r_middle1RotInterp.value_changed TO hanim_r_middle1.rotation
+#ROUTE Stop_r_middle2RotInterp.value_changed TO hanim_r_middle2.rotation
+#ROUTE Stop_r_middle3RotInterp.value_changed TO hanim_r_middle3.rotation
+#ROUTE Stop_r_ring0RotInterp.value_changed TO hanim_r_ring0.rotation
+#ROUTE Stop_r_ring1RotInterp.value_changed TO hanim_r_ring1.rotation
+#ROUTE Stop_r_ring2RotInterp.value_changed TO hanim_r_ring2.rotation
+#ROUTE Stop_r_ring3RotInterp.value_changed TO hanim_r_ring3.rotation
+#ROUTE Stop_r_pinky0RotInterp.value_changed TO hanim_r_pinky0.rotation
+#ROUTE Stop_r_pinky1RotInterp.value_changed TO hanim_r_pinky1.rotation
+#ROUTE Stop_r_pinky2RotInterp.value_changed TO hanim_r_pinky2.rotation
+#ROUTE Stop_r_pinky3RotInterp.value_changed TO hanim_r_pinky3.rotation
+
 
 DEF StandAnimation Group {
  children [
