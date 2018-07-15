@@ -245,6 +245,9 @@ x3dom.registerNodeType(
                     clipPlanes = localClipPlanes.concat(clipPlanes);
                 }
                 
+                 if (this._cf.skinCoord.node)
+                    this._cf.skinCoord.node._vf.point = this._restCoords.copy() ; //reset
+                
                 this._cf.skeleton.nodes.forEach(function(cnode){
                    cnode.collectDrawableObjects(childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes);
                 });
