@@ -182,13 +182,13 @@ x3dom.registerNodeType(
                         var humanoid = this._humanoid;
                         var trafo = humanoid.getCurrentTransform().inverse().mult(childTransform);//factor in root trafo
                         //blend in contribution rel. to undeformed resting
-                        skinCoordIndex.forEach(function(index) {
+                        skinCoordIndex.forEach(function(coordIndex, i) {
                             //update coord
-                            var restCoord = humanoid._restCoords[index];
-                            skinCoord._vf.point[index] = skinCoord._vf.point[index]
+                            var restCoord = humanoid._restCoords[coordIndex];
+                            skinCoord._vf.point[coordIndex] = skinCoord._vf.point[coordIndex]
                                 .add(trafo.multMatrixPnt( restCoord )
                                     .subtract( restCoord )
-                                    .multiply( skinCoordWeight[ Math.min( index, skinCoordWeight.length-1 ) ])
+                                    .multiply( skinCoordWeight[ Math.min( i, skinCoordWeight.length-1 ) ])
                                  ); //in case of not enough weights
                         });
                     }
