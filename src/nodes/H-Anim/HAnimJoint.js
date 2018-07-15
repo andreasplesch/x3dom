@@ -185,7 +185,7 @@ x3dom.registerNodeType(
                         skinCoordIndex.forEach(function(index) {
                             //update coord
                             var restCoord = humanoid._restCoords[index];
-                            skinCoord.point[index] = skinCoord.point[index]
+                            skinCoord._vf.point[index] = skinCoord._vf.point[index]
                                 .add(trafo.multMatrixPnt( restCoord )
                                     .subtract( restCoord )
                                     .multiply( skinCoordWeight[ Math.min( index, skinCoordWeight.length-1 ) ])
