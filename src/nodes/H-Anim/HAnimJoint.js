@@ -182,9 +182,10 @@ x3dom.registerNodeType(
                         //blend in contribution rel. to undeformed resting
                         skinCoordIndex.forEach(function(index) {
                             //update coord
-                            
-                            //skinCoord.point[index] += this._humanoid._restCoords[index] * skinCoordWeight[index];
-                            
+                            var restCoord = this._humanoid._restCoords[index];
+                            skinCoord.point[index] += childTransform.multMatrixPnt( restCoords )
+                                .subtract( restCoords )
+                                .multiply( skinCoordWeight[ Math.min( index, skinCoordWeight.length-1 ) ]);
                         });
                     }
                 }
