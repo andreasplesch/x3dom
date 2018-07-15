@@ -1806,7 +1806,9 @@ DEF Interface Group { # stage and geometry with touchsensors to select animation
     }
    ]
   }
- 
+ ]
+}
+
 ROUTE HudProx.position_changed TO HudXform.translation
 ROUTE HudProx.orientation_changed TO HudXform.rotation 
 
@@ -1899,6 +1901,3 @@ ROUTE Stop_Touch.touchTime TO RunTimer.stopTime
 ROUTE Stop_Touch.touchTime TO JumpTimer.stopTime
 ROUTE Stop_Touch.touchTime TO KickTimer.stopTime
 ROUTE Stop_Touch.touchTime TO StopTimer.startTime
-
- ]
-}
