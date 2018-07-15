@@ -179,13 +179,14 @@ x3dom.registerNodeType(
                     var skinCoordIndex = this._vf.skinCoordIndex;
                     if (skinCoordIndex.length !== 0) {
                         var skinCoordWeight = this._vf.skinCoordWeight;
+                        var humanoid = this._humanoid;
                         //blend in contribution rel. to undeformed resting
                         skinCoordIndex.forEach(function(index) {
                             //update coord
-                            var restCoord = this._humanoid._restCoords[index];
-                            skinCoord.point[index] += childTransform.multMatrixPnt( restCoords )
-                                .subtract( restCoords )
-                                .multiply( skinCoordWeight[ Math.min( index, skinCoordWeight.length-1 ) ]);
+                            var restCoord = humanoid._restCoords[index];
+                            skinCoord.point[index] += childTransform.multMatrixPnt( restCoord )
+                                .subtract( restCoord )
+                                .multiply( skinCoordWeight[ Math.min( index, skinCoordWeight.length-1 ) ]); //in case of not enough weights
                         });
                     }
                 }
