@@ -1945,14 +1945,12 @@
 			<Inline
 				url='"JointCoordinateAxes.x3dv"' />
 		</Transform>
-		<ProximitySensor DEF="HudProx"
-			size="50 50 50" />
+		<!--ProximitySensor DEF="HudProx"
+			size="50 50 50" /-->
 		<Transform DEF="HudXform"
-			rotation="0 0.99999988079071045 0 0.78000003099441528"
-			translation="2 1 2.0000002384185791">
 			<Transform
-				translation="-0.47999998927116394 -0.0099999997764825821 -0.75"
-				scale="0.019999999552965164 0.019999999552965164 0.019999999552965164">
+				translation="-0.5 1 0.75"
+				scale="0.1 0.1 0.1">
 				<Transform DEF="Stand_Text"
 					translation="0 -0.89999997615814209 0">
 					<TouchSensor DEF="Stand_Touch" />
@@ -2148,8 +2146,8 @@
 			</Transform>
 		</Transform>
 	</Group>
-	<ROUTE fromNode="HudProx" fromField="position_changed" toNode="HudXform" toField="set_translation" />
-	<ROUTE fromNode="HudProx" fromField="orientation_changed" toNode="HudXform" toField="set_rotation" />
+	<!--ROUTE fromNode="HudProx" fromField="position_changed" toNode="HudXform" toField="set_translation" />
+	<ROUTE fromNode="HudProx" fromField="orientation_changed" toNode="HudXform" toField="set_rotation" /-->
 	<ROUTE fromNode="Stand_Touch" fromField="touchTime" toNode="PitchTimer" toField="set_stopTime" />
 	<ROUTE fromNode="Stand_Touch" fromField="touchTime" toNode="YawTimer" toField="set_stopTime" />
 	<ROUTE fromNode="Stand_Touch" fromField="touchTime" toNode="RollTimer" toField="set_stopTime" />
