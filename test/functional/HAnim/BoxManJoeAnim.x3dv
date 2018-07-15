@@ -1111,6 +1111,8 @@ DEF Yaw_vl5Yaw OrientationInterpolator { key [ 0, 0.2, 0.4, 0.5, 0.6, 0.8, 1 ] k
 DEF Yaw_vc6Yaw OrientationInterpolator { key [0, 0.2, 0.4, 0.5, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
 DEF Yaw_l_thumb1Pitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
 DEF Yaw_r_thumb1Pitch OrientationInterpolator { key [ 0, 0.2, 0.4, 0.6, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0, 0 0 1 0 ]}
+]}
+
 # ex Yaws_
 ROUTE YawTimer.fraction_changed TO Yaws_r_ankleRotInterp.set_fraction
 ROUTE YawTimer.fraction_changed TO Yaws_r_kneeRotInterp.set_fraction
@@ -1170,7 +1172,6 @@ ROUTE Yaw_vl5Yaw.value_changed TO hanim_vl5.rotation
 #ROUTE Yaw_vc6Yaw.value_changed TO hanim_vc6.rotation 
 #ROUTE Yaw_l_thumb1Pitch.value_changed TO hanim_l_thumb1.rotation
 #ROUTE Yaw_r_thumb1Pitch.value_changed TO hanim_r_thumb1.rotation
-]}
 
 DEF RollsAnimation Group {
  children [
