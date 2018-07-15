@@ -906,6 +906,8 @@ DEF Stand_r_index1Roll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.5, 0.8, 1 
 DEF Stand_r_index2Roll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.5, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0.4, 0 0 1 0.32, 0 0 1 0.25, 0 0 1 0.2, 0 0 1 0 ]}
 DEF Stand_r_index3Roll OrientationInterpolator { key [ 0, 0.2, 0.4, 0.5, 0.8, 1 ] keyValue [ 0 0 1 0, 0 0 1 0.2, 0 0 1 0.3, 0 0 1 0.35, 0 0 1 0.2, 0 0 1 0 ]}
 
+]}
+
 # ex Stand_
 ROUTE StandTimer.fraction_changed TO Stand_r_ankleRotInterp.set_fraction
 ROUTE StandTimer.fraction_changed TO Stand_r_kneeRotInterp.set_fraction
@@ -985,7 +987,6 @@ ROUTE Stand_vl5Yaw.value_changed TO hanim_vl5.rotation
 #ROUTE Stand_r_index1Roll.value_changed TO hanim_r_pinky1.rotation
 #ROUTE Stand_r_index2Roll.value_changed TO hanim_r_pinky2.rotation
 #ROUTE Stand_r_index2Roll.value_changed TO hanim_r_pinky3.rotation
-]}
 
 DEF PitchesAnimation Group {
  children [
