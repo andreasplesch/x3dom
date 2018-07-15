@@ -180,13 +180,16 @@ x3dom.registerNodeType(
                     if (skinCoordIndex.length !== 0) {
                         var skinCoordWeight = this._vf.skinCoordWeight;
                         var humanoid = this._humanoid;
+                        var trafo = humanoid.getCurrentTransform().inverse().mult(childTransform);//factor in root trafo
                         //blend in contribution rel. to undeformed resting
                         skinCoordIndex.forEach(function(index) {
                             //update coord
                             var restCoord = humanoid._restCoords[index];
-                            skinCoord.point[index] += childTransform.multMatrixPnt( restCoord )
-                                .subtract( restCoord )
-                                .multiply( skinCoordWeight[ Math.min( index, skinCoordWeight.length-1 ) ]); //in case of not enough weights
+                            skinCoord.point[index] = skinCoord.point[index]
+                                .add(trafo.multMatrixPnt( restCoord )
+                                    .subtract( restCoord )
+                                    .multiply( skinCoordWeight[ Math.min( index, skinCoordWeight.length-1 ) ])
+                                 ); //in case of not enough weights
                         });
                     }
                 }
