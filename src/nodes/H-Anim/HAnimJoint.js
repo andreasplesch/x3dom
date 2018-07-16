@@ -192,9 +192,9 @@ x3dom.registerNodeType(
                                  ); //in case of not enough weights
                         });
                         //update all, should be only once ber hum. traveral
-                        skinCoord._parentNodes.forEach( function(node) {
-                            node.fieldChanged('coord');// may need to be more general
-                        });
+                        //skinCoord._parentNodes.forEach( function(node) {
+                        //    node.fieldChanged('coord');// may need to be more general
+                        //});
                     }
                 }
                 
