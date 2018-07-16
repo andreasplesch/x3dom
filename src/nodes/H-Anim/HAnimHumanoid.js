@@ -275,7 +275,7 @@ x3dom.registerNodeType(
                 if (this._cf.skinCoord.node)
                     this._restCoords = this._cf.skinCoord.node._vf.point.copy() ;
                 if (this._cf.skinNormal.node)
-                    this._restNormals = this._cf.skinNormal.node_vf.vector.copy();
+                    this._restNormals = this._cf.skinNormal.node._vf.vector.copy();
                 //check for joints MFNodes
             },
             // TODO skeleton   contains the HumanoidRoot Joint object functionality: map similar to children of Group
