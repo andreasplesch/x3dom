@@ -1948,7 +1948,7 @@
 		<!--ProximitySensor DEF="HudProx"
 			size="50 50 50" /-->
 		<Transform DEF="HudXform"
-			<Transform
+			<Transform>
 				translation="-0.5 1 0.75"
 				scale="0.1 0.1 0.1">
 				<Transform DEF="Stand_Text"
