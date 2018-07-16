@@ -1964,7 +1964,7 @@
 						</Appearance>
 						<Text
 							string='"Stand"'>
-							<FontStyle
+							<FontStyle justify='"BEGIN" "FIRST"'
 								family='"SANS"' />
 						</Text>
 					</Shape>
@@ -1992,7 +1992,7 @@
 						</Appearance>
 						<Text
 							string='"Pitch"'>
-							<FontStyle
+							<FontStyle justify='"BEGIN" "FIRST"'
 								family='"SANS"' />
 						</Text>
 					</Shape>
@@ -2012,7 +2012,7 @@
 						</Appearance>
 						<Text
 							string='"Yaw"'>
-							<FontStyle
+							<FontStyle justify='"BEGIN" "FIRST"'
 								family='"SANS"' />
 						</Text>
 					</Shape>
@@ -2032,7 +2032,7 @@
 						</Appearance>
 						<Text
 							string='"Roll"'>
-							<FontStyle
+							<FontStyle justify='"BEGIN" "FIRST"'
 								family='"SANS"' />
 						</Text>
 					</Shape>
@@ -2052,7 +2052,7 @@
 						</Appearance>
 						<Text
 							string='"Walk"'>
-							<FontStyle
+							<FontStyle justify='"BEGIN" "FIRST"'
 								family='"SANS"' />
 						</Text>
 					</Shape>
@@ -2072,7 +2072,7 @@
 						</Appearance>
 						<Text
 							string='"Run"'>
-							<FontStyle
+							<FontStyle justify='"BEGIN" "FIRST"'
 								family='"SANS"' />
 						</Text>
 					</Shape>
@@ -2092,7 +2092,7 @@
 						</Appearance>
 						<Text
 							string='"Jump"'>
-							<FontStyle
+							<FontStyle justify='"BEGIN" "FIRST"'
 								family='"SANS"' />
 						</Text>
 					</Shape>
@@ -2112,7 +2112,7 @@
 						</Appearance>
 						<Text
 							string='"Kick"'>
-							<FontStyle
+							<FontStyle justify='"BEGIN" "FIRST"'
 								family='"SANS"' />
 						</Text>
 					</Shape>
@@ -2132,7 +2132,7 @@
 						</Appearance>
 						<Text
 							string='"Default"'>
-							<FontStyle
+							<FontStyle justify='"BEGIN" "FIRST"'
 								family='"SANS"' />
 						</Text>
 					</Shape>
