@@ -174,12 +174,14 @@ x3dom.registerNodeType(
                 }
                 
                 //skin
+                
+                var skinCoordIndex, skinCoordWeight, humanoid, trafo;
                 var skinCoord = this._humanoid._cf.skinCoord.node;
                 if (skinCoord) {
-                    var skinCoordIndex = this._vf.skinCoordIndex;
+                    skinCoordIndex = this._vf.skinCoordIndex;
                     if (skinCoordIndex.length !== 0) {
-                        var skinCoordWeight = this._vf.skinCoordWeight;
-                        var humanoid = this._humanoid;
+                        skinCoordWeight = this._vf.skinCoordWeight;
+                        humanoid = this._humanoid;
                         var trafo = humanoid.getCurrentTransform().inverse().mult(childTransform);//factor in root trafo
                         //blend in contribution rel. to undeformed resting
                         skinCoordIndex.forEach(function(coordIndex, i) {
@@ -191,10 +193,26 @@ x3dom.registerNodeType(
                                     .multiply( skinCoordWeight[ Math.min( i, skinCoordWeight.length-1 ) ])
                                  ); //in case of not enough weights
                         });
-                        //update all, should be only once ber hum. traveral
-                        //skinCoord._parentNodes.forEach( function(node) {
-                        //    node.fieldChanged('coord');// may need to be more general
-                        //});
+                    }
+                }
+                
+                var skinNormal = this._humanoid._cf.skinNormal.node;
+                if (skinNormal) {
+                    skinCoordIndex = this._vf.skinCoordIndex;
+                    if (skinCoordIndex.length !== 0) {
+                        skinCoordWeight = this._vf.skinCoordWeight;
+                        humanoid = this._humanoid;
+                        trafo = humanoid.getCurrentTransform().inverse().mult(childTransform).inverse().transpose();//factor in root trafo
+                        //blend in contribution rel. to undeformed resting
+                        skinCoordIndex.forEach(function(coordIndex, i) {
+                            //update coord
+                            var restNormal = humanoid._restNormals[coordIndex];
+                            skinNormal._vf.point[coordIndex] = skinNormal._vf.point[coordIndex]
+                                .add(trafo.multMatrixVec( restNormal )
+                                    .subtract( restNormal )
+                                    .multiply( skinCoordWeight[ Math.min( i, skinCoordWeight.length-1 ) ])
+                                 ); //in case of not enough weights
+                        });
                     }
                 }
                 
