@@ -191,7 +191,10 @@ x3dom.registerNodeType(
                                     .multiply( skinCoordWeight[ Math.min( i, skinCoordWeight.length-1 ) ])
                                  ); //in case of not enough weights
                         });
-                        skinCoord._parentNodes[0].fieldChanged('coord'); // needs to be more general
+                        //update all, should be only once ber hum. traveral
+                        skinCoord._parentNodes.forEach( function(node) {
+                            node.fieldChanged('coord');// may need to be more general
+                        });
                     }
                 }
                 
