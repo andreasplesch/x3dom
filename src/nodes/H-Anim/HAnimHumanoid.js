@@ -256,6 +256,11 @@ x3dom.registerNodeType(
                    cnode.collectDrawableObjects(childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes);
                 });
                 
+                if (this._cf.skinCoord.node)
+                    this._cf.skinCoord.node._parentNodes.forEach( function(node) {
+                        node.fieldChanged('coord');// may need to be more general
+                    });
+                
 //                 for (var i=0; i<n; i++) {
 //                     if ( (cnode = this._childNodes[i]) ) {
 //                         // only collect from skeleton field
