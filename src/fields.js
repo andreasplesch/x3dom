@@ -2927,12 +2927,12 @@ x3dom.fields.MFVec3f.prototype.setValueByStr = function(str) {
 
 x3dom.fields.MFVec3f.prototype.setValues = function(vec3Array)
 {
-    if ( vecArray.length < this.length ) {
+    if ( vec3Array.length < this.length ) {
         x3dom.debug.logWarning("MFVec3f.setValues: source array too short. Recycling.");
     }
-    that = this;
+    var that = this;
     this.forEach(function(vec3f, i){
-        that[i].setValues( vec3Array[ i % vecArray.length ] );
+        that[i].setValues( vec3Array[ i % vec3Array.length ] );
     });
 };
 
