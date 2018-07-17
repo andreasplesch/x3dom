@@ -466,24 +466,24 @@
     
     
     <!-- Animation ROUTEs -->
-    <ROUTE fromField='translation_changed' fromNode='HUMANOIDROOT_POSITION_ANIMATOR' toField='set_translation' toNode='hanim_HumanoidRoot'/>
-    <ROUTE fromField='rotation_changed' fromNode='HUMANOIDROOT_ANIMATOR' toField='set_rotation' toNode='hanim_HumanoidRoot'/>
-    <ROUTE fromField='rotation_changed' fromNode='L_HIP_ANIMATOR' toField='set_rotation' toNode='hanim_l_hip'/>
-    <ROUTE fromField='rotation_changed' fromNode='L_KNEE_ANIMATOR' toField='set_rotation' toNode='hanim_l_knee'/>
-    <ROUTE fromField='rotation_changed' fromNode='L_ANKLE_ANIMATOR' toField='set_rotation' toNode='hanim_l_ankle'/>
-    <ROUTE fromField='rotation_changed' fromNode='L_MIDTARSAL_ANIMATOR' toField='set_rotation' toNode='hanim_l_midtarsal'/>
-    <ROUTE fromField='rotation_changed' fromNode='R_HIP_ANIMATOR' toField='set_rotation' toNode='hanim_r_hip'/>
-    <ROUTE fromField='rotation_changed' fromNode='R_KNEE_ANIMATOR' toField='set_rotation' toNode='hanim_r_knee'/>
-    <ROUTE fromField='rotation_changed' fromNode='R_ANKLE_ANIMATOR' toField='set_rotation' toNode='hanim_r_ankle'/>
-    <ROUTE fromField='rotation_changed' fromNode='R_MIDTARSAL_ANIMATOR' toField='set_rotation' toNode='hanim_r_midtarsal'/>
-    <ROUTE fromField='rotation_changed' fromNode='VL5_ANIMATOR' toField='set_rotation' toNode='hanim_vl5'/>
-    <ROUTE fromField='rotation_changed' fromNode='SKULLBASE_ANIMATOR' toField='set_rotation' toNode='hanim_skullbase'/>
-    <ROUTE fromField='rotation_changed' fromNode='L_SHOULDER_ANIMATOR' toField='set_rotation' toNode='hanim_l_shoulder'/>
-    <ROUTE fromField='rotation_changed' fromNode='L_ELBOW_ANIMATOR' toField='set_rotation' toNode='hanim_l_elbow'/>
-    <ROUTE fromField='rotation_changed' fromNode='L_WRIST_ANIMATOR' toField='set_rotation' toNode='hanim_l_wrist'/>
-    <ROUTE fromField='rotation_changed' fromNode='R_SHOULDER_ANIMATOR' toField='set_rotation' toNode='hanim_r_shoulder'/>
-    <ROUTE fromField='rotation_changed' fromNode='R_ELBOW_ANIMATOR' toField='set_rotation' toNode='hanim_r_elbow'/>
-    <ROUTE fromField='rotation_changed' fromNode='R_WRIST_ANIMATOR' toField='set_rotation' toNode='hanim_r_wrist'/>
+    <ROUTE fromField='value_changed' fromNode='HUMANOIDROOT_POSITION_ANIMATOR' toField='set_translation' toNode='hanim_HumanoidRoot'/>
+    <ROUTE fromField='value_changed' fromNode='HUMANOIDROOT_ANIMATOR' toField='set_rotation' toNode='hanim_HumanoidRoot'/>
+    <ROUTE fromField='value_changed' fromNode='L_HIP_ANIMATOR' toField='set_rotation' toNode='hanim_l_hip'/>
+    <ROUTE fromField='value_changed' fromNode='L_KNEE_ANIMATOR' toField='set_rotation' toNode='hanim_l_knee'/>
+    <ROUTE fromField='value_changed' fromNode='L_ANKLE_ANIMATOR' toField='set_rotation' toNode='hanim_l_ankle'/>
+    <ROUTE fromField='value_changed' fromNode='L_MIDTARSAL_ANIMATOR' toField='set_rotation' toNode='hanim_l_midtarsal'/>
+    <ROUTE fromField='value_changed' fromNode='R_HIP_ANIMATOR' toField='set_rotation' toNode='hanim_r_hip'/>
+    <ROUTE fromField='value_changed' fromNode='R_KNEE_ANIMATOR' toField='set_rotation' toNode='hanim_r_knee'/>
+    <ROUTE fromField='value_changed' fromNode='R_ANKLE_ANIMATOR' toField='set_rotation' toNode='hanim_r_ankle'/>
+    <ROUTE fromField='value_changed' fromNode='R_MIDTARSAL_ANIMATOR' toField='set_rotation' toNode='hanim_r_midtarsal'/>
+    <ROUTE fromField='value_changed' fromNode='VL5_ANIMATOR' toField='set_rotation' toNode='hanim_vl5'/>
+    <ROUTE fromField='value_changed' fromNode='SKULLBASE_ANIMATOR' toField='set_rotation' toNode='hanim_skullbase'/>
+    <ROUTE fromField='value_changed' fromNode='L_SHOULDER_ANIMATOR' toField='set_rotation' toNode='hanim_l_shoulder'/>
+    <ROUTE fromField='value_changed' fromNode='L_ELBOW_ANIMATOR' toField='set_rotation' toNode='hanim_l_elbow'/>
+    <ROUTE fromField='value_changed' fromNode='L_WRIST_ANIMATOR' toField='set_rotation' toNode='hanim_l_wrist'/>
+    <ROUTE fromField='value_changed' fromNode='R_SHOULDER_ANIMATOR' toField='set_rotation' toNode='hanim_r_shoulder'/>
+    <ROUTE fromField='value_changed' fromNode='R_ELBOW_ANIMATOR' toField='set_rotation' toNode='hanim_r_elbow'/>
+    <ROUTE fromField='value_changed' fromNode='R_WRIST_ANIMATOR' toField='set_rotation' toNode='hanim_r_wrist'/>
     
     <ROUTE fromNode='TIMER' fromField='fraction_changed' toNode='hanim_skullbase_displacer' toField='weight'/>
   </Scene>
