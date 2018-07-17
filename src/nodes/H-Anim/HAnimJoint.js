@@ -180,8 +180,8 @@ x3dom.registerNodeType(
                 
                 if ( skinCoord ) {
                     
-                    trafo = humanoid.getCurrentTransform().inverse().mult(childTransform);//factor in root trafo
                     humanoid = this._humanoid;
+                    trafo = humanoid.getCurrentTransform().inverse().mult(childTransform);//factor in root trafo
                     
                     // first add displacers
                     displacers = this._cf.displacers.nodes;
