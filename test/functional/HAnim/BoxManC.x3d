@@ -283,7 +283,7 @@
       <Viewpoint DEF='Side_View' containerField='viewpoints' description='Side View' orientation='0 1 0 1.57' position='3 1 0'/>
       <Viewpoint DEF='Top_View' containerField='viewpoints' description='Top View' orientation='1 0 0 -1.57' position='0 3 0'/>
     </HAnimHumanoid>
-    <ExternProtoDeclare name='LOA1_WalkAnimation' url='"LOA1_WalkAnimation.wrl#LOA1_WalkAnimation" "http://www.web3d.org/x3d/content/examples/Basic/HumanoidAnimation/LOA1_WalkAnimation.wrl#LOA1_WalkAnimation" "http://h-anim.org/Models/H-Anim2001/boxman/protos/LOA1WalkAnimation.wrl#LOA1WalkAnimation" "LOA1_WalkAnimation.x3d#LOA1_WalkAnimation" "http://www.web3d.org/x3d/content/examples/Basic/HumanoidAnimation/LOA1_WalkAnimation.x3d#LOA1_WalkAnimation" "http://h-anim.org/Models/H-Anim2001/boxman/protos/LOA1WalkAnimation.x3d#LOA1WalkAnimation"'>
+    <!--ExternProtoDeclare name='LOA1_WalkAnimation' url='"LOA1_WalkAnimation.wrl#LOA1_WalkAnimation" "http://www.web3d.org/x3d/content/examples/Basic/HumanoidAnimation/LOA1_WalkAnimation.wrl#LOA1_WalkAnimation" "http://h-anim.org/Models/H-Anim2001/boxman/protos/LOA1WalkAnimation.wrl#LOA1WalkAnimation" "LOA1_WalkAnimation.x3d#LOA1_WalkAnimation" "http://www.web3d.org/x3d/content/examples/Basic/HumanoidAnimation/LOA1_WalkAnimation.x3d#LOA1_WalkAnimation" "http://h-anim.org/Models/H-Anim2001/boxman/protos/LOA1WalkAnimation.x3d#LOA1WalkAnimation"'>
       <field accessType='inputOutput' name='cycleInterval' type='SFTime'/>
       <field accessType='inputOutput' name='enabled' type='SFBool'/>
       <field accessType='inputOutput' name='loop' type='SFBool'/>
@@ -310,7 +310,7 @@
       <field accessType='outputOnly' name='r_wrist_rotation_changed' type='SFRotation'/>
       <field accessType='outputOnly' name='isActive' type='SFBool'/>
     </ExternProtoDeclare>
-    <ProtoInstance DEF='ANIMATOR' name='LOA1_WalkAnimation'/>
+    <ProtoInstance DEF='ANIMATOR' name='LOA1_WalkAnimation'/-->
     <Group>
 <!-- ROUTE information for TIMER node:  [from fraction_changed to HUMANOIDROOT_POSITION_ANIMATOR.set_fraction ] [from fraction_changed to HUMANOIDROOT_ANIMATOR.set_fraction ] [from fraction_changed to SACROILIAC_ANIMATOR.set_fraction ] [from fraction_changed to L_HIP_ANIMATOR.set_fraction ] [from fraction_changed to L_KNEE_ANIMATOR.set_fraction ] [from fraction_changed to L_ANKLE_ANIMATOR.set_fraction ] [from fraction_changed to L_MIDTARSAL_ANIMATOR.set_fraction ] [from fraction_changed to R_HIP_ANIMATOR.set_fraction ] [from fraction_changed to R_KNEE_ANIMATOR.set_fraction ] [from fraction_changed to R_ANKLE_ANIMATOR.set_fraction ] [from fraction_changed to R_MIDTARSAL_ANIMATOR.set_fraction ] [from fraction_changed to VL5_ANIMATOR.set_fraction ] [from fraction_changed to SKULLBASE_ANIMATOR.set_fraction ] [from fraction_changed to L_SHOULDER_ANIMATOR.set_fraction ] [from fraction_changed to L_ELBOW_ANIMATOR.set_fraction ] [from fraction_changed to L_WRIST_ANIMATOR.set_fraction ] [from fraction_changed to R_SHOULDER_ANIMATOR.set_fraction ] [from fraction_changed to R_ELBOW_ANIMATOR.set_fraction ] [from fraction_changed to R_WRIST_ANIMATOR.set_fraction ] -->
 <TimeSensor DEF='TIMER' cycleInterval='2' loop='true'>
