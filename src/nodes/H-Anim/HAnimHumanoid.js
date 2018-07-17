@@ -246,10 +246,10 @@ x3dom.registerNodeType(
                 }
                 
                 if (this._cf.skinCoord.node)
-                    this._cf.skinCoord.node._vf.point = this._restCoords.copy() ; //reset
+                    this._cf.skinCoord.node._vf.point.setValues(this._restCoords);//.copy() ; //reset
                 
                 if (this._cf.skinNormal.node)
-                    this._cf.skinNormal.node._vf.vector = this._restNormals.copy() ; //reset
+                    this._cf.skinNormal.node._vf.vector.setValues(this._restNormals);//.copy() ; //reset
                 
                 this._cf.skeleton.nodes.forEach(function(cnode){
                    cnode.collectDrawableObjects(childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes);
