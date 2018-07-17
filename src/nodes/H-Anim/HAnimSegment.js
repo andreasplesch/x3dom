@@ -92,6 +92,13 @@ x3dom.registerNodeType(
         {
             // TODO coord      add functionality
             // TODO displacers add functionality
+            // See Joint for possible displacer implementation:
+            // custom collectDrawables
+            // look for displacers
+            // apply weighted displacements to coord field
+            // force update of parents of coord field by fieldChanged("coord") here
+            // or better in Humanoid (needs a list of affected segment shapes)
+            // sofar no example scenes
         }
     )
 );
