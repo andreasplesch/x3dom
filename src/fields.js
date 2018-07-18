@@ -2925,10 +2925,10 @@ x3dom.fields.MFVec3f.prototype.setValueByStr = function(str) {
     }
 };
 
-x3dom.fields.MFVec3f.prototype.setValues = function(vec3Array)
-{
-    var i , 
+x3dom.fields.MFVec3f.prototype.setValues = function(vec3Array) {
+    var i,
         n = Math.min(vec3Array.length, this.length);
+    
     for (i=0; i<n; i++) {
         this[i].setValues( vec3Array[i] )
     }
