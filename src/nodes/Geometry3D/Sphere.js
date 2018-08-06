@@ -161,8 +161,8 @@ x3dom.registerNodeType(
                     return;
                 }
                 var qfactor = 1.0;
-                if(ctx) {
-                    qfactor = ctx.doc.properties.getProperty("PrimitiveQuality", "Medium");
+                if(this._nameSpace) {
+                    qfactor = this._nameSpace.doc.properties.getProperty("PrimitiveQuality", "Medium");
                 }
                 if (x3dom.Utils.isNumber(qfactor)) {
                     qfactor = parseFloat(qfactor);
