@@ -145,7 +145,7 @@ x3dom.registerNodeType(
 //                 this._mesh._numCoords = this._mesh._positions[0].length / 3;
 
 //                 x3dom.geoCache[geoCacheID] = this._mesh;
-            }
+//            }
         },
         {
             nodeChanged: function()
