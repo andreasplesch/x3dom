@@ -48,42 +48,59 @@ x3dom.registerNodeType(
              * @instance
              */
             this.addField_SFVec2f(ctx, 'subdivision', 24, 24);
+        
+            this._qfactors = {
+                "low": 0.3,
+                "medium": 0.5,
+                "high": 1.0
+            };
+        },
+        {
+            nodeChanged: function()
+            {
+                var r = this._vf.radius;
+                var subx = this._vf.subdivision.x, suby = this._vf.subdivision.y;
 
-            var qfactor = 1.0;
-            var r = this._vf.radius;
-            var subx = this._vf.subdivision.x, suby = this._vf.subdivision.y;
+                var geoCacheID = 'Sphere_' + r + '-' + subx + '-' + suby;
 
-            var geoCacheID = 'Sphere_' + r + '-' + subx + '-' + suby;
-
-            if (this._vf.useGeoCache && x3dom.geoCache[geoCacheID] !== undefined) {
-                //x3dom.debug.logInfo("Using Sphere from Cache");
-                this._mesh = x3dom.geoCache[geoCacheID];
-            }
-            else {
-                if(ctx) {
-                    qfactor = ctx.doc.properties.getProperty("PrimitiveQuality", "Medium");
+                if (this._vf.useGeoCache && x3dom.geoCache[geoCacheID] !== undefined) {
+                    //x3dom.debug.logInfo("Using Sphere from Cache");
+                    this._mesh = x3dom.geoCache[geoCacheID];
+                    return;
                 }
-                if (!x3dom.Utils.isNumber(qfactor)) {
-                    switch (qfactor.toLowerCase()) {
-                        case "low":
-                            qfactor = 0.3;
-                            break;
-                        case "medium":
-                            qfactor = 0.5;
-                            break;
-                        case "high":
-                            qfactor = 1.0;
-                            break;
-                    }
-                } else {
+                var qfactor = 1.0;
+                if(this._nameSpace) {
+                    qfactor = this._nameSpace.doc.properties.getProperty("PrimitiveQuality", "Medium");
+                }
+                if (x3dom.Utils.isNumber(qfactor)) {
                     qfactor = parseFloat(qfactor);
+                } 
+                else {
+                    qfactor = this._qfactors[qfactor.toLowerCase()] || 0.5;
                 }
 
                 this._quality = qfactor;
+                
+                this._regenerateMesh();
+                
+                this._mesh._invalidate = true;
+                this._mesh._numFaces = this._mesh._indices[0].length / 3;
+                this._mesh._numCoords = this._mesh._positions[0].length / 3;
 
+                x3dom.geoCache[geoCacheID] = this._mesh;
+            },
+        
+            _regenerateMesh: function()
+            {
+                this._mesh._positions[0] = [];
+                this._mesh._indices[0] =[];
+                this._mesh._normals[0] = [];
+                this._mesh._texCoords[0] =[];
+                var r = this._vf.radius;
+                var subx = this._vf.subdivision.x, suby = this._vf.subdivision.y;
                 var latNumber, longNumber;
-                var latitudeBands = Math.floor(subx * qfactor);
-                var longitudeBands = Math.floor(suby * qfactor);
+                var latitudeBands = Math.floor(subx * this._quality);
+                var longitudeBands = Math.floor(suby * this._quality);
 
                 var theta, sinTheta, cosTheta;
                 var phi, sinPhi, cosPhi;
@@ -95,15 +112,13 @@ x3dom.registerNodeType(
                     cosTheta = Math.cos(theta);
 
                     for (longNumber = 0; longNumber <= longitudeBands; longNumber++) {
-                        phi = (longNumber * 2.0 * Math.PI) / longitudeBands;
-                        sinPhi = Math.sin(phi);
-                        cosPhi = Math.cos(phi);
+                        phi = this._phiFromlong(longNumber, longitudeBands);
+                        
+                        x = this._calcX(phi, sinTheta);
+                        y = this._calcY(cosTheta);
+                        z = this._calcZ(phi, sinTheta);
 
-                        x = -cosPhi * sinTheta;
-                        y = -cosTheta;
-                        z = -sinPhi * sinTheta;
-
-                        u = 0.25 - (longNumber / longitudeBands);
+                        u = this._uFromlong(longNumber, longitudeBands);
                         v = latNumber / latitudeBands;
 
                         this._mesh._positions[0].push(r * x);
@@ -133,16 +148,29 @@ x3dom.registerNodeType(
                         this._mesh._indices[0].push(first + 1);
                     }
                 }
-
-                this._mesh._invalidate = true;
-                this._mesh._numFaces = this._mesh._indices[0].length / 3;
-                this._mesh._numCoords = this._mesh._positions[0].length / 3;
-
-                x3dom.geoCache[geoCacheID] = this._mesh;
-            }
+            },
         
-        },
-        {
+            _calcX: function(phi, sinTheta)
+            {
+                return -Math.cos(phi) * sinTheta;
+            },
+            _calcY: function(cosTheta)
+            {
+                return -cosTheta;
+            },
+            _calcZ: function(phi, sinTheta)
+            {
+                return -Math.sin(phi) * sinTheta;
+            },
+            _phiFromlong: function(longNumber, longitudeBands)
+            {
+                return 0.5 * Math.PI + (longNumber * 2.0 * Math.PI) / longitudeBands;
+            },
+            _uFromlong: function(longNumber, longitudeBands)
+            {
+                return 1.0 - (longNumber / longitudeBands);
+            },
+
             fieldChanged: function(fieldName) {
                 if (fieldName === "radius") {
                     this._mesh._positions[0] = [];
@@ -164,13 +192,11 @@ x3dom.registerNodeType(
                         cosTheta = Math.cos(theta);
 
                         for (longNumber = 0; longNumber <= longitudeBands; longNumber++) {
-                            phi = (longNumber * 2.0 * Math.PI) / longitudeBands;
-                            sinPhi = Math.sin(phi);
-                            cosPhi = Math.cos(phi);
+                            phi = this._phiFromlong(longNumber, longitudeBands);
 
-                            x = -cosPhi * sinTheta;
-                            y = -cosTheta;
-                            z = -sinPhi * sinTheta;
+                            x = this._calcX(phi, sinTheta);
+                            y = this._calcY(cosTheta);
+                            z = this._calcZ(phi, sinTheta);
 
                             this._mesh._positions[0].push(r * x);
                             this._mesh._positions[0].push(r * y);
@@ -187,71 +213,15 @@ x3dom.registerNodeType(
                     });
                 }
                 else if (fieldName === "subdivision") {
-                    this._mesh._positions[0] = [];
-                    this._mesh._indices[0] =[];
-                    this._mesh._normals[0] = [];
-                    this._mesh._texCoords[0] =[];
-
-                    var r = this._vf.radius;
-                    var subx = this._vf.subdivision.x, suby = this._vf.subdivision.y;
-                    var qfactor = this._quality;
-
-                    var latNumber, longNumber;
-                    var latitudeBands = Math.floor(subx * qfactor);
-                    var longitudeBands = Math.floor(suby * qfactor);
-
-                    var theta, sinTheta, cosTheta;
-                    var phi, sinPhi, cosPhi;
-                    var x, y, z, u, v;
-
-                    for (latNumber = 0; latNumber <= latitudeBands; latNumber++) {
-                        theta = (latNumber * Math.PI) / latitudeBands;
-                        sinTheta = Math.sin(theta);
-                        cosTheta = Math.cos(theta);
-
-                        for (longNumber = 0; longNumber <= longitudeBands; longNumber++) {
-                            phi = (longNumber * 2.0 * Math.PI) / longitudeBands;
-                            sinPhi = Math.sin(phi);
-                            cosPhi = Math.cos(phi);
-
-                            x = -cosPhi * sinTheta;
-                            y = -cosTheta;
-                            z = -sinPhi * sinTheta;
-
-                            u = 0.25 - (longNumber / longitudeBands);
-                            v = latNumber / latitudeBands;
-
-                            this._mesh._positions[0].push(r * x);
-                            this._mesh._positions[0].push(r * y);
-                            this._mesh._positions[0].push(r * z);
-                            this._mesh._normals[0].push(x);
-                            this._mesh._normals[0].push(y);
-                            this._mesh._normals[0].push(z);
-                            this._mesh._texCoords[0].push(u);
-                            this._mesh._texCoords[0].push(v);
-                        }
-                    }
-
-                    var first, second;
-
-                    for (latNumber = 0; latNumber < latitudeBands; latNumber++) {
-                        for (longNumber = 0; longNumber < longitudeBands; longNumber++) {
-                            first = (latNumber * (longitudeBands + 1)) + longNumber;
-                            second = first + longitudeBands + 1;
-
-                            this._mesh._indices[0].push(first);
-                            this._mesh._indices[0].push(second);
-                            this._mesh._indices[0].push(first + 1);
-
-                            this._mesh._indices[0].push(second);
-                            this._mesh._indices[0].push(second + 1);
-                            this._mesh._indices[0].push(first + 1);
-                        }
-                    }
-
+                    this._regenerateMesh();
                     this.invalidateVolume();
                     this._mesh._numFaces = this._mesh._indices[0].length / 3;
                     this._mesh._numCoords = this._mesh._positions[0].length / 3;
+                    
+                    var r = this._vf.radius;
+                    var subx = this._vf.subdivision.x, suby = this._vf.subdivision.y;
+                    var geoCacheID = 'Sphere_' + r + '-' + subx + '-' + suby;
+                    x3dom.geoCache[geoCacheID] = this._mesh;
 
                     Array.forEach(this._parentNodes, function (node) {
                         node.setAllDirty();
