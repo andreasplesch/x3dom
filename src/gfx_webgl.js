@@ -2356,6 +2356,14 @@ x3dom.gfx_webgl = (function() {
             if (x3dom.caps.ANISOTROPIC) {
                 gl.texParameterf(tex.type, x3dom.caps.ANISOTROPIC.TEXTURE_MAX_ANISOTROPY_EXT, tex.anisotropicDegree);
             }
+            
+            //AP: do movie updates here, rather than with setInterval in Texture.js
+
+            if (tex.node._video && !tex.node._video.ended && tex.node._video.readyState >= tex.node._video.HAVE_ENOUGH_DATA ) {
+                gl.texSubImage2D(tex.type, 0, 0, 0, tex.format, gl.UNSIGNED_BYTE, tex.node._video);
+                if (tex.genMipMaps)
+                    gl.generateMipmap(tex.type);
+            }
 
             if (!shader || !isUserDefinedShader) {
                 if (!sp[tex.samplerName])
