@@ -377,25 +377,22 @@ x3dom.Texture.prototype.updateTexture = function() {
         }
 
         var updateMovie = function() {
-            gl.bindTexture(that.type, that.texture);
-            gl.texImage2D(that.type, 0, that.format, that.format, gl.UNSIGNED_BYTE, tex._video);
-            if (that.genMipMaps) {
-                gl.generateMipmap(that.type);
-            }
-            gl.bindTexture(that.type, null);
             that.texture.ready = true;
             doc.needRender = true;
         };
 
         var startVideo = function() {
             tex._video.play();
+            gl.bindTexture(that.type, that.texture);
+            gl.texImage2D(that.type, 0, that.format, that.format, gl.UNSIGNED_BYTE, tex._video);
+            gl.bindTexture(that.type, null);
             tex._intervalID = setInterval(updateMovie, 16);
         };
 
         var videoDone = function() {
             clearInterval(tex._intervalID);
             if (tex._vf.loop === true) {
-                tex._video.play();
+                tex._video.play();//may trigger another 'canplaythrough' event
                 tex._intervalID = setInterval(updateMovie, 16);
             }
         };
