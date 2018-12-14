@@ -65,8 +65,8 @@ x3dom.glTF2Loader.prototype._dumpAll = function (x3dScene)
             };
     
     fetch(this._nameSpace.getURL(this._glTF.buffers[0].uri)).then(
-        function(response) {return response.arrayBuffer();}).then(
-        function(buffer) {
+        function (response) {return response.arrayBuffer();}).then(
+        function (buffer) {
             this._glTF.accessors.forEach ( function(accessor, i) {
                 view = accessor.bufferView;
                 byteOffset = accessor.byteOffset + this._glTF.bufferViews[view].byteOffset;
@@ -77,6 +77,7 @@ x3dom.glTF2Loader.prototype._dumpAll = function (x3dScene)
             });
             console.log(buffer);
         });
+}
     
 
 /**
