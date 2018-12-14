@@ -44,7 +44,7 @@ x3dom.glTF2Loader.prototype.load = function(input, binary)
         }, this );
     }
     
-    if ( this._nameSpace.doc.properties.properties.showLog == 'true' )
+    if ( x3dom.debug.logContainer.style.display == 'block' )
         this._dumpAll(x3dScene);
 
     return x3dScene;
