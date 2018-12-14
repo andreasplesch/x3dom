@@ -74,8 +74,8 @@ x3dom.glTF2Loader.prototype._dumpAll = function (x3dScene)
                 typeLength = accessor.count * components;
                 array = new constructorFromType[accessor.componentType](buffer, byteOffset, typeLength);
                 console.log(i, accessor.name, array);
-            }
-            console.log(buffer)
+            });
+            console.log(buffer);
         });
     
 
