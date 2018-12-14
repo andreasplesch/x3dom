@@ -70,7 +70,7 @@ x3dom.glTF2Loader.prototype._dumpAll = function (x3dScene)
         function (buffer) {
             gltf.accessors.forEach ( function(accessor, i) {
                 view = accessor.bufferView;
-                byteOffset = accessor.byteOffset + glTF.bufferViews[view].byteOffset;
+                byteOffset = accessor.byteOffset + gltf.bufferViews[view].byteOffset;
                 components = that._componentsOf(accessor.type);
                 typeLength = accessor.count * components;
                 array = new constructorFromType[accessor.componentType](buffer, byteOffset, typeLength);
