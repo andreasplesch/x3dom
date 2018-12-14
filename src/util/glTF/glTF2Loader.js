@@ -63,14 +63,15 @@ x3dom.glTF2Loader.prototype._dumpAll = function (x3dScene)
                 "5125": Uint32Array,
                 "5126": Float32Array
             };
-    
-    fetch(this._nameSpace.getURL(this._gltf.buffers[0].uri)).then(
+    var gltf = this._gltf;
+    var that = this;
+    fetch(this._nameSpace.getURL(gltf.buffers[0].uri)).then(
         function (response) {return response.arrayBuffer();}).then(
         function (buffer) {
-            this._gltf.accessors.forEach ( function(accessor, i) {
+            gltf.accessors.forEach ( function(accessor, i) {
                 view = accessor.bufferView;
-                byteOffset = accessor.byteOffset + this._glTF.bufferViews[view].byteOffset;
-                components = this._componentsOf(accessor.type);
+                byteOffset = accessor.byteOffset + glTF.bufferViews[view].byteOffset;
+                components = that._componentsOf(accessor.type);
                 typeLength = accessor.count * components;
                 array = new constructorFromType[accessor.componentType](buffer, byteOffset, typeLength);
                 console.log(i, accessor.name, array);
