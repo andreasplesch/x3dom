@@ -64,7 +64,7 @@ x3dom.glTF2Loader.prototype._dumpAll = function (x3dScene)
                 "5126": Float32Array
             };
     
-    fetch(this._nameSpace.getURL(this._glTF.buffers[0].uri)).then(
+    fetch(this._nameSpace.getURL(this._gltf.buffers[0].uri)).then(
         function (response) {return response.arrayBuffer();}).then(
         function (buffer) {
             this._glTF.accessors.forEach ( function(accessor, i) {
