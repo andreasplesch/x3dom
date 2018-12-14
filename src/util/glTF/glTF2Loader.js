@@ -43,9 +43,41 @@ x3dom.glTF2Loader.prototype.load = function(input, binary)
             this._generateX3DAnimationNodes( x3dScene, animation, a_i );  
         }, this );
     }
+    
+    if ( this._nameSpace.doc.properties.properties.showLog == 'true' )
+        this._dumpAll(x3dScene);
 
     return x3dScene;
 };
+
+x3dom.glTF2Loader.prototype._dumpAll = function (x3dScene)
+{
+    console.log(this._glTF);
+    console.log(x3dScene);
+    var array, view, byteOffset, components,typeLength;
+    var constructorFromType = {
+                "5120": Int8Array,
+                "5121": Uint8Array,
+                "5122": Int16Array,
+                "5123": Uint16Array,
+                "5125": Uint32Array,
+                "5126": Float32Array
+            };
+    
+    fetch(this._nameSpace.getURL(this._glTF.buffers[0].uri)).then(
+        function(response) {return response.arrayBuffer();}).then(
+        function(buffer) {
+            this._glTF.accessors.forEach ( function(accessor, i) {
+                view = accessor.bufferView;
+                byteOffset = accessor.byteOffset + this._glTF.bufferViews[view].byteOffset;
+                components = this._componentsOf(accessor.type);
+                typeLength = accessor.count * components;
+                array = new constructorFromType[accessor.componentType](buffer, byteOffset, typeLength);
+                console.log(i, accessor.name, array);
+            }
+            console.log(buffer)
+        });
+    
 
 /**
  * find animation input with longest duration 
