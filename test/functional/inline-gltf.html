@@ -75,7 +75,8 @@
         
         .environment-selector { position: absolute; top: 16px; right: 16px; z-index: 5; background: rgba(0, 0, 0, 0.2); padding: 8px; width: 126px; box-sizing: border-box;}
         .tonemapping-selector { position: absolute; top: 160px; right: 16px; z-index: 5; background: rgba(0, 0, 0, 0.2); padding: 8px; width: 126px; box-sizing: border-box;}
-        .tonemapping-heading, .environment-heading { margin-bottom: 5px; font-size: 18px; font-weight: bold; color: white}
+        .light-selector { position: absolute; top: 300px; right: 16px; z-index: 5; background: rgba(0, 0, 0, 0.2); padding: 8px; width: 126px; box-sizing: border-box;}
+        .tonemapping-heading, .environment-heading { margin-bottom: 5px; font-size: 12px; font-weight: bold; color: white}
 
         label { color: white; font-size: 16px;}
     </style>
@@ -335,17 +336,17 @@
             </div>
         </section>
         
-        <section class="tonemapping-selector">
+        <section class="light-selector">
             <div class="tonemapping-heading">
                 Lights
             </div>
             <div>
                 <input type="radio" id="headlighton" name="lights" onclick="setHeadLight('true')">
-                <label for="headlighton">Headlight On</label>
+                <label for="headlighton">Head On</label>
             </div>
             <div>
                 <input type="radio" id="headlightoff" name="lights" onclick="setHeadLight('false')">
-                <label for="headlightoff">Headlight Off</label>
+                <label for="headlightoff">Head Off</label>
             </div>
         </section>
 
