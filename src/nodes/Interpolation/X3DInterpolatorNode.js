@@ -59,8 +59,8 @@ x3dom.registerNodeType(
              */
             this.addField_SFString(ctx, 'buffer', "");
 
-            this.addField_MFNode('views', x3dom.nodeTypes.BufferGeometryView );
-            this.addField_MFNode('accessors', x3dom.nodeTypes.BufferGeometryAccessor );
+            this.addField_MFNode('views', x3dom.nodeTypes.BufferView );
+            this.addField_MFNode('accessors', x3dom.nodeTypes.BufferAccessor );
 
             this.constructorFromType = {
                 "5120": Int8Array,
@@ -142,9 +142,9 @@ x3dom.registerNodeType(
                 if (this._vf.buffer) {
                     //console.log(this);
                     var URL = this._nameSpace.getURL(this._vf.buffer);
-                    if(x3dom.bufferCache[URL])
+                    if(x3dom.XHRCache[URL] && x3dom.XHRCache[URL].response !== null)
                     {
-                        initAccessors(x3dom.bufferCache[URL]);
+                        initAccessors(x3dom.XHRCache[URL].response);
                         return;
                     }
                     var xhr;
@@ -171,8 +171,7 @@ x3dom.registerNodeType(
                             xhr.counted = true;
                         }
                         if(xhr.status != 200) return;
-                        x3dom.bufferCache[URL] = xhr.response;
-
+                        
                         initAccessors(xhr.response);
 
                         scope._nameSpace.doc.needRender = true;
@@ -245,6 +244,5 @@ x3dom.registerNodeType(
         }
     )
 );
-//global caches
-x3dom.bufferCache={};
-x3dom.XHRCache={};
+//global XHR cache
+x3dom.XHRCache = {}; // unify with x3dom.BinaryContainerLoader.bufferGeoCache

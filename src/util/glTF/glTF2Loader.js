@@ -1,18 +1,24 @@
 /**
- * 
- * @param {Object} gltf 
- * @param {NodeNameSpace} nameSpace 
+ *
+ * @param {Object} gltf
+ * @param {NodeNameSpace} nameSpace
  */
 x3dom.glTF2Loader = function(nameSpace)
 {
     this._nameSpace = nameSpace;
     this._binaryData = null;
-    this._nodeNamePrefix = "NODE";
+    this._prefix = "gltf";
+    this._nodeNamePrefix = this._prefix + "NODE";
+    this._animationPrefix = "CLIP";
+    this._channelPrefix = "CHANNEL";
+    this._clockPrefix = this._prefix + "CLOCK";
+    this._interpolatorPrefix = this._prefix + "INTR";
+    this._cameraPrefix = this._prefix + "CAM";
 }
 
 /**
  * Starts the loading/parsing of the glTF-Object
- * @param {Object} gltf 
+ * @param {Object} gltf
  */
 x3dom.glTF2Loader.prototype.load = function(input, binary)
 {
@@ -43,6 +49,8 @@ x3dom.glTF2Loader.prototype.load = function(input, binary)
             this._generateX3DAnimationNodes( x3dScene, animation, a_i );  
         }, this );
     }
+
+    console.log(x3dScene);
 
     return x3dScene;
 };
@@ -75,12 +83,13 @@ x3dom.glTF2Loader.prototype._findLongestInput = function (animation)
 x3dom.glTF2Loader.prototype._generateX3DAnimationNodes = function(x3dScene, animation, a_i)
 {
     var animation_length = this._findLongestInput( animation );
-    this._generateX3DAnimationClock( x3dScene, animation_length, "ANI"+a_i );
+    var animationID = this._animationPrefix + a_i;
+    this._generateX3DAnimationClock( x3dScene, animation_length, animationID );
     animation.channels.forEach (function ( channel, c_i )
     {
         this._generateX3DAnimation( x3dScene, animation_length,
                                    animation.samplers[channel.sampler], channel.target,
-                                   "ANI"+a_i, "CH"+c_i );
+                                   animationID, this._channelPrefix + c_i );
     }, this);
 };
 
@@ -95,7 +104,7 @@ x3dom.glTF2Loader.prototype._generateX3DAnimationClock = function(parent, durati
     var clock = document.createElement('TimeSensor');
     clock.setAttribute('loop','true');
     clock.setAttribute('cycleInterval', duration);
-    clock.setAttribute('DEF','clock' + aniID);
+    clock.setAttribute('DEF', this._clockPrefix + aniID);
     parent.appendChild(clock);
 };
 
@@ -110,7 +119,6 @@ x3dom.glTF2Loader.prototype._generateX3DAnimationClock = function(parent, durati
  */
 x3dom.glTF2Loader.prototype._generateX3DAnimation = function(parent, duration, sampler, target, animID, chID)
 {
-    //console.log( sampler, target );
     var aniID = animID + chID;
     var input_accessor = this._gltf.accessors[sampler.input];
     var output_accessor = this._gltf.accessors[sampler.output];
@@ -132,7 +140,8 @@ x3dom.glTF2Loader.prototype._generateX3DAnimation = function(parent, duration, s
     var bufferURI = x3dom.Utils.dataURIToObjectURL(this._gltf.buffers[input_view.buffer].uri); //output_view hopefully has same buffer
     
     var interNode = document.createElement(interpolator);
-    interNode.setAttribute('DEF', 'inter'+aniID);
+    var interDEF = this._interpolatorPrefix + aniID;
+    interNode.setAttribute('DEF', interDEF);
     interNode.setAttribute('key', 'sampler.input.array');
     interNode.setAttribute('keyValue', 'sampler.output.array');
     interNode.setAttribute('buffer', bufferURI);
@@ -160,14 +169,14 @@ x3dom.glTF2Loader.prototype._generateX3DAnimation = function(parent, duration, s
         return route;
     };
     
-    var routeTS2INT = _createROUTEElement("fraction_changed", "clock" + animID, "set_fraction", "inter" + aniID);
-    var routeINT2NODE = _createROUTEElement("value_changed", "inter" + aniID, "set_" + target.path, this._gltf.nodes[target.node].name);
+    var targetDEF = this._nodeNamePrefix + this._gltf.nodes[target.node].name;
+    
+    var routeTS2INT = _createROUTEElement("fraction_changed", this._clockPrefix + animID, "set_fraction", interDEF);
+    var routeINT2NODE = _createROUTEElement("value_changed", interDEF, "set_" + target.path, targetDEF);
  
     parent.appendChild(routeTS2INT);
     parent.appendChild(routeINT2NODE);
-    
 };
-
 
 /**
  * Traverses all glTF nodes
@@ -185,8 +194,8 @@ x3dom.glTF2Loader.prototype._traverseNodes = function(node, parent, index)
         for(var i = 0; i < node.children.length; i++)
         {
             var child = this._gltf.nodes[ node.children[i] ];
-    
-            this._traverseNodes(child, x3dNode);
+
+            this._traverseNodes(child, x3dNode, node.children[i]);
         }
     }
 };
@@ -203,7 +212,7 @@ x3dom.glTF2Loader.prototype._generateX3DNode = function(node, parent, index)
     {
         x3dNode = this._generateX3DMatrixTransform(node);
     }
-    else if( node.translation != undefined || 
+    else if( node.translation != undefined ||
              node.rotation    != undefined ||
              node.scale       != undefined)
     {
@@ -223,30 +232,26 @@ x3dom.glTF2Loader.prototype._generateX3DNode = function(node, parent, index)
             var shape = this._generateX3DShape(mesh.primitives[i]);
 
             x3dNode.appendChild(shape);
-        } 
+        }
     }
 
     if( node.camera != undefined )
     {
         var camera = this._gltf.cameras[node.camera];
         var viewpoint = this._generateX3DViewpoint(camera);
-        viewpoint.setAttribute('DEF','CAMERA' + node.camera);
+        viewpoint.setAttribute('DEF', this._cameraPrefix + node.camera);
 
         x3dNode.appendChild(viewpoint);
     }
 
-    if ( node.name === undefined )
+    if ( !node.name )
     {
-        node.name = this._nodeNamePrefix + index;
+        node.name = index;
     }
-
-
-//    if ( node.name != undefined )
-//    {
-        x3dNode.setAttribute( "id", node.name );
-        x3dNode.setAttribute( "DEF", node.name );
-//    }
     
+    var nodeDEF = this._nodeNamePrefix + node.name;
+
+    x3dNode.setAttribute( "DEF", nodeDEF );
 
     return x3dNode;
 };
@@ -257,7 +262,7 @@ x3dom.glTF2Loader.prototype._generateX3DNode = function(node, parent, index)
 x3dom.glTF2Loader.prototype._generateX3DScene = function()
 {
     var scene = document.createElement( "scene" );
-    
+
     return scene;
 };
 
@@ -410,6 +415,12 @@ x3dom.glTF2Loader.prototype._generateX3DAppearance = function(material)
 
     appearance.appendChild(this._generateX3DPhysicalMaterial(material));
 
+    if(this._textureTransform)
+    {
+        appearance.appendChild(this._textureTransform);
+        this._textureTransform = undefined;
+    }
+
     return appearance;
 };
 
@@ -426,7 +437,9 @@ x3dom.glTF2Loader.prototype._generateX3DPhysicalMaterial = function(material)
     var alphaCutoff       = material.alphaCutoff || 0.5;
     var seperateOcclusion = true
     var model             = undefined;
-    var pbr          = undefined;
+    var pbr               = undefined;
+    var channel           = 0;  
+    var transform;
 
     if( material.pbrMetallicRoughness )
     {
@@ -445,24 +458,30 @@ x3dom.glTF2Loader.prototype._generateX3DPhysicalMaterial = function(material)
         var metallicFactor  = (pbr.metallicFactor  != undefined) ? pbr.metallicFactor  : 1;
         var roughnessFactor = (pbr.roughnessFactor != undefined) ? pbr.roughnessFactor : 1;
 
-        if(pbr.baseColorTexture )
+        if(pbr.baseColorTexture)
         {
+            channel = (pbr.baseColorTexture.texCoord) ? 1 : 0;
             texture = this._gltf.textures[pbr.baseColorTexture.index];
-            mat.appendChild(this._generateX3DImageTexture(texture, "baseColorTexture"));
+            transform = (pbr.baseColorTexture.extensions && pbr.baseColorTexture.extensions.KHR_texture_transform) ? 
+                         pbr.baseColorTexture.extensions.KHR_texture_transform : undefined;
+            mat.appendChild(this._generateX3DImageTexture(texture, "baseColorTexture", channel, transform));
         }
 
         if(pbr.metallicRoughnessTexture)
         {
+            channel = (pbr.metallicRoughnessTexture.texCoord) ? 1 : 0;
             texture = this._gltf.textures[pbr.metallicRoughnessTexture.index];
+            transform = (pbr.metallicRoughnessTexture.extensions && pbr.metallicRoughnessTexture.extensions.KHR_texture_transform) ? 
+                         pbr.metallicRoughnessTexture.extensions.KHR_texture_transform : undefined;
 
             if( material.occlusionTexture && material.occlusionTexture.index == pbr.metallicRoughnessTexture.index)
             {
-                seperateOcclusion = false;
-                mat.appendChild(this._generateX3DImageTexture(texture, "occlusionRoughnessMetallicTexture"));
+                seperateOcclusion = false;        
+                mat.appendChild(this._generateX3DImageTexture(texture, "occlusionRoughnessMetallicTexture", channel, transform));
             }
             else
             {
-                mat.appendChild(this._generateX3DImageTexture(texture, "roughnessMetallicTexture"));
+                mat.appendChild(this._generateX3DImageTexture(texture, "roughnessMetallicTexture", channel, transform));
             }
         }
 
@@ -472,20 +491,26 @@ x3dom.glTF2Loader.prototype._generateX3DPhysicalMaterial = function(material)
     }
     else if ( model == "specularGlossiness" )
     {
-        var diffuseFactor    = pbr.diffuseFactor || [ 1, 1, 1, ];
+        var diffuseFactor    = pbr.diffuseFactor || [ 1, 1, 1, 1 ];
         var specularFactor   = pbr.specularFactor || [ 1, 1, 1 ];
         var glossinessFactor = (pbr.glossinessFactor != undefined) ? pbr.glossinessFactor : 1;
 
         if ( pbr.diffuseTexture )
         {
+            channel = (pbr.diffuseTexture.texCoord) ? 1 : 0;
             texture = this._gltf.textures[pbr.diffuseTexture.index];
-            mat.appendChild(this._generateX3DImageTexture(texture, "baseColorTexture"));
+            transform = (pbr.diffuseTexture.extensions && pbr.diffuseTexture.extensions.KHR_texture_transform) ? 
+                         pbr.diffuseTexture.extensions.KHR_texture_transform : undefined;
+            mat.appendChild(this._generateX3DImageTexture(texture, "baseColorTexture", channel, transform));
         }
-        
+
         if ( pbr.specularGlossinessTexture )
         {
+            channel = (pbr.specularGlossinessTexture.texCoord) ? 1 : 0;
             texture = this._gltf.textures[pbr.specularGlossinessTexture.index];
-            mat.appendChild(this._generateX3DImageTexture(texture, "specularGlossinessTexture"));
+            transform = (pbr.specularGlossinessTexture.extensions && pbr.specularGlossinessTexture.extensions.KHR_texture_transform) ? 
+                         pbr.specularGlossinessTexture.extensions.KHR_texture_transform : undefined;
+            mat.appendChild(this._generateX3DImageTexture(texture, "specularGlossinessTexture", channel, transform));
         }
 
         mat.setAttribute("diffuseFactor", diffuseFactor.join(" "));
@@ -495,26 +520,41 @@ x3dom.glTF2Loader.prototype._generateX3DPhysicalMaterial = function(material)
 
     if(material.normalTexture)
     {
+        channel = (material.normalTexture.texCoord) ? 1 : 0;
         texture = this._gltf.textures[material.normalTexture.index];
-        mat.appendChild(this._generateX3DImageTexture(texture, "normalTexture"));
+        transform = (material.normalTexture.extensions && material.normalTexture.extensions.KHR_texture_transform) ? 
+                     material.normalTexture.extensions.KHR_texture_transform : undefined;
+        mat.appendChild(this._generateX3DImageTexture(texture, "normalTexture", channel, transform));
     }
 
     if(material.emissiveTexture)
     {
+        channel = (material.emissiveTexture.texCoord) ? 1 : 0;
         texture = this._gltf.textures[material.emissiveTexture.index];
-        mat.appendChild(this._generateX3DImageTexture(texture, "emissiveTexture"));
+        transform = (material.emissiveTexture.extensions && material.emissiveTexture.extensions.KHR_texture_transform) ? 
+                     material.emissiveTexture.extensions.KHR_texture_transform : undefined;
+        mat.appendChild(this._generateX3DImageTexture(texture, "emissiveTexture", channel, transform));
     }
 
     if(material.occlusionTexture && seperateOcclusion)
     {
+        channel = (material.occlusionTexture.texCoord) ? 1 : 0;
         texture = this._gltf.textures[material.occlusionTexture.index];
-        mat.appendChild(this._generateX3DImageTexture(texture, "occlusionTexture"));
+        transform = (material.occlusionTexture.extensions && material.occlusionTexture.extensions.KHR_texture_transform) ? 
+                     material.occlusionTexture.extensions.KHR_texture_transform : undefined;
+        mat.appendChild(this._generateX3DImageTexture(texture, "occlusionTexture", channel, transform));
     }
-    
+
+    if(material.extensions && material.extensions.KHR_materials_unlit)
+    {
+        mat.setAttribute("unlit", true);
+    }
+
     mat.setAttribute("emissiveFactor",  emissiveFactor.join(" "));
     mat.setAttribute("alphaMode",  alphaMode);
     mat.setAttribute("alphaCutoff", alphaCutoff);
-    
+    mat.setAttribute("model", model);
+
     return mat;
 };
 
@@ -524,12 +564,12 @@ x3dom.glTF2Loader.prototype._generateX3DPhysicalMaterial = function(material)
  * @param {Object} image - A glTF image node
  * @return {Imagetexture}
  */
-x3dom.glTF2Loader.prototype._generateX3DImageTexture = function(texture, containerField)
+x3dom.glTF2Loader.prototype._generateX3DImageTexture = function(texture, containerField, channel, transform)
 {
-    var image   = this._gltf.images[texture.source]; 
+    var image   = this._gltf.images[texture.source];
 
     var imagetexture = document.createElement("imagetexture");
-    
+
     imagetexture.setAttribute("origChannelCount", "2");
     imagetexture.setAttribute("flipY", "true");
 
@@ -548,7 +588,16 @@ x3dom.glTF2Loader.prototype._generateX3DImageTexture = function(texture, contain
         var sampler = this._gltf.samplers[texture.sampler];
         imagetexture.appendChild(this._createX3DTextureProperties(sampler));
     }
-    
+
+    if(channel)
+    {
+        imagetexture.setAttribute("channel", "1");
+    }
+
+    if(transform)
+    {
+        this._textureTransform = this._createX3DTextureTransform(imagetexture, transform);
+    }
 
     return imagetexture;
 };
@@ -573,8 +622,34 @@ x3dom.glTF2Loader.prototype._createX3DTextureProperties = function(sampler)
     {
         textureproperties.setAttribute("generateMipMaps", "true");
     }
-    
+
     return textureproperties;
+};
+
+/**
+ * Generates a X3D TextureTransform node
+ * @private
+ * @param {Object} primitive - A glTF texture transform node
+ * @return {TextureTransform}
+ */
+x3dom.glTF2Loader.prototype._createX3DTextureTransform = function(imagetexture, transform)
+{
+    var texturetransform = document.createElement("texturetransform");
+
+    var offset   = transform.offset || [0, 0];
+    var rotation = transform.rotation || 0;
+    var scale    = transform.scale || [1, 1] ;
+
+    if(transform.texCoord)
+    {
+        imagetexture.setAttribute("channel", texCoord);
+    }
+
+    texturetransform.setAttribute("translation", offset.join(" "));
+    texturetransform.setAttribute("scale", scale.join(" "));
+    texturetransform.setAttribute("rotation", rotation * -1.0);
+
+    return texturetransform;
 };
 
 /**
@@ -588,7 +663,7 @@ x3dom.glTF2Loader.prototype._generateX3DBufferGeometry = function(primitive)
     var views = [];
     var bufferGeometry = document.createElement("buffergeometry");
     var centerAndSize = this._getCenterAndSize(primitive);
- 
+
     bufferGeometry.setAttribute("buffer", this._bufferURI(primitive));
     bufferGeometry.setAttribute("position", centerAndSize.center.join( " " ));
     bufferGeometry.setAttribute("size", centerAndSize.size.join( " " ));
@@ -653,7 +728,7 @@ x3dom.glTF2Loader.prototype._generateX3DBufferGeometry = function(primitive)
 
 x3dom.glTF2Loader.prototype._generateX3DBufferView = function(view)
 {
-    var bufferView = document.createElement( "buffergeometryview" );
+    var bufferView = document.createElement( "bufferview" );
 
     bufferView.setAttribute("target",     view.target);
     bufferView.setAttribute("byteOffset", view.byteOffset || 0);
@@ -671,12 +746,13 @@ x3dom.glTF2Loader.prototype._generateX3DBufferAccessor = function(buffer, access
 
     var byteOffset = accessor.byteOffset;
 
-    var bufferAccessor = document.createElement( "buffergeometryaccessor" );
+    var bufferAccessor = document.createElement( "bufferaccessor" );
 
     bufferAccessor.setAttribute("bufferType", buffer.replace("_0", ""));
     bufferAccessor.setAttribute("view", viewID);
     bufferAccessor.setAttribute("byteOffset", byteOffset || 0);
     bufferAccessor.setAttribute("byteStride", bufferView.byteStride || 0);
+    bufferAccessor.setAttribute("normalized", accessor.normalized || false);
 
     bufferAccessor.setAttribute("components", components);
     bufferAccessor.setAttribute("componentType", accessor.componentType);
@@ -787,7 +863,7 @@ x3dom.glTF2Loader.prototype._primitiveType = function(mode)
 
 x3dom.glTF2Loader.prototype._isDefaultSampler = function(sampler)
 {
-    return ( sampler.wrapS     == 10497 && sampler.wrapS     == 10497 && 
+    return ( sampler.wrapS     == 10497 && sampler.wrapS     == 10497 &&
              sampler.magFilter == 9729  && sampler.minFilter == 9729 );
 };
 
@@ -849,7 +925,7 @@ x3dom.glTF2Loader.prototype._getGLTF = function(input, binary)
                 return gltf;
             }
         }
-    }  
+    }
 };
 
 x3dom.glTF2Loader.prototype._convertBinaryImages = function(gltf, buffer, byteOffset)

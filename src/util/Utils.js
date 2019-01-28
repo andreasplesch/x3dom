@@ -1013,7 +1013,7 @@ x3dom.Utils.generateProperties = function (viewarea, shape)
         property.NORMALSPACE      = (property.NORMALMAP && property.CSSHADER) ? appearance._shader._vf.normalSpace.toUpperCase() :
                                     (property.NORMALMAP && property.PBR_MATERIAL) ? material._vf.normalSpace.toUpperCase() : "TANGENT";
 
-        property.BLENDING         = (property.TEXT || property.CUBEMAP || property.CSSHADER || property.PBR_MATERIAL || (texture && texture._blending)) ? 1 : 0;
+        property.BLENDING         = (property.TEXT || property.CUBEMAP || property.CSSHADER || (property.ALPHAMODE == "BLEND")|| (texture && texture._blending)) ? 1 : 0;
         property.REQUIREBBOX      = (geometry._vf.coordType !== undefined && geometry._vf.coordType != "Float32") ? 1 : 0;
         property.REQUIREBBOXNOR   = (geometry._vf.normalType !== undefined && geometry._vf.normalType != "Float32") ? 1 : 0;
         property.REQUIREBBOXCOL   = (geometry._vf.colorType !== undefined && geometry._vf.colorType != "Float32") ? 1 : 0;
@@ -1030,13 +1030,23 @@ x3dom.Utils.generateProperties = function (viewarea, shape)
                                      (property.BUFFERGEOMETRY && geometry.hasColor()) ||
                                      (geometry._vf.color !== undefined && geometry._vf.color.length > 0)) ? 1 : 0;
         property.CLIPPLANES       = shape._clipPlanes.length;
-		property.ALPHATHRESHOLD	  = (appearance) ? appearance._vf.alphaClipThreshold.toFixed(2) : 0.1;
+        property.ALPHATHRESHOLD	  = (appearance) ? appearance._vf.alphaClipThreshold.toFixed(2) : 0.1;
+        property.MULTITEXCOORD	  = (property.BUFFERGEOMETRY && geometry.hasMultiTexCoord()) ? 1 : 0;
+
+
+        property.DIFFUSEMAPCHANNEL = (property.PBR_MATERIAL && property.DIFFUSEMAP && material._cf.baseColorTexture.node._vf.channel === 1) ? 1 : 0;
+        property.NORMALMAPCHANNEL  = (property.PBR_MATERIAL && property.NORMALMAP && material._cf.normalTexture.node._vf.channel === 1) ? 1 : 0;
+        property.EMISSIVEMAPCHANNEL = (property.PBR_MATERIAL && property.EMISSIVEMAP && material._cf.emissiveTexture.node._vf.channel === 1) ? 1 : 0;
+        property.OCCLUSIONMAPCHANNEL = (property.PBR_MATERIAL && property.OCCLUSIONMAP && material._cf.occlusionTexture.node._vf.channel === 1) ? 1 : 0;
+        property.ROUGHNESSMETALLICMAPCHANNEL = (property.PBR_MATERIAL && property.ROUGHNESSMETALLICMAP && material._cf.roughnessMetallicTexture.node._vf.channel === 1) ? 1 : 0;
+        property.OCCLUSIONROUGHNESSMETALLICMAPCHANNEL = (property.PBR_MATERIAL && property.OCCLUSIONROUGHNESSMETALLICMAP && material._cf.occlusionRoughnessMetallicTexture.node._vf.channel === 1) ? 1 : 0;
+        property.SPECULARGLOSSINESSMAPCHANNEL = (property.PBR_MATERIAL && property.SPECULARGLOSSINESSMAP && material._cf.specularGlossinessTexture.node._vf.channel === 1) ? 1 : 0;
+        property.ALPHAMASK                    = (property.PBR_MATERIAL && (material._vf.alphaMode == "BLEND" || material._vf.alphaMode == "OPAQUE")) ? 0 : 1;
+        property.UNLIT = (property.PBR_MATERIAL && material._vf.unlit) ? 1 : 0;
 
         property.GAMMACORRECTION  = environment._vf.gammaCorrectionDefault;
 
         property.KHR_MATERIAL_COMMONS = 0;
-
-        //console.log(property);
 	}
 
 	property.toIdentifier = function() {
@@ -1340,7 +1350,7 @@ x3dom.Utils.forbiddenBySOP = function (uri_string) {
         Port = Host_Port[1];
     } // else will return false for an invalid URL or URL without authority
 
-    Port = Port || "80";
+    Port = Port || originPort;
     Host = Host || document.location.host;
     Scheme = Scheme || document.location.protocol;
     return !(Port === originPort && Host === document.location.host && Scheme === document.location.protocol);
