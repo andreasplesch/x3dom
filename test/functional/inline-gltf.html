@@ -176,6 +176,12 @@
             document.querySelector("physicalenvironmentlight").setAttribute("specular", specular);
         }
 
+        function setHeadLight( state )
+        {
+            document.querySelector("navigationinfo").setAttribute("headlight", state);
+            document.querySelector("physicalenvironmentlight").setAttribute("on", state == "true"?"false":"true");
+        }
+
         function onKeyPress( e )
         {
             if( e.keyCode == 13 )
@@ -244,7 +250,7 @@
             <div class="sidebar-entry" onclick="load('GearboxAssy')">Gearbox Assy</div>
             <div class="sidebar-entry" onclick="load('Buggy')">Buggy</div>
             <div class="sidebar-entry" onclick="load('CesiumMilkTruck')">Cesium Milk Truck</div>
-            <div class="sidebar-entry" onclick="load('Tokyo')">Tokyo</div>
+            <div class="sidebar-entry" onclick="updateInline('https://raw.githubusercontent.com/andreasplesch/gltf-test/House/sampleModels/littlest_tokyo/scene.gltf')">Tokyo</div>
     
             <div class="sidebar-header">PBR Tests</div>
         
@@ -326,6 +332,20 @@
             <div>
                 <input type="radio" id="filmic" name="tonemapping" onclick="setTonemapping('filmic')">
                 <label for="filmic">Filmic</label>
+            </div>
+        </section>
+        
+        <section class="tonemapping-selector">
+            <div class="tonemapping-heading">
+                Lights
+            </div>
+            <div>
+                <input type="radio" id="headlighton" name="lights" onclick="setHeadLight('true')">
+                <label for="headlighton">Headlight On</label>
+            </div>
+            <div>
+                <input type="radio" id="headlightoff" name="lights" onclick="setHeadLight('false')">
+                <label for="headlightoff">Headlight Off</label>
             </div>
         </section>
 
