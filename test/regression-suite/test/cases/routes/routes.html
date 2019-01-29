@@ -18,19 +18,19 @@
     <Background skyColor='1 1 1'></Background>
     <DirectionalLight direction="-0.4 -0.9 0.3" intensity="0.5" shadowIntensity="0.0" ></DirectionalLight>
      <Transform scale='2.5 2.5 2.5'>
-       <Inline DEF='CUBE1' id="inline" url="" nameSpaceName="gltf" mapDEFToID="true"></Inline>
+       <Inline DEF='CUBE1' id="inline" url="" _nameSpaceName="gltf" mapDEFToID="true"></Inline>
       <Transform DEF='XFORM0a' center='0 0 10'>
         <Inline USE='CUBE1'></Inline>
       </Transform>
       <Transform DEF='XFORM0b' center='0 7 7'>
-        <Inline USE='CUBE1'></Inline>
+        <Inline DEF='CUBE2' id="inline2" url="" _nameSpaceName="gltf" mapDEFToID="true"></Inline>
       </Shape>
       </Transform>
       <Transform DEF='XFORM0c' center='10 0 0'>
-        <Inline USE='CUBE1'></Inline>
+        <Inline DEF='CUBE3' id="inline3" url="" _nameSpaceName="gltf" mapDEFToID="true"></Inline>
       </Transform>
       <Transform DEF='XFORM0d' center='0 10 0'>
-        <Inline USE='CUBE1'></Inline>
+        <Inline DEF='CUBE4' id="inline4" url="" _nameSpaceName="gltf" mapDEFToID="true"></Inline>
       </Transform>
       <Transform DEF='XFORM1a'>
         <Transform USE='XFORM0a'></Transform>
@@ -116,9 +116,12 @@
     <script type="text/javascript">
 	var shadows = false;
     var frac = 0;
-	load('Duck');
+	load('Duck', 'inline');
+	load('Duck', 'inline2');
+	load('Duck', 'inline3');
+	load('Duck', 'inline4');
 	    
-	function load(file, type, direction)
+	function load(file, inline, type, direction)
         {
             var suffix = (type == "Binary") ? ".glb" : ".gltf"; 
 
@@ -131,12 +134,12 @@
 
             var url = type == '-direct' ? file : repo + file + "/glTF" + type + "/" + file + suffix;
             
-            updateInline(url);
+            updateInline(url, inline);
         }
 	
-	function updateInline(url)
+	function updateInline(url, inline)
         {
-            document.getElementById("inline").setAttribute("url", url);
+            document.getElementById(inline).setAttribute("url", url);
 
             //g_runtime.showAll(g_direction, true);   
         }
