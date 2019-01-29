@@ -88,10 +88,15 @@
       <Transform USE='XFORM2d'></Transform>
     </Transform>
 
+    <TimeSensor DEF='TIMER' cycleInterval='30' loop='true'></TimeSensor>
     <OrientationInterpolator id="rotorA" DEF='ROTOR_A' key='0 0.5 1' keyValue='1 0 0 0, 1 0 0 3.14, 1 0 0 6.28'></OrientationInterpolator>
     <OrientationInterpolator id="rotorB" DEF='ROTOR_B' key='0 0.5 1' keyValue='0 1 0 0, 0 1 0 3.14, 0 1 0 6.28'></OrientationInterpolator>
     <OrientationInterpolator id="rotorC" DEF='ROTOR_C' key='0 0.5 1' keyValue='0 0 1 0, 0 0 1 3.14, 0 0 1 6.28'></OrientationInterpolator>
     <OrientationInterpolator id="rotorD" DEF='ROTOR_D' key='0 0.5 1' keyValue='0.707 0 0.707 0, 0.707 0 0.707 3.14, 0.707 0 0.707 6.28'></OrientationInterpolator>
+    <ROUTE fromNode='TIMER' fromField='fraction_changed' toNode='ROTOR_A' toField='set_fraction'></ROUTE>
+    <ROUTE fromNode='TIMER' fromField='fraction_changed' toNode='ROTOR_B' toField='set_fraction'></ROUTE>
+    <ROUTE fromNode='TIMER' fromField='fraction_changed' toNode='ROTOR_C' toField='set_fraction'></ROUTE>
+    <ROUTE fromNode='TIMER' fromField='fraction_changed' toNode='ROTOR_D' toField='set_fraction'></ROUTE>
     <ROUTE fromNode='ROTOR_A' fromField='value_changed' toNode='XFORM0a' toField='rotation'></ROUTE>
     <ROUTE fromNode='ROTOR_A' fromField='value_changed' toNode='XFORM1a' toField='rotation'></ROUTE>
     <ROUTE fromNode='ROTOR_A' fromField='value_changed' toNode='XFORM2a' toField='rotation'></ROUTE>
@@ -166,7 +171,7 @@
     
     <div class="group">
 		<input type="button" id="shadow" value="Enable Shadows" onclick="toggleShadows();" />
-        <input type="button" value="rotor" onclick="rotor()" />
+        <!--input type="button" value="rotor" onclick="rotor()" /-->
 	</div>
 
 </body>
