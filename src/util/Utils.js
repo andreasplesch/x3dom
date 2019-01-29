@@ -720,7 +720,8 @@ x3dom.Utils.isUnsignedType = function (str)
 *****************************************************************************/
 x3dom.Utils.checkDirtyLighting = function(viewarea)
 {
-	return (viewarea.getLights().concat( viewarea._scene.getNavigationInfo()._vf.headlight));
+	return (viewarea.getLights().reduce(function(hash, light){return hash + light._xmlNode.outerHTML;})
+        .concat( viewarea._scene.getNavigationInfo()._vf.headlight));
 };
 
 /*****************************************************************************
