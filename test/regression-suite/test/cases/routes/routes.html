@@ -20,34 +20,17 @@
      <Transform scale='2.5 2.5 2.5'>
        <Inline DEF='CUBE1' id="inline" url="" nameSpaceName="gltf" mapDEFToID="true"></Inline>
       <Transform DEF='XFORM0a' center='0 0 10'>
-        <Shape USE='CUBE1'></Shape>
+        <Inline USE='CUBE1'></Inline>
       </Transform>
       <Transform DEF='XFORM0b' center='0 7 7'>
-        <Shape DEF='CUBE2'>
-        <Appearance>
-		  <Material specularColor='.2 .2 .2' ></Material>
-          <ImageTexture url='./webgl_256.jpg'></ImageTexture>
-        </Appearance>
-        <Box></Box>
+        <Inline USE='CUBE1'></Inline>
       </Shape>
       </Transform>
       <Transform DEF='XFORM0c' center='10 0 0'>
-        <Shape DEF='CUBE3'>
-        <Appearance>
-		  <Material specularColor='.2 .2 .2' ></Material>
-          <ImageTexture url='./w3c_256.jpg'></ImageTexture>
-        </Appearance>
-        <Box></Box>
-      </Shape>
+        <Inline USE='CUBE1'></Inline>
       </Transform>
       <Transform DEF='XFORM0d' center='0 10 0'>
-        <Shape DEF='CUBE4'>
-        <Appearance>
-		  <Material specularColor='.2 .2 .2' ></Material>
-          <ImageTexture url='./web3d_256.jpg'></ImageTexture>
-        </Appearance>
-        <Box></Box>
-      </Shape>
+        <Inline USE='CUBE1'></Inline>
       </Transform>
       <Transform DEF='XFORM1a'>
         <Transform USE='XFORM0a'></Transform>
@@ -172,7 +155,7 @@
 	}
 
         function rotor(){
-            frac += 0.1;
+            frac += 0.01;
             frac %= 1.0;
             document.getElementById('rotorA').setAttribute('set_fraction', frac);
             document.getElementById('rotorB').setAttribute('set_fraction', frac);
