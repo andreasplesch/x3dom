@@ -18,13 +18,7 @@
     <Background skyColor='1 1 1'></Background>
     <DirectionalLight direction="-0.4 -0.9 0.3" intensity="0.5" shadowIntensity="0.0" ></DirectionalLight>
      <Transform scale='2.5 2.5 2.5'>
-      <Shape DEF='CUBE1'>
-        <Appearance>
-		  <Material specularColor='.2 .2 .2' ></Material>
-          <ImageTexture url='./x3d_256.jpg'></ImageTexture>
-        </Appearance>
-        <Box></Box>
-      </Shape>
+       <Inline DEF='CUBE1' id="inline" url="" nameSpaceName="gltf" mapDEFToID="true"></Inline>
       <Transform DEF='XFORM0a' center='0 0 10'>
         <Shape USE='CUBE1'></Shape>
       </Transform>
@@ -134,7 +128,31 @@
     <script type="text/javascript">
 	var shadows = false;
     var frac = 0;
+	load('Duck');
+	    
+	function load(file, type, direction)
+        {
+            var suffix = (type == "Binary") ? ".glb" : ".gltf"; 
+
+            type = (type != undefined) ? "-" + type : "";
+
+            g_direction = direction || "posZ";
+            
+            var repo = "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/";
+            //var repo = "http://localhost/glTF-Sample-Models/2.0/";
+
+            var url = type == '-direct' ? file : repo + file + "/glTF" + type + "/" + file + suffix;
+            
+            updateInline(url);
+        }
 	
+	function updateInline(url)
+        {
+            document.getElementById("inline").setAttribute("url", url);
+
+            //g_runtime.showAll(g_direction, true);   
+        }
+	    
 	function toggleShadows()
 	{
 		var button = document.getElementById("shadow");
