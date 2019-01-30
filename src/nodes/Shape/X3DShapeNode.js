@@ -285,23 +285,21 @@ x3dom.registerNodeType(
                 this.invalidateVolume();
             },
 
-            getShaderProperties: function(viewarea)
-            {
+            getShaderProperties: function(viewarea) {
                 if (this._shaderProperties == null ||
-                    this._dirty.shader == true     ||
+                    this._dirty.shader == true ||
+                    x3dom.Utils.checkDirtyEnvironment(viewarea, this._shaderProperties) ||
+                    x3dom.Utils.checkDirtyPhysicalEnvironmentLight (viewarea, this._shaderProperties) ||
                     (this._webgl !== undefined &&
-                     this._webgl.dirtyLighting != x3dom.Utils.checkDirtyLighting(viewarea) ) ||
-                    x3dom.Utils.checkDirtyEnvironment(viewarea, this._shaderProperties) == true)
+                     this._webgl.dirtyLighting != x3dom.Utils.checkDirtyLighting(viewarea) ))
                 {
                     this._shaderProperties = x3dom.Utils.generateProperties(viewarea, this);
-
                     this._dirty.shader = false;
                     if (this._webgl !== undefined)
                     {
                         this._webgl.dirtyLighting = x3dom.Utils.checkDirtyLighting(viewarea);
                     }
                 }
-
                 return this._shaderProperties;
             },
 
