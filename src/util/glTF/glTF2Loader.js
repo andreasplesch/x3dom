@@ -116,14 +116,14 @@ x3dom.glTF2Loader.prototype._generateMetadata = function(node, parent)
     }
     
     function _generateX3DMetadataNode (nodename, name, value) {
-        var x3dnode = document.createELement(nodename);
+        var x3dnode = document.createElement(nodename);
         x3dnode.setAttribute('name', name);
         x3dnode.setAttribute('value', value);
         return x3dnode;
     }
     
     function _generateX3DMetadataSetNode (name, value) {
-        var x3dnode = document.createELement('MetadataSet');
+        var x3dnode = document.createElement('MetadataSet');
         x3dnode.setAttribute('name', name);
         var keys = Object.keys(value);
         for (var i=0; i<keys.length; i++)
