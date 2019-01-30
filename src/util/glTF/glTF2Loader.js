@@ -128,7 +128,7 @@ x3dom.glTF2Loader.prototype._generateMetadata = function(node, parent)
         var keys = Object.keys(value);
         for (var i=0; i<keys.length; i++)
         {
-            x3dnode.appendChild(_generateMetadata(keys[i], value[keys[i]));
+            x3dnode.appendChild( _generateMetadata(keys[i], value[ keys[i] ]) );
         }
         return x3dnode;
      }
