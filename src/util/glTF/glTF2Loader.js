@@ -19,6 +19,9 @@ x3dom.glTF2Loader.prototype.load = function(input, binary)
     //generate X3D scene
     var x3dScene = this._generateX3DScene();
 
+    //generate worldinfo from asset properties
+    this._generateX3DWorldInfo(x3dScene);
+
     //Get the scene ID
     var sceneID = this._gltf.scene || 0;
 
@@ -46,6 +49,34 @@ x3dom.glTF2Loader.prototype.load = function(input, binary)
     }
 
     return x3dScene;
+};
+
+/**
+ * extract asset properties and append as WorldInfo
+ * @param {X3DNode} parent - A X3D-Node
+ */
+x3dom.glTF2Loader.prototype._generateX3DWorldInfo = function(parent)
+{
+    
+    if (this._gltf.asset) //should always exist
+    {
+        //use namespace for title
+        var asset = this._gltf.asset;
+        var assetProperties = ['copyright', 'generator', 'version', 'minversion'];
+        var worldInfo = document.createElement("worldinfo");
+
+        var info = new x3dom.fields.MFString();
+        var property, i;
+        for(i = 0; i < assetProperties.length; i++)
+        {
+            property = assetProperties[i];
+            if (asset[property]) {
+                info.push(assetProperties[i] + ":" + asset[property]);
+            }
+        }
+        worldInfo.setAttribute('info', info.toString());
+        parent.appendChild(worldInfo);
+    }
 };
 
 /**
