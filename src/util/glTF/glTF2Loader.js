@@ -70,7 +70,7 @@ x3dom.glTF2Loader.prototype._generateX3DWorldInfo = function(parent)
         {
             property = assetProperties[i];
             if (asset[property]) {
-                info.push(assetProperties[i] + ":" + asset[property]);
+                info.push('"' + assetProperties[i] + ":" + asset[property] + '"');  //toString() does not put in quotes
             }
         }
         worldInfo.setAttribute('info', info.toString());
