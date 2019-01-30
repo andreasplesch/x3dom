@@ -60,7 +60,6 @@ x3dom.glTF2Loader.prototype._generateX3DWorldInfo = function(parent)
     
     if (this._gltf.asset) //should always exist
     {
-        //use namespace for title
         var asset = this._gltf.asset;
         var assetProperties = ['copyright', 'generator', 'version', 'minversion'];
         var worldInfo = document.createElement("worldinfo");
@@ -75,6 +74,12 @@ x3dom.glTF2Loader.prototype._generateX3DWorldInfo = function(parent)
             }
         }
         worldInfo.setAttribute('info', info.toString());
+        
+        if (asset.extras && asset.extras.title)
+        {
+            wordInfo.setAttribute('title',asset.extras.title);
+        }
+        
         parent.appendChild(worldInfo);
     }
 };
