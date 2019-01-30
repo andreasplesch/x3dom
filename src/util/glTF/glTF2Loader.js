@@ -77,7 +77,7 @@ x3dom.glTF2Loader.prototype._generateX3DWorldInfo = function(parent)
         
         if (asset.extras && asset.extras.title)
         {
-            wordInfo.setAttribute('title',asset.extras.title);
+            worldInfo.setAttribute('title',asset.extras.title);
         }
         
         parent.appendChild(worldInfo);
