@@ -105,7 +105,7 @@ x3dom.glTF2Loader.prototype._generateMetadata = function(node, parent)
         
         var type = typeof value;
 
-        if (type == 'string' || value === null || type = 'undefined')
+        if (type == 'string' || value === null || type == 'undefined')
         {
             return _generateX3DMetadataNode('MetadataString', name, JSON.stringify(value));
         }
