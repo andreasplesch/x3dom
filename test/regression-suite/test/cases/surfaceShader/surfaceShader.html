@@ -52,6 +52,7 @@
         barkUrls = ["Bark_01","Bark_02","Bark_03","Bark_04","Bark_05","Bark_06","Bark_07","Bark_08","Bark_09"];
         diffuse = document.querySelector("[containerField='diffuseTexture'] imagetexture");
         normal = document.querySelector("[containerField='normalTexture'] imagetexture");
+        specular = document.querySelector("[containerField='specularTexture'] imagetexture");
         cors = "https://api.allorigins.ml/raw?";
         tex = barkUrls[0];
         ext = ".jpg";
@@ -59,7 +60,7 @@
         tex = './textures/' + tex + "_1K";
         diffuse.setAttribute('url', tex + "_Base_Color" + ext);
         normal.setAttribute('url', tex + "_Normal" + ext);
-        
+        specular.setAttribute('url', tex + "_Roughness" + ext);
         
     </script>
 </html>
