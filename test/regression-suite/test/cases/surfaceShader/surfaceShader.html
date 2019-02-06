@@ -41,7 +41,7 @@
                         <Shape>
                             <Appearance DEF='PBRDef'>
                                 <PhysicalMaterial>
-                                    <imagetexture crossorigin='anonymous' origchannelcount="2" flipy="true" containerfield="baseColorTexture" url="./diffuseMap01.png" repeats="true" repeatt="true" scale="true" hidechildren="true">
+                                    <imagetexture crossorigin='anonymous' origchannelcount="2" flipy="true" containerfield="baseColorTexture" url="./textures/Bark_01_1K_Base_Color.jpg" repeats="true" repeatt="true" scale="true" hidechildren="true">
                                         <textureproperties DEF='texprops' boundarymodes="REPEAT" boundarymodet="REPEAT" magnificationfilter="LINEAR" minificationfilter="NEAREST_MIPMAP_LINEAR" generatemipmaps="true" anisotropicdegree="1" bordercolor="0,0,0,0" boundarymoder="REPEAT" texturecompression="FASTEST">
                                         </textureproperties>
                                     </imagetexture>
@@ -87,7 +87,7 @@
         
         baseColor = document.querySelector("[containerField='baseColorTexture']");
         normalPBR = document.querySelector("PhysicalMaterial [containerField='normalTexture']");
-        baseColor.setAttribute('_url', tex + "_Base_Color" + ext);
+        baseColor.setAttribute('url', tex + "_Base_Color" + ext);
         normalPBR.setAttribute('url', tex + "_Normal" + ext);
        
     </script>
