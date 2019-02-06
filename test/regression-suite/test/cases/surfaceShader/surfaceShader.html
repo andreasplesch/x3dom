@@ -47,6 +47,8 @@
                                     </imagetexture>
                                     <imagetexture crossorigin='anonymous' origchannelcount="2" flipy="true" containerfield="roughnessMetallicTexture" url="./normalMap01.png" repeats="true" repeatt="true" scale="true" hidechildren="true">
                                     </imagetexture>
+                                    <imagetexture crossorigin='anonymous' origchannelcount="2" flipy="true" containerfield="occlusionTexture" url="./normalMap01.png" repeats="true" repeatt="true" scale="true" hidechildren="true">
+                                    </imagetexture>
                                 </PhysicalMaterial>
                             </Appearance>
                             <IndexedFaceSet USE='Box01-GEOMETRY'
@@ -85,9 +87,11 @@
         
         baseColor = document.querySelector("[containerField='baseColorTexture']");
         roughness = document.querySelector("[containerField='roughnessMetallicTexture']");
+        occlusion = document.querySelector("[containerField='occlusionTexture']");
         normalPBR = document.querySelector("PhysicalMaterial [containerField='normalTexture']");
         baseColor.setAttribute('_url', tex + "_Base_Color" + ext);
         roughness.setAttribute('_url', tex + "_Roughness" + ext);
+        occlusion.setAttribute('_url', tex + "_AO" + ext);
         normalPBR.setAttribute('url', tex + "_Normal" + ext);
        
     </script>
