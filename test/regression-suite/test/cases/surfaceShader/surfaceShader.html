@@ -37,6 +37,20 @@
                             </IndexedFaceSet>
                         </Shape>
                     </Transform>
+                    <Transform DEF='PBRBox' translate='15 0 0'>
+                        <Shape>
+                            <Appearance DEF='PBRDef'>
+                                <PhysicalMaterial>
+                                    <imagetexture origchannelcount="2" flipy="true" containerfield="baseColorTexture" url="./diffuseMap01.png" repeats="true" repeatt="true" scale="true" hidechildren="true">
+                                        <textureproperties boundarymodes="REPEAT" boundarymodet="REPEAT" magnificationfilter="LINEAR" minificationfilter="NEAREST_MIPMAP_LINEAR" generatemipmaps="true" anisotropicdegree="1" bordercolor="0,0,0,0" boundarymoder="REPEAT" texturecompression="FASTEST">
+                                        </textureproperties>
+                                    </imagetexture>
+                                </PhysicalMaterial>
+                            </Appearance>
+                            <IndexedFaceSet USE='Box01-GEOMETRY'
+                            </IndexedFaceSet>
+                        </Shape>
+                    </Transform>
                     <Transform DEF='Light' translation='14.285714 13.453171 26.684637'>
                         <Shape>
                             <Appearance>
