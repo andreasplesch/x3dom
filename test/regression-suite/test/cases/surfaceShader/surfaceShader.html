@@ -46,8 +46,8 @@
                                         </textureproperties>
                                     </imagetexture>
                                     <imagetexture crossorigin='anonymous' origchannelcount="2" flipy="true" containerfield="normalTexture" url="./normalMap01.png" repeats="true" repeatt="true" scale="true" hidechildren="true">
-                                        <textureproperties USE='texprops'>
-                                        </textureproperties>
+                                        <_textureproperties USE='texprops'>
+                                        </_textureproperties>
                                     </imagetexture>
                                 </PhysicalMaterial>
                             </Appearance>
@@ -88,8 +88,7 @@
         baseColor = document.querySelector("[containerField='baseColorTexture']");
         normalPBR = document.querySelector("PhysicalMaterial [containerField='normalTexture']");
         baseColor.setAttribute('url', tex + "_Base_Color" + ext);
-        normalPBR.setAttribute('url', tex + "_Normal" + ext);
-        
-        
+        normalPBR.setAttribute('_url', tex + "_Normal" + ext);
+       
     </script>
 </html>
