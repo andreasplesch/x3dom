@@ -37,12 +37,16 @@
                             </IndexedFaceSet>
                         </Shape>
                     </Transform>
-                    <Transform DEF='PBRBox' translation='15 0 0'>
+                    <Transform DEF='PBRBox' translation='25 0 0'>
                         <Shape>
                             <Appearance DEF='PBRDef'>
                                 <PhysicalMaterial>
                                     <imagetexture crossorigin='anonymous' origchannelcount="2" flipy="true" containerfield="baseColorTexture" url="./diffuseMap01.png" repeats="true" repeatt="true" scale="true" hidechildren="true">
-                                        <textureproperties boundarymodes="REPEAT" boundarymodet="REPEAT" magnificationfilter="LINEAR" minificationfilter="NEAREST_MIPMAP_LINEAR" generatemipmaps="true" anisotropicdegree="1" bordercolor="0,0,0,0" boundarymoder="REPEAT" texturecompression="FASTEST">
+                                        <textureproperties DEF='texprops' boundarymodes="REPEAT" boundarymodet="REPEAT" magnificationfilter="LINEAR" minificationfilter="NEAREST_MIPMAP_LINEAR" generatemipmaps="true" anisotropicdegree="1" bordercolor="0,0,0,0" boundarymoder="REPEAT" texturecompression="FASTEST">
+                                        </textureproperties>
+                                    </imagetexture>
+                                    <imagetexture crossorigin='anonymous' origchannelcount="2" flipy="true" containerfield="normalTexture" url="./normalMap01.png" repeats="true" repeatt="true" scale="true" hidechildren="true">
+                                        <textureproperties USE='texprops'>
                                         </textureproperties>
                                     </imagetexture>
                                 </PhysicalMaterial>
@@ -80,5 +84,12 @@
         normal.setAttribute('url', tex + "_Normal" + ext);
         specular.setAttribute('url', tex + "_Roughness" + ext);
         ambient.setAttribute('url', tex + "_AO" + ext);
+        
+        baseColor = document.querySelector("[containerField='baseColorTexture']");
+        normalPBR = document.querySelector("PhysicalMaterial [containerField='normalTexture']");
+        baseColor.setAttribute('url', tex + "_Base_Color" + ext);
+        normalPBR.setAttribute('url', tex + "_Normal" + ext);
+        
+        
     </script>
 </html>
