@@ -17,7 +17,7 @@
                             <Appearance DEF='_01_-_Default'>
                                 <CommonSurfaceShader diffuseFactor='1.000 1.000 1.000' specularFactor='1.000 1.000 1.000' shininessFactor='0.145' alphaFactor='1.000' tangentTextureCoordinatesId='1' binormalTextureCoordinatesId='2'>
                                     <SurfaceShaderTexture containerField='diffuseTexture'>
-                                        <ImageTexture crossorigin='anonymous' url='https://cgbookcase.com/textures/Wood/Wood_10/Wood_10_1K_Base_Color.png' _url='./diffuseMap01.png'></ImageTexture>
+                                        <ImageTexture crossorigin='anonymous' url='./diffuseMap01.png'></ImageTexture>
                                     </SurfaceShaderTexture>
                                     <SurfaceShaderTexture containerField='specularTexture'>
                                         <ImageTexture crossorigin='anonymous' url='./specularMap01.png'></ImageTexture>
@@ -52,7 +52,7 @@
         diffuse = document.querySelector("[containerField='diffuseTexture'] imagetexture");
         cors = "https://cors.io/?";
         tex = baseUrls[0];
-        tex = tex + tex.split('/')[5];
+        tex = tex + '/' + tex.split('/')[5];
         tex = tex +"_1K"+"_Base_Color"+".png";
         diffuse.setAttribute('url',cors+tex);
     </script>
