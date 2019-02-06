@@ -22,6 +22,9 @@
                                     <SurfaceShaderTexture containerField='specularTexture'>
                                         <ImageTexture crossorigin='anonymous' url='./specularMap01.png'></ImageTexture>
                                     </SurfaceShaderTexture>
+                                    <SurfaceShaderTexture containerField='ambientTexture'>
+                                        <ImageTexture crossorigin='anonymous' url='./specularMap01.png'></ImageTexture>
+                                    </SurfaceShaderTexture>
                                     <SurfaceShaderTexture containerField='normalTexture'>
                                         <ImageTexture crossorigin='anonymous' url='./normalMap01.png'></ImageTexture>
                                     </SurfaceShaderTexture>
@@ -53,6 +56,7 @@
         diffuse = document.querySelector("[containerField='diffuseTexture'] imagetexture");
         normal = document.querySelector("[containerField='normalTexture'] imagetexture");
         specular = document.querySelector("[containerField='specularTexture'] imagetexture");
+        ambient = document.querySelector("[containerField='ambientTexture'] imagetexture");
         cors = "https://api.allorigins.ml/raw?";
         tex = barkUrls[0];
         ext = ".jpg";
@@ -61,6 +65,8 @@
         diffuse.setAttribute('url', tex + "_Base_Color" + ext);
         normal.setAttribute('url', tex + "_Normal" + ext);
         specular.setAttribute('url', tex + "_Roughness" + ext);
+        ambient.setAttribute('url', tex + "_AO" + ext);
+ 
         
     </script>
 </html>
