@@ -173,7 +173,7 @@
         
         document.querySelector('#colorForm').onchange = function (e) {
             var color = x3dom.fields.SFColor.colorParse(e.target.value);
-            document.querySelector(`[for=${e.target.id}]`).textContent=color.toString();
+            e.target.labels[0].textContent=color.toString();
             PBRBasic.setAttribute('basecolorFactor', color.toString()+" 0");
         };
         
