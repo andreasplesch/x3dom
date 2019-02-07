@@ -94,6 +94,7 @@
                     
                 </Scene>
             </X3D>
+            <div id='forms'>
             <form id='roughnessForm'>
                 <p>Please select roughness:</p>
                 <div>
@@ -123,7 +124,7 @@
                 </div>  
             </form>
             <form id='metalnessForm'>
-                <p>Please select roughness:</p>
+                <p>Please select metalness:</p>
                 <div>
                     <input type="radio" id="mChoice1"
                      name="metalness" value="0">
@@ -150,6 +151,15 @@
                     <label for="mChoice1">1.0</label>
                 </div>  
             </form>
+            <form id='colorForm'>
+                <p>Please select base color:</p>
+                <div>
+                    <input type="color" id="cChoice"
+                     name="basecolor" value="">
+                    <label for="cChoice">1.0</label>
+                </div>  
+            </form>
+            </div>
     </body>
     <script>
         var PBRBasic = document.querySelector('[DEF=PBRBasicMaterial]');
