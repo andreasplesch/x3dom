@@ -67,9 +67,9 @@
 		                <PointLight DEF='Omni01' on='true' intensity='2.000000' ambientIntensity='0.000000' color='0.7 0.7 0.7' _location='14.285714 13.453171 26.684637' attenuation='1.000000 0.000000 0.000000' radius='200.000000'></PointLight>
                     
                     </Transform>
-                    <Viewpoint position="-34.15292 26.77978 47.68462" orientation="-0.31957 -0.93860 -0.13001 0.81799" 
+                    <Viewpoint position="-34.15292 26.77978 47.68462" orientation="-0.31957 -0.93860 -0.13001 0.81799">
 	                </Viewpoint>
-                    <TimeSensor DEF='clock' loop='true' interval='5'></TimeSensor>
+                    <TimeSensor DEF='clock' loop='true' cycleInterval='5'></TimeSensor>
 			        <PositionInterpolator DEF='circler' key='0 0.17 0.25 0.34 0.5 0.67 0.75 0.84 1' 
                                           keyValue='0 13 30, 26 13 15, 30 13 0, 26 13 -15, 0 13 -30, -26, 13, -15, -30 13 0, -26, 13, 15, 0 13 30' >
                     </PositionInterpolator>
@@ -103,7 +103,7 @@
         occlusion = document.querySelector("[containerField='occlusionTexture']");
         normalPBR = document.querySelector("PhysicalMaterial [containerField='normalTexture']");
         baseColor.setAttribute('url', tex + "_Base_Color" + ext);
-        roughness.setAttribute('url', tex + "_MetallicRoughness" + ext);
+        roughness.setAttribute('url', tex + "_Roughness" + ext);
         occlusion.setAttribute('url', tex + "_AO" + ext);
         normalPBR.setAttribute('url', tex + "_Normal" + ext);
        
