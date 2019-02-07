@@ -60,14 +60,14 @@
                     <Transform DEF='Light' translation='14.285714 13.453171 26.684637'>
                         <Shape>
                             <Appearance>
-                                <Material ambientIntensity='0' diffuseColor='0.7 0.7 1.0' shininess='0' emissiveColor='0.7 0.7 1.0'></Material>
+                                <Material ambientIntensity='0' diffuseColor='0.7 0.7 0.7' shininess='0' emissiveColor='0.7 0.7 0.7'></Material>
                             </Appearance>
                             <sphere></sphere>
                         </Shape>
                     </Transform>
                     <Viewpoint position="-34.15292 26.77978 47.68462" orientation="-0.31957 -0.93860 -0.13001 0.81799" 
 	                </Viewpoint>
-                    <PointLight DEF='Omni01' on='TRUE' intensity='0.500000' ambientIntensity='0.200000' color='0.7 0.7 0.7' location='14.285714 13.453171 26.684637' attenuation='1.000000 0.000000 0.000000' radius='200.000000'></PointLight>
+                    <PointLight DEF='Omni01' on='true' intensity='2.000000' ambientIntensity='0.000000' color='0.7 0.7 0.7' location='14.285714 13.453171 26.684637' attenuation='1.000000 0.000000 0.000000' radius='200.000000'></PointLight>
                     <ROUTE fromNode='SPHERE_SENSOR' fromField='rotation_changed' toNode='Box01' toField='set_rotation'></ROUTE>
                     <ROUTE fromNode='SPHERE_SENSOR' fromField='rotation_changed' toNode='PBRBox' toField='set_rotation'></ROUTE>
                 </Scene>
