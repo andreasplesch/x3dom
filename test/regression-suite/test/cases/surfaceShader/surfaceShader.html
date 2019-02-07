@@ -39,7 +39,7 @@
                             </IndexedFaceSet>
                         </Shape>
                     </Transform>
-                    <Transform DEF='PBRBox' translation='25 10 0'>
+                    <Transform DEF='PBRBox' translation='25 0 0'>
                         <Shape>
                             <Appearance DEF='PBRDef'>
                                 <PhysicalMaterial>
@@ -53,7 +53,7 @@
                                     </imagetexture>
                                 </PhysicalMaterial>
                             </Appearance>
-                            <Cylinder DEF="testCylinder" radius='10' height='20' bottom='true' top='true' subdivision='16' ></Cylinder>
+			    <IndexedFaceSet USE='Box01-GEOMETRY'></IndexedFaceSet>
                         </Shape>
                     </Transform>
                     </Transform>
@@ -67,7 +67,7 @@
                     </Transform>
                     <Viewpoint position="-34.15292 26.77978 47.68462" orientation="-0.31957 -0.93860 -0.13001 0.81799" 
 	                </Viewpoint>
-                    <PointLight DEF='Omni01' on='TRUE' intensity='0.500000' ambientIntensity='0.200000' color='0.7 0.7 1.0' location='14.285714 13.453171 26.684637' attenuation='1.000000 0.000000 0.000000' radius='200.000000'></PointLight>
+                    <PointLight DEF='Omni01' on='TRUE' intensity='0.500000' ambientIntensity='0.200000' color='0.7 0.7 0.7' location='14.285714 13.453171 26.684637' attenuation='1.000000 0.000000 0.000000' radius='200.000000'></PointLight>
                     <ROUTE fromNode='SPHERE_SENSOR' fromField='rotation_changed' toNode='Box01' toField='set_rotation'></ROUTE>
                     <ROUTE fromNode='SPHERE_SENSOR' fromField='rotation_changed' toNode='PBRBox' toField='set_rotation'></ROUTE>
                 </Scene>
@@ -82,7 +82,7 @@
         ambient = document.querySelector("[containerField='ambientTexture'] imagetexture");
         cors = "https://api.allorigins.ml/raw?";
         tex = barkUrls[0];
-        ext = ".png";
+        ext = ".jpg";
         //tex = tex + '/' + tex.split('/')[5];
         tex = './textures/' + tex + "_1K";
         diffuse.setAttribute('url', tex + "_Base_Color" + ext);
