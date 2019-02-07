@@ -70,18 +70,20 @@
                         </Shape>
                     </Transform>
                     <Transform DEF='Light' translation='14.285714 13.453171 26.684637'>
-                        <Shape>
+                        <Shape DEF='LightShape'>
                             <Appearance>
                                 <Material ambientIntensity='0' diffuseColor='0.7 0.7 0.7' shininess='0' emissiveColor='0.7 0.7 0.7'></Material>
                             </Appearance>
                             <sphere></sphere>
                         </Shape>
 		                <PointLight DEF='Omni01' on='true' intensity='2.000000' ambientIntensity='0.100000' color='0.7 0.7 0.7' _location='14.285714 13.453171 26.684637' attenuation='1.000000 0.000000 0.000000' radius='200.000000'></PointLight>
-                    
                     </Transform>
                         
                     <Transform DEF='Light2' rotation='1 0 0 1.57'>
-                        <Transform USE='Light'> </Transform>
+                        <Transform DEF='Light2trafo' translation='14.285714 13.453171 26.684637'>
+                            <Shape USE='LightShape'></Shape>
+                            <PointLight DEF='Omni02' on='true' intensity='2.000000' ambientIntensity='0.100000' color='0.7 0.7 0.7' _location='14.285714 13.453171 26.684637' attenuation='1.000000 0.000000 0.000000' radius='200.000000'></PointLight>
+                        </Transform>
                     </Transform>
                     
                     <Viewpoint position="-19.55824 30.62921 46.86883" orientation="-0.66764 -0.71404 -0.21074 0.57436">
@@ -95,6 +97,7 @@
                     <ROUTE fromNode='SPHERE_SENSOR' fromField='rotation_changed' toNode='PBRBox' toField='set_rotation'></ROUTE-->
                     <ROUTE fromNode='clock' fromField='fraction_changed' toNode='circler' toField='set_fraction' ></ROUTE>
                     <ROUTE fromNode='circler' fromField='value_changed' toNode='Light' toField='set_translation' ></ROUTE>
+                    <ROUTE fromNode='circler' fromField='value_changed' toNode='Light2trafo' toField='set_translation' ></ROUTE>
                     
                 </Scene>
             </X3D>
