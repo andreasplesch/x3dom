@@ -60,7 +60,7 @@
                             </IndexedFaceSet>
                         </Shape>
                     </Transform>
-		            <Transform DEF='PBRSphere' translation='0 20 0'>
+                    <Transform DEF='PBRSphere' translation='0 20 0'>
                         <Shape>
                             <Appearance DEF='PBRBasic'>
                                 <PhysicalMaterial DEF='PBRBasicMaterial' metallicFactor='0.2' roughnessFactor='0.2'>
@@ -78,6 +78,10 @@
                         </Shape>
 		                <PointLight DEF='Omni01' on='true' intensity='2.000000' ambientIntensity='0.100000' color='0.7 0.7 0.7' _location='14.285714 13.453171 26.684637' attenuation='1.000000 0.000000 0.000000' radius='200.000000'></PointLight>
                     
+                    </Transform>
+                        
+                    <Transform DEF='Light2' rotation='1 0 0 1.57'>
+                        <Transform USE='Light'> </Transform>
                     </Transform>
                     
                     <Viewpoint position="-19.55824 30.62921 46.86883" orientation="-0.66764 -0.71404 -0.21074 0.57436">
