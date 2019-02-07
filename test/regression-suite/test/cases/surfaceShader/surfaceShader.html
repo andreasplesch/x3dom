@@ -68,10 +68,11 @@
                             </Appearance>
                             <sphere></sphere>
                         </Shape>
-		                <PointLight DEF='Omni01' on='true' intensity='2.000000' ambientIntensity='0.000000' color='0.7 0.7 0.7' _location='14.285714 13.453171 26.684637' attenuation='1.000000 0.000000 0.000000' radius='200.000000'></PointLight>
+		                <PointLight DEF='Omni01' on='true' intensity='2.000000' ambientIntensity='0.100000' color='0.7 0.7 0.7' _location='14.285714 13.453171 26.684637' attenuation='1.000000 0.000000 0.000000' radius='200.000000'></PointLight>
                     
                     </Transform>
-                    <Viewpoint position="-34.15292 26.77978 47.68462" orientation="-0.31957 -0.93860 -0.13001 0.81799">
+                    
+                    <Viewpoint position="-19.55824 30.62921 46.86883" orientation="-0.66764 -0.71404 -0.21074 0.57436">
 	                </Viewpoint>
                     <TimeSensor DEF='clock' loop='true' cycleInterval='10'></TimeSensor>
 			        <PositionInterpolator DEF='circler' key='0 0.08 0.17 0.25 0.34 0.42 0.5 0.58 0.67 0.75 0.84 0.92 1' 
@@ -94,23 +95,42 @@
 //         specular = document.querySelector("[containerField='specularTexture'] imagetexture");
 //         ambient = document.querySelector("[containerField='ambientTexture'] imagetexture");
         cors = "https://api.allorigins.ml/raw?";
-        tex = barkUrls[0];
-        ext = ".jpg";
         //tex = tex + '/' + tex.split('/')[5];
-        tex = './textures/' + tex + "_1K";
 //         diffuse.setAttribute('url', tex + "_Base_Color" + ext);
 //         normal.setAttribute('url', tex + "_Normal" + ext);
 //         specular.setAttribute('url', tex + "_Roughness" + ext);
 //         ambient.setAttribute('url', tex + "_AO" + ext);
         
-        baseColor = document.querySelector("[containerField='baseColorTexture']");
-        roughness = document.querySelector("[containerField='roughnessMetallicTexture']");
-        occlusion = document.querySelector("[containerField='occlusionTexture']");
-        normalPBR = document.querySelector("PhysicalMaterial [containerField='normalTexture']");
-        baseColor.setAttribute('url', tex + "_Base_Color" + ext);
-        roughness.setAttribute('url', tex + "_Roughness" + ext);
-        occlusion.setAttribute('url', tex + "_AO" + ext);
-        normalPBR.setAttribute('url', tex + "_Normal" + ext);
+        function setMaterial (mat) {
+            var tex = barkUrls[mat];
+            var ext = ".jpg";
+            var tex = './textures/' + tex + "_1K";
+            var baseColor = document.querySelector("[containerField='baseColorTexture']");
+            var roughness = document.querySelector("[containerField='roughnessMetallicTexture']");
+            var occlusion = document.querySelector("[containerField='occlusionTexture']");
+            var normalPBR = document.querySelector("PhysicalMaterial [containerField='normalTexture']");
+            baseColor.setAttribute('url', tex + "_Base_Color" + ext);
+            roughness.setAttribute('url', tex + "_Roughness" + ext);
+            occlusion.setAttribute('url', tex + "_AO" + ext);
+            normalPBR.setAttribute('url', tex + "_Normal" + ext);
+        }
+        //cycle through materials
+        var duration = 2;
+        var oldTime = 0;
+        var matIndex = 0;
+        var matN = barkUrls.length;
+        
+        function cycleMaterial(e) {
+            if (e.fieldName !== 'time') return;
+            if (e.value - oldTime < duration) return;
+            oldTime = e.value;
+            matIndex = ++matIndex%matN;
+            setMaterial(matIndex);
+        }
+        
+        clock = document.querySelector('TimeSensor');
+        clock.setAttribute('onoutputchange','cycleMaterial(event)');
+        
     	
     </script>
 </html>
