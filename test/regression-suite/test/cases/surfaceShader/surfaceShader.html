@@ -124,7 +124,7 @@
             </form>
     </body>
     <script>
-        var PBRBasic = document.querySelector('#PBRBasicMaterial');
+        var PBRBasic = document.querySelector('[DEF=PBRBasicMaterial]');
         document.querySelector('#roughnessForm').onchange = function (e) {
             PBRBasic.setAttribute('roughnessFactor', e.target.value);
         };
