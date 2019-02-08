@@ -61,7 +61,7 @@
                             </IndexedFaceSet>
                         </Shape>
                     </Transform>
-                    <Transform DEF='PBRSphere' translation='0 20 0'>
+                    <Transform DEF='PBRSphere' translation='0 30 0'>
                         <Shape>
                             <Appearance DEF='PBRBasic'>
                                 <PhysicalMaterial DEF='PBRBasicMaterial' metallicFactor='0.2' roughnessFactor='0.2'>
@@ -183,7 +183,7 @@
         var Basic = document.querySelector('[DEF=BasicMaterial]');
         document.querySelector('#roughnessForm').onchange = function (e) {
             PBRBasic.setAttribute('roughnessFactor', e.target.value);
-            Basic.setAttribute('shininess', Math.pow(10, 1-e.target.value)-1);
+            Basic.setAttribute('shininess', Math.pow(2, 1-e.target.value)-0.95);
         };
         
         document.querySelector('#metalnessForm').onchange = function (e) {
