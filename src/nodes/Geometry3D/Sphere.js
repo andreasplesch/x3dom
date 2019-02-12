@@ -104,7 +104,7 @@ x3dom.registerNodeType(
 
                 var theta, sinTheta, cosTheta;
                 var phi, sinPhi, cosPhi;
-                var x, y, z, coord, u, v;
+                var coord, u, v;
 
                 for (latNumber = 0; latNumber <= latitudeBands; latNumber++) {
                     theta = (latNumber * Math.PI) / latitudeBands;
@@ -112,12 +112,6 @@ x3dom.registerNodeType(
                     cosTheta = Math.cos(theta);
 
                     for (longNumber = 0; longNumber <= longitudeBands; longNumber++) {
-//                         phi = this._phiFromlong(longNumber, longitudeBands);
-                        
-//                         x = this._calcX(phi, sinTheta);
-//                         y = this._calcY(cosTheta);
-//                         z = this._calcZ(phi, sinTheta);
-                        
                         coord = this._calcXYZ(longNumber, longitudeBands, sinTheta, cosTheta);
 
                         u = this._uFromlong(longNumber, longitudeBands);
@@ -159,24 +153,8 @@ x3dom.registerNodeType(
                 var y = -cosTheta;
                 var z = -Math.sin(phi) * sinTheta;
                 return {x:x, y:y, z:z};
-            },        
-        
-            _calcX: function(phi, sinTheta)
-            {
-                return -Math.cos(phi) * sinTheta;
             },
-            _calcY: function(cosTheta)
-            {
-                return -cosTheta;
-            },
-            _calcZ: function(phi, sinTheta)
-            {
-                return -Math.sin(phi) * sinTheta;
-            },
-            _phiFromlong: function(longNumber, longitudeBands)
-            {
-                return 0.5 * Math.PI + (longNumber * 2.0 * Math.PI) / longitudeBands;
-            },
+                    
             _uFromlong: function(longNumber, longitudeBands)
             {
                 return 1.0 - (longNumber / longitudeBands);
@@ -195,7 +173,7 @@ x3dom.registerNodeType(
 
                     var theta, sinTheta, cosTheta;
                     var phi, sinPhi, cosPhi;
-                    var x, y, z, coord;
+                    var coord;
 
                     for (latNumber = 0; latNumber <= latitudeBands; latNumber++) {
                         theta = (latNumber * Math.PI) / latitudeBands;
@@ -203,11 +181,6 @@ x3dom.registerNodeType(
                         cosTheta = Math.cos(theta);
 
                         for (longNumber = 0; longNumber <= longitudeBands; longNumber++) {
-//                             phi = this._phiFromlong(longNumber, longitudeBands);
-
-//                             x = this._calcX(phi, sinTheta);
-//                             y = this._calcY(cosTheta);
-//                             z = this._calcZ(phi, sinTheta);
                             coord = this._calcXYZ(longNumber, longitudeBands, sinTheta, cosTheta);
 
                             this._mesh._positions[0].push(r * coord.x);
