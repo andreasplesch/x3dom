@@ -342,7 +342,6 @@ x3dom.Texture.prototype.updateTexture = function()
                 tex._video = document.createElement('video');
                 tex._video.setAttribute('preload', 'auto');
                 tex._video.setAttribute('muted', '');
-                tex._video.setAttribute('autoplay', '');
                 tex._video.setAttribute('crossOrigin', tex._vf.crossOrigin);
                 p.appendChild(tex._video);
                 tex._video.style.visibility = "hidden";
@@ -371,8 +370,11 @@ x3dom.Texture.prototype.updateTexture = function()
 
 		var startVideo = function()
 		{
-			tex._video.play();
-			tex._intervalID = setInterval(updateMovie, 16);
+            var pr = tex._video.play();
+            pr.catch(function(error){
+                setTimeout(startVideo, 100);
+            });
+            tex._intervalID = setInterval(updateMovie, 16);
 		};
 
 		var videoDone = function()
