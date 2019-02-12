@@ -104,7 +104,7 @@ x3dom.registerNodeType(
 
                 var theta, sinTheta, cosTheta;
                 var phi, sinPhi, cosPhi;
-                var x, y, z, u, v;
+                var x, y, z, coord, u, v;
 
                 for (latNumber = 0; latNumber <= latitudeBands; latNumber++) {
                     theta = (latNumber * Math.PI) / latitudeBands;
@@ -112,21 +112,23 @@ x3dom.registerNodeType(
                     cosTheta = Math.cos(theta);
 
                     for (longNumber = 0; longNumber <= longitudeBands; longNumber++) {
-                        phi = this._phiFromlong(longNumber, longitudeBands);
+//                         phi = this._phiFromlong(longNumber, longitudeBands);
                         
-                        x = this._calcX(phi, sinTheta);
-                        y = this._calcY(cosTheta);
-                        z = this._calcZ(phi, sinTheta);
+//                         x = this._calcX(phi, sinTheta);
+//                         y = this._calcY(cosTheta);
+//                         z = this._calcZ(phi, sinTheta);
+                        
+                        coord = this._calcXYZ(longNumber, longitudeBands, sinTheta, cosTheta);
 
                         u = this._uFromlong(longNumber, longitudeBands);
                         v = latNumber / latitudeBands;
 
-                        this._mesh._positions[0].push(r * x);
-                        this._mesh._positions[0].push(r * y);
-                        this._mesh._positions[0].push(r * z);
-                        this._mesh._normals[0].push(x);
-                        this._mesh._normals[0].push(y);
-                        this._mesh._normals[0].push(z);
+                        this._mesh._positions[0].push(r * coord.x);
+                        this._mesh._positions[0].push(r * coord.y);
+                        this._mesh._positions[0].push(r * coord.z);
+                        this._mesh._normals[0].push(coord.x);
+                        this._mesh._normals[0].push(coord.y);
+                        this._mesh._normals[0].push(coord.z);
                         this._mesh._texCoords[0].push(u);
                         this._mesh._texCoords[0].push(v);
                     }
@@ -149,6 +151,15 @@ x3dom.registerNodeType(
                     }
                 }
             },
+        
+            _calcXYZ: function(longNumber, longBands, sinTheta, cosTheta)
+            {
+                var phi = 0.5 * Math.PI + (longNumber * 2.0 * Math.PI) / longitudeBands;
+                var x = -Math.cos(phi) * sinTheta;
+                var y = -cosTheta;
+                var z = -Math.sin(phi) * sinTheta;
+                return {x:x, y:y, z:z};
+            },        
         
             _calcX: function(phi, sinTheta)
             {
@@ -184,7 +195,7 @@ x3dom.registerNodeType(
 
                     var theta, sinTheta, cosTheta;
                     var phi, sinPhi, cosPhi;
-                    var x, y, z;
+                    var x, y, z, coord;
 
                     for (latNumber = 0; latNumber <= latitudeBands; latNumber++) {
                         theta = (latNumber * Math.PI) / latitudeBands;
@@ -192,15 +203,16 @@ x3dom.registerNodeType(
                         cosTheta = Math.cos(theta);
 
                         for (longNumber = 0; longNumber <= longitudeBands; longNumber++) {
-                            phi = this._phiFromlong(longNumber, longitudeBands);
+//                             phi = this._phiFromlong(longNumber, longitudeBands);
 
-                            x = this._calcX(phi, sinTheta);
-                            y = this._calcY(cosTheta);
-                            z = this._calcZ(phi, sinTheta);
+//                             x = this._calcX(phi, sinTheta);
+//                             y = this._calcY(cosTheta);
+//                             z = this._calcZ(phi, sinTheta);
+                            coord = this._calcXYZ(longNumber, longitudeBands, sinTheta, cosTheta);
 
-                            this._mesh._positions[0].push(r * x);
-                            this._mesh._positions[0].push(r * y);
-                            this._mesh._positions[0].push(r * z);
+                            this._mesh._positions[0].push(r * coord.x);
+                            this._mesh._positions[0].push(r * coord.y);
+                            this._mesh._positions[0].push(r * coord.z);
                         }
                     }
 
