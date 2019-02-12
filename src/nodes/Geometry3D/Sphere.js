@@ -152,7 +152,7 @@ x3dom.registerNodeType(
                 }
             },
         
-            _calcXYZ: function(longNumber, longBands, sinTheta, cosTheta)
+            _calcXYZ: function(longNumber, longitudeBands, sinTheta, cosTheta)
             {
                 var phi = 0.5 * Math.PI + (longNumber * 2.0 * Math.PI) / longitudeBands;
                 var x = -Math.cos(phi) * sinTheta;
