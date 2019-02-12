@@ -342,6 +342,7 @@ x3dom.Texture.prototype.updateTexture = function()
                 tex._video = document.createElement('video');
                 tex._video.setAttribute('preload', 'auto');
                 tex._video.setAttribute('muted', 'muted');
+                tex._video.setAttribute('crossOrigin', tex._vf.crossOrigin);
                 p.appendChild(tex._video);
                 tex._video.style.visibility = "hidden";
                 tex._video.style.display = "none";
