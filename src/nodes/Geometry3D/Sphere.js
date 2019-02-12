@@ -54,6 +54,7 @@ x3dom.registerNodeType(
                 "medium": 0.5,
                 "high": 1.0
             };
+            this.nodeChanged();
         },
         {
             nodeChanged: function()
