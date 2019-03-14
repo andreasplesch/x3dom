@@ -11,6 +11,13 @@ x3dom.VRControllerManager = function()
     this.wasPresenting   = false;
 
     this.controllers = {
+        "OpenVR HMD" : {
+            left  : "https://x3dom.org/download/assets/vr/vive.glb",
+            right : "https://x3dom.org/download/assets/vr/vive.glb",
+            scaleFactor : new x3dom.fields.SFVec3f(40, 40, 40),
+            offset : new x3dom.fields.SFVec3f(),
+            axesScale : [1,1]
+        },
         "HTC Vive MV" : {
             left  : "https://x3dom.org/download/assets/vr/vive.glb",
             right : "https://x3dom.org/download/assets/vr/vive.glb",
