@@ -489,7 +489,9 @@ x3dom.Viewarea.prototype.getViewMatrix = function ()
     
     {
         var viewMatrix = this.getViewpointMatrix();
-        return viewMatrix.mult(this.vrLeftViewMatrix);
+        //return viewMatrix.mult(this.vrLeftViewMatrix);
+        return this.vrLeftViewMatrix.mult(viewMatrix);
+        
     }
     else
     {
@@ -501,8 +503,10 @@ x3dom.Viewarea.prototype.getViewMatrices = function()
 {
     if(this.vrFrameData) {
         var viewMatrix = this.getViewpointMatrix();
-        return [viewMatrix.mult(this.vrLeftViewMatrix),
-                viewMatrix.mult(this.vrRightViewMatrix)];
+//         return [viewMatrix.mult(this.vrLeftViewMatrix),
+//                 viewMatrix.mult(this.vrRightViewMatrix)];
+        return [this.vrLeftViewMatrix.mult(viewMatrix),
+                this.vrRightViewMatrix.mult(viewMatrix)];
     } else {
         var viewMatrix = this.getViewpointMatrix().mult(this._transMat).mult(this._rotMat);
         return [viewMatrix, viewMatrix]
