@@ -182,7 +182,7 @@ x3dom.VRControllerManager.prototype.onUpdate = function( viewarea, vrDisplay, co
 {
     var transMat = new x3dom.fields.SFMatrix4f();
     var rotMat = new x3dom.fields.SFMatrix4f();
-    var axes = [0, 0], axesScale = [1,1 ];
+    var axes = [0, 0], axesScale = [1, 1];
     if (this.controllers[vrDisplay.displayName])
         axesScale = this.controllers[vrDisplay.displayName].axesScale;
 
@@ -216,6 +216,7 @@ x3dom.VRControllerManager.prototype.onUpdate = function( viewarea, vrDisplay, co
 
     var d = (viewarea._scene._lastMax.subtract(viewarea._scene._lastMin)).length();
     d = ((d < x3dom.fields.Eps) ? 1 : d);
+    d = Math.sqrt(d / 10) * 10; //dampen for large scenes
 
     viewDir  = new x3dom.fields.SFVec3f(-viewDir.x,  -viewDir.y,  viewDir.z ).multiply(d * (dy/viewarea._height));
     rightDir = new x3dom.fields.SFVec3f(-rightDir.x, -rightDir.y, rightDir.z).multiply(d * (dx/viewarea._width) );
