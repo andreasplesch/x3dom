@@ -404,7 +404,7 @@ x3dom.Viewarea.prototype.getLightsShadow = function() {
 };
 
 /**
- * Check if there is a PhysicalEnvironmentLight
+ * Check if there is an enabled PhysicalEnvironmentLight
  *
  * @returns {boolean}
  */
@@ -486,8 +486,10 @@ x3dom.Viewarea.prototype.getViewpointMatrix = function() {
 x3dom.Viewarea.prototype.getViewMatrix = function ()
 {
     if(this.vrFrameData)
+    
     {
-        return this.vrLeftViewMatrix;
+        var viewMatrix = this.getViewpointMatrix();
+        return viewMatrix.mult(this.vrLeftViewMatrix);
     }
     else
     {
@@ -498,14 +500,14 @@ x3dom.Viewarea.prototype.getViewMatrix = function ()
 x3dom.Viewarea.prototype.getViewMatrices = function()
 {
     if(this.vrFrameData) {
-        return [this.vrLeftViewMatrix,
-                this.vrRightViewMatrix];
+        var viewMatrix = this.getViewpointMatrix();
+        return [viewMatrix.mult(this.vrLeftViewMatrix),
+                viewMatrix.mult(this.vrRightViewMatrix)];
     } else {
         var viewMatrix = this.getViewpointMatrix().mult(this._transMat).mult(this._rotMat);
         return [viewMatrix, viewMatrix]
     }
 };
-
 /**
  * Get Light Matrix
  *
@@ -1115,10 +1117,7 @@ x3dom.Viewarea.prototype.checkEvents = function(obj, x, y, buttonState, eventTyp
                 for (i = 0; i < n; ++i) {
                     childNode = node._childNodes[i];
 
-                    if ( x3dom.isa(childNode, x3dom.nodeTypes.X3DPointingDeviceSensorNode) && 
-                         childNode._vf.enabled &&
-                         affectedPointingSensorsList.indexOf(childNode) == -1 )
-                    {
+                    if (x3dom.isa(childNode, x3dom.nodeTypes.X3DPointingDeviceSensorNode) && childNode._vf.enabled) {
                         affectedPointingSensorsList.push(childNode);
                     }
                 }
