@@ -175,8 +175,9 @@ x3dom.VRControllerManager.prototype.onUpdate = function( viewarea, vrDisplay, co
 {
     var transMat = new x3dom.fields.SFMatrix4f();
     var rotMat = new x3dom.fields.SFMatrix4f();
-    var axes = [0, 0];
-    var axesScale = this.controllers[vrDisplay.displayName].axesScale;
+    var axes = [0, 0], axesScale = [1,1 ];
+    if (this.controllers[vrDisplay.displayName])
+        axesScale = this.controllers[vrDisplay.displayName].axesScale;
 
     if(controllers.left)
     {   
