@@ -146,10 +146,14 @@
             x3d.addEventListener( "downloadsfinished", onDownloadsFinished );
             
             g_runtime = x3d.runtime;
-            g_runtime.enterVR = function() {
+            g_runtime.onEnterVR = function() {
                 console.log('entered VR, showall');
                 g_runtime.showAll(g_direction, true);        
-            }
+            };
+            g_runtime.onEnterVR = function() {
+                console.log('exited VR, showall');
+                g_runtime.showAll(g_direction, true);        
+            };
         };
 
         function updateInline(url)
