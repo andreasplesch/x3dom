@@ -1320,16 +1320,26 @@ x3dom.Runtime.prototype.enterVR = function() {
     if(this.canvas.vrDisplay && !this.canvas.vrDisplay.isPresenting)
     {
         this.canvas.vrDisplay.requestPresent([{ source: this.canvas.canvas }]).then(function() {
+            this.onEnterVR(this);
             this.canvas.doc.needRender = true;
         }.bind(this));
     }
+};
+
+x3dom.Runtime.prototype.onEnterVR = function() {
+    x3dom.debug.logInfo('Entered VR successfully.');
 };
 
 x3dom.Runtime.prototype.exitVR = function() {
     if(this.canvas.vrDisplay && this.canvas.vrDisplay.isPresenting)
     {
         this.canvas.vrDisplay.exitPresent();
+        this.onExitVR(this);
     }
+};
+
+x3dom.Runtime.prototype.onExitVR = function() {
+    x3dom.debug.logInfo('Exited VR successfully.');
 };
 
 x3dom.Runtime.prototype.toggleVR = function() {
