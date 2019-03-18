@@ -247,6 +247,8 @@ x3dom.VRControllerManager.prototype._updateControllerModels = function( viewarea
         this.leftInline.setAttribute("render", "true");
         this.rightInline.setAttribute("render", "true");
     }
+    
+    var viewMatrix = this.getViewpointMatrix();
 
     if(controllers.left)
     {
@@ -260,7 +262,7 @@ x3dom.VRControllerManager.prototype._updateControllerModels = function( viewarea
 
         var matrix = x3dom.fields.SFMatrix4f.fromRotationTranslationScale(rotation, position, scale);
 
-        this.leftTransform.setAttribute("matrix", viewarea.vrLeftViewMatrix.inverse().mult(matrix).toString());
+        this.leftTransform.setAttribute("matrix", viewarea.vrLeftViewMatrix.mult(viewMatrix).inverse().mult(matrix).toString());
     }
 
     if(controllers.right)
@@ -275,7 +277,7 @@ x3dom.VRControllerManager.prototype._updateControllerModels = function( viewarea
 
         var matrix = x3dom.fields.SFMatrix4f.fromRotationTranslationScale(rotation, position, scale);
 
-        this.rightTransform.setAttribute("matrix", viewarea.vrRightViewMatrix.inverse().mult(matrix).toString());
+        this.rightTransform.setAttribute("matrix", viewarea.vrRightViewMatrix.mult(viewMatrix).inverse().mult(matrix).toString());
     }
 
 };
