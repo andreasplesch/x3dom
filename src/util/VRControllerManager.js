@@ -248,7 +248,7 @@ x3dom.VRControllerManager.prototype._updateControllerModels = function( viewarea
         this.rightInline.setAttribute("render", "true");
     }
     
-    var viewMatrix = this.getViewpointMatrix();
+    var viewMatrix = viewarea.getViewpointMatrix();
 
     if(controllers.left)
     {
