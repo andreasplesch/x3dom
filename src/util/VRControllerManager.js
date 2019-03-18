@@ -126,8 +126,8 @@ x3dom.VRControllerManager.prototype.fit = function( viewarea, vrDisplay )
     var aspect =  Math.min(viewarea._width/viewarea._height, 1);
 
     var tanfov2 = Math.tan(1.57 / 2.0);
-    //var dist = bsr / tanfov2 / aspect;
-    var dist = 0;
+    var dist = bsr / tanfov2 / aspect;
+    //var dist = 0;
 
     viewarea._movement = viewDir.multiply(-dist)
 }
@@ -154,7 +154,7 @@ x3dom.VRControllerManager.prototype.update = function( viewarea, vrDisplay )
             this.leftInline.setAttribute("render", "true");
             this.rightInline.setAttribute("render", "true");
 
-            this.fit(viewarea, vrDisplay);
+            //this.fit(viewarea, vrDisplay);
         }
 
         this.wasPresenting = true;
