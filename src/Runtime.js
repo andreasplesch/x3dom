@@ -1353,6 +1353,12 @@ x3dom.Runtime.prototype.toggleVR = function() {
     }
 };
 
+x3dom.Runtime.prototype.fitVR = function() {
+    var viewarea = this.canvas.doc._viewarea;
+    viewarea.vrControllerManager.fit(viewarea, this.canvas.vrDisplay);
+};
+
+
 /**
  * APIMethod toggleProjection
  *
