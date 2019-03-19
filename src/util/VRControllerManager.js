@@ -9,7 +9,10 @@ x3dom.VRControllerManager = function()
     this.rightGamepadIdx = undefined;
     this.vrDisplay       = undefined;
     this.wasPresenting   = false;
-
+    
+    this.sceneMin = undefined;
+    this.sceneMax = undefined;
+    
     this.controllers = {
         "OpenVR HMD" : {
             left  : "https://x3dom.org/download/assets/vr/vive.glb",
@@ -115,16 +118,9 @@ x3dom.VRControllerManager.prototype._addInlines = function()
 }
 x3dom.VRControllerManager.prototype.fit = function( viewarea, vrDisplay )
 {
-    //ignore controller for scene volume
-    this.leftTransform._x3domNode._vf.render = false;
-    this.rightTransform._x3domNode._vf.render = false;
-    viewarea._scene.invalidateVolume();
-    viewarea._scene.updateVolume();
-    this.leftTransform._x3domNode._vf.render = true;
-    this.rightTransform._x3domNode._vf.render = true;
-    
-    var min = viewarea._scene._lastMin;
-    var max = viewarea._scene._lastMax;
+    this.resetSceneMinMax( viewarea );
+    var min = this.sceneMin;
+    var max = this.sceneMax;
 
     var dia2 = max.subtract(min).multiply(0.5);    // half diameter
     var bsr = dia2.length();                       // bounding sphere radius
@@ -140,9 +136,28 @@ x3dom.VRControllerManager.prototype.fit = function( viewarea, vrDisplay )
     viewarea._movement = viewDir.multiply(-dist)
 }
 
+x3dom.VRControllerManager.prototype.resetSceneMinMax = function( viewarea )
+{
+    //ignore controller for scene volume
+    var leftRender = this.leftTransform._x3domNode._vf.render;
+    var rightRender = this.rightTransform._x3domNode._vf.render;
+    this.leftTransform._x3domNode._vf.render = false;
+    this.rightTransform._x3domNode._vf.render = false;
+    viewarea._scene.invalidateVolume();
+    viewarea._scene.updateVolume();
+    this.leftTransform._x3domNode._vf.render = leftRender;
+    this.rightTransform._x3domNode._vf.render = rightRender;
+//     this.leftTransform._x3domNode._vf.render = true;
+//     this.rightTransform._x3domNode._vf.render = true;
+    this.sceneMin = viewarea._scene._lastMin;
+    this.sceneMax = viewarea._scene._lastMax;
+}
 
 x3dom.VRControllerManager.prototype.update = function( viewarea, vrDisplay )
 {
+    
+    this.resetSceneMinMax( viewarea );
+
     if ( !vrDisplay || (vrDisplay && !vrDisplay.isPresenting) )
     {
         if(this.wasPresenting)
@@ -222,9 +237,9 @@ x3dom.VRControllerManager.prototype.onUpdate = function( viewarea, vrDisplay, co
     var viewDir = viewarea.vrLeftViewMatrix.e2();
     var rightDir = viewarea.vrLeftViewMatrix.e0();
 
-    var d = (viewarea._scene._lastMax.subtract(viewarea._scene._lastMin)).length();
+    var d = (this.sceneMax.subtract(this.sceneMin)).length();
     d = ((d < x3dom.fields.Eps) ? 1 : d);
-    d = Math.sqrt(d / 10) * 10; //dampen for large scenes
+    d = Math.sqrt(10 * d) ; //dampen for large scenes
 
     viewDir  = new x3dom.fields.SFVec3f(-viewDir.x,  -viewDir.y,  viewDir.z ).multiply(d * (dy/viewarea._height));
     rightDir = new x3dom.fields.SFVec3f(-rightDir.x, -rightDir.y, rightDir.z).multiply(d * (dx/viewarea._width) );
