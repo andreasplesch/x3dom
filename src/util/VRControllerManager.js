@@ -36,7 +36,7 @@ x3dom.VRControllerManager = function()
             left  : "https://x3dom.org/download/assets/vr/oculus-go.glb",
             right : "https://x3dom.org/download/assets/vr/oculus-go.glb",
             scaleFactor : new x3dom.fields.SFVec3f(1, 1, 1),
-            offset : new x3dom.fields.SFVec3f(0.2, -0.2, -1),
+            offset : new x3dom.fields.SFVec3f(0.2, -0.2, -0.7),
             axesScale : [1,-1]
         },
         "Emulated HTC Vive DVT" : {
@@ -255,11 +255,11 @@ x3dom.VRControllerManager.prototype._updateControllerModels = function( viewarea
         var pose = controllers.left.pose;
         var rotation = (pose.orientation) ? x3dom.fields.Quaternion.fromArray(pose.orientation) : new x3dom.fields.Quaternion();
         var position = (pose.position) ? x3dom.fields.SFVec3f.fromArray(pose.position) : this.controllers[ vrDisplay.displayName ].offset;
+        position.x = (pose.position) ? position.x : -position.x;
         var scale    = this.controllers[ vrDisplay.displayName ].scaleFactor;
 
         //position = position.subtract(viewarea._movement);
-        position = position.add(this.controllers[ vrDisplay.displayName ].offset);
-
+        
         var matrix = x3dom.fields.SFMatrix4f.fromRotationTranslationScale(rotation, position, scale);
 
         this.leftTransform.setAttribute("matrix", viewarea.vrLeftViewMatrix.mult(viewMatrix).inverse().mult(matrix).toString());
@@ -273,8 +273,7 @@ x3dom.VRControllerManager.prototype._updateControllerModels = function( viewarea
         var scale    = this.controllers[ vrDisplay.displayName ].scaleFactor;
 
         //position = position.subtract(viewarea._movement);
-        //position = position.add(this.controllers[ vrDisplay.displayName ].offset);
-
+        
         var matrix = x3dom.fields.SFMatrix4f.fromRotationTranslationScale(rotation, position, scale);
 
         this.rightTransform.setAttribute("matrix", viewarea.vrRightViewMatrix.mult(viewMatrix).inverse().mult(matrix).toString());
