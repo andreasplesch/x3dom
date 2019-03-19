@@ -295,11 +295,11 @@ x3dom.VRControllerManager.prototype._updateControllerModels = function( viewarea
         var position = (pose.position) ? x3dom.fields.SFVec3f.fromArray(pose.position) : this.controllers[ vrDisplay.displayName ].offset;
         var scale    = this.controllers[ vrDisplay.displayName ].scaleFactor;
 
-        //position = position.subtract(viewarea._movement);
+        position = position.subtract(viewarea._movement);
         
         var matrix = x3dom.fields.SFMatrix4f.fromRotationTranslationScale(rotation, position, scale);
 
-        this.rightTransform.setAttribute("matrix", viewarea.vrRightViewMatrix.mult(viewMatrix).inverse().mult(matrix).toString());
+        this.rightTransform.setAttribute("matrix", viewMatrix.inverse().mult(matrix).toString());
     }
 
 };
