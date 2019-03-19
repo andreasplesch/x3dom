@@ -115,6 +115,14 @@ x3dom.VRControllerManager.prototype._addInlines = function()
 }
 x3dom.VRControllerManager.prototype.fit = function( viewarea, vrDisplay )
 {
+    //ignore controller for scene volume
+    this.leftTransform._x3domNode._vf.render = false;
+    this.rightTransform._x3domNode._vf.render = false;
+    viewarea._scene.invalidateVolume();
+    viewarea._scene.updateVolume();
+    this.leftTransform._x3domNode._vf.render = true;
+    this.rightTransform._x3domNode._vf.render = true;
+    
     var min = viewarea._scene._lastMin;
     var max = viewarea._scene._lastMax;
 
