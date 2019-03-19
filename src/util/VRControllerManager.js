@@ -39,7 +39,7 @@ x3dom.VRControllerManager = function()
             left  : "https://x3dom.org/download/assets/vr/oculus-go.glb",
             right : "https://x3dom.org/download/assets/vr/oculus-go.glb",
             scaleFactor : new x3dom.fields.SFVec3f(1, 1, 1),
-            offset : new x3dom.fields.SFVec3f(0.2, -0.2, -0.7),
+            offset : new x3dom.fields.SFVec3f(0.2, -0.3, -0.5),
             axesScale : [1,-1]
         },
         "Emulated HTC Vive DVT" : {
@@ -141,14 +141,16 @@ x3dom.VRControllerManager.prototype.resetSceneMinMax = function( viewarea )
     //ignore controller for scene volume
     var leftRender = this.leftTransform._x3domNode._vf.render;
     var rightRender = this.rightTransform._x3domNode._vf.render;
+    
     this.leftTransform._x3domNode._vf.render = false;
     this.rightTransform._x3domNode._vf.render = false;
+    
     viewarea._scene.invalidateVolume();
     viewarea._scene.updateVolume();
+    
     this.leftTransform._x3domNode._vf.render = leftRender;
     this.rightTransform._x3domNode._vf.render = rightRender;
-//     this.leftTransform._x3domNode._vf.render = true;
-//     this.rightTransform._x3domNode._vf.render = true;
+    
     this.sceneMin = viewarea._scene._lastMin;
     this.sceneMax = viewarea._scene._lastMax;
 }
@@ -281,11 +283,11 @@ x3dom.VRControllerManager.prototype._updateControllerModels = function( viewarea
         position.x = (pose.position) ? position.x : -position.x;
         var scale    = this.controllers[ vrDisplay.displayName ].scaleFactor;
 
-        //position = position.subtract(viewarea._movement);
+        position = position.subtract(viewarea._movement);
         
         var matrix = x3dom.fields.SFMatrix4f.fromRotationTranslationScale(rotation, position, scale);
 
-        this.leftTransform.setAttribute("matrix", viewarea.vrLeftViewMatrix.mult(viewMatrix).inverse().mult(matrix).toString());
+        this.leftTransform.setAttribute("matrix", viewMatrix.inverse().mult(matrix).toString());
     }
 
     if(controllers.right)
