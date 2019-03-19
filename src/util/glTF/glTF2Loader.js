@@ -211,6 +211,8 @@ x3dom.glTF2Loader.prototype._generateX3DNode = function(node, index)
     if( node.camera != undefined )
     {
         x3dNode.appendChild(this._generateX3DViewpoint(node));
+        if (node.mesh == undefined && node.children == undefined) //camera is only node content
+            x3dNode.setAttribute('render', 'false'); // exclude transform from scene volume
     }
 
     return x3dNode;
