@@ -241,7 +241,7 @@ x3dom.VRControllerManager.prototype.onUpdate = function( viewarea, vrDisplay, co
 
     var d = (this.sceneMax.subtract(this.sceneMin)).length();
     d = ((d < x3dom.fields.Eps) ? 1 : d);
-    d = Math.sqrt(10 * d) ; //dampen for large scenes
+    //d = Math.sqrt( (d + 2)/100 ) * 100 ; //dampen for large scenes
 
     viewDir  = new x3dom.fields.SFVec3f(-viewDir.x,  -viewDir.y,  viewDir.z ).multiply(d * (dy/viewarea._height));
     rightDir = new x3dom.fields.SFVec3f(-rightDir.x, -rightDir.y, rightDir.z).multiply(d * (dx/viewarea._width) );
