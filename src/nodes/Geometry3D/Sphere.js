@@ -60,16 +60,6 @@ x3dom.registerNodeType(
         {
             nodeChanged: function()
             {
-                var r = this._vf.radius;
-                var subx = this._vf.subdivision.x, suby = this._vf.subdivision.y;
-
-                var geoCacheID = 'Sphere_' + r + '-' + subx + '-' + suby;
-
-                if (this._vf.useGeoCache && x3dom.geoCache[geoCacheID] !== undefined) {
-                    //x3dom.debug.logInfo("Using Sphere from Cache");
-                    this._mesh = x3dom.geoCache[geoCacheID];
-                    return;
-                }
                 var qfactor = 1.0;
                 if(this._nameSpace) {
                     qfactor = this._nameSpace.doc.properties.getProperty("PrimitiveQuality", "Medium");
@@ -82,6 +72,17 @@ x3dom.registerNodeType(
                 }
 
                 this._quality = qfactor;
+                
+                var r = this._vf.radius;
+                var subx = this._vf.subdivision.x, suby = this._vf.subdivision.y;
+
+                var geoCacheID = 'Sphere_' + r + '-' + subx + '-' + suby;
+
+                if (this._vf.useGeoCache && x3dom.geoCache[geoCacheID] !== undefined) {
+                    //x3dom.debug.logInfo("Using Sphere from Cache");
+                    this._mesh = x3dom.geoCache[geoCacheID];
+                    return;
+                }
                 
                 this._regenerateMesh();
                 
