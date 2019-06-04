@@ -118,7 +118,7 @@ x3dom.registerNodeType(
                     //c x T x R x S x -C
                     this._trafo = 
                         x3dom.fields.SFMatrix4f.translation(posCenter.add(trans3)).
-                        mult(x3dom.fields.SFMatrix4f.rotationZ(this._vf.rotation))).
+                        mult(x3dom.fields.SFMatrix4f.rotationZ(this._vf.rotation)).
                         mult(x3dom.fields.SFMatrix4f.scale(scale3)).
                         mult(x3dom.fields.SFMatrix4f.translation(negCenter)); // center is not used in gltf
                 }
