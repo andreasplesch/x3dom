@@ -69,20 +69,6 @@ x3dom.registerNodeType(
              */
             this.addField_SFVec2f(ctx, 'translation', 0, 0);
         
-            /**
-             * The mode field describes the multiplication order used to compute texture coordinates.
-             * Possible values are "X3D" for standard behaviour, and "GLTF" for glTF KHR Texture Transform extension behaviour.
-             * @var {x3dom.fields.SFString} mode
-             * @memberof x3dom.nodeTypes.TextureTransform
-             * @initvalue "X3D"
-             * @range ["X3D", "GLTF"]
-             * @field x3dom
-             * @instance
-             */
-            //this.addField_SFString(ctx, 'mode', "X3D");
-        
-            //this._mode = this._vf.mode.toLowerCase();
-        
             this._calcTrafo();
         },
         {
