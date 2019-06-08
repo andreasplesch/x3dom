@@ -107,7 +107,6 @@ x3dom.registerNodeType(
                     mult(x3dom.fields.SFMatrix4f.scale(scale3)).
                     mult(x3dom.fields.SFMatrix4f.rotationZ(this._vf.rotation)).
                     mult(x3dom.fields.SFMatrix4f.translation(posCenter.add(trans3)));
-                }
             }
         }
     )
