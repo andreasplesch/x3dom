@@ -79,9 +79,9 @@ x3dom.registerNodeType(
              * @field x3dom
              * @instance
              */
-            this.addField_SFString(ctx, 'mode', "X3D");
+            //this.addField_SFString(ctx, 'mode', "X3D");
         
-            this._mode = this._vf.mode.toLowerCase();
+            //this._mode = this._vf.mode.toLowerCase();
         
             this._calcTrafo();
         },
@@ -95,33 +95,18 @@ x3dom.registerNodeType(
                 }
             },
 
-            texTransformMatrix: function() {
-                return this._trafo;
-            },
-        
             _calcTrafo: function () {
                 var negCenter = new x3dom.fields.SFVec3f(-this._vf.center.x, -this._vf.center.y, 0);
                 var posCenter = new x3dom.fields.SFVec3f(this._vf.center.x, this._vf.center.y, 0);
                 var trans3 = new x3dom.fields.SFVec3f(this._vf.translation.x, this._vf.translation.y, 0);
                 var scale3 = new x3dom.fields.SFVec3f(this._vf.scale.x, this._vf.scale.y, 0);
                 
-                if (this._mode == "gltf")
-                {
-                    //c x T x R x S x -C
-                    this._trafo = 
-                        x3dom.fields.SFMatrix4f.translation(posCenter.add(trans3)).
-                        mult(x3dom.fields.SFMatrix4f.rotationZ(this._vf.rotation)).
-                        mult(x3dom.fields.SFMatrix4f.scale(scale3)).
-                        mult(x3dom.fields.SFMatrix4f.translation(negCenter)); // center is not used in gltf
-                }
-                else
-                {
-                    //Tc' = -C * S * R * C * T * Tc
-                    this._trafo = 
-                        x3dom.fields.SFMatrix4f.translation(negCenter).
-                        mult(x3dom.fields.SFMatrix4f.scale(scale3)).
-                        mult(x3dom.fields.SFMatrix4f.rotationZ(this._vf.rotation)).
-                        mult(x3dom.fields.SFMatrix4f.translation(posCenter.add(trans3)));
+                //Tc' = -C * S * R * C * T * Tc
+                this._trafo = 
+                    x3dom.fields.SFMatrix4f.translation(negCenter).
+                    mult(x3dom.fields.SFMatrix4f.scale(scale3)).
+                    mult(x3dom.fields.SFMatrix4f.rotationZ(this._vf.rotation)).
+                    mult(x3dom.fields.SFMatrix4f.translation(posCenter.add(trans3)));
                 }
             }
         }
