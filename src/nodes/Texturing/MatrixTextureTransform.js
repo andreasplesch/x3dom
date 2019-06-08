@@ -21,8 +21,8 @@ x3dom.registerNodeType(
          * @status experimental
          * @extends x3dom.nodeTypes.X3DTextureTransformNode
          * @param {Object} [ctx=null] - context object, containing initial settings like namespace
-         * @classdesc The TextureTransform node defines a 2D transformation that is applied to texture coordinates. This node affects the way textures coordinates are applied to the geometric surface. The transformation consists of (in order):
-         * a translation; a rotation about the centre point; a non-uniform scale about the centre point.
+         * @classdesc The MatrixTextureTransform node defines a 2D transformation as a 4x4 matrix that is applied to texture coordinates.
+           This node affects the way textures coordinates are applied to the geometric surface.
          */
         function (ctx) {
             x3dom.nodeTypes.MatrixTextureTransform.superClass.call(this, ctx);
