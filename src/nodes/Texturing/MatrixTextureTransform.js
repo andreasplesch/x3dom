@@ -41,6 +41,7 @@ x3dom.registerNodeType(
                 0, 1, 0, 0,
                 0, 0, 1, 0,
                 0, 0, 0, 1);
+        
             this._trafo = this._vf.matrix.transpose();
             
         },
@@ -49,10 +50,6 @@ x3dom.registerNodeType(
                 if (fieldName == "matrix") {
                     this._trafo = this._vf.matrix.transpose();
                 }
-            },
-
-            texTransformMatrix: function() {
-                return this._trafo;
             }
             
         }
