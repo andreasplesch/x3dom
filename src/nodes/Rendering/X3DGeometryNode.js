@@ -57,7 +57,7 @@ x3dom.registerNodeType(
              * @instance
              */
             this.addField_SFBool(ctx, 'useGeoCache', this._nameSpace ? 
-                                 this._nameSpace.doc.properties.getProperty("useGeoCache", "true").toLowerSpace == 'true'
+                                 this._nameSpace.doc.properties.getProperty("useGeoCache", "true").toLowerCase() == 'true'
                                 : false);
 
             /**
