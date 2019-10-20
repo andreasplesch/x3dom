@@ -19,6 +19,15 @@ x3dom.debug = {
     // no debugging messages will be logged.
     isActive: false,
 
+    // determines maximum level of logging; higher is more verbose
+    // 0: none
+    // 1: only exceptions
+    // 2: also errors
+    // 3: also warnings
+    // 4: also info
+    // 5: also output events
+    maxLevel: 4,
+
     // stores if firebug is available
     isFirebugAvailable: false,
 
@@ -94,11 +103,14 @@ x3dom.debug = {
      *
      * @param msg the log message
      * @param logType the type of the log message. One of INFO, WARNING, ERROR or EXCEPTION.
+     * @param logLevel verbosity level
      */
-    doLog: function(msg, logType) {
+    doLog: function(msg, logType, logLevel) {
+
+        logLevel = logLevel || 3 ;
 
         // If logging is deactivated do nothing and simply return
-        if (!x3dom.debug.isActive) {
+        if (!x3dom.debug.isActive || logLevel > x3dom.debug.maxLevel) {
             return;
         }
 
@@ -175,8 +187,9 @@ x3dom.debug = {
      *
      * @param msg
      */
-    logInfo: function(msg) {
-        x3dom.debug.doLog(msg, x3dom.debug.INFO);
+    logInfo: function(msg, level) {
+        level = level || 4;
+        x3dom.debug.doLog(msg, x3dom.debug.INFO, level);
     },
 
     /**
