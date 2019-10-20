@@ -37,6 +37,7 @@ x3dom.userAgentFeature = {
         var settings = new x3dom.Properties();  // stores the stuff in <param>
         var validParams = array_to_object([
             'showLog',
+            'logLevel',
             'showStat',
             'showProgress',
             'PrimitiveQuality',
@@ -60,6 +61,7 @@ x3dom.userAgentFeature = {
 
             // default parameters
             settings.setProperty("showLog", x3ds[i].getAttribute("showLog") || 'false');
+            settings.setProperty("logLevel", x3ds[i].getAttribute("logLevel") || '4');
             settings.setProperty("showStat", x3ds[i].getAttribute("showStat") || 'false');
             settings.setProperty("showProgress", x3ds[i].getAttribute("showProgress") || 'true');
             settings.setProperty("PrimitiveQuality", x3ds[i].getAttribute("PrimitiveQuality") || 'High');
@@ -108,6 +110,8 @@ x3dom.userAgentFeature = {
         } else {
             x3dom.debug.activate(false);
         }
+
+        x3dom.debug.maxLevel = settings.getProperty('logLevel');
 
         // Convert the collection into a simple array (is this necessary?)
         x3ds = Array.map(x3ds, function(n) {
