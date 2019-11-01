@@ -780,9 +780,7 @@ x3dom.Texture.prototype.updateText = function ()
     }
 
     gl.bindTexture( this.type, this.texture );
-    //     gl.texImage2D( this.type, 0, this.format, this.format, gl.UNSIGNED_BYTE, text_canvas );
-//     gl.generateMipmap( this.type );
-    this.uploadCustomMipmap ( text_canvas );
+    this.uploadCustomMipmap( text_canvas );
     gl.bindTexture( this.type, null );
 
     //remove canvas after Texture creation
@@ -804,30 +802,35 @@ x3dom.Texture.prototype.updateText = function ()
 x3dom.Texture.prototype.uploadCustomMipmap = function ( canvas )
 {
     var gl = this.gl;
-    var w = canvas.width, h = canvas.height, level = 0, w2 = w, h2 = h ;
+    var w = canvas.width,
+        h = canvas.height,
+        level = 0,
+        w2 = w,
+        h2 = h ;
     var minCanvas = canvas.cloneNode();
-    var ctx2d = minCanvas.getContext('2d');
-    ctx2d.drawImage(canvas,0,0,w,h,0,0,w,h);
+    var ctx2d = minCanvas.getContext( "2d" );
+    ctx2d.drawImage( canvas, 0, 0, w, h, 0, 0, w, h );
     while ( true )
-    { 
-        gl.texImage2D( this.type, level++, this.format, this.format, gl.UNSIGNED_BYTE, ctx2d.getImageData(0, 0, w2, h2) );
-        if (w2 == 1 && h2 == 1) break;
-        w2 = Math.max(1, w2 >> 1);
-        h2 = Math.max(1, h2 >> 1);
-        ctx2d.clearRect(0, 0, w, h);
-        ctx2d.drawImage(canvas,0,0,w,h,0,0,w2,h2);//scale
-        enhance(ctx2d, w2, h2, 0.5+level/2);
+    {
+        gl.texImage2D( this.type, level++, this.format, this.format, gl.UNSIGNED_BYTE, ctx2d.getImageData( 0, 0, w2, h2 ) );
+        if ( w2 == 1 && h2 == 1 ) {break;}
+        w2 = Math.max( 1, w2 >> 1 );
+        h2 = Math.max( 1, h2 >> 1 );
+        ctx2d.clearRect( 0, 0, w, h );
+        ctx2d.drawImage( canvas, 0, 0, w, h, 0, 0, w2, h2 );//scale
+        enhance( ctx2d, w2, h2, 0.5 + level / 2 );
     }
 
-    function enhance (ctx2d, w, h, l, bias)
+    function enhance ( ctx2d, w, h, l, bias )
     {
-        var imageData = ctx2d.getImageData(0,0,w,h);
+        var imageData = ctx2d.getImageData( 0, 0, w, h );
         var data = imageData.data;
-        for (var i = 0; i < data.length; i += 4) {
+        for ( var i = 0; i < data.length; i += 4 )
+        {
             data[ i + 3 ] *= l; // brighten higher levels, clamped since uint8
         }
-       ctx2d.putImageData(imageData, 0, 0);
-       return;
+        ctx2d.putImageData( imageData, 0, 0 );
+        return;
     }
 
 //    gl.generateMipmap( this.type );
