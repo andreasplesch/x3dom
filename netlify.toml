@@ -31,7 +31,7 @@
   echo "build command: npm install &> build.log ..." &&
   npm install &> build.log &&
   echo "build command: eslint --fix ..." &&
-  eslint --fix \"src/**/*.js\" &&
+  eslint --fix src/**/*.js &&
   echo "build command: npm run build &>> build.log ..." &&
   npm run build &>> build.log &&
   echo "generate tests: sh/test/generateTestPage.sh" &&
