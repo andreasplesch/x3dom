@@ -821,16 +821,46 @@ x3dom.Texture.prototype.uploadCustomMipmap = function ( canvas )
         enhance( ctx2d, w2, h2, 0.5 + level / 2 );
     }
 
-    function enhance ( ctx2d, w, h, l, bias )
+    function enhance (s, sw, sh, ctx2d, w, h, l, bias)
     {
-        var imageData = ctx2d.getImageData( 0, 0, w, h );
+        var imageData = ctx2d.getImageData(0,0,w,h);
         var data = imageData.data;
-        for ( var i = 0; i < data.length; i += 4 )
+        var simageData = s.getImageData(0,0,sw,sh);
+        var sdata = simageData.data;
+        var rw = sw/w; rh = sh/h;
+        for (var y = 0; y < h; y += 1)
         {
-            data[ i + 3 ] *= l; // brighten higher levels, clamped since uint8
-        }
-        ctx2d.putImageData( imageData, 0, 0 );
+            for (var x = 0; x < w; x += 1) 
+            {
+                var start = (x * rw - rw/2 + (y * rh - rh/2)*sh);
+                var end = start + (rw + rh*sh);
+                var sbox = sdata.slice( start*4, end*4 );//slice does not work uint8
+                var ave = smooth(sbox);
+                var pos = x+y*h;
+                data[pos++]=ave[0];
+                data[pos++]=ave[1];
+                data[pos++]=ave[2];
+                data[pos++]=ave[3];
+                //ctx2d.putImageData(tpixel, x,y);
+            }
+        }  
+
+        //    data[ i + 3 ] *= l; // brighten higher levels, clamped since uint8
+        //ctx2d.putImageData(imageData, 0, 0);
         return;
+
+        function smooth (pixels) 
+        {
+            var result = [0,0,0,0];
+            for (var i = 0; i < pixels.length; i += 4)
+            {
+                result[0] += pixels[i];
+                result[1] += pixels[i + 1];
+                result[2] += pixels[i + 2];
+                result[3] += pixels[i + 3];
+            }
+            return result.map(function(c){return c/pixels.length})
+       }
     }
 
 //    gl.generateMipmap( this.type );
