@@ -764,15 +764,20 @@ x3dom.Texture.prototype.updateText = function ()
     text_ctx.font = font_style + " " + textHeight + "px " + font_family;
     text_ctx.textAlign = textAlignment;
 
-    // create the multiline text always top down
-    for ( i = 0; i < paragraph.length; i++ )
-    {
-        j = topToBottom ? i : paragraph.length - 1 - i;
-        if ( leftToRight == "rtl" ) {paragraph[ j ] = "\u202e" + paragraph[ j ];} //force rtl unicode mark
-        //text_ctx.strokeText( paragraph[ j ], textX, textY, lengths[ j ] );
-        text_ctx.fillText( paragraph[ j ], textX, textY, lengths[ j ] );
-        textY += textHeight * font_spacing;
-    }
+    var renderConfig = {
+        font_style: font_style,
+        font_family: font_family,
+        font_spacing: font_spacing,
+        paragraph: paragraph,
+        topToBottom: topToBottom,
+        leftToRight: leftToRight,
+        textX: textX,
+        textY: textY,
+        textHeight: textHeight,
+        lengths: lengths
+    };
+
+    this.renderScaledText ( text_ctx, 1, renderConfig );
 
     if ( this.texture === null )
     {
@@ -780,11 +785,11 @@ x3dom.Texture.prototype.updateText = function ()
     }
 
     gl.bindTexture( this.type, this.texture );
-    this.uploadCustomMipmap( text_canvas );
+    this.uploadTextMipmap( text_canvas, renderConfig );
     gl.bindTexture( this.type, null );
 
     //remove canvas after Texture creation
-    document.body.removeChild( text_canvas );
+    document.body.removeChild( text_canvas, renderConfig );
 
     this.node._mesh._positions[ 0 ] = [
         0 + x_offset, -h + y_offset, 0,
@@ -799,75 +804,33 @@ x3dom.Texture.prototype.updateText = function ()
     } );
 };
 
-x3dom.Texture.prototype.uploadCustomMipmap = function ( canvas )
+x3dom.Texture.prototype.renderScaledText = function ( ctx2d, pot, txt )
 {
-    var _smoothScale = function ( ctx2d, w, h, l, sctx2d, sw, sh )
+    ctx2d.font = txt.font_style + " " + txt.textHeight/pot + "px " + txt.font_family;
+    var textYpos = txt.textY;
+
+    // create the multiline text always top down
+    for ( var i = 0; i < txt.paragraph.length; i++ )
     {
-        var _smooth = function ( data, sw, sh, x, y, w, h, l )
-        {
-            var result = [ 0, 0, 0, 0 ],
-                ymin = Math.max( y - h / 2, 0 ),
-                ymax = Math.min( y + h / 2, sh - 1 ),
-                xmin = Math.max( x - w / 2, 0 ),
-                xmax = Math.min( x + w / 2, sw - 1 ),
-                n = 0;
-            for ( var sy = ymin; sy < ymax; sy += 1 )
-            {
-                for ( var sx = xmin; sx < xmax; sx++ )
-                {
-                    n++ ;
-                    var i = ( sy * sw + sx ) * 4;
-                    result[ 0 ] += data[ i ];
-                    result[ 1 ] += data[ i + 1 ];
-                    result[ 2 ] += data[ i + 2 ];
-                    result[ 3 ] += data[ i + 3 ];
-                }
-            }
-            return result.map(
-                function _scale ( c )
-                {
-                    return l * c / n; //average but brigthen higher levels
-                }
-            );
-        };
+        var j = txt.topToBottom ? i : txt.paragraph.length - 1 - i;
+        var paragraphj = txt.paragraph[ j ];
+        if ( txt.leftToRight == "rtl" ) {paragraphj = "\u202e" + paragraphj;} //force rtl unicode mark
+        //text_ctx.strokeText( paragraph[ j ], textX, textY, lengths[ j ] );
+        ctx2d.fillText( paragraphj, txt.textX/pot, textYpos/pot, txt.lengths[ j ]/pot );
+        textYpos += txt.textHeight * txt.font_spacing;
+    }
+};
 
-        var imageData = ctx2d.getImageData( 0, 0, w, h );
-        var data = imageData.data;
-        var sImageData = sctx2d.getImageData( 0, 0, sw, sh );
-        var sData = sImageData.data;
-        var rw = sw / w,
-            rh = sh / h,
-            ave,
-            pos;
-        for ( var y = 0; y < h; y += 1 )
-        {
-            for ( var x = 0; x < w; x += 1 )
-            {
-                ave = _smooth( sData, sw, sh, x * rw, y * rh, rw, rh, l );
-                pos = ( x + y * w ) * 4;
-
-                data[ pos++ ] = ave[ 0 ];
-                data[ pos++ ] = ave[ 1 ];
-                data[ pos++ ] = ave[ 2 ];
-                data[ pos++ ] = ave[ 3 ];
-            }
-        }
-
-        //    data[ i + 3 ] *= l; // brighten higher levels, clamped since uint8
-        ctx2d.putImageData( imageData, 0, 0 );
-        return;
-    };
-
+x3dom.Texture.prototype.uploadTextMipmap = function ( canvas, txt )
+{
     var gl = this.gl,
         w = canvas.width,
         h = canvas.height,
         level = 0,
+        pot = 1;
         w2 = w,
         h2 = h ;
-    var minCanvas = canvas.cloneNode();
-    var ctx2d = minCanvas.getContext( "2d" );
-    var sctx2d = canvas.getContext( "2d" );
-    ctx2d.drawImage( canvas, 0, 0, w, h, 0, 0, w, h );
+        ctx2d = canvas.getContext( "2d" );
     while ( true )
     {
         gl.texImage2D( this.type, level++, this.format, this.format, gl.UNSIGNED_BYTE, ctx2d.getImageData( 0, 0, w2, h2 ) );
@@ -875,8 +838,9 @@ x3dom.Texture.prototype.uploadCustomMipmap = function ( canvas )
         w2 = Math.max( 1, w2 >> 1 );
         h2 = Math.max( 1, h2 >> 1 );
         ctx2d.clearRect( 0, 0, w, h );
-        //ctx2d.drawImage( canvas, 0, 0, w, h, 0, 0, w2, h2 );//scale
-        _smoothScale( ctx2d, w2, h2, 0.5 + level / 2, sctx2d, w, h );
+        pot *= 2;
+        this.renderScaledText( ctx2d, pot, txt );
     }
-//    gl.generateMipmap( this.type );
+//    this.gl.generateMipmap( this.type );
 };
+
