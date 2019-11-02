@@ -516,17 +516,16 @@ x3dom.Texture.prototype.updateText = function ()
         this.anisotropicDegree = x3dom.caps.MAX_ANISOTROPY;
     }
 
-    var fontStyleNode = this.node._cf.fontStyle.node; // should always exist?
-
-    var font_family = "serif"; // should be dealt with by default fontStyleNode?
-    var font_style = "normal";
-    var font_justify = "left";
-    var font_size = 1.0;
-    var font_spacing = 1.0;
-    var font_horizontal = true;
-    var font_language = "";
-    var oversample = 2.0;
-    var minor_alignment = "FIRST";
+    var fontStyleNode = this.node._cf.fontStyle.node, // should always exist?
+        font_family = "serif", // should be dealt with by default fontStyleNode?
+        font_style = "normal",
+        font_justify = "left",
+        font_size = 1.0,
+        font_spacing = 1.0,
+        font_horizontal = true,
+        font_language = "",
+        oversample = 2.0,
+        minor_alignment = "FIRST";
 
     if ( fontStyleNode !== null )
     {
@@ -644,16 +643,16 @@ x3dom.Texture.prototype.updateText = function ()
     }
 
     var textX,
-        textY;
-    var paragraph = this.node._vf.string;
-    var maxExtent = this.node._vf.maxExtent;
-    var lengths = [];
-    var text_canvas = document.createElement( "canvas" );
+        textY,
+        paragraph = this.node._vf.string,
+        maxExtent = this.node._vf.maxExtent,
+        lengths = [],
+        x3dToPx = 32,
+        textAlignment = font_justify;
+    var text_canvas = document.createElement( "canvas" ),
     text_canvas.dir = leftToRight;
-    var x3dToPx = 32;
-    var textHeight = font_size * x3dToPx; // pixel size relative to local coordinate system
-    var textAlignment = font_justify;
-
+    var textHeight = font_size * x3dToPx, // pixel size relative to local coordinate system
+        
     // needed to make webfonts work
     document.body.appendChild( text_canvas );
     var text_ctx = text_canvas.getContext( "2d" );
@@ -765,19 +764,19 @@ x3dom.Texture.prototype.updateText = function ()
     text_ctx.textAlign = textAlignment;
 
     var renderConfig = {
-        font_style: font_style,
-        font_family: font_family,
-        font_spacing: font_spacing,
-        paragraph: paragraph,
-        topToBottom: topToBottom,
-        leftToRight: leftToRight,
-        textX: textX,
-        textY: textY,
-        textHeight: textHeight,
-        lengths: lengths
+        font_style   : font_style,
+        font_family  : font_family,
+        font_spacing : font_spacing,
+        paragraph    : paragraph,
+        topToBottom  : topToBottom,
+        leftToRight  : leftToRight,
+        textX        : textX,
+        textY        : textY,
+        textHeight   : textHeight,
+        lengths      : lengths
     };
 
-    this.renderScaledText ( text_ctx, 1, renderConfig );
+    this.renderScaledText( text_ctx, 1, renderConfig );
 
     if ( this.texture === null )
     {
@@ -806,7 +805,7 @@ x3dom.Texture.prototype.updateText = function ()
 
 x3dom.Texture.prototype.renderScaledText = function ( ctx2d, pot, txt )
 {
-    ctx2d.font = txt.font_style + " " + txt.textHeight/pot + "px " + txt.font_family;
+    ctx2d.font = txt.font_style + " " + txt.textHeight / pot + "px " + txt.font_family;
     var textYpos = txt.textY;
 
     // create the multiline text always top down
@@ -816,7 +815,7 @@ x3dom.Texture.prototype.renderScaledText = function ( ctx2d, pot, txt )
         var paragraphj = txt.paragraph[ j ];
         if ( txt.leftToRight == "rtl" ) {paragraphj = "\u202e" + paragraphj;} //force rtl unicode mark
         //text_ctx.strokeText( paragraph[ j ], textX, textY, lengths[ j ] );
-        ctx2d.fillText( paragraphj, txt.textX/pot, textYpos/pot, txt.lengths[ j ]/pot );
+        ctx2d.fillText( paragraphj, txt.textX / pot, textYpos / pot, txt.lengths[ j ] / pot );
         textYpos += txt.textHeight * txt.font_spacing;
     }
 };
@@ -828,9 +827,9 @@ x3dom.Texture.prototype.uploadTextMipmap = function ( canvas, txt )
         h = canvas.height,
         level = 0,
         pot = 1;
-        w2 = w,
-        h2 = h ;
-        ctx2d = canvas.getContext( "2d" );
+    w2 = w,
+    h2 = h ;
+    ctx2d = canvas.getContext( "2d" );
     while ( true )
     {
         gl.texImage2D( this.type, level++, this.format, this.format, gl.UNSIGNED_BYTE, ctx2d.getImageData( 0, 0, w2, h2 ) );
