@@ -769,7 +769,7 @@ x3dom.Texture.prototype.updateText = function ()
     {
         j = topToBottom ? i : paragraph.length - 1 - i;
         if ( leftToRight == "rtl" ) {paragraph[ j ] = "\u202e" + paragraph[ j ];} //force rtl unicode mark
-        text_ctx.strokeText( paragraph[ j ], textX, textY, lengths[ j ] );
+        //text_ctx.strokeText( paragraph[ j ], textX, textY, lengths[ j ] );
         text_ctx.fillText( paragraph[ j ], textX, textY, lengths[ j ] );
         textY += textHeight * font_spacing;
     }
@@ -809,6 +809,7 @@ x3dom.Texture.prototype.uploadCustomMipmap = function ( canvas )
         h2 = h ;
     var minCanvas = canvas.cloneNode();
     var ctx2d = minCanvas.getContext( "2d" );
+    var sctx2d = canvas.getContext( "2d" );
     ctx2d.drawImage( canvas, 0, 0, w, h, 0, 0, w, h );
     while ( true )
     {
@@ -817,49 +818,64 @@ x3dom.Texture.prototype.uploadCustomMipmap = function ( canvas )
         w2 = Math.max( 1, w2 >> 1 );
         h2 = Math.max( 1, h2 >> 1 );
         ctx2d.clearRect( 0, 0, w, h );
-        ctx2d.drawImage( canvas, 0, 0, w, h, 0, 0, w2, h2 );//scale
-        enhance( ctx2d, w2, h2, 0.5 + level / 2 );
+        //ctx2d.drawImage( canvas, 0, 0, w, h, 0, 0, w2, h2 );//scale
+        enhance( sctx2d, w, h, ctx2d, w2, h2, 0.5 + level / 2 );
     }
 
-    function enhance (s, sw, sh, ctx2d, w, h, l, bias)
+    function enhance (s, sw, sh, ctx2d, w, h, l)
     {
         var imageData = ctx2d.getImageData(0,0,w,h);
         var data = imageData.data;
         var simageData = s.getImageData(0,0,sw,sh);
         var sdata = simageData.data;
-        var rw = sw/w; rh = sh/h;
+        var rw = sw/w,
+            rh = sh/h,
+            ave,
+            pos;
         for (var y = 0; y < h; y += 1)
         {
             for (var x = 0; x < w; x += 1) 
             {
-                var start = (x * rw - rw/2 + (y * rh - rh/2)*sh);
-                var end = start + (rw + rh*sh);
-                var sbox = sdata.slice( start*4, end*4 );//slice does not work uint8
-                var ave = smooth(sbox);
-                var pos = x+y*h;
-                data[pos++]=ave[0];
-                data[pos++]=ave[1];
-                data[pos++]=ave[2];
-                data[pos++]=ave[3];
-                //ctx2d.putImageData(tpixel, x,y);
+                ave = smooth(sdata, sw, sh, x*rw, y*rh, rw, rh, l);
+                pos = ( x + y*w )*4;
+                
+                data[pos++] = ave[0];
+                data[pos++] = ave[1];
+                data[pos++] = ave[2];
+                data[pos++] = ave[3];
             }
         }  
 
         //    data[ i + 3 ] *= l; // brighten higher levels, clamped since uint8
-        //ctx2d.putImageData(imageData, 0, 0);
+        ctx2d.putImageData(imageData, 0, 0);
         return;
 
-        function smooth (pixels) 
+        function smooth ( d, sw, sh, x, y, w, h, l) 
         {
-            var result = [0,0,0,0];
-            for (var i = 0; i < pixels.length; i += 4)
+            var result = [0,0,0,0],
+                ymin = Math.max( y-h/2, 0 ),
+                ymax = Math.min( y+h/2, sh-1 ),
+                xmin = Math.max( x-w/2, 0 ),
+                xmax = Math.min( x+w/2, sw-1 ),
+                n = 0;
+            for (var sy = ymin; sy < ymax; sy += 1)
             {
-                result[0] += pixels[i];
-                result[1] += pixels[i + 1];
-                result[2] += pixels[i + 2];
-                result[3] += pixels[i + 3];
+                for (var sx = xmin; sx < xmax; sx++)
+                {
+                    n++ ;
+                    var i = (sy*sw+sx)*4;
+                    result[0] += d[i];
+                    result[1] += d[i + 1];
+                    result[2] += d[i + 2];
+                    result[3] += d[i + 3];
+                }
             }
-            return result.map(function(c){return c/pixels.length})
+            return result.map(
+                function(c)
+                {
+                    return l * c/n; //average but brigthen higher levels
+                }
+            )
        }
     }
 
