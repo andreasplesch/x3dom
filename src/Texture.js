@@ -652,9 +652,10 @@ x3dom.Texture.prototype.updateText = function ()
     var text_canvas = document.createElement( "canvas" );
     text_canvas.dir = leftToRight;
     var textHeight = font_size * x3dToPx; // pixel size relative to local coordinate system
-        
+
     // needed to make webfonts work
     document.body.appendChild( text_canvas );
+
     var text_ctx = text_canvas.getContext( "2d" );
 
     text_ctx.font = font_style + " " + textHeight + "px " + font_family;
