@@ -649,7 +649,7 @@ x3dom.Texture.prototype.updateText = function ()
         lengths = [],
         x3dToPx = 32,
         textAlignment = font_justify;
-    var text_canvas = document.createElement( "canvas" ),
+    var text_canvas = document.createElement( "canvas" );
     text_canvas.dir = leftToRight;
     var textHeight = font_size * x3dToPx, // pixel size relative to local coordinate system
         
