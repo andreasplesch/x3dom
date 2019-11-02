@@ -830,7 +830,7 @@ x3dom.Texture.prototype.uploadCustomMipmap = function ( canvas )
                 }
             );
         };
-    
+
         var imageData = ctx2d.getImageData( 0, 0, w, h );
         var data = imageData.data;
         var sImageData = sctx2d.getImageData( 0, 0, sw, sh );
