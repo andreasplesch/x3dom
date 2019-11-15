@@ -225,9 +225,13 @@ x3dom.registerNodeType(
 
             postMessage: function (field, msg) {
                 // TODO: timestamps and stuff
-                x3dom.debug.logInfo( 
-                        'event log: ' + this.typeName() + "-" + this._DEF + ":" +
-                        field + ":" + msg, 5 );
+                x3dom.debug.logInfo([ 
+                        Date.now()/1000,
+                        this.typeName(),
+                        this._DEF,
+                        field,
+                        msg
+                        ].join(','), 5 );
                 this._vf[field] = msg;  // FIXME; _cf!!!
                 var listeners = this._fieldWatchers[field];
 
