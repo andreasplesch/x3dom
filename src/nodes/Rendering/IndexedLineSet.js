@@ -117,24 +117,24 @@ x3dom.registerNodeType(
                 var colPerVert = this._vf.colorPerVertex;
 
                 var colorInd = this._vf.colorIndex;
-                if ( colorInd.length == 0 && !colPerVert)
+                if ( colorInd.length == 0 && !colPerVert )
                 {
                     //colorInd = Array.from( Array( lines ), (v, i) => i );
-                    while (colorInd.length < lines) { colorInd.push( colorInd.length ) };
+                    while ( colorInd.length < lines ) { colorInd.push( colorInd.length ); };
                 }
 
                 var hasColor = false,
                     hasColorInd = false;
 
-                if ( colPerVert && colorInd.length >= indexes.length ) 
+                if ( colPerVert && colorInd.length >= indexes.length )
                 {
                     hasColorInd = true;
                 }
-                if ( !colPerVert && colorInd.length >= lines ) 
+                if ( !colPerVert && colorInd.length >= lines )
                 {
                     hasColorInd = true;
                 }
-                
+
                 var positions,
                     colors;
 
@@ -155,7 +155,7 @@ x3dom.registerNodeType(
                         numColComponents = 4;
                     }
                 }
-                
+
                 this._mesh._indices[ 0 ] = [];
                 this._mesh._positions[ 0 ] = [];
                 this._mesh._colors[ 0 ] = [];
@@ -206,13 +206,13 @@ x3dom.registerNodeType(
                                 t = 1;
                                 break;
                             case 1:
-                                _updateMesh(this._mesh);
+                                _updateMesh( this._mesh );
                                 t = 2;
                                 break;
                             case 2:
                                 p0 = p1;
                                 c0 = c1;
-                                _updateMesh(this._mesh);
+                                _updateMesh( this._mesh );
                                 break;
                             default:
                         }
@@ -262,8 +262,8 @@ x3dom.registerNodeType(
 
                 var time1 = new Date().getTime() - time0;
                 //x3dom.debug.logInfo("Mesh load time: " + time1 + " ms");
-                
-                function _updateMesh( mesh )
+
+                function _updateMesh ( mesh )
                 {
                     p1 = +indexes[ i ];
                     if ( hasColorInd && colPerVert ) { c1 = +colorInd[ i ]; }
@@ -292,7 +292,7 @@ x3dom.registerNodeType(
                         mesh._colors[ 0 ].push( colors[ c1 ].g );
                         mesh._colors[ 0 ].push( colors[ c1 ].b );
                     }
-                    
+
                     lineCnt += colPerVert ? 1 : 0; // for color per vert
                 };
             },
