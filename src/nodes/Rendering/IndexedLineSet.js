@@ -119,11 +119,11 @@ x3dom.registerNodeType(
                 var colPerVert = this._vf.colorPerVertex;
 
                 var colorInd = this._vf.colorIndex;
-                //AP: normalize if empty
-//                 if ( colorInd.length == 0 )
-//                 {
-//                     colorInd = colPerVert ? indexes : Array.from( Array(lines), (v ,i) => i );
-//                 }
+                // AP: normalize if empty for col per line
+                if ( colorInd.length == 0 && !colPerVert)
+                {
+                    colorInd = Array.from( Array(lines), (v ,i) => i );
+                }
 
                 var hasColor = false,
                     hasColorInd = false;
