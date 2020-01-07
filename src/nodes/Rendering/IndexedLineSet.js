@@ -112,7 +112,7 @@ x3dom.registerNodeType(
                 {
                     indexes.push( -1 );
                 }
-                var lines = indexes.filter( index => index == -1 ).length;
+                var lines = indexes.filter( function ( index ) { return index == -1; } ).length;
 
                 var colPerVert = this._vf.colorPerVertex;
 
