@@ -120,20 +120,25 @@ x3dom.registerNodeType(
 
                 var colorInd = this._vf.colorIndex;
                 //AP: normalize if empty
-                if ( colorInd.length == 0 )
-                {
-                    colorInd = colPerVert ? indexes : Array.from( Array(lines), (v ,i) => i );
-                }
+//                 if ( colorInd.length == 0 )
+//                 {
+//                     colorInd = colPerVert ? indexes : Array.from( Array(lines), (v ,i) => i );
+//                 }
 
                 var hasColor = false,
                     hasColorInd = false;
 
-//                 if ( colorInd.length >= indexes.length ) 
-//                     //AP: this is only required colors per vertex
-//                 {
-                    hasColorInd = true; // after normalization always true
-//                 }
-
+                if ( colorInd.length >= indexes.length && colPerVert ) 
+                    //AP: this is only required for colors per vertex
+                {
+                    hasColorInd = true;
+                }
+                if ( colorInd.length >= lines && !colPerVert ) 
+                    //AP: this is only required for colors per line
+                {
+                    hasColorInd = true;
+                }
+                
                 var positions,
                     colors;
 
@@ -204,6 +209,7 @@ x3dom.registerNodeType(
                             case 0: // start of line
                                 p0 = +indexes[ i ];
                                 if ( hasColorInd && colPerVert ) { c0 = +colorInd[ i ]; }
+                                else if ( hasColorInd && !colPerVert ) { c0 = +colorInd[ lineCnt ]; }
                                 else { c0 = p0; }
                                 t = 1;
                                 break;
@@ -279,7 +285,7 @@ x3dom.registerNodeType(
                     //if the LineSet is too large for 16 bit indices, split it!
                     if ( positions.length > x3dom.Utils.maxIndexableCoords )
                     {this._mesh.splitMesh( 2 );}
-                } // if isMulti
+                } // end isMulti
                 else
                 {
                     var n = indexes.length;
