@@ -119,7 +119,8 @@ x3dom.registerNodeType(
                 var colorInd = this._vf.colorIndex;
                 if ( colorInd.length == 0 && !colPerVert)
                 {
-                    colorInd = Array.from( Array(lines), (v ,i) => i );
+                    //colorInd = Array.from( Array( lines ), (v, i) => i );
+                    while (colorInd.length < lines) { colorInd.push( colorInd.length ) };
                 }
 
                 var hasColor = false,
