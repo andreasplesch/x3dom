@@ -261,7 +261,8 @@ x3dom.registerNodeType(
 
                 var time1 = new Date().getTime() - time0;
                 //x3dom.debug.logInfo("Mesh load time: " + time1 + " ms");
-                var _updateMesh = function(mesh)
+                
+                function _updateMesh( mesh )
                 {
                     p1 = +indexes[ i ];
                     if ( hasColorInd && colPerVert ) { c1 = +colorInd[ i ]; }
