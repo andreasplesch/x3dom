@@ -108,18 +108,15 @@ x3dom.registerNodeType(
                 // this.handleAttribs();
 
                 var indexes = this._vf.coordIndex;
-                // AP: normalize by adding a -1 if not there
                 if ( indexes.slice( -1 )[ 0 ] != -1 )
                 {
                     indexes.push( -1 );
                 }
                 var lines = indexes.filter( index => index == -1 ).length;
 
-                // TODO; implement colorPerVertex also for single index
                 var colPerVert = this._vf.colorPerVertex;
 
                 var colorInd = this._vf.colorIndex;
-                // AP: normalize if empty for col per line
                 if ( colorInd.length == 0 && !colPerVert)
                 {
                     colorInd = Array.from( Array(lines), (v ,i) => i );
@@ -128,13 +125,11 @@ x3dom.registerNodeType(
                 var hasColor = false,
                     hasColorInd = false;
 
-                if ( colorInd.length >= indexes.length && colPerVert ) 
-                    //AP: this is only required for colors per vertex
+                if ( colPerVert && colorInd.length >= indexes.length ) 
                 {
                     hasColorInd = true;
                 }
-                if ( colorInd.length >= lines && !colPerVert ) 
-                    //AP: this is only required for colors per line
+                if ( !colPerVert && colorInd.length >= lines ) 
                 {
                     hasColorInd = true;
                 }
@@ -159,11 +154,7 @@ x3dom.registerNodeType(
                         numColComponents = 4;
                     }
                 }
-                else
-                {
-                    hasColor = false; // default anyways
-                }
-
+                
                 this._mesh._indices[ 0 ] = [];
                 this._mesh._positions[ 0 ] = [];
                 this._mesh._colors[ 0 ] = [];
@@ -195,88 +186,32 @@ x3dom.registerNodeType(
                         if ( indexes[ i ] === -1 )
                         {
                             t = 0;
-                            lineCnt += colPerVert ? 0 : 1; //AP for color per line
+                            lineCnt += colPerVert ? 0 : 1; //for color per line
                             continue;
                         }
 
                         if ( hasColorInd )
                         {
-                            x3dom.debug.assert( colorInd[ i ] != -1 ); // since continued above
+                            x3dom.debug.assert( colorInd[ i ] != -1 );
                         }
 
-                        switch ( t ) // build two node segments
+                        switch ( t )
                         {
-                            case 0: // start of line
+                            case 0:
                                 p0 = +indexes[ i ];
                                 if ( hasColorInd && colPerVert ) { c0 = +colorInd[ i ]; }
                                 else if ( hasColorInd && !colPerVert ) { c0 = +colorInd[ lineCnt ]; }
                                 else { c0 = p0; }
                                 t = 1;
                                 break;
-                            case 1: // second point
-                                p1 = +indexes[ i ];
-                                if ( hasColorInd && colPerVert ) { c1 = +colorInd[ i ]; }
-                                else if ( hasColorInd && !colPerVert ) { c1 = +colorInd[ lineCnt ]; }
-                                else { c1 = p1; }
-
-                                this._mesh._indices[ 0 ].push( cnt++, cnt++ );
-
-                                this._mesh._positions[ 0 ].push( positions[ p0 ].x );
-                                this._mesh._positions[ 0 ].push( positions[ p0 ].y );
-                                this._mesh._positions[ 0 ].push( positions[ p0 ].z );
-                                this._mesh._positions[ 0 ].push( positions[ p1 ].x );
-                                this._mesh._positions[ 0 ].push( positions[ p1 ].y );
-                                this._mesh._positions[ 0 ].push( positions[ p1 ].z );
-
-                                if ( hasColor )
-                                {
-                                    if ( !colPerVert )
-                                    {
-                                        c0 = c1;
-                                    }
-                                    this._mesh._colors[ 0 ].push( colors[ c0 ].r );
-                                    this._mesh._colors[ 0 ].push( colors[ c0 ].g );
-                                    this._mesh._colors[ 0 ].push( colors[ c0 ].b );
-                                    this._mesh._colors[ 0 ].push( colors[ c1 ].r );
-                                    this._mesh._colors[ 0 ].push( colors[ c1 ].g );
-                                    this._mesh._colors[ 0 ].push( colors[ c1 ].b );
-                                }
-
+                            case 1:
+                                _updateMesh(this._mesh);
                                 t = 2;
-                                lineCnt += colPerVert ? 1 : 0; // for color per vert
                                 break;
-                            case 2: // rest of points for this line
+                            case 2:
                                 p0 = p1;
                                 c0 = c1;
-                                p1 = +indexes[ i ];
-                                if ( hasColorInd && colPerVert ) { c1 = +colorInd[ i ]; }
-                                else if ( hasColorInd && !colPerVert ) { c1 = +colorInd[ lineCnt ]; }
-                                else { c1 = p1; }
-
-                                this._mesh._indices[ 0 ].push( cnt++, cnt++ );
-
-                                this._mesh._positions[ 0 ].push( positions[ p0 ].x );
-                                this._mesh._positions[ 0 ].push( positions[ p0 ].y );
-                                this._mesh._positions[ 0 ].push( positions[ p0 ].z );
-                                this._mesh._positions[ 0 ].push( positions[ p1 ].x );
-                                this._mesh._positions[ 0 ].push( positions[ p1 ].y );
-                                this._mesh._positions[ 0 ].push( positions[ p1 ].z );
-
-                                if ( hasColor )
-                                {
-                                    if ( !colPerVert )
-                                    {
-                                        c0 = c1;
-                                    }
-                                    this._mesh._colors[ 0 ].push( colors[ c0 ].r );
-                                    this._mesh._colors[ 0 ].push( colors[ c0 ].g );
-                                    this._mesh._colors[ 0 ].push( colors[ c0 ].b );
-                                    this._mesh._colors[ 0 ].push( colors[ c1 ].r );
-                                    this._mesh._colors[ 0 ].push( colors[ c1 ].g );
-                                    this._mesh._colors[ 0 ].push( colors[ c1 ].b );
-                                }
-
-                                lineCnt += colPerVert ? 1 : 0; // for color per vert
+                                _updateMesh(this._mesh);
                                 break;
                             default:
                         }
@@ -326,6 +261,38 @@ x3dom.registerNodeType(
 
                 var time1 = new Date().getTime() - time0;
                 //x3dom.debug.logInfo("Mesh load time: " + time1 + " ms");
+                var _updateMesh = function(mesh)
+                {
+                    p1 = +indexes[ i ];
+                    if ( hasColorInd && colPerVert ) { c1 = +colorInd[ i ]; }
+                    else if ( hasColorInd && !colPerVert ) { c1 = +colorInd[ lineCnt ]; }
+                    else { c1 = p1; }
+
+                    mesh._indices[ 0 ].push( cnt++, cnt++ );
+
+                    mesh._positions[ 0 ].push( positions[ p0 ].x );
+                    mesh._positions[ 0 ].push( positions[ p0 ].y );
+                    mesh._positions[ 0 ].push( positions[ p0 ].z );
+                    mesh._positions[ 0 ].push( positions[ p1 ].x );
+                    mesh._positions[ 0 ].push( positions[ p1 ].y );
+                    mesh._positions[ 0 ].push( positions[ p1 ].z );
+
+                    if ( hasColor )
+                    {
+                        if ( !colPerVert )
+                        {
+                            c0 = c1;
+                        }
+                        mesh._colors[ 0 ].push( colors[ c0 ].r );
+                        mesh._colors[ 0 ].push( colors[ c0 ].g );
+                        mesh._colors[ 0 ].push( colors[ c0 ].b );
+                        mesh._colors[ 0 ].push( colors[ c1 ].r );
+                        mesh._colors[ 0 ].push( colors[ c1 ].g );
+                        mesh._colors[ 0 ].push( colors[ c1 ].b );
+                    }
+                    
+                    lineCnt += colPerVert ? 1 : 0; // for color per vert
+                };
             },
 
             nodeChanged : function ()
