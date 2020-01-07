@@ -108,18 +108,31 @@ x3dom.registerNodeType(
                 // this.handleAttribs();
 
                 var indexes = this._vf.coordIndex;
-                var colorInd = this._vf.colorIndex;
-
-                var hasColor = false,
-                    hasColorInd = false;
+                // AP: normalize by adding a -1 if not there
+                if ( indexes.slice( -1 )[ 0 ] != -1 )
+                {
+                    indexes.push( -1 );
+                }
+                var lines = indexes.filter( index => index == -1 ).length;
 
                 // TODO; implement colorPerVertex also for single index
                 var colPerVert = this._vf.colorPerVertex;
 
-                if ( colorInd.length == indexes.length )
+                var colorInd = this._vf.colorIndex;
+                //AP: normalize if empty
+                if ( colorInd.length == 0 )
                 {
-                    hasColorInd = true;
+                    colorInd = colPerVert ? indexes : Array.from( Array(lines), (v ,i) => i );
                 }
+
+                var hasColor = false,
+                    hasColorInd = false;
+
+//                 if ( colorInd.length >= indexes.length ) 
+//                     //AP: this is only required colors per vertex
+//                 {
+                    hasColorInd = true; // after normalization always true
+//                 }
 
                 var positions,
                     colors;
@@ -143,7 +156,7 @@ x3dom.registerNodeType(
                 }
                 else
                 {
-                    hasColor = false;
+                    hasColor = false; // default anyways
                 }
 
                 this._mesh._indices[ 0 ] = [];
@@ -177,23 +190,24 @@ x3dom.registerNodeType(
                         if ( indexes[ i ] === -1 )
                         {
                             t = 0;
+                            lineCnt += colPerVert ? 0 : 1; //AP for color per line
                             continue;
                         }
 
                         if ( hasColorInd )
                         {
-                            x3dom.debug.assert( colorInd[ i ] != -1 );
+                            x3dom.debug.assert( colorInd[ i ] != -1 ); // since continued above
                         }
 
-                        switch ( t )
+                        switch ( t ) // build two node segments
                         {
-                            case 0:
+                            case 0: // start of line
                                 p0 = +indexes[ i ];
                                 if ( hasColorInd && colPerVert ) { c0 = +colorInd[ i ]; }
                                 else { c0 = p0; }
                                 t = 1;
                                 break;
-                            case 1:
+                            case 1: // second point
                                 p1 = +indexes[ i ];
                                 if ( hasColorInd && colPerVert ) { c1 = +colorInd[ i ]; }
                                 else if ( hasColorInd && !colPerVert ) { c1 = +colorInd[ lineCnt ]; }
@@ -223,9 +237,9 @@ x3dom.registerNodeType(
                                 }
 
                                 t = 2;
-                                lineCnt++;
+                                lineCnt += colPerVert ? 1 : 0; // for color per vert
                                 break;
-                            case 2:
+                            case 2: // rest of points for this line
                                 p0 = p1;
                                 c0 = c1;
                                 p1 = +indexes[ i ];
@@ -256,7 +270,7 @@ x3dom.registerNodeType(
                                     this._mesh._colors[ 0 ].push( colors[ c1 ].b );
                                 }
 
-                                lineCnt++;
+                                lineCnt += colPerVert ? 1 : 0; // for color per vert
                                 break;
                             default:
                         }
@@ -291,7 +305,7 @@ x3dom.registerNodeType(
 
                     if ( hasColor )
                     {
-                        this._mesh._colors[ 0 ] = colors.toGL();
+                        this._mesh._colors[ 0 ] = colors.toGL(); // does not work for per line color
                         this._mesh._numColComponents = numColComponents;
                     }
                 }
