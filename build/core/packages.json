@@ -244,6 +244,7 @@
         [
             "X3DEnvironmentTextureNode.js",
             "ComposedCubeMapTexture.js",
+            "ImageCubeMapTexture.js",
             "GeneratedCubeMapTexture.js"
         ],
         "src/nodes/Shaders/":
