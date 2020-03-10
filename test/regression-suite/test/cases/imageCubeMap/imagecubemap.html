@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge" />
+
+      <script type="text/javascript" src="../../../../x3dom-include.js?full"></script>
+  </head>
+  
+  <body>
+
+    <X3D xmlns='http://www.web3d.org/specifications/x3d-namespace' showStat='false' showLog='true' width="800px" height="600px">
+      <Scene DEF='scene'>
+        <Viewpoint position="0 0 4"></Viewpoint>
+        <Background id='back1' crossOrigin='anonymous'
+            backUrl='"./ocean_3_back.jpg"'>
+        </Background>
+        <Transform>
+          <Shape>
+            <Appearance>
+                <Material diffuseColor=".7 .7 .7" specularColor=".5 .5 .5" ></Material>
+                <ImageCubeMapTexture crossOrigin='anonymous' url='"./a.dds"'></ImageCubeMapTexture>
+            </Appearance>
+            <Sphere solid="false" ></Sphere>
+          </Shape>
+        </Transform>
+      </Scene>
+    </X3D>
+  </body>
+</html>
