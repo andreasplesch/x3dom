@@ -14,13 +14,17 @@
         <PointLight location="0 0 4" intensity='0.2' ambientIntensity='0.5'></PointLight>
         <Viewpoint position="0 0 4"></Viewpoint>
         <Background id='back1' crossOrigin='anonymous'
-            backUrl='"https://x3dom.org/download/assets/pbr/castleDiffuse.dds"'>
+            _backUrl='"https://x3dom.org/download/assets/pbr/castleDiffuse.dds"'
+            backUrl='"./earth-cubemap.dds"'>
         </Background>
         <Transform>
           <Shape>
             <Appearance>
                 <Material diffuseColor=".7 .7 .7" specularColor=".5 .5 .5" ></Material>
-                <ImageCubeMapTexture repeatS="false" repeatT="false" crossOrigin='anonymous' url='"https://x3dom.org/download/assets/pbr/castleDiffuse.dds"'></ImageCubeMapTexture>
+                <ImageCubeMapTexture repeatS="false" repeatT="false" crossOrigin='anonymous' 
+                                     _url='"https://x3dom.org/download/assets/pbr/castleDiffuse.dds"'
+                                     url='"./earth-cubemap.dds"'>
+                </ImageCubeMapTexture>
             </Appearance>
             <Sphere solid="false" ></Sphere>
           </Shape>
