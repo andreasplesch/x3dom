@@ -2897,7 +2897,7 @@ x3dom.gfx_webgl = ( function ()
             // TODO: implement surface with additional wireframe render mode (independent from poly mode)
             var indOff,
                 renderMode = viewarea.getRenderMode(),
-                self_transparent = ( mat._vf.transparency > 0 ) && ( !shape.isSolid() ),
+                self_transparent = mat ? ( mat._vf.transparency > 0 ) && ( !shape.isSolid() ) : false,
                 _drawFrontBack = function ( stateManager, drawFunction )
                 {
                     stateManager.frontFace( shape.isCCW() ? gl.CCW : gl.CW );
