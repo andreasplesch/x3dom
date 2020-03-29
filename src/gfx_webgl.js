@@ -3002,12 +3002,12 @@ x3dom.gfx_webgl = ( function ()
                     {
                         _drawFrontBack(
                             this.stateManager,
-                            this.drawArrays.bind( this, gl, s_gl.primType, 0, s_gl.positions[q].length / 3 )
+                            this.drawArrays.bind( this, gl, s_gl.primType, 0, s_gl.positions[ q ].length / 3 )
                         );
                     }
                     else
                     {
-                        this.drawArrays( gl, s_gl.primType, 0, s_gl.positions[q].length / 3 );
+                        this.drawArrays( gl, s_gl.primType, 0, s_gl.positions[ q ].length / 3 );
                     }
                 }
                 else
@@ -3016,12 +3016,12 @@ x3dom.gfx_webgl = ( function ()
                     {
                         _drawFrontBack(
                             this.stateManager,
-                            this.drawElements.bind(this, gl, s_gl.primType, s_gl.indexes[q].length, s_gl.indexType, 0)
+                            this.drawElements.bind( this, gl, s_gl.primType, s_gl.indexes[ q ].length, s_gl.indexType, 0 )
                         );
-                  	}
+                    }
                     else
                     {
-                        this.drawElements( gl, s_gl.primType, s_gl.indexes[q].length, s_gl.indexType, 0 );
+                        this.drawElements( gl, s_gl.primType, s_gl.indexes[ q ].length, s_gl.indexType, 0 );
                     }
                 }
             }
