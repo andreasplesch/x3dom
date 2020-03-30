@@ -1,73 +1,110 @@
-// load all x3dom JS files
-(function() {
+var x3dom_include = {};
 
-var packages = "tools/packages.json";
-var fallback_path = "http://www.x3dom.org/x3dom/";
-var maxDepth = 6;
-send_xhr("../");
+//--------------------------------------------------------------------------------------------------
 
-function send_xhr(basePath){
+x3dom_include.findPackagesJSON = function ( basePath )
+{
+    basePath = basePath || ""
+
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', basePath + packages, false);
 
-    xhr.onreadystatechange = function(){
-        if (xhr.readyState == 4) {
-            if (xhr.responseText && (xhr.status == 200 || xhr.status == 0)) {
-                console.log("found x3dom script base path on: " + basePath);
-                setCSS(basePath);
+    xhr.open( "GET", basePath + "build/core/packages.json", false );
 
-                var groupId, entryId, fileId;
-                var data = JSON.parse(xhr.responseText);
-                if (!data) {
-                    console.error("cannot read " + packages);
-                    return;
-                }
+    xhr.addEventListener( "load", function ( e )
+    {
+        if ( xhr.status !== 200 )
+        {
+            x3dom_include.findPackagesJSON( "../" + basePath );
+        }
+        else
+        {
+            x3dom_include.includeCSS( basePath + "src/x3dom.css" );
+            x3dom_include.includeScripts( basePath, JSON.parse( xhr.response ) );
+        }
+    } );
 
-                for(groupId in data.grouplist){
-                    //skip COMPONENTS section
-                    if(data.grouplist[groupId].group == "EXTENSIONS")
-                        continue;
-                    for(entryId in data.grouplist[groupId].data){
-                    	var entry = data.grouplist[groupId].data[entryId];
-                        if(entry.path)
-                        {
-                            document.write("<script src=\"" + basePath + "src/" + entry.path + "\"></script>");
-                        }
-                        else if(entry.files && entry.files.length > 0)
-                        {
-                            var filePrefix = (entry.filePrefix)?entry.filePrefix:"";
-                            for(fileId in entry.files)
-                            {
-                                var fileEntry = entry.files[fileId];
-                                document.write("<script src=\"" + basePath + "src/" + filePrefix + fileEntry.file + "\"></script>");
-                            }
-                        }
-                    }
-                }
-            } else {
-                //console.error('xhr status is not 200 on: ' + path);
-				if (maxDepth-- > 0) {
-					send_xhr(basePath + "../");
-				}
-				else {
-                    console.warn('FALLBACK to x3dom.org base path');
-                    send_xhr(fallback_path);
-				}
+    xhr.send( null );
+};
+
+//--------------------------------------------------------------------------------------------------
+
+x3dom_include.includeScripts = function ( rootDir, packages )
+{
+    for ( var name in packages )
+    {
+        if ( x3dom_include.getLevel( name ) > this.level )
+        {
+            return;
+        }
+
+        var package = packages[ name ];
+
+        for ( var basePath in package )
+        {
+            var files = package[ basePath ];
+
+            for( var i = 0, n = files.length; i < n; i++ )
+            {
+                x3dom_include.includeScript( rootDir + basePath + files[ i ] );
             }
         }
-    };
-    xhr.send();
+    }
+};
+
+//--------------------------------------------------------------------------------------------------
+
+x3dom_include.includeScript = function ( src )
+{
+    document.write('<script src="' + src + '"></script>');
+};
+
+//--------------------------------------------------------------------------------------------------
+
+x3dom_include.includeCSS = function ( src )
+{
+    var link = document.createElement( "link" );
+
+    link.setAttribute( "type", "text/css" );
+
+    link.setAttribute( "rel", "stylesheet" );
+
+    link.setAttribute( "href", src );
+
+    document.head.appendChild( link );
 }
 
-function setCSS(path){
-    var headNode = document.getElementsByTagName("head")[0];
+//--------------------------------------------------------------------------------------------------
 
-    var importcss = document.createElement("link");
-    importcss.type = "text/css";
-    importcss.href = path + "src/x3dom.css";
-    console.log("including CSS from: " + importcss.href);
-    importcss.rel="stylesheet";
-    headNode.appendChild(importcss);
+x3dom_include.getLevel = function ( name )
+{
+    switch ( name )
+    {
+        case "BASIC"   : return 0;
+        case "FULL"    : return 1;
+        case "PHYSICS" : return 2;
+        case "AMO"     : return 2;
+        default        : return 0; 
+    }
 }
 
-})();
+//--------------------------------------------------------------------------------------------------
+
+x3dom_include.detectLevel = function ()
+{
+    var parts = document.querySelector("script[src*='x3dom-include.js']").src.split( "?" );
+
+    if ( !parts[ 1 ] )
+    {
+        return 0;
+    }
+
+    return x3dom_include.getLevel( parts[ 1 ].toUpperCase() );
+}
+
+//--------------------------------------------------------------------------------------------------
+
+x3dom_include.level = x3dom_include.detectLevel();
+
+//--------------------------------------------------------------------------------------------------
+
+x3dom_include.findPackagesJSON( "" );
