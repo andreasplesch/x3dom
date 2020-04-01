@@ -36,5 +36,5 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: eslint concat fixed
-        path: fxedFiles.txt
+        path: fixedFiles.txt
     
