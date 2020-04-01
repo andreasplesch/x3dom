@@ -15,9 +15,9 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: 10.x
-    - run: npm install -g
+    - run: npm install
     - name: npm run lint
       continue-on-error: true
       run: npm run lint
-    - run: eslint --fix "src/**/*.js"
+    - run: npx eslint --fix "src/**/*.js"
     
