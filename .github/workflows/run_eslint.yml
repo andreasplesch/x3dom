@@ -20,10 +20,11 @@ jobs:
       continue-on-error: true
       run: npm run lint > eslint.err
     - run: cat eslint.err
-    - run: (grep x3dom/src eslint.err && for f in `grep x3dom/src eslint.err`; do cp $f $f.orig; echo $f; done && exit 0)
-    - run: find /home/runner/work/x3dom/x3dom/src -name '*Cylinder.js'
+    - run: (for f in `grep x3dom/src eslint.err`; do cp $f $f.orig; echo $f; done && exit 0)
+    - run: find /home/runner/work/x3dom/x3dom/src -name '*orig'
     - run: npm run lint-fix
     - run: grep x3dom/src eslint.err
-    - run: (for f in `grep x3dom/src eslint.err`; do diff -y $f $f.orig >> diff.out; done; exit 0)
-    - run: cat diff.out `grep x3dom/src eslint.err`
+    - run: (for f in `grep x3dom/src eslint.err`; do diff -y $f $f.orig; done; exit 0)
+      continue-on-error: true
+    - run: cat `grep x3dom/src eslint.err`
     
