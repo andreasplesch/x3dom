@@ -21,7 +21,7 @@
     x3dom.tessWorkerScript = URL.createObjectURL( new Blob( [ "(" + tessWorker.toString() + ")()" ], {type: "application/javascript"} ) );
 
     //wrapper
-    
+
     var basisFunsCache;
 
     function tessWorker ()
