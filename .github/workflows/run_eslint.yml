@@ -15,7 +15,7 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: 10.x
-    - run: npm install
+    - run: npm install -g
     - name: npm run lint
       continue-on-error: true
       run: npm run lint
