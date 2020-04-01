@@ -23,7 +23,7 @@ jobs:
     - run: (for f in `grep x3dom/src eslint.err`; do cp $f $f.orig; echo $f; done && exit 0)
     - run: find /home/runner/work/x3dom/x3dom/src -name '*orig'
     - run: npm run lint-fix
-    - run: (for f in `grep x3dom/src eslint.err`; echo $f; do diff $f $f.orig; done; exit 0)
+    - run: (for f in `grep x3dom/src eslint.err`; do echo $f; diff $f $f.orig; done; exit 0)
       continue-on-error: true
     - run: cat `grep x3dom/src eslint.err`
     
