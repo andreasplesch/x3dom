@@ -18,6 +18,10 @@ jobs:
     - run: npm install
     - name: npm run lint
       continue-on-error: true
-      run: npm run lint
-    - run: npx eslint --fix-dry-run "src/**/*.js" -f codeframe
+      run: npm run lint -o eslint.err
+    - run: echo eslint.err
+    - run: npm run lint-fix
+    - run: grep x3dom/src eslint.err
+    - run: cat `grep x3dom/src eslint.err`
+      
     
