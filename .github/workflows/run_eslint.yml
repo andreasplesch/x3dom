@@ -31,10 +31,4 @@ jobs:
       with:
         name: eslint fix
         path: fixed
-    - run: cat `grep x3dom/src eslint.err` > fixedFiles.txt
-    - name: upload concat files
-      uses: actions/upload-artifact@v1
-      with:
-        name: eslint concat fixed
-        path: fixedFiles.txt
     
