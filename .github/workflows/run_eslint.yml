@@ -23,7 +23,12 @@ jobs:
     - run: (for f in `grep x3dom/src eslint.err`; do cp $f $f.orig; echo $f; done && exit 0)
     - run: find /home/runner/work/x3dom/x3dom/src -name '*orig'
     - run: npm run lint-fix
-    - run: (for f in `grep x3dom/src eslint.err`; do echo $f; diff $f $f.orig; done; exit 0)
+    - run: mkdir fixed
+    - run: (for f in `grep x3dom/src eslint.err`; do echo $f; diff $f $f.orig; cp $f fixed; done; exit 0)
       continue-on-error: true
-    - run: cat `grep x3dom/src eslint.err`
+    - name: upload fixed files
+      uses: actions/upload-artifact@v1
+      with:
+        name: eslint fix
+        path: fixed
     
