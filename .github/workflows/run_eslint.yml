@@ -19,5 +19,5 @@ jobs:
     - name: npm run lint
       continue-on-error: true
       run: npm run lint
-    - run: npm run lint-fix
+    - run: eslint --fix "src/**/*.js"
     
