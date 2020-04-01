@@ -20,8 +20,9 @@ jobs:
       continue-on-error: true
       run: npm run lint > eslint.err
     - run: cat eslint.err
+    - run: for f in `grep x3dom/src/eslint.err`; do cp $f $f.orig; echo $f; done
     - run: npm run lint-fix
     - run: grep x3dom/src eslint.err
+    - run: for f in `grep x3dom/src/eslint.err`; do diff $f $f.orig; done
     - run: cat `grep x3dom/src eslint.err`
-      
     
