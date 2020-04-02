@@ -30,9 +30,11 @@ jobs:
       run: |        
         for f in `grep x3dom/src eslint.err`; do cat $f >> eslint.err; cp $f fixed; done
         REPORT="$(cat eslint.err)"
-        IFS=""
-        echo $REPORT
-        echo ::set-env name=REPORT::$REPORT
+        REPORT="${REPORT//'%'/'%25'}"
+        REPORT="${REPORT//$'\n'/'%0A'}"
+        REPORT="${REPORT//$'\r'/'%0D'}" 
+        echo "$REPORT"
+        echo "::set-env name=REPORT::$REPORT"
       continue-on-error: true
     - name: upload fixed files
       uses: actions/upload-artifact@v1
