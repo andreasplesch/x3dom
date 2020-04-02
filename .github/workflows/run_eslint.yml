@@ -24,10 +24,21 @@ jobs:
     - run: find /home/runner/work/x3dom/x3dom/src -name '*orig'
     - run: npm run lint-fix
     - run: mkdir fixed
-    - run: (for f in `grep x3dom/src eslint.err`; do cat $f; cp $f fixed; done; exit 0)
+    - name: copy and prepare fixes
+      env:
+        REPORT: eslint report
+      run: |
+        for f in `grep x3dom/src eslint.err`; do cat $f; cp $f fixed; done
+        REPORT=`cat eslint.err fixed/*`
+        echo $REPORT
       continue-on-error: true
     - name: upload fixed files
       uses: actions/upload-artifact@v1
       with:
         name: eslint fix
         path: fixed
+    - run: echo $REPORT
+    - name: Create commit comment
+      uses: peter-evans/commit-comment@v1
+      with:
+        body: ${{ env.REPORT }}
