@@ -31,7 +31,7 @@ jobs:
         for f in `grep x3dom/src eslint.err`; do cat $f >> eslint.err; cp $f fixed; done
         cat eslint.err
         REPORT="$(cat eslint.err)"
-        echo $REPORT
+        echo "$REPORT"
         echo ::set-env name=REPORT::$REPORT
       continue-on-error: true
     - name: upload fixed files
@@ -39,7 +39,7 @@ jobs:
       with:
         name: eslint fix
         path: fixed
-    - run: echo $REPORT
+    - run: echo "$REPORT"
     - name: Create commit comment
       uses: peter-evans/commit-comment@v1
       with:
