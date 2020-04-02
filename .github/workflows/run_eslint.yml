@@ -23,45 +23,44 @@ jobs:
     - run: (for f in `grep x3dom/src eslint.err`; do cp $f $f.orig; echo $f; done && exit 0)
     - run: find /home/runner/work/x3dom/x3dom/src -name '*orig'
     - run: npm run lint-fix
-    - run: mkdir fixed
     - name: copy and prepare fixes
       env:
         REPORT: eslint report
-        DIFFOUTPUT: diff output
+        FIXED: fixed files
       shell: bash {0}
-      run: |        
-        for f in `grep x3dom/src eslint.err`; do cat $f >> eslint.err; cp $f fixed; diff -u $f.orig $f >> diffs; done
+      run: |
+        mkdir linted
+        for f in `grep x3dom/src eslint.err`; do cat $f >> fixed; cp $f linted; diff -u $f.orig $f >> eslint.err; done
         REPORT="$(cat eslint.err)"
         REPORT="${REPORT//'%'/'%25'}"
         REPORT="${REPORT//$'\n'/'%0A'}"
         REPORT="${REPORT//$'\r'/'%0D'}" 
         echo "::set-env name=REPORT::$REPORT"
-        DIFFOUTPUT="$(cat diffs)"
-        DIFFOUTPUT="${DIFFOUTPUT//'%'/'%25'}"
-        DIFFOUTPUT="${DIFFOUTPUT//$'\n'/'%0A'}"
-        DIFFOUTPUT="${DIFFOUTPUT//$'\r'/'%0D'}"
-        echo "$DIFFOUTPUT"
-        echo "::set-env name=DIFFOUTPUT::$DIFFOUTPUT"
+        FIXED="$(cat fixed)"
+        FIXED="${FIXED//'%'/'%25'}"
+        FIXED="${FIXED//$'\n'/'%0A'}"
+        FIXED="${FIXED//$'\r'/'%0D'}"
+        echo "::set-env name=FIXED::$FIXED"
       continue-on-error: true
     - name: upload fixed files
       uses: actions/upload-artifact@v1
       with:
         name: eslint fix
-        path: fixed
-    - run: echo "$DIFFOUTPUT"
+        path: linted
+    - run: echo "$REPORT"
     - name: Create diff comment
       uses: peter-evans/commit-comment@v1
       with:
         body: |
-          diff:
+          eslint and diff report:
           ```
-          ${{ env.DIFFOUTPUT }}
+          ${{ env.REPORT }}
           ```
     - name: Create lint comment
       uses: peter-evans/commit-comment@v1
       with:
         body: |
-          eslint report:
+          fixes by eslint:
           ```
-          ${{ env.REPORT }}
+          ${{ env.FIXED }}
           ```
