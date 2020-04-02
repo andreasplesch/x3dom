@@ -28,9 +28,9 @@ jobs:
       env:
         REPORT: eslint report
         DIFF: diff output
-      shell: bash
+      shell: /bin/bash {0}
       run: |        
-        for f in `grep x3dom/src eslint.err`; do cat $f >> eslint.err; cp $f fixed; diff -u $f.org $f >> diffs; done
+        for f in `grep x3dom/src eslint.err`; do cat $f >> eslint.err; cp $f fixed; diff -u $f.orig $f >> diffs; done
         REPORT="$(cat eslint.err)"
         REPORT="${REPORT//'%'/'%25'}"
         REPORT="${REPORT//$'\n'/'%0A'}"
