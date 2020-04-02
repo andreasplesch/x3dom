@@ -29,7 +29,8 @@ jobs:
         REPORT: eslint report
       run: |        
         for f in `grep x3dom/src eslint.err`; do cat $f >> eslint.err; cp $f fixed; done
-        REPORT=`cat eslint.err`
+        cat eslint.err
+        REPORT=$(cat eslint.err)
         echo $REPORT
         echo ::set-env name=REPORT::$REPORT
       continue-on-error: true
