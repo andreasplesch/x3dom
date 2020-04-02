@@ -48,7 +48,7 @@ jobs:
       with:
         name: eslint fix
         path: fixed
-    - run: echo "$REPORT"
+    - run: echo "$DIFF"
     - name: Create diff comment
       uses: peter-evans/commit-comment@v1
       with:
