@@ -39,9 +39,9 @@ jobs:
         DIFFOUTPUT="$(cat diffs)"
         DIFFOUTPUT="${DIFFOUTPUT//'%'/'%25'}"
         DIFFOUTPUT="${DIFFOUTPUT//$'\n'/'%0A'}"
-        DIFFOUTPUT="${DIFFOUTPUT//$'\r'/'%0D'}" 
+        DIFFOUTPUT="${DIFFOUTPUT//$'\r'/'%0D'}"
         echo "$DIFFOUTPUT"
-        echo "::set-env name=DIFFOUTPUT::$DIFFOUTPUT"
+        echo "::set-env name=DIFFOUTPUT::DIFFOUTPUT"
       continue-on-error: true
     - name: upload fixed files
       uses: actions/upload-artifact@v1
