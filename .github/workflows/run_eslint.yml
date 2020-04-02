@@ -27,7 +27,7 @@ jobs:
     - name: copy and prepare fixes
       env:
         REPORT: eslint report
-        DIFF: diff output
+        DIFFOUTPUT: diff output
       shell: /bin/bash {0}
       run: |        
         for f in `grep x3dom/src eslint.err`; do cat $f >> eslint.err; cp $f fixed; diff -u $f.orig $f >> diffs; done
@@ -36,26 +36,26 @@ jobs:
         REPORT="${REPORT//$'\n'/'%0A'}"
         REPORT="${REPORT//$'\r'/'%0D'}" 
         echo "::set-env name=REPORT::$REPORT"
-        DIFF="$(cat diffs)"
-        DIFF="${DIFF//'%'/'%25'}"
-        DIFF="${DIFF//$'\n'/'%0A'}"
-        DIFF="${DIFF//$'\r'/'%0D'}" 
-        echo "$DIFF"
-        echo "::set-env name=DIFF::$DIFF"
+        DIFFOUTPUT="$(cat diffs)"
+        DIFFOUTPUT="${DIFFOUTPUT//'%'/'%25'}"
+        DIFFOUTPUT="${DIFFOUTPUT//$'\n'/'%0A'}"
+        DIFFOUTPUT="${DIFFOUTPUT//$'\r'/'%0D'}" 
+        echo "$DIFFOUTPUT"
+        echo "::set-env name=DIFFOUTPUT::$DIFFOUTPUT"
       continue-on-error: true
     - name: upload fixed files
       uses: actions/upload-artifact@v1
       with:
         name: eslint fix
         path: fixed
-    - run: echo "$DIFF"
+    - run: echo "$DIFFOUTPUT"
     - name: Create diff comment
       uses: peter-evans/commit-comment@v1
       with:
         body: |
           diff:
           ```
-          ${{ env.DIFF }}
+          ${{ env.DIFFOUTPUT }}
           ```
     - name: Create lint comment
       uses: peter-evans/commit-comment@v1
