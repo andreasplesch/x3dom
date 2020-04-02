@@ -27,10 +27,11 @@ jobs:
     - name: copy and prepare fixes
       env:
         REPORT: eslint report
-      run: |
-        for f in `grep x3dom/src eslint.err`; do cat $f; cp $f fixed; done
-        REPORT=`cat eslint.err fixed/*`
+      run: |        
+        for f in `grep x3dom/src eslint.err`; do cat $f >> eslint.err; cp $f fixed; done
+        REPORT=`cat eslint.err`
         echo $REPORT
+        echo ::set-env name=REPORT::$REPORT
       continue-on-error: true
     - name: upload fixed files
       uses: actions/upload-artifact@v1
@@ -41,4 +42,8 @@ jobs:
     - name: Create commit comment
       uses: peter-evans/commit-comment@v1
       with:
-        body: ${{ env.REPORT }}
+        body: |
+          eslint report
+          ```
+          ${{ env.REPORT }}
+          ```
