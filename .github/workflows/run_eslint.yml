@@ -28,7 +28,7 @@ jobs:
       env:
         REPORT: eslint report
         DIFFOUTPUT: diff output
-      shell: /bin/bash {0}
+      shell: bash {0}
       run: |        
         for f in `grep x3dom/src eslint.err`; do cat $f >> eslint.err; cp $f fixed; diff -u $f.orig $f >> diffs; done
         REPORT="$(cat eslint.err)"
@@ -41,7 +41,7 @@ jobs:
         DIFFOUTPUT="${DIFFOUTPUT//$'\n'/'%0A'}"
         DIFFOUTPUT="${DIFFOUTPUT//$'\r'/'%0D'}"
         echo "$DIFFOUTPUT"
-        echo "::set-env name=DIFFOUTPUT::DIFFOUTPUT"
+        echo "::set-env name=DIFFOUTPUT::$DIFFOUTPUT"
       continue-on-error: true
     - name: upload fixed files
       uses: actions/upload-artifact@v1
