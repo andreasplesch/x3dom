@@ -32,7 +32,7 @@ jobs:
         cat eslint.err
         REPORT="$(cat eslint.err)"
         echo "$REPORT"
-        echo ::set-env name=REPORT::$REPORT
+        echo ::set-env name=REPORT::"$REPORT"
       continue-on-error: true
     - name: upload fixed files
       uses: actions/upload-artifact@v1
