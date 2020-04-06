@@ -207,13 +207,15 @@
             {
                 C[ j ] = Cw[ j ] / Cw[ 3 ];
             }
+
             if ( Color !== null )
             {
+                j = 0;
                 for ( l = 0; l <= q; l++ )
                 {
                     indv = spanv - q + l;
                     for ( k = 0; k < 4; k++ )
-                    {temp[ j + k ] = 0.0;}
+                    {tempColor[ j + k ] = 0.0;}
                     for ( k = 0; k <= p; k++ )
                     {
                         i = indu + k + ( indv * ( n + 1 ) );
@@ -688,7 +690,7 @@
                 this.indexHash[ indu ][ indv ] = this.coordIndex;
                 this.coordIndex++;
                 this.coordinates.push( pnt );
-                this.colors.push( point.color );
+                this.colors.push( point.Color );
                 this.texcoords.push( [
                     ( uv[ 0 ] + this.u0 ) / ( this.u1 - this.u0 ),
                     ( uv[ 1 ] + this.v0 ) / ( this.v1 - this.v0 )
