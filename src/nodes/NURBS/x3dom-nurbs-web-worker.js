@@ -207,7 +207,7 @@
             {
                 C[ j ] = Cw[ j ] / Cw[ 3 ];
             }
-            if ( color !== null )
+            if ( Color !== null )
             {
                 for ( l = 0; l <= q; l++ )
                 {
