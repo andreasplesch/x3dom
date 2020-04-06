@@ -163,6 +163,17 @@ x3dom.registerNodeType(
             this.addField_SFNode( "controlPoint", x3dom.nodeTypes.X3DCoordinateNode );
 
             /**
+         * If NULL the geometry is rendered using the Material and texture defined in the Appearance node.
+         * If not NULL the field shall contain a Color node whose colours are applied depending on the value of "colorPerVertex".
+         * @var {x3dom.fields.SFNode} color
+         * @memberof x3dom.nodeTypes.X3DParametricGeometryNode
+         * @initvalue x3dom.nodeTypes.X3DColorNode
+         * @field x3dom
+         * @instance
+         */
+            this.addField_SFNode( "color", x3dom.nodeTypes.X3DColorNode );
+
+            /**
          * NYI: uClosed and vClosed define whether or not the specific dimension is to be evaluated as a closed surface
          * along the u and v directions, respectively.
          * @var {x3dom.fields.SFBool} uClosed
@@ -286,7 +297,7 @@ x3dom.registerNodeType(
 
                 var onmessage = function ( e )
                 {
-                    if ( e.data.length >= 3 && e.data[ 5 ] > this.caller.lastTime )
+                    if ( e.data.length >= 3 && e.data[ 6 ] > this.caller.lastTime )
                     {
                         if ( this.caller.uv.length )
                         {
@@ -321,24 +332,40 @@ x3dom.registerNodeType(
                             } );
                         this.caller.basisFunsCache = e.data[ 3 ];
                         this.caller.uv = e.data[ 4 ];
-                        this.caller.lastTime = e.data[ 5 ];
+                        this.caller.lastTime = e.data[ 6 ];
                     }
                 };
 
                 var coordNode = this._cf.controlPoint.node;
+                var positions = coordNode.getPoints();
+
+                var numColComponents = 3;
+                var colorNode = this._cf.color.node;
+                var colors = new x3dom.fields.MFColor();
+                if ( colorNode )
+                {
+                    colors = colorNode._vf.color;
+                    x3dom.debug.assert( positions.length == colors.length, "Sizes of color and controlPoint arrays differ!" );
+
+                    if ( x3dom.isa( colorNode, x3dom.nodeTypes.ColorRGBA ) )
+                    {
+                        numColComponents = 4;
+                    }
+                }
                 //x3dom.debug.assert(coordNode);
                 var startmessage = [
                     this._vf.uDimension - 1,
                     this._vf.vDimension - 1,
                     this._vf.uOrder - 1, this._vf.vOrder - 1,
                     this._vf.uKnot, this._vf.vKnot,
-                    coordNode.getPoints(),
+                    positions,
                     this._vf.weight,
                     this._vf.uTessellation,
                     this._vf.vTessellation,
                     T,
                     this.basisFunsCache,
                     this.uv,
+                    colors,
                     performance.now()
                 ];
 
@@ -421,6 +448,7 @@ x3dom.registerNodeType(
                 var its = new x3dom.nodeTypes.IndexedTriangleSet();
                 its._nameSpace = node._nameSpace;
                 its._vf.normalPerVertex = node._vf.normalPerVertex;
+                its._vf.colorPerVertex = true;
                 its._vf.solid = false;
                 its._vf.ccw = false;
                 its._vf.index = data[ 0 ];
@@ -445,6 +473,19 @@ x3dom.registerNodeType(
                             new x3dom.fields.SFVec2f( data[ 2 ][ i ][ 0 ], data[ 2 ][ i ][ 1 ] ) );
                     }
                     its.addChild( tc );
+                }
+                //add color node
+                if ( node._cf.color.node !== null )
+                {
+                    var cl = new x3dom.nodesType.Color(); //; check for ColorRGBA
+                    cl._nameSpace = node._nameSpace;
+                    cl._vf.color = new x3dom.fields.MFColor();
+                    for ( var i = 0; i < data[ 5 ].length; i++ )
+                    {
+                        cl._vf.color.push(
+                            new x3dom.fields.SFColor( data[ 5 ][ i ][ 0 ], data[ 5 ][ i ][ 1 ], data[ 5 ][ i ][ 2 ] ) );
+                    }
+                    its.addChild( cl );
                 }
                 its.nodeChanged();
                 its._xmlNode = node._xmlNode;
