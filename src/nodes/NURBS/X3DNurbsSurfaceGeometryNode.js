@@ -341,7 +341,7 @@ x3dom.registerNodeType(
 
                 var numColComponents = 3;
                 var colorNode = this._cf.color.node;
-                var colors = new x3dom.fields.MFColor();
+                var colors = null;
                 if ( colorNode )
                 {
                     colors = colorNode._vf.color;
