@@ -72,7 +72,7 @@
             }
             else
             {
-                postMessage( [ tess.indices, tess.coordinates, tess.texcoords, basisFunsCache, tess.uv, e.data[ 13 ] ] );
+                postMessage( [ tess.indices, tess.coordinates, tess.texcoords, basisFunsCache, tess.uv, tess.colors, e.data[ 14 ] ] );
             }
             close();//deprecated?
         };
@@ -152,7 +152,7 @@
             return N;
         } /* basisFuns */
 
-        function surfacePoint3DH ( n, m, p, q, U, V, P, W, u, v )
+        function surfacePoint3DH ( n, m, p, q, U, V, P, W, u, v, Color )
         {
             var spanu,
                 spanv,
@@ -165,8 +165,11 @@
                 Nu,
                 Nv,
                 C = [],
+                Col = [],
                 Cw = [ 0.0, 0.0, 0.0, 0.0 ],
-                temp = [];
+                Colorw = [ 0.0, 0.0, 0.0, 0.0 ],
+                temp = [],
+                tempColor = [];
 
             spanu = findSpan( n, p, u, U );
             Nu = basisFuns( spanu, u, p, U );
@@ -201,12 +204,47 @@
             }
 
             for ( j = 0; j < 3; j++ )
-            {C[ j ] = Cw[ j ] / Cw[ 3 ];}
+            {
+                C[ j ] = Cw[ j ] / Cw[ 3 ];
+            }
+            if ( color !== null )
+            {
+                for ( l = 0; l <= q; l++ )
+                {
+                    indv = spanv - q + l;
+                    for ( k = 0; k < 4; k++ )
+                    {temp[ j + k ] = 0.0;}
+                    for ( k = 0; k <= p; k++ )
+                    {
+                        i = indu + k + ( indv * ( n + 1 ) );
+                        tempColor[ j + 0 ] += Nu[ k ] * Color[ i ].r;
+                        tempColor[ j + 1 ] += Nu[ k ] * Color[ i ].g;
+                        tempColor[ j + 2 ] += Nu[ k ] * Color[ i ].b;
+                        tempColor[ j + 3 ] += Nu[ k ] * W[ i ];
+                    }
+                    j += 4;
+                }
 
-            return C;
+                j = 0;
+                for ( l = 0; l <= q; l++ )
+                {
+                    Colorw[ 0 ] += Nv[ l ] * tempColor[ j + 0 ];
+                    Colorw[ 1 ] += Nv[ l ] * tempColor[ j + 1 ];
+                    Colorw[ 2 ] += Nv[ l ] * tempColor[ j + 2 ];
+                    Colorw[ 3 ] += Nv[ l ] * tempColor[ j + 3 ];
+                    j += 4;
+                }
+
+                for ( j = 0; j < 3; j++ )
+                {
+                    Col[ j ] = Colorw[ j ] / Colorw[ 3 ];
+                }
+            }
+
+            return { C:C, Color:Col };
         } /* surfacePoint3DH */
 
-        function surfacePoint3D ( n, m, p, q, U, V, P, u, v )
+        function surfacePoint3D ( n, m, p, q, U, V, P, u, v, Color )
         {
             var spanu,
                 spanv,
@@ -323,11 +361,13 @@
 
             this.tloops = nurb[ 10 ];
             this.useUV = nurb[ 12 ];
+            this.Colors = nurb [ 13 ];
 
             this.surfaceHash = [];
             this.indexHash = [];
             this.curveHash = null;
             this.coordinates = [];
+            this.colors = [];
             this.texcoords = [];
             this.indices = [];
             this.uv = [];
@@ -614,12 +654,14 @@
                     {return memoizedPoint;}
                 }
                 // hash lookup failed, compute the point
-                var pnt;
+                var pnt,
+                    point = { C:[], Color:[] };
                 if ( Object.keys( this.W ).length )
                 {
-                    pnt = surfacePoint3DH( this.w, this.h, this.p, this.q,
+                    point = surfacePoint3DH( this.w, this.h, this.p, this.q,
                         this.U, this.V, this.P, this.W,
-                        uv[ 0 ], uv[ 1 ] );
+                        uv[ 0 ], uv[ 1 ], this.Colors );
+                    pnt = point.C;
                 }
                 else
                 {
@@ -646,6 +688,7 @@
                 this.indexHash[ indu ][ indv ] = this.coordIndex;
                 this.coordIndex++;
                 this.coordinates.push( pnt );
+                this.colors.push( point.color );
                 this.texcoords.push( [
                     ( uv[ 0 ] + this.u0 ) / ( this.u1 - this.u0 ),
                     ( uv[ 1 ] + this.v0 ) / ( this.v1 - this.v0 )
