@@ -16,13 +16,13 @@
         <Transform scale='1.2 .15 .6' DEF="SHIP">
           <Shape DEF='STRIPES'>
             <Appearance DEF='texApp'>
-              <PixelTexture image='16 1 1 255 255 255 0 255 255 255 255
+              <!--PixelTexture image='16 1 1 255 255 255 0 255 255 255 255
                                           255 255 255 255 0 255 255 255'>
                 <TextureProperties magnificationFilter="NEAREST_PIXEL"
                                     minificationFilter="NEAREST_PIXEL">
                 </TextureProperties>
-              </PixelTexture><Material></Material>
-              <TextureTransform scale='.25 .25'></TextureTransform>
+              </PixelTexture--><!--Material></Material-->
+              <!--TextureTransform scale='.25 .25'></TextureTransform-->
             </Appearance>
             <NurbsPatchSurface solid="true" DEF="NURBS"
               uOrder="4" uDimension="4" uKnot="0 0 0 0 1 1 1 1"
@@ -34,6 +34,13 @@
                 -1 1  0, 0 1  0, 0 1  0, 1 1  0,
                 -2 2 -2, 0 1 -1, 0 1 -1, 2 2 -2">
               </Coordinate>
+              <Color color="
+                1 0 0, 0 1 0, 0 0 1, 1 1 0,
+                1 0 0, 0 1 0, 0 0 1, 1 1 0,
+                1 1 0, 0 0 1, 0 1 0, 1 0 0,
+                1 1 0, 0 0 1, 0 1 0, 1 0 0
+                ">
+              </Color>
               <TextureCoordinateGenerator mode="COORD">
               </TextureCoordinateGenerator>
             </NurbsPatchSurface>
