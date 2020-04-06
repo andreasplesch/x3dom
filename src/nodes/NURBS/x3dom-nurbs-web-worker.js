@@ -241,7 +241,7 @@
                 }
             }
 
-            return { C:C, Color:Col };
+            return { C: C, Color: Col };
         } /* surfacePoint3DH */
 
         function surfacePoint3D ( n, m, p, q, U, V, P, u, v, Color )
