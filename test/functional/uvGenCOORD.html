@@ -13,7 +13,7 @@
       <Scene>
         <Viewpoint fieldOfView='.392699'>
         </Viewpoint>
-        <Transform scale='1.2 .15 .6' DEF="SHIP">
+        <Transform scale='0.6 .6 .6' DEF="SHIP">
           <Shape DEF='STRIPES'>
             <Appearance DEF='texApp'>
               <!--PixelTexture image='16 1 1 255 255 255 0 255 255 255 255
@@ -28,24 +28,62 @@
               uOrder="4" uDimension="4" uKnot="0 0 0 0 1 1 1 1"
               vOrder="4" vDimension="4" vKnot="0 0 0 0 1 1 1 1"
               weight="1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1">
-              <Coordinate containerField="controlPoint" point="
+              <Coordinate DEF='cpoints' containerField="controlPoint" point="
                 -2 2  2, 0 1  1, 0 1  1, 2 2  2,
                 -1 1  0, 0 1  0, 0 1  0, 1 1  0,
                 -1 1  0, 0 1  0, 0 1  0, 1 1  0,
                 -2 2 -2, 0 1 -1, 0 1 -1, 2 2 -2">
               </Coordinate>
-              <Color color="
+              <Color DEF='ccolors' color="
                 1 0 0, 0 1 0, 0 0 1, 1 1 0,
                 1 0 0, 0 1 0, 0 0 1, 1 1 0,
                 1 1 0, 0 0 1, 0 1 0, 1 0 0,
                 1 1 0, 0 0 1, 0 1 0, 1 0 0
                 ">
               </Color>
-              <TextureCoordinateGenerator mode="COORD">
-              </TextureCoordinateGenerator>
+              <!--TextureCoordinateGenerator mode="COORD">
+              </TextureCoordinateGenerator-->
             </NurbsPatchSurface>
           </Shape>
-          <Transform rotation='0 0 1 1.57'>
+          <Shape DEF='controlPoints'>
+            <Appearance DEF='black'><Material></Material></Appearance>
+            <PointSet>
+              <Coordinate USE='cpoints'></Coordinate>
+              <Color USE='ccolors'></Color>
+            </PointSet>
+          </Shape>
+
+          <Transform translation='0 -2 0'>
+          <Shape USE='controlPoints'></Shape>
+          <Shape DEF='PIXTEX'>
+            <Appearance DEF='texpix'>
+              <PixelTexture image='4 4 3
+                0xFF0000 0x00FF00 0x0000FF 0xFFFF00
+                0xFF0000 0x00FF00 0x0000FF 0xFFFF00
+                0xFFFF00 0x0000FF 0x00FF00 0xFF0000
+                0xFFFF00 0x0000FF 0x00FF00 0xFF0000
+                '>
+                <TextureProperties magnificationFilter="NEAREST_PIXEL"
+                                    minificationFilter="NEAREST_PIXEL">
+                </TextureProperties>
+              </PixelTexture><Material></Material>
+              <!--TextureTransform scale='.25 .25'></TextureTransform-->
+            </Appearance>
+            <NurbsPatchSurface solid="true" DEF="NURBS"
+              uOrder="4" uDimension="4" uKnot="0 0 0 0 1 1 1 1"
+              vOrder="4" vDimension="4" vKnot="0 0 0 0 1 1 1 1"
+              weight="1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1">
+              <Coordinate containerField="controlPoint" point="
+                -2 2  2, 0 1  1, 0 1  1, 2 2  2,
+                -1 1  0, 0 1  0, 0 1  0, 1 1  0,
+                -1 1  0, 0 1  0, 0 1  0, 1 1  0,
+                -2 2 -2, 0 1 -1, 0 1 -1, 2 2 -2">
+              </Coordinate>
+            
+            </NurbsPatchSurface>
+          </Shape>
+          </Transform>
+          <!--Transform rotation='0 0 1 1.57'>
             <Shape DEF='BLANK'>
               <Appearance><Material></Material></Appearance>
               <NurbsPatchSurface USE="NURBS"></NurbsPatchSurface>
@@ -58,9 +96,9 @@
           <Transform rotation='1 0 0 -1.57'><Shape USE='STRIPES'></Shape>
           </Transform>
           <Transform scale='1 -1 -1'>       <Shape USE='STRIPES'></Shape>
-          </Transform>
+          </Transform-->
         </Transform><!-- SHIP -->
-        <Transform scale='1.2 .15 .6' translation='0 -1 0' DEF="box">
+        <!--Transform scale='1.2 .15 .6' translation='0 -1 0' DEF="box">
           <Shape DEF='bSTRIPES'>
             <Appearance USE='texApp'>
             </Appearance>
@@ -73,7 +111,7 @@
               </TextureCoordinateGenerator>
             </IndexedFaceSet>
           </Shape>
-        </Transform>
+        </Transform-->
       </Scene>
     </X3D>
   </body>
