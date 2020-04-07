@@ -21,7 +21,7 @@
                 <TextureProperties magnificationFilter="NEAREST_PIXEL"
                                     minificationFilter="NEAREST_PIXEL">
                 </TextureProperties>
-              </PixelTexture--><!--Material></Material-->
+              </PixelTexture--><Material></Material>
               <!--TextureTransform scale='.25 .25'></TextureTransform-->
             </Appearance>
             <NurbsPatchSurface solid="true" DEF="NURBS"
@@ -67,19 +67,13 @@
                                     minificationFilter="NEAREST_PIXEL">
                 </TextureProperties>
               </PixelTexture><Material></Material>
-              <!--TextureTransform scale='.25 .25'></TextureTransform-->
+              <!--TextureTransform scale='4 4'></TextureTransform-->
             </Appearance>
             <NurbsPatchSurface solid="true" DEF="NURBS"
               uOrder="4" uDimension="4" uKnot="0 0 0 0 1 1 1 1"
               vOrder="4" vDimension="4" vKnot="0 0 0 0 1 1 1 1"
               weight="1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1">
-              <Coordinate containerField="controlPoint" point="
-                -2 2  2, 0 1  1, 0 1  1, 2 2  2,
-                -1 1  0, 0 1  0, 0 1  0, 1 1  0,
-                -1 1  0, 0 1  0, 0 1  0, 1 1  0,
-                -2 2 -2, 0 1 -1, 0 1 -1, 2 2 -2">
-              </Coordinate>
-            
+              <Coordinate USE="cpoints"></Coordinate>
             </NurbsPatchSurface>
           </Shape>
           </Transform>
