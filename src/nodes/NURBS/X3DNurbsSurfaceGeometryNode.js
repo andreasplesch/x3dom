@@ -415,6 +415,7 @@ x3dom.registerNodeType(
                 its._vf.solid = false;
                 its._vf.ccw = false;
                 its._cf.texCoord = node._cf.texCoord;
+                its._cf.color = node._cf.color;
                 var ind = [],
                     i1 = 0,
                     i2 = w;
