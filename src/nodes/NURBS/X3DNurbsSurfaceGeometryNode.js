@@ -415,6 +415,7 @@ x3dom.registerNodeType(
                 its._vf.solid = false;
                 its._vf.ccw = false;
                 its._cf.texCoord = node._cf.texCoord;
+                its._cf.color = node._cf.color;
                 var ind = [],
                     i1 = 0,
                     i2 = w;
@@ -477,7 +478,7 @@ x3dom.registerNodeType(
                 //add color node
                 if ( node._cf.color.node !== null )
                 {
-                    var cl = new x3dom.nodesType.Color(); //; check for ColorRGBA
+                    var cl = new x3dom.nodeTypes.Color(); //; check for ColorRGBA
                     cl._nameSpace = node._nameSpace;
                     cl._vf.color = new x3dom.fields.MFColor();
                     for ( var i = 0; i < data[ 5 ].length; i++ )
