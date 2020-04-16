@@ -657,7 +657,7 @@
                 }
                 // hash lookup failed, compute the point
                 var pnt,
-                    point = { C:[], Color:[] };
+                    point = { C: [], Color: [] };
                 if ( Object.keys( this.W ).length )
                 {
                     point = surfacePoint3DH( this.w, this.h, this.p, this.q,
