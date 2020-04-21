@@ -258,8 +258,6 @@ x3dom.registerNodeType(
 
                     this.colors = this.initColors( colorNode._vf.color, this.numColComponents );
                     x3dom.debug.assert( positions.length == colorNode._vf.color.length, "Sizes of color and controlPoint arrays differ!" );
-
-                    
                 }
 
                 if ( !this._hasCoarseMesh )
@@ -423,21 +421,23 @@ x3dom.registerNodeType(
                         fracU = u / ( this._vf.uDimension - 1 );
                         fracV = v / ( this._vf.vDimension - 1 );
                         if ( ncomp == 3 )
-                        { intpColor = new x3dom.fields.SFColor(
-                            _interp( colors, "r", fracU, fracV ),
-                            _interp( colors, "g", fracU, fracV ),
-                            _interp( colors, "b", fracU, fracV )
+                        {
+                            intpColor = new x3dom.fields.SFColor(
+                                _interp( colors, "r", fracU, fracV ),
+                                _interp( colors, "g", fracU, fracV ),
+                                _interp( colors, "b", fracU, fracV )
                             );
                         }
                         else
-                        { intpColor = new x3dom.fields.SFColorRGBA(
-                            _interp( colors, "r", fracU, fracV ),
-                            _interp( colors, "g", fracU, fracV ),
-                            _interp( colors, "b", fracU, fracV ),
-                            _interp( colors, "a", fracU, fracV )
+                        {
+                            intpColor = new x3dom.fields.SFColorRGBA(
+                                _interp( colors, "r", fracU, fracV ),
+                                _interp( colors, "g", fracU, fracV ),
+                                _interp( colors, "b", fracU, fracV ),
+                                _interp( colors, "a", fracU, fracV )
                             );
                         }
-                        
+
                         intpColors.push( intpColor );
                     }
                 }
@@ -469,7 +469,7 @@ x3dom.registerNodeType(
                 its._cf.texCoord = node._cf.texCoord;
                 if ( node.colors )
                 {
-                    var cl = node.numColComponents == 3 ? 
+                    var cl = node.numColComponents == 3 ?
                         new x3dom.nodeTypes.Color() :
                         new x3dom.nodeTypes.ColorRGBA();
                     cl._nameSpace = node._nameSpace;
@@ -546,13 +546,14 @@ x3dom.registerNodeType(
                     cl._vf.color = node.numColComponents == 3 ?
                         new x3dom.fields.MFColor() :
                         new x3dom.fields.MFColorRGBA();
-                    var SFCol, i;
+                    var SFCol,
+                        i;
                     for ( i = 0; i < data[ 5 ].length; i++ )
                     {
                         SFCol = node.numColComponents == 3 ?
                             new x3dom.fields.SFColor( data[ 5 ][ i ][ 0 ], data[ 5 ][ i ][ 1 ], data[ 5 ][ i ][ 2 ] ) :
                             new x3dom.fields.SFColorRGBA( data[ 5 ][ i ][ 0 ], data[ 5 ][ i ][ 1 ], data[ 5 ][ i ][ 2 ], data[ 5 ][ i ][ 3 ] );
-                        cl._vf.color.push(SFCol);
+                        cl._vf.color.push( SFCol );
                     }
                     its.addChild( cl );
                 }
