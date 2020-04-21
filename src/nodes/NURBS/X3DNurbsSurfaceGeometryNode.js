@@ -427,7 +427,6 @@ x3dom.registerNodeType(
                     }
                 }
                 return intpColors;
-                
             },
 
             createDefaultKnots : function ( n, o )
@@ -453,12 +452,12 @@ x3dom.registerNodeType(
                 its._vf.solid = false;
                 its._vf.ccw = false;
                 its._cf.texCoord = node._cf.texCoord;
-                if (this.colors)
+                if ( this.colors )
                 {
-                var cl = new x3dom.nodeTypes.Color(); //; check for ColorRGBA
-                cl._nameSpace = node._nameSpace;
-                cl._vf.color = this.colors;
-                its.addChild(cl);
+                    var cl = new x3dom.nodeTypes.Color(); //; check for ColorRGBA
+                    cl._nameSpace = node._nameSpace;
+                    cl._vf.color = this.colors;
+                    its.addChild( cl );
                 }
 
                 var ind = [],
