@@ -252,7 +252,7 @@ x3dom.registerNodeType(
                 if ( colorNode )
                 {
                     this.colors = this.initColors( colorNode._vf.color );
-                    x3dom.debug.assert( positions.length == colorNode._vf.colors.length, "Sizes of color and controlPoint arrays differ!" );
+                    x3dom.debug.assert( positions.length == colorNode._vf.color.length, "Sizes of color and controlPoint arrays differ!" );
 
                     if ( x3dom.isa( colorNode, x3dom.nodeTypes.ColorRGBA ) )
                     {
