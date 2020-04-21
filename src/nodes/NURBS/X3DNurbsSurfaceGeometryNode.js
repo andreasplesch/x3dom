@@ -452,9 +452,10 @@ x3dom.registerNodeType(
                 its._vf.solid = false;
                 its._vf.ccw = false;
                 its._cf.texCoord = node._cf.texCoord;
-                its._cf.color = new x3dom.nodeTypes.Color(); //; check for ColorRGBA
-                its._cf._nameSpace = node._nameSpace;
-                its._cf.color._vf.color = this.colors;
+                var cl = new x3dom.nodeTypes.Color(); // check for ColorRGBA
+                cl._nameSpace = node._nameSpace;
+                cl._vf.color = this.colors;
+                its.addChild(cl);
                 var ind = [],
                     i1 = 0,
                     i2 = w;
