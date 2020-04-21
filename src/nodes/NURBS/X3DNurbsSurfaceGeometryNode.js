@@ -422,7 +422,7 @@ x3dom.registerNodeType(
                     return col[ 0 ][ comp ] * (1 - fracU) * (1 - fracV) +
                         col[ 1 ][ comp ] * fracU * (1 - fracV) +
                         col[ 2 ][ comp ] * (1 - fracU) * fracV +
-                        col[ 3 ][ comp ] * fracU * fracV);
+                        col[ 3 ][ comp ] * fracU * fracV;
                 }
             },
 
