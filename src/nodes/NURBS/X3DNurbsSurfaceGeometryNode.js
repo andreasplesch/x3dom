@@ -406,12 +406,19 @@ x3dom.registerNodeType(
                 var intpColor,
                     fracU,
                     fracV;
-                for ( v = 0; v <= this.vDimension; v++ )
+                var _interp = function ( col, comp, fracU, fracV )
                 {
-                    for ( u = 0; u <= this.uDimension; u++ )
+                    return col[ 0 ][ comp ] * ( 1 - fracU ) * ( 1 - fracV ) +
+                        col[ 1 ][ comp ] * fracU * ( 1 - fracV ) +
+                        col[ 2 ][ comp ] * ( 1 - fracU ) * fracV +
+                        col[ 3 ][ comp ] * fracU * fracV;
+                };
+                for ( v = 0; v < this._vf.vDimension; v++ )
+                {
+                    for ( u = 0; u < this._vf.uDimension; u++ )
                     {
-                        fracU = u / this.uDimension;
-                        fracV = v / this.vDimension;
+                        fracU = u / ( this._vf.uDimension - 1 );
+                        fracV = v / ( this._vf.vDimension - 1 );
                         intpColors.push( new x3dom.fields.SFColor(
                             _interp( colors, "r", fracU, fracV ),
                             _interp( colors, "g", fracU, fracV ),
@@ -420,13 +427,6 @@ x3dom.registerNodeType(
                     }
                 }
                 return intpColors;
-                var _interp = function ( col, comp, fracU, fracV )
-                {
-                    return col[ 0 ][ comp ] * ( 1 - fracU ) * ( 1 - fracV ) +
-                        col[ 1 ][ comp ] * fracU * ( 1 - fracV ) +
-                        col[ 2 ][ comp ] * ( 1 - fracU ) * fracV +
-                        col[ 3 ][ comp ] * fracU * fracV;
-                };
             },
 
             createDefaultKnots : function ( n, o )
@@ -452,10 +452,14 @@ x3dom.registerNodeType(
                 its._vf.solid = false;
                 its._vf.ccw = false;
                 its._cf.texCoord = node._cf.texCoord;
-                var cl = new x3dom.nodeTypes.Color(); // check for ColorRGBA
-                cl._nameSpace = node._nameSpace;
-                cl._vf.color = this.colors;
-                its.addChild(cl);
+                if ( this.colors )
+                {
+                    var cl = new x3dom.nodeTypes.Color(); //; check for ColorRGBA
+                    cl._nameSpace = node._nameSpace;
+                    cl._vf.color = this.colors;
+                    its.addChild( cl );
+                }
+
                 var ind = [],
                     i1 = 0,
                     i2 = w;
