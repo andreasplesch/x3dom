@@ -400,30 +400,33 @@ x3dom.registerNodeType(
                     return colors.copy();
                 }
                 // fill in with missing colors with bilinear interpolation
-                var u, v;
+                var u,
+                    v;
                 var intpColors = new x3dom.fields.MFColor();
-                var intpColor, fracU, fracV;
+                var intpColor,
+                    fracU,
+                    fracV;
                 for ( v = 0; v <= this.vDimension; v++ )
                 {
-                    for (u = 0; u <= this.uDimension; u++ )
+                    for ( u = 0; u <= this.uDimension; u++ )
                     {
                         fracU = u / this.uDimension;
                         fracV = v / this.vDimension;
-                        intpColors.push( new x3dom.fields.SFColor (
-                            _interp ( colors, "r", fracU, fracV ),
-                            _interp ( colors, "g", fracU, fracV ),
-                            _interp ( colors, "b", fracU, fracV )
-                        ));
+                        intpColors.push( new x3dom.fields.SFColor(
+                            _interp( colors, "r", fracU, fracV ),
+                            _interp( colors, "g", fracU, fracV ),
+                            _interp( colors, "b", fracU, fracV )
+                        ) );
                     }
                 }
                 return intpColors;
                 var _interp = function ( col, comp, fracU, fracV )
                 {
-                    return col[ 0 ][ comp ] * (1 - fracU) * (1 - fracV) +
-                        col[ 1 ][ comp ] * fracU * (1 - fracV) +
-                        col[ 2 ][ comp ] * (1 - fracU) * fracV +
+                    return col[ 0 ][ comp ] * ( 1 - fracU ) * ( 1 - fracV ) +
+                        col[ 1 ][ comp ] * fracU * ( 1 - fracV ) +
+                        col[ 2 ][ comp ] * ( 1 - fracU ) * fracV +
                         col[ 3 ][ comp ] * fracU * fracV;
-                }
+                };
             },
 
             createDefaultKnots : function ( n, o )
