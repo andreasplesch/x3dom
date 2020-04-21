@@ -243,6 +243,23 @@ x3dom.registerNodeType(
                 this._vf.ccw = false;
                 this._vf.solid = false;
                 this._vf.useGeoCache = false;
+
+                var coordNode = this._cf.controlPoint.node;
+                var positions = coordNode.getPoints();
+                var numColComponents = 3;
+                this.colors = null;
+                var colorNode = this._cf.color.node;
+                if ( colorNode )
+                {
+                    this.colors = this.initColors( colorNode._vf.color );
+                    x3dom.debug.assert( positions.length == colorNode._vf.colors.length, "Sizes of color and controlPoint arrays differ!" );
+
+                    if ( x3dom.isa( colorNode, x3dom.nodeTypes.ColorRGBA ) )
+                    {
+                        numColComponents = 4;
+                    }
+                }
+
                 if ( !this._hasCoarseMesh )
                 {
                     var its = this.createCoarseITS( this );
@@ -336,22 +353,6 @@ x3dom.registerNodeType(
                     }
                 };
 
-                var coordNode = this._cf.controlPoint.node;
-                var positions = coordNode.getPoints();
-
-                var numColComponents = 3;
-                var colorNode = this._cf.color.node;
-                var colors = null;
-                if ( colorNode )
-                {
-                    colors = colorNode._vf.color;
-                    x3dom.debug.assert( positions.length == colors.length, "Sizes of color and controlPoint arrays differ!" );
-
-                    if ( x3dom.isa( colorNode, x3dom.nodeTypes.ColorRGBA ) )
-                    {
-                        numColComponents = 4;
-                    }
-                }
                 //x3dom.debug.assert(coordNode);
                 var startmessage = [
                     this._vf.uDimension - 1,
@@ -365,7 +366,7 @@ x3dom.registerNodeType(
                     T,
                     this.basisFunsCache,
                     this.uv,
-                    colors,
+                    this.colors,
                     performance.now()
                 ];
 
@@ -392,6 +393,39 @@ x3dom.registerNodeType(
             // do nothing until first tessellation
             },
 
+            initColors : function ( colors )
+            {
+                if ( colors.length !== 4 || this.uDimension * this.vDimension <= 4 )
+                {
+                    return colors.copy();
+                }
+                // fill in with missing colors with bilinear interpolation
+                var u, v;
+                var intpColors = new x3dom.fields.MFColor();
+                var intpColor, fracU, fracV;
+                for ( v = 0; v <= this.vDimension; v++ )
+                {
+                    for (u = 0; u <= this.uDimension; u++ )
+                    {
+                        fracU = u / this.uDimension;
+                        fracV = v / this.vDimension;
+                        intpColors.push( new x3dom.fields.SFColor (
+                            _interp ( colors, "r", fracU, fracV ),
+                            _interp ( colors, "g", fracU, fracV ),
+                            _interp ( colors, "b", fracU, fracV )
+                        ));
+                    }
+                }
+                return intpColors;
+                var _interp = function ( col, comp, fracU, fracV )
+                {
+                    return col[ 0 ][ comp ] * (1 - fracU) * (1 - fracV) +
+                        col[ 1 ][ comp ] * fracU * (1 - fracV) +
+                        col[ 2 ][ comp ] * (1 - fracU) * fracV +
+                        col[ 3 ][ comp ] * fracU * fracV);
+                }
+            },
+
             createDefaultKnots : function ( n, o )
             {
                 var knots = Array( n + o ).fill( 0 );
@@ -415,7 +449,9 @@ x3dom.registerNodeType(
                 its._vf.solid = false;
                 its._vf.ccw = false;
                 its._cf.texCoord = node._cf.texCoord;
-                its._cf.color = node._cf.color;
+                its._cf.color = new x3dom.nodeTypes.Color(); //; check for ColorRGBA
+                its._cf._nameSpace = node._nameSpace;
+                its._cf.color._vf.color = this.colors;
                 var ind = [],
                     i1 = 0,
                     i2 = w;
