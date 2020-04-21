@@ -259,7 +259,9 @@
                 Nu,
                 Nv,
                 C = [ 0.0, 0.0, 0.0 ],
-                temp = [];
+                Col = [],
+                temp = [],
+                tempColor = [];
 
             spanu = findSpan( n, p, u, U );
             Nu = basisFuns( spanu, u, p, U );
@@ -291,8 +293,36 @@
                 C[ 2 ] += Nv[ l ] * temp[ j + 2 ];
                 j += 3;
             }
+            
+            if ( Color !== null )
+            {
+                j = 0;
+                for ( l = 0; l <= q; l++ )
+                {
+                    indv = spanv - q + l;
+                    for ( k = 0; k < 3; k++ )
+                    {tempColor[ j + k ] = 0.0;}
+                    for ( k = 0; k <= p; k++ )
+                    {
+                        i = indu + k + ( indv * ( n + 1 ) );
+                        tempColor[ j + 0 ] += Nu[ k ] * Color[ i ].r;
+                        tempColor[ j + 1 ] += Nu[ k ] * Color[ i ].g;
+                        tempColor[ j + 2 ] += Nu[ k ] * Color[ i ].b;
+                    }
+                    j += 3;
+                }
 
-            return C;
+                j = 0;
+                for ( l = 0; l <= q; l++ )
+                {
+                    Col[ 0 ] += Nv[ l ] * tempColor[ j + 0 ];
+                    Col[ 1 ] += Nv[ l ] * tempColor[ j + 1 ];
+                    Col[ 2 ] += Nv[ l ] * tempColor[ j + 2 ];
+                    j += 3;
+                }
+            }
+
+            return { C: C, Color: Col };
         } /* surfacePoint3D */
 
         function curvePoint2DH ( n, p, U, P, W, u )
@@ -667,9 +697,10 @@
                 }
                 else
                 {
-                    pnt = surfacePoint3D( this.w, this.h, this.p, this.q,
+                    point = surfacePoint3D( this.w, this.h, this.p, this.q,
                         this.U, this.V, this.P,
-                        uv[ 0 ], uv[ 1 ] );
+                        uv[ 0 ], uv[ 1 ], this.Colors );
+                    pnt = point.C;
                 }
 
                 // do not memoize this point whilst tesselating trim curves
