@@ -293,7 +293,7 @@
                 C[ 2 ] += Nv[ l ] * temp[ j + 2 ];
                 j += 3;
             }
-            
+
             if ( Color !== null )
             {
                 j = 0;
