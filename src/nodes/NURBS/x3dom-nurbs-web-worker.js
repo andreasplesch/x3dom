@@ -329,9 +329,9 @@
                     Col[ 1 ] += Nv[ l ] * tempColor[ j + 1 ];
                     Col[ 2 ] += Nv[ l ] * tempColor[ j + 2 ];
                     if ( nCol == 4 )
-                        {
-                            Col[ 3 ] += Nv[ l ] * tempColor[ j + 3 ];
-                        }
+                    {
+                        Col[ 3 ] += Nv[ l ] * tempColor[ j + 3 ];
+                    }
                     j += nCol;
                 }
             }
