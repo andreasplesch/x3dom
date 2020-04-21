@@ -240,24 +240,26 @@ x3dom.registerNodeType(
             nodeChanged : function ()
             {
                 this._needReRender = true;
-                this._vf.ccw = false;
-                this._vf.solid = false;
+                //this._vf.ccw = false;
+                //this._vf.solid = false;
                 this._vf.useGeoCache = false;
 
                 var coordNode = this._cf.controlPoint.node;
                 var positions = coordNode.getPoints();
-                var numColComponents = 3;
+                this.numColComponents = 3;
                 this.colors = null;
                 var colorNode = this._cf.color.node;
                 if ( colorNode )
                 {
-                    this.colors = this.initColors( colorNode._vf.color );
-                    x3dom.debug.assert( positions.length == colorNode._vf.color.length, "Sizes of color and controlPoint arrays differ!" );
-
                     if ( x3dom.isa( colorNode, x3dom.nodeTypes.ColorRGBA ) )
                     {
-                        numColComponents = 4;
+                        this.numColComponents = 4;
                     }
+
+                    this.colors = this.initColors( colorNode._vf.color, this.numColComponents );
+                    x3dom.debug.assert( positions.length == colorNode._vf.color.length, "Sizes of color and controlPoint arrays differ!" );
+
+                    
                 }
 
                 if ( !this._hasCoarseMesh )
@@ -393,7 +395,7 @@ x3dom.registerNodeType(
             // do nothing until first tessellation
             },
 
-            initColors : function ( colors )
+            initColors : function ( colors, ncomp )
             {
                 if ( colors.length !== 4 || this.uDimension * this.vDimension <= 4 )
                 {
@@ -402,7 +404,7 @@ x3dom.registerNodeType(
                 // fill in with missing colors with bilinear interpolation
                 var u,
                     v;
-                var intpColors = new x3dom.fields.MFColor();
+                var intpColors = ncomp == 3 ? new x3dom.fields.MFColor() : new x3dom.fields.MFColorRGBA();
                 var intpColor,
                     fracU,
                     fracV;
@@ -413,17 +415,30 @@ x3dom.registerNodeType(
                         col[ 2 ][ comp ] * ( 1 - fracU ) * fracV +
                         col[ 3 ][ comp ] * fracU * fracV;
                 };
+
                 for ( v = 0; v < this._vf.vDimension; v++ )
                 {
                     for ( u = 0; u < this._vf.uDimension; u++ )
                     {
                         fracU = u / ( this._vf.uDimension - 1 );
                         fracV = v / ( this._vf.vDimension - 1 );
-                        intpColors.push( new x3dom.fields.SFColor(
+                        if ( ncomp == 3 )
+                        { intpColor = new x3dom.fields.SFColor(
                             _interp( colors, "r", fracU, fracV ),
                             _interp( colors, "g", fracU, fracV ),
                             _interp( colors, "b", fracU, fracV )
-                        ) );
+                            );
+                        }
+                        else
+                        { intpColor = new x3dom.fields.SFColorRGBA(
+                            _interp( colors, "r", fracU, fracV ),
+                            _interp( colors, "g", fracU, fracV ),
+                            _interp( colors, "b", fracU, fracV ),
+                            _interp( colors, "a", fracU, fracV )
+                            );
+                        }
+                        
+                        intpColors.push( intpColor );
                     }
                 }
                 return intpColors;
@@ -452,9 +467,11 @@ x3dom.registerNodeType(
                 its._vf.solid = false;
                 its._vf.ccw = false;
                 its._cf.texCoord = node._cf.texCoord;
-                if ( this.colors )
+                if ( node.colors )
                 {
-                    var cl = new x3dom.nodeTypes.Color(); //; check for ColorRGBA
+                    var cl = node.numColComponents == 3 ? 
+                        new x3dom.nodeTypes.Color() :
+                        new x3dom.nodeTypes.ColorRGBA();
                     cl._nameSpace = node._nameSpace;
                     cl._vf.color = this.colors;
                     its.addChild( cl );
@@ -492,10 +509,10 @@ x3dom.registerNodeType(
             {
                 var its = new x3dom.nodeTypes.IndexedTriangleSet();
                 its._nameSpace = node._nameSpace;
-                its._vf.normalPerVertex = node._vf.normalPerVertex;
+                its._vf.normalPerVertex = true;//node._vf.normalPerVertex;
                 its._vf.colorPerVertex = true;
-                its._vf.solid = false;
-                its._vf.ccw = false;
+                its._vf.solid = node._vf.solid;
+                its._vf.ccw = node._vf.ccw;
                 its._vf.index = data[ 0 ];
                 var co = new x3dom.nodeTypes.Coordinate();
                 co._nameSpace = node._nameSpace;
@@ -522,13 +539,20 @@ x3dom.registerNodeType(
                 //add color node
                 if ( node._cf.color.node !== null )
                 {
-                    var cl = new x3dom.nodeTypes.Color(); //; check for ColorRGBA
+                    var cl = node.numColComponents == 3 ?
+                        new x3dom.nodeTypes.Color() :
+                        new x3dom.nodeTypes.ColorRGBA();
                     cl._nameSpace = node._nameSpace;
-                    cl._vf.color = new x3dom.fields.MFColor();
-                    for ( var i = 0; i < data[ 5 ].length; i++ )
+                    cl._vf.color = node.numColComponents == 3 ?
+                        new x3dom.fields.MFColor() :
+                        new x3dom.fields.MFColorRGBA();
+                    var SFCol, i;
+                    for ( i = 0; i < data[ 5 ].length; i++ )
                     {
-                        cl._vf.color.push(
-                            new x3dom.fields.SFColor( data[ 5 ][ i ][ 0 ], data[ 5 ][ i ][ 1 ], data[ 5 ][ i ][ 2 ] ) );
+                        SFCol = node.numColComponents == 3 ?
+                            new x3dom.fields.SFColor( data[ 5 ][ i ][ 0 ], data[ 5 ][ i ][ 1 ], data[ 5 ][ i ][ 2 ] ) :
+                            new x3dom.fields.SFColorRGBA( data[ 5 ][ i ][ 0 ], data[ 5 ][ i ][ 1 ], data[ 5 ][ i ][ 2 ], data[ 5 ][ i ][ 3 ] );
+                        cl._vf.color.push(SFCol);
                     }
                     its.addChild( cl );
                 }
