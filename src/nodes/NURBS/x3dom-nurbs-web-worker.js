@@ -167,9 +167,10 @@
                 C = [],
                 Col = [],
                 Cw = [ 0.0, 0.0, 0.0, 0.0 ],
-                Colorw = [ 0.0, 0.0, 0.0, 0.0 ],
+                Colorw = [ 0.0, 0.0, 0.0, 0.0, 0.0 ],
                 temp = [],
-                tempColor = [];
+                tempColor = [],
+                nCol = Color !== null && Color.a === undefined ? 4 : 3;
 
             spanu = findSpan( n, p, u, U );
             Nu = basisFuns( spanu, u, p, U );
@@ -214,7 +215,7 @@
                 for ( l = 0; l <= q; l++ )
                 {
                     indv = spanv - q + l;
-                    for ( k = 0; k < 4; k++ )
+                    for ( k = 0; k < nCol + 1; k++ )
                     {tempColor[ j + k ] = 0.0;}
                     for ( k = 0; k <= p; k++ )
                     {
@@ -222,24 +223,28 @@
                         tempColor[ j + 0 ] += Nu[ k ] * Color[ i ].r;
                         tempColor[ j + 1 ] += Nu[ k ] * Color[ i ].g;
                         tempColor[ j + 2 ] += Nu[ k ] * Color[ i ].b;
-                        tempColor[ j + 3 ] += Nu[ k ] * W[ i ];
+                        if ( nCol == 4 )
+                        {
+                            tempColor[ j + 3 ] += Nu[ k ] * Color[ i ].a;
+                        }
+                        tempColor[ j + nCol ] += Nu[ k ] * W[ i ];
                     }
-                    j += 4;
+                    j += nCol + 1;
                 }
 
                 j = 0;
                 for ( l = 0; l <= q; l++ )
                 {
-                    Colorw[ 0 ] += Nv[ l ] * tempColor[ j + 0 ];
-                    Colorw[ 1 ] += Nv[ l ] * tempColor[ j + 1 ];
-                    Colorw[ 2 ] += Nv[ l ] * tempColor[ j + 2 ];
-                    Colorw[ 3 ] += Nv[ l ] * tempColor[ j + 3 ];
-                    j += 4;
+                    for ( k = 0; k <= nCol; k++ )
+                    {
+                        Colorw[ k ] += Nv[ l ] * tempColor[ j + k ];
+                    }
+                    j += nCol + 1;
                 }
 
-                for ( j = 0; j < 3; j++ )
+                for ( j = 0; j < nCol; j++ )
                 {
-                    Col[ j ] = Colorw[ j ] / Colorw[ 3 ];
+                    Col[ j ] = Colorw[ j ] / Colorw[ nCol ];
                 }
             }
 
@@ -259,9 +264,10 @@
                 Nu,
                 Nv,
                 C = [ 0.0, 0.0, 0.0 ],
-                Col = [ 0.0, 0.0, 0.0 ],
+                Col = [ 0.0, 0.0, 0.0, 0.0 ],
                 temp = [],
-                tempColor = [];
+                tempColor = [],
+                nCol = Color !== null && Color.a === undefined ? 4 : 3;
 
             spanu = findSpan( n, p, u, U );
             Nu = basisFuns( spanu, u, p, U );
@@ -300,7 +306,7 @@
                 for ( l = 0; l <= q; l++ )
                 {
                     indv = spanv - q + l;
-                    for ( k = 0; k < 3; k++ )
+                    for ( k = 0; k < nCol; k++ )
                     {tempColor[ j + k ] = 0.0;}
                     for ( k = 0; k <= p; k++ )
                     {
@@ -308,8 +314,12 @@
                         tempColor[ j + 0 ] += Nu[ k ] * Color[ i ].r;
                         tempColor[ j + 1 ] += Nu[ k ] * Color[ i ].g;
                         tempColor[ j + 2 ] += Nu[ k ] * Color[ i ].b;
+                        if ( nCol == 4 )
+                        {
+                            tempColor[ j + 3 ] += Nu[ k ] * Color[ i ].a;
+                        }
                     }
-                    j += 3;
+                    j += nCol;
                 }
 
                 j = 0;
@@ -318,7 +328,11 @@
                     Col[ 0 ] += Nv[ l ] * tempColor[ j + 0 ];
                     Col[ 1 ] += Nv[ l ] * tempColor[ j + 1 ];
                     Col[ 2 ] += Nv[ l ] * tempColor[ j + 2 ];
-                    j += 3;
+                    if ( nCol == 4 )
+                        {
+                            Col[ 3 ] += Nv[ l ] * tempColor[ j + 3 ];
+                        }
+                    j += nCol;
                 }
             }
 
