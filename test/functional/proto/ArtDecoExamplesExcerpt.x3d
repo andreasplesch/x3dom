@@ -19,9 +19,22 @@
   <Scene>
     <!-- Note that these url address references were changed from original collection in Basic X3D Examples Archive and instead reference local excerpt -->
     <WorldInfo title='ArtDecoExamplesExcerpt.x3d'/>
-    <ExternProtoDeclare appinfo='UniversalMediaMaterials prototype' documentation='https://www.web3d.org/x3d/content/examples/Basic/UniversalMediaMaterials' name='ArtDeco00' url='"ArtDecoPrototypesExcerpt.x3d#ArtDeco00" "http://X3dGraphics.com/examples/X3dForWebAuthors/Chapter14Prototypes/ArtDecoPrototypesExcerpt.x3d#ArtDeco00" "ArtDecoPrototypesExcerpt.wrl#ArtDeco00" "http://X3dGraphics.com/examples/X3dForWebAuthors/Chapter14Prototypes/ArtDecoPrototypesExcerpt.wrl#ArtDeco00"'/>
-    <ExternProtoDeclare appinfo='UniversalMediaMaterials prototype' documentation='https://www.web3d.org/x3d/content/examples/Basic/UniversalMediaMaterials' name='ArtDeco01' url='"ArtDecoPrototypesExcerpt.x3d#ArtDeco01" "http://X3dGraphics.com/examples/X3dForWebAuthors/Chapter14Prototypes/ArtDecoPrototypesExcerpt.x3d#ArtDeco01" "ArtDecoPrototypesExcerpt.wrl#ArtDeco01" "http://X3dGraphics.com/examples/X3dForWebAuthors/Chapter14Prototypes/ArtDecoPrototypesExcerpt.wrl#ArtDeco01"'/>
-    <ExternProtoDeclare appinfo='UniversalMediaMaterials prototype' documentation='https://www.web3d.org/x3d/content/examples/Basic/UniversalMediaMaterials' name='ArtDeco02' url='"ArtDecoPrototypesExcerpt.x3d#ArtDeco02" "http://X3dGraphics.com/examples/X3dForWebAuthors/Chapter14Prototypes/ArtDecoPrototypesExcerpt.x3d#ArtDeco02" "ArtDecoPrototypesExcerpt.wrl#ArtDeco02" "http://X3dGraphics.com/examples/X3dForWebAuthors/Chapter14Prototypes/ArtDecoPrototypesExcerpt.wrl#ArtDeco02"'/>
+    <ProtoDeclare appinfo='UniversalMediaMaterials prototype' documentation='https://www.web3d.org/x3d/content/examples/Basic/UniversalMediaMaterials' name='ArtDeco00'>
+      <ProtoBody>
+        <Material ambientIntensity='0.25' diffuseColor='0.282435 0.085159 0.134462' shininess='0.127273' specularColor='0.276305 0.11431 0.139857'/>
+      </ProtoBody>
+    </ProtoDeclare>
+    <ProtoDeclare appinfo='UniversalMediaMaterials prototype' documentation='https://www.web3d.org/x3d/content/examples/Basic/UniversalMediaMaterials' name='ArtDeco01'>
+      <ProtoBody>
+        <Material ambientIntensity='0.254777' diffuseColor='0.685208 0.134679 0.332385' shininess='0.071429' specularColor='0.122449 0.050035 0.050035'/>
+      </ProtoBody>
+    </ProtoDeclare>
+    <ProtoDeclare appinfo='UniversalMediaMaterials prototype' documentation='https://www.web3d.org/x3d/content/examples/Basic/UniversalMediaMaterials' name='ArtDeco02'>
+      <!-- computed conversion ambientIntensity=1.745282, normalized to 1.0 -->
+      <ProtoBody>
+        <Material ambientIntensity='1.0' diffuseColor='0.536861 0.0529 0.245479' shininess='0.832432' specularColor='0.805292 0.765198 0.747416'/>
+      </ProtoBody>
+    </ProtoDeclare>
     <Group>
       <NavigationInfo headlight='false'/>
       <Viewpoint DEF='Front' description='Front view' position='0.0 0.0 12.0'/>
