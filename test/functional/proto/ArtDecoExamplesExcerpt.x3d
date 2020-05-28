@@ -50,7 +50,7 @@
       <DirectionalLight direction='0.0 1.0 -0.5' intensity='0.5'/>
       <Anchor description='Back to front view' url='"#Front"'>
         <Transform translation='0.0 0.0 -0.5'>
-          <Inline url='"../../Basic/UniversalMediaMaterials/gridBack.x3d" "https://www.web3d.org/x3d/content/examples/Basic/UniversalMediaMaterials/gridBack.x3d" "../../Basic/UniversalMediaMaterials/gridBack.wrl" "https://www.web3d.org/x3d/content/examples/Basic/UniversalMediaMaterials/gridBack.wrl"'/>
+          <Inline crossOrigin='anonymous' "https://www.web3d.org/x3d/content/examples/Basic/UniversalMediaMaterials/gridBack.x3d" "../../Basic/UniversalMediaMaterials/gridBack.wrl" "https://www.web3d.org/x3d/content/examples/Basic/UniversalMediaMaterials/gridBack.wrl"'/>
         </Transform>
       </Anchor>
       <Viewpoint DEF='View00' description='ArtDeco00' position='-3.75 3.75 3.0'/>
@@ -64,7 +64,7 @@
           </Shape>
         </Anchor>
         <Transform translation='0.0 0.3 0.5'>
-          <Anchor description='ArtDeco' parameter='"target=_source"' url='"ArtDecoPrototypesExcerpt.html#ProtoDeclare_ArtDeco00" "https://www.web3d.org/x3d/content/examples/Basic/UniversalMediaMaterials/ArtDecoPrototypesExcerpt.html#ProtoDeclare_ArtDeco"'>
+          <Anchor crossOrigin='anonymous' description='ArtDeco' parameter='"target=_source"' url='"ArtDecoPrototypesExcerpt.html#ProtoDeclare_ArtDeco00" "https://www.web3d.org/x3d/content/examples/Basic/UniversalMediaMaterials/ArtDecoPrototypesExcerpt.html#ProtoDeclare_ArtDeco"'>
             <Shape>
               <Appearance>
                 <Material DEF='TextMat' diffuseColor='1.0 1.0 1.0'/>
@@ -78,7 +78,7 @@
       </Transform>
       <Viewpoint DEF='View01' description='ArtDeco01' position='-2.25 3.75 3.0'/>
       <Transform translation='-2.25 3.75 0.0'>
-        <Anchor description='ArtDeco01 view' url='"#View01"'>
+        <Anchor crossOrigin='anonymous' description='ArtDeco01 view' url='"#View01"'>
           <Shape>
             <Appearance>
               <ProtoInstance containerField='material' name='ArtDeco01'/>
@@ -87,7 +87,7 @@
           </Shape>
         </Anchor>
         <Transform translation='0.0 0.3 0.5'>
-          <Anchor description='ArtDeco01' parameter='"target=_source"' url='"ArtDecoPrototypesExcerpt.html#ProtoDeclare_ArtDeco01" "http://X3dGraphics.com/examples/X3dForWebAuthors/Chapter14Prototypes/ArtDecoPrototypesExcerpt.html#ProtoDeclare_ArtDeco01"'>
+          <Anchor crossOrigin='anonymous'  description='ArtDeco01' parameter='"target=_source"' url='"ArtDecoPrototypesExcerpt.html#ProtoDeclare_ArtDeco01" "http://X3dGraphics.com/examples/X3dForWebAuthors/Chapter14Prototypes/ArtDecoPrototypesExcerpt.html#ProtoDeclare_ArtDeco01"'>
             <Shape>
               <Appearance>
                 <Material USE='TextMat'/>
@@ -110,7 +110,7 @@
           </Shape>
         </Anchor>
         <Transform translation='0.0 0.3 0.5'>
-          <Anchor description='ArtDeco02' parameter='"target=_source"' url='"ArtDecoPrototypesExcerpt.html#ProtoDeclare_ArtDeco02" "http://X3dGraphics.com/examples/X3dForWebAuthors/Chapter14Prototypes/ArtDecoPrototypesExcerpt.html#ProtoDeclare_ArtDeco02"'>
+          <Anchor crossOrigin='anonymous' description='ArtDeco02' parameter='"target=_source"' url='"ArtDecoPrototypesExcerpt.html#ProtoDeclare_ArtDeco02" "http://X3dGraphics.com/examples/X3dForWebAuthors/Chapter14Prototypes/ArtDecoPrototypesExcerpt.html#ProtoDeclare_ArtDeco02"'>
             <Shape>
               <Appearance>
                 <Material USE='TextMat'/>
