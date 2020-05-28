@@ -24,6 +24,7 @@ x3dom.NodeNameSpace = function ( name, document )
     this.defMap = {};
     this.parent = null;
     this.childSpaces = [];
+    this.protos = []; // the ProtoDeclarationArray
 };
 
 /**
@@ -392,6 +393,7 @@ x3dom.NodeNameSpace.prototype.setupTree = function ( domNode, parent )
         }
         else
         {
+            
             // check and create ROUTEs
             if ( domNode.localName.toLowerCase() === "route" )
             {
@@ -521,6 +523,10 @@ x3dom.NodeNameSpace.prototype.setupTree = function ( domNode, parent )
                 }
             }.bind( this ) );
         }
+        if ( this.setupProto( domNode, parent ) )
+        {
+            console.log("Proto setup");
+        }
         else
         {
             // be nice to users who use nodes not (yet) known to the system
@@ -531,3 +537,55 @@ x3dom.NodeNameSpace.prototype.setupTree = function ( domNode, parent )
 
     return n;
 };
+
+x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
+{
+    var tagName = domNode.localName.toLowerCase();
+    var name = domNode.getAttribute( "name" );
+    if ( parent && tagName == "protodeclare" )
+    {
+        console.log("found ProtoDeclare", name, domNode)
+        var protoDeclaration = {
+            'name' : name,
+            'isExternProto' : false,
+            'fields' : [], //FieldDefinitionArray
+        }
+        var protoInterface = domNode.querySelector('ProtoInterface');
+        var protoBody = domNode.querySelector('ProtoBody');
+        if (protoBody)
+        {
+            protoDeclaration['ProtoBody'] = protoBody;
+            protoDeclaration['newInstance'] = function() {
+                var c = this.setupTree( protoBody.querySelector('*'), parent );//only use first child
+                console.log(c);
+                return c
+            }.bind( this )
+            this.protos.push( protoDeclaration );
+        }
+        else
+        {
+            x3dom.debug.logWarning( "ProtoDeclare without a ProtoBody definition: " + domNode.name);
+        }
+    }
+    if ( parent && tagName == "protoinstance" )
+    {
+        console.log("found ProtoInstance", domNode);
+        if (name)
+        {
+            var protoDeclaration = this.protos.find( proto => proto.name == name );
+            if (protoDeclaration == undefined)
+            {
+                x3dom.debug.logWarning( "ProtoInstance without a ProtoDeclaration " + name );
+                return true
+            }
+            else
+            {
+                parent.addChild( protoDeclaration.newInstance(), domNode.getAttribute( "containerField" ));
+            }
+        }
+        else {
+            x3dom.debug.logWarning( "ProtoInstance without a name under " + parent.localName)
+        }
+    }
+    return true
+}
