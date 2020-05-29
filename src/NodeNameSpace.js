@@ -407,7 +407,7 @@ x3dom.NodeNameSpace.prototype.setupTree = function ( domNode, parent )
                 }
                 else
                 {
-                    x3dom.debug.logInfo("ROUTE: from=" + fromNode._DEF + ", to=" + toNode._DEF);
+                    x3dom.debug.logInfo( "ROUTE: from=" + fromNode._DEF + ", to=" + toNode._DEF );
                     fnAtt = route.getAttribute( "fromField" ) || route.getAttribute( "fromfield" );
                     tnAtt = route.getAttribute( "toField" ) || route.getAttribute( "tofield" );
                     fromNode.setupRoute( fnAtt, toNode, tnAtt );
@@ -523,11 +523,11 @@ x3dom.NodeNameSpace.prototype.setupTree = function ( domNode, parent )
             }.bind( this ) );
         }
         var processProto = this.setupProto( domNode, parent );
-        if ( processProto == 'ProtoDeclare' )
+        if ( processProto == "ProtoDeclare" )
         {
             n = null;
         }
-        else if ( processProto == 'ProtoInstance' )
+        else if ( processProto == "ProtoInstance" )
         {
             n = null;
         }
@@ -561,7 +561,7 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
         {
             x3dom.debug.logWarning( "ProtoDeclare without a ProtoBody definition: " + domNode.name );
         }
-        return 'ProtoDeclare';
+        return "ProtoDeclare";
     }
     if ( parent && tagName == "protoinstance" )
     {
@@ -577,14 +577,14 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
             {
                 var firstNode = protoDeclaration.newInstance( parent );
                 parent.addChild( firstNode, domNode.getAttribute( "containerField" ) );
-                parent._xmlNode.append(firstNode._xmlNode);
+                parent._xmlNode.append( firstNode._xmlNode );
             }
         }
         else
         {
             x3dom.debug.logWarning( "ProtoInstance without a name under " + parent.localName );
         }
-        return 'ProtoInstance';
+        return "ProtoInstance";
     }
     return true;
 };
@@ -596,25 +596,24 @@ x3dom.ProtoDeclaration = function ( namespace, protoBody, name, isExternProto, f
     this.name = name;
     this.isExternProto = isExternProto || false;
     this.fields = fields || [];
-
-}
+};
 
 x3dom.ProtoDeclaration.prototype.newInstance = function ( parent )
 {
     var nameSpace = new x3dom.NodeNameSpace( "protoNS", this._nameSpace.doc );
     nameSpace.setBaseURL( this._nameSpace.baseURL + this.name );
-    this._nameSpace.addSpace( nameSpace )
+    this._nameSpace.addSpace( nameSpace );
 
     var children = this._protoBody.childNodes;
-    var firstNode = null , i ;
+    var firstNode = null,
+        i ;
     for ( i = 0; i < children.length; i++ )
     {
-
-        var c = nameSpace.setupTree( children[i], parent );
+        var c = nameSpace.setupTree( children[ i ], parent );
         if ( c !== null && firstNode == null ) // first x3d node
         {
             firstNode = c;
         }
     };
-    return firstNode
-}
+    return firstNode;
+};
