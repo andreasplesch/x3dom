@@ -572,7 +572,7 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
         console.log("found ProtoInstance", domNode);
         if (name)
         {
-            var protoDeclaration = this.protos.find( proto => proto.name == name );
+            var protoDeclaration = this.protos.find( function( proto ) { return proto.name == name; } );
             if (protoDeclaration == undefined)
             {
                 x3dom.debug.logWarning( "ProtoInstance without a ProtoDeclaration " + name );
