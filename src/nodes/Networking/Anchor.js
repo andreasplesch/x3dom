@@ -95,8 +95,15 @@ x3dom.registerNodeType(
 
                 if ( anchor.length > 0 && url == '#' + anchor )
                 {
-                    var vp = this._nameSpace.defMap[ anchor ];
-                    vp._xmlNode.setAttribute('bind','true');
+                    if ( anchor in this._nameSpace.defMap )
+                    {
+                        var vp = this._nameSpace.defMap[ anchor ];
+                        vp._xmlNode.setAttribute( 'bind', 'true' );
+                    }
+                    else
+                    {
+                        x3dom.debug.logWarning( "Anchor #viewpoint=" + anchor + " not in DEF list." );
+                    }
                     return
                 }
 
