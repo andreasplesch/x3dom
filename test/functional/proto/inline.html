@@ -22,7 +22,7 @@
         <Environment gammaCorrectionDefault="none"></Environment>
         <Scene>
             <Transform>
-                <Inline onload='handleLoad(event)' id="inline" nameSpaceName="nurbs" mapDEFToID="true" url="TropicalExamplesInternal.x3d" ></Inline>
+                <Inline onload='handleLoad(event)' id="inline" nameSpaceName="proto" mapDEFToID="true" url="TropicalExamplesInternal.x3d" ></Inline>
             </Transform>
         </Scene>
     </X3D>
@@ -42,10 +42,10 @@
     </select>
 </body>
 <script>
-    const inline = document.querySelector('#Inline');
+    const inline = document.querySelector( '#Inline' );
     const ext = '.x3d';
     function handleChange(event) {
-        inline.setAttribute('url', event.target.options[event.target.selectedIndex].value + ext);
+        inline.setFieldValue( "url", [ event.target.options[event.target.selectedIndex].value + ext ] );
     }
     function handleLoad(event) {
         document.querySelector('X3D').runtime.showAll('negZ');
