@@ -556,6 +556,7 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
             protoDeclaration[ "ProtoBody" ] = protoBody;
             protoDeclaration[ "newInstance" ] = function ()
             {
+                //TODO deal with ProtoDeclare in ProtoBody
                 var c = this.setupTree( protoBody.querySelector( "*" ), parent );//only use first child
                 console.log( c );
                 return c;
