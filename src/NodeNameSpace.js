@@ -538,7 +538,6 @@ x3dom.NodeNameSpace.prototype.setupTree = function ( domNode, parent )
             n = null;
         }
     }
-
     return n;
 };
 
@@ -575,9 +574,17 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
             }
             else
             {
-                var firstNode = protoDeclaration.newInstance( parent );
-                parent.addChild( firstNode, domNode.getAttribute( "containerField" ) );
-                parent._xmlNode.append( firstNode._xmlNode );
+                var instance = protoDeclaration.newInstance( parent );
+                parent.addChild( instance.typeNode, domNode.getAttribute( "containerField" ) );               
+                parent._xmlNode.append( instance.typeNode._xmlNode );
+
+                var switchNode = new x3dom.nodeTypes.Switch();
+                switchNode._nameSpace = parent._nameSpace;
+                instance.helperNodes.forEach( function ( node ) 
+                {
+                    switchNode.addChild( node, 'children' );
+                } );
+                parent._nameSpace.doc._scene.addChild( switchNode );
             }
         }
         else
@@ -603,17 +610,19 @@ x3dom.ProtoDeclaration.prototype.newInstance = function ( parent )
     var nameSpace = new x3dom.NodeNameSpace( "protoNS", this._nameSpace.doc );
     nameSpace.setBaseURL( this._nameSpace.baseURL + this.name );
     this._nameSpace.addSpace( nameSpace );
-
+    var nodes = []
     var children = this._protoBody.childNodes;
     var firstNode = null,
         i ;
     for ( i = 0; i < children.length; i++ )
     {
         var c = nameSpace.setupTree( children[ i ], parent );
-        if ( c !== null && firstNode == null ) // first x3d node
+
+        if ( c != null )
         {
-            firstNode = c;
+            nodes.push( c );
         }
+
     };
-    return firstNode;
+    return { "typeNode": nodes[0], "helperNodes": nodes.slice(1) };
 };
