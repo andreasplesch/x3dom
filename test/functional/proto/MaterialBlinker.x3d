@@ -21,7 +21,7 @@
 		</ColorInterpolator>
 
         <ROUTE fromNode='cI' fromField='value_changed' toNode='MaterialNode' toField='set_diffuseColor'></ROUTE>
-		<TimeSensor DEF='ModulationClock' cycleInterval='2s' loop='true'>
+		<TimeSensor DEF='ModulationClock' cycleInterval='2' loop='true'>
         </TimeSensor>
         <ROUTE fromField='fraction_changed' fromNode='ModulationClock' toNode='cI' toField='set_fraction'/>
       </ProtoBody>
