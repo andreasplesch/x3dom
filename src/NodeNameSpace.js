@@ -575,14 +575,14 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
             else
             {
                 var instance = protoDeclaration.newInstance( parent );
-                parent.addChild( instance.typeNode, domNode.getAttribute( "containerField" ) );               
+                parent.addChild( instance.typeNode, domNode.getAttribute( "containerField" ) );
                 parent._xmlNode.append( instance.typeNode._xmlNode );
 
                 var switchNode = new x3dom.nodeTypes.Switch();
                 switchNode._nameSpace = parent._nameSpace;
-                instance.helperNodes.forEach( function ( node ) 
+                instance.helperNodes.forEach( function ( node )
                 {
-                    switchNode.addChild( node, 'children' );
+                    switchNode.addChild( node, "children" );
                 } );
                 parent._nameSpace.doc._scene.addChild( switchNode );
             }
@@ -610,7 +610,7 @@ x3dom.ProtoDeclaration.prototype.newInstance = function ( parent )
     var nameSpace = new x3dom.NodeNameSpace( "protoNS", this._nameSpace.doc );
     nameSpace.setBaseURL( this._nameSpace.baseURL + this.name );
     this._nameSpace.addSpace( nameSpace );
-    var nodes = []
+    var nodes = [];
     var children = this._protoBody.childNodes;
     var firstNode = null,
         i ;
@@ -622,7 +622,6 @@ x3dom.ProtoDeclaration.prototype.newInstance = function ( parent )
         {
             nodes.push( c );
         }
-
     };
-    return { "typeNode": nodes[0], "helperNodes": nodes.slice(1) };
+    return { "typeNode": nodes[ 0 ], "helperNodes": nodes.slice( 1 ) };
 };
