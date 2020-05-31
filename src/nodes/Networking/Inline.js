@@ -94,6 +94,19 @@ x3dom.registerNodeType(
             {
                 if ( fieldName == "url" || fieldName == "load" )
                 {
+                    //Remove internally added nodes with same namespace, for prototypes
+                    var inline_nameSpace = this._childNodes[0]._nameSpace;
+
+                    var found = this._nameSpace.doc._scene._childNodes.filter( function ( node )
+                                {
+                                    return node._nameSpace == inline_nameSpace;
+                                });
+
+                    for ( var i = 0; i < found.length; i++ )
+                    {
+                        this._nameSpace.doc._scene.removeChild( found[i] );
+                    }
+
                     //Remove the childs of the x3domNode
                     for ( var i = 0; i < this._childNodes.length; i++ )
                     {
@@ -112,6 +125,7 @@ x3dom.registerNodeType(
                             }
                         }
                     }
+
                     this.loadInline();
                 }
                 else if ( fieldName == "render" )
