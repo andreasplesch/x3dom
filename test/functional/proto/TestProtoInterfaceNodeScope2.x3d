@@ -42,7 +42,7 @@
           <Material diffuseColor='0.7 0.7 0'/>
         </fieldValue>
       </ProtoInstance>
-	  <!-- evtl. replace with dom script
+	  <!-- evtl. replace with dom script -->
       <!--Script DEF='SC' directOutput='true'>
         <field accessType='initializeOnly' name='proto1' type='SFNode'>
           <ProtoInstance USE='P2'/>
