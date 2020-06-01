@@ -10,7 +10,7 @@
     <meta content='5 January 2006' name='translated'/>
     <meta content='1 June 2020, Andreas Plesch' name='modified'/>
     <meta content='Copyright (c) Web3D Consortium Inc. 2006' name='rights'/>
-  <head>
+  </head>
   <Scene>
     <WorldInfo title='TestProtoInterfaceNodeScope.x3d'/>
     
