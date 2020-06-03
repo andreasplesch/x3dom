@@ -426,6 +426,7 @@
           <Shape>
             <Appearance>
               <Material diffuseColor='1 1 1' emissiveColor='1 1 1'/>
+			  <DepthMode depthFunc='ALWAYS' />
             </Appearance>
             <IndexedLineSet coordIndex='0 1 -1'>
               <Coordinate DEF='bondo'>
