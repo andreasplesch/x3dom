@@ -571,7 +571,7 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
         if ( protoBody )
         {
             //find IS and make internal route template
-            protoBody._ISRoutes = [];
+            protoBody._ISRoutes = {};
             protoBody.querySelectorAll( "IS" ).forEach( function ( ISnode )
             {
                 ISnode.querySelectorAll( "connect" ).forEach( function ( connect )
@@ -583,16 +583,23 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
                         ISparent.setAttribute( "DEF",
                             "_proto_" +
                             ISparent.tagName + "_"
-                            + ++x3dom.protoISDEFuid );
+                            + x3dom.protoISDEFuid++ );
                     }
-                    protoBody._ISRoutes.push(
-                        {
-                            "protoField" : connect.getAttribute( "protoField" ),
-                            "nodeDEF"    : ISparent.getAttribute( "DEF" ),
-                            "nodeField"  : connect.getAttribute( "nodeField" )
-                        } );
+                    var protoField = connect.getAttribute( "protoField" );
+                    var nodeDEF =  ISparent.getAttribute( "DEF" );
+                    var nodeField = connect.getAttribute( "nodeField" );
+                    protoBody._ISRoutes[ protoField ] = {
+                        "nodeDEF": nodeDEF,
+                        "nodeField": nodeField
+                    }
+//                     protoBody._ISRoutes.push(
+//                         {
+//                             "protoField" : connect.getAttribute( "protoField" ),
+//                             "nodeDEF"    : ISparent.getAttribute( "DEF" ),
+//                             "nodeField"  : connect.getAttribute( "nodeField" )
+//                         } );
                 } );
-                //ISnode.remove();
+                ISnode.remove();
             } );
 
             var protoDeclaration = new x3dom.ProtoDeclaration( this, protoBody, name, fields );
@@ -623,6 +630,8 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
                 {
                     instance._DEF = domNode.getAttribute( "DEF" );
                     this.defMap[ instance._DEF ] = instance;
+                    //also set nameSpace name to DEF
+                    instance.typeNode._nameSpace.name = instance._DEF;
                 }
 
                 //add pseudo fields, set to initial value
@@ -659,35 +668,62 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
                 } );
 
                 //set field values
-                var instanceNamespace = instance.typeNode._nameSpace;
+                var instanceNameSpace = instance.typeNode._nameSpace;
+                var ISRoutes = protoDeclaration._protoBody._ISRoutes;
 
-                protoDeclaration._protoBody._ISRoutes.forEach( function ( route )
+                for ( var protoField in ISRoutes )
                 {
-                    var instanceElement = instanceNamespace.defMap[ route.nodeDEF ]._xmlNode;
-                    if ( route.protoField in instance._cf )
+                    var ISNode = ISRoutes[ protoField ];
+                    var instanceElement = instanceNameSpace.defMap[ ISNode.nodeDEF ]._xmlNode;
+                    if ( protoField in instance._cf )
                     {
                         //cfField
-                        var current = instanceElement.querySelector( route.nodeField );
+                        var current = instanceElement.querySelector( ISNode.nodeField );
                         if ( current )
                         {
                             instanceElement.removeChild( current );
-                            instanceNamespace.doc.onNodeRemoved( current, instanceElement );
+                            instanceNameSpace.doc.onNodeRemoved( current, instanceElement );
                         }
-                        instance._cf[ route.protoField ].forEach( function ( sfnode )
+                        instance._cf[ protoField ].forEach( function ( sfnode )
                         {
                             instanceElement.appendChild( sfnode );
-                            instanceNamespace.doc.onNodeAdded( sfnode, instanceElement );
+                            instanceNameSpace.doc.onNodeAdded( sfnode, instanceElement );
                         } );
                     }
                     else
                     {
-                        instanceElement.setAttribute( route.nodeField, instance._vf[ route.protoField ] );
+                        instanceElement.setAttribute( ISNode.nodeField, instance._vf[ protoField ] );
                     }
-                } );
+                };
+
+                instance._fieldWatchers = {}; //expected by setuproutes
+                instance._routes = {}; 
 
                 //add internal routes
+                //by providing fieldChanged and postMessage functions which are called by routes
+                instance.fieldChanged = function ( field )
+                {
+                    //instance._vf[field] is now parsed value
+                    var ISNode = ISRoutes[ field ];
+                    var instanceNode = instanceNameSpace.defMap[ ISNode.nodeDEF ];
+                    //forward
+                    //potentially check for cf values
+                    instanceNode._vf[ ISNode.nodeField ] = instance._vf[ field ];
+                    instanceNode.fieldChanged ( ISNode.nodeField );
+                };
 
-                //add fieldwatchers?
+                instance.postMessage = function ( field, msg ) //x3dom.nodeTypes.X3DNode.prototype.postMessage.bind( instance );
+                {
+                    // TODO: timestamps and stuff
+                    this._vf[ field ] = msg;  // FIXME; _cf!!!
+                    var listeners = this._fieldWatchers[ field ];
+
+                    var that = this;
+                    if ( listeners )
+                    {
+                        listeners.forEach( function ( l ) { l.call( that, msg ); } );
+                    }
+                }
 
                 parent.addChild( instance.typeNode, domNode.getAttribute( "containerField" ) );
                 parent._xmlNode.append( instance.typeNode._xmlNode );
@@ -718,7 +754,7 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
 
 x3dom.ProtoDeclaration = function ( namespace, protoBody, name, fields, isExternProto )
 {
-    this._nameSpace = namespace;
+    this._nameSpace = namespace; // main scene name space
     this._protoBody = protoBody;
     this.name = name;
     this.isExternProto = isExternProto || false;
@@ -727,7 +763,8 @@ x3dom.ProtoDeclaration = function ( namespace, protoBody, name, fields, isExtern
 
 x3dom.ProtoDeclaration.prototype.newInstance = function ( parent )
 {
-    var nameSpace = new x3dom.NodeNameSpace( "protoNS", this._nameSpace.doc );
+    
+    var nameSpace = new x3dom.NodeNameSpace( "protoNS", this._nameSpace.doc ); // instance name space
     nameSpace.setBaseURL( this._nameSpace.baseURL + this.name );
     this._nameSpace.addSpace( nameSpace );
     var nodes = [];
