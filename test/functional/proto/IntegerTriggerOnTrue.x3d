@@ -24,7 +24,9 @@
 			</IS>
         </IntegerTrigger>
 		<BooleanFilter DEF='filter'>
-			<connect nodeField='set_boolean' protoField='set_boolean' />
+			<IS>
+				<connect nodeField='set_boolean' protoField='set_boolean' />
+			</IS>
 		</BooleanFilter>
 		<ROUTE fromNode='filter' fromField='inputTrue' toNode='trigger' toField='set_boolean' />
       </ProtoBody>
@@ -34,7 +36,9 @@
 	<Transform translation='-2 2 0'>
 		<TouchSensor DEF='BoxButton' />
 		<Shape>
-			<Material />
+			<Appearance DEF='grey'>
+				<Material diffuseColor='0.5 0.5 0.5'/>
+			</Appearance>
 			<Text string='"Click for Box"' />
 		</Shape>
 	</Transform>
@@ -42,7 +46,7 @@
 	<Transform translation='-2 -2 0'>
 		<TouchSensor DEF='SphereButton' />
 		<Shape>
-			<Material />
+			<Appearance USE='grey' />
 			<Text string='"Click for Sphere"' />
 		</Shape>
 	</Transform>
