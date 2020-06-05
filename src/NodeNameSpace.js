@@ -589,17 +589,11 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
                     var nodeDEF =  ISparent.getAttribute( "DEF" );
                     var nodeField = connect.getAttribute( "nodeField" );
                     protoBody._ISRoutes[ protoField ] = {
-                        "nodeDEF"   : nodeDEF,
-                        "nodeField" : nodeField
-                    };
-                    //                     protoBody._ISRoutes.push(
-                    //                         {
-                    //                             "protoField" : connect.getAttribute( "protoField" ),
-                    //                             "nodeDEF"    : ISparent.getAttribute( "DEF" ),
-                    //                             "nodeField"  : connect.getAttribute( "nodeField" )
-                    //                         } );
+                        "nodeDEF": nodeDEF,
+                        "nodeField": nodeField
+                    }
                 } );
-                ISnode.remove();
+                //ISnode.remove();
             } );
 
             var protoDeclaration = new x3dom.ProtoDeclaration( this, protoBody, name, fields );
@@ -667,14 +661,51 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
                     }
                 } );
 
-                //set field values
+                //add internal routes
+                //by providing fieldChanged and postMessage functions which are called by routes
+
+                instance._fieldWatchers = {}; //expected by setuproutes
+                instance._routes = {}; 
+
+                instance.fieldChanged = function ( field )
+                {
+                    //todo: check if input field
+                    //instance._vf[field] is now parsed value
+                    var instanceNameSpace = this.typeNode._nameSpace;
+                    var ISRoutes = this.declaration._protoBody._ISRoutes;
+                    var ISNode = ISRoutes[ field ];
+                    var instanceNode = instanceNameSpace.defMap[ ISNode.nodeDEF ];
+                    //forward
+                    //potentially check for cf values
+                    instanceNode._vf[ ISNode.nodeField ] = instance._vf[ field ];
+                    instanceNode.fieldChanged ( ISNode.nodeField );
+                };
+
+                instance.postMessage = function ( field, msg ) //x3dom.nodeTypes.X3DNode.prototype.postMessage.bind( instance );
+                {
+                    // TODO: timestamps and stuff
+                    this._vf[ field ] = msg; // FIXME; _cf!!!
+                    var listeners = this._fieldWatchers[ field ];
+
+                    var that = this;
+                    if ( listeners )
+                    {
+                        listeners.forEach( function ( l ) { l.call( that, msg ); } );
+                    }
+                }
+
+                instance.setupRoute = x3dom.nodeTypes.X3DNode.prototype.setupRoute.bind( instance );
+
+                //set node field values
                 var instanceNameSpace = instance.typeNode._nameSpace;
                 var ISRoutes = protoDeclaration._protoBody._ISRoutes;
 
                 for ( var protoField in ISRoutes )
                 {
                     var ISNode = ISRoutes[ protoField ];
-                    var instanceElement = instanceNameSpace.defMap[ ISNode.nodeDEF ]._xmlNode;
+                    var instanceNode = instanceNameSpace.defMap[ ISNode.nodeDEF ];
+                    var instanceElement = instanceNode._xmlNode;
+                    //transfer instance field values
                     if ( protoField in instance._cf )
                     {
                         //cfField
@@ -694,35 +725,16 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
                     {
                         instanceElement.setAttribute( ISNode.nodeField, instance._vf[ protoField ] );
                     }
-                };
 
-                instance._fieldWatchers = {}; //expected by setuproutes
-                instance._routes = {};
-
-                //add internal routes
-                //by providing fieldChanged and postMessage functions which are called by routes
-                instance.fieldChanged = function ( field )
-                {
-                    //instance._vf[field] is now parsed value
-                    var ISNode = ISRoutes[ field ];
-                    var instanceNode = instanceNameSpace.defMap[ ISNode.nodeDEF ];
-                    //forward
-                    //potentially check for cf values
-                    instanceNode._vf[ ISNode.nodeField ] = instance._vf[ field ];
-                    instanceNode.fieldChanged( ISNode.nodeField );
-                };
-
-                instance.postMessage = function ( field, msg ) //x3dom.nodeTypes.X3DNode.prototype.postMessage.bind( instance );
-                {
-                    // TODO: timestamps and stuff
-                    this._vf[ field ] = msg;  // FIXME; _cf!!!
-                    var listeners = this._fieldWatchers[ field ];
-
-                    var that = this;
-                    if ( listeners )
+                    //add fieldwatchers to nodeFields to forward event out
+                    //todo: only for output fields
+                    if ( !instanceNode._fieldWatchers[ ISNode.nodeField ] )
                     {
-                        listeners.forEach( function ( l ) { l.call( that, msg ); } );
+                        instanceNode._fieldWatchers[ ISNode.nodeField ] = [];
                     }
+                    instanceNode._fieldWatchers[ ISNode.nodeField ].push( 
+                        instance.postMessage.bind( instance, protoField ) // forward
+                    );
                 };
 
                 parent.addChild( instance.typeNode, domNode.getAttribute( "containerField" ) );
@@ -743,11 +755,10 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
         }
         return "ProtoInstance";
     }
-    //     if ( parent && tagName == "IS" )
-    //     {
-    //         //in an instanced ProtoBody
-
-    //     }
+    if ( parent && tagName == "is" )
+    {
+        return "ProtoDeclare"; // silence log warning 
+    }
 
     return true;
 };
@@ -763,6 +774,7 @@ x3dom.ProtoDeclaration = function ( namespace, protoBody, name, fields, isExtern
 
 x3dom.ProtoDeclaration.prototype.newInstance = function ( parent )
 {
+    
     var nameSpace = new x3dom.NodeNameSpace( "protoNS", this._nameSpace.doc ); // instance name space
     nameSpace.setBaseURL( this._nameSpace.baseURL + this.name );
     this._nameSpace.addSpace( nameSpace );
@@ -779,7 +791,7 @@ x3dom.ProtoDeclaration.prototype.newInstance = function ( parent )
             nodes.push( c );
         }
     };
-    return { "typeNode": nodes[ 0 ], "helperNodes": nodes.slice( 1 ) };
+    return { "typeNode": nodes[ 0 ], "helperNodes": nodes.slice( 1 ), "declaration": this };
 };
 
 // uid for generated proto defs
