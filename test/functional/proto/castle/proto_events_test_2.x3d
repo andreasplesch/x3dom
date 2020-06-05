@@ -58,10 +58,14 @@
 			<ROUTE fromNode="BFilter" fromField="inputTrue" toNode="IGenerate1" toField="set_boolean" />
 		</ProtoBody>
 	</ProtoDeclare>
-	<ProtoInstance name="LightToggle" DEF="LT">
-	</ProtoInstance>
-	<KeySensor DEF="K" />
-	<ROUTE fromNode="K" fromField="controlKey" toNode="LT" toField="light_on_setter" />
+	<Group>
+		<TouchSensor DEF="K" />
+		<ProtoInstance name="LightToggle" DEF="LT">
+		</ProtoInstance>
+	</Group>
+	<!--KeySensor DEF="K" /-->
+	<!--ROUTE fromNode="K" fromField="controlKey" toNode="LT" toField="light_on_setter" /-->
+	<ROUTE fromNode="K" fromField="isActive" toNode="LT" toField="light_on_setter" />
 	<Transform
 		translation="0 -2 0">
 		<DirectionalLight />
