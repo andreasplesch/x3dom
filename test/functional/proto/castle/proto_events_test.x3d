@@ -39,13 +39,14 @@
 					<connect nodeField="set_boolean" protoField="bool" />
 				</IS>
 			</BooleanFilter>
-			<IntegerTrigger DEF="IGenerate0">
+			<IntegerTrigger DEF="IGenerate0"
+					integerKey="0">
 				<IS>
 					<connect nodeField="triggerValue" protoField="int" />
 				</IS>
 			</IntegerTrigger>
 			<IntegerTrigger DEF="IGenerate1"
-				integerKey="1">
+					integerKey="1">
 				<IS>
 					<connect nodeField="triggerValue" protoField="int" />
 				</IS>
