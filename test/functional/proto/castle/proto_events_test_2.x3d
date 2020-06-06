@@ -30,7 +30,7 @@
 					</IS>
 				</DirectionalLight>
 				<!-- x3dom does not generate on_changed event -->
-				<ROUTE fromNode="light" fromField="set_on" toNode="light" toField="on_changed" />
+				
 			</Group>
 			
 		</ProtoBody>
