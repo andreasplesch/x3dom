@@ -545,7 +545,7 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
 {
     var tagName = domNode.localName.toLowerCase();
     var name = domNode.getAttribute( "name" );
-    if ( parent && tagName == "protodeclare" )
+    if ( tagName == "protodeclare" ) // && parent )
     {
         console.log( "found ProtoDeclare", name, domNode );
         var protoInterface = domNode.querySelector( "ProtoInterface" );
@@ -572,26 +572,49 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
         {
             //find IS and make internal route template
             protoBody._ISRoutes = {};
+
             protoBody.querySelectorAll( "IS" ).forEach( function ( ISnode )
             {
+                //check if inside another nested ProtoDeclare protobody
+                var parentBody = ISnode.parentElement;
+                while ( parentBody.localName.toLowerCase() !== "protobody" )
+                {
+                    parentBody = parentBody.parentElement;
+                }
+                if ( parentBody !== protoBody ) return // skip
+
                 ISnode.querySelectorAll( "connect" ).forEach( function ( connect )
                 {
                     var ISparent = ISnode.parentElement;
                     //assign unique DEF to parent if needed
                     if ( ISparent.hasAttribute( "DEF" ) == false )
                     {
-                        ISparent.setAttribute( "DEF",
-                            "_proto_" +
+                        var defname = "_proto_" +
                             ISparent.tagName + "_"
-                            + x3dom.protoISDEFuid++ );
+                            + x3dom.protoISDEFuid++ ;
+                        ISparent.setAttribute( "DEF", defname );
+                        //add to defmap if protoinstance which has been already parsed
+                        if ( ISparent.localName.toLowerCase() == "protoinstance")
+                        {
+                            if ( ISparent._x3domNode )
+                            {
+                                ISparent._x3domNode._DEF = defname ;
+                                ISparent._x3domNode.typeNode._nameSpace.defMap[ defname ] = ISparent._x3domNode ;
+                            }
+                        }
+
                     }
                     var protoField = connect.getAttribute( "protoField" );
                     var nodeDEF =  ISparent.getAttribute( "DEF" );
                     var nodeField = connect.getAttribute( "nodeField" );
-                    protoBody._ISRoutes[ protoField ] = {
-                        "nodeDEF"   : nodeDEF,
-                        "nodeField" : nodeField
-                    };
+                    if ( !protoBody._ISRoutes[ protoField ] )
+                    {
+                        protoBody._ISRoutes[ protoField ] = [];
+                    }
+                    protoBody._ISRoutes[ protoField ].push( {
+                        "nodeDEF": nodeDEF,
+                        "nodeField": nodeField
+                    });
                 } );
                 //ISnode.remove();
             } );
@@ -605,7 +628,7 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
         }
         return "ProtoDeclare";
     }
-    if ( parent && tagName == "protoinstance" )
+    if ( tagName == "protoinstance" ) // && parent )
     {
         console.log( "found ProtoInstance", domNode );
         if ( name )
@@ -634,7 +657,7 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
                 protoDeclaration.fields.forEach( function ( field )
                 {
                     //check if Node value
-                    if ( field.cfValue.length > 0 )
+                    if ( field.dataType.endsWith("Node") )
                     {
                         instance._cf[ field.name ] = field.cfValue;
                     }
@@ -645,10 +668,10 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
                 } );
 
                 //set fields to instance values
-                domNode.querySelectorAll( "fieldValue" ).forEach( function ( fieldValue )
+                domNode.querySelectorAll( ":scope > fieldValue" ).forEach( function ( fieldValue )
                 {
                     var name = fieldValue.getAttribute( "name" );
-                    var cfValue = fieldValue.querySelectorAll( "*" );
+                    var cfValue = fieldValue.querySelectorAll( ":scope > *" );
                     //check if Node value
                     if ( cfValue.length > 0 )
                     {
@@ -665,7 +688,7 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
                 //by providing fieldChanged and postMessage functions which are called by routes
 
                 instance._fieldWatchers = {}; //expected by setuproutes
-                instance._routes = {};
+                instance._routes = {}; 
 
                 instance.fieldChanged = function ( field )
                 {
@@ -673,17 +696,32 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
                     //instance._vf[field] is now parsed value
                     var instanceNameSpace = this.typeNode._nameSpace;
                     var ISRoutes = this.declaration._protoBody._ISRoutes;
-                    var ISNode = ISRoutes[ field ];
-                    var instanceNode = instanceNameSpace.defMap[ ISNode.nodeDEF ];
-                    //forward
-                    //potentially check for cf values
-                    instanceNode._vf[ ISNode.nodeField ] = instance._vf[ field ];
-                    instanceNode.fieldChanged( ISNode.nodeField );
+                    ISRoutes[ field ].forEach( function (ISNode)
+                    {
+                        //var ISNode = ISRoutes[ field ][0];//todo for all nodes
+                        var instanceNode = instanceNameSpace.defMap[ ISNode.nodeDEF ];
+                        //forward
+                        //potentially check for cf values
+                        //strip set_ and _changed
+                        var nodeField = _normalizeName( ISNode.nodeField, instanceNode );
+                        instanceNode._vf[ nodeField ] = instance._vf[ field ];
+                        instanceNode.fieldChanged ( nodeField );
+                    });
                 };
+
+                function _normalizeName ( name, node )
+                    {
+                        if ( name in node._vf )
+                        {
+                            return name
+                        }
+                        return name.replace(/^set_/,'').replace(/_changed$/,'')
+                    }
 
                 instance.postMessage = function ( field, msg ) //x3dom.nodeTypes.X3DNode.prototype.postMessage.bind( instance );
                 {
                     // TODO: timestamps and stuff
+
                     this._vf[ field ] = msg; // FIXME; _cf!!!
                     var listeners = this._fieldWatchers[ field ];
 
@@ -692,9 +730,12 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
                     {
                         listeners.forEach( function ( l ) { l.call( that, msg ); } );
                     }
-                };
+                }
 
                 instance.setupRoute = x3dom.nodeTypes.X3DNode.prototype.setupRoute.bind( instance );
+                instance.removeRoute = x3dom.nodeTypes.X3DNode.prototype.removeRoute.bind( instance );
+                instance.findX3DDoc = instance.typeNode.findX3DDoc.bind( instance.typeNode ); //x3dom.nodeTypes.X3DNode.prototype.findX3DDoc.bind( instance );
+                instance.nodeChanged = x3dom.nodeTypes.X3DNode.prototype.nodeChanged.bind( instance );
 
                 //set node field values
                 var instanceNameSpace = instance.typeNode._nameSpace;
@@ -702,40 +743,63 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
 
                 for ( var protoField in ISRoutes )
                 {
-                    var ISNode = ISRoutes[ protoField ];
-                    var instanceNode = instanceNameSpace.defMap[ ISNode.nodeDEF ];
-                    var instanceElement = instanceNode._xmlNode;
-                    //transfer instance field values
-                    if ( protoField in instance._cf )
+                    ISRoutes[ protoField ].forEach( function ( ISNode )
                     {
-                        //cfField
-                        var current = instanceElement.querySelector( ISNode.nodeField );
-                        if ( current )
+                        //var ISNode = ISRoutes[ protoField ][0];//todo for all nodes
+                        var instanceNode = instanceNameSpace.defMap[ ISNode.nodeDEF ];
+                        var instanceElement = instanceNode._xmlNode;
+                        //transfer instance field values
+                        if ( protoField in instance._cf )
                         {
-                            instanceElement.removeChild( current );
-                            instanceNameSpace.doc.onNodeRemoved( current, instanceElement );
-                        }
-                        instance._cf[ protoField ].forEach( function ( sfnode )
-                        {
-                            instanceElement.appendChild( sfnode );
-                            instanceNameSpace.doc.onNodeAdded( sfnode, instanceElement );
-                        } );
-                    }
-                    else
-                    {
-                        instanceElement.setAttribute( ISNode.nodeField, instance._vf[ protoField ] );
-                    }
+                            //cfField
+                            var current = instanceElement.querySelector( ISNode.nodeField );
+                            if ( current )
+                            {
+                                instanceElement.removeChild( current );
+                                instanceNameSpace.doc.onNodeRemoved( current, instanceElement );
+                            }
+                            instance._cf[ protoField ].forEach( function ( sfnode )
+                            {
+                                instanceElement.appendChild( sfnode );
+                                //instanceNameSpace.doc.onNodeAdded( sfnode, instanceElement );
+                                
+                                var newNode = instanceNode._nameSpace.setupTree( sfnode, parent );
 
-                    //add fieldwatchers to nodeFields to forward event out
-                    //todo: only for output fields
-                    if ( !instanceNode._fieldWatchers[ ISNode.nodeField ] )
-                    {
-                        instanceNode._fieldWatchers[ ISNode.nodeField ] = [];
-                    }
-                    instanceNode._fieldWatchers[ ISNode.nodeField ].push(
-                        instance.postMessage.bind( instance, protoField ) // forward
-                    );
+                                instanceNode.addChild( newNode, sfnode.getAttribute( "containerField" ) );
+                                instanceNode.nodeChanged();
+
+                                var grandParentNode = instanceElement.parentNode;
+
+                                if ( grandParentNode && grandParentNode._x3domNode )
+                                {
+                                    grandParentNode._x3domNode.nodeChanged();
+                                }
+                            } );
+                        }
+                        else
+                        {
+                            var nodeField = _normalizeName ( ISNode.nodeField, instanceNode );
+                            if ( instance._vf[ protoField ] !== null ) //if no value keep node default
+                            {
+                                instanceElement.setAttribute( nodeField, instance._vf[ protoField ] );
+                            }
+                        }
+
+                        //add fieldwatchers to nodeFields to forward event out
+                        //todo: only for output fields
+
+                        if ( !instanceNode._fieldWatchers[ ISNode.nodeField ] )
+                        {
+                            instanceNode._fieldWatchers[ ISNode.nodeField ] = [];
+                        }
+                        instanceNode._fieldWatchers[ _normalizeName( ISNode.nodeField, instanceNode ) ].push( 
+                            instance.postMessage.bind( instance, protoField ) // forward
+                        );
+                    });
                 };
+
+                instance._xmlNode = domNode;
+                domNode._x3domNode = instance;
 
                 parent.addChild( instance.typeNode, domNode.getAttribute( "containerField" ) );
                 parent._xmlNode.append( instance.typeNode._xmlNode );
@@ -755,9 +819,10 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
         }
         return "ProtoInstance";
     }
+
     if ( parent && tagName == "is" )
     {
-        return "ProtoDeclare"; // silence log warning
+        return "ProtoDeclare"; // silence log warning 
     }
 
     return true;
@@ -774,16 +839,24 @@ x3dom.ProtoDeclaration = function ( namespace, protoBody, name, fields, isExtern
 
 x3dom.ProtoDeclaration.prototype.newInstance = function ( parent )
 {
+    
     var nameSpace = new x3dom.NodeNameSpace( "protoNS", this._nameSpace.doc ); // instance name space
     nameSpace.setBaseURL( this._nameSpace.baseURL + this.name );
     this._nameSpace.addSpace( nameSpace );
+    //transfer proto definitions if any
+    
+    this._nameSpace.protos.forEach( function (protoDeclaration)
+    {
+        nameSpace.protos.push( protoDeclaration );
+    });
+
     var nodes = [];
     var children = this._protoBody.cloneNode( true ).childNodes;
     var firstNode = null,
         i ;
     for ( i = 0; i < children.length; i++ )
     {
-        var c = nameSpace.setupTree( children[ i ], parent );
+        var c = nameSpace.setupTree.call( nameSpace, children[ i ], parent );
 
         if ( c != null )
         {
