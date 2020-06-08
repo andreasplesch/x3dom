@@ -736,7 +736,7 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
                 instance.nodeChanged = x3dom.nodeTypes.X3DNode.prototype.nodeChanged.bind( instance );
 
                 //set node field values
-                
+
                 var instanceNameSpace = instance.typeNode._nameSpace;
                 var ISRoutes = protoDeclaration._protoBody._ISRoutes;
 
@@ -780,11 +780,11 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
                             var nodeField = _normalizeName( ISNode.nodeField, instanceNode );
                             if ( instance._vf[ protoField ] !== null ) //if no value keep node default
                             {
-                                if ( instanceElement.localName.toLowerCase() == 'protoinstance' ) //special
+                                if ( instanceElement.localName.toLowerCase() == "protoinstance" ) //special
                                 {
-                                    var fieldValue = document.createElement('fieldValue');
-                                    fieldValue.setAttribute('name', nodeField );
-                                    fieldValue.setAttribute('value', instance._vf[ protoField ] );
+                                    var fieldValue = document.createElement( "fieldValue" );
+                                    fieldValue.setAttribute( "name", nodeField );
+                                    fieldValue.setAttribute( "value", instance._vf[ protoField ] );
                                     instanceElement.append( fieldValue );
                                     instanceNameSpace.setupTree( instanceElement, instanceElement.parentNode._x3domNode );
                                 }
@@ -793,7 +793,6 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
                                 {
                                     instanceElement.setAttribute( nodeField, instance._vf[ protoField ] );
                                 }
-
                             }
                         }
 
