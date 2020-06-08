@@ -667,7 +667,7 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
                 } );
 
                 //set fields to instance values
-                domNode.querySelectorAll( ":scope > fieldValue" ).forEach( function ( fieldValue )
+                domNode.querySelectorAll( ":scope > fieldValue , :scope > fieldvalue" ).forEach( function ( fieldValue )
                 {
                     var name = fieldValue.getAttribute( "name" );
                     var cfValue = fieldValue.querySelectorAll( ":scope > *" );
@@ -697,7 +697,6 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
                     var ISRoutes = this.declaration._protoBody._ISRoutes;
                     ISRoutes[ field ].forEach( function ( ISNode )
                     {
-                        //var ISNode = ISRoutes[ field ][0];//todo for all nodes
                         var instanceNode = instanceNameSpace.defMap[ ISNode.nodeDEF ];
                         //forward
                         //potentially check for cf values
@@ -737,6 +736,7 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
                 instance.nodeChanged = x3dom.nodeTypes.X3DNode.prototype.nodeChanged.bind( instance );
 
                 //set node field values
+                
                 var instanceNameSpace = instance.typeNode._nameSpace;
                 var ISRoutes = protoDeclaration._protoBody._ISRoutes;
 
@@ -762,7 +762,7 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
                                 instanceElement.appendChild( sfnode );
                                 //instanceNameSpace.doc.onNodeAdded( sfnode, instanceElement );
 
-                                var newNode = instanceNode._nameSpace.setupTree( sfnode, parent );
+                                var newNode = parent._nameSpace.setupTree( sfnode, parent );//use parent namespace
 
                                 instanceNode.addChild( newNode, sfnode.getAttribute( "containerField" ) );
                                 instanceNode.nodeChanged();
@@ -780,7 +780,20 @@ x3dom.NodeNameSpace.prototype.setupProto = function ( domNode, parent )
                             var nodeField = _normalizeName( ISNode.nodeField, instanceNode );
                             if ( instance._vf[ protoField ] !== null ) //if no value keep node default
                             {
-                                instanceElement.setAttribute( nodeField, instance._vf[ protoField ] );
+                                if ( instanceElement.localName.toLowerCase() == 'protoinstance' ) //special
+                                {
+                                    var fieldValue = document.createElement('fieldValue');
+                                    fieldValue.setAttribute('name', nodeField );
+                                    fieldValue.setAttribute('value', instance._vf[ protoField ] );
+                                    instanceElement.append( fieldValue );
+                                    instanceNameSpace.setupTree( instanceElement, instanceElement.parentNode._x3domNode );
+                                }
+
+                                else
+                                {
+                                    instanceElement.setAttribute( nodeField, instance._vf[ protoField ] );
+                                }
+
                             }
                         }
 
