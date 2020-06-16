@@ -76,6 +76,26 @@ x3dom.registerNodeType(
 
             addChild : function ( node, containerFieldName )
             {
+                        if ( "isProtoInstance" in node )
+                        {
+                            this.addChild( node.typeNode, containerFieldName );
+                            var switchNode = new x3dom.nodeTypes.Switch();
+                            switchNode._nameSpace = this._nameSpace;
+                            node.helperNodes.forEach( function ( helper )
+                                {
+                                    switchNode.addChild( helper, "children" );
+                                } );
+                            this._nameSpace.doc._scene.addChild2( switchNode );
+                        } 
+                        else
+                        {
+                            this.addChild2( node, containerFieldName );
+                        }
+
+            },
+            
+            addChild2 : function ( node, containerFieldName )
+            {
                 if ( node )
                 {
                     var field = null;
