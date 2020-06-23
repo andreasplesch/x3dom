@@ -500,7 +500,7 @@ x3dom.NodeNameSpace.prototype.setupTree = function ( domNode, parent )
                     var c = that.setupTree( childDomNode, n );
                     if ( c )
                     {
-                            n.addChild( c, childDomNode.getAttribute( "containerField" ) );   
+                        n.addChild( c, childDomNode.getAttribute( "containerField" ) );
                     }
                 } );
 
@@ -525,32 +525,32 @@ x3dom.NodeNameSpace.prototype.setupTree = function ( domNode, parent )
 
         else if ( parent && domNode.localName.toLowerCase() == "protodeclare" )
         {
-            this.protoDeclare( domNode, parent )
+            this.protoDeclare( domNode, parent );
         }
-        
+
         else if ( parent && domNode.localName.toLowerCase() == "protoinstance" )
         {
-            this.protoInstance( domNode, parent )
+            this.protoInstance( domNode, parent );
         }
 
         else if ( parent && domNode.localName.toLowerCase() == "is" )
         {
             //silence warning
             //check for connect, just because
-            if ( domNode.querySelectorAll("connect").length == 0 )
+            if ( domNode.querySelectorAll( "connect" ).length == 0 )
             {
                 x3dom.debug.logWarning( "IS statement without connect link: " + domNode.parentElement.localName );
             }
         }
-//         var processProto = this.setupProto( domNode, parent );
-//         if ( processProto == "ProtoDeclare" )
-//         {
-//             n = null;
-//         }
-//         else if ( processProto == "ProtoInstance" )
-//         {
-//             n = null;
-//         }
+        //         var processProto = this.setupProto( domNode, parent );
+        //         if ( processProto == "ProtoDeclare" )
+        //         {
+        //             n = null;
+        //         }
+        //         else if ( processProto == "ProtoInstance" )
+        //         {
+        //             n = null;
+        //         }
         else
         {
             // be nice to users who use nodes not (yet) known to the system
@@ -592,7 +592,7 @@ x3dom.NodeNameSpace.prototype.protoInstance = function ( domNode, parent )
                 {
                     val.setAttribute( "containerField", name );
                     protoInstanceDom.appendChild( val );
-                });
+                } );
             }
             else
             {
@@ -600,10 +600,10 @@ x3dom.NodeNameSpace.prototype.protoInstance = function ( domNode, parent )
                 protoInstanceDom.setAttribute( name, value );
             }
         } );
-    
+
     parent._xmlNode.appendChild( protoInstanceDom );
     this.doc.onNodeAdded( protoInstanceDom, parent._xmlNode );
-}
+};
 
 x3dom.NodeNameSpace.prototype.protoDeclare = function ( domNode, parent )
 
@@ -722,51 +722,53 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
             function ( ctx )
             {
                 x3dom.nodeTypes[ that.name ].superClass.call( this, ctx );
-                
+
                 //fields
-                that.fields.filter( function ( field ) {
+                that.fields.filter( function ( field )
+                {
                     return !field.dataType.endsWith( "ode" ); //_vf fields
-                    })
-                . forEach( function ( field ) 
-                {
+                } )
+                    . forEach( function ( field )
+                    {
                     //set interface defaults
-                    if ( ctx && ctx.xmlNode && !ctx.xmlNode.hasAttribute( field.name ) )
-                    {
-                        ctx.xmlNode.setAttribute( field.name, field.value );
-                    }
-                    this["addField_" + field.dataType]( ctx, field.name, field.value );
-                }, this );
-                that.fields.filter( function ( field ) {
-                    return field.dataType.endsWith( "ode" ); //_cf fields
-                    })
-                . forEach( function (field) 
-                {
-                    //set interface defaults for cf fields
-                    if ( ctx && ctx.xmlNode )
-                    {
-                        if ( ctx.xmlNode.querySelectorAll("[containerField="+field.name+"]").length == 0 )
+                        if ( ctx && ctx.xmlNode && !ctx.xmlNode.hasAttribute( field.name ) )
                         {
-                            field.cfValue.forEach( function ( sfnodedom )
-                            {
-                                ctx.xmlNode.appendChild( sfnodedom.cloneNode( true ) );
-                            });
+                            ctx.xmlNode.setAttribute( field.name, field.value );
                         }
-                    }
-                    //find node type from IS in body
-                    //var fieldTypeString = that._protoBody._ISRoutes[field.name][0].nodeField;
-                    var ISRoutes = that._protoBody._ISRoutes;
-                    var ISconnection = ISRoutes[ field.name ][ 0 ];
-                    var nodeField = ISconnection.nodeField;
-                    var ISDomNode = that._protoBody.querySelector("[DEF="+ISconnection.nodeDEF+"]");
-                    //create temp node to get type
-                    var ISNode = new x3dom.nodeTypesLC[ ISDomNode.localName.toLowerCase() ]; 
-                    //this._cf[ field ].type = ISNode._cf[ nodeField ].type;//ISparent._x3domNode._cf[nodeField].type //but not available yet
-                    this["addField_" + field.dataType]( field.name, ISNode._cf[ nodeField ].type );//type should be registered x3dom type
-                }, this );
+                        this[ "addField_" + field.dataType ]( ctx, field.name, field.value );
+                    }, this );
+                that.fields.filter( function ( field )
+                {
+                    return field.dataType.endsWith( "ode" ); //_cf fields
+                } )
+                    . forEach( function ( field )
+                    {
+                    //set interface defaults for cf fields
+                        if ( ctx && ctx.xmlNode )
+                        {
+                            if ( ctx.xmlNode.querySelectorAll( "[containerField=" + field.name + "]" ).length == 0 )
+                            {
+                                field.cfValue.forEach( function ( sfnodedom )
+                                {
+                                    ctx.xmlNode.appendChild( sfnodedom.cloneNode( true ) );
+                                } );
+                            }
+                        }
+                        //find node type from IS in body
+                        //var fieldTypeString = that._protoBody._ISRoutes[field.name][0].nodeField;
+                        var ISRoutes = that._protoBody._ISRoutes;
+                        var ISconnection = ISRoutes[ field.name ][ 0 ];
+                        var nodeField = ISconnection.nodeField;
+                        var ISDomNode = that._protoBody.querySelector( "[DEF=" + ISconnection.nodeDEF + "]" );
+                        //create temp node to get type
+                        var ISNode = new x3dom.nodeTypesLC[ ISDomNode.localName.toLowerCase() ]();
+                        //this._cf[ field ].type = ISNode._cf[ nodeField ].type;//ISparent._x3domNode._cf[nodeField].type //but not available yet
+                        this[ "addField_" + field.dataType ]( field.name, ISNode._cf[ nodeField ].type );//type should be registered x3dom type
+                    }, this );
 
                 //initial
                 var nameSpaceName = "protoNS";
-                if (ctx.xmlNode.hasAttribute("DEF"))
+                if ( ctx.xmlNode.hasAttribute( "DEF" ) )
                 {
                     nameSpaceName = ctx.xmlNode.getAttribute( "DEF" ) + "NS";
                 }
@@ -787,13 +789,13 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                 this._changing = false;
             },
             {
-                nodeChanged: function ()
+                nodeChanged : function ()
                 {
-                    if ( this._changing ) return
+                    if ( this._changing ) {return;}
 
                     this._changing = true;
                     var children = this.protoBodyClone.childNodes;
-    
+
                     for ( var i = 0; i < children.length; i++ )
                     {
                         var c = this.innerNameSpace.setupTree.call( this.innerNameSpace, children[ i ], this );
@@ -818,7 +820,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
 
                     //add fieldwatchers to nodeFields to forward event out
                     //todo: only for output fields
-                    
+
                     for ( field in this._vf )
                     {
                         var ISRoutes = this.declaration._protoBody._ISRoutes;
@@ -834,19 +836,18 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                                 }
                                 instanceNode._fieldWatchers[ nodeField ].push(
                                     this.postMessage.bind( this, field ) ); // forward
-
                             }, this );
                         }
                     }
                     this._changing = false;
                 },
 
-                fieldChanged: function ( field )
+                fieldChanged : function ( field )
                 {
                     //todo: check if input field
                     //var instanceNameSpace = this.typeNode._nameSpace;
                     var ISRoutes = this.declaration._protoBody._ISRoutes;
-                    if ( ! (field in ISRoutes) ) return
+                    if ( ! ( field in ISRoutes ) ) {return;}
                     ISRoutes[ field ].forEach( function ( ISNode )
                     {
                         var instanceNode = this.innerNameSpace.defMap[ ISNode.nodeDEF ];
@@ -868,24 +869,24 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                                 this._cf[ field ].nodes.forEach( function ( sfnode )
                                 {
                                     instanceNode.addChild( sfnode, nodeField );
-                                });
+                                } );
                             }
                             else if ( instanceNode._cfFieldTypes[ nodeField ] == "SFNode"
-                            && this._cf[field].node )
+                            && this._cf[ field ].node )
                             {
                                 this._cf[ field ].node._parentNodes = [];
                                 instanceNode.addChild( this._cf[ field ].node );
                             }
                             else
                             {
-                                x3dom.debug.logWarning("Unexpected field type: "+instanceNode._cfFieldTypes[ nodeField ]);
+                                x3dom.debug.logWarning( "Unexpected field type: " + instanceNode._cfFieldTypes[ nodeField ] );
                             }
                             instanceNode.nodeChanged();
                         }
                     }, this );
                 },
 
-                _normalizeName: function ( name, node )
+                _normalizeName : function ( name, node )
                 {
                     if ( name in node._vf )
                     {
@@ -896,7 +897,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
 
             }
         )
-    )
+    );
 };
 
 // uid for generated proto defs
@@ -1202,7 +1203,6 @@ x3dom.protoISDEFuid = 0;
 //     return true;
 // };
 
-
 // x3dom.ProtoDeclaration.prototype.newInstance = function ( parent )
 // {
 //     var nameSpace = new x3dom.NodeNameSpace( "protoNS", this._nameSpace.doc ); // instance name space
@@ -1224,9 +1224,9 @@ x3dom.protoISDEFuid = 0;
 //         wrapper.appendChild( protoBodyClone.removeChild( child ) );
 //         protoBodyClone.prepend( wrapper );
 //     }
-        
+
 //     var children = protoBodyClone.childNodes;
-    
+
 //     var firstNode = null,
 //         i ;
 //     for ( i = 0; i < children.length; i++ )
@@ -1240,5 +1240,3 @@ x3dom.protoISDEFuid = 0;
 //     };
 //     return { "typeNode": nodes[ 0 ], "helperNodes": nodes.slice( 1 ), "declaration": this };
 // };
-
-
