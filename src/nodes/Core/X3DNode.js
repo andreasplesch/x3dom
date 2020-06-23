@@ -81,13 +81,13 @@ x3dom.registerNodeType(
                     this.addChild( node.typeNode, containerFieldName );
                     if ( node.helperNodes.length > 0 )
                     {
-                                var switchNode = new x3dom.nodeTypes.Switch();
-                                switchNode._nameSpace = this._nameSpace;
-                                node.helperNodes.forEach( function ( helper )
-                                {
-                                    switchNode.addChild( helper, "children" );
-                                } );
-                                this._nameSpace.doc._scene.addChild2( switchNode );
+                        var switchNode = new x3dom.nodeTypes.Switch();
+                        switchNode._nameSpace = this._nameSpace;
+                        node.helperNodes.forEach( function ( helper )
+                        {
+                            switchNode.addChild( helper, "children" );
+                        } );
+                        this._nameSpace.doc._scene.addChild2( switchNode );
                     }
                 }
                 else
