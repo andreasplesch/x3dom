@@ -678,7 +678,6 @@ x3dom.NodeNameSpace.prototype.protoDeclare = function ( domNode, parent )
                     "nodeField" : nodeField
                 } );
             } );
-            //ISnode.remove();
         } );
 
         var protoDeclaration = new x3dom.ProtoDeclaration( this, protoBody, name, fields );
@@ -755,14 +754,12 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                             }
                         }
                         //find node type from IS in body
-                        //var fieldTypeString = that._protoBody._ISRoutes[field.name][0].nodeField;
                         var ISRoutes = that._protoBody._ISRoutes;
                         var ISconnection = ISRoutes[ field.name ][ 0 ];
                         var nodeField = ISconnection.nodeField;
                         var ISDomNode = that._protoBody.querySelector( "[DEF=" + ISconnection.nodeDEF + "]" );
                         //create temp node to get type
                         var ISNode = new x3dom.nodeTypesLC[ ISDomNode.localName.toLowerCase() ]();
-                        //this._cf[ field ].type = ISNode._cf[ nodeField ].type;//ISparent._x3domNode._cf[nodeField].type //but not available yet
                         this[ "addField_" + field.dataType ]( field.name, ISNode._cf[ nodeField ].type );//type should be registered x3dom type
                     }, this );
 
@@ -772,7 +769,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                 {
                     nameSpaceName = ctx.xmlNode.getAttribute( "DEF" ) + "NS";
                 }
-                this.innerNameSpace = new x3dom.NodeNameSpace( "protoNS", ctx.doc ); // instance name space
+                this.innerNameSpace = new x3dom.NodeNameSpace( nameSpaceName, ctx.doc ); // instance name space
                 this.innerNameSpace.setBaseURL( ctx.nameSpace.baseURL + that.name );
                 that._nameSpace.addSpace( this.innerNameSpace );
 
