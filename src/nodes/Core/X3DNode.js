@@ -79,13 +79,16 @@ x3dom.registerNodeType(
                 if ( "isProtoInstance" in node )
                 {
                     this.addChild( node.typeNode, containerFieldName );
-                    var switchNode = new x3dom.nodeTypes.Switch();
-                    switchNode._nameSpace = this._nameSpace;
-                    node.helperNodes.forEach( function ( helper )
+                    if ( node.helperNodes.length > 0 )
                     {
-                        switchNode.addChild( helper, "children" );
-                    } );
-                    this._nameSpace.doc._scene.addChild2( switchNode );
+                                var switchNode = new x3dom.nodeTypes.Switch();
+                                switchNode._nameSpace = this._nameSpace;
+                                node.helperNodes.forEach( function ( helper )
+                                {
+                                    switchNode.addChild( helper, "children" );
+                                } );
+                                this._nameSpace.doc._scene.addChild2( switchNode );
+                    }
                 }
                 else
                 {
