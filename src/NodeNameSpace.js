@@ -562,6 +562,17 @@ x3dom.NodeNameSpace.prototype.protoInstance = function ( domNode, parent )
     //construct dom node
     var protoInstanceDom = document.createElement( name );
 
+    //DEF/USE
+    if ( domNode.hasAttribute( "DEF" ) )
+    {
+        protoInstanceDom.setAttribute( "DEF", domNode.getAttribute( "DEF" ) );
+    }
+
+    else if ( domNode.hasAttribute( "USE" ) )
+    {
+        protoInstanceDom.setAttribute( "USE", domNode.getAttribute( "USE" ) );
+    }
+
     //set fields to instance values
     domNode.querySelectorAll( ":scope > fieldValue , :scope > fieldvalue" )
         . forEach( function ( fieldValue )
@@ -573,6 +584,7 @@ x3dom.NodeNameSpace.prototype.protoInstance = function ( domNode, parent )
             {
                 cfValue.forEach( function ( val )
                 {
+                    val.setAttribute( "containerField", name );
                     protoInstanceDom.appendChild( val );
                 });
             }
@@ -665,14 +677,6 @@ x3dom.NodeNameSpace.prototype.protoDeclare = function ( domNode, parent )
 
         var protoDeclaration = new x3dom.ProtoDeclaration( this, protoBody, name, fields );
         protoDeclaration.registerNode();
-//         var testInst = new x3dom.nodeTypes[name](
-//                 {
-//                     doc       : this.doc,
-//                     runtime   : this.doc._x3dElem.runtime,
-//                     xmlNode   : domNode,
-//                     nameSpace : this
-//                 });
-//         //testInst.nodeChanged();
         this.protos.push( protoDeclaration );
     }
     else
@@ -711,13 +715,13 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
              */
             function ( ctx )
             {
-                x3dom.nodeTypes[that.name].superClass.call( this, ctx );
+                x3dom.nodeTypes[ that.name ].superClass.call( this, ctx );
                 
                 //fields
-                that.fields.filter( function (field) {
-                    return !field.dataType.endsWith("ode"); //_vf fields
+                that.fields.filter( function ( field ) {
+                    return !field.dataType.endsWith( "ode" ); //_vf fields
                     })
-                . forEach( function (field) 
+                . forEach( function ( field ) 
                 {
                     //set interface defaults
                     if ( ctx && ctx.xmlNode && !ctx.xmlNode.hasAttribute( field.name ) )
@@ -726,18 +730,40 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                     }
                     this["addField_" + field.dataType]( ctx, field.name, field.value );
                 }, this );
-                that.fields.filter( function (field) {
-                    return field.dataType.endsWith("ode"); //_cf fields
+                that.fields.filter( function ( field ) {
+                    return field.dataType.endsWith( "ode" ); //_cf fields
                     })
                 . forEach( function (field) 
                 {
+                    //set interface defaults for cf fields
+                    if ( ctx && ctx.xmlNode )
+                    {
+                        if ( ctx.xmlNode.querySelectorAll("[containerField="+field.name+"]").length == 0 )
+                        {
+                            field.cfValue.forEach( function ( sfnodedom )
+                            {
+                                ctx.xmlNode.appendChild( sfnodedom.cloneNode( true ) );
+                            });
+                        }
+                    }
                     //find node type from IS in body
-                    var fieldTypeString = that._protoBody._ISRoutes[field.name][0].nodeField;
-                    //ISparent._x3domNode._cf[nodeField].type //but not available yet
-                    this["addField_" + field.dataType]( field.name, x3dom.nodeTypesLC[fieldTypeString.toLowerCase()] );//type should be registered x3dom type
+                    //var fieldTypeString = that._protoBody._ISRoutes[field.name][0].nodeField;
+                    var ISRoutes = that._protoBody._ISRoutes;
+                    var ISconnection = ISRoutes[ field.name ][ 0 ];
+                    var nodeField = ISconnection.nodeField;
+                    var ISDomNode = that._protoBody.querySelector("[DEF="+ISconnection.nodeDEF+"]");
+                    //create temp node to get type
+                    var ISNode = new x3dom.nodeTypesLC[ ISDomNode.localName.toLowerCase() ]; 
+                    //this._cf[ field ].type = ISNode._cf[ nodeField ].type;//ISparent._x3domNode._cf[nodeField].type //but not available yet
+                    this["addField_" + field.dataType]( field.name, ISNode._cf[ nodeField ].type );//type should be registered x3dom type
                 }, this );
 
                 //initial
+                var nameSpaceName = "protoNS";
+                if (ctx.xmlNode.hasAttribute("DEF"))
+                {
+                    nameSpaceName = ctx.xmlNode.getAttribute( "DEF" ) + "NS";
+                }
                 this.innerNameSpace = new x3dom.NodeNameSpace( "protoNS", ctx.doc ); // instance name space
                 this.innerNameSpace.setBaseURL( ctx.nameSpace.baseURL + that.name );
                 that._nameSpace.addSpace( this.innerNameSpace );
@@ -752,10 +778,14 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                 this.protoBodyClone = that._protoBody.cloneNode( true );
                 this.declaration = that;
                 this.isProtoInstance = true;
+                this._changing = false;
             },
             {
                 nodeChanged: function ()
                 {
+                    if ( this._changing ) return
+
+                    this._changing = true;
                     var children = this.protoBodyClone.childNodes;
     
                     for ( var i = 0; i < children.length; i++ )
@@ -769,6 +799,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                     };
                     this.typeNode = this.nodes[ 0 ];
                     this.helperNodes = this.nodes.slice( 1 );
+
                     //set initial values
                     for ( field in this._vf )
                     {
@@ -776,25 +807,75 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                     }
                     for ( field in this._cf )
                     {
-
+                        this.fieldChanged( field );
                     }
-                    //return { "typeNode": nodes[ 0 ], "helperNodes": nodes.slice( 1 ), "declaration": this };
+
+                    //add fieldwatchers to nodeFields to forward event out
+                    //todo: only for output fields
+                    
+                    for ( field in this._vf )
+                    {
+                        var ISRoutes = this.declaration._protoBody._ISRoutes;
+                        if ( field in ISRoutes ) //misbehaved Protos may have unused fields
+                        {
+                            ISRoutes[ field ].forEach( function ( ISNode )
+                            {
+                                var instanceNode = this.innerNameSpace.defMap[ ISNode.nodeDEF ];
+                                var nodeField = this._normalizeName( ISNode.nodeField, instanceNode );
+                                if ( !instanceNode._fieldWatchers[ nodeField ] )
+                                {
+                                    instanceNode._fieldWatchers[ nodeField ] = [];
+                                }
+                                instanceNode._fieldWatchers[ nodeField ].push(
+                                    this.postMessage.bind( this, field ) ); // forward
+
+                            }, this );
+                        }
+                    }
+                    this._changing = false;
                 },
 
                 fieldChanged: function ( field )
                 {
                     //todo: check if input field
-                    var instanceNameSpace = this.typeNode._nameSpace;
+                    //var instanceNameSpace = this.typeNode._nameSpace;
                     var ISRoutes = this.declaration._protoBody._ISRoutes;
+                    if ( ! (field in ISRoutes) ) return
                     ISRoutes[ field ].forEach( function ( ISNode )
                     {
-                        var instanceNode = instanceNameSpace.defMap[ ISNode.nodeDEF ];
+                        var instanceNode = this.innerNameSpace.defMap[ ISNode.nodeDEF ];
                         //forward
                         //potentially check for cf values
                         //strip set_ and _changed
                         var nodeField = this._normalizeName( ISNode.nodeField, instanceNode );
-                        instanceNode._vf[ nodeField ] = this._vf[ field ];
-                        instanceNode.fieldChanged( nodeField );
+                        if ( field in this._vf )
+                        {
+                            instanceNode._vf[ nodeField ] = this._vf[ field ];
+                            instanceNode.fieldChanged( nodeField );
+                        }
+                        else if ( field in this._cf )
+                        {
+                            instanceNode._cf[ nodeField ] = this._cf[ field ];
+                            //transfer parents/children
+                            if ( instanceNode._cfFieldTypes[ nodeField ] == "MFNode" )
+                            {
+                                this._cf[ field ].nodes.forEach( function ( sfnode )
+                                {
+                                    instanceNode.addChild( sfnode, nodeField );
+                                });
+                            }
+                            else if ( instanceNode._cfFieldTypes[ nodeField ] == "SFNode"
+                            && this._cf[field].node )
+                            {
+                                this._cf[ field ].node._parentNodes = [];
+                                instanceNode.addChild( this._cf[ field ].node );
+                            }
+                            else
+                            {
+                                x3dom.debug.logWarning("Unexpected field type: "+instanceNode._cfFieldTypes[ nodeField ]);
+                            }
+                            instanceNode.nodeChanged();
+                        }
                     }, this );
                 },
 
