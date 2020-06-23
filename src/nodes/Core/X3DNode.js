@@ -76,24 +76,23 @@ x3dom.registerNodeType(
 
             addChild : function ( node, containerFieldName )
             {
-                        if ( "isProtoInstance" in node )
-                        {
-                            this.addChild( node.typeNode, containerFieldName );
-                            var switchNode = new x3dom.nodeTypes.Switch();
-                            switchNode._nameSpace = this._nameSpace;
-                            node.helperNodes.forEach( function ( helper )
-                                {
-                                    switchNode.addChild( helper, "children" );
-                                } );
-                            this._nameSpace.doc._scene.addChild2( switchNode );
-                        } 
-                        else
-                        {
-                            this.addChild2( node, containerFieldName );
-                        }
-
+                if ( "isProtoInstance" in node )
+                {
+                    this.addChild( node.typeNode, containerFieldName );
+                    var switchNode = new x3dom.nodeTypes.Switch();
+                    switchNode._nameSpace = this._nameSpace;
+                    node.helperNodes.forEach( function ( helper )
+                    {
+                        switchNode.addChild( helper, "children" );
+                    } );
+                    this._nameSpace.doc._scene.addChild2( switchNode );
+                }
+                else
+                {
+                    this.addChild2( node, containerFieldName );
+                }
             },
-            
+
             addChild2 : function ( node, containerFieldName )
             {
                 if ( node )
@@ -124,7 +123,7 @@ x3dom.registerNodeType(
                         this._childNodes.push( node );
                         if ( !"isProtoInstance" in this )
                         {
-                                    node.parentAdded( this );
+                            node.parentAdded( this );
                         }
                         return true;
                     }
@@ -136,27 +135,27 @@ x3dom.registerNodeType(
                         //transfer nodes directly
                         if ( "isProtoInstance" in node )
                         {
-                                    this.nodes.concat( node.nodes );
+                            this.nodes.concat( node.nodes );
                         }
                         else
                         {
-                                    this.nodes.push( node );
-                                    that = this;
-                                    _transfer_defMap ( { child: {node: node} } );
-                                    function _transfer_defMap ( nodes )
+                            this.nodes.push( node );
+                            that = this;
+                            _transfer_defMap( { child: {node: node} } );
+                            function _transfer_defMap ( nodes )
+                            {
+                                Object.keys( nodes ).forEach( function ( key )
+                                {
+                                    if ( nodes[ key ].node && nodes[ key ].node._DEF )
                                     {
-                                                Object.keys( nodes ).forEach( function ( key )
-                                                {
-                                                            if ( nodes[key].node && nodes[key].node._DEF )
-                                                            {
-                                                                        that.innerNameSpace.defMap[ nodes[key].node._DEF ] = nodes[key].node;
-                                                            }
-                                                            if ( nodes[key].node && nodes[key].node._cf )
-                                                            {
-                                                                        _transfer_defMap ( nodes[key].node._cf );
-                                                            }
-                                                } );
+                                        that.innerNameSpace.defMap[ nodes[ key ].node._DEF ] = nodes[ key ].node;
                                     }
+                                    if ( nodes[ key ].node && nodes[ key ].node._cf )
+                                    {
+                                        _transfer_defMap( nodes[ key ].node._cf );
+                                    }
+                                } );
+                            }
                         }
                     }
                 }
