@@ -122,8 +122,42 @@ x3dom.registerNodeType(
                     {
                         node._parentNodes.push( this );
                         this._childNodes.push( node );
-                        node.parentAdded( this );
+                        if ( !"isProtoInstance" in this )
+                        {
+                                    node.parentAdded( this );
+                        }
                         return true;
+                    }
+                    else if ( "isProtoInstance" in this )
+                    {
+                        //child is not a field value, parent is protobody
+                        //so child is "root node" of protobody
+                        //and constitutes its nodes
+                        //transfer nodes directly
+                        if ( "isProtoInstance" in node )
+                        {
+                                    this.nodes.concat( node.nodes );
+                        }
+                        else
+                        {
+                                    this.nodes.push( node );
+                                    that = this;
+                                    _transfer_defMap ( { child: {node: node} } );
+                                    function _transfer_defMap ( nodes )
+                                    {
+                                                Object.keys( nodes ).forEach( function ( key )
+                                                {
+                                                            if ( nodes[key].node && nodes[key].node._DEF )
+                                                            {
+                                                                        that.innerNameSpace.defMap[ nodes[key].node._DEF ] = nodes[key].node;
+                                                            }
+                                                            if ( nodes[key].node && nodes[key].node._cf )
+                                                            {
+                                                                        _transfer_defMap ( nodes[key].node._cf );
+                                                            }
+                                                } );
+                                    }
+                        }
                     }
                 }
                 return false;
