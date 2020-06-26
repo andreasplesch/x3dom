@@ -528,6 +528,11 @@ x3dom.NodeNameSpace.prototype.setupTree = function ( domNode, parent )
             this.protoDeclare( domNode, parent );
         }
 
+        else if ( parent && domNode.localName.toLowerCase() == "externprotodeclare" )
+        {
+            this.externProtoDeclare( domNode, parent );
+        }
+
         else if ( parent && domNode.localName.toLowerCase() == "protoinstance" )
         {
             this.protoInstance( domNode, parent );
@@ -565,6 +570,12 @@ x3dom.NodeNameSpace.prototype.protoInstance = function ( domNode, parent )
 {
     var name = domNode.getAttribute( "name" );
     //console.log( "found ProtoInstance", name, domNode );
+    var protoDeclaration = this.protos.find( function ( proto ) { return proto.name == name; } );
+    if ( protoDeclaration == undefined )
+    {
+        x3dom.debug.logWarning( "ProtoInstance without a ProtoDeclaration " + name );
+        return
+    }
     //construct dom node
     var protoInstanceDom = document.createElement( name );
 
@@ -601,8 +612,52 @@ x3dom.NodeNameSpace.prototype.protoInstance = function ( domNode, parent )
             }
         } );
 
+    if ( protoDeclaration.isExternProto && protoDeclaration.needsLoading )
+    {
+        this.loadExternProtoAsync( protoDeclaration, protoInstanceDom, domNode, parent._xmlNode );
+        return;
+    }
+
     parent._xmlNode.appendChild( protoInstanceDom );
     this.doc.onNodeAdded( protoInstanceDom, parent._xmlNode );
+};
+
+x3dom.NodeNameSpace.prototype.loadExternProtoAsync = async function ( protoDeclaration, protoInstanceDom, domNode, parentDom )
+{
+    var response = await fetch( this.getURL( protoDeclaration.url [ 0 ] ) );
+    var responseText = await response.text();
+    var parser = new DOMParser();
+    var doc = parser.parseFromString( responseText, "application/xml" );
+    var scene = doc.querySelector( "X3D" );
+    if ( scene == null )
+    {
+        doc = parser.parseFromString( responseText, "text/html" );
+        scene = doc.querySelector( "X3D" );
+    }
+    var declareNode = scene.querySelector( "ProtoDeclare" );
+    //transfer name
+    declareNode.setAttribute( 'name', protoDeclaration.name );
+    //remove current declaration
+    var currentIndex = this.protos.findIndex( function ( d ) 
+    {
+        return d == protoDeclaration;
+    })
+    this.protos.splice( currentIndex, 1 );
+    this.protoDeclare( declareNode ); //add declaration as internal
+    //add instance
+    domNode.insertAdjacentElement( 'afterend', protoInstanceDom ); // do not use appendChild since scene parent may be already transferred
+    this.doc.onNodeAdded( protoInstanceDom, parentDom );
+}
+
+x3dom.NodeNameSpace.prototype.externProtoDeclare = function ( domNode, parent )
+
+{
+    var name = domNode.getAttribute( "name" );
+    var url = x3dom.fields.MFString.parse( domNode.getAttribute( "url" ) );
+    var protoDeclaration = new x3dom.ProtoDeclaration( this, name, null, null, true, url );
+    //protoDeclaration.registerNode();
+    this.protos.push( protoDeclaration );
+    //protoinstance checks for name and triggers loading
 };
 
 x3dom.NodeNameSpace.prototype.protoDeclare = function ( domNode, parent )
@@ -680,7 +735,7 @@ x3dom.NodeNameSpace.prototype.protoDeclare = function ( domNode, parent )
             } );
         } );
 
-        var protoDeclaration = new x3dom.ProtoDeclaration( this, protoBody, name, fields );
+        var protoDeclaration = new x3dom.ProtoDeclaration( this, name, protoBody, fields );
         protoDeclaration.registerNode();
         this.protos.push( protoDeclaration );
     }
@@ -691,13 +746,15 @@ x3dom.NodeNameSpace.prototype.protoDeclare = function ( domNode, parent )
     return "ProtoDeclare";
 };
 
-x3dom.ProtoDeclaration = function ( namespace, protoBody, name, fields, isExternProto )
+x3dom.ProtoDeclaration = function ( namespace, name, protoBody, fields, isExternProto, url )
 {
     this._nameSpace = namespace; // main scene name space
-    this._protoBody = protoBody;
     this.name = name;
-    this.isExternProto = isExternProto || false;
+    this._protoBody = protoBody || null;
     this.fields = fields || [];
+    this.isExternProto = isExternProto || false;
+    this.url = url || [];
+    this.needsLoading = true;
 };
 
 x3dom.ProtoDeclaration.prototype.registerNode = function ()
@@ -842,7 +899,6 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                 fieldChanged : function ( field )
                 {
                     //todo: check if input field
-                    //var instanceNameSpace = this.typeNode._nameSpace;
                     var ISRoutes = this.declaration._protoBody._ISRoutes;
                     if ( ! ( field in ISRoutes ) ) {return;}
                     ISRoutes[ field ].forEach( function ( ISNode )
