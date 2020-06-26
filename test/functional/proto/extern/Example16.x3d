@@ -7,6 +7,7 @@
     <meta content='Don Brutzman' name='creator'/>
     <meta content='26 June 2000' name='created'/>
     <meta content='28 October 2019' name='modified'/>
+    <meta content='26 June 2020' name='modified'/>
     <meta content='VRML 97 specification example: Chopper. Click chopper to toggle rotor spinning.' name='description'/>
     <meta content='originals/exampleD_16.wrl' name='reference'/>
     <meta content='VRML 97, ISO/IEC 14772-1, Part 1: Functional specification and UTF-8 encoding, D.16 Chopper' name='specificationSection'/>
@@ -41,8 +42,20 @@
             </IS>
           </ProtoInstance>
         </Group>
+        <BooleanTrigger DEF='trigger' />
+        <BooleanToggle DEF='toggler' />
+        <BooleanFilter DEF='brancher' />
+        <TimeTrigger DEF='stopTimer' />
+        <TimeTrigger DEF='startTimer' />
+        <ROUTE fromField='touchTime' fromNode='Touch' toField='set_triggerTime' toNode='trigger'/>
+        <ROUTE fromField='triggerTrue' fromNode='trigger' toField='set_boolean' toNode='toggler'/>
+        <ROUTE fromField='toggle' fromNode='toggler' toField='set_boolean' toNode='brancher'/>
+        <ROUTE fromField='inputFalse' fromNode='brancher' toField='set_boolean' toNode='stopTimer'/>
+        <ROUTE fromField='inputTrue' fromNode='brancher' toField='set_boolean' toNode='startTimer'/>
+        <ROUTE fromField='triggerTime' fromNode='startTimer' toField='startTime' toNode='Top'/>
+        <ROUTE fromField='triggerTime' fromNode='stopTimer' toField='stopTime' toNode='Top'/>
         <!-- Warning: VRML97-style scripting, not X3D Scene Authoring Interface (SAI) -->
-        <Script DEF='RotorScript'>
+        <!--Script DEF='RotorScript'>
           <field accessType='inputOnly' name='startOrStopEngine' type='SFTime'/>
           <field accessType='outputOnly' name='startEngine' type='SFTime'/>
           <field accessType='outputOnly' name='stopEngine' type='SFTime'/>
@@ -63,10 +76,10 @@ function startOrStopEngine(value) {
 	}
 }
 ]]>
-        </Script>
-        <ROUTE fromField='touchTime' fromNode='Touch' toField='startOrStopEngine' toNode='RotorScript'/>
+        </Script-->
+        <!--ROUTE fromField='touchTime' fromNode='Touch' toField='startOrStopEngine' toNode='RotorScript'/>
         <ROUTE fromField='startEngine' fromNode='RotorScript' toField='startTime' toNode='Top'/>
-        <ROUTE fromField='stopEngine' fromNode='RotorScript' toField='stopTime' toNode='Top'/>
+        <ROUTE fromField='stopEngine' fromNode='RotorScript' toField='stopTime' toNode='Top'/-->
       </ProtoBody>
     </ProtoDeclare>
     <!-- ==================== -->
