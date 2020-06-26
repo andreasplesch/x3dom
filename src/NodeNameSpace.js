@@ -574,7 +574,7 @@ x3dom.NodeNameSpace.prototype.protoInstance = function ( domNode, parent )
     if ( protoDeclaration == undefined )
     {
         x3dom.debug.logWarning( "ProtoInstance without a ProtoDeclaration " + name );
-        return
+        return;
     }
     //construct dom node
     var protoInstanceDom = document.createElement( name );
@@ -636,18 +636,18 @@ x3dom.NodeNameSpace.prototype.loadExternProtoAsync = async function ( protoDecla
     }
     var declareNode = scene.querySelector( "ProtoDeclare" );
     //transfer name
-    declareNode.setAttribute( 'name', protoDeclaration.name );
+    declareNode.setAttribute( "name", protoDeclaration.name );
     //remove current declaration
-    var currentIndex = this.protos.findIndex( function ( d ) 
+    var currentIndex = this.protos.findIndex( function ( d )
     {
         return d == protoDeclaration;
-    })
+    } );
     this.protos.splice( currentIndex, 1 );
     this.protoDeclare( declareNode ); //add declaration as internal
     //add instance
-    domNode.insertAdjacentElement( 'afterend', protoInstanceDom ); // do not use appendChild since scene parent may be already transferred
+    domNode.insertAdjacentElement( "afterend", protoInstanceDom ); // do not use appendChild since scene parent may be already transferred
     this.doc.onNodeAdded( protoInstanceDom, parentDom );
-}
+};
 
 x3dom.NodeNameSpace.prototype.externProtoDeclare = function ( domNode, parent )
 
