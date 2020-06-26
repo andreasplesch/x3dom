@@ -623,7 +623,7 @@ x3dom.NodeNameSpace.prototype.protoInstance = function ( domNode, parent )
     this.doc.onNodeAdded( protoInstanceDom, parent._xmlNode );
 };
 
-x3dom.NodeNameSpace.prototype.loadExternProtoAsync = async function ( protoDeclaration, protoInstanceDom, domNode, parentDom )
+x3dom.NodeNameSpace.prototype.loadExternProtoAsync = function ( protoDeclaration, protoInstanceDom, domNode, parentDom )
 {
     //use queue to ensure processing in correct sequence
     protoDeclaration.instanceQueue.push( {
