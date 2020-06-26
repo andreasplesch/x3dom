@@ -9,7 +9,7 @@
         select {
             padding: 5px;
             border-width: thick;
-            borderr-radius: 5px;
+            border-radius: 5px;
         }
         option {
             font-style: italic;
@@ -28,10 +28,7 @@
         </Scene>
     </X3D>
     <label _style='margin: 5px;' for="x3d-select">Choose an example:</label>
-    <select _style='padding: 5px;
-            border-width: thick;
-            borderr-radius: 5px;'
-            id="x3d-select" onchange='handleChange(event)'>
+    <select id="x3d-select" onchange='handleChange(event)'>
         <option>ArtDecoPrototypesExcerpt</option>
         <option>ArtDecoExamplesExcerpt</option>
         <option>TropicalExamplesInternal</option>
@@ -48,12 +45,20 @@
         <option>Prototype_InRoute</option>
         <option>IntegerTriggerOnTrue</option>
         <option>Figure31_9SpinGroupPrototype</option>
+        <option>Floater</option>
         <option>castle/proto_ultra_simple</option>
         <option>castle/proto_inline</option>
         <option>castle/proto_events_test</option>
         <option>castle/proto_events_test_2</option>
         <option>castle/proto_events_test_3</option>
         <option>castle/proto_nested</option>
+        <option>castle/proto_nested_expand</option>
+        <option>castle/proto_nodes</option>
+        <option>castle/proto_other</option>
+        <option>castle/proto_sfnode_default</option>
+        <option>extern/different_name</option>
+        <option>extern/One</option>
+        <option>extern/VectorField1</option>
         
         <option value="none" selected>--Please choose a x3d scene--</option>
     </select>
