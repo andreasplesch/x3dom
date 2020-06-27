@@ -404,18 +404,18 @@ x3dom.NodeNameSpace.prototype.setupTree = function ( domNode, parent )
                 var toNode = this.defMap[ tnDEF ];
                 var fnAtt = route.getAttribute( "fromField" ) || route.getAttribute( "fromfield" );
                 var tnAtt = route.getAttribute( "toField" ) || route.getAttribute( "tofield" );
-                    
+
                 if ( !( fromNode && toNode ) )
                 {
                     x3dom.debug.logWarning( "not yet availabe route - can't find all DEFs for " + fnAtt + " -> " + tnAtt );
                     this.lateRoutes.push( // save to check after protoextern instances loaded
-                    {
-                       route: route,
-                       fnDEF: fnDEF,
-                       tnDEF: tnDEF,
-                       fnAtt: fnAtt,
-                       tnAtt: tnAtt
-                    });
+                        {
+                            route : route,
+                            fnDEF : fnDEF,
+                            tnDEF : tnDEF,
+                            fnAtt : fnAtt,
+                            tnAtt : tnAtt
+                        } );
                 }
                 else
                 {
@@ -575,7 +575,7 @@ x3dom.NodeNameSpace.prototype.protoInstance = function ( domNode, domParent )
     if ( !domNode.localName ) {return;}
     if ( domNode.localName.toLowerCase() !== "protoinstance" ) {return;}
     if ( domNode._x3dom ) {return;}
-    
+
     var name = domNode.getAttribute( "name" );
     //console.log( "found ProtoInstance", name, domNode );
     var protoDeclaration = this.protos.find( function ( proto ) { return proto.name == name; } );
@@ -662,8 +662,8 @@ x3dom.NodeNameSpace.prototype.loadExternProtoAsync = function ( protoDeclaration
                 scene = doc.querySelector( "X3D" );
             }
             //find hash
-            var hash = url.split('#').slice(-1)[0];
-            var selector = hash == "" ? "ProtoDeclare" : "ProtoDeclare[name='"+hash+"']";
+            var hash = url.split( "#" ).slice( -1 )[ 0 ];
+            var selector = hash == "" ? "ProtoDeclare" : "ProtoDeclare[name='" + hash + "']";
             var declareNode = scene.querySelector( selector );
             //transfer name
             declareNode.setAttribute( "name", protoDeclaration.name );
@@ -684,7 +684,7 @@ x3dom.NodeNameSpace.prototype.loadExternProtoAsync = function ( protoDeclaration
                 that.doc.onNodeAdded( instance.protoInstanceDom, instance.parentDom );
                 instance.domNode._x3dom = instance.protoInstanceDom;
 
-                that.lateRoutes.forEach( function (route)
+                that.lateRoutes.forEach( function ( route )
                 {
                     var fromNode = that.defMap[ route.fnDEF ];
                     var toNode = that.defMap[ route.tnDEF ];
@@ -694,7 +694,7 @@ x3dom.NodeNameSpace.prototype.loadExternProtoAsync = function ( protoDeclaration
                         fromNode.setupRoute( route.fnAtt, toNode, route.tnAtt );
                         route.route._nodeNameSpace = that;
                     }
-                });
+                } );
             };
             protoDeclaration.needsLoading = false;
         } )
@@ -969,7 +969,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                         ISRoutes[ field ].forEach( function ( ISNode )
                         {
                             var instanceNode = this.innerNameSpace.defMap[ ISNode.nodeDEF ];
-                            
+
                             if ( instanceNode == undefined ) //probably unfinished externproto
                             {
                                 var ISparent = this.protoBodyClone.querySelector( "[DEF=" + ISNode.nodeDEF + "]" );
@@ -984,7 +984,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                                 }
                                 return;
                             }
-                            
+
                             this._externTries = 0;
                             //forward
                             //potentially check for cf values
@@ -998,7 +998,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                             else if ( field in this._cf )
                             {
                                 instanceNode._cf[ nodeField ] = this._cf[ field ];//(re)add reference
-                                
+
                                 //transfer parents/children
                                 var nodes = [];
                                 if ( instanceNode._cfFieldTypes[ nodeField ] == "MFNode" )
@@ -1008,7 +1008,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                                 else if ( instanceNode._cfFieldTypes[ nodeField ] == "SFNode"
                                             && this._cf[ field ].node )
                                 {
-                                    nodes = [this._cf[ field ].node];
+                                    nodes = [ this._cf[ field ].node ];
                                 }
                                 else
                                 {
@@ -1018,13 +1018,13 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                                 //only update if not already added
                                 nodes.forEach( function ( sfnode )
                                 {
-                                    if ( !instanceNode._childNodes.some( function (child)
-                                        {
-                                            return child == sfnode;
-                                        }) )
+                                    if ( !instanceNode._childNodes.some( function ( child )
+                                    {
+                                        return child == sfnode;
+                                    } ) )
                                     {
                                         instanceNode.addChild( sfnode, nodeField );
-                                    }   
+                                    }
                                 } );
 
                                 instanceNode.nodeChanged();
@@ -1033,9 +1033,8 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                     }
                     catch ( error )
                     {
-                        x3dom.debug.logWarning(" Proto warning: " + error );
+                        x3dom.debug.logWarning( " Proto warning: " + error );
                     };
-
                 },
 
                 _normalizeName : function ( name, node )
