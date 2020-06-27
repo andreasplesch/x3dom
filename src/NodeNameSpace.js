@@ -495,17 +495,17 @@ x3dom.NodeNameSpace.prototype.setupTree = function ( domNode, parent )
 
                 //register ProtoDeclares and convert ProtoInstance tp new nodes
                 domNode.querySelectorAll( ":scope > *" ) //static nodelist
-                . forEach( function ( childDomNode )
-                {
-                    var tag = childDomNode.localName.toLowerCase();
-                    if ( tag == "protodeclare" )
+                    . forEach( function ( childDomNode )
+                    {
+                        var tag = childDomNode.localName.toLowerCase();
+                        if ( tag == "protodeclare" )
                         { this.protoDeclare( childDomNode ); }
-                    else if ( tag == "externprotodeclare" )
+                        else if ( tag == "externprotodeclare" )
                         { this.externProtoDeclare( childDomNode ); }
-                    else if ( tag == "protoinstance" )
+                        else if ( tag == "protoinstance" )
                         { this.protoInstance( childDomNode, domNode ); }
-                }, this );
-                
+                    }, this );
+
                 // call children
                 domNode.childNodes.forEach( function ( childDomNode ) //live nodelist
                 {
@@ -579,7 +579,7 @@ x3dom.NodeNameSpace.prototype.protoInstance = function ( domNode, domParent )
     if ( protoDeclaration == undefined )
     {
         x3dom.debug.logWarning( "ProtoInstance without a ProtoDeclaration " + name );
-        return
+        return;
     }
     //construct dom node
     var protoInstanceDom = document.createElement( name );
@@ -620,11 +620,11 @@ x3dom.NodeNameSpace.prototype.protoInstance = function ( domNode, domParent )
     if ( protoDeclaration.isExternProto && protoDeclaration.needsLoading )
     {
         this.loadExternProtoAsync( protoDeclaration, protoInstanceDom, domNode, domParent );
-        return
+        return;
     }
 
     //domParent.appendChild( protoInstanceDom );
-    domNode.insertAdjacentElement( 'afterend', protoInstanceDom ); // do not use appendChild since scene parent may be already transferred
+    domNode.insertAdjacentElement( "afterend", protoInstanceDom ); // do not use appendChild since scene parent may be already transferred
     //this.doc.onNodeAdded( protoInstanceDom, parent._xmlNode );
 };
 
@@ -632,49 +632,49 @@ x3dom.NodeNameSpace.prototype.loadExternProtoAsync = function ( protoDeclaration
 {
     //use queue to ensure processing in correct sequence
     protoDeclaration.instanceQueue.push( {
-        "protoInstanceDom": protoInstanceDom,
-        "domNode": domNode,
-        "parentDom": parentDom
-        } );
+        "protoInstanceDom" : protoInstanceDom,
+        "domNode"          : domNode,
+        "parentDom"        : parentDom
+    } );
     var that = this;
     fetch( this.getURL( protoDeclaration.url [ 0 ] ) )
-    .then( function ( response ) { return response.text() })
-    .then( function ( text ) 
-    {
-        var parser = new DOMParser();
-        var doc = parser.parseFromString( text, "application/xml" );
-        var scene = doc.querySelector( "X3D" );
-        if ( scene == null )
+        .then( function ( response ) { return response.text(); } )
+        .then( function ( text )
         {
-            doc = parser.parseFromString( responseText, "text/html" );
-            scene = doc.querySelector( "X3D" );
-        }
-        var declareNode = scene.querySelector( "ProtoDeclare" );
-        //transfer name
-        declareNode.setAttribute( 'name', protoDeclaration.name );
-        //remove current placeholder declaration
-        var currentIndex = that.protos.findIndex( function ( d ) 
+            var parser = new DOMParser();
+            var doc = parser.parseFromString( text, "application/xml" );
+            var scene = doc.querySelector( "X3D" );
+            if ( scene == null )
+            {
+                doc = parser.parseFromString( responseText, "text/html" );
+                scene = doc.querySelector( "X3D" );
+            }
+            var declareNode = scene.querySelector( "ProtoDeclare" );
+            //transfer name
+            declareNode.setAttribute( "name", protoDeclaration.name );
+            //remove current placeholder declaration
+            var currentIndex = that.protos.findIndex( function ( d )
+            {
+                return d == protoDeclaration;
+            } );
+            that.protos.splice( currentIndex, 1 );
+            that.protoDeclare( declareNode ); //add declaration as internal
+            //add instance(s) in order
+            var instance;
+            while ( instance = protoDeclaration.instanceQueue.shift() ) //process in correct sequence
+            {
+                instance.domNode.insertAdjacentElement( "afterend", instance.protoInstanceDom ); // do not use appendChild since scene parent may be already transferred
+                that.doc.onNodeAdded( instance.protoInstanceDom, instance.parentDom );
+            };
+            protoDeclaration.needsLoading = false;
+        } )
+        .catch( function ( error )
         {
-            return d == protoDeclaration;
-        })
-        that.protos.splice( currentIndex, 1 );
-        that.protoDeclare( declareNode ); //add declaration as internal
-        //add instance(s) in order
-        var instance;
-        while ( instance = protoDeclaration.instanceQueue.shift() ) //process in correct sequence
-        {
-            instance.domNode.insertAdjacentElement( 'afterend', instance.protoInstanceDom ); // do not use appendChild since scene parent may be already transferred
-            that.doc.onNodeAdded( instance.protoInstanceDom, instance.parentDom );
-        };
-        protoDeclaration.needsLoading = false;
-    })
-    .catch( function ( error )
-    {
-        x3dom.debug.logError( "ExternProto fetch failed: " + error );
-        protoDeclaration.needsLoading = false;
-        return null;
-    } );
-}
+            x3dom.debug.logError( "ExternProto fetch failed: " + error );
+            protoDeclaration.needsLoading = false;
+            return null;
+        } );
+};
 
 x3dom.NodeNameSpace.prototype.externProtoDeclare = function ( domNode )
 {
@@ -877,20 +877,20 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                     this._changing = true;
 
                     var body = this.protoBodyClone;
-                
+
                     //register ProtoDeclares and convert ProtoInstance tp new nodes
                     body.querySelectorAll( ":scope > *" ) //static nodelist
-                    . forEach( function ( childDomNode )
-                    {
-                        var tag = childDomNode.localName.toLowerCase();
-                        if ( tag == "protodeclare" )
+                        . forEach( function ( childDomNode )
+                        {
+                            var tag = childDomNode.localName.toLowerCase();
+                            if ( tag == "protodeclare" )
                             { this.innerNameSpace.protoDeclare( childDomNode ); }
-                        else if ( tag == "externprotodeclare" )
+                            else if ( tag == "externprotodeclare" )
                             { this.innerNameSpace.externProtoDeclare( childDomNode ); }
-                        else if ( tag == "protoinstance" )
+                            else if ( tag == "protoinstance" )
                             { this.innerNameSpace.protoInstance( childDomNode, body ); }
-                    }, this );
-                    
+                        }, this );
+
                     var children = this.protoBodyClone.childNodes;//live nodelist
 
                     for ( var i = 0; i < children.length; i++ )
@@ -922,7 +922,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                         var ISRoutes = this.declaration._protoBody._ISRoutes;
                         if ( field in ISRoutes ) //misbehaved Protos may have unused fields
                         {
-                            this._setupFieldWatchers ( field );
+                            this._setupFieldWatchers( field );
                         }
                     };
                     this._changing = false;
@@ -948,7 +948,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                                     var timer = setTimeout( this.fieldChanged.bind( this ), 1000, field );
                                 }
                             }
-                            return
+                            return;
                         }
                         //forward
                         //potentially check for cf values
@@ -1011,7 +1011,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                                     var timer = setTimeout( this._setupFieldWatchers.bind( this ), 1000, field );
                                 }
                             }
-                            return
+                            return;
                         }
                         var nodeField = this._normalizeName( ISNode.nodeField, instanceNode );
                         if ( !instanceNode._fieldWatchers[ nodeField ] )
