@@ -25,6 +25,7 @@ x3dom.NodeNameSpace = function ( name, document )
     this.parent = null;
     this.childSpaces = [];
     this.protos = []; // the ProtoDeclarationArray
+    this.misRoutes = []; // the broken route array
 };
 
 /**
@@ -397,19 +398,28 @@ x3dom.NodeNameSpace.prototype.setupTree = function ( domNode, parent )
             if ( domNode.localName.toLowerCase() === "route" )
             {
                 var route = domNode;
-                var fnAtt = route.getAttribute( "fromNode" ) || route.getAttribute( "fromnode" );
-                var tnAtt = route.getAttribute( "toNode" ) || route.getAttribute( "tonode" );
-                var fromNode = this.defMap[ fnAtt ];
-                var toNode = this.defMap[ tnAtt ];
+                var fnDEF = route.getAttribute( "fromNode" ) || route.getAttribute( "fromnode" );
+                var tnDEF = route.getAttribute( "toNode" ) || route.getAttribute( "tonode" );
+                var fromNode = this.defMap[ fnDEF ];
+                var toNode = this.defMap[ tnDEF ];
+                var fnAtt = route.getAttribute( "fromField" ) || route.getAttribute( "fromfield" );
+                var tnAtt = route.getAttribute( "toField" ) || route.getAttribute( "tofield" );
+                    
                 if ( !( fromNode && toNode ) )
                 {
                     x3dom.debug.logWarning( "Broken route - can't find all DEFs for " + fnAtt + " -> " + tnAtt );
+                    this.misRoutes.push( // save to check after protoextern instances loaded
+                    {
+                       route: route,
+                       fnDEF: fnDEF,
+                       tnDEF: tnDEF,
+                       fnAtt: fnAtt,
+                       tnAtt: tnAtt
+                    });
                 }
                 else
                 {
                     x3dom.debug.logInfo( "ROUTE: from=" + fromNode._DEF + ", to=" + toNode._DEF );
-                    fnAtt = route.getAttribute( "fromField" ) || route.getAttribute( "fromfield" );
-                    tnAtt = route.getAttribute( "toField" ) || route.getAttribute( "tofield" );
                     fromNode.setupRoute( fnAtt, toNode, tnAtt );
                     // Store reference to namespace for being able to remove route later on
                     route._nodeNameSpace = this;
@@ -523,7 +533,8 @@ x3dom.NodeNameSpace.prototype.setupTree = function ( domNode, parent )
     }
     else if ( domNode.localName )
     {
-        if ( parent && domNode.localName.toLowerCase() == "x3dommetagroup" )
+        var tagLC = domNode.localName.toLowerCase();
+        if ( parent && tagLC == "x3dommetagroup" )
         {
             domNode.childNodes.forEach( function ( childDomNode )
             {
@@ -535,22 +546,12 @@ x3dom.NodeNameSpace.prototype.setupTree = function ( domNode, parent )
             }.bind( this ) );
         }
 
-        else if ( parent && domNode.localName.toLowerCase() == "protodeclare" )
-        {
-            n = null;//this.protoDeclare( domNode, parent );
-        }
-
-        else if ( parent && domNode.localName.toLowerCase() == "externprotodeclare" )
-        {
-            n = null;//this.externProtoDeclare( domNode, parent );
-        }
-
-        else if ( parent && domNode.localName.toLowerCase() == "protoinstance" )
+        else if ( tagLC == "protodeclare" || tagLC == "externprotodeclare" || tagLC == "protoinstance" )
         {
             n = null;//this.protoInstance( domNode, parent._xmlNode );
         }
 
-        else if ( parent && domNode.localName.toLowerCase() == "is" )
+        else if ( domNode.localName.toLowerCase() == "is" )
         {
             //silence warning
             //check for connect, just because
@@ -573,6 +574,8 @@ x3dom.NodeNameSpace.prototype.protoInstance = function ( domNode, domParent )
 {
     if ( !domNode.localName ) {return;}
     if ( domNode.localName.toLowerCase() !== "protoinstance" ) {return;}
+    if ( domNode._x3dom ) {return;}
+    
     var name = domNode.getAttribute( "name" );
     //console.log( "found ProtoInstance", name, domNode );
     var protoDeclaration = this.protos.find( function ( proto ) { return proto.name == name; } );
@@ -593,6 +596,11 @@ x3dom.NodeNameSpace.prototype.protoInstance = function ( domNode, domParent )
     else if ( domNode.hasAttribute( "USE" ) )
     {
         protoInstanceDom.setAttribute( "USE", domNode.getAttribute( "USE" ) );
+    }
+
+    if ( domNode.hasAttribute( "containerField" ) )
+    {
+        protoInstanceDom.setAttribute( "containerField", domNode.getAttribute( "containerField" ) );
     }
 
     //set fields to instance values
@@ -625,6 +633,7 @@ x3dom.NodeNameSpace.prototype.protoInstance = function ( domNode, domParent )
 
     //domParent.appendChild( protoInstanceDom );
     domNode.insertAdjacentElement( "afterend", protoInstanceDom ); // do not use appendChild since scene parent may be already transferred
+    domNode._x3dom = protoInstanceDom;
     //this.doc.onNodeAdded( protoInstanceDom, parent._xmlNode );
 };
 
@@ -636,8 +645,10 @@ x3dom.NodeNameSpace.prototype.loadExternProtoAsync = function ( protoDeclaration
         "domNode"          : domNode,
         "parentDom"        : parentDom
     } );
+    domNode._x3dom = protoInstanceDom;
     var that = this;
-    fetch( this.getURL( protoDeclaration.url [ 0 ] ) )
+    var url = this.getURL( protoDeclaration.url [ 0 ] );
+    fetch( url )
         .then( function ( response ) { return response.text(); } )
         .then( function ( text )
         {
@@ -649,7 +660,10 @@ x3dom.NodeNameSpace.prototype.loadExternProtoAsync = function ( protoDeclaration
                 doc = parser.parseFromString( responseText, "text/html" );
                 scene = doc.querySelector( "X3D" );
             }
-            var declareNode = scene.querySelector( "ProtoDeclare" );
+            //find hash
+            var hash = url.split('#').slice(-1)[0];
+            var selector = hash == "" ? "ProtoDeclare" : "ProtoDeclare[name='"+hash+"']";
+            var declareNode = scene.querySelector( selector );
             //transfer name
             declareNode.setAttribute( "name", protoDeclaration.name );
             //remove current placeholder declaration
@@ -665,6 +679,20 @@ x3dom.NodeNameSpace.prototype.loadExternProtoAsync = function ( protoDeclaration
             {
                 instance.domNode.insertAdjacentElement( "afterend", instance.protoInstanceDom ); // do not use appendChild since scene parent may be already transferred
                 that.doc.onNodeAdded( instance.protoInstanceDom, instance.parentDom );
+                instance.domNode._x3dom = instance.protoInstanceDom;
+
+                that.misRoutes.forEach( function (route)
+                {
+                    var fromNode = that.defMap[ route.fnDEF ];
+                    var toNode = that.defMap[ route.tnDEF ];
+                    if ( ( fromNode && toNode ) )
+                    {
+                        x3dom.debug.logInfo( "fixed ROUTE: from=" + fromNode._DEF + ", to=" + toNode._DEF );
+                        fromNode.setupRoute( route.fnAtt, toNode, route.tnAtt );
+                        // Store reference to namespace for being able to remove route later on
+                        route.route._nodeNameSpace = that;
+                    }
+                });
             };
             protoDeclaration.needsLoading = false;
         } )
