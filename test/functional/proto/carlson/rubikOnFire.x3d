@@ -5,6 +5,7 @@
         <meta name='title' content='rubikOnFire.x3d'/>
         <meta name='creator' content='John Carlson'/>
         <meta name='generator' content='manual'/>
+        <meta name='modified' content='larger box'/>
         <meta name='identifier' content='https://coderextreme.net/X3DJSONLD/rubikOnFire.x3d'/>
         <meta name='description' content='a white rubik cube'/>      
       </head>
@@ -136,7 +137,7 @@
         <ProtoInstance name="twentyseven">
             <fieldValue name="ttranslation" value="0 0 0"/>
             <fieldValue name="myShape">
-                <Box size="1 1 1"/>
+                <Box size="1.8 1.8 1.8"/>
             </fieldValue>
         </ProtoInstance>
     </Scene>
