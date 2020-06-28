@@ -873,7 +873,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                         //create temp node to get type
                         var type = x3dom.nodeTypes.X3DNode;
                         var IStype = ISDomNode.localName.toLowerCase();
-                        if ( IStype in x3dom.nodeTypesLC)
+                        if ( IStype in x3dom.nodeTypesLC )
                         {
                             var ISNode = new x3dom.nodeTypesLC[ IStype ]( ctx );
                             type = ISNode._cf[ nodeField ].type;
