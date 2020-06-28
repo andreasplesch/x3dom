@@ -5,13 +5,14 @@
         <meta name='title' content='rubik.x3d'/>
         <meta name='creator' content='John Carlson'/>
         <meta name='generator' content='manual'/>
+        <meta name='modified' content='protosphere'/>
         <meta name='identifier' content='https://coderextreme.net/X3DJSONLD/rubik.x3d'/>
         <meta name='description' content='a kind of rubik cube with spheres'/>      
       </head>
     <Scene>
         <NavigationInfo type='"EXAMINE"'/>
         <Viewpoint description="Rubiks Cube" position="0 0 12"/>
-        <ProtoDeclare name="sphere">
+        <ProtoDeclare name="protosphere">
             <ProtoInterface>
                 <field name="xtranslation" accessType="inputOutput" type="SFVec3f" value="0.0 0.0 0.0"/>
             </ProtoInterface>
@@ -38,13 +39,13 @@
                     <IS>
                         <connect nodeField="translation" protoField="ytranslation"/>
                     </IS>
-                    <ProtoInstance name="sphere">
+                    <ProtoInstance name="protosphere">
                         <fieldValue name="xtranslation" value="0 0 0"/>
                     </ProtoInstance>
-                    <ProtoInstance name="sphere">
+                    <ProtoInstance name="protosphere">
                         <fieldValue name="xtranslation" value="2 0 0"/>
                     </ProtoInstance>
-                    <ProtoInstance name="sphere">
+                    <ProtoInstance name="protosphere">
                         <fieldValue name="xtranslation" value="-2 0 0"/>
                     </ProtoInstance>
                 </Transform>
@@ -93,7 +94,7 @@
             </ProtoBody>
         </ProtoDeclare>
         <ProtoInstance name="twentyseven">
-            <fieldValue name="ttranslation" value="0 0 0"/>
+            <fieldValue name="xtranslation" value="0 0 1"/>
         </ProtoInstance>
     </Scene>
 </X3D>
