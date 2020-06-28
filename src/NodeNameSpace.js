@@ -871,8 +871,14 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                         var nodeField = ISconnection.nodeField;
                         var ISDomNode = that._protoBody.querySelector( "[DEF=" + ISconnection.nodeDEF + "]" );
                         //create temp node to get type
-                        var ISNode = new x3dom.nodeTypesLC[ ISDomNode.localName.toLowerCase() ]( ctx );
-                        this[ "addField_" + field.dataType ]( field.name, ISNode._cf[ nodeField ].type );//type should be registered x3dom type
+                        var type = x3dom.nodeTypes.X3DNode;
+                        var IStype = ISDomNode.localName.toLowerCase();
+                        if ( IStype in x3dom.nodeTypesLC)
+                        {
+                            var ISNode = new x3dom.nodeTypesLC[ IStype ]( ctx );
+                            type = ISNode._cf[ nodeField ].type;
+                        }
+                        this[ "addField_" + field.dataType ]( field.name, type );//type should be registered x3dom type
                     }, this );
 
                 //initial
