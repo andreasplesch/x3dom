@@ -25,7 +25,7 @@
       <Group>
         <NavigationInfo type='"EXAMINE" "WALK" "FLY" "ANY"'/>
         <Transform>
-          <ProtoInstance DEF='MYPROTO' name='BallProto'/>
+          <BallProto DEF='MYPROTO' />
         </Transform>
       </Group>
     </Group>
