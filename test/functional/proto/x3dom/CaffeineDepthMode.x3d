@@ -540,7 +540,7 @@
         
       </Transform>
       <Transform>
-        <ProtoInstance name='ano2_text'>
+        <ano2_text
           txt='"water solubility: 1-5"'/>
         
       </Transform>
