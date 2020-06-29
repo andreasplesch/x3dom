@@ -37,9 +37,9 @@
     <DirectionalLight color='0.0 0.3 1.0' direction='-0.5 1.0 0.7'/>
     <ProtoDeclare name='Pad'>
       <ProtoInterface>
-        <field accessType='inputOutput' name='rotation' type='SFRotation='0.0 0.0 1.0 0.0'/>
-        <field accessType='inputOutput' name='cycleInterval' type='SFTime='10.0'/>
-        <field accessType='inputOutput' name='translation' type='SFVec3f='0.0 0.0 0.0'/>
+        <field accessType='inputOutput' name='rotation' type='SFRotation' value='0.0 0.0 1.0 0.0'/>
+        <field accessType='inputOutput' name='cycleInterval' type='SFTime' value='10.0'/>
+        <field accessType='inputOutput' name='translation' type='SFVec3f' value='0.0 0.0 0.0'/>
       </ProtoInterface>
       <ProtoBody>
         <Collision enabled='false'>
