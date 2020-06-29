@@ -63,7 +63,7 @@
 	</ProtoDeclare>
 	<Group>
 		<TouchSensor DEF="K" />
-		<LightToggle" DEF="LT" />
+		<LightToggle DEF="LT" />
 		
 	</Group>
 	<!--KeySensor DEF="K" /-->
