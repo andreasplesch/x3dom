@@ -206,7 +206,7 @@
       <DirectionalLight direction='0.0 1.0 -0.5' intensity='0.5'/>
       <Anchor description='Back to front view' url='"#Front"'>
         <Transform translation='0.0 0.0 -0.5'>
-          <Inline url='"gridBack.x3d" "https://www.web3d.org/x3d/content/examples/Basic/UniversalMediaMaterials/gridBack.x3d" "gridBack.wrl" "https://www.web3d.org/x3d/content/examples/Basic/UniversalMediaMaterials/gridBack.wrl"'/>
+          <Inline url='"../gridBack.x3d" "https://www.web3d.org/x3d/content/examples/Basic/UniversalMediaMaterials/gridBack.x3d" "gridBack.wrl" "https://www.web3d.org/x3d/content/examples/Basic/UniversalMediaMaterials/gridBack.wrl"'/>
         </Transform>
       </Anchor>
       <Viewpoint DEF='View00' description='Tropical00' position='-3.75 3.75 3.0'/>
@@ -214,7 +214,7 @@
         <Anchor description='Tropical00 view' url='"#View00"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical00'/>
+              <Tropical00/>
             </Appearance>
             <Sphere DEF='Ball' radius='0.5'/>
           </Shape>
@@ -237,7 +237,7 @@
         <Anchor description='Tropical01 view' url='"#View01"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical01'/>
+              <Tropical01/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -260,7 +260,7 @@
         <Anchor description='Tropical02 view' url='"#View02"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical02'/>
+              <Tropical02/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -283,7 +283,7 @@
         <Anchor description='Tropical03 view' url='"#View03"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical03'/>
+              <Tropical03/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -306,7 +306,7 @@
         <Anchor description='Tropical04 view' url='"#View04"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical04'/>
+              <Tropical04/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -329,7 +329,7 @@
         <Anchor description='Tropical05 view' url='"#View05"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical05'/>
+              <Tropical05/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -352,7 +352,7 @@
         <Anchor description='Tropical06 view' url='"#View06"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical06'/>
+              <Tropical06/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -375,7 +375,7 @@
         <Anchor description='Tropical07 view' url='"#View07"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical07'/>
+              <Tropical07/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -398,7 +398,7 @@
         <Anchor description='Tropical08 view' url='"#View08"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical08'/>
+              <Tropical08/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -421,7 +421,7 @@
         <Anchor description='Tropical09 view' url='"#View09"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical09'/>
+              <Tropical09/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -444,7 +444,7 @@
         <Anchor description='Tropical10 view' url='"#View10"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical10'/>
+              <Tropical10/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -467,7 +467,7 @@
         <Anchor description='Tropical11 view' url='"#View11"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical11'/>
+              <Tropical11/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -490,7 +490,7 @@
         <Anchor description='Tropical12 view' url='"#View12"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical12'/>
+              <Tropical12/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -513,7 +513,7 @@
         <Anchor description='Tropical13 view' url='"#View13"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical13'/>
+              <Tropical13/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -536,7 +536,7 @@
         <Anchor description='Tropical14 view' url='"#View14"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical14'/>
+              <Tropical14/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -559,7 +559,7 @@
         <Anchor description='Tropical15 view' url='"#View15"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical15'/>
+              <Tropical15/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -582,7 +582,7 @@
         <Anchor description='Tropical16 view' url='"#View16"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical16'/>
+              <Tropical16/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -605,7 +605,7 @@
         <Anchor description='Tropical17 view' url='"#View17"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical17'/>
+              <Tropical17/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -628,7 +628,7 @@
         <Anchor description='Tropical18 view' url='"#View18"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical18'/>
+              <Tropical18/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -651,7 +651,7 @@
         <Anchor description='Tropical19 view' url='"#View19"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical19'/>
+              <Tropical19/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -674,7 +674,7 @@
         <Anchor description='Tropical20 view' url='"#View20"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical20'/>
+              <Tropical20/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -697,7 +697,7 @@
         <Anchor description='Tropical21 view' url='"#View21"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical21'/>
+              <Tropical21/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -720,7 +720,7 @@
         <Anchor description='Tropical22 view' url='"#View22"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical22'/>
+              <Tropical22/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -743,7 +743,7 @@
         <Anchor description='Tropical23 view' url='"#View23"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical23'/>
+              <Tropical23/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -766,7 +766,7 @@
         <Anchor description='Tropical24 view' url='"#View24"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical24'/>
+              <Tropical24/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -789,7 +789,7 @@
         <Anchor description='Tropical25 view' url='"#View25"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical25'/>
+              <Tropical25/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -812,7 +812,7 @@
         <Anchor description='Tropical26 view' url='"#View26"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical26'/>
+              <Tropical26/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -835,7 +835,7 @@
         <Anchor description='Tropical27 view' url='"#View27"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical27'/>
+              <Tropical27/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -858,7 +858,7 @@
         <Anchor description='Tropical28 view' url='"#View28"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical28'/>
+              <Tropical28/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -881,7 +881,7 @@
         <Anchor description='Tropical29 view' url='"#View29"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical29'/>
+              <Tropical29/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -904,7 +904,7 @@
         <Anchor description='Tropical30 view' url='"#View30"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical30'/>
+              <Tropical30/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -927,7 +927,7 @@
         <Anchor description='Tropical31 view' url='"#View31"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical31'/>
+              <Tropical31/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -950,7 +950,7 @@
         <Anchor description='Tropical32 view' url='"#View32"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical32'/>
+              <Tropical32/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -973,7 +973,7 @@
         <Anchor description='Tropical33 view' url='"#View33"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical33'/>
+              <Tropical33/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
@@ -996,7 +996,7 @@
         <Anchor description='Tropical34 view' url='"#View34"'>
           <Shape>
             <Appearance>
-              <ProtoInstance containerField='material' name='Tropical34'/>
+              <Tropical34/>
             </Appearance>
             <Sphere USE='Ball'/>
           </Shape>
