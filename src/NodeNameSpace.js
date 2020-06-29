@@ -534,6 +534,11 @@ x3dom.NodeNameSpace.prototype.setupTree = function ( domNode, parent )
     else if ( domNode.localName )
     {
         var tagLC = domNode.localName.toLowerCase();
+        //check if externproto tag for direct syntax
+        var protoDeclaration = this.protos.find( function ( declaration )
+            {
+                return tagLC == declaration.name.toLowerCase() && declaration.isExternProto;
+            } );
         if ( parent && tagLC == "x3dommetagroup" )
         {
             domNode.childNodes.forEach( function ( childDomNode )
@@ -559,6 +564,10 @@ x3dom.NodeNameSpace.prototype.setupTree = function ( domNode, parent )
             {
                 x3dom.debug.logWarning( "IS statement without connect link: " + domNode.parentElement.localName );
             }
+        }
+        else if ( protoDeclaration )
+        {
+            this.loadExternProtoAsync( protoDeclaration, domNode, domNode, domNode.parentElement );
         }
         else
         {
@@ -679,10 +688,13 @@ x3dom.NodeNameSpace.prototype.loadExternProtoAsync = function ( protoDeclaration
             while ( instance = protoDeclaration.instanceQueue.shift() ) //process in correct sequence
             {
                 that.doc.mutationObserver.disconnect();//do not record mutation
-                instance.domNode.insertAdjacentElement( "afterend", instance.protoInstanceDom ); // do not use appendChild since scene parent may be already transferred
+                if (instance.domNode !== instance.protoInstanceDom )
+                {
+                    instance.domNode.insertAdjacentElement( "afterend", instance.protoInstanceDom ); // do not use appendChild since scene parent may be already transferred
+                }
                 that.doc.mutationObserver.observe( that.doc._scene._xmlNode, { attributes: true, attributeOldValue: true, childList: true, subtree: true } );
                 that.doc.onNodeAdded( instance.protoInstanceDom, instance.parentDom );
-                instance.domNode._x3dom = instance.protoInstanceDom;
+                //instance.domNode._x3dom = instance.protoInstanceDom;
 
                 that.lateRoutes.forEach( function ( route )
                 {
