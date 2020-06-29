@@ -173,7 +173,7 @@ x3dom.registerNodeType(
                     for ( var fieldName in this._cf )
                     {
                         if ( this._cf.hasOwnProperty( fieldName ) &&
-                             (targetField == "any" || fieldName == targetField) )
+                             ( targetField == "any" || fieldName == targetField ) )
                         {
                             var field = this._cf[ fieldName ];
                             if ( field.rmLink( node ) || force )
