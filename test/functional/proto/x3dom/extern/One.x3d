@@ -31,9 +31,10 @@
       <field accessType='initializeOnly' name='translation' type='SFVec3f'/>
       <field accessType='initializeOnly' name='yTumbleInterval' type='SFTime'/>
     </ExternProtoDeclare>
-    <ProtoInstance name='TumbleGroup'>
-      <fieldValue name='xTumbleInterval' value='27.0'/>
-      <fieldValue name='children'>
+    <TumbleGroup
+      xTumbleInterval='27.0'
+      zTumbleInterval' value='45.0'
+      yTumbleInterval='13.0'>
         <Shape DEF='Block'>
           <Appearance>
             <Material/>
@@ -41,25 +42,18 @@
           </Appearance>
           <Box size='4.0 4.0 4.0'/>
         </Shape>
-      </fieldValue>
-      <fieldValue name='zTumbleInterval' value='45.0'/>
-      <fieldValue name='yTumbleInterval' value='13.0'/>
-    </ProtoInstance>
-    <ProtoInstance name='TumbleGroup'>
-      <fieldValue name='xTumbleInterval' value='29.0'/>
-      <fieldValue name='children'>
+    </TumbleGroup>
+    <TumbleGroup
+      xTumbleInterval='29.0'
+      zTumbleInterval='25.0'
+      yTumbleInterval='31.0'>
         <Shape USE='Block'/>
-      </fieldValue>
-      <fieldValue name='zTumbleInterval' value='25.0'/>
-      <fieldValue name='yTumbleInterval' value='31.0'/>
-    </ProtoInstance>
-    <ProtoInstance name='TumbleGroup'>
-      <fieldValue name='xTumbleInterval' value='38.0'/>
-      <fieldValue name='children'>
+    </TumbleGroup>
+    <TumbleGroup
+      xTumbleInterval='38.0'
+      zTumbleInterval='43.0'
+      yTumbleInterval='27.0'>
         <Shape USE='Block'/>
-      </fieldValue>
-      <fieldValue name='zTumbleInterval' value='43.0'/>
-      <fieldValue name='yTumbleInterval' value='27.0'/>
-    </ProtoInstance>
+    </TumbleGroup>
   </Scene>
 </X3D>
