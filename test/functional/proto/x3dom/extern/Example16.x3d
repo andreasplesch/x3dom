@@ -32,15 +32,15 @@
         <Group>
           <TouchSensor DEF='Touch' description='touch to start/stop spinning rotor'/>
           <Inline url='"ChopperBody.x3d" "https://www.web3d.org/x3d/content/examples/Basic/Vrml97Specification/ChopperBody.x3d" "ChopperBody.wrl" "https://www.web3d.org/x3d/content/examples/Basic/Vrml97Specification/ChopperBody.wrl"'/>
-          <ProtoInstance DEF='Top' name='Rotor'>
-            <fieldValue name='stopTime' value='1'/>
-            <fieldValue name='children'>
+          <Rotor
+            stopTime='1'>
+            
               <Inline url='"ChopperRotor.x3d" "https://www.web3d.org/x3d/content/examples/Basic/Vrml97Specification/ChopperRotor.x3d" "ChopperRotor.wrl" "https://www.web3d.org/x3d/content/examples/Basic/Vrml97Specification/ChopperRotor.wrl"'/>
-            </fieldValue>
+            
             <IS>
               <connect nodeField='rate' protoField='rotorSpeed'/>
             </IS>
-          </ProtoInstance>
+          </Rotor>
         </Group>
         <BooleanTrigger DEF='trigger' />
         <BooleanToggle DEF='toggler' />
@@ -85,7 +85,7 @@ function startOrStopEngine(value) {
     <!-- ==================== -->
     <Viewpoint description='Example 16' position='0 0 5'/>
     <Group>
-      <ProtoInstance DEF='MikesChopper' name='Chopper'/>
+      <Chopper DEF='MikesChopper' />
     </Group>
   </Scene>
 </X3D>
