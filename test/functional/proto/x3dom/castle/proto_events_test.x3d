@@ -58,7 +58,7 @@
 	<Group>
 		<TouchSensor DEF="K" />
 		<LightToggle DEF="LT" />
-		</ProtoInstance>
+
 	</Group>
 	<!--<KeySensor DEF="K" /-->
 	<!--ROUTE fromNode="K" fromField="controlKey" toNode="LT" toField="set_light_on" /-->
