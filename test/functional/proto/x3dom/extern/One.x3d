@@ -33,7 +33,7 @@
     </ExternProtoDeclare>
     <TumbleGroup
       xTumbleInterval='27.0'
-      zTumbleInterval' value='45.0'
+      zTumbleInterval='45.0'
       yTumbleInterval='13.0'>
         <Shape DEF='Block'>
           <Appearance>
