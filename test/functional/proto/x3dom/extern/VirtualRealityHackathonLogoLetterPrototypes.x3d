@@ -71,7 +71,7 @@
             
           
           
-            <Logo_letter_H containerField=='backFace'
+            <Logo_letter_H containerField='backFace'
               front_colour='0.80 0.67 0.31'
               sides_colour='0.91 0.90 0.78'/>
             
