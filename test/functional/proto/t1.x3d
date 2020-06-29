@@ -178,7 +178,7 @@
 	<Transform
 		translation="-468 0 315">
 		<Inline
-			url='"t.wrl"' />
+			url='"t.x3d"' />
 		<Anchor
 			url='"javascript:window.open(&apos;./data/566.html&apos;,&apos;details&apos;,&apos;height=550,width=400,top=50,left=50,menubar=no,status=no,toolbar=no,titlebar=no&apos;);"'
 			description="Derby Women&apos;s Centre">
