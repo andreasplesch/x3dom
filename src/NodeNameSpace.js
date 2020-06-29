@@ -503,7 +503,7 @@ x3dom.NodeNameSpace.prototype.setupTree = function ( domNode, parent )
                 n._xmlNode = domNode;
                 domNode._x3domNode = n;
 
-                //register ProtoDeclares and convert ProtoInstance tp new nodes
+                //register ProtoDeclares and convert ProtoInstance to new nodes
                 domNode.querySelectorAll( ":scope > *" ) //static nodelist
                     . forEach( function ( childDomNode )
                     {
@@ -848,6 +848,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                         }
                         this[ "addField_" + field.dataType ]( ctx, field.name, field.value );
                     }, this );
+                this._cf_hash = {};
                 that.fields.filter( function ( field )
                 {
                     return field.dataType.endsWith( "ode" ); //_cf fields
@@ -879,6 +880,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                             type = ISNode._cf[ nodeField ].type;
                         }
                         this[ "addField_" + field.dataType ]( field.name, type );//type should be registered x3dom type
+                        this._cf_hash[ field.name ] = "trigger";
                     }, this );
 
                 //initial
@@ -906,7 +908,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                 this._maxTries = 5;
             },
             {
-                nodeChanged : function ()
+                nodeChanged : function ( nodeField )
                 {
                     if ( this._changing ) {return;}
 
@@ -949,7 +951,19 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                     }
                     for ( field in this._cf )
                     {
-                        this.fieldChanged( field );
+                        var cf = this._cf[ field ];
+                        if ( "nodes" in cf )
+                        {
+                            if ( this._cf_hash[ field ] !== this._get_cf_hash( field )
+                                || field == nodeField ) //changed
+                            {
+                                this.fieldChanged( field );
+                            }
+                        }
+                        else
+                        {
+                                this.fieldChanged( field );
+                        }
                     }
 
                     //add fieldwatchers to nodeFields to forward event out
@@ -963,6 +977,15 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                         }
                     };
                     this._changing = false;
+
+                    //save a current hash of cf children
+                    for ( field in this._cf )
+                    {
+                        if ( "nodes" in this._cf[ field ] )
+                        {
+                            this._cf_hash[ field ] = this._get_cf_hash( field );
+                        }
+                    }
                 },
 
                 fieldChanged : function ( field )
@@ -1021,19 +1044,36 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                                     x3dom.debug.logWarning( "Unexpected field type: " + instanceNode._cfFieldTypes[ nodeField ] );
                                 }
 
-                                //only update if not already added
-                                nodes.forEach( function ( sfnode )
+                                //first remove all field childnodes
+                                instanceNode._childNodes.forEach( function ( sfnode )
                                 {
-                                    if ( !instanceNode._childNodes.some( function ( child )
-                                    {
-                                        return child == sfnode;
-                                    } ) )
-                                    {
-                                        instanceNode.addChild( sfnode, nodeField );
-                                    }
+                                    instanceNode.removeChild( sfnode, nodeField, "force" );
+                                });
+                                
+                                // then re-add new child nodes to instance
+                                nodes.forEach( function ( sfnode, i )
+                                {
+                                    instanceNode.addChild( sfnode, nodeField );
                                 } );
 
-                                instanceNode.nodeChanged();
+                                if ( instanceNode._cfFieldTypes[ nodeField ] == "MFNode" )
+                                {
+                                    // now the _cf nodes array may contain duplicates
+                                    // remove the first one
+                                    for ( var i = 0; i < nodes.length; i++ )
+                                    {
+                                        var node = nodes[ i ];
+                                        for ( var j = nodes.length - 1; j > i; j-- )
+                                        {
+                                            if ( node == nodes[ j ] )
+                                            {
+                                                nodes.splice(j, 1);
+                                            }
+                                        }
+                                    }
+                                }
+
+                                instanceNode.nodeChanged( nodeField );
                             }
                         }, this );
                     }
@@ -1079,6 +1119,12 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                         instanceNode._fieldWatchers[ nodeField ].push(
                             this.postMessage.bind( this, field ) ); // forward
                     }, this );
+                },
+
+                _get_cf_hash : function ( field )
+                {
+                    var nodes = this._cf[ field ].nodes; 
+                    return nodes.length
                 }
             }
         )
