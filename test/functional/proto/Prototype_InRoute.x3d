@@ -2,7 +2,7 @@
 <!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 3.3//EN" "http://www.web3d.org/specifications/x3d-3.3.dtd">
 <X3D profile='Immersive' version='3.3' xmlns:xsd='http://www.w3.org/2001/XMLSchema-instance' xsd:noNamespaceSchemaLocation='http://www.web3d.org/specifications/x3d-3.3.xsd'>
   <head>
-    <meta content='Prototype.x3d' name='title'/>
+    <meta content='Prototype_InRoute.x3d' name='title'/>
     <meta content='X3D encodings example: defining a Prototype, demonstration of IS/connect definitions.' name='description'/>
     <meta content='Don Brutzman and Joe Williams' name='creator'/>
     <meta content='1 June 2002' name='created'/>
