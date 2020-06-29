@@ -165,16 +165,18 @@ x3dom.registerNodeType(
                 return false;
             },
 
-            removeChild : function ( node )
+            removeChild : function ( node, targetField, force )
             {
+                targetField = targetField || "any";
                 if ( node )
                 {
                     for ( var fieldName in this._cf )
                     {
-                        if ( this._cf.hasOwnProperty( fieldName ) )
+                        if ( this._cf.hasOwnProperty( fieldName ) &&
+                             (targetField == "any" || fieldName == targetField) )
                         {
                             var field = this._cf[ fieldName ];
-                            if ( field.rmLink( node ) )
+                            if ( field.rmLink( node ) || force )
                             {
                                 for ( var i = node._parentNodes.length - 1; i >= 0; i-- )
                                 {
