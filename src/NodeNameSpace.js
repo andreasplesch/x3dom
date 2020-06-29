@@ -962,7 +962,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                         }
                         else
                         {
-                                this.fieldChanged( field );
+                            this.fieldChanged( field );
                         }
                     }
 
@@ -1048,8 +1048,8 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                                 instanceNode._childNodes.forEach( function ( sfnode )
                                 {
                                     instanceNode.removeChild( sfnode, nodeField, "force" );
-                                });
-                                
+                                } );
+
                                 // then re-add new child nodes to instance
                                 nodes.forEach( function ( sfnode, i )
                                 {
@@ -1067,7 +1067,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                                         {
                                             if ( node == nodes[ j ] )
                                             {
-                                                nodes.splice(j, 1);
+                                                nodes.splice( j, 1 );
                                             }
                                         }
                                     }
@@ -1123,13 +1123,10 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
 
                 _get_cf_hash : function ( field )
                 {
-                    var nodes = this._cf[ field ].nodes; 
-                    return nodes.length
+                    var nodes = this._cf[ field ].nodes;
+                    return nodes.length;
                 }
             }
         )
     );
 };
-
-// uid for generated proto defs
-x3dom.protoISDEFuid = 0;
