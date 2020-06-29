@@ -32,7 +32,7 @@
         <Group>
           <TouchSensor DEF='Touch' description='touch to start/stop spinning rotor'/>
           <Inline url='"ChopperBody.x3d" "https://www.web3d.org/x3d/content/examples/Basic/Vrml97Specification/ChopperBody.x3d" "ChopperBody.wrl" "https://www.web3d.org/x3d/content/examples/Basic/Vrml97Specification/ChopperBody.wrl"'/>
-          <Rotor
+          <Rotor DEF='Top'
             stopTime='1'>
             
               <Inline url='"ChopperRotor.x3d" "https://www.web3d.org/x3d/content/examples/Basic/Vrml97Specification/ChopperRotor.x3d" "ChopperRotor.wrl" "https://www.web3d.org/x3d/content/examples/Basic/Vrml97Specification/ChopperRotor.wrl"'/>
