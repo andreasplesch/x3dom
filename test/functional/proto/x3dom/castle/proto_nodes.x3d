@@ -79,7 +79,7 @@
 		</Transform>
 		<MaterialSphereDefaultRed containerField="children">
 			
-				<Material DEF="YellowMat"
+				<Material containerField='material' DEF="YellowMat"
 					diffuseColor="1 1 0" />
 			
 		</MaterialSphereDefaultRed>
