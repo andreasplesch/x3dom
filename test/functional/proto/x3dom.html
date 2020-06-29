@@ -23,7 +23,7 @@
         <Scene>
             <!--Background skyColor='0, 0, 0.1'></Background-->
             <Transform>
-                <Inline onload='handleLoad(event)' id="inline" nameSpaceName="proto" mapDEFToID="true" url="IntegerTriggerOnTrue.x3d" ></Inline>
+                <Inline onload='handleLoad(event)' id="inline" nameSpaceName="proto" mapDEFToID="true" url="x3dom/ArtDecoPrototypesExcerpt.x3dom" ></Inline>
             </Transform>
         </Scene>
     </X3D>
@@ -71,7 +71,7 @@
 </body>
 <script>
     const inline = document.querySelector( '#Inline' );
-    const ext = '.x3d';
+    const ext = '.x3dom';
     function handleChange(event) {
         inline.setFieldValue( "url", [ event.target.options[event.target.selectedIndex].value + ext ] );
     }
