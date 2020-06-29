@@ -1130,3 +1130,6 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
         )
     );
 };
+
+// uid for generated proto defs
+x3dom.protoISDEFuid = 0;
