@@ -47,24 +47,25 @@
                     <IS>
                         <connect nodeField="translation" protoField="ytranslation"/>
                     </IS>
-                    <ProtoInstance name="anyShape">
-                        <fieldValue name="xtranslation" value="0 0 0"/>
+                    <anyShape
+                        xtranslation" value="0 0 0">
                         <IS>
                             <connect nodeField="myShape" protoField="myShape"/>
                         </IS>
-                    </ProtoInstance>
-                    <ProtoInstance name="anyShape">                       
-                        <fieldValue name="xtranslation" value="2 0 0"/>
+                    </anyShape>
+                    <anyShape
+                        xtranslation" value="2 0 0">
                         <IS>
                             <connect nodeField="myShape" protoField="myShape"/>
                         </IS>
-                    </ProtoInstance>
-                    <ProtoInstance name="anyShape">                       
-                        <fieldValue name="xtranslation" value="-2 0 0"/>
+                    </anyShape>
+                    <anyShape
+                        xtranslation" value="-2 0 0">
                         <IS>
                             <connect nodeField="myShape" protoField="myShape"/>
                         </IS>
-                    </ProtoInstance>
+                    </anyShape>
+                    
                 </Transform>
             </ProtoBody>
         </ProtoDeclare>
@@ -80,24 +81,25 @@
                     <IS>
                         <connect nodeField="translation" protoField="ztranslation"/>
                     </IS>
-                    <ProtoInstance name="three">                       
-                        <fieldValue name="ytranslation" value="0 0 0"/>
+                    <three
+                        ytranslation="0 0 0">
                         <IS>
                             <connect nodeField="myShape" protoField="myShape"/>
                         </IS>
-                    </ProtoInstance>
-                    <ProtoInstance name="three">
-                        <fieldValue name="ytranslation" value="0 2 0"/>
+                    </three>
+                    <three
+                        ytranslation="0 2 0">
                         <IS>
                             <connect nodeField="myShape" protoField="myShape"/>
                         </IS>
-                    </ProtoInstance>
-                    <ProtoInstance name="three">
-                        <fieldValue name="ytranslation" value="0 -2 0"/>
+                    </three>
+                    <three
+                        ytranslation="0 -2 0">
                         <IS>
                             <connect nodeField="myShape" protoField="myShape"/>
                         </IS>
-                    </ProtoInstance>
+                    </three>
+                    
                 </Transform>
             </ProtoBody>
         </ProtoDeclare>
@@ -113,32 +115,32 @@
                     <IS>
                         <connect nodeField="translation" protoField="ttranslation"/>
                     </IS>
-                    <ProtoInstance name="nine">
-                        <fieldValue name="ztranslation" value="0 0 0"/>
+                    <nine
+                        ztranslation="0 0 0">
                         <IS>
                             <connect nodeField="myShape" protoField="myShape"/>
                         </IS>
-                    </ProtoInstance>
-                    <ProtoInstance name="nine">                     
-                        <fieldValue name="ztranslation" value="0 0 2"/>
+                    </nine>
+					<nine
+                        ztranslation="0 0 2">
                         <IS>
                             <connect nodeField="myShape" protoField="myShape"/>
                         </IS>
-                    </ProtoInstance>
-                    <ProtoInstance name="nine">
-                        <fieldValue name="ztranslation" value="0 0 -2"/>
+                    </nine>
+					<nine
+                        ztranslation="0 0 -2">
                         <IS>
                             <connect nodeField="myShape" protoField="myShape"/>
                         </IS>
-                    </ProtoInstance>
+                    </nine>
                 </Transform>
             </ProtoBody>
         </ProtoDeclare>
-        <ProtoInstance name="twentyseven">
-            <fieldValue name="ttranslation" value="0 0 0"/>
-            <fieldValue name="myShape">
-                <Box size="1.8 1.8 1.8"/>
-            </fieldValue>
-        </ProtoInstance>
+        <twentyseven
+            ttranslation="0 0 0">
+            
+                <Box containerField="myShape" size="1.8 1.8 1.8"/>
+            
+        </twentyseven>
     </Scene>
 </X3D>
