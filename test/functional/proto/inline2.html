@@ -1,0 +1,89 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge" />
+    <title>Proto test</title>
+    <script type="text/javascript" src="../../x3dom-include.js?full"></script>
+    <style>
+        label {margin: 5px;}
+        select {
+            padding: 5px;
+            border-width: thick;
+            border-radius: 5px;
+        }
+        option {
+            font-style: italic;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <X3D xmlns="http://www.web3d.org/specifications/x3d-namespace" showStat="true" showLog="true" width="500px" height="500px">
+        <Environment gammaCorrectionDefault="none"></Environment>
+        <Scene>
+            <!--Background skyColor='0, 0, 0.1'></Background-->
+            <Transform>
+                <Inline onload='handleLoad(event)' id="inline" nameSpaceName="proto" mapDEFToID="true" url="IntegerTriggerOnTrue.x3d" ></Inline>
+            </Transform>
+        </Scene>
+    </X3D>
+    <label _style='margin: 5px;' for="x3d-select">Choose an example:</label>
+    <select id="x3d-select" onchange='handleChange(event)'>
+        <option>x3dom/ArtDecoPrototypesExcerpt</option>
+        <option>ArtDecoExamplesExcerpt</option>
+        <option>TropicalExamplesInternal</option>
+        <option>def</option>
+        <option>fivedeepinternalroute</option>
+        <option>route_inside</option>
+        <option>simple</option>
+        <option>MaterialBlinker</option>
+        <option>Prototype</option>
+        <option>TestProtoInterfaceNodeScope2</option>
+        <option>TextStringPrototype</option>
+        <option>TexCircleFishPrototype</option>
+        <option>CaffeineDepthMode</option>
+        <option>Prototype_InRoute</option>
+        <option>IntegerTriggerOnTrue</option>
+        <option>Figure31_9SpinGroupPrototype</option>
+        <option>Floater</option>
+        <option>castle/proto_ultra_simple</option>
+        <option>castle/proto_inline</option>
+        <option>castle/proto_events_test</option>
+        <option>castle/proto_events_test_2</option>
+        <option disabled>castle/proto_events_test_3</option>
+        <option>castle/proto_nested</option>
+        <option>castle/proto_nested_expand</option>
+        <option>castle/proto_nodes</option>
+        <option>castle/proto_other</option>
+        <option disabled>castle/proto_sfnode_default</option>
+        <option>extern/different_name</option>
+        <option>extern/One</option>
+        <option>extern/VectorField1</option>
+        <option>extern/Example16</option>
+        <option>extern/VirtualRealityHackathonLogoLetterPrototypes</option>
+        <option>carlson/rubik</option>
+        <option>carlson/rubikOnFire</option>
+        <option>carlson/rubikFurnace</option>
+        
+        <option value="none" selected>--Please choose a x3d scene--</option>
+    </select>
+    <textarea id='InlineContent' style="margin: 10px; width: calc( 100% - 10px ); height: 200px; display: block;"></textarea>
+</body>
+<script>
+    const inline = document.querySelector( '#Inline' );
+    const ext = '.x3d';
+    function handleChange(event) {
+        inline.setFieldValue( "url", [ event.target.options[event.target.selectedIndex].value + ext ] );
+    }
+    function handleLoad(event) {
+        window.setTimeout(
+            _showAll, //'negZ')
+            300, 'negZ');
+    }
+    function _showAll (dir) { 
+        document.querySelector('X3D').runtime.showAll(dir);
+        var inlineArea = document.querySelector('#InlineContent');
+        inlineArea.textContent = document.querySelector('Inline').innerHTML.replace(/><([^//])/g,'>\n<$1');
+         }
+</script>
+</html>
