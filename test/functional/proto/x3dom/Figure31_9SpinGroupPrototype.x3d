@@ -76,8 +76,8 @@
               </Appearance>
             </Shape>
           </SpinGroup>
-        </ProtoInstance>  
-      </ProtoInstance>
+        
+      </SpinGroup>
     <ROUTE fromField='touchTime' fromNode='ActivateSecondSpinGroup' toField='startTime' toNode='SecondSpinGroup'/>
   </Scene>
 </X3D>
