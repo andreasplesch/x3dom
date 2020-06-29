@@ -62,11 +62,11 @@
 		</Shape>
 	</Switch>
 	
-  <IntegerTriggerOnTrue DEF='TriggerZero'
-      integerKey='0' />
-    
 	<IntegerTriggerOnTrue DEF='TriggerZero'
-      integerKey='1' />
+      	integerKey='0' />
+    
+	<IntegerTriggerOnTrue DEF='TriggerOne'
+      	integerKey='1' />
     
 	<ROUTE fromNode='BoxButton' fromField='isActive' toNode='TriggerZero' toField='set_boolean' />
 	<ROUTE fromNode='SphereButton' fromField='isActive' toNode='TriggerOne' toField='set_boolean' />
