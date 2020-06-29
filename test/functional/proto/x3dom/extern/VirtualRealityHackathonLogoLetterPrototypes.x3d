@@ -44,45 +44,45 @@
     <Viewpoint DEF='Camera' description='Virtual Reality Hackathon Logo Letter Prototypes' fieldOfView='0.858' position='0 0 4'/>
     <Transform DEF='Logo_Transform'>
       <Transform rotation='0 0 1 0.7854' scale='2 2 2'>
-        <ProtoInstance name='Cubic_Logo'>
-          <fieldValue name='internalColor' value='0.6 0.6 0.6'/>
-          <fieldValue name='frontFace'>
-            <ProtoInstance name='Logo_letter_V'>
-              <fieldValue name='front_colour' value='0.80 0.67 0.31'/>
-              <fieldValue name='sides_colour' value='0.91 0.90 0.78'/>
-            </ProtoInstance>
-          </fieldValue>
-          <fieldValue name='bottomFace'>
-            <ProtoInstance name='Logo_letter_V'>
-              <fieldValue name='front_colour' value='0.47 0.65 0.80'/>
-              <fieldValue name='sides_colour' value='0.73 0.79 0.84'/>
-            </ProtoInstance>
-          </fieldValue>
-          <fieldValue name='rightFace'>
-            <ProtoInstance name='Logo_letter_R'>
-              <fieldValue name='front_colour' value='0.80 0.67 0.31'/>
-              <fieldValue name='sides_colour' value='0.91 0.90 0.78'/>
-            </ProtoInstance>
-          </fieldValue>
-          <fieldValue name='leftFace'>
-            <ProtoInstance name='Logo_letter_R'>
-              <fieldValue name='front_colour' value='0.47 0.65 0.80'/>
-              <fieldValue name='sides_colour' value='0.73 0.79 0.84'/>
-            </ProtoInstance>
-          </fieldValue>
-          <fieldValue name='backFace'>
-            <ProtoInstance name='Logo_letter_H'>
-              <fieldValue name='front_colour' value='0.80 0.67 0.31'/>
-              <fieldValue name='sides_colour' value='0.91 0.90 0.78'/>
-            </ProtoInstance>
-          </fieldValue>
-          <fieldValue name='topFace'>
-            <ProtoInstance name='Logo_letter_H'>
-              <fieldValue name='front_colour' value='0.47 0.65 0.80'/>
-              <fieldValue name='sides_colour' value='0.73 0.79 0.84'/>
-            </ProtoInstance>
-          </fieldValue>
-        </ProtoInstance>
+        <Cubic_Logo
+          internalColor='0.6 0.6 0.6'>
+          
+            <Logo_letter_V containerField='frontFace'
+              front_colour='0.80 0.67 0.31'
+              sides_colour='0.91 0.90 0.78'/>
+
+
+          
+            <Logo_letter_V containerField='bottomFace'
+              front_colour='0.47 0.65 0.80'
+              sides_colour='0.73 0.79 0.84'/>
+            
+          
+          
+            <Logo_letter_R containerField='rightFace'
+              front_colour='0.80 0.67 0.31'
+              sides_colour='0.91 0.90 0.78'/>
+            
+          
+          
+            <Logo_letter_R containerField='leftFace'
+              front_colour='0.47 0.65 0.80'
+              sides_colour='0.73 0.79 0.84'/>
+            
+          
+          
+            <Logo_letter_H containerField=='backFace'
+              front_colour='0.80 0.67 0.31'
+              sides_colour='0.91 0.90 0.78'/>
+            
+          
+          
+            <Logo_letter_H containerField='topFace'>
+              front_colour='0.47 0.65 0.80'
+              sides_colour='0.73 0.79 0.84'/>
+            
+          
+        </Cubic_Logo>
       </Transform>
     </Transform>
     <TimeSensor DEF='Rotation_Timer' cycleInterval='3' loop='true'/>
