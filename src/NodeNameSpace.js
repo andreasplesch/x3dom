@@ -407,7 +407,7 @@ x3dom.NodeNameSpace.prototype.setupTree = function ( domNode, parent )
 
                 if ( !( fromNode && toNode ) )
                 {
-                    x3dom.debug.logWarning( "not yet availabe route - can't find all DEFs for " + fnAtt + " -> " + tnAtt );
+                    x3dom.debug.logWarning( "not yet available route - can't find all DEFs for " + fnAtt + " -> " + tnAtt );
                     this.lateRoutes.push( // save to check after protoextern instances loaded
                         {
                             route : route,
@@ -504,7 +504,7 @@ x3dom.NodeNameSpace.prototype.setupTree = function ( domNode, parent )
                 domNode._x3domNode = n;
 
                 //register ProtoDeclares and convert ProtoInstance to new nodes
-                domNode.querySelectorAll( ":scope > *" ) //static nodelist
+                domNode.querySelectorAll( ":scope > *" )
                     . forEach( function ( childDomNode )
                     {
                         var tag = childDomNode.localName.toLowerCase();
@@ -517,7 +517,7 @@ x3dom.NodeNameSpace.prototype.setupTree = function ( domNode, parent )
                     }, this );
 
                 // call children
-                domNode.childNodes.forEach( function ( childDomNode ) //live nodelist
+                domNode.childNodes.forEach( function ( childDomNode )
                 {
                     var c = this.setupTree( childDomNode, n );
                     if ( c )
@@ -534,7 +534,7 @@ x3dom.NodeNameSpace.prototype.setupTree = function ( domNode, parent )
     else if ( domNode.localName )
     {
         var tagLC = domNode.localName.toLowerCase();
-        //check if externproto tag for direct syntax
+        //find not yet loaded externproto in case of direct syntax 
         var protoDeclaration = this.protos.find( function ( declaration )
         {
             return tagLC == declaration.name.toLowerCase() && declaration.isExternProto;
@@ -551,24 +551,25 @@ x3dom.NodeNameSpace.prototype.setupTree = function ( domNode, parent )
             }.bind( this ) );
         }
 
+        //silence warnings
         else if ( tagLC == "protodeclare" || tagLC == "externprotodeclare" || tagLC == "protoinstance" )
         {
-            n = null;//this.protoInstance( domNode, parent._xmlNode );
+            n = null;
         }
-
         else if ( domNode.localName.toLowerCase() == "is" )
         {
-            //silence warning
-            //check for connect, just because
             if ( domNode.querySelectorAll( "connect" ).length == 0 )
             {
                 x3dom.debug.logWarning( "IS statement without connect link: " + domNode.parentElement.localName );
             }
         }
+
+        //direct syntax
         else if ( protoDeclaration )
         {
             this.loadExternProtoAsync( protoDeclaration, domNode, domNode, domNode.parentElement );
         }
+
         else
         {
             // be nice to users who use nodes not (yet) known to the system
