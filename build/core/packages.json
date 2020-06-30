@@ -10,6 +10,7 @@
             "fields.js",
             "Bindable.js",
             "NodeNameSpace.js",
+            "NodeNameSpaceProtos.js",
             "gfx_webgl.js",
             "SSAO.js",
             "Runtime.js",
@@ -42,7 +43,6 @@
             "json/JSONParser.js",
             "json/PrototypeExpander.js",
 			"protos/ProtoDeclaration.js"
-			
         ],
         "src/shader/" :
         [
