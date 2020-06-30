@@ -21,7 +21,7 @@
             "Mesh.js",
             "Docs.js"
         ],
-        "/src/util/":
+        "src/util/":
         [
             "AdaptiveRenderControl.js",
             "RequestManager.js",
@@ -40,7 +40,9 @@
             "DDSLoader.js",
             "VRControllerManager.js",
             "json/JSONParser.js",
-            "json/PrototypeExpander.js"
+            "json/PrototypeExpander.js",
+            "protos/ProtoDeclaration"
+			
         ],
         "src/shader/" :
         [
