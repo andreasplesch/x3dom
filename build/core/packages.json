@@ -41,7 +41,7 @@
             "VRControllerManager.js",
             "json/JSONParser.js",
             "json/PrototypeExpander.js",
-            "protos/ProtoDeclaration"
+			"protos/ProtoDeclaration.js"
 			
         ],
         "src/shader/" :
