@@ -534,7 +534,7 @@ x3dom.NodeNameSpace.prototype.setupTree = function ( domNode, parent )
     else if ( domNode.localName )
     {
         var tagLC = domNode.localName.toLowerCase();
-        //find not yet loaded externproto in case of direct syntax 
+        //find not yet loaded externproto in case of direct syntax
         var protoDeclaration = this.protos.find( function ( declaration )
         {
             return tagLC == declaration.name.toLowerCase() && declaration.isExternProto;
