@@ -107,7 +107,7 @@ x3dom.NodeNameSpace.prototype.loadExternProtoAsync = function ( protoDeclaration
             while ( instance = protoDeclaration.instanceQueue.shift() ) //process in correct sequence
             {
                 that.doc.mutationObserver.disconnect();//do not record mutation
-                if (instance.domNode !== instance.protoInstanceDom )
+                if ( instance.domNode !== instance.protoInstanceDom )
                 {
                     instance.domNode.insertAdjacentElement( "afterend", instance.protoInstanceDom ); // do not use appendChild since scene parent may be already transferred
                 }
