@@ -15,11 +15,11 @@
  * called from setupTree to process a ProtoInstance node. creates another dom node in short syntax.
  * This short dom node is then processed back in setupTree. Additionally, it triggers loading an
  * ExternProto declaration if required.
- * 
+ *
  * @param domNode - the ProtoInstance dom node
  * @param domParent - the parent dom node
  */
- x3dom.NodeNameSpace.prototype.protoInstance = function ( domNode, domParent )
+x3dom.NodeNameSpace.prototype.protoInstance = function ( domNode, domParent )
 {
     if ( !domNode.localName ) {return;}
     if ( domNode._x3dom ) {return;}
@@ -88,7 +88,7 @@
  * NodeNameSpace loadExternProtoAsync
  *
  * called from protoInstance to load an extern protoDeclaration, and then instance the node.
- * 
+ *
  * ExternProto declaration if required.
  * @param protoDeclaration - the initial protoDeclaration stub, is replaced after loading
  * @param protoInstanceDom - the short syntax proto instance dom node
@@ -171,7 +171,7 @@ x3dom.NodeNameSpace.prototype.loadExternProtoAsync = function ( protoDeclaration
  * NodeNameSpace externProtoDeclare
  *
  * adds initial proto declaration to available prototype array
- * 
+ *
  * @param domNode - the regular syntax ProtoInstance dom node
  */
 x3dom.NodeNameSpace.prototype.externProtoDeclare = function ( domNode )
@@ -188,7 +188,7 @@ x3dom.NodeNameSpace.prototype.externProtoDeclare = function ( domNode )
  *
  * processes ProtoDeclare node, called from setupTree.
  * generates a new protoDeclaration, and then uses it to register the new node to x3dom
- * 
+ *
  * @param domNode - the regular syntax ProtoInstance dom node
  */
 x3dom.NodeNameSpace.prototype.protoDeclare = function ( domNode )
