@@ -1,7 +1,27 @@
-x3dom.NodeNameSpace.prototype.protoInstance = function ( domNode, domParent )
+/**
+ * X3DOM JavaScript Library
+ * http://www.x3dom.org
+ *
+ * (C)2020 Andreas Plesch, Waltham, MA
+ * Dual licensed under the MIT and GPL
+ *
+ * Based on code originally provided by
+ * Philip Taylor: http://philip.html5.org
+ */
+
+/**
+ * NodeNameSpace protoInstance
+ *
+ * called from setupTree to process a ProtoInstance node. creates another dom node in short syntax.
+ * This short dom node is then processed back in setupTree. Additionally, it triggers loading an
+ * ExternProto declaration if required.
+ * 
+ * @param domNode - the ProtoInstance dom node
+ * @param domParent - the parent dom node
+ */
+ x3dom.NodeNameSpace.prototype.protoInstance = function ( domNode, domParent )
 {
     if ( !domNode.localName ) {return;}
-    if ( domNode.localName.toLowerCase() !== "protoinstance" ) {return;}
     if ( domNode._x3dom ) {return;}
 
     var name = domNode.getAttribute( "name" );
@@ -58,14 +78,24 @@ x3dom.NodeNameSpace.prototype.protoInstance = function ( domNode, domParent )
         this.loadExternProtoAsync( protoDeclaration, protoInstanceDom, domNode, domParent );
         return;
     }
-    this.doc.mutationObserver.disconnect();//do not record
-    //domParent.appendChild( protoInstanceDom );
+    this.doc.mutationObserver.disconnect(); //avoid doubled processing
     domNode.insertAdjacentElement( "afterend", protoInstanceDom ); // do not use appendChild since scene parent may be already transferred
     this.doc.mutationObserver.observe( this.doc._scene._xmlNode, { attributes: true, attributeOldValue: true, childList: true, subtree: true } );
     domNode._x3dom = protoInstanceDom;
-    //this.doc.onNodeAdded( protoInstanceDom, parent._xmlNode );
 };
 
+/**
+ * NodeNameSpace loadExternProtoAsync
+ *
+ * called from protoInstance to load an extern protoDeclaration, and then instance the node.
+ * 
+ * ExternProto declaration if required.
+ * @param protoDeclaration - the initial protoDeclaration stub, is replaced after loading
+ * @param protoInstanceDom - the short syntax proto instance dom node
+ * @param domNode - the regular syntax ProtoInstance dom node
+ * @param parentDom - the parent dom node
+ * @returns null - if downloading fails
+ */
 x3dom.NodeNameSpace.prototype.loadExternProtoAsync = function ( protoDeclaration, protoInstanceDom, domNode, parentDom )
 {
     //use queue to ensure processing in correct sequence
@@ -137,6 +167,13 @@ x3dom.NodeNameSpace.prototype.loadExternProtoAsync = function ( protoDeclaration
         } );
 };
 
+/**
+ * NodeNameSpace externProtoDeclare
+ *
+ * adds initial proto declaration to available prototype array
+ * 
+ * @param domNode - the regular syntax ProtoInstance dom node
+ */
 x3dom.NodeNameSpace.prototype.externProtoDeclare = function ( domNode )
 {
     var name = domNode.getAttribute( "name" );
@@ -146,11 +183,18 @@ x3dom.NodeNameSpace.prototype.externProtoDeclare = function ( domNode )
     //protoinstance checks for name and triggers loading
 };
 
+/**
+ * NodeNameSpace protoDeclare
+ *
+ * processes ProtoDeclare node, called from setupTree.
+ * generates a new protoDeclaration, and then uses it to register the new node to x3dom
+ * 
+ * @param domNode - the regular syntax ProtoInstance dom node
+ */
 x3dom.NodeNameSpace.prototype.protoDeclare = function ( domNode )
 {
     var name = domNode.getAttribute( "name" );
 
-    //console.log( "found ProtoDeclare", name, domNode );
     var protoInterface = domNode.querySelector( "ProtoInterface" );
 
     var fields = [];
