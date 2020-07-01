@@ -48,7 +48,7 @@
                         <connect nodeField="translation" protoField="ytranslation"/>
                     </IS>
                     <anyShape
-                        xtranslation" value="0 0 0">
+                        xtranslation value="0 0 0">
                         <IS>
                             <connect nodeField="myShape" protoField="myShape"/>
                         </IS>
