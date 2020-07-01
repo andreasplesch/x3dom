@@ -20,7 +20,7 @@
  * @param url - url MFString for ExternProtoDeclare
  * @constructor
  */
- x3dom.ProtoDeclaration = function ( namespace, name, protoBody, fields, isExternProto, url )
+x3dom.ProtoDeclaration = function ( namespace, name, protoBody, fields, isExternProto, url )
 {
     this._nameSpace = namespace; // main scene name space
     this.name = name;
@@ -73,7 +73,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                             ctx.xmlNode.setAttribute( field.name, field.value );
                         }
                         this[ "addField_" + field.dataType ]( ctx, field.name, field.value );
-                    } 
+                    }
                     else // _cf fields
                     {
                     //set interface defaults for cf fields
@@ -154,7 +154,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
 
                     //generate nodes from body
                     var children = this.protoBodyClone.childNodes;
-                    
+
                     for ( var i = 0; i < children.length; i++ )
                     {
                         var c = this.innerNameSpace.setupTree.call( this.innerNameSpace, children[ i ], this );
