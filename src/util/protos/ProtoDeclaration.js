@@ -1,4 +1,26 @@
-x3dom.ProtoDeclaration = function ( namespace, name, protoBody, fields, isExternProto, url )
+/**
+ * X3DOM JavaScript Library
+ * http://www.x3dom.org
+ *
+ * (C)2020 Andreas Plesch, Waltham, MA
+ * Dual licensed under the MIT and GPL
+ *
+ * Based on code originally provided by
+ * Philip Taylor: http://philip.html5.org
+ */
+
+/**
+ * ProtoDeclaration constructor
+ *
+ * @param namespace - namespace of containing scene
+ * @param name - name of new node
+ * @param protoBody - dom of ProtoBody
+ * @param fields - fields from ProtoInterface
+ * @param isExternProto - true for ExternProtoDeclare
+ * @param url - url MFString for ExternProtoDeclare
+ * @constructor
+ */
+ x3dom.ProtoDeclaration = function ( namespace, name, protoBody, fields, isExternProto, url )
 {
     this._nameSpace = namespace; // main scene name space
     this.name = name;
@@ -10,6 +32,13 @@ x3dom.ProtoDeclaration = function ( namespace, name, protoBody, fields, isExtern
     this.instanceQueue = [];
 };
 
+/**
+ * ProtoDeclaration registerNode
+ *
+ * registers node with x3dom
+ * takes fields from ProtoDeclaration and adds them to node
+ *
+ */
 x3dom.ProtoDeclaration.prototype.registerNode = function ()
 {
     var that = this;
@@ -32,12 +61,11 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
             {
                 x3dom.nodeTypes[ that.name ].superClass.call( this, ctx );
 
-                //fields
-                that.fields.filter( function ( field )
+                //add fields
+                this._cf_hash = {};
+                that.fields.forEach( function ( field )
                 {
-                    return !field.dataType.endsWith( "ode" ); //_vf fields
-                } )
-                    . forEach( function ( field )
+                    if ( !field.dataType.endsWith( "ode" ) )//; //_vf fields
                     {
                     //set interface defaults
                         if ( ctx && ctx.xmlNode && !ctx.xmlNode.hasAttribute( field.name ) )
@@ -45,13 +73,8 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                             ctx.xmlNode.setAttribute( field.name, field.value );
                         }
                         this[ "addField_" + field.dataType ]( ctx, field.name, field.value );
-                    }, this );
-                this._cf_hash = {};
-                that.fields.filter( function ( field )
-                {
-                    return field.dataType.endsWith( "ode" ); //_cf fields
-                } )
-                    . forEach( function ( field )
+                    } 
+                    else // _cf fields
                     {
                     //set interface defaults for cf fields
                         if ( ctx && ctx.xmlNode )
@@ -79,9 +102,10 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                         }
                         this[ "addField_" + field.dataType ]( field.name, type );//type should be registered x3dom type
                         this._cf_hash[ field.name ] = "trigger";
-                    }, this );
+                    }//, this );
+                }, this );
 
-                //initial
+                //initialize
                 var nameSpaceName = "protoNS";
                 if ( ctx.xmlNode.hasAttribute( "DEF" ) )
                 {
@@ -91,7 +115,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                 this.innerNameSpace.setBaseURL( ctx.nameSpace.baseURL + that.name );
                 that._nameSpace.addSpace( this.innerNameSpace );
 
-                //transfer proto definitions if any
+                //transfer proto definitions to instance namespace if any
                 that._nameSpace.protos.forEach( function ( protoDeclaration )
                 {
                     this.innerNameSpace.protos.push( protoDeclaration );
@@ -115,7 +139,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                     var body = this.protoBodyClone;
 
                     //register ProtoDeclares and convert ProtoInstance to new nodes
-                    body.querySelectorAll( ":scope > *" ) //static nodelist
+                    body.querySelectorAll( ":scope > *" )
                         .forEach( function ( childDomNode )
                         {
                             var tag = childDomNode.localName.toLowerCase();
@@ -128,8 +152,9 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                         },
                         this );
 
+                    //generate nodes from body
                     var children = this.protoBodyClone.childNodes;
-
+                    
                     for ( var i = 0; i < children.length; i++ )
                     {
                         var c = this.innerNameSpace.setupTree.call( this.innerNameSpace, children[ i ], this );
@@ -150,10 +175,11 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                     for ( field in this._cf )
                     {
                         var cf = this._cf[ field ];
-                        if ( "nodes" in cf )
+                        if ( "nodes" in cf ) //MFNode
                         {
+                            //only process if changed to avoid readding
                             if ( this._cf_hash[ field ] !== this._get_cf_hash( field )
-                                || field == nodeField ) //changed
+                                || field == nodeField ) // if passed, is changed
                             {
                                 this.fieldChanged( field );
                             }
@@ -176,7 +202,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                     };
                     this._changing = false;
 
-                    //save a current hash of cf children
+                    //save a current 'hash' of cf children
                     for ( field in this._cf )
                     {
                         if ( "nodes" in this._cf[ field ] )
@@ -188,7 +214,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
 
                 fieldChanged : function ( field )
                 {
-                    try
+                    try //
                     {
                         //todo: check if input field
                         var ISRoutes = this.declaration._protoBody._ISRoutes;
@@ -277,7 +303,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                     }
                     catch ( error )
                     {
-                        x3dom.debug.logWarning( " Proto warning: " + error );
+                        x3dom.debug.logWarning( "Proto warning: " + error );
                     };
                 },
 
