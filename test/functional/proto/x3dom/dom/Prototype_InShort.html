@@ -1,10 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<!-- =================================================================== -->
-<!-- embedded X3D scene appears after html/head/script and style entries -->
-<!-- =================================================================== -->
-<html xmlns="http://www.w3.org/1999/xhtml">
-<nead>
+<html>
+<head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge" />
     <title>Proto test</title>
@@ -25,7 +20,7 @@
 <body>
 
 <X3D profile='Immersive' version='3.3' xmlns:xsd='http://www.w3.org/2001/XMLSchema-instance' xsd:noNamespaceSchemaLocation='http://www.web3d.org/specifications/x3d-3.3.xsd'>
-  <head>
+  <!--head>
     <meta content='Prototype_InRoute.x3d' name='title'/>
     <meta content='X3D encodings example: defining a Prototype, demonstration of IS/connect definitions.' name='description'/>
     <meta content='Don Brutzman and Joe Williams' name='creator'/>
@@ -36,13 +31,13 @@
     <meta content='https://www.web3d.org/x3d/content/examples/Basic/X3dSpecifications/Prototype.x3d' name='identifier'/>
     <meta content='X3D-Edit 3.3, https://savage.nps.edu/X3D-Edit' name='generator'/>
     <meta content='../license.html' name='license'/>
-  </head>
+  </head-->
   <Scene>
-    <WorldInfo title='Prototype.x3d'/>
+    <!--WorldInfo title='Prototype.x3d'-->
     <ProtoDeclare name='TwoColorTable'>
       <ProtoInterface>
-        <field accessType='inputOutput' name='legColor' type='SFColor' value='.8 .4 .7'/>
-        <field accessType='inputOutput' name='topColor' type='SFColor' value='.6 .6 .1'/>
+        <field accessType='inputOutput' name='legColor' type='SFColor' value='.8 .4 .7'></field>
+        <field accessType='inputOutput' name='topColor' type='SFColor' value='.6 .6 .1'></field>
       </ProtoInterface>
       <ProtoBody>
         <Transform>
@@ -52,11 +47,11 @@
               <Appearance>
                 <Material DEF='TableTopMaterial'>
                   <IS>
-                    <connect nodeField='diffuseColor' protoField='topColor'/>
+                    <connect nodeField='diffuseColor' protoField='topColor'></connect>
                   </IS>
                 </Material>
               </Appearance>
-              <Box size='1.2 0.2 1.2'/>
+              <Box size='1.2 0.2 1.2'></Box>
             </Shape>
           </Transform>
           <Transform translation='-0.5 0.0 -0.5'>
@@ -65,23 +60,23 @@
               <Appearance>
                 <Material DEF='LegMaterial' diffuseColor='1.0 0.0 0.0'>
                   <IS>
-                    <connect nodeField='diffuseColor' protoField='legColor'/>
+                    <connect nodeField='diffuseColor' protoField='legColor'></connect>
                   </IS>
                 </Material>
               </Appearance>
-              <Cylinder height='1.0' radius='0.1'/>
+              <Cylinder height='1.0' radius='0.1'></Cylinder>
             </Shape>
           </Transform>
           <Transform translation='0.5 0.0 -0.5'>
             <!-- another table leg -->
-            <Shape USE='Leg'/>
+            <Shape USE='Leg'></Shape>
           </Transform>
           <Transform translation='-0.5 0.0 0.5'>
-            <Shape USE='Leg'/>
+            <Shape USE='Leg'></Shape>
             <!-- another table leg -->
           </Transform>
           <Transform translation='0.5 0.0 0.5'>
-            <Shape USE='Leg'/>
+            <Shape USE='Leg'></Shape>
             <!-- another table leg -->
           </Transform>
           <!-- End of root Transform's children -->
@@ -94,7 +89,7 @@
 
     <TwoColorTable DEF='animatedTable'
       legColor='1 0 0'
-      topColor='0 1 0'/>
+      topColor='0 1 0'></TwoColorTable>
 
 	<!--TimeSensor DEF='Timer' cycleInterval='5' loop='true'/>
 	<ColorInterpolator DEF='ColorChanger' key='0 0.3333 0.6666 1' keyValue='1 0 0 0 1 0 0 0 1 1 0 0'/>
