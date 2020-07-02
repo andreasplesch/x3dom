@@ -5,15 +5,8 @@
     <title>Proto test</title>
     <script type="text/javascript" src="../../../../x3dom-include.js?full"></script>
     <style>
-        label {margin: 5px;}
-        select {
-            padding: 5px;
-            border-width: thick;
-            border-radius: 5px;
-        }
-        option {
-            font-style: italic;
-            font-family: monospace;
+        x3d {
+        	height: 50%
         }
     </style>
 </head>
@@ -100,9 +93,19 @@
     <!-- Use the Examine viewer -->
   </Scene>
 </X3D>
+<button onclick='randomizeColor()'>random colors</button>
 </body>
 
 <script type="text/javascript">
-   console.log('HERE');
+   function randomizeColor()
+   {
+		var table = document.querySelector('TwoColorTable');
+		table.setAttribute('legColor', randomColor());
+		table.setAttribute('topColor', randomColor());
+   }
+   function randomColor()
+   {
+        return [Math.random(),Math.random(),Math.random()].join();
+   }
 </script>
 </html>
