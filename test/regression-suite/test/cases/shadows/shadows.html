@@ -6,9 +6,9 @@
 </head>
 <body>
 <x3d width="800px" height="600px" id="x3d">
-    <scene>
+    <!--scene>
         <navigationInfo id="head" headlight='false' type='"EXAMINE"'></navigationInfo>
-        <!--Pointlight id="light1" location="-4 -4 4" color="1 1 1" intensity="1.0" shadowfiltersize="0.0" shadowmapsize="1024" shadowintensity=".7"></Pointlight-->
+        <!--Pointlight id="light1" location="-4 -4 4" color="1 1 1" intensity="1.0" shadowfiltersize="0.0" shadowmapsize="1024" shadowintensity=".7"></Pointlight->
         <DirectionalLight id="light2" direction="0 -1 0" color="1 1 1" intensity="1.0" _shadowCascades="1" shadowfiltersize="16" shadowmapsize="1024" shadowintensity=".7"></DirectionalLight>
         <Transform id="trans" translation="0 -2 0">
             <Shape>
@@ -25,10 +25,30 @@
                 </appearance>
                 <!--indexedfaceset coordindex="0 1 2 3" solid="false">
                     <coordinate point="-10 -2 -10 , 10 -2 -10, 10 -2 10, -10 -2 10"></coordinate>
-                </indexedfaceset-->
+                </indexedfaceset->
                 <Plane solid="false" size="50 50"></Plane>
             </Shape>
         </Transform>
+    </scene-->
+    <scene>
+        <navigationInfo id="head" headlight='false' type='"EXAMINE"'></navigationInfo>
+        <background  skyColor="0 0 0"></background>
+        <directionalLight id="directional" direction='0 -1 0' on ="TRUE" intensity='1.0' shadowIntensity='0.5'  shadowCascades="1" shadowFilterSize="16" shadowMapSize="512">
+        </directionalLight>
+
+        <Shape>
+            <Appearance><Material diffuseColor="0 0 0.8"></Material></Appearance>
+            <Sphere radius="10"></Sphere>
+        </Shape>
+
+            <Transform translation="0 -12.5 0" rotation="1 0 0 -1.57">
+            <Shape>
+               <Appearance><Material diffuseColor="0.7 0.7 0.7"></Material></Appearance>
+               <Plane solid="false" size="50 50"></Plane>
+           </Shape>
+       </Transform>
+
+        <Viewpoint position="2.44723 13.11743 38.56844" orientation="-0.99727 0.07070 -0.02151 0.42839" ></Viewpoint>
     </scene>
 </x3d>
 </body>
