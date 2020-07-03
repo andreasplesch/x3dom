@@ -36,11 +36,20 @@
         <!--directionalLight id="directional" direction='0 -1 0' on ="TRUE" intensity='1.0' shadowIntensity='0.5'  shadowCascades="1" shadowFilterSize="16" shadowMapSize="512">
         </directionalLight-->
         <DirectionalLight id="light2" direction="0 -1 0" color="1 1 1" intensity="1.0" _shadowCascades="1" shadowfiltersize="16" shadowmapsize="1024" shadowintensity=".7"></DirectionalLight>
+        
 
-        <Shape>
+        <!--Shape>
             <Appearance><Material diffuseColor="0 0 0.8"></Material></Appearance>
             <Sphere radius="10"></Sphere>
-        </Shape>
+        </Shape-->
+        <Transform id="trans" translation="0 -2 0">
+            <Shape>
+                <appearance>
+                    <material id="mat1" diffusecolor="0 1 0.2" ></material>
+                </appearance>
+                <sphere></sphere>
+            </Shape>
+        </Transform>
 
             <Transform translation="0 -12.5 0" rotation="1 0 0 -1.57">
             <Shape>
