@@ -127,7 +127,7 @@ x3dom.X3DDocument.prototype._setup = function ( sceneDoc )
     this._viewarea = new x3dom.Viewarea( this, scene );
 
     this._viewarea._width = this.canvas.width;
-    this._viewarea._height = this.canvas.height;
+    this._viewarea._height = this.canvas.height * ( window.devicePixelRatio || 1 );
 };
 
 x3dom.X3DDocument.prototype.advanceTime = function ( t )
