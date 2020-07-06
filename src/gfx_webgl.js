@@ -150,7 +150,7 @@ x3dom.gfx_webgl = ( function ()
                         x3dom.caps.SAMPLES = ctx.getParameter( ctx.SAMPLES );
                         x3dom.caps.COMPRESSED_TEXTURE = ctx.getExtension( "WEBGL_compressed_texture_s3tc" );
                         x3dom.caps.INDEX_UINT = ctx.getExtension( "OES_element_index_uint" );
-                        x3dom.caps.FP_TEXTURES = null;//ctx.getExtension( "OES_texture_float" );
+                        x3dom.caps.FP_TEXTURES = ctx.getExtension( "OES_texture_float" );
                         x3dom.caps.FPL_TEXTURES = ctx.getExtension( "OES_texture_float_linear" );
                         x3dom.caps.HFP_TEXTURES = ctx.getExtension( "OES_texture_half_float" );
                         x3dom.caps.COLOR_BUFFER_FLOAT = ctx.getExtension( "WEBGL_color_buffer_float" );
@@ -200,10 +200,11 @@ x3dom.gfx_webgl = ( function ()
                             x3dom.Utils.maxIndexableCoords = 4294967295;
                         }
 
-                        //Disable half float textures on apple devices
+                        //Disable (half) float textures on apple devices
                         if ( isAppleDevice )
                         {
                             x3dom.caps.HFP_TEXTURES = false;
+                            x3dom.caps.FP_TEXTURES = false;
                         }
 
                         //Disable texture lod on safari browsers
