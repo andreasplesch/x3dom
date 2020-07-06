@@ -69,7 +69,7 @@ x3dom.gfx_webgl = ( function ()
      */
     function setupContext ( canvas, x3dElem )
     {
-        var validContextNames = [ "webgl2", "webgl", "experimental-webgl", "moz-webgl", "webkit-3d" ];
+        var validContextNames = [ "webgl", "webgl2", "experimental-webgl", "moz-webgl", "webkit-3d" ];
 
         var isAppleDevice   = ( /mac|ip(hone|od|ad)/i ).test( navigator.platform ),
             isSafariBrowser = ( /safari/i ).test( navigator.userAgent ),
@@ -150,7 +150,7 @@ x3dom.gfx_webgl = ( function ()
                         x3dom.caps.SAMPLES = ctx.getParameter( ctx.SAMPLES );
                         x3dom.caps.COMPRESSED_TEXTURE = ctx.getExtension( "WEBGL_compressed_texture_s3tc" );
                         x3dom.caps.INDEX_UINT = ctx.getExtension( "OES_element_index_uint" );
-                        x3dom.caps.FP_TEXTURES = ctx.getExtension( "OES_texture_float" );
+                        x3dom.caps.FP_TEXTURES = null;//ctx.getExtension( "OES_texture_float" );
                         x3dom.caps.FPL_TEXTURES = ctx.getExtension( "OES_texture_float_linear" );
                         x3dom.caps.HFP_TEXTURES = ctx.getExtension( "OES_texture_half_float" );
                         x3dom.caps.COLOR_BUFFER_FLOAT = ctx.getExtension( "WEBGL_color_buffer_float" );
