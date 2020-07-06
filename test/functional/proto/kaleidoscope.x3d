@@ -206,7 +206,7 @@ info='"converted to xml 20061012 last 20100103. mostly from an old wrl originall
    <Transform DEF='LittleGeode'>
     <Shape>
      <Appearance>
-      <ImageTexture url='"textures/crown.png" "buddapalmstrike.png"'/>
+      <ImageTexture url='"textures/attachment.png" "buddapalmstrike.png"'/>
       <TextureTransform DEF='TextureTransform0' center='0 1'/>
      </Appearance>
      <IndexedFaceSet solid='false' creaseAngle='0.524'
