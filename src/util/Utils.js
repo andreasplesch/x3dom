@@ -636,13 +636,10 @@ x3dom.Utils.initFBO = function ( gl, w, h, type, mipMap, needDepthBuf, numMrt )
     }
 
     var status = gl.checkFramebufferStatus( gl.FRAMEBUFFER );
-    console.log ( "initFBO: " + [w, h, type, mipMap, needDepthBuf, numMrt].join() );
-    console.log ( "caps: " + [x3dom.caps.DRAW_BUFFERS, x3dom.caps.DEPTH_TEXTURE, x3dom.caps.FP_TEXTURES].join() );
 
     if ( status != gl.FRAMEBUFFER_COMPLETE )
     {
         x3dom.debug.logWarning( "[Utils|InitFBO] FBO-Status: " + status );
-
     }
 
     gl.bindFramebuffer( gl.FRAMEBUFFER, null );
