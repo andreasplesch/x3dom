@@ -98,11 +98,11 @@
    function setSpeed(t)
    {
 		var chopper = document.querySelector('Chopper');
-		chopper.setAttribute('stopTime', performance.now()/1000);
+		chopper.setAttribute('stopTime', performance.now()/1000 + 0.1);
 		setTimeout( () => {
 		    chopper.setAttribute('rotorSpeed', t);
 	    	chopper.setAttribute('startTime', performance.now()/1000);
-		}, 30);
+		}, 200);
    }
    function adjustSpeed(e)
    {
