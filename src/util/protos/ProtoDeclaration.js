@@ -154,8 +154,9 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
 
                     //generate nodes from body
                     var children = this.protoBodyClone.childNodes;
+                    var i;
 
-                    for ( var i = 0; i < children.length; i++ )
+                    for ( i = 0; i < children.length; i++ )
                     {
                         var c = this.innerNameSpace.setupTree.call( this.innerNameSpace, children[ i ], this );
 
@@ -167,8 +168,20 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                     this.typeNode = this.nodes[ 0 ];
                     this.helperNodes = this.nodes.slice( 1 );
 
+                    //transfer dom "on" attributes to typeNode dom
+                    var attributes = this._xmlNode.attributes;
+                    var attr;
+                    for ( i = 0; i < attributes.length; i++ )
+                    {
+                        attr = attributes[i];
+                        if ( attr.name.startsWith('on') )
+                        {
+                            this.typeNode._xmlNode.setAttribute( attr.name, attr.value );
+                        }
+                    }
+
                     //set initial values
-                    for ( field in this._vf )
+                    for ( var field in this._vf )
                     {
                         this.fieldChanged( field );
                     }
@@ -177,7 +190,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                         var cf = this._cf[ field ];
                         if ( "nodes" in cf ) //MFNode
                         {
-                            //only process if changed to avoid readding
+                            //only process if changed to avoid re-adding
                             if ( this._cf_hash[ field ] !== this._get_cf_hash( field )
                                 || field == nodeField ) // if passed, is changed
                             {
