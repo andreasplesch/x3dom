@@ -38,7 +38,8 @@
     <ProtoDeclare name='Chopper'>
       <ProtoInterface>
         <field accessType='inputOutput' name='rotorSpeed' type='SFTime' value='1'></field>
-        <field accessType='inputOutput' name='stopTime' type='SFTime' value='1'></field>
+        <field accessType='inputOutput' name='stopTime' type='SFTime' value='0'></field>
+        <field accessType='inputOutput' name='startTime' type='SFTime' value='0'></field>
       </ProtoInterface>
       <ProtoBody>
         <Group>
@@ -47,11 +48,12 @@
           <Rotor DEF='Top'
             stopTime='1'>
             
-              <Inline url='"ChopperRotor.x3d" "https://www.web3d.org/x3d/content/examples/Basic/Vrml97Specification/ChopperRotor.x3d" "ChopperRotor.wrl" "https://www.web3d.org/x3d/content/examples/Basic/Vrml97Specification/ChopperRotor.wrl"'></Inline>
+              <Inline url='"../extern/ChopperRotor.x3d" "https://www.web3d.org/x3d/content/examples/Basic/Vrml97Specification/ChopperRotor.x3d" "ChopperRotor.wrl" "https://www.web3d.org/x3d/content/examples/Basic/Vrml97Specification/ChopperRotor.wrl"'></Inline>
             
             <IS>
               <connect nodeField='rate' protoField='rotorSpeed'></connect>
               <connect nodeField='stopTime' protoField='stopTime'></connect>
+              <connect nodeField='startTime' protoField='startTime'></connect>
             </IS>
           </Rotor>
         </Group>
@@ -77,33 +79,34 @@
     </Group>
   </Scene>
 </X3D>
-<button onclick='changeSpeed()'>adjust speed</button>
+<button onclick='changeSpeed()'>random speed</button>
+<input style='width:90%' type='range' min='0.1' oninput='adjustSpeed(this)'/>
 </body>
 
 <script type="text/javascript">
    function changeSpeed()
    {
-		var table = document.createElement('TwoColorTable');
-		table.setAttribute('legColor', randomColor());
-		table.setAttribute('topColor', randomColor());
-		var trafo = document.createElement('Transform');
-		trafo.setAttribute('class','tabletrafo');
-		trafo.setAttribute('translation', randomTranslation( 6.0 ));
-		trafo.appendChild(table);
-		document.querySelector('Scene').appendChild(trafo);
+		var rate = speed (100);
+		document.querySelector('[type="range"]').value = rate ; 
+		setSpeed(40 / rate);
+		
    }
-   function randomColor()
+   function speed( s )
    {
-        return [Math.random(), Math.random(), Math.random()].join(' ');
+        return Math.random() * s;
    }
-   function randomTranslation( r = 6.0 )
+   function setSpeed(t)
    {
-        return [r*Math.random()-r/2, r*Math.random()-r/2, r*Math.random()-r/2].join(' ');
+		var chopper = document.querySelector('Chopper');
+		chopper.setAttribute('stopTime', performance.now()/1000);
+		setTimeout( () => {
+		    chopper.setAttribute('rotorSpeed', t);
+	    	chopper.setAttribute('startTime', performance.now()/1000);
+		}, 30);
    }
-   function removeTable()
+   function adjustSpeed(e)
    {
-   	    var tabletrafo = document.querySelector('.tabletrafo:last-of-type');
-   	    if ( tabletrafo) tabletrafo.remove();
+   	    setSpeed( 40 / e.value );
    }
 </script>
 </html>
