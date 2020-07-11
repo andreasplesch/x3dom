@@ -80,7 +80,7 @@
     <!-- End of prototype -->
     <!-- The prototype is now defined. Although it contains a number of nodes, only the legColor and topColor fields are public. Instead of using the default legColor and topColor, this instance of the table has red legs and a green top: -->
 
-    <TwoColorTable DEF='animatedTable'
+    <TwoColorTable onclick='logClick(event)' DEF='animatedTable'
       legColor='1 0 0'
       topColor='0 1 0'></TwoColorTable>
 
@@ -94,6 +94,9 @@
   </Scene>
 </X3D>
 <button onclick='randomizeColor()'>random colors</button>
+<div >
+<textarea style="height: 100%; width: 100%;" id='logArea'></textarea>
+</div>
 </body>
 
 <script type="text/javascript">
@@ -106,6 +109,15 @@
    function randomColor()
    {
         return [Math.random(),Math.random(),Math.random()].join();
+   }
+   function logClick(e)
+   {    
+        var l = document.querySelector('#logArea');
+   	    for ( var k in e )
+   	    {
+   	        l.textContent = k + ":" + e[k] + "\n" +
+                                l.textContent;
+   	    }
    }
 </script>
 </html>
