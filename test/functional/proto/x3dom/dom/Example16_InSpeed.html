@@ -40,6 +40,7 @@
         <field accessType='inputOutput' name='rotorSpeed' type='SFTime' value='1'></field>
         <field accessType='inputOutput' name='stopTime' type='SFTime' value='0'></field>
         <field accessType='inputOutput' name='startTime' type='SFTime' value='0'></field>
+        <field accessType='inputOutput' name='on' type='SFBool' value='true'></field>
       </ProtoInterface>
       <ProtoBody>
         <Group>
@@ -58,7 +59,11 @@
           </Rotor>
         </Group>
         <BooleanTrigger DEF='trigger' ></BooleanTrigger>
-        <BooleanToggle DEF='toggler' ></BooleanToggle>
+        <BooleanToggle DEF='toggler' >
+            <IS>
+                <connect nodeField='toggle' protoField='on'></connect>
+            </IS>
+        </BooleanToggle>
         <BooleanFilter DEF='brancher' ></BooleanFilter>
         <TimeTrigger DEF='stopTimer' ></TimeTrigger>
         <TimeTrigger DEF='startTimer' ></TimeTrigger>
@@ -98,11 +103,11 @@
    function setSpeed(t)
    {
 		var chopper = document.querySelector('Chopper');
-		chopper.setAttribute('stopTime', performance.now()/1000 + 0.1);
+		chopper.setAttribute('on', false);
 		setTimeout( () => {
 		    chopper.setAttribute('rotorSpeed', t);
-	    	chopper.setAttribute('startTime', performance.now()/1000);
-		}, 200);
+	    	chopper.setAttribute('on', true);
+		}, 20);
    }
    function adjustSpeed(e)
    {
