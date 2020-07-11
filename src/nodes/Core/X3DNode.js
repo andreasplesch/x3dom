@@ -87,7 +87,8 @@ x3dom.registerNodeType(
                         {
                             switchNode.addChild( helper, "children" );
                         } );
-                        this._nameSpace.doc._scene.addChild2( switchNode );
+                        //this._nameSpace.doc._scene.addChild2( switchNode );
+                        this.addChild2( switchNode );
                     }
                 }
                 else
