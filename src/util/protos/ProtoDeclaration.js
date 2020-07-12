@@ -173,8 +173,8 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                     var attr;
                     for ( i = 0; i < attributes.length; i++ )
                     {
-                        attr = attributes[i];
-                        if ( attr.name.startsWith('on') )
+                        attr = attributes[ i ];
+                        if ( attr.name.startsWith( "on" ) )
                         {
                             this.typeNode._xmlNode.setAttribute( attr.name, attr.value );
                         }
