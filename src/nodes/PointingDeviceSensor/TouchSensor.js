@@ -44,7 +44,7 @@ x3dom.registerNodeType(
             this._hitPoint = new x3dom.fields.SFVec3f();
             this._hitNormal = new x3dom.fields.SFVec3f();
             this._hitRotation = new x3dom.fields.Quaternion();
-            this._up = new x3dom.fields.SFVec3f(0, 1, 0);
+            this._up = new x3dom.fields.SFVec3f( 0, 1, 0 );
         },
         {
             //----------------------------------------------------------------------------------------------------------------------
@@ -54,13 +54,12 @@ x3dom.registerNodeType(
             {
                 if ( this._vf.enabled )
                 {
-
-                    this.postMessage( "hitPoint_changed", this._hitPoint.fromArray( event.hitPnt ));
+                    this.postMessage( "hitPoint_changed", this._hitPoint.fromArray( event.hitPnt ) );
                     this._hitNormal.set( event.normalX, event.normalY, event.normalZ );
                     this.postMessage( "hitNormal_changed", this._hitNormal );
                     //non-standard field
-                    this.postMessage( "hitRotation_changed", 
-                        x3dom.fields.Quaternion.rotateFromTo( this._up, this._hitNormal ));
+                    this.postMessage( "hitRotation_changed",
+                        x3dom.fields.Quaternion.rotateFromTo( this._up, this._hitNormal ) );
                 }
             }
 
