@@ -95,13 +95,18 @@
 </X3D>
 
 <div>
-<h2>Press PgDn, see log</h2>
-<textarea style="height: 20%; width: 100%;" id='logArea'></textarea>
+<h2>Press button or PgDn, see log</h2>
+
+<button onclick='nextVp()'>Next View</button>
+
+<textarea style="height: 20%; width: 100%; margin-top: 20px;" id='logArea'></textarea>
+
 </div>
 </body>
 
 <script type="text/javascript">
-	function tweak()
+    maxChars = 30000;
+    function tweak()
 	{
 		//turn on internal proto help switch node
 		document.querySelectorAll('XViewpoint').forEach( node => node._x3domNode.helperNodes[0]._parentNodes[0]._vf.whichChoice = 0 );
@@ -112,13 +117,20 @@
 	function v1changed(e)
 	{    
 		var l = document.querySelector('#logArea');
+		if ( l.textLength > maxChars )	l.textContent = "";
 		l.textContent = "v1 position: " + e.position + "\n" + l.textContent;
 	}
   
-  function v2changed(e)
+    function v2changed(e)
 	{    
 		var l = document.querySelector('#logArea');
+		if ( l.textLength > maxChars )	l.textContent = "";
 		l.textContent = "v2 position: " + e.position + "\n" + l.textContent;
+	}
+
+	function nextVp()
+	{
+		document.querySelector('x3d').runtime.nextView();
 	}
 
 </script>
