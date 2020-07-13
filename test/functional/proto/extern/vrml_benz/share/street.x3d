@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 3.0//EN" "http://www.web3d.org/specifications/x3d-3.0.dtd">
+<X3D profile="Interchange" version="3.0"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance"
+     xsd:noNamespaceSchemaLocation="http://www.web3d.org/specifications/x3d-3.0.xsd">
+<head>
+	<meta name="generator" content="tovrmlx3d, http://castle-engine.sourceforge.net/view3dscene.php#section_converting" />
+	<meta name="source" content="street.x3d" />
+</head>
+<Scene>
+	<WorldInfo
+		title="Drift bei 100 km/h Seitenwind ohne Lenkbewegung. Copyright (C) 1999"
+		info='"(C) Copyright 1999 Daimler/Chrysler (Mercedes-Benz) RUS/ICA Universitaet Stuttgart lina.longhitano@daimlerchrysler.com scheurich@csv.ica.uni-stuttgart.de"' />
+	<Group>
+		<Shape>
+			<Appearance>
+				<Material />
+			</Appearance>
+			<IndexedFaceSet
+				creaseAngle="0.5"
+				coordIndex="3 2 1 0 -1"
+				normalIndex="0 1 2 3 -1"
+				colorPerVertex="false">
+				<Coordinate
+					point="-7.914370059967041 1.309999942779541 -0.016875000670552254 7.9481301307678223 1.309999942779541 -0.016875000670552254 7.9481301307678223 -1.2599999904632568 -0.016875000670552254 -7.914370059967041 -1.2599999904632568 -0.016875000670552254" />
+				<Normal
+					vector="0 0 1 0 0 1 0 0 1 0 0 1" />
+				<Color
+					color="0 0 0" />
+			</IndexedFaceSet>
+		</Shape>
+		<Shape>
+			<Appearance>
+				<Material />
+			</Appearance>
+			<IndexedFaceSet
+				creaseAngle="0.5"
+				coordIndex="3 2 1 0 -1"
+				normalIndex="0 1 2 3 -1"
+				colorPerVertex="false">
+				<Coordinate
+					point="-7.9593801498413086 0.039259299635887146 0 7.869379997253418 0.039259299635887146 0 7.869379997253418 -0.039753101766109467 0 -7.9593801498413086 -0.039753101766109467 0" />
+				<Normal
+					vector="0 0 1 0 0 1 0 0 1 0 0 1" />
+				<Color
+					color="1 1 1" />
+			</IndexedFaceSet>
+		</Shape>
+	</Group>
+</Scene>
+</X3D>

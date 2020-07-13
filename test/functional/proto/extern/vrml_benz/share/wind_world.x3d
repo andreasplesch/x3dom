@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 3.0//EN" "http://www.web3d.org/specifications/x3d-3.0.dtd">
+<X3D profile="Interchange" version="3.0"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance"
+     xsd:noNamespaceSchemaLocation="http://www.web3d.org/specifications/x3d-3.0.xsd">
+<head>
+	<meta name="generator" content="tovrmlx3d, http://castle-engine.sourceforge.net/view3dscene.php#section_converting" />
+	<meta name="source" content="wind_world.x3d" />
+</head>
+<Scene>
+	<NavigationInfo
+		avatarSize="0.25 1.6000000238418579 0.75"
+		type='"EXAMINE"' />
+	<Transform
+		translation="0 0 -0.15000000596046448">
+		<Transform
+			rotation="1 0 0 1.5707999467849731">
+			<Transform>
+				<Inline
+					url='"gras.x3d"' />
+			</Transform>
+			<Transform
+				translation="0 -2.5 0"
+				rotation="0 1 0 3.1400001049041748" />
+		</Transform>
+		<Transform
+			scale="8 4 4"
+			translation="0 20 0">
+			<Transform
+				rotation="1 0 0 1.5707963705062866">
+				<Inline
+					url='"berg1.x3d"' />
+			</Transform>
+		</Transform>
+		<Transform
+			scale="8 4 4"
+			translation="0 -20 0">
+			<Transform
+				rotation="1 0 0 1.5707999467849731">
+				<Inline
+					url='"berg2.x3d"' />
+			</Transform>
+		</Transform>
+	</Transform>
+</Scene>
+</X3D>
