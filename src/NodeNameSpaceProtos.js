@@ -69,7 +69,10 @@ x3dom.NodeNameSpace.prototype.protoInstance = function ( domNode, domParent )
             else
             {
                 var value = fieldValue.getAttribute( "value" );
-                protoInstanceDom.setAttribute( name, value );
+                if ( value ) 
+                {
+                    protoInstanceDom.setAttribute( name, value );
+                }
             }
         } );
 
@@ -120,7 +123,7 @@ x3dom.NodeNameSpace.prototype.loadExternProtoAsync = function ( protoDeclaration
                 scene = doc.querySelector( "X3D" );
             }
             //find hash
-            var hash = url.split( "#" ).slice( -1 )[ 0 ];
+            var hash = url.includes('#') ? url.split( "#" ).slice( -1 )[ 0 ] : "";
             var selector = hash == "" ? "ProtoDeclare" : "ProtoDeclare[name='" + hash + "']";
             var declareNode = scene.querySelector( selector );
             //transfer name
