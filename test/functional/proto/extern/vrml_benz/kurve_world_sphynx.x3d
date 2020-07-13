@@ -35,9 +35,9 @@
 			<Inline
 				url='"./platte.x3d"' />
 		</Transform>
-		<Anchor
+		<!--Anchor
 			url='"https://www.visus.uni-stuttgart.de/"'
-			description="Fahrsimulation Daimler-Chrysler/Mercedes-Benz, Teil der Doktorarbeit von Lina Longhitano (RUS/Daimler-Benz)">
+			description="Fahrsimulation Daimler-Chrysler/Mercedes-Benz, Teil der Doktorarbeit von Lina Longhitano (RUS/Daimler-Benz)"-->
 			<Transform
 				translation="9.0600004196166992 40.700000762939453 -0.10000000149011612">
 				<ProtoInstance name="kurve" containerField="children">
@@ -49,7 +49,7 @@
 						value="0.30000001192092896 0.30000001192092896 0.30000001192092896" />
 				</ProtoInstance>
 			</Transform>
-		</Anchor>
+		<!--/Anchor-->
 		<Transform
 			translation="-100 -100.69999694824219 0"
 			scale="10 10 10">
