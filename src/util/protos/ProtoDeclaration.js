@@ -70,7 +70,10 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                     //set interface defaults
                         if ( ctx && ctx.xmlNode && !ctx.xmlNode.hasAttribute( field.name ) )
                         {
-                            ctx.xmlNode.setAttribute( field.name, field.value );
+                            if ( field.value )
+                            {
+                                ctx.xmlNode.setAttribute( field.name, field.value );
+                            }
                         }
                         this[ "addField_" + field.dataType ]( ctx, field.name, field.value );
                     }
