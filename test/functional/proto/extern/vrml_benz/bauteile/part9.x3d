@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 3.0//EN" "http://www.web3d.org/specifications/x3d-3.0.dtd">
+<X3D profile="Interchange" version="3.0"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance"
+     xsd:noNamespaceSchemaLocation="http://www.web3d.org/specifications/x3d-3.0.xsd">
+<head>
+	<meta name="generator" content="tovrmlx3d, http://castle-engine.sourceforge.net/view3dscene.php#section_converting" />
+	<meta name="source" content="part9.x3d" />
+</head>
+<Scene>
+	<ProtoDeclare name="part9">
+		<ProtoInterface>
+				<field accessType="initializeOnly" type="SFColor" name="mysurfacecolor" value="0.25 0 0" />
+				<field accessType="initializeOnly" type="SFColor" name="mylinecolor" value="0.25 0 0" />
+				<field accessType="initializeOnly" type="SFFloat" name="mycreaseangle" value="1" />
+				<field accessType="initializeOnly" type="SFFloat" name="mytransparency" value="0" />
+				<field accessType="initializeOnly" type="SFColor" name="mydiffusecolor" value="0.20000000298023224 0.20000000298023224 0.20000000298023224" />
+		</ProtoInterface>
+		<ProtoBody>
+			<Group>
+				<Shape>
+					<Appearance>
+						<Material
+							shininess="1">
+							<IS>
+								<connect nodeField="diffuseColor" protoField="mydiffusecolor" />
+								<connect nodeField="emissiveColor" protoField="mysurfacecolor" />
+								<connect nodeField="transparency" protoField="mytransparency" />
+							</IS>
+						</Material>
+					</Appearance>
+					<IndexedFaceSet
+						coordIndex="1 2 3 -1 3 2 4 -1 5 4 2 -1 6 5 2 -1 7 6 2 -1 8 9 10 -1 9 11 10 -1 12 10 11 -1 13 10 12 -1 14 10 13 -1"
+						solid="false">
+						<Coordinate
+							point="0 0 0 -0.93080002069473267 0.82959997653961182 0.91775000095367432 -0.90439999103546143 0.79000002145767212 1.0452500581741333 -0.99870002269744873 0.98919999599456787 0.93494999408721924 -0.99910002946853638 0.99849998950958252 0.95045000314712524 -0.99879997968673706 1.0001000165939331 0.97495001554489136 -0.99430000782012939 0.99409997463226318 1.0254499912261963 -0.98379999399185181 0.97130000591278076 1.0431499481201172 -0.93080002069473267 -0.82959997653961182 0.91775000095367432 -0.99870002269744873 -0.98919999599456787 0.93494999408721924 -0.90439999103546143 -0.79000002145767212 1.0452500581741333 -0.99910002946853638 -0.99849998950958252 0.95045000314712524 -0.99879997968673706 -1.0001000165939331 0.97495001554489136 -0.99430000782012939 -0.99409997463226318 1.0254499912261963 -0.98379999399185181 -0.97130000591278076 1.0431499481201172" />
+						<IS>
+							<connect nodeField="creaseAngle" protoField="mycreaseangle" />
+						</IS>
+					</IndexedFaceSet>
+				</Shape>
+				<Shape>
+					<Appearance>
+						<Material
+							shininess="1">
+							<IS>
+								<connect nodeField="diffuseColor" protoField="mydiffusecolor" />
+								<connect nodeField="emissiveColor" protoField="mylinecolor" />
+								<connect nodeField="transparency" protoField="mytransparency" />
+							</IS>
+						</Material>
+					</Appearance>
+					<IndexedLineSet>
+						<Coordinate
+							point="0 0 0 -0.93080002069473267 0.82959997653961182 0.91775000095367432 -0.90439999103546143 0.79000002145767212 1.0452500581741333 -0.99870002269744873 0.98919999599456787 0.93494999408721924 -0.99910002946853638 0.99849998950958252 0.95045000314712524 -0.99879997968673706 1.0001000165939331 0.97495001554489136 -0.99430000782012939 0.99409997463226318 1.0254499912261963 -0.98379999399185181 0.97130000591278076 1.0431499481201172 -0.93080002069473267 -0.82959997653961182 0.91775000095367432 -0.99870002269744873 -0.98919999599456787 0.93494999408721924 -0.90439999103546143 -0.79000002145767212 1.0452500581741333 -0.99910002946853638 -0.99849998950958252 0.95045000314712524 -0.99879997968673706 -1.0001000165939331 0.97495001554489136 -0.99430000782012939 -0.99409997463226318 1.0254499912261963 -0.98379999399185181 -0.97130000591278076 1.0431499481201172" />
+					</IndexedLineSet>
+				</Shape>
+			</Group>
+		</ProtoBody>
+	</ProtoDeclare>
+</Scene>
+</X3D>
