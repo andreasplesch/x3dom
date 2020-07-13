@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 3.0//EN" "http://www.web3d.org/specifications/x3d-3.0.dtd">
+<X3D profile="Interchange" version="3.0"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance"
+     xsd:noNamespaceSchemaLocation="http://www.web3d.org/specifications/x3d-3.0.xsd">
+<head>
+	<meta name="generator" content="tovrmlx3d, http://castle-engine.sourceforge.net/view3dscene.php#section_converting" />
+	<meta name="source" content="winddrift_benz_trajektorie.x3d" />
+</head>
+<Scene>
+	<Inline
+		url='"winddrift_benz.x3d"' />
+	<ExternProtoDeclare name="karosserie_trajektorie_proto" url='"winddrift_benz/karosserie_trajektorie.x3d"'>
+			<field accessType="initializeOnly" type="SFColor" name="mysurfacecolor" />
+			<field accessType="initializeOnly" type="SFColor" name="mylinecolor" />
+			<field accessType="initializeOnly" type="SFFloat" name="mycreaseangle" />
+			<field accessType="initializeOnly" type="SFFloat" name="mytransparency" />
+			<field accessType="initializeOnly" type="SFColor" name="mydiffusecolor" />
+	</ExternProtoDeclare>
+	<ProtoInstance name="karosserie_trajektorie_proto">
+		<fieldValue name="mylinecolor"
+			value="1 0 0" />
+	</ProtoInstance>
+</Scene>
+</X3D>
