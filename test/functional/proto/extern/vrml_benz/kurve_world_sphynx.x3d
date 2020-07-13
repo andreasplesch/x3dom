@@ -36,7 +36,7 @@
 				url='"./platte.x3d"' />
 		</Transform>
 		<Anchor
-			url='"http://www.csv.ica.uni-stuttgart.de/vrml/vrml_rsyst.html"'
+			url='"https://www.visus.uni-stuttgart.de/"'
 			description="Fahrsimulation Daimler-Chrysler/Mercedes-Benz, Teil der Doktorarbeit von Lina Longhitano (RUS/Daimler-Benz)">
 			<Transform
 				translation="9.0600004196166992 40.700000762939453 -0.10000000149011612">
