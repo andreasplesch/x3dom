@@ -13,7 +13,7 @@
 		skyAngle="0.77999997138977051 1.5700000524520874" />
 	<Inline
 		url='"./kurve_benz.x3d"' />
-	<ExternProtoDeclare name="karosserie_trajektorie_proto" url='"./karosserie_trajektorie.x3d"'>
+	<ExternProtoDeclare name="karosserie_trajektorie_proto" url='"./kurve_benz/karosserie_trajektorie.x3d"'>
 			<field accessType="initializeOnly" type="SFColor" name="mysurfacecolor" />
 			<field accessType="initializeOnly" type="SFColor" name="mylinecolor" />
 			<field accessType="initializeOnly" type="SFFloat" name="mycreaseangle" />
