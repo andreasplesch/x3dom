@@ -413,17 +413,17 @@
 		<field accessType="initializeOnly" type="SFVec3f" name="initvektor" value="0 0 1" />
 		<field accessType="initializeOnly" type="SFVec3f" name="vektor" value="0 0 0" />
 	</Script-->
-	<ROUTE fromNode="karosserie_rotation" fromField="value_changed" toNode="mitte_mover_rotation" toField="rotation_in" />
-	<ROUTE fromNode="mitte_mover_rotation" fromField="rotation_out" toNode="paralleler_flug" toField="set_rotation" />
-	<ROUTE fromNode="mitte_mover_rotation" fromField="rotation_out" toNode="strasse_beobachter" toField="set_rotation" />
-	<ROUTE fromNode="mitte_mover_rotation" fromField="rotation_out" toNode="mittelpunkt_beobachter" toField="set_rotation" />
+	<!--ROUTE fromNode="karosserie_rotation" fromField="value_changed" toNode="mitte_mover_rotation" toField="rotation_in" /-->
+	<!--ROUTE fromNode="mitte_mover_rotation" fromField="rotation_out" toNode="paralleler_flug" toField="set_rotation" /-->
+	<!--ROUTE fromNode="mitte_mover_rotation" fromField="rotation_out" toNode="strasse_beobachter" toField="set_rotation" /-->
+	<!--ROUTE fromNode="mitte_mover_rotation" fromField="rotation_out" toNode="mittelpunkt_beobachter" toField="set_rotation" /-->
 	<!--Script DEF="beobachter_mover_position"
 		url='"vrmlscript:&#xA;   function initialize()&#xA;      {&#xA;      translation_out[0]=0;&#xA;      translation_out[1]=0;&#xA;      translation_out[2]=0;&#xA;      }&#xA;   function translation_in(val)  &#xA;      {&#xA;      translation_out[0]=val[0];&#xA;      translation_out[1]=val[1];&#xA;      translation_out[2]=0.1;&#xA;      }&#xA;   "'>
 		<field accessType="inputOnly" type="SFVec3f" name="translation_in" />
 		<field accessType="outputOnly" type="SFVec3f" name="translation_out" />
 	</Script-->
-	<ROUTE fromNode="karosserie_position" fromField="value_changed" toNode="beobachter_mover_position" toField="translation_in" />
-	<ROUTE fromNode="beobachter_mover_position" fromField="translation_out" toNode="paralleler_flug" toField="set_translation" />
+	<!--ROUTE fromNode="karosserie_position" fromField="value_changed" toNode="beobachter_mover_position" toField="translation_in" /-->
+	<!--ROUTE fromNode="beobachter_mover_position" fromField="translation_out" toNode="paralleler_flug" toField="set_translation" /-->
 	<!--Script DEF="beobachter_mover_rotation"
 		url='"vrmlscript:&#xA;   function initialize()&#xA;      {&#xA;      rotation_out[0]=0;&#xA;      rotation_out[1]=0;&#xA;      rotation_out[2]=1;&#xA;      rotation_out[3]=0;&#xA;      flag_out=0;&#xA;      }&#xA;   function skalarprodukt(a,b)&#xA;      {&#xA;      return(a[0]*b[0]+a[1]*b[1]+a[2]*b[2]);&#xA;      }&#xA;   function betrag(a)&#xA;      {&#xA;      return(Math.sqrt(a[0]*a[0]+a[1]*a[1]+a[2]*a[2]));&#xA;      }&#xA;   function translation_in(val)  &#xA;      {&#xA;      rotation_out[0]=0;&#xA;      rotation_out[1]=0;&#xA;      rotation_out[2]=1;&#xA;      betrag1=betrag(val);&#xA;      betrag2=betrag(initvektor);&#xA;      if ((betrag1==0) || (betrag2==0))&#xA;         coswinkel=0;&#xA;      else&#xA;         coswinkel=skalarprodukt(val,initvektor)/(betrag1*betrag2);&#xA;      if (coswinkel&gt;1)&#xA;         {&#xA;         coswinkel=1;&#xA;         }&#xA;      else if (coswinkel&lt;-1)&#xA;         {&#xA;         coswinkel=-1;&#xA;         }&#xA;      rotation_out[3]=Math.acos(coswinkel);&#xA;      }&#xA;   "'>
 		<field accessType="inputOnly" type="SFVec3f" name="translation_in" />
@@ -433,13 +433,35 @@
 		<field accessType="initializeOnly" type="SFFloat" name="betrag1" value="0" />
 		<field accessType="initializeOnly" type="SFFloat" name="betrag2" value="0" />
 	</Script-->
-	<ROUTE fromNode="beobachter_mover_position" fromField="translation_out" toNode="beobachter_mover_rotation" toField="translation_in" />
-	<ROUTE fromNode="beobachter_mover_rotation" fromField="rotation_out" toNode="dauernder_beobachter" toField="set_rotation" />
+	<!--ROUTE fromNode="beobachter_mover_position" fromField="translation_out" toNode="beobachter_mover_rotation" toField="translation_in" /-->
+	<!--ROUTE fromNode="beobachter_mover_rotation" fromField="rotation_out" toNode="dauernder_beobachter" toField="set_rotation" /-->
 	<!--Script DEF="TIMER"
-		url='"vrmlscript:&#xA;   function initialize()&#xA;      {&#xA;      readyflag_out=0;&#xA;      fraction_changed=0.01;&#xA;      }&#xA;   function fraction_in(val)  &#xA;      {&#xA;      if (val&lt;=0.96)&#xA;         fraction_changed=1.0/0.96*val;&#xA;      else if (val&lt;=0.98)&#xA;         {&#xA;         readyflag_out=1;&#xA;         fraction_changed=1.0;&#xA;         }&#xA;      else&#xA;         {&#xA;         readyflag_out=0;&#xA;         fraction_changed=0.01; &#xA;         }&#xA;      if (fraction_changed==0)&#xA;         fraction_changed=0.01;&#xA;      }&#xA;   "'>
-		<field accessType="inputOnly" type="SFFloat" name="fraction_in" />
-		<field accessType="outputOnly" type="SFFloat" name="fraction_changed" />
-		<field accessType="outputOnly" type="SFInt32" name="readyflag_out" />
+                url='"vrmlscript:&#xA;   
+                function initialize()&#xA;      
+                {&#xA;
+                        readyflag_out=0;&#xA;
+                        fraction_changed=0.01;&#xA;
+                }&#xA;
+                function fraction_in(val)  &#xA;      
+                {&#xA;
+                    if (val&lt;=0.96)&#xA;
+                    fraction_changed=1.0/0.96*val;&#xA;
+                    else if (val&lt;=0.98)&#xA;
+                    {&#xA;
+                        readyflag_out=1;&#xA;
+                        fraction_changed=1.0;&#xA;
+                    }&#xA;
+                    else&#xA;         
+                    {&#xA;
+                        readyflag_out=0;&#xA;
+                        fraction_changed=0.01; &#xA;
+                        }&#xA;
+                    if (fraction_changed==0)&#xA;
+                        fraction_changed=0.01;&#xA;
+                }&#xA;   "'>
+                <field accessType="inputOnly" type="SFFloat" name="fraction_in" />
+                <field accessType="outputOnly" type="SFFloat" name="fraction_changed" />
+                <field accessType="outputOnly" type="SFInt32" name="readyflag_out" />
 	</Script-->
 	<ROUTE fromNode="REALTIMER" fromField="fraction_changed" toNode="karosserie_position" toField="set_fraction" />
 	<ROUTE fromNode="REALTIMER" fromField="fraction_changed" toNode="karosserie_rotation" toField="set_fraction" />
@@ -459,6 +481,6 @@
 	<TimeSensor DEF="TEXTTIMER"
 		cycleInterval="0.10000000000000001"
 		stopTime="-1" />
-	<ROUTE fromNode="TEXTTIMER" fromField="cycleTime" toNode="TEXTCREATOR" toField="ping" />
+	<!--ROUTE fromNode="TEXTTIMER" fromField="cycleTime" toNode="TEXTCREATOR" toField="ping" /-->
 </Scene>
 </X3D>
