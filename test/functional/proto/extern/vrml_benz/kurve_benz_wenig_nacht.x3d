@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 3.0//EN" "http://www.web3d.org/specifications/x3d-3.0.dtd">
+<X3D profile="Interchange" version="3.0"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance"
+     xsd:noNamespaceSchemaLocation="http://www.web3d.org/specifications/x3d-3.0.xsd">
+<head>
+	<meta name="generator" content="tovrmlx3d, http://castle-engine.sourceforge.net/view3dscene.php#section_converting" />
+	<meta name="source" content="kurve_benz_wenig_nacht.x3d" />
+</head>
+<Scene>
+	<WorldInfo
+		title="Kurvenfahrt bei dauernder Beschleunigung. Copyright (C) 1999"
+		info='"(C) Copyright 1999 Daimler/Chrysler (Mercedes-Benz) RUS/ICA Universitaet Stuttgart lina.longhitano@daimlerchrysler.com scheurich@csv.ica.uni-stuttgart.de"' />
+	<TimeSensor DEF="TIMER"
+		cycleInterval="25"
+		loop="true" />
+	<NavigationInfo
+		avatarSize="0.25 1.6000000238418579 0.75"
+		type='"EXAMINE"' />
+	<Viewpoint
+		position="19.899999618530273 -17.579999923706055 23.870000839233398"
+		orientation="0.99000000953674316 0.11999999731779099 0.10999999940395355 0.98000001907348633"
+		description="ganzer Kreis" />
+	<Background
+		skyColor="0 0 0 0 0 0 0 0 0"
+		skyAngle="0.77999997138977051 1.5700000524520874" />
+	<Inline
+		url='"kurve_benz_trajektorie.x3d"' />
+	<Viewpoint
+		position="10 36 120"
+		description="Draufsicht" />
+	<Viewpoint
+		position="44.779998779296875 18.979999542236328 1.1799999475479126"
+		orientation="0.43000000715255737 0.5899999737739563 0.68999999761581421 2.2899999618530273"
+		description="Viertelkreis" />
+	<Inline
+		url='"kurve_world_nacht.x3d"' />
+</Scene>
+</X3D>

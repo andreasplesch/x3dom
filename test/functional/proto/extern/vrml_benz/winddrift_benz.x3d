@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 3.0//EN" "http://www.web3d.org/specifications/x3d-3.0.dtd">
+<X3D profile="Interchange" version="3.0"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance"
+     xsd:noNamespaceSchemaLocation="http://www.web3d.org/specifications/x3d-3.0.xsd">
+<head>
+	<meta name="generator" content="tovrmlx3d, http://castle-engine.sourceforge.net/view3dscene.php#section_converting" />
+	<meta name="source" content="winddrift_benz.x3d" />
+</head>
+<Scene>
+	<WorldInfo
+		title="Drift bei 100 km/h Seitenwind ohne Lenkbewegung. Copyright (C) 1999"
+		info='"(C) Copyright 1999 Daimler/Chrysler (Mercedes-Benz) RUS/ICA Universitaet Stuttgart lina.longhitano@daimlerchrysler.com scheurich@csv.ica.uni-stuttgart.de"' />
+	<TimeSensor DEF="TIMER"
+		cycleInterval="5"
+		loop="true" />
+	<NavigationInfo
+		avatarSize="0.25 1.6000000238418579 0.75"
+		type='"EXAMINE"' />
+	<ExternProtoDeclare name="part0" url='"bauteile/part0.x3d"'>
+			<field accessType="initializeOnly" type="SFColor" name="mysurfacecolor" />
+			<field accessType="initializeOnly" type="SFColor" name="mylinecolor" />
+			<field accessType="initializeOnly" type="SFFloat" name="mycreaseangle" />
+			<field accessType="initializeOnly" type="SFFloat" name="mytransparency" />
+			<field accessType="initializeOnly" type="SFColor" name="mydiffusecolor" />
+	</ExternProtoDeclare>
+	<ExternProtoDeclare name="part1" url='"bauteile/part1.x3d"'>
+			<field accessType="initializeOnly" type="SFColor" name="mysurfacecolor" />
+			<field accessType="initializeOnly" type="SFColor" name="mylinecolor" />
+			<field accessType="initializeOnly" type="SFFloat" name="mycreaseangle" />
+			<field accessType="initializeOnly" type="SFFloat" name="mytransparency" />
+			<field accessType="initializeOnly" type="SFColor" name="mydiffusecolor" />
+	</ExternProtoDeclare>
+	<ExternProtoDeclare name="part2" url='"bauteile/part2.x3d"'>
+			<field accessType="initializeOnly" type="SFColor" name="mysurfacecolor" />
+			<field accessType="initializeOnly" type="SFColor" name="mylinecolor" />
+			<field accessType="initializeOnly" type="SFFloat" name="mycreaseangle" />
+			<field accessType="initializeOnly" type="SFFloat" name="mytransparency" />
+			<field accessType="initializeOnly" type="SFColor" name="mydiffusecolor" />
+	</ExternProtoDeclare>
+	<ExternProtoDeclare name="part3" url='"bauteile/part3.x3d"'>
+			<field accessType="initializeOnly" type="SFColor" name="mysurfacecolor" />
+			<field accessType="initializeOnly" type="SFColor" name="mylinecolor" />
+			<field accessType="initializeOnly" type="SFFloat" name="mycreaseangle" />
+			<field accessType="initializeOnly" type="SFFloat" name="mytransparency" />
+			<field accessType="initializeOnly" type="SFColor" name="mydiffusecolor" />
+	</ExternProtoDeclare>
+	<ExternProtoDeclare name="part4" url='"bauteile/part4.x3d"'>
+			<field accessType="initializeOnly" type="SFColor" name="mysurfacecolor" />
+			<field accessType="initializeOnly" type="SFColor" name="mylinecolor" />
+			<field accessType="initializeOnly" type="SFFloat" name="mycreaseangle" />
+			<field accessType="initializeOnly" type="SFFloat" name="mytransparency" />
+			<field accessType="initializeOnly" type="SFColor" name="mydiffusecolor" />
+	</ExternProtoDeclare>
+	<ExternProtoDeclare name="part5" url='"bauteile/part5.x3d"'>
+			<field accessType="initializeOnly" type="SFColor" name="mysurfacecolor" />
+			<field accessType="initializeOnly" type="SFColor" name="mylinecolor" />
+			<field accessType="initializeOnly" type="SFFloat" name="mycreaseangle" />
+			<field accessType="initializeOnly" type="SFFloat" name="mytransparency" />
+			<field accessType="initializeOnly" type="SFColor" name="mydiffusecolor" />
+	</ExternProtoDeclare>
+	<ExternProtoDeclare name="part6" url='"bauteile/part6.x3d"'>
+			<field accessType="initializeOnly" type="SFColor" name="mysurfacecolor" />
+			<field accessType="initializeOnly" type="SFColor" name="mylinecolor" />
+			<field accessType="initializeOnly" type="SFFloat" name="mycreaseangle" />
+			<field accessType="initializeOnly" type="SFFloat" name="mytransparency" />
+			<field accessType="initializeOnly" type="SFColor" name="mydiffusecolor" />
+	</ExternProtoDeclare>
+	<ExternProtoDeclare name="part7" url='"bauteile/part7.x3d"'>
+			<field accessType="initializeOnly" type="SFColor" name="mysurfacecolor" />
+			<field accessType="initializeOnly" type="SFColor" name="mylinecolor" />
+			<field accessType="initializeOnly" type="SFFloat" name="mycreaseangle" />
+			<field accessType="initializeOnly" type="SFFloat" name="mytransparency" />
+			<field accessType="initializeOnly" type="SFColor" name="mydiffusecolor" />
+	</ExternProtoDeclare>
+	<ExternProtoDeclare name="part8" url='"bauteile/part8.x3d"'>
+			<field accessType="initializeOnly" type="SFColor" name="mysurfacecolor" />
+			<field accessType="initializeOnly" type="SFColor" name="mylinecolor" />
+			<field accessType="initializeOnly" type="SFFloat" name="mycreaseangle" />
+			<field accessType="initializeOnly" type="SFFloat" name="mytransparency" />
+			<field accessType="initializeOnly" type="SFColor" name="mydiffusecolor" />
+	</ExternProtoDeclare>
+	<ExternProtoDeclare name="part9" url='"bauteile/part9.x3d"'>
+			<field accessType="initializeOnly" type="SFColor" name="mysurfacecolor" />
+			<field accessType="initializeOnly" type="SFColor" name="mylinecolor" />
+			<field accessType="initializeOnly" type="SFFloat" name="mycreaseangle" />
+			<field accessType="initializeOnly" type="SFFloat" name="mytransparency" />
+			<field accessType="initializeOnly" type="SFColor" name="mydiffusecolor" />
+	</ExternProtoDeclare>
+	<ExternProtoDeclare name="part10" url='"bauteile/part10.x3d"'>
+			<field accessType="initializeOnly" type="SFColor" name="mysurfacecolor" />
+			<field accessType="initializeOnly" type="SFColor" name="mylinecolor" />
+			<field accessType="initializeOnly" type="SFFloat" name="mycreaseangle" />
+			<field accessType="initializeOnly" type="SFFloat" name="mytransparency" />
+			<field accessType="initializeOnly" type="SFColor" name="mydiffusecolor" />
+	</ExternProtoDeclare>
+	<Anchor
+		description="Fahrsimulation Daimler-Chrysler/Mercedes-Benz, Teil der Doktorarbeit von Lina Longhitano (RUS/Daimler-Benz)"
+		url='"http://www.csv.ica.uni-stuttgart.de/vrml/vrml_rsyst.html"'>
+		<Transform DEF="karroserie">
+			<ProtoInstance name="part0" containerField="children">
+				<fieldValue name="mysurfacecolor"
+					value="0.5 0.5 0.55000001192092896" />
+				<fieldValue name="mydiffusecolor"
+					value="0.40000000596046448 0.40000000596046448 0.40000000596046448" />
+				<fieldValue name="mycreaseangle"
+					value="0.69999998807907104" />
+			</ProtoInstance>
+			<ProtoInstance name="part1" containerField="children">
+				<fieldValue name="mylinecolor"
+					value="1 1 1" />
+			</ProtoInstance>
+			<ProtoInstance name="part2" containerField="children">
+				<fieldValue name="mysurfacecolor"
+					value="0.40000000596046448 0.40000000596046448 0.44999998807907104" />
+				<fieldValue name="mydiffusecolor"
+					value="0.40000000596046448 0.40000000596046448 0.40000000596046448" />
+				<fieldValue name="mycreaseangle"
+					value="0.69999998807907104" />
+			</ProtoInstance>
+			<ProtoInstance name="part3" containerField="children">
+				<fieldValue name="mysurfacecolor"
+					value="0.02500000037252903 0.02500000037252903 0.02500000037252903" />
+			</ProtoInstance>
+			<ProtoInstance name="part4" containerField="children">
+				<fieldValue name="mysurfacecolor"
+					value="0.40000000596046448 0.40000000596046448 0.44999998807907104" />
+				<fieldValue name="mydiffusecolor"
+					value="0.40000000596046448 0.40000000596046448 0.40000000596046448" />
+				<fieldValue name="mycreaseangle"
+					value="0.69999998807907104" />
+			</ProtoInstance>
+			<ProtoInstance name="part5" containerField="children">
+				<fieldValue name="mylinecolor"
+					value="1 1 1" />
+			</ProtoInstance>
+			<ProtoInstance name="part6" containerField="children">
+				<fieldValue name="mylinecolor"
+					value="1 0 0" />
+			</ProtoInstance>
+			<ProtoInstance name="part7" containerField="children">
+				<fieldValue name="mylinecolor"
+					value="1 1 1" />
+			</ProtoInstance>
+			<ProtoInstance name="part8" containerField="children">
+				<fieldValue name="mysurfacecolor"
+					value="0.10000000149011612 0.10000000149011612 0.10000000149011612" />
+				<fieldValue name="mytransparency"
+					value="0.80000001192092896" />
+			</ProtoInstance>
+			<ProtoInstance name="part9" containerField="children">
+				<fieldValue name="mysurfacecolor"
+					value="0.80000001192092896 0.80000001192092896 0.80000001192092896" />
+			</ProtoInstance>
+			<ProtoInstance name="part10" containerField="children">
+				<fieldValue name="mysurfacecolor"
+					value="0.75 0.75 0.75" />
+			</ProtoInstance>
+		</Transform>
+	</Anchor>
+	<ExternProtoDeclare name="rad0" url='"bauteile/rad0.x3d"'>
+			<field accessType="initializeOnly" type="SFColor" name="mysurfacecolor" />
+			<field accessType="initializeOnly" type="SFColor" name="mylinecolor" />
+			<field accessType="initializeOnly" type="SFFloat" name="mycreaseangle" />
+			<field accessType="initializeOnly" type="SFFloat" name="mytransparency" />
+			<field accessType="initializeOnly" type="SFColor" name="mydiffusecolor" />
+	</ExternProtoDeclare>
+	<ExternProtoDeclare name="felge0" url='"bauteile/felge0.x3d"'>
+			<field accessType="initializeOnly" type="SFColor" name="mysurfacecolor" />
+			<field accessType="initializeOnly" type="SFColor" name="mylinecolor" />
+			<field accessType="initializeOnly" type="SFFloat" name="mycreaseangle" />
+			<field accessType="initializeOnly" type="SFFloat" name="mytransparency" />
+			<field accessType="initializeOnly" type="SFColor" name="mydiffusecolor" />
+	</ExternProtoDeclare>
+	<Transform DEF="rad0">
+		<Transform
+			rotation="0 0 1 3.1400001049041748">
+			<ProtoInstance name="rad0" containerField="children">
+				<fieldValue name="mysurfacecolor"
+					value="0 0 0" />
+			</ProtoInstance>
+			<ProtoInstance name="felge0" containerField="children">
+				<fieldValue name="mysurfacecolor"
+					value="0.5 0.5 0.55000001192092896" />
+				<fieldValue name="mydiffusecolor"
+					value="0.40000000596046448 0.40000000596046448 0.40000000596046448" />
+				<fieldValue name="mycreaseangle"
+					value="0.69999998807907104" />
+			</ProtoInstance>
+		</Transform>
+	</Transform>
+	<ExternProtoDeclare name="rad1" url='"bauteile/rad1.x3d"'>
+			<field accessType="initializeOnly" type="SFColor" name="mysurfacecolor" />
+			<field accessType="initializeOnly" type="SFColor" name="mylinecolor" />
+			<field accessType="initializeOnly" type="SFFloat" name="mycreaseangle" />
+			<field accessType="initializeOnly" type="SFFloat" name="mytransparency" />
+			<field accessType="initializeOnly" type="SFColor" name="mydiffusecolor" />
+	</ExternProtoDeclare>
+	<ExternProtoDeclare name="felge1" url='"bauteile/felge1.x3d"'>
+			<field accessType="initializeOnly" type="SFColor" name="mysurfacecolor" />
+			<field accessType="initializeOnly" type="SFColor" name="mylinecolor" />
+			<field accessType="initializeOnly" type="SFFloat" name="mycreaseangle" />
+			<field accessType="initializeOnly" type="SFFloat" name="mytransparency" />
+			<field accessType="initializeOnly" type="SFColor" name="mydiffusecolor" />
+	</ExternProtoDeclare>
+	<Transform DEF="rad1">
+		<ProtoInstance name="rad1" containerField="children">
+			<fieldValue name="mysurfacecolor"
+				value="0 0 0" />
+		</ProtoInstance>
+		<ProtoInstance name="felge1" containerField="children">
+			<fieldValue name="mysurfacecolor"
+				value="0.5 0.5 0.55000001192092896" />
+			<fieldValue name="mydiffusecolor"
+				value="0.40000000596046448 0.40000000596046448 0.40000000596046448" />
+			<fieldValue name="mycreaseangle"
+				value="0.69999998807907104" />
+		</ProtoInstance>
+	</Transform>
+	<ExternProtoDeclare name="rad2" url='"bauteile/rad2.x3d"'>
+			<field accessType="initializeOnly" type="SFColor" name="mysurfacecolor" />
+			<field accessType="initializeOnly" type="SFColor" name="mylinecolor" />
+			<field accessType="initializeOnly" type="SFFloat" name="mycreaseangle" />
+			<field accessType="initializeOnly" type="SFFloat" name="mytransparency" />
+			<field accessType="initializeOnly" type="SFColor" name="mydiffusecolor" />
+	</ExternProtoDeclare>
+	<ExternProtoDeclare name="felge2" url='"bauteile/felge2.x3d"'>
+			<field accessType="initializeOnly" type="SFColor" name="mysurfacecolor" />
+			<field accessType="initializeOnly" type="SFColor" name="mylinecolor" />
+			<field accessType="initializeOnly" type="SFFloat" name="mycreaseangle" />
+			<field accessType="initializeOnly" type="SFFloat" name="mytransparency" />
+			<field accessType="initializeOnly" type="SFColor" name="mydiffusecolor" />
+	</ExternProtoDeclare>
+	<Transform DEF="rad2">
+		<Transform
+			rotation="0 0 1 3.1400001049041748">
+			<ProtoInstance name="rad2" containerField="children">
+				<fieldValue name="mysurfacecolor"
+					value="0 0 0" />
+			</ProtoInstance>
+			<ProtoInstance name="felge2" containerField="children">
+				<fieldValue name="mysurfacecolor"
+					value="0.5 0.5 0.55000001192092896" />
+				<fieldValue name="mydiffusecolor"
+					value="0.40000000596046448 0.40000000596046448 0.40000000596046448" />
+				<fieldValue name="mycreaseangle"
+					value="0.69999998807907104" />
+			</ProtoInstance>
+		</Transform>
+	</Transform>
+	<ExternProtoDeclare name="rad3" url='"bauteile/rad3.x3d"'>
+			<field accessType="initializeOnly" type="SFColor" name="mysurfacecolor" />
+			<field accessType="initializeOnly" type="SFColor" name="mylinecolor" />
+			<field accessType="initializeOnly" type="SFFloat" name="mycreaseangle" />
+			<field accessType="initializeOnly" type="SFFloat" name="mytransparency" />
+			<field accessType="initializeOnly" type="SFColor" name="mydiffusecolor" />
+	</ExternProtoDeclare>
+	<ExternProtoDeclare name="felge3" url='"bauteile/felge3.x3d"'>
+			<field accessType="initializeOnly" type="SFColor" name="mysurfacecolor" />
+			<field accessType="initializeOnly" type="SFColor" name="mylinecolor" />
+			<field accessType="initializeOnly" type="SFFloat" name="mycreaseangle" />
+			<field accessType="initializeOnly" type="SFFloat" name="mytransparency" />
+			<field accessType="initializeOnly" type="SFColor" name="mydiffusecolor" />
+	</ExternProtoDeclare>
+	<Transform DEF="rad3">
+		<ProtoInstance name="rad3" containerField="children">
+			<fieldValue name="mysurfacecolor"
+				value="0 0 0" />
+		</ProtoInstance>
+		<ProtoInstance name="felge3" containerField="children">
+			<fieldValue name="mysurfacecolor"
+				value="0.5 0.5 0.55000001192092896" />
+			<fieldValue name="mydiffusecolor"
+				value="0.40000000596046448 0.40000000596046448 0.40000000596046448" />
+			<fieldValue name="mycreaseangle"
+				value="0.69999998807907104" />
+		</ProtoInstance>
+	</Transform>
+	<ExternProtoDeclare name="karosserie_position_proto" url='"winddrift_benz/karosserie_position.x3d"'>
+			<field accessType="inputOnly" type="SFFloat" name="set_fraction" />
+			<field accessType="outputOnly" type="SFVec3f" name="value_changed" />
+	</ExternProtoDeclare>
+	<ProtoInstance name="karosserie_position_proto" DEF="karosserie_position">
+	</ProtoInstance>
+	<ExternProtoDeclare name="karosserie_rotation_proto" url='"winddrift_benz/karosserie_rotation.x3d"'>
+			<field accessType="inputOnly" type="SFFloat" name="set_fraction" />
+			<field accessType="outputOnly" type="SFRotation" name="value_changed" />
+	</ExternProtoDeclare>
+	<ProtoInstance name="karosserie_rotation_proto" DEF="karosserie_rotation">
+	</ProtoInstance>
+	<ExternProtoDeclare name="rad0_position_proto" url='"winddrift_benz/rad0_position.x3d"'>
+			<field accessType="inputOnly" type="SFFloat" name="set_fraction" />
+			<field accessType="outputOnly" type="SFVec3f" name="value_changed" />
+	</ExternProtoDeclare>
+	<ProtoInstance name="rad0_position_proto" DEF="rad0_position">
+	</ProtoInstance>
+	<ExternProtoDeclare name="rad0_rotation_proto" url='"winddrift_benz/rad0_rotation.x3d"'>
+			<field accessType="inputOnly" type="SFFloat" name="set_fraction" />
+			<field accessType="outputOnly" type="SFRotation" name="value_changed" />
+	</ExternProtoDeclare>
+	<ProtoInstance name="rad0_rotation_proto" DEF="rad0_rotation">
+	</ProtoInstance>
+	<ExternProtoDeclare name="rad1_position_proto" url='"winddrift_benz/rad1_position.x3d"'>
+			<field accessType="inputOnly" type="SFFloat" name="set_fraction" />
+			<field accessType="outputOnly" type="SFVec3f" name="value_changed" />
+	</ExternProtoDeclare>
+	<ProtoInstance name="rad1_position_proto" DEF="rad1_position">
+	</ProtoInstance>
+	<ExternProtoDeclare name="rad1_rotation_proto" url='"winddrift_benz/rad1_rotation.x3d"'>
+			<field accessType="inputOnly" type="SFFloat" name="set_fraction" />
+			<field accessType="outputOnly" type="SFRotation" name="value_changed" />
+	</ExternProtoDeclare>
+	<ProtoInstance name="rad1_rotation_proto" DEF="rad1_rotation">
+	</ProtoInstance>
+	<ExternProtoDeclare name="rad2_position_proto" url='"winddrift_benz/rad2_position.x3d"'>
+			<field accessType="inputOnly" type="SFFloat" name="set_fraction" />
+			<field accessType="outputOnly" type="SFVec3f" name="value_changed" />
+	</ExternProtoDeclare>
+	<ProtoInstance name="rad2_position_proto" DEF="rad2_position">
+	</ProtoInstance>
+	<ExternProtoDeclare name="rad2_rotation_proto" url='"winddrift_benz/rad2_rotation.x3d"'>
+			<field accessType="inputOnly" type="SFFloat" name="set_fraction" />
+			<field accessType="outputOnly" type="SFRotation" name="value_changed" />
+	</ExternProtoDeclare>
+	<ProtoInstance name="rad2_rotation_proto" DEF="rad2_rotation">
+	</ProtoInstance>
+	<ExternProtoDeclare name="rad3_position_proto" url='"winddrift_benz/rad3_position.x3d"'>
+			<field accessType="inputOnly" type="SFFloat" name="set_fraction" />
+			<field accessType="outputOnly" type="SFVec3f" name="value_changed" />
+	</ExternProtoDeclare>
+	<ProtoInstance name="rad3_position_proto" DEF="rad3_position">
+	</ProtoInstance>
+	<ExternProtoDeclare name="rad3_rotation_proto" url='"winddrift_benz/rad3_rotation.x3d"'>
+			<field accessType="inputOnly" type="SFFloat" name="set_fraction" />
+			<field accessType="outputOnly" type="SFRotation" name="value_changed" />
+	</ExternProtoDeclare>
+	<ProtoInstance name="rad3_rotation_proto" DEF="rad3_rotation">
+	</ProtoInstance>
+	<Transform
+		scale="0.60000002384185791 0.60000002384185791 0.60000002384185791"
+		translation="16 -24 2"
+		rotation="1 0 0 1.5700000524520874">
+		<Inline
+			url='"share/windmaschine.x3d"' />
+	</Transform>
+	<ROUTE fromNode="TIMER" fromField="fraction_changed" toNode="karosserie_position" toField="set_fraction" />
+	<ROUTE fromNode="TIMER" fromField="fraction_changed" toNode="karosserie_rotation" toField="set_fraction" />
+	<ROUTE fromNode="karosserie_position" fromField="value_changed" toNode="karroserie" toField="set_translation" />
+	<ROUTE fromNode="karosserie_rotation" fromField="value_changed" toNode="karroserie" toField="set_rotation" />
+	<ROUTE fromNode="TIMER" fromField="fraction_changed" toNode="rad0_position" toField="set_fraction" />
+	<ROUTE fromNode="TIMER" fromField="fraction_changed" toNode="rad0_rotation" toField="set_fraction" />
+	<ROUTE fromNode="rad0_position" fromField="value_changed" toNode="rad0" toField="set_translation" />
+	<ROUTE fromNode="rad0_rotation" fromField="value_changed" toNode="rad0" toField="set_rotation" />
+	<ROUTE fromNode="TIMER" fromField="fraction_changed" toNode="rad1_position" toField="set_fraction" />
+	<ROUTE fromNode="TIMER" fromField="fraction_changed" toNode="rad1_rotation" toField="set_fraction" />
+	<ROUTE fromNode="rad1_position" fromField="value_changed" toNode="rad1" toField="set_translation" />
+	<ROUTE fromNode="rad1_rotation" fromField="value_changed" toNode="rad1" toField="set_rotation" />
+	<ROUTE fromNode="TIMER" fromField="fraction_changed" toNode="rad2_position" toField="set_fraction" />
+	<ROUTE fromNode="TIMER" fromField="fraction_changed" toNode="rad2_rotation" toField="set_fraction" />
+	<ROUTE fromNode="rad2_position" fromField="value_changed" toNode="rad2" toField="set_translation" />
+	<ROUTE fromNode="rad2_rotation" fromField="value_changed" toNode="rad2" toField="set_rotation" />
+	<ROUTE fromNode="TIMER" fromField="fraction_changed" toNode="rad3_position" toField="set_fraction" />
+	<ROUTE fromNode="TIMER" fromField="fraction_changed" toNode="rad3_rotation" toField="set_fraction" />
+	<ROUTE fromNode="rad3_position" fromField="value_changed" toNode="rad3" toField="set_translation" />
+	<ROUTE fromNode="rad3_rotation" fromField="value_changed" toNode="rad3" toField="set_rotation" />
+</Scene>
+</X3D>

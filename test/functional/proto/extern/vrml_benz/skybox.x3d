@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 3.0//EN" "http://www.web3d.org/specifications/x3d-3.0.dtd">
+<X3D profile="Interchange" version="3.0"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance"
+     xsd:noNamespaceSchemaLocation="http://www.web3d.org/specifications/x3d-3.0.xsd">
+<head>
+	<meta name="generator" content="tovrmlx3d, http://castle-engine.sourceforge.net/view3dscene.php#section_converting" />
+	<meta name="source" content="skybox.x3d" />
+</head>
+<Scene>
+	<Viewpoint
+		orientation="0.97666198015213013 0.13340599834918976 -0.16832999885082245 1.592553973197937"
+		position="-0.34603700041770935 -9.9937534332275391 0.071954242885112762" />
+	<Transform
+		rotation="1 0 0 1.5700000524520874">
+		<Background
+			backUrl='"sky_veryright.jpg"'
+			rightUrl='"sky_right.jpg"'
+			frontUrl='"sky_middle.jpg"'
+			leftUrl='"sky_left.jpg"'
+			topUrl='"sky_up.jpg"'
+			bottomUrl='"sky_down.jpg"' />
+	</Transform>
+	<Transform
+		rotation="0.99831300973892212 0.023006359115242958 0.05331021174788475 4.9348697662353516"
+		translation="-4.0233140907730558E-7 9.5367431640625E-7 2.86102294921875E-6">
+		<Shape>
+			<Appearance>
+				<Material />
+			</Appearance>
+			<Cylinder />
+		</Shape>
+	</Transform>
+</Scene>
+</X3D>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 3.0//EN" "http://www.web3d.org/specifications/x3d-3.0.dtd">
+<X3D profile="Interchange" version="3.0"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance"
+     xsd:noNamespaceSchemaLocation="http://www.web3d.org/specifications/x3d-3.0.xsd">
+<head>
+	<meta name="generator" content="tovrmlx3d, http://castle-engine.sourceforge.net/view3dscene.php#section_converting" />
+	<meta name="source" content="kurve_world_sphynx.x3d" />
+</head>
+<Scene>
+	<ExternProtoDeclare name="kurve" url='"./kurve.x3d"'>
+			<field accessType="initializeOnly" type="SFColor" name="mysurfacecolor" />
+			<field accessType="initializeOnly" type="SFColor" name="mylinecolor" />
+			<field accessType="initializeOnly" type="SFFloat" name="mycreaseangle" />
+			<field accessType="initializeOnly" type="SFFloat" name="mytransparency" />
+			<field accessType="initializeOnly" type="SFColor" name="mydiffusecolor" />
+	</ExternProtoDeclare>
+	<ProtoDeclare name="pyramide">
+		<ProtoInterface>
+		</ProtoInterface>
+		<ProtoBody>
+			<Inline
+				url='"./pyramid_texture.x3d"' />
+		</ProtoBody>
+	</ProtoDeclare>
+	<Group>
+		<NavigationInfo
+			avatarSize="0.25 1.6000000238418579 0.75"
+			type='"EXAMINE"' />
+		<Transform
+			translation="9.0600004196166992 40.700000762939453 -0.15000000596046448"
+			rotation="1 0 0 1.5700000524520874">
+			<Inline
+				url='"./halfskybox.x3d"' />
+			<Inline
+				url='"./platte.x3d"' />
+		</Transform>
+		<Anchor
+			url='"http://www.csv.ica.uni-stuttgart.de/vrml/vrml_rsyst.html"'
+			description="Fahrsimulation Daimler-Chrysler/Mercedes-Benz, Teil der Doktorarbeit von Lina Longhitano (RUS/Daimler-Benz)">
+			<Transform
+				translation="9.0600004196166992 40.700000762939453 -0.10000000149011612">
+				<ProtoInstance name="kurve" containerField="children">
+					<fieldValue name="mysurfacecolor"
+						value="0.40000000596046448 0.40000000596046448 0.40000000596046448" />
+					<fieldValue name="mylinecolor"
+						value="1 1 1" />
+					<fieldValue name="mydiffusecolor"
+						value="0.30000001192092896 0.30000001192092896 0.30000001192092896" />
+				</ProtoInstance>
+			</Transform>
+		</Anchor>
+		<Transform
+			translation="-100 -100.69999694824219 0"
+			scale="10 10 10">
+			<ProtoInstance name="pyramide" containerField="children" />
+		</Transform>
+		<Transform
+			translation="30 -180.69999694824219 0"
+			rotation="0 0 1 2.4500000476837158"
+			scale="20 20 20">
+			<ProtoInstance name="pyramide" containerField="children" />
+		</Transform>
+		<Transform
+			translation="-100 -30.700000762939453 0"
+			rotation="0 0 1 1.6000000238418579"
+			scale="30 30 30">
+			<ProtoInstance name="pyramide" containerField="children" />
+		</Transform>
+		<Transform
+			translation="-200 -330.70001220703125 0"
+			rotation="0 0 1 0.20000000298023224"
+			scale="100 100 100">
+			<ProtoInstance name="pyramide" containerField="children" />
+		</Transform>
+		<Transform
+			translation="-200 330.70001220703125 0"
+			rotation="0 0 1 2.9000000953674316"
+			scale="100 100 100">
+			<ProtoInstance name="pyramide" containerField="children" />
+		</Transform>
+		<Transform
+			translation="300 -140.69999694824219 0"
+			rotation="0 0 1 2.9000000953674316"
+			scale="100 100 100">
+			<ProtoInstance name="pyramide" containerField="children" />
+		</Transform>
+		<Transform
+			translation="-300 230.69999694824219 0"
+			rotation="0 0 1 2.9000000953674316"
+			scale="50 50 50">
+			<ProtoInstance name="pyramide" containerField="children" />
+		</Transform>
+		<Transform
+			translation="140 120 0"
+			rotation="0 0 -1 1.7999999523162842"
+			scale="20 20 20">
+			<Transform
+				rotation="1 0 0 1.5707999467849731">
+				<Inline
+					url='"./sphynx_texture.x3d"' />
+			</Transform>
+		</Transform>
+	</Group>
+</Scene>
+</X3D>
