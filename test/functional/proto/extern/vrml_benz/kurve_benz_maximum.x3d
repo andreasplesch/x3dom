@@ -8,6 +8,7 @@
 	<meta name="source" content="kurve_benz_maximum.x3d" />
 </head>
 <Scene>
+	<Environment gammaCorrectionDefault="none"></Environment>
 	<ExternProtoDeclare name="karosserie_trajektorie_proto" url='"kurve_benz/karosserie_trajektorie.x3d"'>
 			<field accessType="initializeOnly" type="SFColor" name="mysurfacecolor" />
 			<field accessType="initializeOnly" type="SFColor" name="mylinecolor" />
