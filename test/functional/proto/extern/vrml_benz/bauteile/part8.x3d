@@ -39,7 +39,7 @@
 						</IS>
 					</IndexedFaceSet>
 				</Shape>
-				<Shape>
+				<!--<Shape>
 					<Appearance>
 						<Material
 							shininess="1">
