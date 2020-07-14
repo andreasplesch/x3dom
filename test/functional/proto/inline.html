@@ -19,12 +19,12 @@
 </head>
 <body>
 <h3>X3D Prototypes</h3>
-    <X3D xmlns="http://www.web3d.org/specifications/x3d-namespace" showStat="true" showLog="true" width="500px" height="500px">
+    <X3D xmlns="http://www.web3d.org/specifications/x3d-namespace" showStat="true" showLog="true" width="600px" height="400px">
         <Environment gammaCorrectionDefault="none"></Environment>
         <Scene>
             <!--Background skyColor='0, 0, 0.1'></Background-->
             <Transform>
-                <Inline onload='handleLoad(event)' id="inline" nameSpaceName="proto" mapDEFToID="true" url="IntegerTriggerOnTrue.x3d" ></Inline>
+                <Inline onload='handleLoad(event)' id="inline" nameSpaceName="proto" mapDEFToID="true" url="Floater.x3d" ></Inline>
             </Transform>
         </Scene>
     </X3D>
@@ -62,7 +62,7 @@
         <option>extern/VectorField1</option>
         <option>extern/Example16</option>
         <option>extern/VirtualRealityHackathonLogoLetterPrototypes</option>
-        <option>extern/vrml_benz/kurve_benz_maximum</option>
+        <option disabled>extern/vrml_benz/kurve_benz_maximum</option>
         <option>carlson/rubik</option>
         <option>carlson/rubikOnFire</option>
         <option>carlson/rubikFurnace</option>
@@ -143,7 +143,9 @@
           <li>
               <a href='https://andreasplesch.github.io/x3dom/test/functional/proto/x3dom/dom/OnXTouchSensorChanged.html'>https://andreasplesch.github.io/x3dom/test/functional/proto/x3dom/dom/OnXTouchSensorChanged.html</a>
           </li>
-          
+          <li>
+              <a href='https://andreasplesch.github.io/x3dom/test/functional/proto/extern/vrml_benz/kurve_benz_maximum.html'>https://andreasplesch.github.io/x3dom/test/functional/proto/extern/vrml_benz/kurve_benz_maximum.html</a>
+          </li>
       </ul>
     </div>
 </body>
@@ -152,6 +154,7 @@
     const ext = '.x3d';
     function handleChange(event) {
         inline.setFieldValue( "url", [ event.target.options[event.target.selectedIndex].value + ext ] );
+
     }
     function handleChangeJson(event) {
         inline.setFieldValue( "url", [ event.target.options[event.target.selectedIndex].value ] );
@@ -161,7 +164,7 @@
             _showAll, //'negZ')
             300, 'negZ');
     }
-    function _showAll (dir) { 
+    function _showAll (dir) {
         document.querySelector('X3D').runtime.showAll(dir);
         var inlineArea = document.querySelector('#InlineContent');
         inlineArea.textContent = document.querySelector('Inline').innerHTML.replace(/><([^//])/g,'>\n<$1');
