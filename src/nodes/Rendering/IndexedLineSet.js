@@ -105,9 +105,17 @@ x3dom.registerNodeType(
             {
                 var time0 = new Date().getTime();
 
+                this._mesh._indices[ 0 ] = [];
+                this._mesh._positions[ 0 ] = [];
+                this._mesh._colors[ 0 ] = [];
+
                 // this.handleAttribs();
 
                 var indexes = this._vf.coordIndex;
+                if ( indexes.length == 0 )
+                {
+                    return;
+                }
                 if ( indexes.slice( -1 )[ 0 ] != -1 )
                 {
                     indexes.push( -1 );
@@ -155,10 +163,6 @@ x3dom.registerNodeType(
                         numColComponents = 4;
                     }
                 }
-
-                this._mesh._indices[ 0 ] = [];
-                this._mesh._positions[ 0 ] = [];
-                this._mesh._colors[ 0 ] = [];
 
                 var i,
                     t,
