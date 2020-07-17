@@ -200,7 +200,7 @@ x3dom.gfx_webgl = ( function ()
                             x3dom.Utils.maxIndexableCoords = 4294967295;
                         }
 
-                        //Disable (half) float textures on apple devices
+                        //Disable half float and float textures on apple devices
                         if ( isAppleDevice )
                         {
                             x3dom.caps.HFP_TEXTURES = false;
@@ -1050,7 +1050,8 @@ x3dom.gfx_webgl = ( function ()
 
                 if ( sky.length != colors.length )
                 {
-                    x3dom.debug.logError( "Number of background colors and corresponding angles are different!" );
+                    x3dom.debug.logError( "Number of background colors and corresponding angles do not match.\n"
+                        + "You have to define one angle less than the count of RGB colors because the angle 0° is added automatically." );
                     var minArrayLength = ( sky.length < colors.length ) ? sky.length : colors.length;
                     sky.length = minArrayLength;
                     colors.length = minArrayLength;
