@@ -232,7 +232,7 @@ x3dom.Viewarea.prototype.tick = function ( timeStamp )
     if ( this._mixer.isActive() )
     {
         //mixer target may have changed due to current transform
-        //need to refresh from scratch 
+        //need to refresh from scratch
         var vp = this._scene.getViewpoint();
         vp.resetView();
         var target = vp.getViewMatrix().mult( vp.getCurrentTransform().inverse() );
