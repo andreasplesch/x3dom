@@ -125,7 +125,7 @@ x3dom.registerNodeType(
                     {
                         node._parentNodes.push( this );
                         this._childNodes.push( node );
-                        if ( !"isProtoInstance" in this )
+                        if ( !( "isProtoInstance" in this ) )
                         {
                             node.parentAdded( this );
                         }
