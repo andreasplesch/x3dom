@@ -8,6 +8,13 @@
         x3d {
         	height: 50%
         }
+        .blur5 {
+        	filter: blur(20px);
+        	transition: filter 0.2s
+        }
+        .blur0 {
+        	filter: blur(0px);
+        }
     </style>
 </head>
 <body onload='tweak()'>
@@ -111,7 +118,28 @@
 		//turn on internal proto help switch node
 		document.querySelectorAll('XViewpoint').forEach( node => node._x3domNode.helperNodes[0]._parentNodes[0]._vf.whichChoice = 0 );
 		//focus x3d
-		document.querySelector('X3D > Canvas').focus();
+		x3d = document.querySelector('X3D');
+		x3d.querySelector('Canvas').focus();
+		x3d.runtime.onAnimationStarted = aniStart;
+		x3d.runtime.onAnimationFinished = aniDone;
+	}
+
+	function aniStart()
+	{
+		if ( x3d.runtime.canvas.doc._viewarea._mixer._isVPtarget )
+		{
+			x3d.runtime.getCanvas().classList.remove('blur0');
+			x3d.runtime.getCanvas().classList.add('blur5');
+		}
+	}
+
+    function aniDone()
+	{
+		if ( x3d.runtime.canvas.doc._viewarea._mixer._isVPtarget )
+		{
+			x3d.runtime.getCanvas().classList.remove('blur5');
+			x3d.runtime.getCanvas().classList.add('blur0');
+		}
 	}
   
 	function v1changed(e)
