@@ -83,7 +83,12 @@ x3dom.NodeNameSpace.prototype.protoInstance = function ( domNode, domParent )
     }
     this.doc.mutationObserver.disconnect(); //avoid doubled processing
     domNode.insertAdjacentElement( "afterend", protoInstanceDom ); // do not use appendChild since scene parent may be already transferred
-    this.doc.mutationObserver.observe( this.doc._scene._xmlNode, { attributes: true, attributeOldValue: true, childList: true, subtree: true } );
+    var observedDOM = this.doc._x3dElem;
+    if ( this.doc._scene )
+    {
+        observedDOM = this.doc._scene._xmlNode;
+    }
+    this.doc.mutationObserver.observe( observedDOM, { attributes: true, attributeOldValue: true, childList: true, subtree: true } );
     domNode._x3dom = protoInstanceDom;
 };
 
