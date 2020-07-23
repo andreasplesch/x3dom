@@ -79,7 +79,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                     }
                     else // _cf fields
                     {
-                    //set interface defaults for cf fields
+                        //set interface defaults for cf fields
                         if ( ctx && ctx.xmlNode )
                         {
                             if ( ctx.xmlNode.querySelectorAll( "[containerField='" + field.name + "']" ).length == 0 )
@@ -91,21 +91,27 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                             }
                         }
                         //find node type from IS in body
+                        var type = x3dom.nodeTypes.X3DNode;
                         var ISRoutes = that._protoBody._ISRoutes;
                         var ISconnection = ISRoutes[ field.name ][ 0 ];
                         var nodeField = ISconnection.nodeField;
                         var ISDomNode = that._protoBody.querySelector( "[DEF=" + ISconnection.nodeDEF + "]" );
                         //create temp node to get type
-                        var type = x3dom.nodeTypes.X3DNode;
                         var IStype = ISDomNode.localName.toLowerCase();
                         if ( IStype in x3dom.nodeTypesLC )
                         {
-                            var ISNode = new x3dom.nodeTypesLC[ IStype ]( ctx );
+                            var ISctx = {
+                                    doc       : ctx.doc,
+                                    runtime   : ctx.runtime,
+                                    xmlNode   : ISDomNode.cloneNode( true ), // clone to avoid adding defaults
+                                    nameSpace : ctx.nameSpace
+                            };
+                            var ISNode = new x3dom.nodeTypesLC[ IStype ]( ISctx );
                             type = ISNode._cf[ nodeField ].type;
                         }
                         this[ "addField_" + field.dataType ]( field.name, type );//type should be registered x3dom type
                         this._cf_hash[ field.name ] = "trigger";
-                    }//, this );
+                    }
                 }, this );
 
                 //initialize
@@ -256,7 +262,6 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
 
                             this._externTries = 0;
                             //forward
-                            //potentially check for cf values
                             //strip set_ and _changed
                             var nodeField = this._normalizeName( ISNode.nodeField, instanceNode );
                             if ( field in this._vf )
@@ -291,14 +296,14 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                                 } );
 
                                 // then re-add new child nodes to instance
-                                nodes.forEach( function ( sfnode, i )
+                                nodes.forEach( function ( sfnode )
                                 {
                                     instanceNode.addChild( sfnode, nodeField );
                                 } );
 
                                 if ( instanceNode._cfFieldTypes[ nodeField ] == "MFNode" )
                                 {
-                                    // now the _cf nodes array may contain duplicates
+                                    // now the _cf nodes array may contain duplicate references
                                     // remove the first one
                                     for ( var i = 0; i < nodes.length; i++ )
                                     {
