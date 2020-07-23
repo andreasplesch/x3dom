@@ -101,10 +101,10 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                         if ( IStype in x3dom.nodeTypesLC )
                         {
                             var ISctx = {
-                                    doc       : ctx.doc,
-                                    runtime   : ctx.runtime,
-                                    xmlNode   : ISDomNode.cloneNode( true ), // clone to avoid adding defaults
-                                    nameSpace : ctx.nameSpace
+                                doc       : ctx.doc,
+                                runtime   : ctx.runtime,
+                                xmlNode   : ISDomNode.cloneNode( true ), // clone to avoid adding defaults
+                                nameSpace : ctx.nameSpace
                             };
                             var ISNode = new x3dom.nodeTypesLC[ IStype ]( ISctx );
                             type = ISNode._cf[ nodeField ].type;
