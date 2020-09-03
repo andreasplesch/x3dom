@@ -2792,6 +2792,18 @@ x3dom.gfx_webgl = ( function ()
             isParticleSet = true;
         }
 
+        var pointProperties = s_app ? s_app._cf.pointProperties.node : null;
+        pointProperties = pointProperties && x3dom.isa( s_geo, x3dom.nodeTypes.PointSet );
+
+        if ( pointProperties )
+        {
+            var pprop = s_app._cf.pointProperties.node;
+            sp.pointSizeAttenuation = pprop._attenuation.toGL();
+            sp.pointSizeFactor = pprop._vf.pointSizeScaleFactor;
+            sp.minPointSize = pprop._vf.pointSizeMinValue;
+            sp.maxPointSize = pprop._vf.pointSizeMaxValue;
+        }
+
         q_n = s_gl.positions.length;
 
         for ( var q = 0; q < q_n; q++ )
