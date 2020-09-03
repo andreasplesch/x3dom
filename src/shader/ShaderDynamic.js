@@ -207,7 +207,7 @@ x3dom.shader.DynamicShader.prototype.generateVertexShader = function ( gl, prope
     }
 
     //Lights & Fog
-    if ( properties.LIGHTS || properties.FOG || properties.CLIPPLANES )
+    if ( properties.LIGHTS || properties.FOG || properties.CLIPPLANES || properties.POINTPROPERTIES )
     {
         shader += "uniform vec3 eyePosition;\n";
         shader += "varying vec4 fragPosition;\n";
@@ -1192,6 +1192,11 @@ x3dom.shader.DynamicShader.prototype.generateFragmentShader = function ( gl, pro
         }
 
         shader += "color.rgb = _emissiveColor + ((ambient + diffuse) * color.rgb + specular * _specularColor) * _occlusion;\n";
+        if ( ( properties.IS_PARTICLE || properties.POINTPROPERTIES ) && !properties.TEXTURED )
+        {
+            shader += "float pAlpha = 1.0 - clamp(length((gl_PointCoord - 0.5) * 2.0), 0.0, 1.0);\n";
+            shader += "if ( pAlpha < 0.01 ) discard;\n";
+        }
     }
     else
     {
@@ -1241,12 +1246,22 @@ x3dom.shader.DynamicShader.prototype.generateFragmentShader = function ( gl, pro
                 shader += "color.rgb *= vec3(pAlpha);\n";
                 shader += "color.a = pAlpha;\n";
             }
+            else if ( properties.POINTPROPERTIES && !properties.TEXTURED )
+            {
+                shader += "float pAlpha = 1.0 - clamp(length((gl_PointCoord - 0.5) * 2.0), 0.0, 1.0);\n";
+                shader += "if ( pAlpha < 0.01 ) discard;\n";
+            }
         }
         else if ( properties.IS_PARTICLE )
         {
             shader += "float pAlpha = 1.0 - clamp(length((gl_PointCoord - 0.5) * 2.0), 0.0, 1.0);\n";
             shader += "color.rgb *= vec3(pAlpha);\n";
             shader += "color.a = pAlpha;\n";
+        }
+        else if ( properties.POINTPROPERTIES && !properties.TEXTURED )
+        {
+            shader += "float pAlpha = 1.0 - clamp(length((gl_PointCoord - 0.5) * 2.0), 0.0, 1.0);\n";
+            shader += "if ( pAlpha < 0.01 ) discard;\n";
         }
     }
 
