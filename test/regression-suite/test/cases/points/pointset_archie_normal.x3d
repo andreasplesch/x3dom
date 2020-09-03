@@ -24,7 +24,7 @@
               </PointSet>
               <Appearance>
                 <Material diffuseColor="1 0 0"/>
-                <PointProperties colorMode='POINT_COLOR' pointSizeMaxValue='100' pointSizeMinValue='1' pointSizeScaleFactor='100' pointSizeAttenuation='1 1 0' containerField='pointProperties'/>
+                <PointProperties pointSizeMaxValue='100' pointSizeMinValue='1' pointSizeScaleFactor='100' attenuation='1 1 0' containerField='pointProperties'/>
               </Appearance>
             </Shape>
           </Transform>
