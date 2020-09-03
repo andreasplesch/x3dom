@@ -77,7 +77,7 @@ x3dom.registerNodeType(
              * @instance
              */
             this.addField_MFFloat( ctx, "pointSizeAttenuation", [ 1, 0, 0 ] );
-            this._attenuation = [ 1, 0, 0 ];
+            this._attenuation = new x3dom.fields.MFFloat( [ 1, 0, 0 ] );
         },
         {
             nodeChanged : function ()
