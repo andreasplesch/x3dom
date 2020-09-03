@@ -25,8 +25,9 @@
                         </Normal>    
                       </PointSet>
                       <Appearance>
-                        <Material emissiveColor="0 0 0">
-                        </Material>
+                        <Material diffuseColor="1 0 0"></Material>
+                        <PointProperties colorMode='POINT_COLOR' pointSizeMaxValue='100' pointSizeMinValue='1' pointSizeScaleFactor='100' pointSizeAttenuation='1 1 0' containerField='pointProperties'>
+                        </PointProperties>
                       </Appearance>
                     </Shape>
                   </Transform>
@@ -36,24 +37,5 @@
         </Scene>
       </X3D>
     </div>
-
-    <script type="text/javascript">
-    function setCol()
-	{
-		var mat = document.getElementsByTagName("Color");
-		
-		mat[0].setAttribute("color", '0 1 0 1 1 1 0 1 0');
-        
-        var pnt = document.getElementsByTagName("Coordinate");
-        
-        pnt[0].setAttribute("point", '0 1 1 2 2 2 3 2 2');
-		
-		return false;
-	}
-    </script>
-    <p>
-	
-	<div id="output">&nbsp;</div>
-	</p>
 </body>
 </html>
