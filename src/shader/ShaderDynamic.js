@@ -524,6 +524,12 @@ x3dom.shader.DynamicShader.prototype.generateVertexShader = function ( gl, prope
         shader += "float pointSize = floor(length(particleSize) * 256.0 / spriteDist + 0.5);\n";
         shader += "gl_PointSize = clamp(pointSize, 2.0, 256.0);\n";
     }
+    else if ( properties.LIGHTS )
+    {
+        shader += "float spriteDist = (gl_Position.w > 0.000001) ? gl_Position.w : 0.000001;\n";
+        shader += "float pointSize = floor(0.5 * 256.0 / spriteDist + 0.5);\n";
+        shader += "gl_PointSize = clamp(pointSize, 2.0, 256.0);\n";
+    }
     else
     {
         shader += "gl_PointSize = 2.0;\n";
