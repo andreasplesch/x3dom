@@ -68,7 +68,7 @@ x3dom.registerNodeType(
 
             /**
              * The pointSizeMinValue, pointSizeMaxValue, and pointSizeAttenuation fields specify a depth perception in a point cloud rendering by making points close to the viewer appear larger. The modification of point size depending on distance from the view occurs in two steps, starting with the nominal point size as determined by the pointSizeScaleFactor field.
-             * @var {x3dom.fields.MFFloat} pointSizeAttenuation
+             * @var {x3dom.fields.SFVec3f} attenuation
              * @range [0, inf]
              * @memberof x3dom.nodeTypes.PointProperties
              * @initvalue 1 0 0
