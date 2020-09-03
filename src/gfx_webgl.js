@@ -2797,11 +2797,11 @@ x3dom.gfx_webgl = ( function ()
 
         if ( pointProperties )
         {
-            var pprop = s_app._cf.pointProperties.node;
-            sp.pointSizeAttenuation = pprop._attenuation.toGL();
-            sp.pointSizeFactor = pprop._vf.pointSizeScaleFactor;
-            sp.minPointSize = pprop._vf.pointSizeMinValue;
-            sp.maxPointSize = pprop._vf.pointSizeMaxValue;
+            var pprop_vf = s_app._cf.pointProperties.node._vf;
+            sp.pointSizeAttenuation = pprop_vf.attenuation.toGL();
+            sp.pointSizeFactor = pprop_vf.pointSizeScaleFactor;
+            sp.minPointSize = pprop_vf.pointSizeMinValue;
+            sp.maxPointSize = pprop_vf.pointSizeMaxValue;
         }
 
         q_n = s_gl.positions.length;
