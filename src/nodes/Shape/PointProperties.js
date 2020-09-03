@@ -7,7 +7,7 @@
  * Dual licensed under the MIT and GPL
  */
 
-/* ### LineProperties ### */
+/* ### PointProperties ### */
 x3dom.registerNodeType(
     "PointProperties",
     "Shape",
@@ -97,9 +97,9 @@ x3dom.registerNodeType(
                 }
                 if ( this._vf.pointSizeMinValue > this._vf.pointSizeMaxValue )
                 {
-                    x3dom.debug.logWarning("pointSizeMinValue is larger than pointSizeMaxValue, will set to MaxValue");
+                    x3dom.debug.logWarning( "pointSizeMinValue is larger than pointSizeMaxValue, will set to MaxValue" );
                     this._vf.pointSizeMinValue = this._vf.pointSizeMaxValue;
-                }                
+                }
             },
             fieldChanged : function ( fieldName )
             {
