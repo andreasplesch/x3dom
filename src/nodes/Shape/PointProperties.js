@@ -31,8 +31,7 @@ x3dom.registerNodeType(
              SFFloat  [in,out] pointSizeScaleFactor  1 [1,∞)
              SFFloat  [in,out] pointSizeMinValue     1 [0,∞)
              SFFloat  [in,out] pointSizeMaxValue     1 [0,∞)
-             MFFloat  [in,out] pointSizeAttenuation  1 0 0 [0,∞)
-             SFString [in,out] colorMode             "TEXTURE_AND_POINT_COLOR" ["POINT_COLOR" | "TEXTURE_COLOR" | "TEXTURE_AND_POINT_COLOR"]* @var {x3dom.fields.SFBool} applied
+             SFVec3f  [in,out] attenuation  1 0 0 [0,∞)
              */
             /**
              * pointSizeScaleFactor is a value determining the nominal point size before modification by the sizing modifications, as determined by the pointSizeMinValue, pointSizeMaxValue, and pointSizeAttenuation values discussed below. The nominal rendered point size is a browser-dependent minimum renderable point size, multiplied by the pointSizeScaleFactor.
@@ -76,25 +75,11 @@ x3dom.registerNodeType(
              * @field x3d
              * @instance
              */
-            this.addField_MFFloat( ctx, "pointSizeAttenuation", [ 1, 0, 0 ] );
-            this._attenuation = new x3dom.fields.MFFloat( [ 1, 0, 0 ] );
+            this.addField_SFVec3f( ctx, "attenuation", 1, 0, 0 );
         },
         {
             nodeChanged : function ()
             {
-                var attenuation = this._vf.pointSizeAttenuation;
-                if ( attenuation.length > 0 )
-                {
-                    this._attenuation[ 0 ] = attenuation[ 0 ];
-                }
-                if ( attenuation.length > 1 )
-                {
-                    this._attenuation[ 1 ] = attenuation[ 1 ];
-                }
-                if ( attenuation.length > 2 )
-                {
-                    this._attenuation[ 2 ] = attenuation[ 2 ];
-                }
                 if ( this._vf.pointSizeMinValue > this._vf.pointSizeMaxValue )
                 {
                     x3dom.debug.logWarning( "pointSizeMinValue is larger than pointSizeMaxValue, will set to MaxValue" );
