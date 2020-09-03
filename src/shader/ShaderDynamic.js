@@ -198,6 +198,14 @@ x3dom.shader.DynamicShader.prototype.generateVertexShader = function ( gl, prope
         shader += "attribute vec3 particleSize;\n";
     }
 
+    if ( properties.POINTPROPERTIES )
+    {
+        shader += "uniform vec3 pointSizeAttenuation;\n";
+        shader += "uniform float pointSizeFactor;\n";
+        shader += "uniform float minPointSize;\n";
+        shader += "uniform float maxPointSize;\n";
+    }
+
     //Lights & Fog
     if ( properties.LIGHTS || properties.FOG || properties.CLIPPLANES )
     {
@@ -488,7 +496,7 @@ x3dom.shader.DynamicShader.prototype.generateVertexShader = function ( gl, prope
     }
 
     //Lights & Fog
-    if ( properties.LIGHTS || properties.FOG || properties.CLIPPLANES )
+    if ( properties.LIGHTS || properties.FOG || properties.CLIPPLANES || properties.POINTPROPERTIES )
     {
         shader += "fragPosition = (mat_mv * vec4(vertPosition, 1.0));\n";
         shader += "fragPositionWS = (modelMatrix * vec4(vertPosition, 1.0));\n";
@@ -524,11 +532,13 @@ x3dom.shader.DynamicShader.prototype.generateVertexShader = function ( gl, prope
         shader += "float pointSize = floor(length(particleSize) * 256.0 / spriteDist + 0.5);\n";
         shader += "gl_PointSize = clamp(pointSize, 2.0, 256.0);\n";
     }
-    else if ( properties.LIGHTS )
+    else if ( properties.POINTPROPERTIES )
     {
-        shader += "float spriteDist = (gl_Position.w > 0.000001) ? gl_Position.w : 0.000001;\n";
-        shader += "float pointSize = floor(0.5 * 256.0 / spriteDist + 0.5);\n";
-        shader += "gl_PointSize = clamp(pointSize, 2.0, 256.0);\n";
+        shader += "float r = length( fragPosition.xyz );\n";
+        shader += "vec3 a = pointSizeAttenuation;\n";
+        shader += "float attFactor = ( a.x + a.y * r + a.z * r * r );\n";
+        shader += "float pointSize =  pointSizeFactor * 1.0 / attFactor;\n";
+        shader += "gl_PointSize = clamp(pointSize, minPointSize, maxPointSize);\n";
     }
     else
     {
