@@ -1,0 +1,80 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge" />
+    <title>PointSet test</title>
+    <script type="text/javascript" src="../../../../x3dom-include.js"></script>
+    <script type="text/javascript" src="catawba_points.js"></script>
+    <script type="text/javascript" src="catawba_normals.js"></script>
+    <script type="text/javascript" src="catawba_color.js"></script>
+</head>
+<body onload="init()">
+    <div class="group">
+        <X3D xmlns="http://www.web3d.org/specifications/x3d-namespace" id="x3d" showStat="false" showLog="false" x="0px" y="0px" width="600px" height="400px" style="border: 1px solid #000; background-color: darkslategray;">
+        <Scene>
+            <Viewpoint description="Face On view" position="0 0 16" fieldOfView="0.7854" jump="true" orientation="0 0 1 0" centerOfRotation="0 0 0" retainUserOffsets="false" containerField="children">
+            </Viewpoint>    
+              <Transform translation="247.080001831 126.869995117 -19.8899993896" >
+                <Transform scale="0.0172008 0.015421 0.00258675" >
+                    <Shape onclick='toggleTex()'>
+                      <PointSet>
+                        <Coordinate point="
+                                           ">
+                        </Coordinate>
+                        <Normal DEF="cloud-normals" vector="
+                                                            ">
+                        </Normal>
+                        <Color color="
+                                      ">
+                        </Color>       
+                      </PointSet>
+                      <Appearance>
+                        <Material emissiveColor="0.1 0 0" diffuseColor="1 0 0"></Material>
+                        <PointProperties pointSizeMaxValue='100' pointSizeMinValue='1' pointSizeScaleFactor='100' attenuation='1 1 0' containerField='pointProperties'>
+                        </PointProperties>
+                        <PixelTexture DEF='PixelColors' image='3 3 2
+                         0x0000 0x88ff 0x0000
+                         0x88ff 0xffff 0x88ff
+                         0x0000 0x88ff 0x0000'
+                         repeatS='false' repeatT='false'>
+                            <TextureProperties magnificationFilter='NEAREST_PIXEL'>
+                            </TextureProperties>
+                        </PixelTexture>
+                      </Appearance>
+                    </Shape>
+                  
+              </Transform>
+            </Transform>
+        </Scene>
+      </X3D>
+    </div>
+    <h1> PointProperties </h1>
+    <div> Click on points to toggle sprite texture. </div>
+
+    <script>
+    app = document.querySelector('Appearance');
+    //tex = app.querySelector('PixelTexture').cloneNode(true);
+    function toggleTex()
+    {
+        var t = app.querySelector('PixelTexture');
+        if ( t )
+        {
+            tex = app.removeChild(t);   
+        }
+        else
+        {
+            app.appendChild(tex);
+        }
+    }
+    function init()
+    {
+        pointset=document.querySelector("PointSet");
+        pointset.querySelector("Coordinate").setAttribute("point", catawba_points);
+        pointset.querySelector("Normal").setAttribute("normal", catawba_normals);
+        pointset.querySelector("Color").setAttribute("color", catawba_color);
+    }
+    </script>
+</body>
+</html>
+                                    
+                                           
