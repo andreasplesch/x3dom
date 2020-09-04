@@ -1,1 +1,1 @@
-catawba_normals = "0 1 0,".repeat(1146222);
+catawba_normals = "1 1 1 ".repeat(1528296);
