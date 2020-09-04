@@ -10,32 +10,41 @@
 </head>
 <body onload="init()">
     <div class="group">
-        <X3D xmlns="http://www.web3d.org/specifications/x3d-namespace" id="x3d" showStat="false" showLog="false" x="0px" y="0px" width="600px" height="400px" style="border: 1px solid #000; background-color: darkslategray;">
+    <X3D xmlns="http://www.web3d.org/specifications/x3d-namespace" id="x3d" showStat="false" showLog="false" x="0px" y="0px" width="600px" height="400px" style="border: 1px solid #000; background-color: darkslategray;">
         <Scene>
-            <Viewpoint description="Face On view" position="0 0 16" fieldOfView="0.7854" jump="true" orientation="0 0 1 0" centerOfRotation="0 0 0" retainUserOffsets="false" containerField="children">
-            </Viewpoint>    
-              <Transform translation="247.080001831 126.869995117 -19.8899993896" >
-                <Transform scale="0.0172008 0.015421 0.00258675" >
+            <NavigationInfo headlight='true'></NavigationInfo>
+            <Background skyColor='0.4 0.4 0.4'></Background>
+            <DirectionalLight id="spotlight" direction='-0.5 0.2 0.5' on ="TRUE" intensity='1.0' shadowIntensity='0.5' ambientIntensity="1.0"> </DirectionalLight>
+            <Viewpoint position="463.50979 312.77262 -253.12975" orientation="-0.07119 0.95359 0.29258 2.47469" 
+	 centerOfRotation="294.99692 147.42657 -60.15290" fieldOfView="0.78540" description="overview"></Viewpoint>
+            <Transform translation="247.080001831 126.869995117 -19.8899993896" rotation='1 0 0 -1.57'>
+              <Transform DEF='trafo' scale="0.0172008 0.015421 0.00258675" >
+                    
+              </Transform>
+            </Transform>
+        </Scene>
+      </X3D>
+      <!-- DETACH first -->
                     <Shape onclick='toggleTex()'>
                       <PointSet>
-                        <Coordinate point="
+                        <Coordinate point="0 0 0
                                            ">
                         </Coordinate>
-                        <Normal DEF="cloud-normals" vector="
+                        <Normal DEF="cloud-normals" vector="0 1 0
                                                             ">
                         </Normal>
-                        <Color color="
+                        <Color color="0 0 1
                                       ">
                         </Color>       
                       </PointSet>
                       <Appearance>
-                        <Material emissiveColor="0.1 0 0" diffuseColor="1 0 0"></Material>
-                        <PointProperties pointSizeMaxValue='100' pointSizeMinValue='1' pointSizeScaleFactor='100' attenuation='1 1 0' containerField='pointProperties'>
+                        <Material emissiveColor="0.01 0 0" diffuseColor="1 1 1"></Material>
+                        <PointProperties pointSizeMaxValue='100' pointSizeMinValue='1' pointSizeScaleFactor='700' attenuation='1 1 0' containerField='pointProperties'>
                         </PointProperties>
                         <PixelTexture DEF='PixelColors' image='3 3 2
-                         0x0000 0x88ff 0x0000
-                         0x88ff 0xffff 0x88ff
-                         0x0000 0x88ff 0x0000'
+                         0x0000 0xeeff 0x0000
+                         0xeeff 0xffff 0xeeff
+                         0x0000 0xeeff 0x0000'
                          repeatS='false' repeatT='false'>
                             <TextureProperties magnificationFilter='NEAREST_PIXEL'>
                             </TextureProperties>
@@ -43,10 +52,6 @@
                       </Appearance>
                     </Shape>
                   
-              </Transform>
-            </Transform>
-        </Scene>
-      </X3D>
     </div>
     <h1> PointProperties </h1>
     <div> Click on points to toggle sprite texture. </div>
@@ -68,13 +73,14 @@
     }
     function init()
     {
-        pointset=document.querySelector("PointSet");
-        pointset.querySelector("Coordinate").setAttribute("point", catawba_points);
-        pointset.querySelector("Normal").setAttribute("normal", catawba_normals);
+        pointset=document.querySelector("Shape");
+        pointset.querySelector("Coordinate").setAttribute("point", ca_points);
+        pointset.querySelector("Normal").setAttribute("vector", catawba_normals);
         pointset.querySelector("Color").setAttribute("color", catawba_color);
+        document.querySelector("[DEF='trafo']").appendChild(pointset);
     }
     </script>
 </body>
 </html>
                                     
-                                           
+                                          
