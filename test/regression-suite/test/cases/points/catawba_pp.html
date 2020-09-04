@@ -12,7 +12,60 @@
             <Viewpoint description="Face On view" position="0 0 16" fieldOfView="0.7854" jump="true" orientation="0 0 1 0" centerOfRotation="0 0 0" retainUserOffsets="false" containerField="children">
             </Viewpoint>    
               <Transform translation="247.080001831 126.869995117 -19.8899993896" >
-                <Transform scale="0.03 0.03 0.03" >
+                <Transform scale="0.0172008 0.015421 0.00258675" >
                     <Shape onclick='toggleTex()'>
                       <PointSet>
                         <Coordinate point="
+                                           ">
+                        </Coordinate>
+                        <Normal DEF="cloud-normals" vector="
+                                                            
+                                                            ">
+                        </Normal>
+                        <Color color="
+                                      ">
+                        </Color>       
+                      </PointSet>
+                      <Appearance>
+                        <Material emissiveColor="0.1 0 0" diffuseColor="1 0 0"></Material>
+                        <PointProperties pointSizeMaxValue='100' pointSizeMinValue='1' pointSizeScaleFactor='100' attenuation='1 1 0' containerField='pointProperties'>
+                        </PointProperties>
+                        <PixelTexture DEF='PixelColors' image='3 3 2
+                         0x0000 0x88ff 0x0000
+                         0x88ff 0xffff 0x88ff
+                         0x0000 0x88ff 0x0000'
+                         repeatS='false' repeatT='false'>
+                            <TextureProperties magnificationFilter='NEAREST_PIXEL'>
+                            </TextureProperties>
+                        </PixelTexture>
+                      </Appearance>
+                    </Shape>
+                  
+              </Transform>
+            </Transform>
+        </Scene>
+      </X3D>
+    </div>
+    <h1> PointProperties </h1>
+    <div> Click on points to toggle sprite texture. </div>
+
+    <script>
+    app = document.querySelector('Appearance');
+    //tex = app.querySelector('PixelTexture').cloneNode(true);
+    function toggleTex()
+    {
+        var t = app.querySelector('PixelTexture');
+        if ( t )
+        {
+            tex = app.removeChild(t);   
+        }
+        else
+        {
+            app.appendChild(tex);
+        }
+    }
+    </script>
+</body>
+</html>
+                                    
+                                           
