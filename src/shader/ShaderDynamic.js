@@ -897,7 +897,7 @@ x3dom.shader.DynamicShader.prototype.generateFragmentShader = function ( gl, pro
             shader += "vec2 texcoord2 = texcoord;\n";
         }
     }
-    else
+    else if ( properties.TEXTURED )
     {
         shader += "vec2 texcoord = fragTexcoord;\n";
         if ( properties.MULTITEXCOORD )
