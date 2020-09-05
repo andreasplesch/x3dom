@@ -98,7 +98,6 @@ x3dom.registerNodeType(
                 this._mesh._indices[ 0 ] = [];
                 this._mesh._positions[ 0 ] = positions.toGL();
                 this._mesh._colors[ 0 ] = colors.toGL();
-                //this._mesh._normals[ 0 ] = [];
                 this._mesh._normals[ 0 ] = normals.toGL();
                 this._mesh._texCoords[ 0 ] = [];
 
