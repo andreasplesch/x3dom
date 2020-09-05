@@ -1216,7 +1216,7 @@ x3dom.shader.DynamicShader.prototype.generateFragmentShader = function ( gl, pro
                 shader += "if (color.a < 0.01 ) discard;\n";
             }
             else
-            {    
+            {
                 shader += "float pAlpha = 1.0 - clamp(length((gl_PointCoord - 0.5) * 2.0), 0.0, 1.0);\n";
                 shader += "if ( pAlpha < 0.01 ) discard;\n";
             }
