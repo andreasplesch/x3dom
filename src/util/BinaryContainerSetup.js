@@ -1553,7 +1553,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
         shape._webgl.normalType = 5126;
         bufferGeo._mesh._numNormComponents = 3;
     };
-    
+
     var linkCache = function ( cache )
     {
         cache.shapes.push( shape );
@@ -1572,8 +1572,8 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
             {
                 return;
             }
-            _cleanupGLObjects.call(this, force, delGL );   
-        }
+            _cleanupGLObjects.call( this, force, delGL );
+        };
     };
 
     if ( bufferGeo._vf.buffer != "" )
