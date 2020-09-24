@@ -1,0 +1,66 @@
+<X3D profile="Complete" width="512px" height="512px"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance" xsd:noNamespaceSchemaLocation="http://www.web3d.org/specifications/x3d-3.0.xsd">
+<head>
+  <meta content="test.x3d" name="filename"/>
+  <meta content="test" name="description"/>
+  <meta content="Octaga X3D file exporter" name="generator"/>
+</head>
+<Scene>
+ <ProtoDeclare name="Cylinder_2">
+  <ProtoInterface>
+    <field accessType="inputOutput" name="material" type="SFNode">
+    </field>
+  </ProtoInterface>
+  <ProtoBody>
+  <Group>
+    <Shape>
+      <Appearance DEF="App">
+        <IS>
+          <connect nodeField="material" protoField="material"/>
+        </IS>
+      </Appearance>
+      <Cylinder>
+      </Cylinder>
+    </Shape>
+  </Group>
+  </ProtoBody>
+</ProtoDeclare>
+
+<Group>
+  <TouchSensor DEF="Ts">
+  </TouchSensor>
+  <Shape>
+    <Appearance>
+      <Material diffuseColor="0.2 0.2 0.2" emissiveColor=".9 0 0">
+      </Material>
+    </Appearance>
+    <Sphere>
+    </Sphere>
+  </Shape>
+</Group>
+<Switch DEF="Sw" whichChoice="0" >
+<Transform translation="0 2.5 0" >
+     <ProtoInstance name="Cylinder_2" >    
+        <fieldValue name="material">
+          <Material DEF="Cylmat" ambientIntensity="1" diffuseColor=".2 .2 .0" emissiveColor="0.8 0.8 0">
+          </Material>
+        </fieldValue>
+      </ProtoInstance>
+
+</Transform>
+</Switch>
+<TimeSensor DEF="Tm_1"   cycleInterval="5" >
+</TimeSensor>
+
+ <ColorInterpolator DEF="Cyl_Ci_1" key="0 .5 1 " keyValue="0.8 0.8 0, 0.0 0.0 0.0, 0.8 0.8 0">
+ </ColorInterpolator>
+
+<ROUTE fromNode='Ts' fromField='touchTime' toNode='Tm_1' toField='startTime'>
+ </ROUTE>
+
+<ROUTE fromNode='Tm_1' fromField='fraction_changed' toNode='Cyl_Ci_1' toField='set_fraction'>
+  </ROUTE>
+<ROUTE fromNode='Cyl_Ci_1' fromField='value_changed' toNode='Cylmat' toField='emissiveColor'>
+    </ROUTE>
+</Scene>
+</X3D>
