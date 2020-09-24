@@ -112,12 +112,12 @@ x3dom.registerNodeType(
                     {
                         app._parentNodes.forEach( function ( shape )
                         {
-                            if ( x3dom.isa(shape, x3dom.nodeTypes.X3DShapeNode) )
+                            if ( x3dom.isa( shape, x3dom.nodeTypes.X3DShapeNode ) )
                             {
                                 shape._dirty.material = true;
                             }
                         } );
-                        if ( x3dom.isa(app, x3dom.nodeTypes.X3DAppearanceNode) )
+                        if ( x3dom.isa( app, x3dom.nodeTypes.X3DAppearanceNode ) )
                         {
                             app.checkSortType();
                         }
