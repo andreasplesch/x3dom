@@ -283,13 +283,15 @@ x3dom.registerNodeType(
 
                 if ( fieldName == "alphaMode" )
                 {
-                    app._parentNodes.forEach( function ( shape )
+                    this._parentNodes.forEach( function ( app )
                     {
-                        if ( x3dom.isa( shape, x3dom.nodeTypes.X3DShapeNode ) )
+                        app._parentNodes.forEach( function ( shape )
                         {
-                            shape._dirty.shader = true;
-                        }
-                    } );
+                            if ( x3dom.isa( shape, x3dom.nodeTypes.X3DShapeNode ) )
+                            {
+                                shape._dirty.shader = true;
+                            }
+                        } );
                     if ( x3dom.isa( app, x3dom.nodeTypes.X3DAppearanceNode ) )
                     {
                         app.checkSortType();
