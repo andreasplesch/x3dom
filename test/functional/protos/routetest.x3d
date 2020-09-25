@@ -8,7 +8,7 @@ xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance" xsd:noNamespaceSchemaLocat
 <Scene>
  <ProtoDeclare name="Cylinder_2">
   <ProtoInterface>
-    <field accessType="inputOutput" name="material" type="SFNode">
+    <field accessType="inputOutput" name="appearance" type="SFNode">
     </field>
   </ProtoInterface>
   <ProtoBody>
