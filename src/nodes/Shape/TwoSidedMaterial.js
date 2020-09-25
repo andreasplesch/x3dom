@@ -106,12 +106,12 @@ x3dom.registerNodeType(
             fieldChanged : function ( fieldName )
             {
                 this._fieldChanged( fieldName,
-                                   [ "ambientIntensity", "diffuseColor", 
-                                    "emissiveColor", "shininess",
-                                    "specularColor", "transparency",
-                                    "backAmbientIntensity", "backDiffuseColor",
-                                    "backEmissiveColor", "backShininess",
-                                    "backSpecularColor", "backTransparency", "separateBackColor" ] );
+                    [ "ambientIntensity", "diffuseColor",
+                        "emissiveColor", "shininess",
+                        "specularColor", "transparency",
+                        "backAmbientIntensity", "backDiffuseColor",
+                        "backEmissiveColor", "backShininess",
+                        "backSpecularColor", "backTransparency", "separateBackColor" ] );
             }
         }
     )
