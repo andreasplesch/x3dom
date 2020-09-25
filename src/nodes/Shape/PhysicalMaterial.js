@@ -292,10 +292,11 @@ x3dom.registerNodeType(
                                 shape._dirty.shader = true;
                             }
                         } );
-                    if ( x3dom.isa( app, x3dom.nodeTypes.X3DAppearanceNode ) )
-                    {
-                        app.checkSortType();
-                    }
+                        if ( x3dom.isa( app, x3dom.nodeTypes.X3DAppearanceNode ) )
+                        {
+                            app.checkSortType();
+                        }
+                    } );
                 }
             },
 
