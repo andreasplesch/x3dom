@@ -14,11 +14,11 @@ xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance" xsd:noNamespaceSchemaLocat
   <ProtoBody>
   <Group>
     <Shape>
-      <Appearance DEF="App">
+      <!--Appearance DEF="App"-->
         <IS>
-          <connect nodeField="material" protoField="material"/>
+          <connect nodeField="appearance" protoField="appearance"/>
         </IS>
-      </Appearance>
+      <!--/Appearance-->
       <Cylinder>
       </Cylinder>
     </Shape>
@@ -41,9 +41,11 @@ xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance" xsd:noNamespaceSchemaLocat
 <Switch DEF="Sw" whichChoice="0" >
 <Transform translation="0 2.5 0" >
      <ProtoInstance name="Cylinder_2" >    
-        <fieldValue name="material">
+        <fieldValue name="appearance">
+          <Appearance>
           <Material DEF="Cylmat" ambientIntensity="1" diffuseColor=".2 .2 .0" emissiveColor="0.8 0.8 0">
           </Material>
+          </Appearance>
         </fieldValue>
       </ProtoInstance>
 
