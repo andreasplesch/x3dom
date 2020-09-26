@@ -584,7 +584,7 @@ x3dom.Viewarea.prototype.getLightMatrix = function ( lights )
 
             for ( i = 0; i < n; i++ )
             {
-                var light = lights[i];
+                var light = lights[ i ];
                 if ( x3dom.isa( light, x3dom.nodeTypes.PointLight ) )
                 {
                     var wcLoc = light.getCurrentTransform().multMatrixPnt( light._vf.location );
