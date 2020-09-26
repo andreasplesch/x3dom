@@ -1,0 +1,68 @@
+<html>
+  <head>
+		<meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge" />
+    <script type="text/javascript" src="../x3dom-include.js"></script>
+	</head>
+</body>
+
+<p>All is fine with BOTH lights on, but with ONLY light B, its shadow is mistakenly calculated from the positon of light A</p>
+<p>i.e. with MULTIPLE lights in a scene, the shadow for any SINGLE light is always calculated from the position of the FIRST light declared in the DOM</p>
+
+<button onclick="A=!A; document.getElementById('LA').on=A; document.getElementById('CA').render=A;">toggle light A</button>
+
+<button onclick="B=!B; document.getElementById('LB').on=B; document.getElementById('CB').render=B;">toggle light B</button>
+
+<div style="position:fixed; width:640px; height:480px; border:1px solid black;" >
+    <x3d id='x3dElement' showStat='false' showLog='false'>
+      <scene DEF='scene'>
+        <navigationInfo type='examine' headlight="false"></navigationInfo>
+
+        <SpotLight id="LA"  on='true' location="6, 5, 10"  shadowIntensity='0.5' zNear="8"></SpotLight>
+
+        <SpotLight id="LB"  on='false' location="-6, 5, 10" shadowIntensity='1' zNear="8" ></SpotLight>
+        
+        <shape>
+          <Appearance>
+              <material/>               
+          </Appearance>
+          <torus/>
+        </shape>
+        
+       <Transform translation="0 -2 0" rotation="1 0 0 -1.57">
+        <shape>
+          <Appearance>
+              <material/>               
+          </Appearance>
+          <plane size="10 10"/>
+        </shape> 
+       </Transform>
+
+      <Transform id="CA" translation="3, 2.5, 5" rotation="1.0 0 -0.5 1.570796">
+        <shape>
+          <Appearance>
+              <material emissiveColor="1 1 0"/>               
+          </Appearance>
+          <cone/>
+        </shape> 
+       </Transform>
+
+      <Transform id="CB" render="false" translation="-3, 2.5, 5" rotation="1.0 0 0.5 1.570796">
+        <shape>
+          <Appearance>
+              <material emissiveColor="1 1 0"/>               
+          </Appearance>
+          <cone/>
+        </shape> 
+       </Transform>
+      
+      </scene>
+    </x3d>
+</div>
+<script>
+  var A = true;
+  var B = false;
+</script>
+
+</body>
+</html>
