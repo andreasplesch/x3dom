@@ -1,0 +1,60 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge" />
+    <title>Light test</title>
+    <script type="text/javascript" src="../../x3dom-include.js?full"></script>
+    <style>
+        label {margin: 5px;}
+        select {
+            padding: 5px;
+            border-width: thick;
+            border-radius: 5px;
+        }
+        option {
+            font-style: italic;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+<h3>X3D Scoped Lights</h3>
+    <X3D xmlns="http://www.web3d.org/specifications/x3d-namespace" showStat="true" showLog="true" width="600px" height="400px">
+        <Environment gammaCorrectionDefault="none"></Environment>
+        <Scene>
+            <!--Background skyColor='0, 0, 0.1'></Background-->
+            <Transform>
+                <Inline onload='handleLoad(event)' id="inline" nameSpaceName="proto" mapDEFToID="true" url="NavigationInfo.x3d" ></Inline>
+            </Transform>
+        </Scene>
+    </X3D>
+    <label _style='margin: 5px;' for="x3d-select1">Choose a xml&nbsp&nbsp&nbsp&nbsp example:</label>
+    <select id="x3d-select1" onchange='handleChange(event)'>
+        <option>NavigationInfo</option>
+        
+        <option value="none" selected>--Please choose a x3d scene--</option>
+    </select>
+    <textarea id='InlineContent' style="margin: 10px; width: calc( 100% - 10px ); height: 200px; display: block;"></textarea>
+    </body>
+<script>
+    const inline = document.querySelector( '#Inline' );
+    const ext = '.x3d';
+    function handleChange(event) {
+        inline.setFieldValue( "url", [ event.target.options[event.target.selectedIndex].value + ext ] );
+
+    }
+    function handleChangeJson(event) {
+        inline.setFieldValue( "url", [ event.target.options[event.target.selectedIndex].value ] );
+    }
+    function handleLoad(event) {
+        window.setTimeout(
+            _showAll, //'negZ')
+            300, 'negZ');
+    }
+    function _showAll (dir) {
+        document.querySelector('X3D').runtime.showAll(dir);
+        var inlineArea = document.querySelector('#InlineContent');
+        inlineArea.textContent = document.querySelector('Inline').innerHTML.replace(/><([^//])/g,'>\n<$1');
+         }
+</script>
+</html>
