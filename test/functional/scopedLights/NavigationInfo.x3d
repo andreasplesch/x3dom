@@ -18,7 +18,7 @@
   <Scene>
     <WorldInfo
         title='sponza'/>
-    <TextureBackground DEF='CloudySky'>
+    <!--TextureBackground DEF='CloudySky'>
       <ImageTexture containerField='frontTexture'
           url='"CloudySky/CloudySky-front.jpg"'>
         <TextureProperties DEF='_1'
@@ -49,7 +49,7 @@
           url='"CloudySky/CloudySky-bottom.jpg"'>
         <TextureProperties USE='_1'/>
       </ImageTexture>
-    </TextureBackground>
+    </TextureBackground-->
     <NavigationInfo
         type='"EXAMINE"'
         headlight='false'/>
@@ -91,11 +91,11 @@
           shadowMapSize='2048'/>
       <Inline DEF='Sponza'
           url='"sponza.x3d"'/>
-      <LoadSensor DEF='_4'>
+      <!--LoadSensor DEF='_4'>
         <Inline USE='Sponza' containerField='watchList'/>
-      </LoadSensor>
+      </LoadSensor-->
     </Group>
-    <ParticleSystem DEF='_5'
+    <!--ParticleSystem DEF='_5'
         geometryType='SPRITE'
         maxParticles='70'
         particleLifetime='0.73'
@@ -113,7 +113,7 @@
             repeatS='false'
             repeatT='false'/>
       </Appearance>
-    </ParticleSystem>
+    </ParticleSystem-->
     <NavigationInfo
         type='"WALK", "EXAMINE"'
         headlight='false'/>
