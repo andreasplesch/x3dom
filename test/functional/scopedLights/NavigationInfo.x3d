@@ -106,8 +106,9 @@
               emissiveColor='1 0.790776 0'/>
           <ImageTexture
               url='"flare.png"'
-              repeatS='false'
-              repeatT='false'/>
+              repeatS='true'
+              repeatT='true'/>
+          <TextureTransform scale='2 2' />
         </Appearance>
         <Sphere radius='0.2' />
       </Shape>
