@@ -56,9 +56,12 @@
     <NavigationInfo DEF='_2'
         type='"WALK", "EXAMINE"'
         headlight='false'/>
+    <Viewpoint position="-17.18545 2.98670 -0.63641" orientation="0.02595 -0.99933 0.02586 1.56811" 
+	     centerOfRotation="-2.35664 2.99533 -1.19751" fieldOfView="0.78540" description="Initial View">
+    </Viewpoint>
     <Viewpoint
-        description='Initial View'
-        position='-18.7554 5.99533 1.63847'
+        description='xite View'
+        position='-18.7554 3.99533 1.63847'
         orientation='-7.81108432587867e-16 -1 -6.61248690345936e-16 80.1883798254191'
         centerOfRotation='-2.35664 2.99533 -1.19751'/>
     <Group>
@@ -95,6 +98,20 @@
         <Inline USE='Sponza' containerField='watchList'/>
       </LoadSensor-->
     </Group>
+    <Transform DEF='_t6'>
+      <Shape>
+        <Appearance>
+          <Material DEF='_7'
+              emissiveColor='1 0.790776 0'/>
+          <ImageTexture
+              url='"flare.png"'
+              repeatS='false'
+              repeatT='false'/>
+        </Appearance>
+        <Sphere/>
+      </Shape>
+    </Transform>
+        
     <!--ParticleSystem DEF='_5'
         geometryType='SPRITE'
         maxParticles='70'
@@ -121,7 +138,8 @@
     <ROUTE fromNode='LocationInterpolator' fromField='value_changed' toNode='_3' toField='set_location'/>
     <ROUTE fromNode='AnimationTimer' fromField='fraction_changed' toNode='ColorInterpolator' toField='set_fraction'/>
     <ROUTE fromNode='ColorInterpolator' fromField='value_changed' toNode='_3' toField='set_color'/>
-    <ROUTE fromNode='_3' fromField='location_changed' toNode='_6' toField='set_position'/>
+    <!--ROUTE fromNode='_3' fromField='location_changed' toNode='_6' toField='set_position'/-->
+    <ROUTE fromNode='_3' fromField='location_changed' toNode='_t6' toField='set_translation'/>
     <ROUTE fromNode='_3' fromField='color_changed' toNode='_7' toField='set_emissiveColor'/>
     <ROUTE fromNode='_4' fromField='isLoaded' toNode='_2' toField='set_bind'/>
   </Scene>
