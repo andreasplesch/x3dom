@@ -103,12 +103,12 @@
         <Appearance>
           <Material DEF='_7'
               emissiveColor='1 0.790776 0'/>
-          <ImageTexture
+          <!--ImageTexture
               url='"flare.png"'
               repeatS='false'
-              repeatT='false'/>
+              repeatT='false'/-->
         </Appearance>
-        <Sphere/>
+        <Sphere radius='0.5' />
       </Shape>
     </Transform>
         
