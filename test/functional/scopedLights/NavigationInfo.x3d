@@ -50,9 +50,9 @@
         <TextureProperties USE='_1'/>
       </ImageTexture>
     </TextureBackground-->
-    <NavigationInfo
+    <!--NavigationInfo
         type='"EXAMINE"'
-        headlight='false'/>
+        headlight='false'/-->
     <NavigationInfo DEF='_2'
         type='"WALK"'
         headlight='false'/>
