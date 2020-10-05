@@ -108,7 +108,7 @@
               url='"flare.png"'
               repeatS='true'
               repeatT='true'/>
-          <TextureTransform scale='2 2' />
+          <TextureTransform scale='4 4' />
         </Appearance>
         <Sphere radius='0.2' />
       </Shape>
