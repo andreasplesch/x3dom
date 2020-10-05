@@ -58,7 +58,7 @@
         headlight='false'/>
     <Viewpoint
         description='Initial View'
-        position='-18.7554 2.99533 1.63847'
+        position='-18.7554 5.99533 1.63847'
         orientation='-7.81108432587867e-16 -1 -6.61248690345936e-16 80.1883798254191'
         centerOfRotation='-2.35664 2.99533 -1.19751'/>
     <Group>
@@ -80,14 +80,14 @@
           color='1 0.790776 0'
           intensity='0.451456'
           location='-1.04113 5.52 -5.4'
-          shadowIntensity='0.5'
+          shadowIntensity='0.7'
           shadowMapSize='2048'/>
       <PointLight
           global='false'
           intensity='0.458738'
           ambientIntensity='0.13835'
           location='0 15.55 0'
-          shadowIntensity='0.5'
+          shadowIntensity='0.7'
           shadowMapSize='2048'/>
       <Inline DEF='Sponza'
           url='"sponza.x3d"'/>
