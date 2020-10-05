@@ -104,11 +104,11 @@
           <Material DEF='_7'
 	      diffuseColor='0 0 0'	
               emissiveColor='1 0.790776 0'/>
-          <ImageTexture
+          <!--ImageTexture
               url='"flare.png"'
               repeatS='true'
               repeatT='true'/>
-          <TextureTransform scale='4 4' />
+          <TextureTransform scale='4 4' /-->
         </Appearance>
         <Sphere radius='0.2' />
       </Shape>
