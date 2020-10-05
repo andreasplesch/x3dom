@@ -80,14 +80,14 @@
           color='1 0.790776 0'
           intensity='0.451456'
           location='-1.04113 5.52 -5.4'
-          shadowIntensity='1'
+          shadowIntensity='0.1'
           shadowMapSize='2048'/>
       <PointLight
           global='false'
           intensity='0.458738'
           ambientIntensity='0.13835'
           location='0 15.55 0'
-          shadowIntensity='1'
+          shadowIntensity='0.1'
           shadowMapSize='2048'/>
       <Inline DEF='Sponza'
           url='"sponza.x3d"'/>
