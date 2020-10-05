@@ -54,7 +54,7 @@
         type='"EXAMINE"'
         headlight='false'/>
     <NavigationInfo DEF='_2'
-        type='"WALK", "EXAMINE"'
+        type='"WALK"'
         headlight='false'/>
     <Viewpoint position="-17.18545 2.98670 -0.63641" orientation="0.02595 -0.99933 0.02586 1.56811" 
 	     centerOfRotation="-2.35664 2.99533 -1.19751" fieldOfView="0.78540" description="Initial View">
