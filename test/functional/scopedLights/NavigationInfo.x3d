@@ -102,6 +102,7 @@
       <Shape>
         <Appearance>
           <Material DEF='_7'
+	      diffuseColor='0 0 0'	
               emissiveColor='1 0.790776 0'/>
           <!--ImageTexture
               url='"flare.png"'
