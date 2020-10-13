@@ -39,23 +39,39 @@ x3dom.registerNodeType(
              * @instance
              */
             this.addField_MFColor( ctx, "keyValue", [] );
+
+            this._lastValue = new x3dom.fields.SFColor();
+            this.fieldChanged("keyValue");
         },
         {
             fieldChanged : function ( fieldName )
             {
                 if ( fieldName === "set_fraction" )
                 {
-                    // FIXME; perform color interpolation in HSV space
+                    // temporarily switch to HSV for interpolation
+                    this._vf.keyValue = this._keyValueHSV;
                     var value = this.linearInterp( this._vf.set_fraction, function ( a, b, t )
-                    {
-                        return a.multiply( 1.0 - t ).add( b.multiply( t ) );
+                    {   
+                        var mix = a.multiply( 1.0 - t ).add( b.multiply( t ) );
+                        return mix.setHSV( mix.r, mix.g, mix.b );
                     } );
 
-                    if ( value != undefined && value != this._lastValue )
+                    // switch back
+                    this._vf.keyValue = this._keyValue;
+                    
+                    if ( value != undefined && !value.equals( this._lastValue, 0.0001 ) )
                     {
                         this._lastValue = value;
                         this.postMessage( "value_changed", value );
                     }
+                }
+                if ( fieldName === "keyValue" )
+                {
+                    this._keyValueHSV = this._vf.keyValue.map( function ( color ) {
+                        var hsv = color.getHSV();
+                        return new x3dom.fields.SFColor( hsv[0], hsv[1], hsv[2] );
+                    });
+                    this._keyValue = this._vf.keyValue.copy();
                 }
             }
         }
