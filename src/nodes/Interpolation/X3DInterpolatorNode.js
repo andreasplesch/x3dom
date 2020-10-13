@@ -105,7 +105,7 @@ x3dom.registerNodeType(
             linearInterp : function ( time, interp )
             {
                 var key = this._vf.key;
-                var keyValue = this._vf.keyValue;                
+                var keyValue = this._vf.keyValue;
                 if ( key.length == 0 )
                 {
                     return;
