@@ -41,7 +41,7 @@ x3dom.registerNodeType(
             this.addField_MFColor( ctx, "keyValue", [] );
 
             this._lastValue = new x3dom.fields.SFColor();
-            this.fieldChanged("keyValue");
+            this.fieldChanged( "keyValue" );
         },
         {
             fieldChanged : function ( fieldName )
@@ -51,14 +51,14 @@ x3dom.registerNodeType(
                     // temporarily switch to HSV for interpolation
                     this._vf.keyValue = this._keyValueHSV;
                     var value = this.linearInterp( this._vf.set_fraction, function ( a, b, t )
-                    {   
+                    {
                         var mix = a.multiply( 1.0 - t ).add( b.multiply( t ) );
                         return mix.setHSV( mix.r, mix.g, mix.b );
                     } );
 
                     // switch back
                     this._vf.keyValue = this._keyValue;
-                    
+
                     if ( value != undefined && !value.equals( this._lastValue, 0.0001 ) )
                     {
                         this._lastValue = value;
@@ -67,10 +67,11 @@ x3dom.registerNodeType(
                 }
                 if ( fieldName === "keyValue" )
                 {
-                    this._keyValueHSV = this._vf.keyValue.map( function ( color ) {
+                    this._keyValueHSV = this._vf.keyValue.map( function ( color )
+                    {
                         var hsv = color.getHSV();
-                        return new x3dom.fields.SFColor( hsv[0], hsv[1], hsv[2] );
-                    });
+                        return new x3dom.fields.SFColor( hsv[ 0 ], hsv[ 1 ], hsv[ 2 ] );
+                    } );
                     this._keyValue = this._vf.keyValue.copy();
                 }
             }
