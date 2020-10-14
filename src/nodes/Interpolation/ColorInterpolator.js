@@ -58,7 +58,8 @@ x3dom.registerNodeType(
             {
                 if ( fieldName === "set_fraction" )
                 {
-                    var value, mix;
+                    var value,
+                        mix;
                     if ( this._vf.RGB )
                     {
                         value = this.linearInterp( this._vf.set_fraction, function ( a, b, t )
@@ -75,7 +76,7 @@ x3dom.registerNodeType(
                         {
                             var a = aH.copy();
                             var b = bH.copy();
-                            b.r = b.r > a.r ? b.r : b.r + 360; //ensure b.r > a.r 
+                            b.r = b.r > a.r ? b.r : b.r + 360; //ensure b.r > a.r
                             if ( b.r - a.r < 180 )
                             {
                                 // on small segment
@@ -83,11 +84,11 @@ x3dom.registerNodeType(
                             }
                             else
                             {
-                                // on large segment, 
+                                // on large segment,
                                 a.r = a.r + 360; // overtake b
                                 mix = a.multiply( 1.0 - t ).add( b.multiply( t ) );
                             }
-                            return mix.setHSV( mix.r%360, mix.g, mix.b );
+                            return mix.setHSV( mix.r % 360, mix.g, mix.b );
                         } );
                         // switch back
                         this._vf.keyValue = this._keyValue;
