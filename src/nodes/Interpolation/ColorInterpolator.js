@@ -40,6 +40,16 @@ x3dom.registerNodeType(
              */
             this.addField_MFColor( ctx, "keyValue", [] );
 
+            /**
+             * Specifies whether the interpolator should interpolate in RGB space
+             * @var {x3dom.fields.SFBool} RGB
+             * @memberof x3dom.nodeTypes.ColorInterpolator
+             * @initvalue false
+             * @field x3dom
+             * @instance
+             */
+            this.addField_SFBool( ctx, "RGB", false );
+
             this._lastValue = new x3dom.fields.SFColor();
             this.fieldChanged( "keyValue" );
         },
@@ -48,18 +58,42 @@ x3dom.registerNodeType(
             {
                 if ( fieldName === "set_fraction" )
                 {
-                    // temporarily switch to HSV for interpolation
-                    this._vf.keyValue = this._keyValueHSV;
-                    var value = this.linearInterp( this._vf.set_fraction, function ( a, b, t )
+                    var value, mix;
+                    if ( this._vf.RGB )
                     {
-                        var mix = a.multiply( 1.0 - t ).add( b.multiply( t ) );
-                        return mix.setHSV( mix.r, mix.g, mix.b );
-                    } );
+                        value = this.linearInterp( this._vf.set_fraction, function ( a, b, t )
+                        {
+                            mix = a.multiply( 1.0 - t ).add( b.multiply( t ) );
+                            return mix;
+                        } );
+                    }
+                    else
+                    {
+                        // temporarily switch to HSV for interpolation
+                        this._vf.keyValue = this._keyValueHSV;
+                        value = this.linearInterp( this._vf.set_fraction, function ( aH, bH, t )
+                        {
+                            var a = aH.copy();
+                            var b = bH.copy();
+                            b.r = b.r > a.r ? b.r : b.r + 360; //ensure b.r > a.r 
+                            if ( b.r - a.r < 180 )
+                            {
+                                // on small segment
+                                mix = a.multiply( 1.0 - t ).add( b.multiply( t ) );
+                            }
+                            else
+                            {
+                                // on large segment, 
+                                a.r = a.r + 360; // overtake b
+                                mix = a.multiply( 1.0 - t ).add( b.multiply( t ) );
+                            }
+                            return mix.setHSV( mix.r%360, mix.g, mix.b );
+                        } );
+                        // switch back
+                        this._vf.keyValue = this._keyValue;
+                    }
 
-                    // switch back
-                    this._vf.keyValue = this._keyValue;
-
-                    if ( value != undefined && !value.equals( this._lastValue, 0.0001 ) )
+                    if ( value != undefined && !value.equals( this._lastValue, x3dom.fields.Eps ) )
                     {
                         this._lastValue = value;
                         this.postMessage( "value_changed", value );
