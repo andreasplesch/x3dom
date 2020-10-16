@@ -1,0 +1,55 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge" />
+    <title>TouchSensorIsOverEventECMAScript</title>
+    <script type="text/javascript" src="../../../../x3dom-include.js?full"></script>
+    <style>
+        x3d {
+        	height: 50%
+        }
+    </style>
+</head>
+   <body id="htmlBody" >
+      
+<X3D id='rootX3dElement' showStat='false' showLog='false' showProgress='bar'
+ profile='Immersive' version='3.3' noNamespaceSchemaLocation='https://www.web3d.org/specifications/x3d-3.3.xsd'>
+<Scene>
+<Group bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+  <Shape bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+    <Appearance>
+    <Material DEF='MAT' diffuseColor='0 0 1'></Material>
+    </Appearance>
+    <Box size='2 2 2' solid='true'></Box>
+  </Shape>
+  <TouchSensor DEF='TS'></TouchSensor>
+</Group>
+<X3DScript DEF='SC'>
+<field accessType='inputOnly' name='isOver' type='SFBool'></field>
+<field accessType='outputOnly' name='diffuseColor_changed' type='SFColor'></field>
+<![CDATA[
+      
+ecmascript:
+
+function isOver(val) 
+{ 
+    if (val == true) 
+    { 
+        diffuseColor_changed = new SFColor(1,0,0); 
+    } 
+    else 
+    { 
+        diffuseColor_changed = new SFColor(0,0,1);
+    }
+}
+
+    
+]]>
+</X3DScript>
+<ROUTE fromField='isOver' fromNode='TS' toField='isOver' toNode='SC'></ROUTE>
+<ROUTE fromField='diffuseColor_changed' fromNode='SC' toField='set_diffuseColor' toNode='MAT'></ROUTE>
+</Scene>
+</X3D>
+
+   </body>
+</html>
