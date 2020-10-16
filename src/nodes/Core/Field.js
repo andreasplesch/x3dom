@@ -46,6 +46,16 @@ x3dom.registerNodeType(
              * @instance
              */
             this.addField_SFString( ctx, "type", "" );
+            
+            /**
+             *
+             * @var {x3dom.fields.SFString} accessType
+             * @memberof x3dom.nodeTypes.Field
+             * @initvalue ""
+             * @field x3dom
+             * @instance
+             */
+            this.addField_SFString( ctx, "accessType", "" );
 
             /**
              *
