@@ -27,7 +27,7 @@ x3dom.registerNodeType(
         function ( ctx )
         {
             x3dom.nodeTypes.X3DChildNode.superClass.call( this, ctx );
-            
+
             /**
              * Associated programming language code, referenced by the url field, that is executed to carry out the Script node's function.
              * @var {x3dom.fields.MFString} url
