@@ -1,3 +1,96 @@
+/** @namespace x3dom.nodeTypes */
+/*
+ * X3DOM JavaScript Library
+ * http://www.x3dom.org
+ *
+ * (C)2009 Fraunhofer IGD, Darmstadt, Germany
+ * (C)2020 Andreas Plesch, Waltham, MA, U.S.A.
+ * Dual licensed under the MIT and GPL
+ */
+
+/* ### X3DScript ### */
+x3dom.registerNodeType(
+    "X3DScript",
+    "Scripting",
+    defineClass( x3dom.nodeTypes.X3DScriptNode,
+
+        /**
+         * Constructor for X3DScript
+         * @constructs x3dom.nodeTypes.X3DScript
+         * @x3d 3.3
+         * @component Core
+         * @status experimental
+         * @extends x3dom.nodeTypes.X3DScriptNode
+         * @param {Object} [ctx=null] - context object, containing initial settings like namespace
+         * @classdesc The Script node is used to program behaviour in a scene.
+         */
+        function ( ctx )
+        {
+            x3dom.nodeTypes.X3DChildNode.superClass.call( this, ctx );
+
+            /**
+             * NYI. 
+             * Once the script has access to a X3D node (via an SFNode or MFNode value either in one of the Script node's fields or passed in as an attribute),
+             * the script is able to read the contents of that node's fields. If the Script node's directOutput field is TRUE,
+             * the script may also send events directly to any node to which it has access, and may dynamically establish or break routes.
+             * If directOutput is FALSE (the default), the script may only affect the rest of the world via events sent through its fields.
+             * The results are undefined if directOutput is FALSE and the script sends events directly to a node to which it has access.
+             * @var {x3dom.fields.SFBool} load
+             * @memberof x3dom.nodeTypes.X3DScript
+             * @initvalue false
+             * @field x3d
+             * @instance
+             */
+            this.addField_SFBool( ctx, "directOutput", false ); //NYI
+
+             /**
+             * NYI. 
+             * If the Script node's mustEvaluate field is FALSE, the browser may delay sending input events to the script until its outputs are needed by the browser. If the mustEvaluate field is TRUE, the browser shall send input events to the script as soon as possible, regardless of whether the outputs are needed. The mustEvaluate field shall be set to TRUE only if the Script node has effects that are not known to the browser (such as sending information across the network). Otherwise, poor performance may result.
+             * @var {x3dom.fields.SFBool} mustEvaluate
+             * @memberof x3dom.nodeTypes.X3DScript
+             * @initvalue false
+             * @field x3d
+             * @instance
+             */
+            this.addField_SFBool( ctx, "mustEvaluate", false ); //NYI
+      
+            /**
+             * Contains all fields.x3dom mechanism to allow custom fields.
+             * @var {x3dom.fields.MFNode} fields
+             * @memberof x3dom.nodeTypes.X3DScript
+             * @initvalue x3dom.nodeTypes.Field
+             * @field x3dom
+             * @instance
+             */
+            this.addField_MFNode( "fields", x3dom.nodeTypes.Field );
+
+            this._domParser = new DomParser();
+            this._source = "// ecmascript source code";
+            this.LANG = "ecmascript:";
+        },
+        {
+            nodeChanged : function ()
+            {
+                // use textContent of dom node if it contains "ecmascript:"
+                // cdata sections in html docs get converted to comments by browser
+                // use the comment if it contains "ecmascript:"
+                var xml = this._xmlNode;
+                if ( xml.textContent.indexOf( this.LANG ) > -1 )
+                {
+                    this._source = xml.textContent;
+                }
+                xml.childNodes.forEach( function ( node )
+                {
+                    if ( node.nodeType == node.COMMENT_NODE )
+                    {
+                        if ( node.textContent.indexOf( this.LANG ) > -1 )
+                        {
+                            this._source = node.textContent;
+                        }
+                    }
+                }, this );
+    )
+);
 /*
 Script : X3DScriptNode {
   SFNode    [in,out] metadata     NULL  [X3DMetadataObject]
