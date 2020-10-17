@@ -31,6 +31,12 @@
       
 ecmascript:
 
+function initialize()
+{
+    initColor = new SFColor(0.5,0.5,1);
+    console.log(initColor);
+}
+
 function isOver(val) 
 { 
     if (val == true) 
@@ -39,11 +45,11 @@ function isOver(val)
     } 
     else 
     { 
-        diffuseColor_changed = new SFColor(0,0,1);
+        diffuseColor_changed = initColor;//new SFColor(0,0,1);
     }
 }
 
-    
+
 ]]>
 </X3DScript>
 <ROUTE fromField='isOver' fromNode='TS' toField='isOver' toNode='SC'></ROUTE>
