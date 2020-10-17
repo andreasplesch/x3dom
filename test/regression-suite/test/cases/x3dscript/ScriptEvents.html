@@ -61,11 +61,11 @@
 }
 /* ============================================================================= */
 </style>
-      <style type="text/css" media="screen, print">
+<style type="text/css" media="screen, print">
 .webfont { font-size:200%; font-family:'TYPEWRITER'; color:green;} /* Conversion TODO font families: SANS SERIF TYPEWRITER */
 </style>
       <!-- Button zoom adapted from https://x3dom.org/docs/dev/tutorial/styling.html -->
-      <style type="text/css">
+<style type="text/css">
 
 html {width:100%;height:100%;margin:0;padding:0;}
 body {margin:0;padding:10px;width:100%;height:100%;}
@@ -97,7 +97,7 @@ body {margin:0;padding:10px;width:100%;height:100%;}
 }
 </style>
       <!-- https://x3dom.org/docs/dev/api.html and https://x3dom.org/docs/dev/configuration.html -->
-      <script type="text/javascript">
+<script type="text/javascript">
 var zoomed = false;
 var showStatistics = false;
 var showDebugLog   = true;
@@ -177,7 +177,7 @@ function toggleShowDebugLogs()
         document.getElementById("details").hidden = (!showDebugLog);
 }
 </script>
-      <script type="text/javascript">
+<script type="text/javascript">
          var fullscreen = false;
          
          function toggleFullscreen ()
@@ -212,37 +212,9 @@ function toggleShowDebugLogs()
            }
          }
 </script>
-   </head>
+</head>
    <body id="htmlBody" onload="toggleFullscreen ();">
-      <table style="width:96%" id="htmlPageHeader">
-         <tr>
-            <td style="text-align:left;">
-               <h2>ScriptEvents.x3d</h2>
-            </td>
-            <td id="checkBoxCell" style="text-align:right"> (<a href="http://X3dGraphics.com/examples/X3dForWebAuthors/Chapter09EventUtilitiesScripting/ScriptEvents.x3d"
-                  title="View .x3d scene">.x3d scene</a>, 
-<a href="http://X3dGraphics.com/examples/X3dForWebAuthors/Chapter09EventUtilitiesScripting/ScriptEvents.html"
-                  title="View .html pretty-print source">pretty-print source</a>, 
-<input id="checkBoxOverlayStatistics"
-                      type="checkbox"
-                      value="Overlay scene statistics"
-                      onclick="toggleOverlayStatistics();"/>
-               <span title="Overlay scene performance statistics">statistics</span>, 
-<input id="checkBoxShowDebugLogs"
-                      type="checkbox"
-                      value="Display debugger logs"
-                      checked="checked"
-                      onclick="toggleShowDebugLogs();"/>
-               <span title="Show meta information and debug logs">info &amp; logs</span>, <a href="https://doc.x3dom.org" onclick="target='_blank';">X3DOM Player</a>)</td>
-         </tr>
-         <tr>
-            <td colspan="2">
-               <p>
-                  <span class="webfont">A Script node drives the position and orientation of orbiting cones near the pump house.</span>
-               </p>
-            </td>
-         </tr>
-      </table>
+      
       <div>
 <!-- ================================ -->
 <!-- embedded X3D scene appears here: -->
@@ -251,7 +223,7 @@ function toggleShowDebugLogs()
 <X3D id='rootX3dElement' showStat='false' showLog='true' showProgress='bar'
  profile='Immersive' version='3.3' noNamespaceSchemaLocation='https://www.web3d.org/specifications/x3d-3.3.xsd'>
 <head>
-<meta content='ScriptEvents.x3d' name='title'/>
+<!--meta content='ScriptEvents.x3d' name='title'/>
 <meta content='A Script node drives the position and orientation of orbiting cones near the pump house.' name='description'/>
 <meta content='Todd Gagnon and Mark A. Boyd' name='creator'/>
 <meta content='Xeena VRML importer, X3D-Edit 3.1, https://www.web3d.org/x3d/content/README.X3D-Edit.html' name='translator'/>
@@ -263,154 +235,183 @@ function toggleShowDebugLogs()
 <meta content='http://X3dGraphics.com/examples/X3dForWebAuthors/Chapter09EventUtilitiesScripting/ScriptEvents.x3d' name='identifier'/>
 <meta content='X3D-Edit 3.3, https://savage.nps.edu/X3D-Edit' name='generator'/>
 <meta content='Vrml97ToX3dNist, http://ovrt.nist.gov/v2_x3d.html' name='generator'/>
-<meta content='../license.html' name='license'/>
+<meta content='../license.html' name='license'/-->
 </head>
 <Scene>
-<WorldInfo title='ScriptEvents.x3d'/>
-<Background skyColor='1 1 1' transparency='0'/>
-<Viewpoint description='click pump house to spin cones' position='3 1 7'/>
-<Viewpoint description='Book View' orientation='-0.969 0.239 0.056 0.13' position='1.66 1.34 5.95'/>
-<Group bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Transform scale='0.91 0.6 0.3' translation='0.8 -0.65 0.5' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Shape bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Appearance>
-<Material diffuseColor='0.749 0.694 0.651'/>
-</Appearance>
-<Cylinder bottom='false' top='false'/>
-</Shape>
-</Transform>
-<Group bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Shape bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Appearance DEF='PumpHouseAppearance'>
-<Material diffuseColor='0.82 0.78 0.74'/>
-</Appearance>
-<IndexedFaceSet coordIndex='0 1 5 4 -1 5 1 2 6 -1 6 2 3 7 -1 3 0 4 7 -1 1 12 13 2 -1 2 13 14 -1 12 15 16 13 -1 15 0 3 16 -1 16 3 17 -1 9 5 6 10 -1 8 9 10 11 -1 4 8 11 7 -1 4 5 9 8 -1 11 10 6 7 -1 3 2 14 17 -1 13 16 17 14 -1'>
-<Coordinate point='0.0 0.0 0.0 2.0 0.0 0.0 2.0 1.75 0.0 0.0 1.75 0.0 0.625 0.75 0.0 1.0 0.75 0.0 1.0 1.6 0.0 0.625 1.6 0.0 0.625 0.75 -0.65 1.0 0.75 -0.65 1.0 1.6 -0.65 0.625 1.6 -0.65 2.0 0.0 -2.7 2.0 1.75 -2.7 2.0 2.5 -1.0 0.0 0.0 -2.7 0.0 1.75 -2.7 0.0 2.5 -1.0'/>
-</IndexedFaceSet>
-</Shape>
-<TouchSensor DEF='PumpTouched' description='touch to activate'/>
-</Group>
-</Group>
-<Group bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Transform scale='0.5 0.5 0.5' translation='1.0 1.1 -1.5' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Transform DEF='PistonTransform' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Transform scale='1.8 1.2 0.6' translation='0.0 -0.2 0.0' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Shape bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Appearance>
-<Material diffuseColor='0.427 0.427 0.42'/>
-</Appearance>
-<Cylinder height='1.0' radius='0.98'/>
-</Shape>
-</Transform>
-<Transform DEF='CylinderRod' rotation='0.0 0.0 -1.0 0.523599' translation='-0.25 0.75 0.0' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Shape bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Appearance USE='PumpHouseAppearance'/>
-<Cylinder height='1.0' radius='0.1'/>
-</Shape>
-</Transform>
-<Transform rotation='0.0 0.0 1.0 1.047198' translation='1.0 0.6 0.0' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Transform USE='CylinderRod'/>
-</Transform>
-<Transform translation='0.0 1.2 0.0' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Shape bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Appearance USE='PumpHouseAppearance'/>
-<Sphere radius='0.15'/>
-</Shape>
-</Transform>
-<Transform DEF='RockerArm1' center='0.0 -0.4 0.0' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Shape bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Appearance USE='PumpHouseAppearance'/>
-<Cylinder height='1.8' radius='0.1'/>
-</Shape>
-<Transform translation='0.0 0.95 0.0' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Shape bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Appearance USE='PumpHouseAppearance'/>
-<Sphere radius='0.15'/>
-</Shape>
-</Transform>
-<PositionInterpolator DEF='Rocker1Path' key='0.0 0.3 0.32 0.5 0.75 1.0' keyValue='0.0 2.0 -0.25 0.0 1.8 -0.35 0.0 1.8 -0.35 0.0 2.0 -0.25 0.0 2.0 -0.12 0.0 2.0 -0.25'/>
-<OrientationInterpolator DEF='Rocker1Rotation' key='0.0 0.3 0.32 0.5 0.75 1.0' keyValue='-1.0 0.0 0.0 0.523599 -1.0 0.0 0.0 1.0471976 -1.0 0.0 0.0 1.0471976 -1.0 0.0 0.0 0.523599 -1.0 0.0 0.0 0.2617994 -1.0 0.0 0.0 0.523599'/>
-</Transform>
-<Transform DEF='RockerArm2' center='0.0 0.7 0.0' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Shape bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Appearance USE='PumpHouseAppearance'/>
-<Cylinder height='1.8' radius='0.1'/>
-</Shape>
-<Transform translation='0.0 -0.95 0.0' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Shape bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Appearance USE='PumpHouseAppearance'/>
-<Sphere radius='0.15'/>
-</Shape>
-</Transform>
-<PositionInterpolator DEF='Rocker2Path' key='0.0 0.3 0.32 0.5 0.75 1.0' keyValue='0.0 1.95 -1.0 0.0 1.2 -1.6 0.0 1.2 -1.6 0.0 1.95 -1.0 0.0 2.2 -0.65 0.0 1.95 -1.0'/>
-<OrientationInterpolator DEF='Rocker2Rotation' key='0.0 0.3 0.32 0.5 0.75 1.0' keyValue='1.0 0.0 0.0 0.523599 1.0 0.0 0.0 0.4 1.0 0.0 0.0 0.4 1.0 0.0 0.0 0.523599 1.0 0.0 0.0 1.570796 1.0 0.0 0.0 0.523599'/>
-</Transform>
-</Transform>
-<TimeSensor DEF='PistonClock' cycleInterval='5.5' loop='true'/>
-<PositionInterpolator DEF='PistonPath' key='0.0 0.3 0.32 0.5 0.75 1.0' keyValue='-0.4 -2.3 4.0 -0.4 -1.5 4.0 -0.4 -1.5 4.0 -0.4 -2.3 4.0 -0.4 -3.3 4.0 -0.4 -2.3 4.0'/>
-<Transform translation='3 2 4' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Transform DEF='ThreeCones' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Transform DEF='RedTransform' rotation='0 0 1 3.14' translation='0 -1.5 .5' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Shape bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Appearance>
-<Material diffuseColor='1 0 0'/>
-</Appearance>
-<Cone DEF='b1' bottomRadius='.5' height='1' side='true' bottom='true' solid='true'/>
-</Shape>
-</Transform>
-<Transform DEF='GreenTransform' rotation='0 0 1 -1.05' translation='1.3 .75 0' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Shape bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Appearance>
-<Material diffuseColor='0 1 1'/>
-</Appearance>
-<Cone USE='b1'/>
-</Shape>
-</Transform>
-<Transform DEF='TurquoiseTransform' rotation='0 0 1 1.05' translation='-1.3 .75 -.5' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Shape bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
-<Appearance>
-<Material diffuseColor='1 1 0'/>
-</Appearance>
-<Cone USE='b1'/>
-</Shape>
-</Transform>
-</Transform>
-</Transform>
-<Script DEF='ControlScript'>
-<field accessType='inputOnly' name='angle' type='SFFloat'/>
-<field accessType='outputOnly' name='positionRed' type='SFVec3f'/>
-<field accessType='outputOnly' name='positionGreen' type='SFVec3f'/>
-<field accessType='outputOnly' name='positionTurquoise' type='SFVec3f'/>
-<field accessType='outputOnly' name='orientationRed' type='SFRotation'/>
-<field accessType='outputOnly' name='orientationGreen' type='SFRotation'/>
-<field accessType='outputOnly' name='orientationTurquoise' type='SFRotation'/>
-</Script>
-</Transform>
-</Group>
-<ScalarInterpolator DEF='AngleGenerator' key='0 1' keyValue='0 6.28319'/>
-<ROUTE fromField='value_changed' fromNode='AngleGenerator' toField='angle' toNode='ControlScript'/>
-<TimeSensor DEF='SpinAngleTimer' cycleInterval='2' enabled='false' loop='true' startTime='1'/>
-<ROUTE fromField='fraction_changed' fromNode='SpinAngleTimer' toField='set_fraction' toNode='AngleGenerator'/>
-<BooleanFilter DEF='TouchFilter' containerField='children'/>
-<ROUTE fromField='isActive' fromNode='PumpTouched' toField='set_boolean' toNode='TouchFilter'/>
-<ROUTE fromField='inputTrue' fromNode='TouchFilter' toField='enabled' toNode='SpinAngleTimer'/>
-<ROUTE fromField='positionRed' fromNode='ControlScript' toField='translation' toNode='RedTransform'/>
-<ROUTE fromField='positionGreen' fromNode='ControlScript' toField='translation' toNode='GreenTransform'/>
-<ROUTE fromField='positionTurquoise' fromNode='ControlScript' toField='translation' toNode='TurquoiseTransform'/>
-<ROUTE fromField='orientationRed' fromNode='ControlScript' toField='rotation' toNode='RedTransform'/>
-<ROUTE fromField='orientationGreen' fromNode='ControlScript' toField='rotation' toNode='GreenTransform'/>
-<ROUTE fromField='orientationTurquoise' fromNode='ControlScript' toField='rotation' toNode='TurquoiseTransform'/>
-<ROUTE fromField='inputFalse' fromNode='TouchFilter' toField='enabled' toNode='PistonClock'/>
-<ROUTE fromField='fraction_changed' fromNode='PistonClock' toField='set_fraction' toNode='PistonPath'/>
-<ROUTE fromField='value_changed' fromNode='PistonPath' toField='set_translation' toNode='PistonTransform'/>
-<ROUTE fromField='fraction_changed' fromNode='PistonClock' toField='set_fraction' toNode='Rocker1Path'/>
-<ROUTE fromField='value_changed' fromNode='Rocker1Path' toField='set_translation' toNode='RockerArm1'/>
-<ROUTE fromField='fraction_changed' fromNode='PistonClock' toField='set_fraction' toNode='Rocker1Rotation'/>
-<ROUTE fromField='value_changed' fromNode='Rocker1Rotation' toField='set_rotation' toNode='RockerArm1'/>
-<ROUTE fromField='fraction_changed' fromNode='PistonClock' toField='set_fraction' toNode='Rocker2Path'/>
-<ROUTE fromField='value_changed' fromNode='Rocker2Path' toField='set_translation' toNode='RockerArm2'/>
-<ROUTE fromField='fraction_changed' fromNode='PistonClock' toField='set_fraction' toNode='Rocker2Rotation'/>
-<ROUTE fromField='value_changed' fromNode='Rocker2Rotation' toField='set_rotation' toNode='RockerArm2'/>
+   <Background skyColor='1 1 1' transparency='0'></Background>
+   <Viewpoint description='click pump house to spin cones' position='3 1 7'></Viewpoint>
+   <Viewpoint description='Book View' orientation='-0.969 0.239 0.056 0.13' position='1.66 1.34 5.95'></Viewpoint>
+   <Group bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+      <Transform scale='0.91 0.6 0.3' translation='0.8 -0.65 0.5' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+         <Shape bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+            <Appearance>
+               <Material diffuseColor='0.749 0.694 0.651'></Material>
+            </Appearance>
+            <Cylinder bottom='false' top='false'></Cylinder>
+         </Shape>
+      </Transform>
+      <Group bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+         <Shape bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+            <Appearance DEF='PumpHouseAppearance'>
+               <Material diffuseColor='0.82 0.78 0.74'></Material>
+            </Appearance>
+            <IndexedFaceSet coordIndex='0 1 5 4 -1 5 1 2 6 -1 6 2 3 7 -1 3 0 4 7 -1 1 12 13 2 -1 2 13 14 -1 12 15 16 13 -1 15 0 3 16 -1 16 3 17 -1 9 5 6 10 -1 8 9 10 11 -1 4 8 11 7 -1 4 5 9 8 -1 11 10 6 7 -1 3 2 14 17 -1 13 16 17 14 -1'>
+               <Coordinate point='0.0 0.0 0.0 2.0 0.0 0.0 2.0 1.75 0.0 0.0 1.75 0.0 0.625 0.75 0.0 1.0 0.75 0.0 1.0 1.6 0.0 0.625 1.6 0.0 0.625 0.75 -0.65 1.0 0.75 -0.65 1.0 1.6 -0.65 0.625 1.6 -0.65 2.0 0.0 -2.7 2.0 1.75 -2.7 2.0 2.5 -1.0 0.0 0.0 -2.7 0.0 1.75 -2.7 0.0 2.5 -1.0'>
+               </Coordinate>
+            </IndexedFaceSet>
+         </Shape>
+         <TouchSensor DEF='PumpTouched' description='touch to activate'></TouchSensor>
+      </Group>
+   </Group>
+   <Group bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+      <Transform scale='0.5 0.5 0.5' translation='1.0 1.1 -1.5' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+         <Transform DEF='PistonTransform' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+            <Transform scale='1.8 1.2 0.6' translation='0.0 -0.2 0.0' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+               <Shape bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+                  <Appearance>
+                     <Material diffuseColor='0.427 0.427 0.42'></Material>
+                  </Appearance>
+                  <Cylinder height='1.0' radius='0.98'></Cylinder>
+               </Shape>
+            </Transform>
+            <Transform DEF='CylinderRod' rotation='0.0 0.0 -1.0 0.523599' translation='-0.25 0.75 0.0' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+               <Shape bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+                  <Appearance USE='PumpHouseAppearance'></Appearance>
+                  <Cylinder height='1.0' radius='0.1'></Cylinder>
+               </Shape>
+            </Transform>
+            <Transform rotation='0.0 0.0 1.0 1.047198' translation='1.0 0.6 0.0' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+               <Transform USE='CylinderRod'></Transform>
+            </Transform>
+            <Transform translation='0.0 1.2 0.0' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+               <Shape bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+                  <Appearance USE='PumpHouseAppearance'></Appearance>
+                  <Sphere radius='0.15'></Sphere>
+               </Shape>
+            </Transform>
+            <Transform DEF='RockerArm1' center='0.0 -0.4 0.0' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+               <Shape bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+                  <Appearance USE='PumpHouseAppearance'></Appearance>
+                  <Cylinder height='1.8' radius='0.1'></Cylinder>
+               </Shape>
+               <Transform translation='0.0 0.95 0.0' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+               <Shape bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+                  <Appearance USE='PumpHouseAppearance'></Appearance>
+                  <Sphere radius='0.15'></Sphere>
+               </Shape>
+            </Transform>
+            <PositionInterpolator DEF='Rocker1Path' key='0.0 0.3 0.32 0.5 0.75 1.0' keyValue='0.0 2.0 -0.25 0.0 1.8 -0.35 0.0 1.8 -0.35 0.0 2.0 -0.25 0.0 2.0 -0.12 0.0 2.0 -0.25'>
+            </PositionInterpolator>
+            <OrientationInterpolator DEF='Rocker1Rotation' key='0.0 0.3 0.32 0.5 0.75 1.0' keyValue='-1.0 0.0 0.0 0.523599 -1.0 0.0 0.0 1.0471976 -1.0 0.0 0.0 1.0471976 -1.0 0.0 0.0 0.523599 -1.0 0.0 0.0 0.2617994 -1.0 0.0 0.0 0.523599'>
+            </OrientationInterpolator>
+         </Transform>
+         <Transform DEF='RockerArm2' center='0.0 0.7 0.0' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+            <Shape bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+               <Appearance USE='PumpHouseAppearance'></Appearance>
+               <Cylinder height='1.8' radius='0.1'></Cylinder>
+            </Shape>
+            <Transform translation='0.0 -0.95 0.0' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+               <Shape bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+                  <Appearance USE='PumpHouseAppearance'></Appearance>
+                  <Sphere radius='0.15'></Sphere>
+               </Shape>
+            </Transform>
+            <PositionInterpolator DEF='Rocker2Path' key='0.0 0.3 0.32 0.5 0.75 1.0' keyValue='0.0 1.95 -1.0 0.0 1.2 -1.6 0.0 1.2 -1.6 0.0 1.95 -1.0 0.0 2.2 -0.65 0.0 1.95 -1.0'>
+            </PositionInterpolator>
+            <OrientationInterpolator DEF='Rocker2Rotation' key='0.0 0.3 0.32 0.5 0.75 1.0' keyValue='1.0 0.0 0.0 0.523599 1.0 0.0 0.0 0.4 1.0 0.0 0.0 0.4 1.0 0.0 0.0 0.523599 1.0 0.0 0.0 1.570796 1.0 0.0 0.0 0.523599'>
+            </OrientationInterpolator>
+         </Transform>
+      </Transform>
+         <TimeSensor DEF='PistonClock' cycleInterval='5.5' loop='true'></TimeSensor>
+         <PositionInterpolator DEF='PistonPath' key='0.0 0.3 0.32 0.5 0.75 1.0' keyValue='-0.4 -2.3 4.0 -0.4 -1.5 4.0 -0.4 -1.5 4.0 -0.4 -2.3 4.0 -0.4 -3.3 4.0 -0.4 -2.3 4.0'>
+         </PositionInterpolator>
+         <Transform translation='3 2 4' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+            <Transform DEF='ThreeCones' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+               <Transform DEF='RedTransform' rotation='0 0 1 3.14' translation='0 -1.5 .5' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+                  <Shape bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+                     <Appearance>
+                        <Material diffuseColor='1 0 0'></Material>
+                     </Appearance>
+                     <Cone DEF='b1' bottomRadius='.5' height='1' side='true' bottom='true' solid='true'></Cone>
+                  </Shape>
+               </Transform>
+               <Transform DEF='GreenTransform' rotation='0 0 1 -1.05' translation='1.3 .75 0' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+                  <Shape bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+                     <Appearance>
+                        <Material diffuseColor='0 1 1'></Material>
+                     </Appearance>
+                     <Cone USE='b1'></Cone>
+                  </Shape>
+               </Transform>
+               <Transform DEF='TurquoiseTransform' rotation='0 0 1 1.05' translation='-1.3 .75 -.5' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+                  <Shape bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+                     <Appearance>
+                        <Material diffuseColor='1 1 0'></Material>
+                     </Appearance>
+                     <Cone USE='b1'></Cone>
+                  </Shape>
+               </Transform>
+            </Transform>
+         </Transform>
+         <X3DScript DEF='ControlScript'>
+            <field accessType='inputOnly' name='angle' type='SFFloat'></field>
+            <field accessType='outputOnly' name='positionRed' type='SFVec3f'></field>
+            <field accessType='outputOnly' name='positionGreen' type='SFVec3f'></field>
+            <field accessType='outputOnly' name='positionTurquoise' type='SFVec3f'></field>
+            <field accessType='outputOnly' name='orientationRed' type='SFRotation'></field>
+            <field accessType='outputOnly' name='orientationGreen' type='SFRotation'></field>
+            <field accessType='outputOnly' name='orientationTurquoise' type='SFRotation'></field>
+<![CDATA[
+          
+ecmascript:
+
+//  this input function receives the currently interpolated rotation angle value,
+//  and then computes the position and orientation of each of the cones.
+
+function angle (value)
+{
+  positionRed       = new SFVec3f (Math.cos (value), 1.5 * Math.sin(value), 0.5);
+  positionGreen     = new SFVec3f (Math.cos (value+2.094), 1.5 * Math.sin(value+2.094),    0);
+  positionTurquoise = new SFVec3f (Math.cos (value+4.189), 1.5 * Math.sin(value+4.189), -0.5);
+
+  // The values 2.094 and 4.189 are 1/3 and 2/3 of 2*pi radians.
+  orientationRed       = new SFRotation (0, 0, 1, -2*value);
+  orientationGreen     = new SFRotation (0, 0, 1, -2*(value+2.094));
+  orientationTurquoise = new SFRotation (0, 0, 1, -2*(value+4.189));
+}
+
+        
+]]>
+         </X3DScript>
+      </Transform>
+   </Group>
+   <ScalarInterpolator DEF='AngleGenerator' key='0 1' keyValue='0 6.28319'>
+   </ScalarInterpolator>
+   <ROUTE fromField='value_changed' fromNode='AngleGenerator' toField='angle' toNode='ControlScript'></ROUTE>
+   <TimeSensor DEF='SpinAngleTimer' cycleInterval='2' enabled='false' loop='true' startTime='1'>
+   </TimeSensor>
+   <ROUTE fromField='fraction_changed' fromNode='SpinAngleTimer' toField='set_fraction' toNode='AngleGenerator'></ROUTE>
+   <BooleanFilter DEF='TouchFilter' containerField='children'>
+   </BooleanFilter>
+   <ROUTE fromField='isActive' fromNode='PumpTouched' toField='set_boolean' toNode='TouchFilter'></ROUTE>
+   <ROUTE fromField='inputTrue' fromNode='TouchFilter' toField='enabled' toNode='SpinAngleTimer'></ROUTE>
+   <ROUTE fromField='positionRed' fromNode='ControlScript' toField='translation' toNode='RedTransform'></ROUTE>
+   <ROUTE fromField='positionGreen' fromNode='ControlScript' toField='translation' toNode='GreenTransform'></ROUTE>
+   <ROUTE fromField='positionTurquoise' fromNode='ControlScript' toField='translation' toNode='TurquoiseTransform'></ROUTE>
+   <ROUTE fromField='orientationRed' fromNode='ControlScript' toField='rotation' toNode='RedTransform'></ROUTE>
+   <ROUTE fromField='orientationGreen' fromNode='ControlScript' toField='rotation' toNode='GreenTransform'></ROUTE>
+   <ROUTE fromField='orientationTurquoise' fromNode='ControlScript' toField='rotation' toNode='TurquoiseTransform'></ROUTE>
+   <ROUTE fromField='inputFalse' fromNode='TouchFilter' toField='enabled' toNode='PistonClock'></ROUTE>
+   <ROUTE fromField='fraction_changed' fromNode='PistonClock' toField='set_fraction' toNode='PistonPath></ROUTE>
+   <ROUTE fromField='value_changed' fromNode='PistonPath' toField='set_translation' toNode='PistonTransform'></ROUTE>
+   <ROUTE fromField='fraction_changed' fromNode='PistonClock' toField='set_fraction' toNode='Rocker1Path'></ROUTE>
+   <ROUTE fromField='value_changed' fromNode='Rocker1Path' toField='set_translation' toNode='RockerArm1'></ROUTE>
+   <ROUTE fromField='fraction_changed' fromNode='PistonClock' toField='set_fraction' toNode='Rocker1Rotation'></ROUTE>
+   <ROUTE fromField='value_changed' fromNode='Rocker1Rotation' toField='set_rotation' toNode='RockerArm1'></ROUTE>
+   <ROUTE fromField='fraction_changed' fromNode='PistonClock' toField='set_fraction' toNode='Rocker2Path'></ROUTE>
+   <ROUTE fromField='value_changed' fromNode='Rocker2Path' toField='set_translation' toNode='RockerArm2'></ROUTE>
+   <ROUTE fromField='fraction_changed' fromNode='PistonClock' toField='set_fraction' toNode='Rocker2Rotation'></ROUTE>
+   <ROUTE fromField='value_changed' fromNode='Rocker2Rotation' toField='set_rotation' toNode='RockerArm2'></ROUTE>
 </Scene>
 </X3D>
 
