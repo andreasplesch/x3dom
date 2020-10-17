@@ -1,0 +1,58 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge" />
+    <title>BouncerECMAScript</title>
+    <script type="text/javascript" src="../../../../x3dom-include.js?full"></script>
+    <style>
+        x3d {
+        	height: 50%
+        }
+    </style>
+</head>
+   <body id="htmlBody" >
+      
+<X3D profile='Full' version='3.3' xmlns:xsd='http://www.w3.org/2001/XMLSchema-instance' xsd:noNamespaceSchemaLocation='http://www.web3d.org/specifications/x3d-3.3.xsd'>
+  <Scene>
+    <Transform DEF='Ball'>
+      <Shape>
+        <Appearance>
+          <Material
+              ambientIntensity='0.5'
+              diffuseColor='1 1 1'
+              specularColor='0.7 0.7 0.7'
+              shininess='0.4'></Material>
+        </Appearance>
+        <Sphere></Sphere>
+      </Shape>
+    </Transform>
+
+    <TimeSensor DEF='Clock'
+        cycleInterval='2'
+        loop='true'
+        startTime='1'></TimeSensor>
+
+    <X3DScript DEF='Bouncer'>
+      <field accessType='initializeOnly' type='SFFloat' name='bounceHeight' value='3'></field>
+      <field accessType='inputOnly' type='SFFloat' name='set_fraction'></field>
+      <field accessType='outputOnly' type='SFVec3f' name='value_changed'></field>
+      <field accessType='inputOutput' type='SFBool' name='enabled' value='true'></field>
+<![CDATA[ecmascript:
+function set_fraction (fraction, time)
+{
+   if (!enabled)
+      return;
+   var y = 4.0 * bounceHeight * fraction * (1.0 - fraction);
+   value_changed.x = 0.0;
+   value_changed.y = y;
+   value_changed.z = 0.0;
+}
+]]>
+    </X3DScript>
+
+    <ROUTE fromNode='Clock' fromField='fraction_changed' toNode='Bouncer' toField='set_fraction'></ROUTE>
+    <ROUTE fromNode='Bouncer' fromField='value_changed' toNode='Ball' toField='set_translation'></ROUTE>
+  </Scene>
+</X3D>
+   </body>
+</html>
