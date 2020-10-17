@@ -64,9 +64,12 @@ x3dom.registerNodeType(
              */
             this.addField_MFNode( "fields", x3dom.nodeTypes.Field );
 
-            this._domParser = new DomParser();
+            this._domParser = new DOMParser();
             this._source = "// ecmascript source code";
             this.LANG = "ecmascript:";
+            this.beginRegex = /^.*ecmascript:/s ;
+            this.endRegex = /]]$/s ;
+            this._ctx = ctx;
         },
         {
             nodeChanged : function ()
@@ -78,6 +81,7 @@ x3dom.registerNodeType(
                 if ( xml.textContent.indexOf( this.LANG ) > -1 )
                 {
                     this._source = xml.textContent;
+                    xml.textContent = "";
                 }
                 xml.childNodes.forEach( function ( node )
                 {
@@ -89,7 +93,31 @@ x3dom.registerNodeType(
                         }
                     }
                 }, this );
+
+                //cleanup
+                this._source = this._source.replace( this.beginRegex, "" );
+                this._source = this._source.replace( this.endRegex, "" );
+
+                //make fields
+                this._cf.fields.nodes.forEach( function ( field )
+                {
+                    var fieldType = field._vf.type;
+                    var fieldName = field._vf.name;
+                    if ( fieldType.endsWith ('ode') ) // cf node
+                    {
+                        var type = x3dom.nodeTypes.X3DNode;
+                        //TODO; get type from default value
+                        this[ "addField_" + fieldType ]( fieldName, type );//type should be registered x3dom type
+                    }
+                    else
+                    {
+                        this[ "addField_" + fieldType ]( this._ctx, fieldName, field._vf.value );
+                    }
+                }, this );
+
             }
+        }
+
     )
 );
 /*
