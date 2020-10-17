@@ -67,8 +67,8 @@ x3dom.registerNodeType(
             this._domParser = new DOMParser();
             this._source = "// ecmascript source code";
             this.LANG = "ecmascript:";
-            this.beginRegex = /^.*ecmascript:/s ;
-            this.endRegex = /]]$/s ;
+            this.CDATA = "[CDATA[";
+            this.endRegex = /\s*]]$/ ;
             this._ctx = ctx;
             this._callbacks = {};
         },
@@ -96,7 +96,8 @@ x3dom.registerNodeType(
                 }, this );
 
                 //cleanup
-                this._source = this._source.replace( this.beginRegex, "" );
+                this._source = this._source.replace( this.CDATA, "" );
+                this._source = this._source.replace( this.LANG, "" );
                 this._source = this._source.replace( this.endRegex, "" );
 
                 //make fields
@@ -112,13 +113,15 @@ x3dom.registerNodeType(
                     }
                     else
                     {
-                        this[ "addField_" + fieldType ]( this._ctx, fieldName, field._vf.value );
+                        if ( field._vf.value ) this._ctx.xmlNode.setAttribute( fieldName, field._vf.value ); // use dom to set value
+                        this[ "addField_" + fieldType ]( this._ctx, fieldName, field._vf.value ); //or default value if none given
                     }
                 }, this );
 
-                //find inputs and outputs
+                //find inputs and outputs, and fields to initialize
                 var outputs = [];
                 var inputs = [];
+                var initValues = [];
                 this._cf.fields.nodes.forEach( function ( field )
                 {
                     var atype = field._vf.accessType;
@@ -127,24 +130,32 @@ x3dom.registerNodeType(
                     {
                       case "outputonly" :
                         outputs.push( fieldName );
+                        initValues.push( fieldName );
                         break;
                       case "inputoutput" :
                         outputs.push( fieldName + "_changed" );
                         inputs.push( "set_" + fieldName );
+                        initValues.push( fieldName );
                         break;
                       case "inputonly" :
                         inputs.push( fieldName );
                         break;
+                      case "initializeonly" :
+                        initValues.push( fieldName );
                       default :
                         x3dom.debug.logWarning( fieldName + " has unrecognized access type: " +  atype );
                         break;
                     }
                 });
                 //wrap source
-                var source = "return function wrapper () { \n";
+                var source = "return function wrapper ( scriptNode ) { \n";
                 var callbacks = ["initialize", "prepareEvents", "eventsProcessed", "shutdown", "getOutputs"].concat( inputs );
                 source += "var " + callbacks.join(",") + ";\n";
                 source += "var " + outputs.join(",") + ";\n";
+                initValues.forEach( function (field)
+                {
+                    source += "var " + field + " = scriptNode._vf['" + field +"'];\n";
+                });
                 Object.keys( x3dom.fields ).forEach( function ( field ) 
                 {
                     source += "var " + field + " = x3dom.fields." + field + ";\n";  
@@ -162,7 +173,7 @@ x3dom.registerNodeType(
                 } ).join(",") + " } };"
                 //make script function
                 this._scriptFunction = new Function( source )();
-                this._callbacks = this._scriptFunction();
+                this._callbacks = this._scriptFunction( this ); // pass in this node
                 //run initialize
                 if ( this._callbacks.initialize instanceof Function )
                 {
@@ -175,11 +186,11 @@ x3dom.registerNodeType(
                 if ( this._callbacks[fieldName] instanceof Function )
                 {
                     var preOutputs = this._callbacks.getOutputs();
-                    this._callbacks[fieldName]( this._vf[fieldName] );
+                    this._callbacks[fieldName]( this._vf[fieldName], Date.now()/1000 );
                     var postOutputs = this._callbacks.getOutputs();
                     for ( var output in postOutputs )
                     {
-                        if ( postOutputs[output] != preOutputs[output] )
+                        //if ( postOutputs[output] != preOutputs[output] )
                         {
                             this.postMessage( output, postOutputs[output] );
                         }
