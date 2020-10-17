@@ -309,6 +309,11 @@
             "IntegerSequencer.js",
             "IntegerTrigger.js",
             "TimeTrigger.js"
+        ],
+        "src/nodes/Scripting/":
+        [
+            "X3DScriptNode.js",
+            "X3DScript.js"
         ]
     },
     "FULL":
