@@ -89,6 +89,7 @@ x3dom.registerNodeType(
                         }
                     }
                 }, this );
+            }
     )
 );
 /*
