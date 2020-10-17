@@ -70,6 +70,7 @@ x3dom.registerNodeType(
             this.beginRegex = /^.*ecmascript:/s ;
             this.endRegex = /]]$/s ;
             this._ctx = ctx;
+            this._callbacks = {};
         },
         {
             nodeChanged : function ()
@@ -115,9 +116,77 @@ x3dom.registerNodeType(
                     }
                 }, this );
 
+                //find inputs and outputs
+                var outputs = [];
+                var inputs = [];
+                this._cf.fields.nodes.forEach( function ( field )
+                {
+                    var atype = field._vf.accessType;
+                    var fieldName = field._vf.name;
+                    switch (atype.toLowerCase())
+                    {
+                      case "outputonly" :
+                        outputs.push( fieldName );
+                        break;
+                      case "inputoutput" :
+                        outputs.push( fieldName + "_changed" );
+                        inputs.push( "set_" + fieldName );
+                        break;
+                      case "inputonly" :
+                        inputs.push( fieldName );
+                        break;
+                      default :
+                        x3dom.debug.logWarning( fieldName + " has unrecognized access type: " +  atype );
+                        break;
+                    }
+                });
+                //wrap source
+                var source = "return function wrapper () { \n";
+                var callbacks = ["initialize", "prepareEvents", "eventsProcessed", "shutdown", "getOutputs"].concat( inputs );
+                source += "var " + callbacks.join(",") + ";\n";
+                source += "var " + outputs.join(",") + ";\n";
+                Object.keys( x3dom.fields ).forEach( function ( field ) 
+                {
+                    source += "var " + field + " = x3dom.fields." + field + ";\n";  
+                });
+                //TODO add SFRotation, Browser, print ...
+                source += this._source;
+                source += "\n function getOutputs () { \n";
+                source += "return { " + outputs.map( function (c)
+                {
+                    return "\n" + c + " : " + c;
+                } ).join(",") + " } };";
+                source += "\n return { " + callbacks.map( function (c)
+                {
+                    return "\n" + c + " : " + c;
+                } ).join(",") + " } };"
+                //make script function
+                this._scriptFunction = new Function( source )();
+                this._callbacks = this._scriptFunction();
+                //run initialize
+                if ( this._callbacks.initialize instanceof Function )
+                {
+                    this._callbacks.initialize( Date.now()/1000 );
+                }
+            },
+
+            fieldChanged: function (fieldName)
+            {
+                if ( this._callbacks[fieldName] instanceof Function )
+                {
+                    var preOutputs = this._callbacks.getOutputs();
+                    this._callbacks[fieldName]( this._vf[fieldName] );
+                    var postOutputs = this._callbacks.getOutputs();
+                    for ( var output in postOutputs )
+                    {
+                        if ( postOutputs[output] != preOutputs[output] )
+                        {
+                            this.postMessage( output, postOutputs[output] );
+                        }
+                    }
+                }
             }
         }
-
     )
 );
 /*
