@@ -1,0 +1,601 @@
+<html>
+   <head>
+      <title>MaterialModulator.x3d (X3dToX3dom.xslt X3DOM)</title>
+      <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
+      <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+      <meta name="generator"
+            content="https://www.web3d.org/x3d/stylesheets/X3dToX3dom.xslt"/>
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Numbered X3DOM release versions: https://doc.x3dom.org/download -->
+<!-- Developer X3DOM release version: https://doc.x3dom.org/download/dev -->
+      <script type="text/javascript" src="../../../../x3dom-include.js?full"></script>
+      <meta name="warning"
+            content="Webfonts must be loaded prior to using Text node in X3D scene... see https://x3dom.org/x3dom/example/x3dom_text.html"/>
+      <!-- X3DOM needs Web Fonts when an X3D Text node is included -->
+      <!-- adapted from https://x3dom.org/x3dom/example/x3dom_text.html and http://web.mit.edu/jmorzins/www/fonts.html -->
+      <style type="text/css">
+/* ============================================================================= */
+@font-face {
+  font-family: 'SERIF'; /* default original */
+  font-style: normal;
+  font-weight: 700;
+  src: local('Roman'), url('Roman.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'SERIF'; /* default alternate */
+  font-style: normal;
+  font-weight: 700;
+  src: local('Times New Roman'), local('TimesNewRoman'), url('Times New Roman.ttf') format('truetype');
+}
+/* ============================================================================= */
+@font-face {
+  font-family: 'SANS'; /* default original */
+  font-style: normal;
+  font-weight: 400;
+  src: local('Arial'), url('Arial.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'SANS'; /* default alternate */
+  font-style: normal;
+  font-weight: 400;
+  src: local('Helvetica'), url('Helvetica.ttf') format('truetype');
+}
+/* ============================================================================= */
+@font-face {
+  font-family: 'TYPEWRITER'; /* default original */
+  font-style: normal;
+  font-weight: 900;
+  src: local('Courier'), url('Courier.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'TYPEWRITER'; /* default alternate */
+  font-style: normal;
+  font-weight: 900;
+  src: local('Courier New'), url('Courier New.ttf') format('truetype');
+}
+/* ============================================================================= */
+</style>
+      <style type="text/css" media="screen, print">
+.webfont { font-size:200%; font-family:'TYPEWRITER'; color:green;} /* Conversion TODO font families: SANS SERIF TYPEWRITER */
+</style>
+      <!-- Button zoom adapted from https://x3dom.org/docs/dev/tutorial/styling.html -->
+      <style type="text/css">
+
+html {width:100%;height:100%;margin:0;padding:0;}
+body {margin:0;padding:10px;width:100%;height:100%;}
+
+#rootX3dElement {
+    height: 450px;
+    width:  800px;
+    border: none;
+    display: block;
+    position:relative;
+    background:#000;
+}
+
+#toggleZoomButton {
+    position: absolute;
+    float: left;
+    z-index: 1;
+    top: 0px;
+    left: 0px;
+    width: 10em;
+    height: 2em;
+    border: none;
+    background-color: #202021;
+    color: #ccc;
+}
+
+#toggleZoomButton:hover {
+    background-color:blue;
+}
+</style>
+      <!-- https://x3dom.org/docs/dev/api.html and https://x3dom.org/docs/dev/configuration.html -->
+      <script type="text/javascript">
+var zoomed = false;
+var showStatistics = false;
+var showDebugLog   = true;
+
+function toggleZoom(button) {
+
+        var new_height;
+        var new_width;
+        var x3d_element;
+        
+        htmlBody       = document.getElementById('htmlBody');
+        htmlPageHeader = document.getElementById('htmlPageHeader');
+        htmlPageFooter = document.getElementById('htmlPageFooter');
+        x3d_element    = document.getElementById('rootX3dElement');
+
+        if (zoomed) // previous value
+        {
+                // unzoom
+                new_height = "450px";
+                new_width  = "800px";
+                button.innerHTML = "Zoom";
+                htmlPageHeader.style.display = "table-row";
+                htmlPageFooter.style.display = "table-row";
+                document.getElementById('checkBoxCell').style="text-align:right";
+                htmlBody.style.padding = "10px";
+                x3d_element.showStat   = showStatistics;
+                x3d_element.showLog    = showDebugLog;
+                x3d_element.runtime.debug(showDebugLog);
+                document.getElementById("details").hidden = (!showDebugLog);
+        } else {
+                // zoom
+                new_height = "100%";
+                new_width  = "100%";
+                button.innerHTML = "Unzoom";
+                htmlPageHeader.style.display = "none";
+                htmlPageFooter.style.display = "none";
+                htmlBody.style.padding = "0px";
+                x3d_element.showStat   = false;
+                x3d_element.showLog    = false;
+                x3d_element.runtime.debug(false);
+                document.getElementById("details").hidden = true;
+                // TODO how to hide browser interface?
+        }
+        zoomed = !zoomed; // toggle
+
+        x3d_element.style.height = new_height;
+        x3d_element.style.width  = new_width;
+}
+                    
+    // Browser information table adapted from http://www.w3schools.com/js/js_window_navigator.asp
+    
+    document.addEventListener("DOMContentLoaded", function()
+    {
+        document.getElementById("browserCodeName"      ).innerHTML = navigator.appCodeName;
+        document.getElementById("browserAppName"       ).innerHTML = navigator.appName;
+        document.getElementById("browserAppVersion"    ).innerHTML = navigator.appVersion;
+        document.getElementById("browserCookieEnabled" ).innerHTML = navigator.cookieEnabled;
+        document.getElementById("browserPlatform"      ).innerHTML = navigator.platform;
+        document.getElementById("browserUserAgent"     ).innerHTML = navigator.userAgent;
+    if (navigator.systemLanguage)
+        document.getElementById("browserSystemLanguage").innerHTML = navigator.systemLanguage;
+    else
+        document.getElementById("browserSystemLanguage").innerHTML = navigator.language;
+    }, false);
+
+function toggleOverlayStatistics()
+{
+        showStatistics = !showStatistics; // toggle
+        x3d_element = document.getElementById('rootX3dElement');
+        x3d_element.runtime.statistics(showStatistics);
+}
+function toggleShowDebugLogs()
+{
+        showDebugLog  = !showDebugLog; // toggle
+        x3d_element = document.getElementById('rootX3dElement');
+        x3d_element.runtime.debug(showDebugLog);
+        document.getElementById("details").hidden = (!showDebugLog);
+}
+</script>
+      <script type="text/javascript">
+         var fullscreen = false;
+         
+         function toggleFullscreen ()
+         {
+           fullscreen = !fullscreen;
+           
+           if (fullscreen)
+           {
+             jQuery (".frame")
+               .css ("position", "fixed")
+               .css ("top", "0px")
+               .css ("left", "0px")
+               .css ("bottom", "0px")
+               .css ("right", "0px")
+               .css ("background", "#313131");
+                
+             jQuery (".maximize") .attr ("title", "Reduce frame, show console");
+         
+             jQuery (".browser") .css ("height", "100%");
+             jQuery ("X3DCanvas") .css ("height", "90%");
+           }
+           else
+           {
+             jQuery (".frame")
+               .css ("position", "inherit")
+               .css ("background", "none");
+               
+             jQuery (".maximize") .attr ("title", "Full Frame");
+         
+             jQuery (".browser") .css ("height", "initial");
+             jQuery ("X3DCanvas") .css ("height", "432px");
+           }
+         }
+</script>
+   </head>
+   <body id="htmlBody" onload="toggleFullscreen ();">
+      
+      <div>
+<!-- ================================ -->
+<!-- embedded X3D scene appears here: -->
+<!-- Conversion note: the following HTML button is overlaid on top of the page -->
+         <button id="toggleZoomButton" onclick="toggleZoom(this); return false;">Zoom</button>
+<X3D id='rootX3dElement' showStat='false' showLog='true' showProgress='bar'
+ profile='Immersive' version='3.3' noNamespaceSchemaLocation='https://www.web3d.org/specifications/x3d-3.3.xsd'>
+<head>
+<!--meta content='MaterialModulator.x3d' name='title'/>
+<meta content='Mimic a Material node and modulate the diffuseColor field as an animation effect, provided as a prototype for reusability.' name='description'/>
+<meta content='Learning suggestion for authors: try changing the modulation script so that it goes from [0 ... 1] and then [1 ... 0] alternating, rather than abruptly shifting from 1 immediately back to 0.' name='hint'/>
+<meta content='Don Brutzman' name='creator'/>
+<meta content='10 March 2008' name='created'/>
+<meta content='20 October 2019' name='modified'/>
+<meta content='X3D prototype requiring Script inputOutput fields' name='subject'/>
+<meta content='MaterialModulator.png' name='Image'/>
+<meta content='http://X3dGraphics.com/examples/X3dForWebAuthors/Chapter14Prototypes/MaterialModulator.x3d' name='identifier'/>
+<meta content='X3D-Edit 3.3, https://savage.nps.edu/X3D-Edit' name='generator'/>
+<meta content='../license.html' name='license'/-->
+</head>
+<Scene>
+<ProtoDeclare appinfo='mimic a Material node and modulate the diffuseColor field as an animation effect' documentation='http://x3dgraphics.com/examples/X3dForWebAuthors/Chapter14Prototypes/MaterialModulatorIndex.html' name='MaterialModulator'>
+  <ProtoInterface>
+    <field accessType='inputOutput' appinfo='default value true' name='enabled' type='SFBool' value='true'></field>
+    <field accessType='inputOutput' appinfo='default value 0.8 0.8 0.8' name='diffuseColor' type='SFColor' value='0.8 0.8 0.8'></field>
+    <field accessType='inputOutput' appinfo='default value 0 0 0' name='emissiveColor' type='SFColor' value='0 0 0'></field>
+    <field accessType='inputOutput' appinfo='default value 0 0 0' name='specularColor' type='SFColor' value='0 0 0'></field>
+    <field accessType='inputOutput' appinfo='default value 0.0' name='transparency' type='SFFloat' value='0.0'></field>
+    <field accessType='inputOutput' appinfo='default value 0.2' name='shininess' type='SFFloat' value='0.2'></field>
+    <field accessType='inputOutput' appinfo='default value 0.2' name='ambientIntensity' type='SFFloat' value='0.2'></field>
+  </ProtoInterface>
+  <ProtoBody>
+    <Material DEF='MaterialNode'>
+      <IS>
+        <connect nodeField='diffuseColor' protoField='diffuseColor'></connect>
+        <connect nodeField='emissiveColor' protoField='emissiveColor'></connect>
+        <connect nodeField='specularColor' protoField='specularColor'></connect>
+        <connect nodeField='transparency' protoField='transparency'></connect>
+        <connect nodeField='shininess' protoField='shininess'></connect>
+        <connect nodeField='ambientIntensity' protoField='ambientIntensity'></connect>
+      </IS>
+    </Material>
+    <Script DEF='MaterialModulatorScript'>
+      <field accessType='inputOutput' name='enabled' type='SFBool'></field>
+      <field accessType='inputOutput' name='diffuseColor' type='SFColor'></field>
+      <field accessType='outputOnly' name='newColor' type='SFColor'></field>
+      <field accessType='inputOnly' name='clockTrigger' type='SFTime'></field>
+      <IS>
+        <connect nodeField='enabled' protoField='enabled'></connect>
+        <connect nodeField='diffuseColor' protoField='diffuseColor'></connect>
+      </IS>
+    </Script>
+    <ROUTE fromField='newColor' fromNode='MaterialModulatorScript' toField='diffuseColor' toNode='MaterialNode'></ROUTE>
+    <TimeSensor DEF='ModulationClock' cycleInterval='0.1' loop='true'>
+      <IS>
+        <connect nodeField='enabled' protoField='enabled'></connect>
+      </IS>
+    </TimeSensor>
+    <ROUTE fromField='cycleTime' fromNode='ModulationClock' toField='clockTrigger' toNode='MaterialModulatorScript'></ROUTE>
+  </ProtoBody>
+</ProtoDeclare>
+<Transform translation='0 1 0' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+  <Shape bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+    <Sphere></Sphere>
+    <Appearance>
+      <ProtoInstance DEF='MaterialModulatorInstance' containerField='material' name='MaterialModulator'>
+        <fieldValue name='enabled' value='true'></fieldValue>
+        <fieldValue name='diffuseColor' value='0.5 0.1 0.1'></fieldValue>
+      </ProtoInstance>
+    </Appearance>
+  </Shape>
+</Transform>
+<Transform translation='0 -2 0' bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+  <Shape bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+    <Text string='&quot;enable/disable&quot; &quot;MaterialModulator&quot;'>
+      <FontStyle family='&quot;SANS&quot;' justify='&quot;MIDDLE&quot; &quot;MIDDLE&quot;' style='BOLD'></FontStyle>
+    </Text>
+    <Appearance>
+      <Material diffuseColor='0.9 0.9 0.9'></Material>
+    </Appearance>
+  </Shape>
+  <Shape bboxCenter='0 0 0' bboxSize='-1 -1 -1'>
+    <Box size='8 2 .001' solid='true'></Box>
+    <Appearance>
+      <Material transparency='1'></Material>
+    </Appearance>
+  </Shape>
+  <TouchSensor DEF='TouchTextInterface' description='Select to enable/disable MaterialModulator'></TouchSensor>
+  <BooleanToggle DEF='EventToggler' toggle='false' containerField='children'></BooleanToggle>
+  <ROUTE fromField='isActive' fromNode='TouchTextInterface' toField='set_boolean' toNode='EventToggler'></ROUTE>
+  <ROUTE fromField='toggle' fromNode='EventToggler' toField='enabled' toNode='MaterialModulatorInstance'></ROUTE>
+</Transform>
+</Scene>
+</X3D>
+
+<!-- ================================ -->
+</div>
+      <div id="details">
+         <p style="clear:both;">&nbsp;</p>
+         <table style="border:0px solid; border-spacing:0px; margin:auto; margin-top:20px;margin-left:5%;">
+            <tr style="background-color:silver; border-color:silver;">
+               <th style="text-align:right;">X3D&nbsp;Scene </th>
+               <th style="text-align:left;"> &nbsp; </th>
+               <th style="text-align:left;"> Metadata </th>
+            </tr>
+            <tr style="background-color:silver; border-color:silver;">
+               <td style="text-align:right;color:green;">
+                  <i>archive</i>
+               </td>
+               <td> &nbsp; </td>
+               <td>
+                  <i>
+                     <a href="http://X3dGraphics.com/examples/X3dForWebAuthors/Chapter14Prototypes">http://X3dGraphics.com/examples/X3dForWebAuthors/Chapter14Prototypes</a>
+                  </i>
+               </td>
+            </tr>
+            <tr>
+               <td style="text-align:right;color:green">title</td>
+               <td> &nbsp; </td>
+               <td>
+                  <a href="MaterialModulator.x3d">MaterialModulator.x3d</a>
+               </td>
+            </tr>
+            <tr>
+               <td style="text-align:right;color:green">description</td>
+               <td> &nbsp; </td>
+               <td>Mimic a Material node and modulate the diffuseColor field as an animation effect, provided as a prototype for reusability.</td>
+            </tr>
+            <tr>
+               <td style="text-align:right;color:green">hint</td>
+               <td> &nbsp; </td>
+               <td>Learning suggestion for authors: try changing the modulation script so that it goes from [0 ... 1] and then [1 ... 0] alternating, rather than abruptly shifting from 1 immediately back to 0.</td>
+            </tr>
+            <tr>
+               <td style="text-align:right;color:green">creator</td>
+               <td> &nbsp; </td>
+               <td>Don Brutzman</td>
+            </tr>
+            <tr>
+               <td style="text-align:right;color:green">created</td>
+               <td> &nbsp; </td>
+               <td>10 March 2008</td>
+            </tr>
+            <tr>
+               <td style="text-align:right;color:green">modified</td>
+               <td> &nbsp; </td>
+               <td>20 October 2019</td>
+            </tr>
+            <tr>
+               <td style="text-align:right;color:green">subject</td>
+               <td> &nbsp; </td>
+               <td>X3D prototype requiring Script inputOutput fields</td>
+            </tr>
+            <tr>
+               <td style="text-align:right;color:green">Image</td>
+               <td> &nbsp; </td>
+               <td>
+                  <a href="MaterialModulator.png">MaterialModulator.png</a>
+               </td>
+            </tr>
+            <tr>
+               <td style="text-align:right;color:green">identifier</td>
+               <td> &nbsp; </td>
+               <td>
+                  <a href="http://X3dGraphics.com/examples/X3dForWebAuthors/Chapter14Prototypes/MaterialModulator.x3d">http://X3dGraphics.com/examples/X3dForWebAuthors/Chapter14Prototypes/MaterialModulator.x3d</a>
+               </td>
+            </tr>
+            <tr>
+               <td style="text-align:right;color:green">generator</td>
+               <td> &nbsp; </td>
+               <td>X3D-Edit 3.3, <a href="https://savage.nps.edu/X3D-Edit">https://savage.nps.edu/X3D-Edit</a>
+               </td>
+            </tr>
+            <tr>
+               <td style="text-align:right;color:green">license</td>
+               <td> &nbsp; </td>
+               <td>
+                  <a href="../license.html">../license.html</a>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="3">&nbsp;</td>
+            </tr>
+            <tr style="background-color:silver;border-color:silver;">
+               <th style="text-align:right;"> HTML&nbsp;Browser </th>
+               <th/>
+               <th style="text-align:left;"> Information </th>
+            </tr>
+            <tr>
+               <td style="text-align:right;"> Browser code name: </td>
+               <td/>
+               <td id="browserCodeName"/>
+            </tr>
+            <tr>
+               <td style="text-align:right;"> Browser application name: </td>
+               <td/>
+               <td id="browserAppName"/>
+            </tr>
+            <tr>
+               <td style="text-align:right;"> Browser version: </td>
+               <td/>
+               <td id="browserAppVersion"/>
+            </tr>
+            <tr>
+               <td style="text-align:right;"> Cookies enabled: </td>
+               <td/>
+               <td id="browserCookieEnabled"/>
+            </tr>
+            <tr>
+               <td style="text-align:right;"> Platform: </td>
+               <td/>
+               <td id="browserPlatform"/>
+            </tr>
+            <tr>
+               <td style="text-align:right;"> User Agent: </td>
+               <td/>
+               <td id="browserUserAgent"/>
+            </tr>
+            <tr>
+               <td style="text-align:right;"> System language: </td>
+               <td/>
+               <td id="browserSystemLanguage"/>
+            </tr>
+            <tr>
+               <td colspan="3">
+                  <div id="htmlPageFooter">
+                     <table border="1"
+                            style="float:left; margin:auto; margin-top:20px; border:1px solid black;">
+                        <caption style="text-align:center;background-color:silver;border-color:silver; padding:4px;">
+                           <b>X3DOM node coverage</b>
+                        </caption>
+                        <tr style="text-align:center; padding:4px; border:1px solid black;">
+                           <th> Supported nodes found </th>
+                           <th> Unsupported nodes found </th>
+                           <th> Partial support</th>
+                        </tr>
+                        <tr style="border:1px solid black;">
+                           <td style="text-align:left;vertical-align:text-top;padding:4px;">
+                              <a href="https://www.web3d.org/x3d/tooltips/X3dTooltips.html#Appearance"
+                                 target="_blank">
+                                 <span style="color:green; text-decoration-color:green; moz-text-decoration-color:green;">Appearance</span>
+                              </a>
+                              <br/>
+                              <a href="https://www.web3d.org/x3d/tooltips/X3dTooltips.html#BooleanToggle"
+                                 target="_blank">
+                                 <span style="color:green; text-decoration-color:green; moz-text-decoration-color:green;">BooleanToggle</span>
+                              </a>
+                              <br/>
+                              <a href="https://www.web3d.org/x3d/tooltips/X3dTooltips.html#Box"
+                                 target="_blank">
+                                 <span style="color:green; text-decoration-color:green; moz-text-decoration-color:green;">Box</span>
+                              </a>
+                              <br/>
+                              <a href="https://www.web3d.org/x3d/tooltips/X3dTooltips.html#field"
+                                 target="_blank">
+                                 <span style="color:green; text-decoration-color:green; moz-text-decoration-color:green;">field</span>
+                              </a>
+                              <br/>
+                              <a href="https://www.web3d.org/x3d/tooltips/X3dTooltips.html#FontStyle"
+                                 target="_blank">
+                                 <span style="color:green; text-decoration-color:green; moz-text-decoration-color:green;">FontStyle</span>
+                              </a>
+                              <br/>
+                              <a href="https://www.web3d.org/x3d/tooltips/X3dTooltips.html#head"
+                                 target="_blank">
+                                 <span style="color:green; text-decoration-color:green; moz-text-decoration-color:green;">head</span>
+                              </a>
+                              <br/>
+                              <a href="https://www.web3d.org/x3d/tooltips/X3dTooltips.html#Material"
+                                 target="_blank">
+                                 <span style="color:green; text-decoration-color:green; moz-text-decoration-color:green;">Material</span>
+                              </a>
+                              <br/>
+                              <a href="https://www.web3d.org/x3d/tooltips/X3dTooltips.html#meta"
+                                 target="_blank">
+                                 <span style="color:green; text-decoration-color:green; moz-text-decoration-color:green;">meta</span>
+                              </a>
+                              <br/>
+                              <a href="https://www.web3d.org/x3d/tooltips/X3dTooltips.html#ROUTE"
+                                 target="_blank">
+                                 <span style="color:green; text-decoration-color:green; moz-text-decoration-color:green;">ROUTE</span>
+                              </a>
+                              <br/>
+                              <a href="https://www.web3d.org/x3d/tooltips/X3dTooltips.html#Scene"
+                                 target="_blank">
+                                 <span style="color:green; text-decoration-color:green; moz-text-decoration-color:green;">Scene</span>
+                              </a>
+                              <br/>
+                              <a href="https://www.web3d.org/x3d/tooltips/X3dTooltips.html#Shape"
+                                 target="_blank">
+                                 <span style="color:green; text-decoration-color:green; moz-text-decoration-color:green;">Shape</span>
+                              </a>
+                              <br/>
+                              <a href="https://www.web3d.org/x3d/tooltips/X3dTooltips.html#Sphere"
+                                 target="_blank">
+                                 <span style="color:green; text-decoration-color:green; moz-text-decoration-color:green;">Sphere</span>
+                              </a>
+                              <br/>
+                              <a href="https://www.web3d.org/x3d/tooltips/X3dTooltips.html#TimeSensor"
+                                 target="_blank">
+                                 <span style="color:green; text-decoration-color:green; moz-text-decoration-color:green;">TimeSensor</span>
+                              </a>
+                              <br/>
+                              <a href="https://www.web3d.org/x3d/tooltips/X3dTooltips.html#TouchSensor"
+                                 target="_blank">
+                                 <span style="color:green; text-decoration-color:green; moz-text-decoration-color:green;">TouchSensor</span>
+                              </a>
+                              <br/>
+                              <a href="https://www.web3d.org/x3d/tooltips/X3dTooltips.html#Transform"
+                                 target="_blank">
+                                 <span style="color:green; text-decoration-color:green; moz-text-decoration-color:green;">Transform</span>
+                              </a>
+                              <br/>
+                              <a href="https://www.web3d.org/x3d/tooltips/X3dTooltips.html#WorldInfo"
+                                 target="_blank">
+                                 <span style="color:green; text-decoration-color:green; moz-text-decoration-color:green;">WorldInfo</span>
+                              </a>
+                              <br/> 
+                           </td>
+                           <td style="text-align:left;vertical-align:text-top;padding:4px;">
+                              <a href="https://www.web3d.org/x3d/tooltips/X3dTooltips.html#connect"
+                                 target="_blank">
+                                 <span style="color:red; text-decoration-color:red; moz-text-decoration-color:red;">connect</span>
+                              </a>
+                              <br/>
+                              <a href="https://www.web3d.org/x3d/tooltips/X3dTooltips.html#fieldValue"
+                                 target="_blank">
+                                 <span style="color:red; text-decoration-color:red; moz-text-decoration-color:red;">fieldValue</span>
+                              </a>
+                              <br/>
+                              <a href="https://www.web3d.org/x3d/tooltips/X3dTooltips.html#IS"
+                                 target="_blank">
+                                 <span style="color:red; text-decoration-color:red; moz-text-decoration-color:red;">IS</span>
+                              </a>
+                              <br/>
+                              <a href="https://www.web3d.org/x3d/tooltips/X3dTooltips.html#ProtoBody"
+                                 target="_blank">
+                                 <span style="color:red; text-decoration-color:red; moz-text-decoration-color:red;">ProtoBody</span>
+                              </a>
+                              <br/>
+                              <a href="https://www.web3d.org/x3d/tooltips/X3dTooltips.html#ProtoDeclare"
+                                 target="_blank">
+                                 <span style="color:red; text-decoration-color:red; moz-text-decoration-color:red;">ProtoDeclare</span>
+                              </a>
+                              <br/>
+                              <a href="https://www.web3d.org/x3d/tooltips/X3dTooltips.html#ProtoInstance"
+                                 target="_blank">
+                                 <span style="color:red; text-decoration-color:red; moz-text-decoration-color:red;">ProtoInstance</span>
+                              </a>
+                              <br/>
+                              <a href="https://www.web3d.org/x3d/tooltips/X3dTooltips.html#ProtoInterface"
+                                 target="_blank">
+                                 <span style="color:red; text-decoration-color:red; moz-text-decoration-color:red;">ProtoInterface</span>
+                              </a>
+                              <br/>
+                              <a href="https://www.web3d.org/x3d/tooltips/X3dTooltips.html#Script"
+                                 target="_blank">
+                                 <span style="color:red; text-decoration-color:red; moz-text-decoration-color:red;">Script</span>
+                              </a>
+                              <br/> 
+                           </td>
+                           <td style="text-align:left;vertical-align:text-top;padding:4px;">
+                              <a href="https://www.web3d.org/x3d/tooltips/X3dTooltips.html#Text"
+                                 target="_blank">
+                                 <span style="color:orange; text-decoration-color:orange; moz-text-decoration-color:orange;">
+                                    <b>Text</b>
+                                 </span>
+                              </a>
+                              <br/>: for example use, see <a href="https://x3dom.org/x3dom/example/x3dom_text.html"
+                                 onclick="target='x3dom';">X3DOM Text Example</a> 
+                           </td>
+                        </tr>
+                        <tr style="text-align:center; background-color:silver;border-color:silver; padding:6px;">
+                           <td colspan="3" style="cellpadding:3px"> &nbsp;&nbsp;&nbsp; References: <a href="https://doc.x3dom.org/check" onclick="target='_blank';">X3DOM browser check</a>,
+                                <a href="https://doc.x3dom.org" onclick="target='_blank';">X3DOM home</a>,
+                                <a href="https://doc.x3dom.org" onclick="target='_blank';">X3DOM documentation</a>,
+                                <a href="https://x3dom.org/x3dom/test/functional/dumpNodeTypeTree.html"
+                                 onclick="target='_blank';">X3DOM list of supported nodes</a>,
+                                and
+                                <a href="https://www.web3d.org/x3d/content/examples/X3dResources.html"
+                                 onclick="target='_blank';">X3D Resources</a> &nbsp;&nbsp;&nbsp; </td>
+                        </tr>
+                     </table>
+                  </div>
+               </td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>
