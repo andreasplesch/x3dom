@@ -2683,67 +2683,67 @@ x3dom.fields.Quaternion = function ( x, y, z, w )
  * @class Represents a SFRotation
  */
 x3dom.fields.SFRotation = new Proxy( x3dom.fields.Quaternion,
-{
-    construct: function ( target, args )
     {
-        args[0] = args[0] || 0;
-        args[1] = args[1] || 1;
-        args[2] = args[2] || 0;
-        args[3] = args[3] || 0;
-        var quat;
-        var handler = {
-            get: function ( target, prop )
-                {
-                    switch ( prop )
-                    {
-                        case "0":
-                        case "x":
-                            return target.SFRotation.x;
-                            break;
-                        case "1":
-                        case "y":
-                            return target.SFRotation.y;
-                            break;
-                        case "2":
-                        case "z":
-                            return target.SFRotation.z;
-                            break;
-                        case "3":
-                        case "angle":
-                            return target.SFRotation.angle;
-                            break;
-                        default:
-                            return Reflect.get( target, prop );
-                    }
-                }
-        };
-        
-        if ( args[0].constructor == x3dom.fields.SFVec3f )
+        construct: function ( target, args )
         {
-            if ( args[1].constructor == x3dom.fields.SFVec3f )
+            args[ 0 ] = args[ 0 ] || 0;
+            args[ 1 ] = args[ 1 ] || 1;
+            args[ 2 ] = args[ 2 ] || 0;
+            args[ 3 ] = args[ 3 ] || 0;
+            var quat;
+            var handler = {
+                get : function ( target, prop )
+                    {
+                        switch ( prop )
+                        {
+                            case "0":
+                            case "x":
+                                return target.SFRotation.x;
+                                break;
+                            case "1":
+                            case "y":
+                                return target.SFRotation.y;
+                                break;
+                            case "2":
+                            case "z":
+                                return target.SFRotation.z;
+                                break;
+                            case "3":
+                            case "angle":
+                                return target.SFRotation.angle;
+                                break;
+                            default:
+                                return Reflect.get( target, prop );
+                        }
+                    }
+            };
+
+            if ( args[ 0 ].constructor == x3dom.fields.SFVec3f )
             {
-                quat = new x3dom.fields.Quaternion.rotateFromTo( args[0].normalize(), args[1].normalize() );
+                if ( args[ 1 ].constructor == x3dom.fields.SFVec3f )
+                {
+                    quat = new x3dom.fields.Quaternion.rotateFromTo( args[ 0 ].normalize(), args[ 1 ].normalize() );
+                }
+                else
+                {
+                    quat = new x3dom.fields.Quaternion.axisAngle( args[ 0 ], args[ 1 ] );
+                }
             }
             else
             {
-                quat = new x3dom.fields.Quaternion.axisAngle( args[0], args[1] );
+                quat = new x3dom.fields.Quaternion.axisAngle( new x3dom.fields.SFVec3f( args[ 0 ], args[ 1 ], args[ 2 ] ), args[ 3 ] );
             }
+            //save properties
+            var aa = quat.toAxisAngle();
+            quat.SFRotation = {
+                x : aa[0].x,
+                y : aa[0].y,
+                z : aa[0].z,
+                angle : aa[1]
+            };
+            return new Proxy( quat, handler );
         }
-        else
-        {
-            quat = new x3dom.fields.Quaternion.axisAngle( new x3dom.fields.SFVec3f( args[0], args[1], args[2] ), args[3] );
-        }
-        //save properties
-        var aa = quat.toAxisAngle();
-        quat.SFRotation = {
-            x: aa[0].x,
-            y: aa[0].y,
-            z: aa[0].z,
-            angle: aa[1]
-        };
-        return new Proxy ( quat, handler );
-    }
-} );
+    } );
 
 /**
  * Returns a copy of the supplied quaternion.
