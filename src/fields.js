@@ -2713,7 +2713,7 @@ x3dom.fields.SFRotation = new Proxy( x3dom.fields.Quaternion,
                             return target.SFRotation.angle;
                             break;
                         default:
-                            return Reflect.get(...arguments)
+                            return Reflect.get( target, prop );
                     }
                 }
         };
