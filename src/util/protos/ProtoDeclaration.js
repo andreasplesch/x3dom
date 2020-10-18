@@ -192,7 +192,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                     //set initial values
                     for ( var field in this._vf )
                     {
-                        this.fieldChanged( field );
+                        this.fieldChanged( field, true );
                     }
                     for ( field in this._cf )
                     {
@@ -203,12 +203,12 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                             if ( this._cf_hash[ field ] !== this._get_cf_hash( field )
                                 || field == nodeField ) // if passed, is changed
                             {
-                                this.fieldChanged( field );
+                                this.fieldChanged( field, true );
                             }
                         }
                         else
                         {
-                            this.fieldChanged( field );
+                            this.fieldChanged( field, true );
                         }
                     }
 
@@ -234,7 +234,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                     }
                 },
 
-                fieldChanged : function ( field )
+                fieldChanged : function ( field, isInit )
                 {
                     try //
                     {
@@ -267,7 +267,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                             if ( field in this._vf )
                             {
                                 instanceNode._vf[ nodeField ] = this._vf[ field ];
-                                instanceNode.fieldChanged( nodeField );
+                                instanceNode.fieldChanged( nodeField, isInit );
                             }
                             else if ( field in this._cf )
                             {
