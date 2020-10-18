@@ -119,7 +119,7 @@ x3dom.registerNodeType(
                 }, this );
 
                 //find inputs and outputs, and fields to initialize
-                var outputs = [ "_dummy999" ];
+                var outputs = [];
                 var inputs = [];
                 var initValues = [];
                 this._cf.fields.nodes.forEach( function ( field )
@@ -133,7 +133,7 @@ x3dom.registerNodeType(
                             initValues.push( fieldName );
                             break;
                         case "inputoutput" :
-                            outputs.push( fieldName + "_changed" );
+                            outputs.push( fieldName );
                             inputs.push( "set_" + fieldName );
                             initValues.push( fieldName );
                             break;
@@ -151,7 +151,7 @@ x3dom.registerNodeType(
                 var source = "return function wrapper ( scriptNode ) { \n";
                 var callbacks = [ "initialize", "prepareEvents", "eventsProcessed", "shutdown", "getOutputs" ].concat( inputs );
                 source += "var " + callbacks.join( "," ) + ";\n";
-                source += "var " + outputs.join( "," ) + ";\n";
+                //source += "var " + outputs.join( "," ) + ";\n";
 
                 initValues.forEach( function ( field )
                 {
@@ -162,8 +162,8 @@ x3dom.registerNodeType(
                 {
                     source += "var " + field + " = x3dom.fields." + field + ";\n";
                 } );
-
-                //TODO add SFRotation, Browser, print ...
+                //TODO Browser, print ...
+                source += " var Browser = { print : x3dom.debug.logInfo, println : x3dom.debug.logInfo };\n";
                 source += this._source;
                 source += "\n function getOutputs () { \n";
                 source += "return { " + outputs.map( function ( c )
@@ -176,21 +176,30 @@ x3dom.registerNodeType(
                 } ).join( "," ) + " } };";
                 //make script function
                 this._scriptFunction = new Function( source )();
-                this._callbacks = this._scriptFunction( this ); // pass in this node
-                //run initialize
-                if ( this._callbacks.initialize instanceof Function )
-                {
-                    this._callbacks.initialize( Date.now() / 1000 );
-                }
-
+                this.fieldChanged ( "", true ); // run and initialize if available
             },
 
-            fieldChanged : function ( fieldName )
+            fieldChanged : function ( fieldName, isInit )
             {
+                if ( isInit )
+                {   // proto is using fieldChanged to set initial values which then may be used in initialize, rerun as needed
+                    this._callbacks = this._scriptFunction( this ); // pass in this node
+                    //run initialize
+                    if ( this._callbacks.initialize instanceof Function )
+                    {
+                        this._callbacks.initialize( Date.now() / 1000 );
+                    }
+                    return;
+                }
+
+                if ( "set_" + fieldName in this._callbacks )
+                {
+                    fieldName = "set_" + fieldName;
+                }
                 if ( this._callbacks[ fieldName ] instanceof Function )
                 {
                     var preOutputs = this._callbacks.getOutputs();
-                    this._callbacks[ fieldName ]( this._vf[ fieldName ], Date.now() / 1000 );
+                    this._callbacks[ fieldName ]( this._vf[ this._normalizeName( fieldName ) ], Date.now() / 1000 );
                     var postOutputs = this._callbacks.getOutputs();
                     for ( var output in postOutputs )
                     {
@@ -202,7 +211,14 @@ x3dom.registerNodeType(
                 }
             },
 
-            forwardMessage : function ( fieldName, msg ) { console.log ( fieldName, msg ); },
+            _normalizeName : function ( name )
+            {
+                if ( name in this._vf ) 
+                {
+                    return name;
+                }
+                return name.replace( /^set_/, "" ).replace( /_changed$/, "" );
+            },
         }
     )
 );
