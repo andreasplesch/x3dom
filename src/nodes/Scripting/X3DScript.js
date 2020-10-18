@@ -119,7 +119,7 @@ x3dom.registerNodeType(
                 }, this );
 
                 //find inputs and outputs, and fields to initialize
-                var outputs = [];
+                var outputs = [ "_dummy999" ];
                 var inputs = [];
                 var initValues = [];
                 this._cf.fields.nodes.forEach( function ( field )
@@ -152,20 +152,23 @@ x3dom.registerNodeType(
                 var callbacks = [ "initialize", "prepareEvents", "eventsProcessed", "shutdown", "getOutputs" ].concat( inputs );
                 source += "var " + callbacks.join( "," ) + ";\n";
                 source += "var " + outputs.join( "," ) + ";\n";
+
                 initValues.forEach( function ( field )
                 {
                     source += "var " + field + " = scriptNode._vf['" + field + "'];\n";
                 } );
+
                 Object.keys( x3dom.fields ).forEach( function ( field )
                 {
                     source += "var " + field + " = x3dom.fields." + field + ";\n";
                 } );
+
                 //TODO add SFRotation, Browser, print ...
                 source += this._source;
                 source += "\n function getOutputs () { \n";
                 source += "return { " + outputs.map( function ( c )
                 {
-                    return "\n" + c + " : " + c;
+                    return "\n" + c + " : " + c + ", " + c + "_json : " + " JSON.stringify( " + c + " )";
                 } ).join( "," ) + " } };";
                 source += "\n return { " + callbacks.map( function ( c )
                 {
@@ -179,6 +182,7 @@ x3dom.registerNodeType(
                 {
                     this._callbacks.initialize( Date.now() / 1000 );
                 }
+
             },
 
             fieldChanged : function ( fieldName )
@@ -190,13 +194,15 @@ x3dom.registerNodeType(
                     var postOutputs = this._callbacks.getOutputs();
                     for ( var output in postOutputs )
                     {
-                        //if ( postOutputs[output] != preOutputs[output] )
+                        if ( postOutputs[output + "_json"] != preOutputs[output + "_json"] )
                         {
                             this.postMessage( output, postOutputs[ output ] );
                         }
                     }
                 }
-            }
+            },
+
+            forwardMessage : function ( fieldName, msg ) { console.log ( fieldName, msg ); },
         }
     )
 );
