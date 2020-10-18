@@ -251,7 +251,7 @@ function toggleShowDebugLogs()
         <connect nodeField='ambientIntensity' protoField='ambientIntensity'></connect>
       </IS>
     </Material>
-    <Script DEF='MaterialModulatorScript'>
+    <X3DScript DEF='MaterialModulatorScript'>
       <field accessType='inputOutput' name='enabled' type='SFBool'></field>
       <field accessType='inputOutput' name='diffuseColor' type='SFColor'></field>
       <field accessType='outputOnly' name='newColor' type='SFColor'></field>
@@ -260,7 +260,35 @@ function toggleShowDebugLogs()
         <connect nodeField='enabled' protoField='enabled'></connect>
         <connect nodeField='diffuseColor' protoField='diffuseColor'></connect>
       </IS>
-    </Script>
+<![CDATA[
+          
+ecmascript:
+function initialize ()
+{
+    newColor = diffuseColor; // start with original color
+}
+function clockTrigger (timeValue)
+{
+    if (!enabled) return;
+    red   = newColor.r;
+    green = newColor.g;
+    blue  = newColor.b;
+    
+    // note different modulation rates for each color component, % is modulus operator
+    newColor = new SFColor ((red + 0.02) % 1, (green + 0.03) % 1, (blue + 0.04) % 1);
+	if (enabled)
+	{
+		console.log ('diffuseColor=(' + red +',' + green + ',' + blue + ') newColor=' + newColor.toString() + '\n');
+	}
+}
+function set_enabled (newValue)
+{
+	enabled = newValue;
+}
+
+        
+]]>
+    </X3DScript>
     <ROUTE fromField='newColor' fromNode='MaterialModulatorScript' toField='diffuseColor' toNode='MaterialNode'></ROUTE>
     <TimeSensor DEF='ModulationClock' cycleInterval='0.1' loop='true'>
       <IS>
