@@ -365,6 +365,11 @@ function toggleShowDebugLogs()
           
 ecmascript:
 
+function initialize ()
+{
+  orientationRed = new SFRotation (0, 0, 1, 0);
+}
+
 //  this input function receives the currently interpolated rotation angle value,
 //  and then computes the position and orientation of each of the cones.
 
@@ -375,10 +380,10 @@ function angle (value)
   positionTurquoise = new SFVec3f (Math.cos (value+4.189), 1.5 * Math.sin(value+4.189), -0.5);
 
   // The values 2.094 and 4.189 are 1/3 and 2/3 of 2*pi radians.
-  orientationRed       = new SFRotation (0, 0, 1, -2*value);
+  orientationRed.angle = -2*value;
   orientationGreen     = new SFRotation (0, 0, 1, -2*(value+2.094));
   orientationTurquoise = new SFRotation (0, 0, 1, -2*(value+4.189));
-  console.log( orientationRed.SFRotation.z, orientationRed[3] );
+  console.log( orientationRed[2], orientationRed[3] );
 }
 
 ]]>
