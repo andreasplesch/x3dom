@@ -2772,12 +2772,12 @@ x3dom.fields.Quaternion.prototype.getAxis = function ()
     if ( "SFRotation" in this )
     {
         var axis = this.SFRotation;
-        return new x3dom.fields.SFVec3f(axis.x, axis.y, axis.z);
+        return new x3dom.fields.SFVec3f( axis.x, axis.y, axis.z );
     }
     else
     {
         var aa = this.toAxisAngle();
-        return aa[0];
+        return aa[ 0 ];
     }
 };
 
@@ -2887,7 +2887,7 @@ x3dom.fields.Quaternion.prototype.multiply = function ( that )
     if ( "SFRotation" in this )
     {
         var aa = product.toAxisAngle();
-        return new x3dom.fields.SFRotation( aa[0].x, aa[0].y, aa[0].z, aa[1] );
+        return new x3dom.fields.SFRotation( aa[ 0 ].x, aa[ 0 ].y, aa[ 0 ].z, aa[ 1 ] );
     }
     return product;
 };
