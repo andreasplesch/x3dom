@@ -2671,7 +2671,7 @@ x3dom.fields.Quaternion = function ( x, y, z, w )
 /**
  * SFRotation constructor.
  *
- * Represents a quaternion, the four components of which, all being
+ * Represents a SFRotation, the four components of which, all being
  * numbers, can be accessed and modified directly.
  *
  * Note that the coordinates, if supplied separately or in an array,
@@ -2687,7 +2687,7 @@ x3dom.fields.SFRotation = new Proxy( x3dom.fields.Quaternion,
         construct : function ( target, args )
         {
             args[ 0 ] = args[ 0 ] || 0;
-            args[ 1 ] = args[ 1 ] || 1;
+            args[ 1 ] = args[ 1 ] == undefined ? 1 : args[ 1 ];
             args[ 2 ] = args[ 2 ] || 0;
             args[ 3 ] = args[ 3 ] || 0;
             var quat;
@@ -2715,6 +2715,17 @@ x3dom.fields.SFRotation = new Proxy( x3dom.fields.Quaternion,
                         default:
                             return Reflect.get( target, prop );
                     }
+                },
+                set : function( target, prop, value )
+                {
+                    var rot = target.SFRotation;
+                    rot[prop] = value;
+                    target.setValues(
+                        new x3dom.fields.Quaternion.axisAngle(
+                            new x3dom.fields.SFVec3f( rot.x, rot.y, rot.z ), rot.angle
+                        )
+                    );
+                    return true;
                 }
             };
 
@@ -2728,22 +2739,45 @@ x3dom.fields.SFRotation = new Proxy( x3dom.fields.Quaternion,
                 {
                     quat = new x3dom.fields.Quaternion.axisAngle( args[ 0 ], args[ 1 ] );
                 }
+                //save properties
+                var aa = quat.toAxisAngle();
+                quat.SFRotation = {
+                    x     : aa[ 0 ].x,
+                    y     : aa[ 0 ].y,
+                    z     : aa[ 0 ].z,
+                    angle : aa[ 1 ]
+                };
             }
             else
             {
                 quat = new x3dom.fields.Quaternion.axisAngle( new x3dom.fields.SFVec3f( args[ 0 ], args[ 1 ], args[ 2 ] ), args[ 3 ] );
+                quat.SFRotation = {
+                    x     : args[ 0 ],
+                    y     : args[ 1 ],
+                    z     : args[ 2 ],
+                    angle : args[ 3 ]
+                };
             }
-            //save properties
-            var aa = quat.toAxisAngle();
-            quat.SFRotation = {
-                x     : aa[ 0 ].x,
-                y     : aa[ 0 ].y,
-                z     : aa[ 0 ].z,
-                angle : aa[ 1 ]
-            };
             return new Proxy( quat, handler );
         }
     } );
+
+/**
+ * Sets the components of this quaternion from another quaternion, and returns
+ * this modified quaternion.
+ *
+ * @param {x3dom.fields.Quaternion} that - the quaternion to copy from
+ * @returns {x3dom.fields.Quaternion} this modified quaternion
+ */
+x3dom.fields.Quaternion.prototype.setValues = function ( that )
+{
+    this.x = that.x;
+    this.y = that.y;
+    this.z = that.z;
+    this.w = that.w;
+
+    return this;
+};
 
 /**
  * Returns a copy of the supplied quaternion.
