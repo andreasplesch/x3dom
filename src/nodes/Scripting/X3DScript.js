@@ -176,7 +176,7 @@ x3dom.registerNodeType(
                 } ).join( "," ) + " } };";
                 //make script function
                 this._scriptFunction = new Function( source )();
-                this.fieldChanged ( "", true ); // run and initialize if available
+                this.fieldChanged( "", true ); // run and initialize if available
             },
 
             fieldChanged : function ( fieldName, isInit )
@@ -203,7 +203,7 @@ x3dom.registerNodeType(
                     var postOutputs = this._callbacks.getOutputs();
                     for ( var output in postOutputs )
                     {
-                        if ( postOutputs[output + "_json"] != preOutputs[output + "_json"] )
+                        if ( postOutputs[ output + "_json" ] != preOutputs[ output + "_json" ] )
                         {
                             this.postMessage( output, postOutputs[ output ] );
                         }
@@ -213,12 +213,12 @@ x3dom.registerNodeType(
 
             _normalizeName : function ( name )
             {
-                if ( name in this._vf ) 
+                if ( name in this._vf )
                 {
                     return name;
                 }
                 return name.replace( /^set_/, "" ).replace( /_changed$/, "" );
-            },
+            }
         }
     )
 );
