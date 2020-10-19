@@ -3326,7 +3326,7 @@ x3dom.fields.Quaternion.prototype.inverse = function ()
     if ( "SFRotation" in this )
     {
         var aa = inverse.toAxisAngle();
-        return new x3dom.fields.SFRotation( aa[0].x, aa[0].y, aa[0].z, aa[1] );
+        return new x3dom.fields.SFRotation( aa[ 0 ].x, aa[ 0 ].y, aa[ 0 ].z, aa[ 1 ] );
     }
     return inverse;
 };
