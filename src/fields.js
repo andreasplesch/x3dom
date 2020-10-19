@@ -2716,10 +2716,10 @@ x3dom.fields.SFRotation = new Proxy( x3dom.fields.Quaternion,
                             return Reflect.get( target, prop );
                     }
                 },
-                set : function( target, prop, value )
+                set : function ( target, prop, value )
                 {
                     var rot = target.SFRotation;
-                    rot[prop] = value;
+                    rot[ prop ] = value;
                     target.setValues(
                         new x3dom.fields.Quaternion.axisAngle(
                             new x3dom.fields.SFVec3f( rot.x, rot.y, rot.z ), rot.angle
