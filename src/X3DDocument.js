@@ -112,7 +112,6 @@ x3dom.X3DDocument.prototype._setup = function ( sceneDoc )
     this.mutationObserver.observe( sceneDoc.parentNode, { attributes: true, attributeOldValue: true, childList: true, subtree: false } );
     this.mutationObserver.observe( sceneElem, { attributes: true, attributeOldValue: true, childList: true, subtree: true } );
 
-
     // create and add BindableBag that holds all bindable stacks
     this._bindableBag = new x3dom.BindableBag( this );
 
