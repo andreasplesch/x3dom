@@ -1,0 +1,1309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D profile="Complete"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance" xsd:noNamespaceSchemaLocation="http://www.web3d.org/specifications/x3d-3.0.xsd">
+<head>
+  <meta content="test.x3d" name="filename"/>
+  <meta content="test" name="description"/>
+  <meta content="Octaga X3D file exporter" name="generator"/>
+</head>
+<Scene>
+<ProtoDeclare name="New_Icosahedron_Faces">
+  <ProtoInterface>
+    <field accessType="inputOutput" name="syzVPos3Choice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzVPos3TrChoice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzVPos3Material" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzVPos3TrMaterial" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzVNeg1Choice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzVNeg1TrChoice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzVNeg1Material" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzVNeg1TrMaterial" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzVNeg2Choice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzVNeg2TrChoice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzVNeg2Material" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzVNeg2TrMaterial" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzIVNeg3Choice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzIVNeg3TrChoice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzIVNeg3Material" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzIVNeg3TrMaterial" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzIVPos1Choice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzIVPos1TrChoice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzIVPos1Material" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzIVPos1TrMaterial" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzIVPos2Choice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzIVPos2TrChoice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzIVPos2Material" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzIVPos2TrMaterial" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzVINeg2Choice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzVINeg2TrChoice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzVINeg2Material" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzVINeg2TrMaterial" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzVIPos2Choice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzVIPos2TrChoice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzVIPos2Material" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzVIPos2TrMaterial" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzVI_0_Choice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzVI_0_TrChoice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzVI_0_Material" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzVI_0_TrMaterial" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzVII_0_Choice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzVII_0_TrChoice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzVII_0_Material" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzVII_0_TrMaterial" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzI_0_Choice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzI_0_TrChoice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzI_0_Material" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzI_0_TrMaterial" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzIPos2Choice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzIPos2TrChoice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzIPos2Material" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzIPos2TrMaterial" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzINeg2Choice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzINeg2TrChoice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzINeg2Material" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzINeg2TrMaterial" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzIIINeg1Choice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzIIINeg1TrChoice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzIIINeg1Material" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzIIINeg1TrMaterial" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzIIIPos3Choice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzIIIPos3TrChoice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzIIIPos3Material" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzIIIPos3TrMaterial" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzIIINeg2Choice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzIIINeg2TrChoice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzIIINeg2Material" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzIIINeg2TrMaterial" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzIINeg3Choice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzIINeg3TrChoice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzIINeg3Material" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzIINeg3TrMaterial" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzIIPos1Choice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzIIPos1TrChoice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzIIPos1Material" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzIIPos1TrMaterial" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzIIPos2Choice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzIIPos2TrChoice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzIIPos2Material" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="syzIIPos2TrMaterial" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="tone_0_Choice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="tone_0_TrChoice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="tone_0_Material" type="SFNode">
+    </field>
+    <field accessType="inputOutput" name="tone_0_TrMaterial" type="SFNode">
+    </field>
+  </ProtoInterface>
+  <ProtoBody>
+  <Group>
+    <Switch>
+      <IS>
+        <connect nodeField="whichChoice" protoField="syzVPos3Choice"/>
+      </IS>
+      <Group>
+        <Shape DEF="_X1_X2_Entity0">
+          <Appearance>
+            <IS>
+              <connect nodeField="material" protoField="syzVPos3Material"/>
+            </IS>
+          </Appearance>
+          <IndexedFaceSet coordIndex="0 1 2 -1 
+             2 3 4 -1 
+             3 1 4 -1 
+             2 4 5 -1 
+             0 2 5 -1 
+             1 0 4 -1 
+             " solid="false">
+            <Coordinate point="1.82624 -0.405418 -1.05514
+               1.7661 -0.449627 -0.729934
+               1.2469 -1.41873 0.542594
+               1.76659 0.152708 0.840176
+               1.82715 0.404859 1.05522
+               1.1285 -1.70755 0.655593
+               ">
+            </Coordinate>
+          </IndexedFaceSet>
+        </Shape>
+        <Switch>
+          <IS>
+            <connect nodeField="whichChoice" protoField="syzVPos3TrChoice"/>
+          </IS>
+          <Group>
+            <Shape DEF="_X1_X2_Entity1">
+              <Appearance>
+                <IS>
+                  <connect nodeField="material" protoField="syzVPos3TrMaterial"/>
+                </IS>
+              </Appearance>
+              <IndexedFaceSet coordIndex="0 1 2 -1 
+                 " solid="false">
+                <Coordinate point="1.76659 0.152708 0.840176
+                   1.2469 -1.41873 0.542594
+                   1.7661 -0.449627 -0.729934
+                   ">
+                </Coordinate>
+              </IndexedFaceSet>
+            </Shape>
+          </Group>
+        </Switch>
+      </Group>
+    </Switch>
+    <Switch>
+      <IS>
+        <connect nodeField="whichChoice" protoField="syzVNeg2Choice"/>
+      </IS>
+      <Group>
+        <Shape DEF="_X1_X2_Entity2">
+          <Appearance>
+            <IS>
+              <connect nodeField="material" protoField="syzVNeg2Material"/>
+            </IS>
+          </Appearance>
+          <IndexedFaceSet coordIndex="0 1 2 -1 
+             2 3 4 -1 
+             3 1 4 -1 
+             2 4 5 -1 
+             0 2 5 -1 
+             1 0 4 -1 
+             " solid="false">
+            <Coordinate point="-0.001596 -0.400086 2.1118
+               -0.253096 -0.445194 1.89723
+               -1.09417 -1.41823 0.813784
+               -1.61395 0.153229 1.11109
+               -1.83082 0.404932 1.05538
+               -1.13242 -1.7075 0.655478
+               ">
+            </Coordinate>
+          </IndexedFaceSet>
+        </Shape>
+        <Switch>
+          <IS>
+            <connect nodeField="whichChoice" protoField="syzVNeg2TrChoice"/>
+          </IS>
+          <Group>
+            <Shape DEF="_X1_X2_Entity3">
+              <Appearance>
+                <IS>
+                  <connect nodeField="material" protoField="syzVNeg2TrMaterial"/>
+                </IS>
+              </Appearance>
+              <IndexedFaceSet coordIndex="0 1 2 -1 
+                 " solid="false">
+                <Coordinate point="-1.61395 0.153229 1.11109
+                   -1.09417 -1.41823 0.813784
+                   -0.253096 -0.445194 1.89723
+                   ">
+                </Coordinate>
+              </IndexedFaceSet>
+            </Shape>
+          </Group>
+        </Switch>
+      </Group>
+    </Switch>
+    <Switch>
+      <IS>
+        <connect nodeField="whichChoice" protoField="syzIVNeg3Choice"/>
+      </IS>
+      <Group>
+        <Shape DEF="_X1_X2_Entity4">
+          <Appearance>
+            <IS>
+              <connect nodeField="material" protoField="syzIVNeg3Material"/>
+            </IS>
+          </Appearance>
+          <IndexedFaceSet coordIndex="0 1 2 -1 
+             2 3 4 -1 
+             3 1 4 -1 
+             2 4 5 -1 
+             0 2 5 -1 
+             1 0 4 -1 
+             " solid="false">
+            <Coordinate point="-1.82997 0.404972 1.0553
+               -1.76985 0.154487 0.843232
+               -1.25079 -1.41726 0.546171
+               -1.77042 -0.448662 -0.726565
+               -1.83098 -0.405198 -1.0551
+               -1.13242 -1.7075 0.655478
+               ">
+            </Coordinate>
+          </IndexedFaceSet>
+        </Shape>
+        <Switch>
+          <IS>
+            <connect nodeField="whichChoice" protoField="syzIVNeg3TrChoice"/>
+          </IS>
+          <Group>
+            <Shape DEF="_X1_X2_Entity5">
+              <Appearance>
+                <IS>
+                  <connect nodeField="material" protoField="syzIVNeg3TrMaterial"/>
+                </IS>
+              </Appearance>
+              <IndexedFaceSet coordIndex="0 1 2 -1 
+                 " solid="false">
+                <Coordinate point="-1.77042 -0.448662 -0.726565
+                   -1.25079 -1.41726 0.546171
+                   -1.76985 0.154487 0.843232
+                   ">
+                </Coordinate>
+              </IndexedFaceSet>
+            </Shape>
+          </Group>
+        </Switch>
+      </Group>
+    </Switch>
+    <Switch>
+      <IS>
+        <connect nodeField="whichChoice" protoField="syzIVPos2Choice"/>
+      </IS>
+      <Group>
+        <Shape DEF="_X1_X2_Entity6">
+          <Appearance>
+            <IS>
+              <connect nodeField="material" protoField="syzIVPos2Material"/>
+            </IS>
+          </Appearance>
+          <IndexedFaceSet coordIndex="0 1 2 -1 
+             2 3 4 -1 
+             3 1 4 -1 
+             2 4 5 -1 
+             0 2 5 -1 
+             1 0 4 -1 
+             " solid="false">
+            <Coordinate point="1.82548 0.408914 1.05501
+               1.61212 0.158195 1.1093
+               1.09756 -1.41467 0.810313
+               0.253777 -0.445885 1.89546
+               -0.000524 -0.402507 2.11212
+               1.13345 -1.70506 0.653513
+               ">
+            </Coordinate>
+          </IndexedFaceSet>
+        </Shape>
+        <Switch>
+          <IS>
+            <connect nodeField="whichChoice" protoField="syzIVPos2TrChoice"/>
+          </IS>
+          <Group>
+            <Shape DEF="_X1_X2_Entity7">
+              <Appearance>
+                <IS>
+                  <connect nodeField="material" protoField="syzIVPos2TrMaterial"/>
+                </IS>
+              </Appearance>
+              <IndexedFaceSet coordIndex="0 1 2 -1 
+                 " solid="false">
+                <Coordinate point="0.253777 -0.445885 1.89546
+                   1.09756 -1.41467 0.810313
+                   1.61212 0.158195 1.1093
+                   ">
+                </Coordinate>
+              </IndexedFaceSet>
+            </Shape>
+          </Group>
+        </Switch>
+      </Group>
+    </Switch>
+    <Switch>
+      <IS>
+        <connect nodeField="whichChoice" protoField="syzVNeg1Choice"/>
+      </IS>
+      <Group>
+        <Shape DEF="_X1_X2_Entity8">
+          <Appearance>
+            <IS>
+              <connect nodeField="material" protoField="syzVNeg1Material"/>
+            </IS>
+          </Appearance>
+          <IndexedFaceSet coordIndex="0 1 2 -1 
+             2 3 4 -1 
+             3 1 4 -1 
+             2 4 5 -1 
+             0 2 5 -1 
+             1 0 4 -1 
+             " solid="false">
+            <Coordinate point="-1.83034 -0.405344 -1.05461
+               -1.5187 -0.450289 -1.16502
+               -0.15849 -1.42187 -1.34923
+               -0.1583 0.148079 -1.952
+               -0.001974 0.399599 -2.11259
+               -0.001858 -1.7108 -1.30248
+               ">
+            </Coordinate>
+          </IndexedFaceSet>
+        </Shape>
+        <Switch>
+          <IS>
+            <connect nodeField="whichChoice" protoField="syzVNeg1TrChoice"/>
+          </IS>
+          <Group>
+            <Shape DEF="_X1_X2_Entity9">
+              <Appearance>
+                <IS>
+                  <connect nodeField="material" protoField="syzVNeg1TrMaterial"/>
+                </IS>
+              </Appearance>
+              <IndexedFaceSet coordIndex="0 1 2 -1 
+                 " solid="false">
+                <Coordinate point="-0.1583 0.148079 -1.952
+                   -0.15849 -1.42187 -1.34923
+                   -1.5187 -0.450289 -1.16502
+                   ">
+                </Coordinate>
+              </IndexedFaceSet>
+            </Shape>
+          </Group>
+        </Switch>
+      </Group>
+    </Switch>
+    <Switch>
+      <IS>
+        <connect nodeField="whichChoice" protoField="syzIVPos1Choice"/>
+      </IS>
+      <Group>
+        <Shape DEF="_X1_X2_Entity10">
+          <Appearance>
+            <IS>
+              <connect nodeField="material" protoField="syzIVPos1Material"/>
+            </IS>
+          </Appearance>
+          <IndexedFaceSet coordIndex="0 1 2 -1 
+             2 3 4 -1 
+             3 1 4 -1 
+             2 4 5 -1 
+             0 2 5 -1 
+             1 0 4 -1 
+             " solid="false">
+            <Coordinate point="-0.00233 0.39964 -2.11181
+               0.15162 0.149774 -1.95309
+               0.151582 -1.42046 -1.35107
+               1.51224 -0.449463 -1.16716
+               1.82698 -0.405271 -1.05545
+               -0.001858 -1.7108 -1.30248
+               ">
+            </Coordinate>
+          </IndexedFaceSet>
+        </Shape>
+        <Switch>
+          <IS>
+            <connect nodeField="whichChoice" protoField="syzIVPos1TrChoice"/>
+          </IS>
+          <Group>
+            <Shape DEF="_X1_X2_Entity11">
+              <Appearance>
+                <IS>
+                  <connect nodeField="material" protoField="syzIVPos1TrMaterial"/>
+                </IS>
+              </Appearance>
+              <IndexedFaceSet coordIndex="0 1 2 -1 
+                 " solid="false">
+                <Coordinate point="1.51224 -0.449463 -1.16716
+                   0.151582 -1.42046 -1.35107
+                   0.15162 0.149774 -1.95309
+                   ">
+                </Coordinate>
+              </IndexedFaceSet>
+            </Shape>
+          </Group>
+        </Switch>
+      </Group>
+    </Switch>
+    <Switch>
+      <IS>
+        <connect nodeField="whichChoice" protoField="syzVINeg2Choice"/>
+      </IS>
+      <Group>
+        <Shape DEF="_X1_X2_Entity12">
+          <Appearance>
+            <IS>
+              <connect nodeField="material" protoField="syzVINeg2Material"/>
+            </IS>
+          </Appearance>
+          <IndexedFaceSet coordIndex="0 1 2 -1 
+             2 3 4 -1 
+             3 1 4 -1 
+             2 4 5 -1 
+             0 2 5 -1 
+             1 0 4 -1 
+             " solid="false">
+            <Coordinate point="-1.13147 -1.70727 0.655313
+               -1.09282 -1.59804 0.342416
+               -0.252105 -1.60095 -1.11404
+               -1.61267 -0.629747 -0.93046
+               -1.83079 -0.405428 -1.05534
+               -0.001858 -1.7108 -1.30248
+               ">
+            </Coordinate>
+          </IndexedFaceSet>
+        </Shape>
+        <Switch>
+          <IS>
+            <connect nodeField="whichChoice" protoField="syzVINeg2TrChoice"/>
+          </IS>
+          <Group>
+            <Shape DEF="_X1_X2_Entity13">
+              <Appearance>
+                <IS>
+                  <connect nodeField="material" protoField="syzVINeg2TrMaterial"/>
+                </IS>
+              </Appearance>
+              <IndexedFaceSet coordIndex="0 1 2 -1 
+                 " solid="false">
+                <Coordinate point="-1.61267 -0.629747 -0.93046
+                   -0.252105 -1.60095 -1.11404
+                   -1.09282 -1.59804 0.342416
+                   ">
+                </Coordinate>
+              </IndexedFaceSet>
+            </Shape>
+          </Group>
+        </Switch>
+      </Group>
+    </Switch>
+    <Switch>
+      <IS>
+        <connect nodeField="whichChoice" protoField="syzVIPos2Choice"/>
+      </IS>
+      <Group>
+        <Shape DEF="_X1_X2_Entity14">
+          <Appearance>
+            <IS>
+              <connect nodeField="material" protoField="syzVIPos2Material"/>
+            </IS>
+          </Appearance>
+          <IndexedFaceSet coordIndex="0 1 2 -1 
+             2 3 4 -1 
+             3 1 4 -1 
+             2 4 5 -1 
+             0 2 5 -1 
+             1 0 4 -1 
+             " solid="false">
+            <Coordinate point="1.8263 -0.404776 -1.05527
+               1.60981 -0.627119 -0.932699
+               0.249601 -1.59867 -1.11701
+               1.09033 -1.59659 0.339432
+               1.12852 -1.70774 0.655151
+               -0.001858 -1.7108 -1.30248
+               ">
+            </Coordinate>
+          </IndexedFaceSet>
+        </Shape>
+        <Switch>
+          <IS>
+            <connect nodeField="whichChoice" protoField="syzVIPos2TrChoice"/>
+          </IS>
+          <Group>
+            <Shape DEF="_X1_X2_Entity15">
+              <Appearance>
+                <IS>
+                  <connect nodeField="material" protoField="syzVIPos2TrMaterial"/>
+                </IS>
+              </Appearance>
+              <IndexedFaceSet coordIndex="0 1 2 -1 
+                 " solid="false">
+                <Coordinate point="1.09033 -1.59659 0.339432
+                   0.249601 -1.59867 -1.11701
+                   1.60981 -0.627119 -0.932699
+                   ">
+                </Coordinate>
+              </IndexedFaceSet>
+            </Shape>
+          </Group>
+        </Switch>
+      </Group>
+    </Switch>
+    <Switch>
+      <IS>
+        <connect nodeField="whichChoice" protoField="syzVI_0_Choice"/>
+      </IS>
+      <Group>
+        <Shape DEF="_X1_X2_Entity16">
+          <Appearance>
+            <IS>
+              <connect nodeField="material" protoField="syzVI_0_Material"/>
+            </IS>
+          </Appearance>
+          <IndexedFaceSet coordIndex="0 1 2 -1 
+             2 3 4 -1 
+             3 1 4 -1 
+             2 4 5 -1 
+             0 2 5 -1 
+             1 0 4 -1 
+             " solid="false">
+            <Coordinate point="1.13284 -1.70483 0.652776
+               0.842376 -1.59586 0.775608
+               -0.839298 -1.60115 0.775763
+               -0.001419 -0.627377 1.86102
+               -0.000823 -0.402738 2.11207
+               -1.12746 -1.71157 0.653402
+               ">
+            </Coordinate>
+          </IndexedFaceSet>
+        </Shape>
+        <Switch>
+          <IS>
+            <connect nodeField="whichChoice" protoField="syzVI_0_TrChoice"/>
+          </IS>
+          <Group>
+            <Shape DEF="_X1_X2_Entity17">
+              <Appearance>
+                <IS>
+                  <connect nodeField="material" protoField="syzVI_0_TrMaterial"/>
+                </IS>
+              </Appearance>
+              <IndexedFaceSet coordIndex="0 1 2 -1 
+                 " solid="false">
+                <Coordinate point="-0.001419 -0.627377 1.86102
+                   -0.839298 -1.60115 0.775763
+                   0.842376 -1.59586 0.775608
+                   ">
+                </Coordinate>
+              </IndexedFaceSet>
+            </Shape>
+          </Group>
+        </Switch>
+      </Group>
+    </Switch>
+    <Switch>
+      <IS>
+        <connect nodeField="whichChoice" protoField="syzVII_0_Choice"/>
+      </IS>
+      <Group>
+        <Shape DEF="_X1_X2_Entity18">
+          <Appearance>
+            <IS>
+              <connect nodeField="material" protoField="syzVII_0_Material"/>
+            </IS>
+          </Appearance>
+          <IndexedFaceSet coordIndex="0 1 2 -1 
+             2 3 4 -1 
+             3 1 4 -1 
+             2 4 5 -1 
+             0 2 5 -1 
+             1 0 4 -1 
+             " solid="false">
+            <Coordinate point="1.12846 -1.70692 0.654908
+               0.84071 -1.70733 0.485999
+               0.000109 -1.71022 -0.970517
+               -0.840973 -1.70801 0.485722
+               -1.13211 -1.70783 0.655224
+               -0.001858 -1.7108 -1.30248
+               ">
+            </Coordinate>
+          </IndexedFaceSet>
+        </Shape>
+        <Switch>
+          <IS>
+            <connect nodeField="whichChoice" protoField="syzVII_0_TrChoice"/>
+          </IS>
+          <Group>
+            <Shape DEF="_X1_X2_Entity19">
+              <Appearance>
+                <IS>
+                  <connect nodeField="material" protoField="syzVII_0_TrMaterial"/>
+                </IS>
+              </Appearance>
+              <IndexedFaceSet coordIndex="0 1 2 -1 
+                 " solid="false">
+                <Coordinate point="-0.840973 -1.70801 0.485722
+                   0.000109 -1.71022 -0.970517
+                   0.84071 -1.70733 0.485999
+                   ">
+                </Coordinate>
+              </IndexedFaceSet>
+            </Shape>
+          </Group>
+        </Switch>
+      </Group>
+    </Switch>
+    <Switch>
+      <IS>
+        <connect nodeField="whichChoice" protoField="syzIIINeg1Choice"/>
+      </IS>
+      <Group>
+        <Shape DEF="_X1_X2_Entity20">
+          <Appearance>
+            <IS>
+              <connect nodeField="material" protoField="syzIIINeg1Material"/>
+            </IS>
+          </Appearance>
+          <IndexedFaceSet coordIndex="0 1 2 -1 
+             2 3 4 -1 
+             3 1 4 -1 
+             2 4 5 -1 
+             0 2 5 -1 
+             1 0 4 -1 
+             " solid="false">
+            <Coordinate point="-1.83032 0.405062 1.05466
+               -1.51868 0.450017 1.16505
+               -0.158496 1.42164 1.34923
+               -0.15824 -0.148308 1.95199
+               -0.001901 -0.399823 2.11258
+               -0.001874 1.71057 1.30247
+               ">
+            </Coordinate>
+          </IndexedFaceSet>
+        </Shape>
+        <Switch>
+          <IS>
+            <connect nodeField="whichChoice" protoField="syzIIINeg1TrChoice"/>
+          </IS>
+          <Group>
+            <Shape DEF="_X1_X2_Entity21">
+              <Appearance>
+                <IS>
+                  <connect nodeField="material" protoField="syzIIINeg1TrMaterial"/>
+                </IS>
+              </Appearance>
+              <IndexedFaceSet coordIndex="0 1 2 -1 
+                 " solid="false">
+                <Coordinate point="-0.15824 -0.148308 1.95199
+                   -0.158496 1.42164 1.34923
+                   -1.51868 0.450017 1.16505
+                   ">
+                </Coordinate>
+              </IndexedFaceSet>
+            </Shape>
+          </Group>
+        </Switch>
+      </Group>
+    </Switch>
+    <Switch>
+      <IS>
+        <connect nodeField="whichChoice" protoField="syzIIIPos3Choice"/>
+      </IS>
+      <Group>
+        <Shape DEF="_X1_X2_Entity22">
+          <Appearance>
+            <IS>
+              <connect nodeField="material" protoField="syzIIIPos3Material"/>
+            </IS>
+          </Appearance>
+          <IndexedFaceSet coordIndex="0 1 2 -1 
+             2 3 4 -1 
+             3 1 4 -1 
+             2 4 5 -1 
+             0 2 5 -1 
+             1 0 4 -1 
+             " solid="false">
+            <Coordinate point="1.82626 0.405251 1.05508
+               1.7661 0.449458 0.729875
+               1.24684 1.41855 -0.542638
+               1.76657 -0.152877 -0.840235
+               1.82713 -0.405026 -1.05528
+               1.12843 1.70736 -0.655634
+               ">
+            </Coordinate>
+          </IndexedFaceSet>
+        </Shape>
+        <Switch>
+          <IS>
+            <connect nodeField="whichChoice" protoField="syzIIIPos3TrChoice"/>
+          </IS>
+          <Group>
+            <Shape DEF="_X1_X2_Entity23">
+              <Appearance>
+                <IS>
+                  <connect nodeField="material" protoField="syzIIIPos3TrMaterial"/>
+                </IS>
+              </Appearance>
+              <IndexedFaceSet coordIndex="0 1 2 -1 
+                 " solid="false">
+                <Coordinate point="1.76657 -0.152877 -0.840235
+                   1.24684 1.41855 -0.542638
+                   1.7661 0.449458 0.729875
+                   ">
+                </Coordinate>
+              </IndexedFaceSet>
+            </Shape>
+          </Group>
+        </Switch>
+      </Group>
+    </Switch>
+    <Switch>
+      <IS>
+        <connect nodeField="whichChoice" protoField="syzIIINeg2Choice"/>
+      </IS>
+      <Group>
+        <Shape DEF="_X1_X2_Entity24">
+          <Appearance>
+            <IS>
+              <connect nodeField="material" protoField="syzIIINeg2Material"/>
+            </IS>
+          </Appearance>
+          <IndexedFaceSet coordIndex="0 1 2 -1 
+             2 3 4 -1 
+             3 1 4 -1 
+             2 4 5 -1 
+             0 2 5 -1 
+             1 0 4 -1 
+             " solid="false">
+            <Coordinate point="-0.001668 0.399862 -2.11181
+               -0.253164 0.444962 -1.89723
+               -1.09423 1.41797 -0.813761
+               -1.61398 -0.153504 -1.11105
+               -1.83084 -0.405214 -1.05534
+               -1.13249 1.70724 -0.655455
+               ">
+            </Coordinate>
+          </IndexedFaceSet>
+        </Shape>
+        <Switch>
+          <IS>
+            <connect nodeField="whichChoice" protoField="syzIIINeg2TrChoice"/>
+          </IS>
+          <Group>
+            <Shape DEF="_X1_X2_Entity25">
+              <Appearance>
+                <IS>
+                  <connect nodeField="material" protoField="syzIIINeg2TrMaterial"/>
+                </IS>
+              </Appearance>
+              <IndexedFaceSet coordIndex="0 1 2 -1 
+                 " solid="false">
+                <Coordinate point="-1.61398 -0.153504 -1.11105
+                   -1.09423 1.41797 -0.813761
+                   -0.253164 0.444962 -1.89723
+                   ">
+                </Coordinate>
+              </IndexedFaceSet>
+            </Shape>
+          </Group>
+        </Switch>
+      </Group>
+    </Switch>
+    <Switch>
+      <IS>
+        <connect nodeField="whichChoice" protoField="syzIIPos1Choice"/>
+      </IS>
+      <Group>
+        <Shape DEF="_X1_X2_Entity26">
+          <Appearance>
+            <IS>
+              <connect nodeField="material" protoField="syzIIPos1TrMaterial"/>
+            </IS>
+          </Appearance>
+          <IndexedFaceSet coordIndex="0 1 2 -1 
+             2 3 4 -1 
+             3 1 4 -1 
+             2 4 5 -1 
+             0 2 5 -1 
+             1 0 4 -1 
+             " solid="false">
+            <Coordinate point="-0.002258 -0.399864 2.11181
+               0.15168 -0.149994 1.95307
+               0.151575 1.42024 1.35106
+               1.51226 0.449286 1.16711
+               1.827 0.405104 1.05539
+               -0.001874 1.71057 1.30247
+               ">
+            </Coordinate>
+          </IndexedFaceSet>
+        </Shape>
+        <Switch>
+          <IS>
+            <connect nodeField="whichChoice" protoField="syzIIPos1TrChoice"/>
+          </IS>
+          <Group>
+            <Shape DEF="_X1_X2_Entity27">
+              <Appearance>
+                <IS>
+                  <connect nodeField="material" protoField="syzIIPos1TrMaterial"/>
+                </IS>
+              </Appearance>
+              <IndexedFaceSet coordIndex="0 1 2 -1 
+                 " solid="false">
+                <Coordinate point="1.51226 0.449286 1.16711
+                   0.151575 1.42024 1.35106
+                   0.15168 -0.149994 1.95307
+                   ">
+                </Coordinate>
+              </IndexedFaceSet>
+            </Shape>
+          </Group>
+        </Switch>
+      </Group>
+    </Switch>
+    <Switch>
+      <IS>
+        <connect nodeField="whichChoice" protoField="syzIIPos2Choice"/>
+      </IS>
+      <Group>
+        <Shape DEF="_X1_X2_Entity28">
+          <Appearance>
+            <IS>
+              <connect nodeField="material" protoField="syzIIPos2Material"/>
+            </IS>
+          </Appearance>
+          <IndexedFaceSet coordIndex="0 1 2 -1 
+             2 3 4 -1 
+             3 1 4 -1 
+             2 4 5 -1 
+             0 2 5 -1 
+             1 0 4 -1 
+             " solid="false">
+            <Coordinate point="1.82546 -0.409081 -1.05507
+               1.61209 -0.158369 -1.10935
+               1.0975 1.41448 -0.810353
+               0.253709 0.445668 -1.89547
+               -0.000596 0.402283 -2.11212
+               1.13338 1.70487 -0.653554
+               ">
+            </Coordinate>
+          </IndexedFaceSet>
+        </Shape>
+        <Switch>
+          <IS>
+            <connect nodeField="whichChoice" protoField="syzIIPos2TrChoice"/>
+          </IS>
+          <Group>
+            <Shape DEF="_X1_X2_Entity29">
+              <Appearance>
+                <IS>
+                  <connect nodeField="material" protoField="syzIPos2TrMaterial"/>
+                </IS>
+              </Appearance>
+              <IndexedFaceSet coordIndex="0 1 2 -1 
+                 " solid="false">
+                <Coordinate point="0.253709 0.445668 -1.89547
+                   1.0975 1.41448 -0.810353
+                   1.61209 -0.158369 -1.10935
+                   ">
+                </Coordinate>
+              </IndexedFaceSet>
+            </Shape>
+          </Group>
+        </Switch>
+      </Group>
+    </Switch>
+    <Switch>
+      <IS>
+        <connect nodeField="whichChoice" protoField="syzIINeg3Choice"/>
+      </IS>
+      <Group>
+        <Shape DEF="_X1_X2_Entity30">
+          <Appearance>
+            <IS>
+              <connect nodeField="material" protoField="syzIINeg3Material"/>
+            </IS>
+          </Appearance>
+          <IndexedFaceSet coordIndex="0 1 2 -1 
+             2 3 4 -1 
+             3 1 4 -1 
+             2 4 5 -1 
+             0 2 5 -1 
+             1 0 4 -1 
+             " solid="false">
+            <Coordinate point="-1.82999 -0.405253 -1.05525
+               -1.76987 -0.154767 -0.843191
+               -1.25085 1.417 -0.546144
+               -1.77041 0.448382 0.726607
+               -1.83096 0.404916 1.05514
+               -1.13249 1.70724 -0.655455
+               ">
+            </Coordinate>
+          </IndexedFaceSet>
+        </Shape>
+        <Switch>
+          <IS>
+            <connect nodeField="whichChoice" protoField="syzIINeg3TrChoice"/>
+          </IS>
+          <Group>
+            <Shape DEF="_X1_X2_Entity31">
+              <Appearance>
+                <IS>
+                  <connect nodeField="material" protoField="syzIINeg3TrMaterial"/>
+                </IS>
+              </Appearance>
+              <IndexedFaceSet coordIndex="0 1 2 -1 
+                 " solid="false">
+                <Coordinate point="-1.77041 0.448382 0.726607
+                   -1.25085 1.417 -0.546144
+                   -1.76987 -0.154767 -0.843191
+                   ">
+                </Coordinate>
+              </IndexedFaceSet>
+            </Shape>
+          </Group>
+        </Switch>
+      </Group>
+    </Switch>
+    <Switch>
+      <IS>
+        <connect nodeField="whichChoice" protoField="syzINeg2Choice"/>
+      </IS>
+      <Group>
+        <Shape DEF="_X1_X2_Entity32">
+          <Appearance>
+            <IS>
+              <connect nodeField="material" protoField="syzINeg2Material"/>
+            </IS>
+          </Appearance>
+          <IndexedFaceSet coordIndex="0 1 2 -1 
+             2 3 4 -1 
+             3 1 4 -1 
+             2 4 5 -1 
+             0 2 5 -1 
+             1 0 4 -1 
+             " solid="false">
+            <Coordinate point="-1.13154 1.70701 -0.655289
+               -1.09288 1.59778 -0.342395
+               -0.252124 1.60071 1.11403
+               -1.61266 0.629472 0.930497
+               -1.83077 0.405146 1.05538
+               -0.001874 1.71057 1.30247
+               ">
+            </Coordinate>
+          </IndexedFaceSet>
+        </Shape>
+        <Switch>
+          <IS>
+            <connect nodeField="whichChoice" protoField="syzINeg2TrChoice"/>
+          </IS>
+          <Group>
+            <Shape DEF="_X1_X2_Entity33">
+              <Appearance>
+                <IS>
+                  <connect nodeField="material" protoField="syzINeg2TrMaterial"/>
+                </IS>
+              </Appearance>
+              <IndexedFaceSet coordIndex="0 1 2 -1 
+                 " solid="false">
+                <Coordinate point="-1.61266 0.629472 0.930497
+                   -0.252124 1.60071 1.11403
+                   -1.09288 1.59778 -0.342395
+                   ">
+                </Coordinate>
+              </IndexedFaceSet>
+            </Shape>
+          </Group>
+        </Switch>
+      </Group>
+    </Switch>
+    <Switch>
+      <IS>
+        <connect nodeField="whichChoice" protoField="syzI_0_Choice"/>
+      </IS>
+      <Group>
+        <Shape DEF="_X1_X2_Entity34">
+          <Appearance>
+            <IS>
+              <connect nodeField="material" protoField="syzI_0_Material"/>
+            </IS>
+          </Appearance>
+          <IndexedFaceSet coordIndex="0 1 2 -1 
+             2 3 4 -1 
+             3 1 4 -1 
+             2 4 5 -1 
+             0 2 5 -1 
+             1 0 4 -1 
+             " solid="false">
+            <Coordinate point="1.13276 1.70464 -0.652817
+               0.842305 1.59566 -0.775641
+               -0.83937 1.6009 -0.775747
+               -0.001491 0.627153 -1.86103
+               -0.000895 0.402513 -2.11208
+               -1.12753 1.71131 -0.653378
+               ">
+            </Coordinate>
+          </IndexedFaceSet>
+        </Shape>
+        <Switch>
+          <IS>
+            <connect nodeField="whichChoice" protoField="syzI_0_TrChoice"/>
+          </IS>
+          <Group>
+            <Shape DEF="_X1_X2_Entity35">
+              <Appearance>
+                <IS>
+                  <connect nodeField="material" protoField="syzI_0_TrMaterial"/>
+                </IS>
+              </Appearance>
+              <IndexedFaceSet coordIndex="0 1 2 -1 
+                 " solid="false">
+                <Coordinate point="-0.001491 0.627153 -1.86103
+                   -0.83937 1.6009 -0.775747
+                   0.842305 1.59566 -0.775641
+                   ">
+                </Coordinate>
+              </IndexedFaceSet>
+            </Shape>
+          </Group>
+        </Switch>
+      </Group>
+    </Switch>
+    <Switch>
+      <IS>
+        <connect nodeField="whichChoice" protoField="syzIPos2Choice"/>
+      </IS>
+      <Group>
+        <Shape DEF="_X1_X2_Entity36">
+          <Appearance>
+            <IS>
+              <connect nodeField="material" protoField="syzI_0_Material"/>
+            </IS>
+          </Appearance>
+          <IndexedFaceSet coordIndex="0 1 2 -1 
+             2 3 4 -1 
+             3 1 4 -1 
+             2 4 5 -1 
+             0 2 5 -1 
+             1 0 4 -1 
+             " solid="false">
+            <Coordinate point="1.82632 0.404609 1.05521
+               1.60982 0.626945 0.932645
+               0.249583 1.59845 1.117
+               1.09027 1.5964 -0.339473
+               1.12845 1.70755 -0.655192
+               -0.001874 1.71057 1.30247
+               ">
+            </Coordinate>
+          </IndexedFaceSet>
+        </Shape>
+        <Switch>
+          <IS>
+            <connect nodeField="whichChoice" protoField="syzI_0_TrChoice"/>
+          </IS>
+          <Group>
+            <Shape DEF="_X1_X2_Entity37">
+              <Appearance>
+                <IS>
+                  <connect nodeField="material" protoField="syzI_0_TrMaterial"/>
+                </IS>
+              </Appearance>
+              <IndexedFaceSet coordIndex="0 1 2 -1 
+                 " solid="false">
+                <Coordinate point="1.09027 1.5964 -0.339473
+                   0.249583 1.59845 1.117
+                   1.60982 0.626945 0.932645
+                   ">
+                </Coordinate>
+              </IndexedFaceSet>
+            </Shape>
+          </Group>
+        </Switch>
+      </Group>
+    </Switch>
+    <Switch>
+      <IS>
+        <connect nodeField="whichChoice" protoField="tone_0_Choice"/>
+      </IS>
+      <Group>
+        <Shape DEF="_X1_X2_Entity38">
+          <Appearance>
+            <IS>
+              <connect nodeField="material" protoField="tone_0_Material"/>
+            </IS>
+          </Appearance>
+          <IndexedFaceSet coordIndex="0 1 2 -1 
+             2 3 4 -1 
+             3 1 4 -1 
+             2 4 5 -1 
+             0 2 5 -1 
+             1 0 4 -1 
+             " solid="false">
+            <Coordinate point="1.12838 1.70673 -0.654948
+               0.840643 1.70713 -0.486031
+               8.3e-05 1.70999 0.970508
+               -0.84104 1.70776 -0.485706
+               -1.13218 1.70757 -0.6552
+               -0.001874 1.71057 1.30247
+               ">
+            </Coordinate>
+          </IndexedFaceSet>
+        </Shape>
+        <Switch>
+          <IS>
+            <connect nodeField="whichChoice" protoField="tone_0_TrChoice"/>
+          </IS>
+          <Group>
+            <Shape DEF="_X1_X2_Entity39">
+              <Appearance>
+                <IS>
+                  <connect nodeField="material" protoField="tone_0_TrMaterial"/>
+                </IS>
+              </Appearance>
+              <IndexedFaceSet coordIndex="0 1 2 -1 
+                 " solid="false">
+                <Coordinate point="-0.84104 1.70776 -0.485706
+                   8.3e-05 1.70999 0.970508
+                   0.840643 1.70713 -0.486031
+                   ">
+                </Coordinate>
+              </IndexedFaceSet>
+            </Shape>
+          </Group>
+        </Switch>
+      </Group>
+    </Switch>
+  </Group>
+  </ProtoBody>
+</ProtoDeclare>
+<ProtoInstance name="New_Icosahedron_Faces">
+  <fieldValue name="syzVPos3Choice" value="0"/>
+  <fieldValue name="syzVPos3TrChoice" value="0"/>
+  <fieldValue name="syzVPos3Material">
+    <Material DEF="NIF_Red" ambientIntensity="1" diffuseColor="1 0 0" emissiveColor="0.3 0 0" transparency="0.5">
+    </Material>
+  </fieldValue>
+  <fieldValue name="syzVPos3TrMaterial">
+    <Material DEF="NIF_blue" ambientIntensity="1" diffuseColor="0 0 1" emissiveColor="0.3 0 0" transparency="0.8">
+    </Material>
+  </fieldValue>
+  <fieldValue name="syzVNeg1Choice" value="0"/>
+  <fieldValue name="syzVNeg1TrChoice" value="0"/>
+  <fieldValue name="syzVNeg1Material">
+  </fieldValue>
+  <fieldValue name="syzVNeg1TrMaterial">
+  </fieldValue>
+  <fieldValue name="syzVNeg2Choice" value="0"/>
+  <fieldValue name="syzVNeg2TrChoice" value="0"/>
+  <fieldValue name="syzVNeg2Material">
+  </fieldValue>
+  <fieldValue name="syzVNeg2TrMaterial">
+  </fieldValue>
+  <fieldValue name="syzIVNeg3Choice" value="0"/>
+  <fieldValue name="syzIVNeg3TrChoice" value="-1"/>
+  <fieldValue name="syzIVNeg3Material">
+  </fieldValue>
+  <fieldValue name="syzIVNeg3TrMaterial">
+  </fieldValue>
+  <fieldValue name="syzIVPos1Choice" value="0"/>
+  <fieldValue name="syzIVPos1TrChoice" value="0"/>
+  <fieldValue name="syzIVPos1Material">
+  </fieldValue>
+  <fieldValue name="syzIVPos1TrMaterial">
+  </fieldValue>
+  <fieldValue name="syzIVPos2Choice" value="0"/>
+  <fieldValue name="syzIVPos2TrChoice" value="0"/>
+  <fieldValue name="syzIVPos2Material">
+  </fieldValue>
+  <fieldValue name="syzIVPos2TrMaterial">
+  </fieldValue>
+  <fieldValue name="syzVINeg2Choice" value="0"/>
+  <fieldValue name="syzVINeg2TrChoice" value="0"/>
+  <fieldValue name="syzVINeg2Material">
+  </fieldValue>
+  <fieldValue name="syzVINeg2TrMaterial">
+  </fieldValue>
+  <fieldValue name="syzVIPos2Choice" value="0"/>
+  <fieldValue name="syzVIPos2TrChoice" value="0"/>
+  <fieldValue name="syzVIPos2Material">
+  </fieldValue>
+  <fieldValue name="syzVIPos2TrMaterial">
+  </fieldValue>
+  <fieldValue name="syzVI_0_Choice" value="0"/>
+  <fieldValue name="syzVI_0_TrChoice" value="0"/>
+  <fieldValue name="syzVI_0_Material">
+  </fieldValue>
+  <fieldValue name="syzVI_0_TrMaterial">
+  </fieldValue>
+  <fieldValue name="syzVII_0_Choice" value="0"/>
+  <fieldValue name="syzVII_0_TrChoice" value="0"/>
+  <fieldValue name="syzVII_0_Material">
+  </fieldValue>
+  <fieldValue name="syzVII_0_TrMaterial">
+  </fieldValue>
+  <fieldValue name="syzI_0_Choice" value="0"/>
+  <fieldValue name="syzI_0_TrChoice" value="0"/>
+  <fieldValue name="syzI_0_Material">
+  </fieldValue>
+  <fieldValue name="syzI_0_TrMaterial">
+  </fieldValue>
+  <fieldValue name="syzIPos2Choice" value="0"/>
+  <fieldValue name="syzIPos2TrChoice" value="0"/>
+  <fieldValue name="syzIPos2Material">
+  </fieldValue>
+  <fieldValue name="syzIPos2TrMaterial">
+  </fieldValue>
+  <fieldValue name="syzINeg2Choice" value="0"/>
+  <fieldValue name="syzINeg2TrChoice" value="0"/>
+  <fieldValue name="syzINeg2Material">
+  </fieldValue>
+  <fieldValue name="syzINeg2TrMaterial">
+  </fieldValue>
+  <fieldValue name="syzIIINeg1Choice" value="0"/>
+  <fieldValue name="syzIIINeg1TrChoice" value="0"/>
+  <fieldValue name="syzIIINeg1Material">
+  </fieldValue>
+  <fieldValue name="syzIIINeg1TrMaterial">
+  </fieldValue>
+  <fieldValue name="syzIIIPos3Choice" value="0"/>
+  <fieldValue name="syzIIIPos3TrChoice" value="0"/>
+  <fieldValue name="syzIIIPos3Material">
+  </fieldValue>
+  <fieldValue name="syzIIIPos3TrMaterial">
+  </fieldValue>
+  <fieldValue name="syzIIINeg2Choice" value="0"/>
+  <fieldValue name="syzIIINeg2TrChoice" value="0"/>
+  <fieldValue name="syzIIINeg2Material">
+  </fieldValue>
+  <fieldValue name="syzIIINeg2TrMaterial">
+  </fieldValue>
+  <fieldValue name="syzIINeg3Choice" value="0"/>
+  <fieldValue name="syzIINeg3TrChoice" value="0"/>
+  <fieldValue name="syzIINeg3Material">
+    <Material diffuseColor="1 1 0" transparency="0.3">
+    </Material>
+  </fieldValue>
+  <fieldValue name="syzIINeg3TrMaterial">
+    <Material diffuseColor="0 1 1" transparency="0.6">
+    </Material>
+  </fieldValue>
+  <fieldValue name="syzIIPos1Choice" value="0"/>
+  <fieldValue name="syzIIPos1TrChoice" value="0"/>
+  <fieldValue name="syzIIPos1Material">
+  </fieldValue>
+  <fieldValue name="syzIIPos1TrMaterial">
+  </fieldValue>
+  <fieldValue name="syzIIPos2Choice" value="0"/>
+  <fieldValue name="syzIIPos2TrChoice" value="0"/>
+  <fieldValue name="syzIIPos2Material">
+  </fieldValue>
+  <fieldValue name="syzIIPos2TrMaterial">
+  </fieldValue>
+  <fieldValue name="tone_0_Choice" value="0"/>
+  <fieldValue name="tone_0_TrChoice" value="0"/>
+  <fieldValue name="tone_0_Material">
+  </fieldValue>
+  <fieldValue name="tone_0_TrMaterial">
+  </fieldValue>
+</ProtoInstance>
+</Scene>
+</X3D>
