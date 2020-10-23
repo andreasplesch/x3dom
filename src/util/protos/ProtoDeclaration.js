@@ -112,6 +112,10 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                                 type = ISNode._cf[ nodeField ].type;
                             }
                         }
+                        else
+                        {
+                            x3dom.debug.logWarning( that.name + ' Proto: field without IS connection - ' + field.name );
+                        }
                         this[ "addField_" + field.dataType ]( field.name, type );//type should be registered x3dom type
                         this._cf_hash[ field.name ] = "trigger";
                     }
