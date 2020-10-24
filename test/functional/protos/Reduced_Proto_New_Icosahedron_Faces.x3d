@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D profile="Complete"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance" xsd:noNamespaceSchemaLocation="http://www.web3d.org/specifications/x3d-3.0.xsd">
+<head>
+  <meta content="test.x3d" name="filename"/>
+  <meta content="test" name="description"/>
+  <meta content="Octaga X3D file exporter" name="generator"/>
+</head>
+<Scene>
+<ProtoDeclare name="New_Icosahedron_Faces">
+  <ProtoInterface>
+    <field accessType="inputOutput" name="syzIVPos2Choice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzIVPos2TrChoice" type="SFInt32" value="0"/>
+    <field accessType="inputOutput" name="syzIVPos2Material" type="SFNode">
+      <Material diffuseColor="1 0 0">
+      </Material>
+    </field>
+    <field accessType="inputOutput" name="syzIVPos2TrMaterial" type="SFNode">
+      <Material diffuseColor="0 1 0">
+      </Material>
+    </field>
+  </ProtoInterface>
+  <ProtoBody>
+  <Group>
+    <Switch>
+      <IS>
+        <connect nodeField="whichChoice" protoField="syzIVPos2Choice"/>
+      </IS>
+      <Group>
+        <Shape>
+          <Appearance>
+            <IS>
+              <connect nodeField="material" protoField="syzIVPos2Material"/>
+            </IS>
+          </Appearance>
+          <IndexedFaceSet coordIndex="0 1 2 -1
+             2 3 4 -1
+             3 1 4 -1
+             2 4 5 -1
+             0 2 5 -1
+             1 0 4 -1
+             " solid="false">
+            <Coordinate point="1.825 0.409 1.055
+               1.612 0.158 1.109
+               1.098 -1.415 0.81
+               0.254 -0.446 1.895
+               -0.001 -0.403 2.112
+               1.133 -1.705 0.654
+               ">
+            </Coordinate>
+          </IndexedFaceSet>
+        </Shape>
+        <Switch>
+          <IS>
+            <connect nodeField="whichChoice" protoField="syzIVPos2TrChoice"/>
+          </IS>
+          <Group>
+            <Shape>
+              <Appearance>
+                <IS>
+                  <connect nodeField="material" protoField="syzIVPos2TrMaterial"/>
+                </IS>
+              </Appearance>
+              <IndexedFaceSet coordIndex="0 1 2 -1
+                 " solid="false">
+                <Coordinate point="0.254 -0.446 1.895
+                   1.098 -1.415 0.81
+                   1.612 0.158 1.109
+                   ">
+                </Coordinate>
+              </IndexedFaceSet>
+            </Shape>
+          </Group>
+        </Switch>
+        </Group>
+        </Switch>
+  </Group>
+  </ProtoBody>
+</ProtoDeclare>
+<ProtoInstance name="New_Icosahedron_Faces">
+  <fieldValue name="syzIVPos2Choice" value="0"/>
+  <fieldValue name="syzIVPos2TrChoice" value="0"/>
+  <fieldValue name="syzIVPos2Material">
+    <Material diffuseColor="1 0 0">
+    </Material>
+  </fieldValue>
+  <fieldValue name="syzIVPos2TrMaterial">
+    <Material diffuseColor="0 1 0">
+    </Material>
+  </fieldValue>
+</ProtoInstance>
+</Scene>
+</X3D>
