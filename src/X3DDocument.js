@@ -795,12 +795,16 @@ x3dom.X3DDocument.prototype.onNodeRemoved =  function ( removedNode, target )
 
 x3dom.X3DDocument.prototype.onX3DNodeRemoved =  function ( removedNode, target )
 {
-    var domNode = "querySelector" in removedNode && removedNode.querySelector('X3D');
+    var domNodes = [];
+    if ( "querySelectorAll" in removedNode )
+    {
+        domNodes = removedNode.querySelectorAll('X3D');
+    } 
     if ( removedNode.localName && removedNode.localName.toUpperCase() == "X3D" )
     {
-        domNode = removedNode;
+        domNodes = [ removedNode ];
     }
-    if ( domNode )
+    domNodes.forEach( function ( domNode )
     {
         var runtime = domNode.runtime;
 
@@ -830,7 +834,7 @@ x3dom.X3DDocument.prototype.onX3DNodeRemoved =  function ( removedNode, target )
             domNode.context = null;
             domNode.runtime = null;
         }
-    }
+    }, this );
 };
 
 x3dom.X3DDocument.prototype.onNodeAdded = function ( addedNode, target )
