@@ -798,8 +798,8 @@ x3dom.X3DDocument.prototype.onX3DNodeRemoved =  function ( removedNode, target )
     var domNodes = [];
     if ( "querySelectorAll" in removedNode )
     {
-        domNodes = removedNode.querySelectorAll('X3D');
-    } 
+        domNodes = removedNode.querySelectorAll( "X3D" );
+    }
     if ( removedNode.localName && removedNode.localName.toUpperCase() == "X3D" )
     {
         domNodes = [ removedNode ];
