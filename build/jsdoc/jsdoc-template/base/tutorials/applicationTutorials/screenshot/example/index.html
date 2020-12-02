@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>X3DOM Catalogue example</title>
 
- <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.0.min.js" ></script>
+ <script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
  <link rel='stylesheet' type='text/css' href='https://www.x3dom.org/download/x3dom.css'/>
  <script type='text/javascript' src='https://www.x3dom.org/download/x3dom.js'> </script>
 
@@ -38,24 +38,38 @@
 
 		//Every time the user clicks on the 'take screenhot' button
 		$("#btnTakeScreenshot").on("click", function() {
-			//Get data url from the runtime
-			var imgUrl = document.getElementById("canvas").runtime.getScreenshot();
-
+			//maximise canvas
+			var x3delement = document.querySelector("x3d");
+			var x3dcontainer = document.querySelector("#container");
+			x3dcontainer.style.width='4096px';
+			x3dcontainer.style.height='4096px';
+			
+			//delay a bit to give the browser a chance to render
+			setTimeout( function () {
+			
 			//Create preview image...
 			var newScreenshotImage = document.createElement('img');
-			newScreenshotImage.src = imgUrl;
 			newScreenshotImage.id = "screenshot_" + screenshotCount;
 			$('#screenshotPreviews').append(newScreenshotImage);
 
 			//...and download link
 			var newScreenshotDownloadLink = document.createElement('a');
-			newScreenshotDownloadLink.href = imgUrl;
+			
 			newScreenshotDownloadLink.download = "screenshot_" + screenshotCount + ".png";
-			newScreenshotDownloadLink.innerHTML = "Speichern";
+			newScreenshotDownloadLink.innerHTML = "Save";
 			$('#screenshotPreviews').append(newScreenshotDownloadLink);
 
 			screenshotCount++;
 			$('#screenshotCount').html(screenshotCount);
+
+			//Get data url from the runtime
+			var imgUrl = x3delement.runtime.getScreenshot();
+			newScreenshotImage.src = imgUrl;
+			newScreenshotDownloadLink.href = imgUrl;
+			x3dcontainer.style.width='500px';
+			x3dcontainer.style.height='400px';
+			}, 100 );
+			
 		});
 	});
 </script>
@@ -69,22 +83,20 @@
 	Scanner Data provided by the <a href='http://www.3d-coform.eu'>3D COFORM Project</a>.
 </p>
 
-<div style="position:absolute;left: 550px;border:1px solid #dddddd; width:300px;min-height:200px;padding:10px;">
+<div style="border:1px solid #dddddd; width:300px;min-height:200px;padding:10px;">
 	<b>Screenshots: <span id="screenshotCount">0</span></b>
 	<div id="screenshotPreviews">
 
 	</div>
 </div>
 
-<div style="height:420px">
-	<x3d id="canvas" width='500px' height='400px'>
+<div id='container' style="height:409px; width:409px">
+	<x3d id="canvas" style="height:100%; width: 100%">
 	    <scene id="mainScene">
 			<Inline id="inlineBox" nameSpaceName="dcm" url="dcm2.x3d" />
 	    </scene>
 	</x3d>
 </div>
-
-
 
 <div>
 	<a href="#" id="btnTakeScreenshot">Take screenshot</a>
