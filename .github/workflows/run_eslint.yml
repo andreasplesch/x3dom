@@ -42,11 +42,11 @@ jobs:
         FIXED="${FIXED//$'\r'/'%0D'}"
         echo "envFIXED=$FIXED" >> $GITHUB_ENV
       continue-on-error: true
-    - name: upload fixed files
-      uses: actions/upload-artifact@v1
-      with:
-        name: eslint fix
-        path: linted
+#     - name: upload fixed files
+#       uses: actions/upload-artifact@v1
+#       with:
+#         name: eslint fix
+#         path: linted
     - run: echo "$REPORT"
     - name: Create diff comment
       uses: peter-evans/commit-comment@v1
