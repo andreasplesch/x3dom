@@ -35,12 +35,12 @@ jobs:
         REPORT="${REPORT//'%'/'%25'}"
         REPORT="${REPORT//$'\n'/'%0A'}"
         REPORT="${REPORT//$'\r'/'%0D'}" 
-        echo "::set-env name=REPORT::$REPORT"
+        echo "envREPORT=$REPORT" >> $GITHUB_ENV
         FIXED="$(cat fixed)"
         FIXED="${FIXED//'%'/'%25'}"
         FIXED="${FIXED//$'\n'/'%0A'}"
         FIXED="${FIXED//$'\r'/'%0D'}"
-        echo "::set-env name=FIXED::$FIXED"
+        echo "envFIXED=$FIXED" >> $GITHUB_ENV
       continue-on-error: true
     - name: upload fixed files
       uses: actions/upload-artifact@v1
@@ -54,7 +54,7 @@ jobs:
         body: |
           eslint and diff report:
           ```
-          ${{ env.REPORT }}
+          ${{ env.envREPORT }}
           ```
     - name: Create lint comment
       uses: peter-evans/commit-comment@v1
@@ -62,5 +62,5 @@ jobs:
         body: |
           fixes by eslint:
           ```
-          ${{ env.FIXED }}
+          ${{ env.envFIXED }}
           ```
