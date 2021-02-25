@@ -2005,14 +2005,14 @@ x3dom.gfx_webgl = ( function ()
                 sp.minPointSize = pprop_vf.pointSizeMinValue;
                 sp.maxPointSize = pprop_vf.pointSizeMaxValue;
 
-//                 sp.modelViewMatrix = mat_view.mult( trafo ).toGL();
-//                 sp.viewMatrixInverse = mat_view.inverse().toGL();
+                // sp.modelViewMatrix = mat_view.mult( trafo ).toGL();
+                // sp.viewMatrixInverse = mat_view.inverse().toGL();
 
-//                 if ( this.VRMode == 2 )
-//                 {
-//                     sp.modelViewMatrix2 = mat_view_R.mult( trafo ).toGL();
-//                     sp.viewMatrixInverse2 = mat_view_R.inverse().toGL();
-//                 }
+                // if ( this.VRMode == 2 )
+                // {
+                //     sp.modelViewMatrix2 = mat_view_R.mult( trafo ).toGL();
+                //     sp.viewMatrixInverse2 = mat_view_R.inverse().toGL();
+                // }
             }
 
             var q_n = s_gl.positions.length;
