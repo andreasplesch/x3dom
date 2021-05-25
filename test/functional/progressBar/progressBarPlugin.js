@@ -1,4 +1,11 @@
-x3dom.runtime.ready = function()
+/*
+
+Copyright (c) 2021, Andreas Plesch, Waltham, MA
+All rights reserved.
+
+*/
+
+x3dom.runtime.ready = function(
 {
     var x3d = document.querySelector('x3d');
     var progressDiv = x3d.querySelector(".x3dom-progress");
