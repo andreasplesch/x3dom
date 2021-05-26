@@ -27,6 +27,7 @@ height:100%;
     outline:none; 
 }
 .x3dom-progress {
+/* default spinner style
     left: 25%;
     top: 50%;
     position: absolute;
@@ -45,10 +46,11 @@ height:100%;
     transition: opacity 0.2s ease-in-out;
     background-color: rgba(255, 255, 255, 0.1);
     transition: background-color 10s cubic-bezier(0, 2.14, 1, -1.14) 0s, transform 40s linear 0s;
-    --background-color-1: rgba(253,110,55,0.5);
+    --background-color-1: rgba(253,110,55,0.4);
     --background-color-2: rgba(255,255,255,0.1);
     background-clip: border-box;
     width: 50%;
+*/
 }
 
 .x3dom-progress-spinner {
@@ -62,19 +64,71 @@ height:100%;
 }
 
 .x3dom-progress-bar {
+/* default
     height: 2em;
-    width: 100%;
+    width: 50%;
+*/
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    background: none;
+    appearance: none;
+    display:block;
+    margin:0 auto 10px auto;
+    width:50%;
+    height: calc(5px + .9vw);
 }
 
 .x3dom-progress-barDiv {
+    /*width: 100%;*/
+    text-align: justify;
+    position: absolute;
+    max-width: 1250px;
+    width: calc(90%);
+    height: auto;
+    left: 50%;
+    top: 90%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.x3dom-progress-percent {
+    display: none; /*block;*/
+    marginLeft: 1em;
     width: 100%;
 }
 
+.x3dom-animated::-webkit-progress-bar {
+background: transparent;
+}
 
-.x3dom-progress-percent {
-    display: block;
-    marginLeft: 1em;
-    width: 100%;
+.x3dom-animated::-webkit-progress-value {
+transition: width 10s;	
+background-image:
+-webkit-linear-gradient(-45deg, 
+transparent 66%, rgba(0, 0, 0, .1) 66%, 
+rgba(0,0, 0, .1) 66%, transparent 66%),
+-webkit-linear-gradient(top, 
+rgba(255, 255, 255, .25), 
+rgba(0, 0, 0, .25)),
+-webkit-linear-gradient(left, #252525, #750000);
+border-radius: 2px; 
+background-size: 35px 20px, 100% 100%, 100% 100%;
+}
+
+.x3dom-animated::-moz-progress-bar {
+transition: padding-bottom 10s;	
+background:
+-webkit-linear-gradient(-45deg, 
+transparent 66%, rgba(0, 0, 0, .1) 66%, 
+rgba(0,0, 0, .1) 66%, transparent 66%),
+-webkit-linear-gradient(top, 
+rgba(255, 255, 255, .25), 
+rgba(0, 0, 0, .25)),
+-webkit-linear-gradient(left, #252525, #750000);
+border-radius: 2px; 
+background-size: 35px 20px, 100% 100%, 100% 100%;
 }
 
 @keyframes spin {
