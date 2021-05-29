@@ -19,6 +19,7 @@ All rights reserved.
         progressDiv.style.backgroundClip = "border-box";
         var max = x3d.querySelectorAll('inline').length - 2; // guess downloads, subtract vr inlines
         var requests = 0;
+        var delays = 2;
         var value = max - requests;
         barDiv.innerHTML = '<progress class="x3dom-animated x3dom-progress-bar"></progress><percent class="x3dom-progress-percent">0%</percent>';
         progressDiv.appendChild(barDiv);
@@ -34,6 +35,12 @@ All rights reserved.
                 {
                     //requests = x3dom.RequestManager.loadedRequests;//+m.target.textContent;
                     requests = +m.target.textContent;
+                    if (requests == 0 && delays )
+                    {
+                        x3d.runtime.canvas.doc.downloadCount = 1;
+                        delays--;
+                        setTimeout(function(){ x3d.runtime.canvas.doc.downloadCount = 0; }, 4 * 1000 );
+                    }
                     value = max - requests;  // count up
                     if ( value / max > progress.value / max )
                     {
