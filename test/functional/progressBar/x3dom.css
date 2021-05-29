@@ -1,33 +1,34 @@
-X3D:hover, 
-x3d:hover, 
-.x3dom-canvas:hover {
+X3D:hover, x3d:hover, .x3dom-canvas:hover {
     -webkit-user-select: none;
     -webkit-touch-callout: none;
 }
+
 .x3dom-canvas {
-z-index: 0;
-position: absolute;
-left: 50%; top: 50%;
--webkit-transform: translate(-50%, -50%);
-transform: translate(-50%, -50%);	
-border:none;
-cursor:pointer;
-cursor:-webkit-grab;
-cursor:grab;
-width:100%;
-height:100%;
+    z-index: 0;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    border: none;
+    cursor: pointer;
+    cursor: -webkit-grab;
+    cursor: grab;
+    width: 100%;
+    height: 100%;
 }
 
 .x3dom-canvas-mousedown {
-  cursor:-webkit-grabbing;
-  cursor:grabbing;
+    cursor: -webkit-grabbing;
+    cursor: grabbing;
 }
 
 .x3dom-canvas:focus {
-    outline:none; 
+    outline: none;
 }
+
 .x3dom-progress {
-/* default spinner style
+    /* default spinner style
     left: 25%;
     top: 50%;
     position: absolute;
@@ -45,17 +46,15 @@ height:100%;
     pointer-events: none;
     transition: opacity 0.2s ease-in-out;
     background-color: rgba(255, 255, 255, 0.1);
-    transition: background-color 10s cubic-bezier(0, 2.14, 1, -1.14) 0s, transform 40s linear 0s;
-    --background-color-1: rgba(253,110,55,0.4);
-    --background-color-2: rgba(255,255,255,0.1);
     background-clip: border-box;
-    width: 50%;
 */
 }
 
 .x3dom-progress-spinner {
-    border: 2px solid #f3f3f3; /* Light grey */
-    border-top: 2px solid #646464; /* Blue */
+    border: 2px solid #f3f3f3;
+    /* Light grey */
+    border-top: 2px solid #646464;
+    /* Blue */
     border-radius: 50%;
     width: 16px;
     height: 16px;
@@ -74,9 +73,9 @@ height:100%;
     border: none;
     background: none;
     appearance: none;
-    display:block;
-    margin:0 auto 10px auto;
-    width:50%;
+    display: block;
+    margin: 10px;
+    width: 100%;
     height: calc(5px + .9vw);
 }
 
@@ -85,55 +84,66 @@ height:100%;
     text-align: justify;
     position: absolute;
     max-width: 1250px;
-    width: calc(90%);
+    width: 50%; /*calc(90%);*/
     height: auto;
     left: 50%;
     top: 90%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.0);
+    /* uncomment for pulsating background-color */
+    /*
+    transition: background-color 10s cubic-bezier(0, 2.14, 1, -1.14) 0s, transform 40s linear 0s;
+    animation: pulse 5s infinite;
+    */
+    --background-color-1: rgba(253,110,55,0.4);
+    --background-color-2: rgba(255,255,255,0.1);
+    background-clip: border-box;
+
+}
+
+@keyframes pulse {
+  0% {
+    background-color: #001F3F00;
+  }
+  100% {
+    background-color: #750000F0;
+  }
 }
 
 .x3dom-progress-percent {
-    display: none; /*block;*/
+    display: none;
+    /*block;*/
     marginLeft: 1em;
     width: 100%;
 }
 
 .x3dom-animated::-webkit-progress-bar {
-background: transparent;
+    background: transparent;
 }
 
 .x3dom-animated::-webkit-progress-value {
-transition: width 10s;	
-background-image:
--webkit-linear-gradient(-45deg, 
-transparent 66%, rgba(0, 0, 0, .1) 66%, 
-rgba(0,0, 0, .1) 66%, transparent 66%),
--webkit-linear-gradient(top, 
-rgba(255, 255, 255, .25), 
-rgba(0, 0, 0, .25)),
--webkit-linear-gradient(left, #252525, #750000);
-border-radius: 2px; 
-background-size: 35px 20px, 100% 100%, 100% 100%;
+    transition: width 10s;
+    background-image: -webkit-linear-gradient(-45deg, transparent 66%, rgba(0, 0, 0, .1) 66%, rgba(0,0, 0, .1) 66%, transparent 66%), -webkit-linear-gradient(top, rgba(255, 255, 255, .25), rgba(0, 0, 0, .25)), -webkit-linear-gradient(left, #252525, #750000);
+    border-radius: 2px;
+    background-size: 35px 20px, 100% 100%, 100% 100%;
 }
 
 .x3dom-animated::-moz-progress-bar {
-transition: padding-bottom 10s;	
-background:
--webkit-linear-gradient(-45deg, 
-transparent 66%, rgba(0, 0, 0, .1) 66%, 
-rgba(0,0, 0, .1) 66%, transparent 66%),
--webkit-linear-gradient(top, 
-rgba(255, 255, 255, .25), 
-rgba(0, 0, 0, .25)),
--webkit-linear-gradient(left, #252525, #750000);
-border-radius: 2px; 
-background-size: 35px 20px, 100% 100%, 100% 100%;
+    transition: padding-bottom 10s;
+    background: -webkit-linear-gradient(-45deg, transparent 66%, rgba(0, 0, 0, .1) 66%, rgba(0,0, 0, .1) 66%, transparent 66%), -webkit-linear-gradient(top, rgba(255, 255, 255, .25), rgba(0, 0, 0, .25)), -webkit-linear-gradient(left, #252525, #750000);
+    border-radius: 2px;
+    background-size: 35px 20px, 100% 100%, 100% 100%;
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .x3dom-vr {
@@ -196,12 +206,12 @@ background-size: 35px 20px, 100% 100%, 100% 100%;
     list-style: none;
     font-size: 9px;
     line-height: 16px;
-    margin:0;
+    margin: 0;
     padding: 0;
     padding-top: 2px;
 }
 
-.x3dom-states-item  {
+.x3dom-states-item {
     width: 100%;
     float: left;
 }
@@ -217,18 +227,18 @@ background-size: 35px 20px, 100% 100%, 100% 100%;
 }
 
 .x3dom-touch-marker {
-	display: inline;
+    display: inline;
     padding: 5px;
     border-radius: 10px;
     position: absolute;
     font-family: Helvetica, sans-serif;
-    line-height:10px;
+    line-height: 10px;
     font-size: 10px;
     color: darkorange;
     background: cornsilk;
     opacity: 0.6;
     border: 2px solid orange;
-	z-index: 200;
+    z-index: 200;
 }
 
 .x3dom-log {
@@ -248,9 +258,9 @@ background-size: 35px 20px, 100% 100%, 100% 100%;
     background-color: black;
     opacity: 0.8;
     -webkit-user-select: text;
-       -moz-user-select: text;
-        -ms-user-select: text;
-            user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
 }
 
 .x3dom-nox3d {
@@ -261,12 +271,12 @@ background-size: 35px 20px, 100% 100%, 100% 100%;
     opacity: 0.75;
 }
 
-.x3dom-nox3d p { 
+.x3dom-nox3d p {
     color: #fff;
     font-size: 14px;
 }
 
-.x3dom-nox3d a { 
+.x3dom-nox3d a {
     color: #fff;
     font-size: 14px;
 }
