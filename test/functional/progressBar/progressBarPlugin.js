@@ -17,30 +17,35 @@ All rights reserved.
         var backgroundColor1 = getComputedStyle(barDiv).getPropertyValue("--background-color-1") || 'rgba(253,110,55,0.4)';
         var backgroundColor2 = getComputedStyle(barDiv).getPropertyValue("--background-color-2") || 'rgba(255,255,255,0.1)';
         progressDiv.style.backgroundClip = "border-box";
-        var max = x3d.querySelectorAll('inline').length; // guess downloads
-        var value = 0;
+        var max = x3d.querySelectorAll('inline').length - 2; // guess downloads, subtract vr inlines
+        var requests = 0;
+        var value = max - requests;
         barDiv.innerHTML = '<progress class="x3dom-animated x3dom-progress-bar"></progress><percent class="x3dom-progress-percent">0%</percent>';
         progressDiv.appendChild(barDiv);
         var progress = barDiv.querySelector('progress');
         var progressText = barDiv.querySelector('percent');
         progress.max = max;
-        progress.value = 1;
+        progress.value = max / 100; //show a bit of progress
         var updateBar = function ( mlist )
         {
             mlist.forEach( m =>
             {
                 if (m.type == "childList")
                 {
-                    //value = x3dom.RequestManager.loadedRequests;//+m.target.textContent;
-                    value = +m.target.textContent;
+                    //requests = x3dom.RequestManager.loadedRequests;//+m.target.textContent;
+                    requests = +m.target.textContent;
                     if ( value > max )
                     {
-                        max = value;
+                        max = requests;
                         progress.max = max;
                     }
-                    progress.value = max - value; // count up
-                    progressText.childNodes[0].textContent = Math.round(100 * progress.value/max) + "%";
-                    //barDiv.style.backgroundColor = value % 2 ? backgroundColor1 : backgroundColor2;
+                    value = max - requests;  // count up
+                    if ( value / max > progress.value / max )
+                    {
+                        progress.value = value;
+                        progressText.childNodes[0].textContent = Math.round(100 * progress.value/max) + "%";
+                        //barDiv.style.backgroundColor = value % 2 ? backgroundColor1 : backgroundColor2;
+                    }
                 }
             });
         }
