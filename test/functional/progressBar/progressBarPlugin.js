@@ -34,17 +34,19 @@ All rights reserved.
                 {
                     //requests = x3dom.RequestManager.loadedRequests;//+m.target.textContent;
                     requests = +m.target.textContent;
-                    if ( value > max )
-                    {
-                        max = requests;
-                        progress.max = max;
-                    }
                     value = max - requests;  // count up
                     if ( value / max > progress.value / max )
                     {
-                        progress.value = value;
-                        progressText.childNodes[0].textContent = Math.round(100 * progress.value/max) + "%";
-                        //barDiv.style.backgroundColor = value % 2 ? backgroundColor1 : backgroundColor2;
+                        if ( requests > max )
+                        {
+                            max = requests;
+                            progress.max = max;
+                        }
+                        {
+                            progress.value = value;
+                            progressText.childNodes[0].textContent = Math.round(100 * progress.value/max) + "%";
+                            //barDiv.style.backgroundColor = value % 2 ? backgroundColor1 : backgroundColor2;
+                        }
                     }
                 }
             });
