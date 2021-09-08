@@ -1,0 +1,14 @@
+A scenegraph only x3dom without rendering to the Canvas
+-------------------------------------------------------
+
+x3dom constructs an x3d scenegraph object from the dom and updates it through routed events. Then it renders the scene to a webgl Canvas when there are changes. It would be useful to have a version which does not render but still parses the dom and updates the scenegraph.
+
+This branch will try to remove rendering. It already works to just detach the render canvas from the page, so it may be quite feasible to remove it completely.
+
+A caveat it that mouse interaction, picking and navigation will not be available but this ia unavoidable. All pickling related code will have to be short-circuited.
+
+Strategy
+--------
+
+Just try to remove the main render call, first. Go from there.
+
