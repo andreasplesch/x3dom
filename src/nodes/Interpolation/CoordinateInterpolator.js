@@ -77,6 +77,23 @@ x3dom.registerNodeType(
                         this.postMessage( "value_changed", value );
                     }
                 }
+            },
+
+            keyValueFromAccessor : function ( array )
+            {
+                var keyValue = new x3dom.fields.MFVec3f();
+                array.forEach( function ( val, i )
+                {
+                    if ( i % 3 == 2 )
+                    {
+                        keyValue.push( new x3dom.fields.SFVec3f(
+                            array[ i - 2 ],
+                            array[ i - 1 ],
+                            val
+                        ) );
+                    }
+                } );
+                return keyValue;
             }
         }
     )
