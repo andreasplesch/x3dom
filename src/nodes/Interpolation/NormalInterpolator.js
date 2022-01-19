@@ -70,7 +70,7 @@ x3dom.registerNodeType(
                         var val = new x3dom.fields.MFVec3f();
                         for ( var i = 0; i < a.length; i++ )
                         {
-                            val.push(a[ i ].multiply( 1.0 - t ).add( b[ i ].multiply( t ) ).normalize() );
+                            val.push( a[ i ].multiply( 1.0 - t ).add( b[ i ].multiply( t ) ).normalize() );
                         }
                         return val;
                     } );
