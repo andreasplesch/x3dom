@@ -1,5 +1,6 @@
 // wasm glTF decoder, wrapper plus wasm as data url
 
+
 var DracoDecoderModule = (() => {
   var _scriptDir = typeof document !== 'undefined' && document.currentScript ? document.currentScript.src : undefined;
   if (typeof __filename !== 'undefined') _scriptDir = _scriptDir || __filename;
@@ -36,8 +37,8 @@ else if (typeof define === 'function' && define['amd'])
 else if (typeof exports === 'object')
   exports["DracoDecoderModule"] = DracoDecoderModule;
 
-var x3dom.glTF = {};
-var x3dom.glTF.draco_wasm_dataurl = "data:text/plain;base64," +
+var x3dom_glTF = {};
+var x3dom_glTF.draco_wasm_dataurl = "data:text/plain;base64," +
   `AGFzbQEAAAABhAEUYAF/AX9gAn9/AX9gAX8AYAN/f38Bf2ACf38AYAABf2AEf39/fwF/YAN/f38A
 YAZ/f39/f38Bf2AEf39/fwBgAABgBn9/f39/fwBgBX9/f39/AGACf38BfWACf34AYAZ/f39/f34A
 YAd/f39/f39/AGADf39+AX9gA39/fwF8YAF/AX0CHwUBYQFhAAoBYQFiAAcBYQFjAAABYQFkAAAB
