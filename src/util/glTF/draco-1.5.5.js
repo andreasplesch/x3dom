@@ -118,12 +118,12 @@ bd();a.DT_UINT16=cd();a.DT_INT32=dd();a.DT_UINT32=ed();a.DT_INT64=fd();a.DT_UINT
 if(8>b.byteLength)return a.INVALID_GEOMETRY_TYPE;switch(b[7]){case 0:return a.POINT_CLOUD;case 1:return a.TRIANGULAR_MESH;default:return a.INVALID_GEOMETRY_TYPE}};return n.ready}}();"object"===typeof exports&&"object"===typeof module?module.exports=DracoDecoderModule:"function"===typeof define&&define.amd?define([],function(){return DracoDecoderModule}):"object"===typeof exports&&(exports.DracoDecoderModule=DracoDecoderModule);
                                        
 var DracoDecoderWASM = { 
-  dataUrl: "data:text/plain;base64," + DracoDecoderWASM_base64,
-  arrayBuffer: Uint8Array.from( atob( DracoDecoderWASM_base64 ), c => c.charCodeAt( 0 )).buffer,
+  dataUrl: "data:text/plain;base64," + DracoDecoderWASM_base64(),
+  arrayBuffer: Uint8Array.from( atob( DracoDecoderWASM_base64() ), c => c.charCodeAt( 0 )).buffer,
 };
 
-var DracoDecoderWASM_base64 =                                       
-  `AGFzbQEAAAABhAEUYAF/AX9gAn9/AX9gAX8AYAN/f38Bf2ACf38AYAABf2AEf39/fwF/YAN/f38A
+function DracoDecoderWASM_base64 ()
+{ return `AGFzbQEAAAABhAEUYAF/AX9gAn9/AX9gAX8AYAN/f38Bf2ACf38AYAABf2AEf39/fwF/YAN/f38A
 YAZ/f39/f38Bf2AEf39/fwBgAABgBn9/f39/fwBgBX9/f39/AGACf38BfWACf34AYAZ/f39/f34A
 YAd/f39/f39/AGADf39+AX9gA39/fwF8YAF/AX0CHwUBYQFhAAoBYQFiAAcBYQFjAAABYQFkAAAB
 YQFlAAcDrgOsAwIAAwMKBAoHAwoABwIAAgAKAQQEAwcJAgEABwMEBAMAAwQCAwMAAAACBQECBAQA
@@ -3473,3 +3473,4 @@ AAAAMAEAADEBAABTdDExbG9naWNfZXJyb3IA2CsAANgsAAB4LAAAAAAAABwtAAABAAAAMgEAADEB
 AABTdDEybGVuZ3RoX2Vycm9yAAAAANgrAAAILQAA6CwAAAAAAABQLQAAAQAAADMBAAAxAQAAU3Qx
 Mm91dF9vZl9yYW5nZQAAAADYKwAAPC0AAOgsAABTdDl0eXBlX2luZm8AAAAAsCsAAFwtAEH02gAL
 A/AvUA==`
+};
