@@ -12,6 +12,7 @@ x3dom.glTF2Loader = function ( nameSpace )
         "KHR_materials_unlit",
         "KHR_texture_transform"
     ];
+    this._dracoDecoderModule = DracoDecoderModule({ wasmBinary: DracoDecoderWASM.arrayBuffer });
 };
 
 /**
