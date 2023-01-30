@@ -117,7 +117,12 @@ typeof c&&(c=c.ptr);return B(Kc(d,b,c),C)};m.prototype.__destroy__=m.prototype._
 bd();a.DT_UINT16=cd();a.DT_INT32=dd();a.DT_UINT32=ed();a.DT_INT64=fd();a.DT_UINT64=gd();a.DT_FLOAT32=hd();a.DT_FLOAT64=id();a.DT_BOOL=jd();a.DT_TYPES_COUNT=kd();a.OK=ld();a.DRACO_ERROR=md();a.IO_ERROR=nd();a.INVALID_PARAMETER=od();a.UNSUPPORTED_VERSION=pd();a.UNKNOWN_VERSION=qd()}va?b():oa.unshift(b)})();if("function"===typeof a.onModuleParsed)a.onModuleParsed();a.Decoder.prototype.GetEncodedGeometryType=function(b){if(b.__class__&&b.__class__===a.DecoderBuffer)return a.Decoder.prototype.GetEncodedGeometryType_Deprecated(b);
 if(8>b.byteLength)return a.INVALID_GEOMETRY_TYPE;switch(b[7]){case 0:return a.POINT_CLOUD;case 1:return a.TRIANGULAR_MESH;default:return a.INVALID_GEOMETRY_TYPE}};return n.ready}}();"object"===typeof exports&&"object"===typeof module?module.exports=DracoDecoderModule:"function"===typeof define&&define.amd?define([],function(){return DracoDecoderModule}):"object"===typeof exports&&(exports.DracoDecoderModule=DracoDecoderModule);
                                        
-DracoDecoderWASM_dataUrl="data:text/plain;base64," +
+DracoDecoderWASM = { 
+  dataUrl: "data:text/plain;base64," + DracoDecoderWASM_base64,
+  arrayBuffer: Uint8Array.from( atob( DracoDecoderWASM_base64 ), c => c.charCodeAt( 0 )).buffer,
+};
+
+DracoDecoderWASM_base64 =                                       
   `AGFzbQEAAAABhAEUYAF/AX9gAn9/AX9gAX8AYAN/f38Bf2ACf38AYAABf2AEf39/fwF/YAN/f38A
 YAZ/f39/f38Bf2AEf39/fwBgAABgBn9/f39/fwBgBX9/f39/AGACf38BfWACf34AYAZ/f39/f34A
 YAd/f39/f39/AGADf39+AX9gA39/fwF8YAF/AX0CHwUBYQFhAAoBYQFiAAcBYQFjAAABYQFkAAAB
