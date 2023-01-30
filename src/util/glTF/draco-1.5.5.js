@@ -1,3 +1,4 @@
+/* eslint-disable */
 // glTF wrapper and wasm as data url
 
 var $jscomp=$jscomp||{};$jscomp.scope={};$jscomp.arrayIteratorImpl=function(h){var n=0;return function(){return n<h.length?{done:!1,value:h[n++]}:{done:!0}}};$jscomp.arrayIterator=function(h){return{next:$jscomp.arrayIteratorImpl(h)}};$jscomp.makeIterator=function(h){var n="undefined"!=typeof Symbol&&Symbol.iterator&&h[Symbol.iterator];return n?n.call(h):$jscomp.arrayIterator(h)};$jscomp.ASSUME_ES5=!1;$jscomp.ASSUME_NO_NATIVE_MAP=!1;$jscomp.ASSUME_NO_NATIVE_SET=!1;$jscomp.SIMPLE_FROUND_POLYFILL=!1;
@@ -118,7 +119,7 @@ bd();a.DT_UINT16=cd();a.DT_INT32=dd();a.DT_UINT32=ed();a.DT_INT64=fd();a.DT_UINT
 if(8>b.byteLength)return a.INVALID_GEOMETRY_TYPE;switch(b[7]){case 0:return a.POINT_CLOUD;case 1:return a.TRIANGULAR_MESH;default:return a.INVALID_GEOMETRY_TYPE}};return n.ready}}();"object"===typeof exports&&"object"===typeof module?module.exports=DracoDecoderModule:"function"===typeof define&&define.amd?define([],function(){return DracoDecoderModule}):"object"===typeof exports&&(exports.DracoDecoderModule=DracoDecoderModule);
                                        
 var DracoDecoderWASM = { 
-  dataUrl: "data:text/plain;base64," + DracoDecoderWASM_base64(),
+  //dataUrl: "data:text/plain;base64," + DracoDecoderWASM_base64(),
   arrayBuffer: Uint8Array.from( atob( DracoDecoderWASM_base64() ), c => c.charCodeAt( 0 )).buffer,
 };
 
