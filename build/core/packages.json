@@ -38,6 +38,7 @@
             "Moveable.js",
             "Promise.js",
             "glTF/glTF2Loader.js",
+            "glTF/draco-1.5.5.js",
             "DDSLoader.js",
             "VRControllerManager.js",
             "json/JSONParser.js",
