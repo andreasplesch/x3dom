@@ -11,11 +11,6 @@ x3dom.glTF2Loader = function ( nameSpace )
         "KHR_materials_unlit",
         "KHR_texture_transform"
     ];
-    DracoDecoderModule({ wasmBinary: DracoDecoderWASM.arrayBuffer }).then( function (module)
-    {
-        this._dracoDecoderModule = module;
-        this._dracoDecoder = new module.Decoder();
-    }.bind( this ));
 };
 
 /**
@@ -28,15 +23,19 @@ x3dom.glTF2Loader.prototype.dispose = function ()
     //this._dracoDecoderModule.destroy( this._dracoGeometry );
     this._dracoDecoderModule = null;
     this._glTF = null;
-    this._defintions = null;
+    this._definitions = null;
 }
 
 /**
  * Starts the loading/parsing of the glTF-Object
  * @param {Object} gltf
  */
-x3dom.glTF2Loader.prototype.load = function ( input, binary )
+x3dom.glTF2Loader.prototype.load = async function ( input, binary )
 {
+    const module = DracoDecoderModule({ wasmBinary: DracoDecoderWASM.arrayBuffer });
+    this._dracoDecoderModule = module;
+    this._dracoDecoder = new module.Decoder();
+
     this._gltf = this._getGLTF( input, binary );
 
     //generate X3D scene
