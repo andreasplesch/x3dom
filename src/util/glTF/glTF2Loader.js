@@ -32,7 +32,7 @@ x3dom.glTF2Loader.prototype.dispose = function ()
  */
 x3dom.glTF2Loader.prototype.load = async function ( input, binary )
 {
-    const module = DracoDecoderModule({ wasmBinary: DracoDecoderWASM.arrayBuffer });
+    const module = await DracoDecoderModule({ wasmBinary: DracoDecoderWASM.arrayBuffer });
     this._dracoDecoderModule = module;
     this._dracoDecoder = new module.Decoder();
 
