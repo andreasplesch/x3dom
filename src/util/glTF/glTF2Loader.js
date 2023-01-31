@@ -15,7 +15,7 @@ x3dom.glTF2Loader = function ( nameSpace )
     {
         this._dracoDecoderModule = module;
         this._dracoDecoder = new module.Decoder();
-    }.bind( this );
+    }.bind( this ));
 };
 
 /**
