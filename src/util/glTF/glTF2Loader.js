@@ -1,5 +1,4 @@
 /**
- *
  * @param {Object} gltf
  * @param {NodeNameSpace} nameSpace
  */
@@ -12,8 +11,25 @@ x3dom.glTF2Loader = function ( nameSpace )
         "KHR_materials_unlit",
         "KHR_texture_transform"
     ];
-    this._dracoDecoderModule = DracoDecoderModule({ wasmBinary: DracoDecoderWASM.arrayBuffer });
+    DracoDecoderModule({ wasmBinary: DracoDecoderWASM.arrayBuffer }).then( function (module)
+    {
+        this._dracoDecoderModule = module;
+        this._dracoDecoder = new module.Decoder();
+    }.bind( this );
 };
+
+/**
+ * Starts the loading/parsing of the glTF-Object
+ * @param {Object} gltf
+ */
+x3dom.glTF2Loader.prototype.dispose = function ()
+{
+    this._dracoDecoderModule.destroy( this._dracoDecoder );
+    //this._dracoDecoderModule.destroy( this._dracoGeometry );
+    this._dracoDecoderModule = null;
+    this._glTF = null;
+    this._defintions = null;
+}
 
 /**
  * Starts the loading/parsing of the glTF-Object
