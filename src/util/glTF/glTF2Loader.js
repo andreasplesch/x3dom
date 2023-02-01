@@ -30,9 +30,10 @@ x3dom.glTF2Loader.prototype.dispose = function ()
  * Starts the loading/parsing of the glTF-Object
  * @param {Object} gltf
  */
-x3dom.glTF2Loader.prototype.load = async function ( input, binary )
+
+x3dom.glTF2Loader.prototype.load = async function ( input, binary ) // eslint-disable-line
 {
-    const module = await DracoDecoderModule({ wasmBinary: DracoDecoderWASM.arrayBuffer });
+    const module = await DracoDecoderModule({ wasmBinary: DracoDecoderWASM.arrayBuffer }); // eslint-disable-line
     this._dracoDecoderModule = module;
     this._dracoDecoder = new module.Decoder();
 
