@@ -397,11 +397,11 @@ x3dom.registerNodeType(
                                 {
                                     var loader = new x3dom.glTF2Loader( namespace );
 
-                                    loader.load( xhr.response, isBinary ).then( function (inlineScene)
+                                    loader.load( xhr.response, isBinary ).then( function ( inlineScene )
                                     {
                                         loader.dispose();
                                         that.loadX3D( inlineScene, namespace );
-                                    });
+                                    } );
                                 }
                                 else
                                 {
