@@ -31,9 +31,11 @@ x3dom.glTF2Loader.prototype.dispose = function ()
  * @param {Object} gltf
  */
 
-x3dom.glTF2Loader.prototype.load = async function ( input, binary ) // eslint-disable-line
+x3dom.glTF2Loader.prototype.load = function ( input, binary )
 {
-    const module = await DracoDecoderModule({ wasmBinary: DracoDecoderWASM.arrayBuffer }); // eslint-disable-line
+    //const module = await 
+    return DracoDecoderModule({ wasmBinary: DracoDecoderWASM.arrayBuffer }).then( function ( module )
+    {
     this._dracoDecoderModule = module;
     this._dracoDecoder = new module.Decoder();
 
@@ -80,6 +82,7 @@ x3dom.glTF2Loader.prototype.load = async function ( input, binary ) // eslint-di
     }
 
     return x3dScene;
+    }.bind ( this ) );
 };
 
 /**
