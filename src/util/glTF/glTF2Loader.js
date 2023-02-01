@@ -24,7 +24,7 @@ x3dom.glTF2Loader.prototype.dispose = function ()
     this._dracoDecoderModule = null;
     this._glTF = null;
     this._definitions = null;
-}
+};
 
 /**
  * Starts the loading/parsing of the glTF-Object
@@ -33,56 +33,56 @@ x3dom.glTF2Loader.prototype.dispose = function ()
 
 x3dom.glTF2Loader.prototype.load = function ( input, binary )
 {
-    //const module = await 
-    return DracoDecoderModule({ wasmBinary: DracoDecoderWASM.arrayBuffer }).then( function ( module )
+    //const module = await
+    return DracoDecoderModule( { wasmBinary: DracoDecoderWASM.arrayBuffer } ).then( function ( module )
     {
-    this._dracoDecoderModule = module;
-    this._dracoDecoder = new module.Decoder();
+        this._dracoDecoderModule = module;
+        this._dracoDecoder = new module.Decoder();
 
-    this._gltf = this._getGLTF( input, binary );
+        this._gltf = this._getGLTF( input, binary );
 
-    //generate X3D scene
-    var x3dScene = this._generateX3DScene();
+        //generate X3D scene
+        var x3dScene = this._generateX3DScene();
 
-    //Get the scene ID
-    var sceneID = this._gltf.scene || 0;
+        //Get the scene ID
+        var sceneID = this._gltf.scene || 0;
 
-    //Get the scene
-    var scene = this._gltf.scenes[ sceneID ];
+        //Get the scene
+        var scene = this._gltf.scenes[ sceneID ];
 
-    //generate worldinfo from asset properties and extras
-    this._generateX3DWorldInfo( scene, x3dScene );
+        //generate worldinfo from asset properties and extras
+        this._generateX3DWorldInfo( scene, x3dScene );
 
-    //check if unsupported extension are required
-    if ( this._unsupportedExtensionsRequired() )
-    {
-        x3dom.debug.logWarning( "Cannot render glTF." );
-        x3dom.debug.logWarning( "Some required extension of " + this._gltf.extensionsRequired + " not supported." );
-        return x3dScene;
-    }
-
-    // Get the nodes
-    for ( var i = 0; i < scene.nodes.length; i++ )
-    {
-        var node = this._gltf.nodes[ scene.nodes[ i ] ];
-
-        this._traverseNodes( node, x3dScene, scene.nodes[ i ] );
-    }
-
-    //Get the animations
-    if ( this._gltf.animations )
-    {
-        for ( var i = 0; i < this._gltf.animations.length; i++ )
+        //check if unsupported extension are required
+        if ( this._unsupportedExtensionsRequired() )
         {
-            var animation   = this._gltf.animations[ i ];
-            var animationID = "glTF_ANIMATION_" + i;
-
-            this._generateX3DAnimationNodes( x3dScene, animation, animationID );
+            x3dom.debug.logWarning( "Cannot render glTF." );
+            x3dom.debug.logWarning( "Some required extension of " + this._gltf.extensionsRequired + " not supported." );
+            return x3dScene;
         }
-    }
 
-    return x3dScene;
-    }.bind ( this ) );
+        // Get the nodes
+        for ( var i = 0; i < scene.nodes.length; i++ )
+        {
+            var node = this._gltf.nodes[ scene.nodes[ i ] ];
+
+            this._traverseNodes( node, x3dScene, scene.nodes[ i ] );
+        }
+
+        //Get the animations
+        if ( this._gltf.animations )
+        {
+            for ( var i = 0; i < this._gltf.animations.length; i++ )
+            {
+                var animation   = this._gltf.animations[ i ];
+                var animationID = "glTF_ANIMATION_" + i;
+
+                this._generateX3DAnimationNodes( x3dScene, animation, animationID );
+            }
+        }
+
+        return x3dScene;
+    }.bind( this ) );
 };
 
 /**
