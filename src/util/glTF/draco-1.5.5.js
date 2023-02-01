@@ -1,4 +1,5 @@
 /* eslint-disable */
+
 // glTF wrapper and wasm as data url
 
 var $jscomp=$jscomp||{};$jscomp.scope={};$jscomp.arrayIteratorImpl=function(h){var n=0;return function(){return n<h.length?{done:!1,value:h[n++]}:{done:!0}}};$jscomp.arrayIterator=function(h){return{next:$jscomp.arrayIteratorImpl(h)}};$jscomp.makeIterator=function(h){var n="undefined"!=typeof Symbol&&Symbol.iterator&&h[Symbol.iterator];return n?n.call(h):$jscomp.arrayIterator(h)};$jscomp.ASSUME_ES5=!1;$jscomp.ASSUME_NO_NATIVE_MAP=!1;$jscomp.ASSUME_NO_NATIVE_SET=!1;$jscomp.SIMPLE_FROUND_POLYFILL=!1;
