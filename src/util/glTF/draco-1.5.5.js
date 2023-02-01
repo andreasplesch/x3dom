@@ -121,7 +121,7 @@ if(8>b.byteLength)return a.INVALID_GEOMETRY_TYPE;switch(b[7]){case 0:return a.PO
                                        
 var DracoDecoderWASM = { 
   //dataUrl: "data:text/plain;base64," + DracoDecoderWASM_base64(),
-  arrayBuffer: Uint8Array.from( atob( DracoDecoderWASM_base64() ), c => c.charCodeAt( 0 )).buffer,
+  arrayBuffer: Uint8Array.from( atob( DracoDecoderWASM_base64() ), function (c) { return c.charCodeAt( 0 ); }).buffer
 };
 
 function DracoDecoderWASM_base64 ()
