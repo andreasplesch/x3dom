@@ -9,7 +9,8 @@ x3dom.glTF2Loader = function ( nameSpace )
     this._supportedExtensions = [
         "KHR_materials_pbrSpecularGlossiness",
         "KHR_materials_unlit",
-        "KHR_texture_transform"
+        "KHR_texture_transform",
+        "KHR_draco_mesh_compression"
     ];
 };
 
@@ -465,10 +466,21 @@ x3dom.glTF2Loader.prototype._generateX3DShape = function ( primitive )
     if ( material.name == undefined ) {material.name = primitive.material;}
 
     shape.appendChild( this._generateX3DAppearance( material ) );
+    //KHR_draco_mesh_compression
+    if ( primitve.extension && primitive.extensions.KHR_draco_mesh_compression )
+    {
+        this._handleDracoGeometry( primitive.extensions.KHR_draco_mesh_compression, primitive );
+    }
 
     shape.appendChild( this._generateX3DBufferGeometry( primitive ) );
 
     return shape;
+};
+
+x3dom.glTF2Loader.prototype._handleDracoGeometry = function ( dracoExtension, primitive )
+{
+    const dracoBuffer = this._gltf.buffers[ this._gltf.bufferViews[ dracoExtension.bufferView ].buffer ];
+    // ...
 };
 
 /**
