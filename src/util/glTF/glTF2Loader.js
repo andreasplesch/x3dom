@@ -479,7 +479,7 @@ x3dom.glTF2Loader.prototype._generateX3DShape = function ( primitive )
 
 x3dom.glTF2Loader.prototype._handleDracoGeometry = function ( dracoExtension, primitive )
 {
-    const dracoBuffer = this._gltf.buffers[ this._gltf.bufferViews[ dracoExtension.bufferView ].buffer ];
+    var dracoBuffer = this._gltf.buffers[ this._gltf.bufferViews[ dracoExtension.bufferView ].buffer ];
     // ...
 };
 
