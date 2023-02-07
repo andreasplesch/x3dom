@@ -485,18 +485,18 @@ x3dom.glTF2Loader.prototype._handleDracoGeometry = function ( dracoExtension, pr
     var dracoBuffer = this._gltf.buffers[ bufferView.buffer ];
     this._decoderBuffer = null;
     return fetch( dracoBuffer.uri )
-        .then( function ( r ) 
-        {
-          return r.arrayBuffer();
-        })
         .then( function ( r )
         {
-            var actualBuffer = r.slice(bufferView.byteOffset,
-                bufferView.byteOffset + bufferView.byteLength);
+            return r.arrayBuffer();
+        } )
+        .then( function ( r )
+        {
+            var actualBuffer = r.slice( bufferView.byteOffset,
+                bufferView.byteOffset + bufferView.byteLength );
             this._decoderBuffer = new this._dracoDecoderModule.DecoderBuffer();
-            this._decoderBuffer.Init(actualBuffer, bufferView.byteLength);
-            return this._decoderBuffer
-        }.bind( this ));
+            this._decoderBuffer.Init( actualBuffer, bufferView.byteLength );
+            return this._decoderBuffer;
+        }.bind( this ) );
     // ...
 };
 
@@ -793,7 +793,7 @@ x3dom.glTF2Loader.prototype._generateX3DBufferGeometry = function ( primitive, d
 
     if ( dracoExtension )
     {
-        bufferURI = x3dom.Utils.dataURIToObjectURL( 
+        bufferURI = x3dom.Utils.dataURIToObjectURL(
             this._glTF.buffers[
                 this._glTF.bufferViews [
                     dracoExtension.bufferView ] ].uri );
@@ -820,7 +820,8 @@ x3dom.glTF2Loader.prototype._generateX3DBufferGeometry = function ( primitive, d
         }
     }
 
-    var view, accessor;
+    var view,
+        accessor;
 
     //Check for indices
     if ( primitive.indices != undefined )
@@ -909,7 +910,7 @@ x3dom.glTF2Loader.prototype._generateX3DBufferAccessor = function ( bufferType, 
 {
     var components = this._componentsOf( accessor.type );
 
-    var bufferView = "bufferView" in accessor ? this._gltf.bufferViews[ accessor.bufferView ]: {};
+    var bufferView = "bufferView" in accessor ? this._gltf.bufferViews[ accessor.bufferView ] : {};
 
     var byteStride = "byteStride" in bufferView ? bufferView.byteStride : 0;
 
