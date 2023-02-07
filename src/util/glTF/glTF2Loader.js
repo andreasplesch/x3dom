@@ -821,6 +821,7 @@ x3dom.glTF2Loader.prototype._generateX3DBufferGeometry = function ( primitive, d
     }
 
     var view,
+        viewID,
         accessor;
 
     //Check for indices
@@ -830,19 +831,19 @@ x3dom.glTF2Loader.prototype._generateX3DBufferGeometry = function ( primitive, d
 
         if ( dracoExtension )
         {
-            view = this._gltf.bufferViews[ dracoExtension.bufferView ];
-            view.id = dracoExtension.bufferView;
+            view = Object.assign( {}, this._gltf.bufferViews[ dracoExtension.bufferView ] );
+            view.idx = dracoExtension.bufferView;
             view.target = 34963;
             viewID = views.push( view ) - 1;
         }
 
         else
         {
-            view = this._gltf.bufferViews[ accessor.bufferView ];
-            view.id = accessor.bufferView;
+            view = Object.assign( {}, this._gltf.bufferViews[ accessor.bufferView ] );
+            view.idx = accessor.bufferView;
             view.target = 34963;
 
-            var viewID = views.indexOf( view );
+            viewID = views.indexOf( view );
 
             if ( view.target != undefined && viewID == -1 )
             {
@@ -861,20 +862,20 @@ x3dom.glTF2Loader.prototype._generateX3DBufferGeometry = function ( primitive, d
 
         if ( dracoExtension )
         {
-            view = this._gltf.bufferViews[ dracoExtension.bufferView ];
+            view = Object.assign( {}, this._gltf.bufferViews[ dracoExtension.bufferView ] );
             view.target = 34962;
-            view.id = dracoExtension.bufferView;
+            view.idx = dracoExtension.bufferView;
             view.dracoUniqueId = dracoExtension.attributes[ attribute ];
             viewID = views.push( view ) - 1;
         }
 
         else
         {
-            var view = this._gltf.bufferViews[ accessor.bufferView ];
+            view = Object.assign( {}, this._gltf.bufferViews[ accessor.bufferView ] );
             view.target = 34962;
-            view.id = accessor.bufferView;
+            view.idx = accessor.bufferView;
 
-            var viewID = views.indexOf( view );
+            viewID = views.indexOf( view );
 
             if ( view.target != undefined && viewID == -1 )
             {
@@ -900,7 +901,7 @@ x3dom.glTF2Loader.prototype._generateX3DBufferView = function ( view )
     bufferView.setAttribute( "target",     view.target );
     bufferView.setAttribute( "byteOffset", view.byteOffset || 0 );
     bufferView.setAttribute( "byteLength", view.byteLength );
-    bufferView.setAttribute( "id", view.id );
+    bufferView.setAttribute( "idx", view.idx );
     bufferView.setAttribute( "dracoId", view.dracoUniqueId || -1 );
 
     return bufferView;
