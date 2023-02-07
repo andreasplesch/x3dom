@@ -902,7 +902,7 @@ x3dom.glTF2Loader.prototype._generateX3DBufferView = function ( view )
     bufferView.setAttribute( "byteOffset", view.byteOffset || 0 );
     bufferView.setAttribute( "byteLength", view.byteLength );
     bufferView.setAttribute( "idx", view.idx );
-    bufferView.setAttribute( "dracoId", view.dracoUniqueId || -1 );
+    bufferView.setAttribute( "dracoId", view.dracoUniqueId !== undefined ? view.dracoUniqueId : -1 );
 
     return bufferView;
 };
