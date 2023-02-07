@@ -789,7 +789,21 @@ x3dom.glTF2Loader.prototype._generateX3DBufferGeometry = function ( primitive, d
     var bufferGeometry = document.createElement( "buffergeometry" );
     var centerAndSize = this._getCenterAndSize( primitive );
 
-    bufferGeometry.setAttribute( "buffer", this._bufferURI( primitive ) );
+    var bufferURI;
+
+    if ( dracoExtension )
+    {
+        bufferURI = x3dom.Utils.dataURIToObjectURL( 
+            this._glTF.buffers[
+                this._glTF.bufferViews [
+                    dracoExtension.bufferView ] ].uri );
+    }
+    else
+    {
+        bufferURI = this._bufferURI( primitive );
+    }
+
+    bufferGeometry.setAttribute( "buffer", bufferURI );
     bufferGeometry.setAttribute( "position", centerAndSize.center.join( " " ) );
     bufferGeometry.setAttribute( "size", centerAndSize.size.join( " " ) );
     bufferGeometry.setAttribute( "vertexCount", this._getVertexCount( primitive ) );
@@ -806,38 +820,65 @@ x3dom.glTF2Loader.prototype._generateX3DBufferGeometry = function ( primitive, d
         }
     }
 
+    var view, accessor;
+
     //Check for indices
     if ( primitive.indices != undefined )
     {
-        var accessor = this._gltf.accessors[ primitive.indices ];
+        accessor = this._gltf.accessors[ primitive.indices ];
 
-        var view = this._gltf.bufferViews[ accessor.bufferView ];
-        view.id = accessor.bufferView;
-        view.target = 34963;
-
-        var viewID = views.indexOf( view );
-
-        if ( view.target != undefined && viewID == -1 )
+        if ( dracoExtension )
         {
+            view = this._glTF.bufferViews[ dracoExtension.bufferView ];
+            view.id = dracoExtension.bufferView;
+            view.target = 34963;
             viewID = views.push( view ) - 1;
+        }
+
+        else
+        {
+            view = this._gltf.bufferViews[ accessor.bufferView ];
+            view.id = accessor.bufferView;
+            view.target = 34963;
+
+            var viewID = views.indexOf( view );
+
+            if ( view.target != undefined && viewID == -1 )
+            {
+                viewID = views.push( view ) - 1;
+            }
         }
 
         bufferGeometry.appendChild( this._generateX3DBufferAccessor( "INDEX", accessor, viewID ) );
     }
 
-    for ( var attribute in primitive.attributes )
+    var attributes = dracoExtension ? dracoExtension.attributes : primitive.attributes;
+
+    for ( var attribute in attributes )
     {
-        var accessor = this._gltf.accessors[ primitive.attributes[ attribute ] ];
+        accessor = this._gltf.accessors[ primitive.attributes[ attribute ] ];
 
-        var view = this._gltf.bufferViews[ accessor.bufferView ];
-        view.target = 34962;
-        view.id = accessor.bufferView;
-
-        var viewID = views.indexOf( view );
-
-        if ( view.target != undefined && viewID == -1 )
+        if ( dracoExtension )
         {
+            view = this._glTF.bufferViews[ dracoExtension.bufferView ];
+            view.target = 34962;
+            view.id = dracoExtension.bufferView;
+            view.dracoUniqueId = dracoExtension.attributes[ attribute ];
             viewID = views.push( view ) - 1;
+        }
+
+        else
+        {
+            var view = this._gltf.bufferViews[ accessor.bufferView ];
+            view.target = 34962;
+            view.id = accessor.bufferView;
+
+            var viewID = views.indexOf( view );
+
+            if ( view.target != undefined && viewID == -1 )
+            {
+                viewID = views.push( view ) - 1;
+            }
         }
 
         bufferGeometry.appendChild( this._generateX3DBufferAccessor( attribute, accessor, viewID ) );
@@ -859,24 +900,27 @@ x3dom.glTF2Loader.prototype._generateX3DBufferView = function ( view )
     bufferView.setAttribute( "byteOffset", view.byteOffset || 0 );
     bufferView.setAttribute( "byteLength", view.byteLength );
     bufferView.setAttribute( "id", view.id );
+    bufferView.setAttribute( "dracoId", view.dracoUniqueId || -1 );
 
     return bufferView;
 };
 
-x3dom.glTF2Loader.prototype._generateX3DBufferAccessor = function ( buffer, accessor, viewID )
+x3dom.glTF2Loader.prototype._generateX3DBufferAccessor = function ( bufferType, accessor, viewID )
 {
     var components = this._componentsOf( accessor.type );
 
-    var bufferView = this._gltf.bufferViews[ accessor.bufferView ];
+    var bufferView = "bufferView" in accessor ? this._gltf.bufferViews[ accessor.bufferView ]: {};
 
-    var byteOffset = accessor.byteOffset;
+    var byteStride = "byteStride" in bufferView ? bufferView.byteStride : 0;
+
+    var byteOffset = "byteOffset" in accessor ? accessor.byteOffset : 0;
 
     var bufferAccessor = document.createElement( "bufferaccessor" );
 
-    bufferAccessor.setAttribute( "bufferType", buffer.replace( "_0", "" ) );
+    bufferAccessor.setAttribute( "bufferType", bufferType.replace( "_0", "" ) );
     bufferAccessor.setAttribute( "view", viewID );
-    bufferAccessor.setAttribute( "byteOffset", byteOffset || 0 );
-    bufferAccessor.setAttribute( "byteStride", bufferView.byteStride || 0 );
+    bufferAccessor.setAttribute( "byteOffset", byteOffset );
+    bufferAccessor.setAttribute( "byteStride", byteStride );
     bufferAccessor.setAttribute( "normalized", accessor.normalized || false );
 
     bufferAccessor.setAttribute( "components", components );
