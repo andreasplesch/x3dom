@@ -23,7 +23,7 @@ x3dom.glTF2Loader.prototype.dispose = function ()
     this._dracoDecoderModule.destroy( this._dracoDecoder );
     //this._dracoDecoderModule.destroy( this._dracoGeometry );
     this._dracoDecoderModule = null;
-    this._glTF = null;
+    this._gltf = null;
     this._definitions = null;
 };
 
@@ -794,8 +794,8 @@ x3dom.glTF2Loader.prototype._generateX3DBufferGeometry = function ( primitive, d
     if ( dracoExtension )
     {
         bufferURI = x3dom.Utils.dataURIToObjectURL(
-            this._glTF.buffers[
-                this._glTF.bufferViews [
+            this._gltf.buffers[
+                this._gltf.bufferViews [
                     dracoExtension.bufferView ] ].uri );
     }
     else
@@ -830,7 +830,7 @@ x3dom.glTF2Loader.prototype._generateX3DBufferGeometry = function ( primitive, d
 
         if ( dracoExtension )
         {
-            view = this._glTF.bufferViews[ dracoExtension.bufferView ];
+            view = this._gltf.bufferViews[ dracoExtension.bufferView ];
             view.id = dracoExtension.bufferView;
             view.target = 34963;
             viewID = views.push( view ) - 1;
@@ -861,7 +861,7 @@ x3dom.glTF2Loader.prototype._generateX3DBufferGeometry = function ( primitive, d
 
         if ( dracoExtension )
         {
-            view = this._glTF.bufferViews[ dracoExtension.bufferView ];
+            view = this._gltf.bufferViews[ dracoExtension.bufferView ];
             view.target = 34962;
             view.id = dracoExtension.bufferView;
             view.dracoUniqueId = dracoExtension.attributes[ attribute ];
