@@ -468,7 +468,7 @@ x3dom.glTF2Loader.prototype._generateX3DShape = function ( primitive )
     shape.appendChild( this._generateX3DAppearance( material ) );
     //KHR_draco_mesh_compression
     var dracoExtension = null;
-    if ( primitve.extension && primitive.extensions.KHR_draco_mesh_compression )
+    if ( primitive.extension && primitive.extensions.KHR_draco_mesh_compression )
     {
         //this._handleDracoGeometry( primitive.extensions.KHR_draco_mesh_compression, primitive );
         dracoExtension = primitive.extensions.KHR_draco_mesh_compression;
