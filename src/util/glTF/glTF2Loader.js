@@ -796,7 +796,7 @@ x3dom.glTF2Loader.prototype._generateX3DBufferGeometry = function ( primitive, d
         bufferURI = x3dom.Utils.dataURIToObjectURL(
             this._gltf.buffers[
                 this._gltf.bufferViews [
-                    dracoExtension.bufferView ] ].uri );
+                    dracoExtension.bufferView ].buffer ].uri );
     }
     else
     {
