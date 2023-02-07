@@ -467,19 +467,36 @@ x3dom.glTF2Loader.prototype._generateX3DShape = function ( primitive )
 
     shape.appendChild( this._generateX3DAppearance( material ) );
     //KHR_draco_mesh_compression
+    var dracoExtension = null;
     if ( primitve.extension && primitive.extensions.KHR_draco_mesh_compression )
     {
-        this._handleDracoGeometry( primitive.extensions.KHR_draco_mesh_compression, primitive );
+        //this._handleDracoGeometry( primitive.extensions.KHR_draco_mesh_compression, primitive );
+        dracoExtension = primitive.extensions.KHR_draco_mesh_compression;
     }
 
-    shape.appendChild( this._generateX3DBufferGeometry( primitive ) );
+    shape.appendChild( this._generateX3DBufferGeometry( primitive, dracoExtension ) );
 
     return shape;
 };
 
 x3dom.glTF2Loader.prototype._handleDracoGeometry = function ( dracoExtension, primitive )
 {
-    var dracoBuffer = this._gltf.buffers[ this._gltf.bufferViews[ dracoExtension.bufferView ].buffer ];
+    var bufferView = this._gltf.bufferViews[ dracoExtension.bufferView ];
+    var dracoBuffer = this._gltf.buffers[ bufferView.buffer ];
+    this._decoderBuffer = null;
+    return fetch( dracoBuffer.uri )
+        .then( function ( r ) 
+        {
+          return r.arrayBuffer();
+        })
+        .then( function ( r )
+        {
+            var actualBuffer = r.slice(bufferView.byteOffset,
+                bufferView.byteOffset + bufferView.byteLength);
+            this._decoderBuffer = new this._dracoDecoderModule.DecoderBuffer();
+            this._decoderBuffer.Init(actualBuffer, bufferView.byteLength);
+            return this._decoderBuffer
+        }.bind( this ));
     // ...
 };
 
@@ -766,7 +783,7 @@ x3dom.glTF2Loader.prototype._createX3DTextureTransform = function ( imagetexture
  * @param {Object} primitive - A glTF primitive node
  * @return {BufferGeometry}
  */
-x3dom.glTF2Loader.prototype._generateX3DBufferGeometry = function ( primitive )
+x3dom.glTF2Loader.prototype._generateX3DBufferGeometry = function ( primitive, dracoExtension )
 {
     var views = [];
     var bufferGeometry = document.createElement( "buffergeometry" );
