@@ -1634,7 +1634,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
                     var view = bufferGeo._cf.views.nodes[0]; // all views the same for draco except dracoId
                     dracoBuffer = arraybuffer.slice( view._vf.byteOffset,
                         view._vf.byteOffset + view._vf.byteLength );
-                }
+                } )
             }
             return arraybuffer
         } ).then ( function ( arraybuffer)
