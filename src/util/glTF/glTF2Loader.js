@@ -808,6 +808,7 @@ x3dom.glTF2Loader.prototype._generateX3DBufferGeometry = function ( primitive, d
     bufferGeometry.setAttribute( "size", centerAndSize.size.join( " " ) );
     bufferGeometry.setAttribute( "vertexCount", this._getVertexCount( primitive ) );
     bufferGeometry.setAttribute( "primType", this._primitiveType( primitive.mode ) );
+    bufferGeometry.setAttribute( "draco", dracoExtension !== null );
 
     //Check Material for double sided rendering
     if ( primitive.material != undefined )

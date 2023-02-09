@@ -1327,6 +1327,8 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
     // 0 := no BG, 1 := indexed BG, -1 := non-indexed BG
     shape._webgl.bufferGeometry = ( bufferGeo._indexed ) ? 1 : -1;
 
+    var isDraco = bufferGeo.draco; 
+
     bufferGeo._mesh._numCoords = bufferGeo._vf.vertexCount[ 0 ];
     bufferGeo._mesh._numFaces = bufferGeo._vf.vertexCount[ 0 ] / 3;
 
@@ -1576,6 +1578,8 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
         };
     };
 
+    /* setup/download buffer geometry */
+
     if ( bufferGeo._vf.buffer != "" )
     {
         URL = shape._nameSpace.getURL( bufferGeo._vf.buffer );
@@ -1617,7 +1621,23 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
             } );
         }
 
+        var dracoDecoderModule, dracoDecoder, dracoBuffer;
+
         x3dom.BinaryContainerLoader.bufferGeoCache[ URL ].promise.then( function ( arraybuffer )
+        {
+            if ( draco )
+            {
+                DracoDecoderModule( { wasmBinary: DracoDecoderWASM.arrayBuffer } ).then( function ( module )
+                {
+                    dracoDecoderModule = module;
+                    dracoDecoder = new module.Decoder();
+                    var view = bufferGeo._cf.views.nodes[0]; // all views the same for draco except dracoId
+                    dracoBuffer = arraybuffer.slice( view._vf.byteOffset,
+                        view._vf.byteOffset + view._vf.byteLength );
+                }
+            }
+            return arraybuffer
+        } ).then ( function ( arraybuffer)
         {
             if ( shape._webgl == undefined )
             {
@@ -1647,7 +1667,6 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
     }
 };
 
-/** setup/download buffer geometry */
 x3dom.BinaryContainerLoader.setupBufferInterpolator = function ( interpolator )
 {
     var getKeys = function ( interpolator, accessor, arraybuffer )
