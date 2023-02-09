@@ -1625,7 +1625,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
 
         x3dom.BinaryContainerLoader.bufferGeoCache[ URL ].promise.then( function ( arraybuffer )
         {
-            if ( draco )
+            if ( isDraco )
             {
                 DracoDecoderModule( { wasmBinary: DracoDecoderWASM.arrayBuffer } ).then( function ( module )
                 {
