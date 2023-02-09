@@ -1419,7 +1419,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
         {
             var view = views[ i ];
 
-            var bufferID   = view._vf.id;
+            var bufferID   = view._vf.idx;
             var byteOffset = view._vf.byteOffset;
             var byteLength = view._vf.byteLength;
 
