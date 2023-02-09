@@ -1327,7 +1327,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
     // 0 := no BG, 1 := indexed BG, -1 := non-indexed BG
     shape._webgl.bufferGeometry = ( bufferGeo._indexed ) ? 1 : -1;
 
-    var isDraco = bufferGeo.draco; 
+    var isDraco = bufferGeo.draco;
 
     bufferGeo._mesh._numCoords = bufferGeo._vf.vertexCount[ 0 ];
     bufferGeo._mesh._numFaces = bufferGeo._vf.vertexCount[ 0 ] / 3;
@@ -1621,7 +1621,9 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
             } );
         }
 
-        var dracoDecoderModule, dracoDecoder, dracoGeometry;
+        var dracoDecoderModule,
+            dracoDecoder,
+            dracoGeometry;
 
         x3dom.BinaryContainerLoader.bufferGeoCache[ URL ].promise.then( function ( arraybuffer )
         {
@@ -1631,7 +1633,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
                 {
                     dracoDecoderModule = module;
                     dracoDecoder = new module.Decoder();
-                    var view = bufferGeo._cf.views.nodes[0]; // all views the same for draco except dracoId
+                    var view = bufferGeo._cf.views.nodes[ 0 ]; // all views the same for draco except dracoId
                     var dracoArray = new Int8Array( arraybuffer ).slice( view._vf.byteOffset,
                         view._vf.byteOffset + view._vf.byteLength );
                     var geometryType = dracoDecoder.GetEncodedGeometryType( dracoArray );
@@ -1645,10 +1647,10 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
                         dracoGeometry = new dracoDecoderModule.PointCloud();
                         dracoDecoder.decodeArrayToPointCloud( dracoArray, dracoArray.length, dracoGeometry );
                     }
-                } )
+                } );
             }
-            return arraybuffer
-        } ).then ( function ( arraybuffer)
+            return arraybuffer;
+        } ).then( function ( arraybuffer )
         {
             if ( shape._webgl == undefined )
             {
