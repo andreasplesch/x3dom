@@ -1451,9 +1451,9 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
             //decodeAttribute
         }
         return new Uint8Array( arraybuffer, byteOffset, byteLength );
-    }
+    };
 
-    function decodeAttribute( view, i )
+    function decodeAttribute ( view, i )
     {
         //attribute = view.dracoId
         //find dataType from accessor
@@ -1462,22 +1462,20 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
         //decoder.GetAttributeDataArrayForAllPoints( dracoGeometry, attribute, dataType, byteLength, ptr );
     }
 
-    function decodeIndex()
+    function decodeIndex ()
     {
+        var numFaces = dracoGeometry.num_faces();
+        var numIndices = numFaces * 3;
+        var byteLength = numIndices * 4;
 
-		var numFaces = dracoGeometry.num_faces();
-		var numIndices = numFaces * 3;
-		var byteLength = numIndices * 4;
+        var ptr = draco._malloc( byteLength );
+        dracoDecoder.GetTrianglesUInt32Array( dracoGeometry, byteLength, ptr );
+        //var index = new Uint32Array( draco.HEAPF32.buffer, ptr, numIndices ).slice();
+        var index = new Uint8Array( draco.HEAPF32.buffer, ptr, numIndices );
+        draco._free( ptr );
 
-		var ptr = draco._malloc( byteLength );
-		dracoDecoder.GetTrianglesUInt32Array( dracoGeometry, byteLength, ptr );
-		//var index = new Uint32Array( draco.HEAPF32.buffer, ptr, numIndices ).slice();
-		var index = new Uint8Array( draco.HEAPF32.buffer, ptr, numIndices );
-		draco._free( ptr );
-
-		return index; //{ array: index, itemSize: 1 };
-
-	}
+        return index; //{ array: index, itemSize: 1 };
+    }
 
     var getPositions = function ( arraybuffer )
     {
