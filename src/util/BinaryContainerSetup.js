@@ -1327,7 +1327,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
     // 0 := no BG, 1 := indexed BG, -1 := non-indexed BG
     shape._webgl.bufferGeometry = ( bufferGeo._indexed ) ? 1 : -1;
 
-    var isDraco = bufferGeo.draco;
+    var isDraco = bufferGeo._vf.draco;
 
     bufferGeo._mesh._numCoords = bufferGeo._vf.vertexCount[ 0 ];
     bufferGeo._mesh._numFaces = bufferGeo._vf.vertexCount[ 0 ] / 3;
@@ -1405,7 +1405,8 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
 
             var bufferIdx = x3dom.BUFFER_IDX[ accessor._vf.bufferType ];
 
-            var bufferViewID = bufferGeo._cf.views.nodes[ view ]._vf.idx;
+            var bufferView = bufferGeo._cf.views.nodes[ view ]._vf.idx;
+            var bufferViewID = isDraco ? bufferView._vf.dracoId : bufferView._vf.idx;
 
             shape._webgl.buffers[ bufferIdx ] = x3dom.BinaryContainerLoader.bufferGeoCache[ URL ].buffers[ bufferViewID ];
         }
@@ -1419,14 +1420,14 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
         {
             var view = views[ i ];
 
-            var bufferID   = view._vf.idx;
+            var bufferID   = isDraco ? view._vf.dracoId : view._vf.idx;
             var byteOffset = view._vf.byteOffset;
             var byteLength = view._vf.byteLength;
 
             if ( x3dom.BinaryContainerLoader.bufferGeoCache[ URL ].buffers[ bufferID ] == undefined ||
                !gl.isBuffer( x3dom.BinaryContainerLoader.bufferGeoCache[ URL ].buffers[ bufferID ] ) )
             {
-                var bufferData = new Uint8Array( arraybuffer, byteOffset, byteLength );
+                var bufferData = getBufferData( arraybuffer, byteOffset, byteLength, view );
 
                 var buffer = gl.createBuffer();
 
@@ -1438,6 +1439,45 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
             }
         }
     };
+
+    var getBufferData( arraybuffer, byteOffset, byteLength, view )
+    {
+        if ( isDraco )
+        {
+            if ( view._vf.target == 34963 ) // INDEX
+            {
+                return decodeIndex();
+            }
+            //decodeAttribute
+        }
+        return new Uint8Array( arraybuffer, byteOffset, byteLength );
+    }
+
+    function decodeAttribute( view, i )
+    {
+        //attribute = view.dracoId
+        //find dataType from accessor
+        //bufferGeo._cf.accessor.nodes.find( a => a.view == i )
+        //byteLength from accessor
+        //decoder.GetAttributeDataArrayForAllPoints( dracoGeometry, attribute, dataType, byteLength, ptr );
+    }
+
+    function decodeIndex()
+    {
+
+		var numFaces = dracoGeometry.num_faces();
+		var numIndices = numFaces * 3;
+		var byteLength = numIndices * 4;
+
+		var ptr = draco._malloc( byteLength );
+		dracoDecoder.GetTrianglesUInt32Array( dracoGeometry, byteLength, ptr );
+		//var index = new Uint32Array( draco.HEAPF32.buffer, ptr, numIndices ).slice();
+		var index = new Uint8Array( draco.HEAPF32.buffer, ptr, numIndices );
+		draco._free( ptr );
+
+		return index; //{ array: index, itemSize: 1 };
+
+	}
 
     var getPositions = function ( arraybuffer )
     {
