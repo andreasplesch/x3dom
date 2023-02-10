@@ -1405,7 +1405,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
 
             var bufferIdx = x3dom.BUFFER_IDX[ accessor._vf.bufferType ];
 
-            var bufferView = bufferGeo._cf.views.nodes[ view ]._vf.idx;
+            var bufferView = bufferGeo._cf.views.nodes[ view ];
             var bufferViewID = isDraco ? bufferView._vf.dracoId : bufferView._vf.idx;
 
             shape._webgl.buffers[ bufferIdx ] = x3dom.BinaryContainerLoader.bufferGeoCache[ URL ].buffers[ bufferViewID ];
@@ -1440,7 +1440,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
         }
     };
 
-    var getBufferData( arraybuffer, byteOffset, byteLength, view )
+    var getBufferData = function ( arraybuffer, byteOffset, byteLength, view )
     {
         if ( isDraco )
         {
@@ -1680,12 +1680,12 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
                     if ( geometryType == dracoDecoderModule.TRIANGULAR_MESH )
                     {
                         dracoGeometry = new dracoDecoderModule.Mesh();
-                        dracoDecoder.decodeArrayToMesh( dracoArray, dracoArray.length, dracoGeometry );
+                        dracoDecoder.DecodeArrayToMesh( dracoArray, dracoArray.length, dracoGeometry );
                     }
                     if ( geometryType == dracoDecoderModule.POINT_CLOUD )
                     {
                         dracoGeometry = new dracoDecoderModule.PointCloud();
-                        dracoDecoder.decodeArrayToPointCloud( dracoArray, dracoArray.length, dracoGeometry );
+                        dracoDecoder.DecodeArrayToPointCloud( dracoArray, dracoArray.length, dracoGeometry );
                     }
                 } );
             }
