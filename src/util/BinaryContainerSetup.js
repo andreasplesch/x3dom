@@ -1317,7 +1317,8 @@ x3dom.BinaryContainerLoader.bufferGeoCache = {};
 /** setup/download buffer geometry */
 x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea, currContext )
 {
-    var URL;
+    var url;
+    var cacheID;
     var isDataURL = false;
     var bufferGeo = shape._cf.geometry.node;
     var idxAccessor = null;
@@ -1408,7 +1409,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
             var bufferView = bufferGeo._cf.views.nodes[ view ];
             var bufferViewID = isDraco ? bufferView._vf.dracoId : bufferView._vf.idx;
 
-            shape._webgl.buffers[ bufferIdx ] = x3dom.BinaryContainerLoader.bufferGeoCache[ URL ].buffers[ bufferViewID ];
+            shape._webgl.buffers[ bufferIdx ] = x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].buffers[ bufferViewID ];
         }
     };
 
@@ -1424,8 +1425,8 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
             var byteOffset = view._vf.byteOffset;
             var byteLength = view._vf.byteLength;
 
-            if ( x3dom.BinaryContainerLoader.bufferGeoCache[ URL ].buffers[ bufferID ] == undefined ||
-               !gl.isBuffer( x3dom.BinaryContainerLoader.bufferGeoCache[ URL ].buffers[ bufferID ] ) )
+            if ( x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].buffers[ bufferID ] == undefined ||
+               !gl.isBuffer( x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].buffers[ bufferID ] ) )
             {
                 var bufferData = getBufferData( arraybuffer, byteOffset, byteLength, view, i );
 
@@ -1435,7 +1436,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
                 gl.bufferData( view._vf.target, bufferData, gl.STATIC_DRAW );
                 gl.bindBuffer( view._vf.target, null );
 
-                x3dom.BinaryContainerLoader.bufferGeoCache[ URL ].buffers[ bufferID ] = buffer;
+                x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].buffers[ bufferID ] = buffer;
             }
         }
     };
@@ -1629,21 +1630,22 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
 
     if ( bufferGeo._vf.buffer != "" )
     {
-        URL = shape._nameSpace.getURL( bufferGeo._vf.buffer );
+        url = shape._nameSpace.getURL( bufferGeo._vf.buffer );
+        cacheID = url + " " + bufferGeo._vf.position; // better use byteOffset
 
-        if ( x3dom.BinaryContainerLoader.bufferGeoCache[ URL ] == undefined )
+        if ( x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ] == undefined )
         {
             shape._nameSpace.doc.incrementDownloads();
 
-            x3dom.BinaryContainerLoader.bufferGeoCache[ URL ] = {};
-            x3dom.BinaryContainerLoader.bufferGeoCache[ URL ].buffers = [];
-            x3dom.BinaryContainerLoader.bufferGeoCache[ URL ].shapes = [];
-            x3dom.BinaryContainerLoader.bufferGeoCache[ URL ].decrementDownload = true;
-            x3dom.BinaryContainerLoader.bufferGeoCache[ URL ].promise = new Promise( function ( resolve, reject )
+            x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ] = {};
+            x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].buffers = [];
+            x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].shapes = [];
+            x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].decrementDownload = true;
+            x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].promise = new Promise( function ( resolve, reject )
             {
                 var xhr = new XMLHttpRequest();
 
-                xhr.open( "GET", URL );
+                xhr.open( "GET", url );
 
                 xhr.responseType = "arraybuffer";
 
@@ -1672,7 +1674,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
             dracoDecoder,
             dracoGeometry;
 
-        x3dom.BinaryContainerLoader.bufferGeoCache[ URL ].promise.then( function ( arraybuffer )
+        x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].promise.then( function ( arraybuffer )
         {
             if ( isDraco )
             {
@@ -1702,26 +1704,26 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
         {
             if ( shape._webgl == undefined )
             {
-                x3dom.BinaryContainerLoader.bufferGeoCache[ URL ] = undefined;
+                x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ] = undefined;
                 return;
             }
 
             initBufferViews( arraybuffer );
             initAccessors();
             computeNormals( arraybuffer );
-            linkCache( x3dom.BinaryContainerLoader.bufferGeoCache[ URL ] );
+            linkCache( x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ] );
 
-            if ( x3dom.BinaryContainerLoader.bufferGeoCache[ URL ].decrementDownload )
+            if ( x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].decrementDownload )
             {
-                x3dom.BinaryContainerLoader.bufferGeoCache[ URL ].decrementDownload = false;
+                x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].decrementDownload = false;
                 shape._nameSpace.doc.decrementDownloads();
                 shape._nameSpace.doc.needRender = true;
             }
         } ).catch( function ()
         {
-            if ( x3dom.BinaryContainerLoader.bufferGeoCache[ URL ].decrementDownload )
+            if ( x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].decrementDownload )
             {
-                x3dom.BinaryContainerLoader.bufferGeoCache[ URL ].decrementDownload = false;
+                x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].decrementDownload = false;
                 shape._nameSpace.doc.decrementDownloads();
             }
         } );
