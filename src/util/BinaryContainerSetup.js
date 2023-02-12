@@ -1456,8 +1456,8 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
     function decodeAttribute ( view, index )
     {
         var attributeID = view._vf.dracoId;
-        var dracoAttribute = DracoDecoderModule.GetAttributeByUniqueId( dracoGeometry, attributeID );
-        var attributeAccessor = bufferGeo._cf.accessor.nodes.find( function (a) 
+        var dracoAttribute = dracoDecoder.GetAttributeByUniqueId( dracoGeometry, attributeID );
+        var attributeAccessor = bufferGeo._cf.accessors.nodes.find( function (a) 
         {
             return a._vf.view == index;
         } );
@@ -1466,7 +1466,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
         var byteLength = dracoAttribute.size() * dracoAttribute.num_components() * bytes_per_component;
         var ptr = dracoDecoderModule._malloc( byteLength );
         var status = dracoDecoder.GetAttributeDataArrayForAllPoints( dracoGeometry, dracoAttribute, dracoAttribute.data_type(), byteLength, ptr );
-        var array = x3dom.BinaryContainerLoader.getArrayBufferFromType( componentType, ptr, byteLength );
+        var array = x3dom.BinaryContainerLoader.getArrayBufferFromType( componentType, dracoDecoderModule.HEAPF32.buffer, ptr, byteLength );
         dracoDecoderModule._free( ptr );
         return array;
     }
