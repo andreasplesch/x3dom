@@ -1463,10 +1463,11 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
         } );
         var componentType = attributeAccessor._vf.componentType;
         var bytes_per_component = x3dom.BinaryContainerLoader.getArrayBufferFromType( componentType ).BYTES_PER_ELEMENT;
-        var byteLength = dracoAttribute.size() * dracoAttribute.num_components() * bytes_per_component;
+        var numValues = dracoAttribute.size() * dracoAttribute.num_components();
+        var byteLength = numValues * bytes_per_component;
         var ptr = dracoDecoderModule._malloc( byteLength );
         var status = dracoDecoder.GetAttributeDataArrayForAllPoints( dracoGeometry, dracoAttribute, dracoAttribute.data_type(), byteLength, ptr );
-        var array = x3dom.BinaryContainerLoader.getArrayBufferFromType( componentType, dracoDecoderModule.HEAPF32.buffer, ptr, byteLength );
+        var array = x3dom.BinaryContainerLoader.getArrayBufferFromType( componentType, dracoDecoderModule.HEAPF32.buffer, ptr, numValues );
         dracoDecoderModule._free( ptr );
         return array;
     }
@@ -1479,8 +1480,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
 
         var ptr = dracoDecoderModule._malloc( byteLength );
         var status = dracoDecoder.GetTrianglesUInt32Array( dracoGeometry, byteLength, ptr );
-        //var index = new Uint32Array( draco.HEAPF32.buffer, ptr, numIndices ).slice();
-        var index = new Uint8Array( dracoDecoderModule.HEAPF32.buffer, ptr, numIndices );
+        var index = new Uint32Array( dracoDecoderModule.HEAPF32.buffer, ptr, numIndices );
         dracoDecoderModule._free( ptr );
 
         return index; //{ array: index, itemSize: 1 };
