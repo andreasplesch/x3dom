@@ -1455,11 +1455,20 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
 
     function decodeAttribute ( view, index )
     {
-        //attribute = view.dracoId
-        //find dataType from accessor
-        //bufferGeo._cf.accessor.nodes.find( a => a.view == i )
-        //byteLength from accessor
-        //decoder.GetAttributeDataArrayForAllPoints( dracoGeometry, attribute, dataType, byteLength, ptr );
+        var attributeID = view._vf.dracoId;
+        var dracoAttribute = DracoDecoderModule.GetAttributeByUniqueId( dracoGeometry, attributeID );
+        var attributeAccessor = bufferGeo._cf.accessor.nodes.find( function (a) 
+        {
+            return a._vf.view == index;
+        } );
+        var componentType = attributeAccessor._vf.componentType;
+        var bytes_per_component = x3dom.BinaryContainerLoader.getArrayBufferFromType( componentType ).BYTES_PER_ELEMENT;
+        var byteLength = dracoAttribute.size() * dracoAttribute.num_components() * bytes_per_component;
+        var ptr = dracoDecoderModule._malloc( byteLength );
+        var status = dracoDecoder.GetAttributeDataArrayForAllPoints( dracoGeometry, dracoAttribute, dracoAttribute.data_type(), byteLength, ptr );
+        var array = x3dom.BinaryContainerLoader.getArrayBufferFromType( componentType, ptr, byteLength );
+        dracoDecoderModule._free( ptr );
+        return array;
     }
 
     function decodeIndex ()
@@ -1469,7 +1478,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
         var byteLength = numIndices * 4;
 
         var ptr = dracoDecoderModule._malloc( byteLength );
-        dracoDecoder.GetTrianglesUInt32Array( dracoGeometry, byteLength, ptr );
+        var status = dracoDecoder.GetTrianglesUInt32Array( dracoGeometry, byteLength, ptr );
         //var index = new Uint32Array( draco.HEAPF32.buffer, ptr, numIndices ).slice();
         var index = new Uint8Array( dracoDecoderModule.HEAPF32.buffer, ptr, numIndices );
         dracoDecoderModule._free( ptr );
