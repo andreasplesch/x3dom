@@ -1481,7 +1481,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
 
         var ptr = dracoDecoderModule._malloc( byteLength );
         var status = dracoDecoder.GetTrianglesUInt32Array( dracoGeometry, byteLength, ptr );
-        var index = new Uint32Array( dracoDecoderModule.HEAPF32.buffer, ptr, numIndices );
+        var index = new Uint32Array( dracoDecoderModule.HEAPU32.buffer, ptr, numIndices ).slice();
         dracoDecoderModule._free( ptr );
 
         return index; //{ array: index, itemSize: 1 };
@@ -1650,7 +1650,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
             shape._nameSpace.doc.incrementDownloads();
 
             x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ] = {};
-            x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].buffers = {};
+            x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].buffers = [];
             x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].shapes = [];
             x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].decrementDownload = true;
             x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].promise = new Promise( function ( resolve, reject )
