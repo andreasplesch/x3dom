@@ -1458,7 +1458,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
     {
         var attributeID = view._vf.dracoId;
         var dracoAttribute = dracoDecoder.GetAttributeByUniqueId( dracoGeometry, attributeID );
-        var attributeAccessor = bufferGeo._cf.accessors.nodes.find( function (a) 
+        var attributeAccessor = bufferGeo._cf.accessors.nodes.find( function ( a )
         {
             return a._vf.view == index;
         } );
@@ -1650,7 +1650,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
             shape._nameSpace.doc.incrementDownloads();
 
             x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ] = {};
-            x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].buffers = [];
+            x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].buffers = {};
             x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].shapes = [];
             x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].decrementDownload = true;
             x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].promise = new Promise( function ( resolve, reject )
@@ -1724,6 +1724,9 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
             initAccessors();
             computeNormals( arraybuffer );
             linkCache( x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ] );
+
+            dracoDecoderModule.destroy( dracoDecoder );
+            dracoDecoderModule = null;
 
             if ( x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].decrementDownload )
             {
