@@ -1495,13 +1495,20 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
         {
             var posView = bufferGeo._cf.views.nodes[ posAccessor._vf.view ];
 
-            var byteOffset = posAccessor._vf.byteOffset + posView._vf.byteOffset;
-            var byteLength = posAccessor._vf.count * posAccessor._vf.components;
+            if ( isDraco )
+            {
+                positions = decodeAttribute( posView, posAccessor._vf.view );
+            }
+            else
+            {
+                var byteOffset = posAccessor._vf.byteOffset + posView._vf.byteOffset;
+                var byteLength = posAccessor._vf.count * posAccessor._vf.components;
 
-            positions = x3dom.BinaryContainerLoader.getArrayBufferFromType( posAccessor._vf.componentType,
-                arraybuffer,
-                byteOffset,
-                byteLength );
+                positions = x3dom.BinaryContainerLoader.getArrayBufferFromType( posAccessor._vf.componentType,
+                    arraybuffer,
+                    byteOffset,
+                    byteLength );
+            }
         }
 
         return positions;
@@ -1509,6 +1516,11 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
 
     var getIndices = function ( arraybuffer )
     {
+        if ( isDraco )
+        {
+            return decodeIndex();
+        }
+
         var indices;
 
         if ( idxAccessor )

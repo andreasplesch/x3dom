@@ -35,11 +35,7 @@ x3dom.glTF2Loader.prototype.dispose = function ()
 x3dom.glTF2Loader.prototype.load = function ( input, binary )
 {
     //const module = await
-    return DracoDecoderModule( { wasmBinary: DracoDecoderWASM.arrayBuffer } ).then( function ( module )
     {
-        this._dracoDecoderModule = module;
-        this._dracoDecoder = new module.Decoder();
-
         this._gltf = this._getGLTF( input, binary );
 
         //generate X3D scene
@@ -83,7 +79,7 @@ x3dom.glTF2Loader.prototype.load = function ( input, binary )
         }
 
         return x3dScene;
-    }.bind( this ) );
+    }//.bind( this ) );
 };
 
 /**
@@ -479,26 +475,26 @@ x3dom.glTF2Loader.prototype._generateX3DShape = function ( primitive )
     return shape;
 };
 
-x3dom.glTF2Loader.prototype._handleDracoGeometry = function ( dracoExtension, primitive )
-{
-    var bufferView = this._gltf.bufferViews[ dracoExtension.bufferView ];
-    var dracoBuffer = this._gltf.buffers[ bufferView.buffer ];
-    this._decoderBuffer = null;
-    return fetch( dracoBuffer.uri )
-        .then( function ( r )
-        {
-            return r.arrayBuffer();
-        } )
-        .then( function ( r )
-        {
-            var actualBuffer = r.slice( bufferView.byteOffset,
-                bufferView.byteOffset + bufferView.byteLength );
-            this._decoderBuffer = new this._dracoDecoderModule.DecoderBuffer();
-            this._decoderBuffer.Init( actualBuffer, bufferView.byteLength );
-            return this._decoderBuffer;
-        }.bind( this ) );
-    // ...
-};
+// x3dom.glTF2Loader.prototype._handleDracoGeometry = function ( dracoExtension, primitive )
+// {
+//     var bufferView = this._gltf.bufferViews[ dracoExtension.bufferView ];
+//     var dracoBuffer = this._gltf.buffers[ bufferView.buffer ];
+//     this._decoderBuffer = null;
+//     return fetch( dracoBuffer.uri )
+//         .then( function ( r )
+//         {
+//             return r.arrayBuffer();
+//         } )
+//         .then( function ( r )
+//         {
+//             var actualBuffer = r.slice( bufferView.byteOffset,
+//                 bufferView.byteOffset + bufferView.byteLength );
+//             this._decoderBuffer = new this._dracoDecoderModule.DecoderBuffer();
+//             this._decoderBuffer.Init( actualBuffer, bufferView.byteLength );
+//             return this._decoderBuffer;
+//         }.bind( this ) );
+//     // ...
+// };
 
 /**
  * Generates a X3D appearance node
