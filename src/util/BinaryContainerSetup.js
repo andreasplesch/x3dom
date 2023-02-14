@@ -1695,8 +1695,8 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
                     dracoDecoderModule = module;
                     dracoDecoder = new module.Decoder();
                     var view = bufferGeo._cf.views.nodes[ 0 ]; // all views the same for draco except dracoId
-                    var dracoArray = new Int8Array( arraybuffer ).slice( view._vf.byteOffset,
-                        view._vf.byteOffset + view._vf.byteLength );
+                    var dracoArray = new Int8Array( arraybuffer ).slice( view._vf.byteOffset - 1,
+                        view._vf.byteOffset + view._vf.byteLength - 1 );
                     var geometryType = dracoDecoder.GetEncodedGeometryType( dracoArray );
                     if ( geometryType == dracoDecoderModule.TRIANGULAR_MESH )
                     {
