@@ -1468,7 +1468,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
         var byteLength = numValues * bytes_per_component;
         var ptr = dracoDecoderModule._malloc( byteLength );
         var status = dracoDecoder.GetAttributeDataArrayForAllPoints( dracoGeometry, dracoAttribute, dracoAttribute.data_type(), byteLength, ptr );
-        var array = x3dom.BinaryContainerLoader.getArrayBufferFromType( componentType, dracoDecoderModule.HEAPF32.buffer, ptr, numValues );
+        var array = x3dom.BinaryContainerLoader.getArrayBufferFromType( componentType, dracoDecoderModule.HEAPF32.buffer, ptr, numValues ).slice();
         dracoDecoderModule._free( ptr );
         return array;
     }
@@ -1695,8 +1695,8 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
                     dracoDecoderModule = module;
                     dracoDecoder = new module.Decoder();
                     var view = bufferGeo._cf.views.nodes[ 0 ]; // all views the same for draco except dracoId
-                    var dracoArray = new Int8Array( arraybuffer ).slice( view._vf.byteOffset - 1,
-                        view._vf.byteOffset + view._vf.byteLength - 1 );
+                    var dracoArray = new Int8Array( arraybuffer ).slice( view._vf.byteOffset,
+                        view._vf.byteOffset + view._vf.byteLength );
                     var geometryType = dracoDecoder.GetEncodedGeometryType( dracoArray );
                     if ( geometryType == dracoDecoderModule.TRIANGULAR_MESH )
                     {
