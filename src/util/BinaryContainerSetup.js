@@ -1454,7 +1454,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
         return new Uint8Array( arraybuffer, byteOffset, byteLength );
     };
 
-    function decodeAttribute ( view, index )
+    var decodeAttribute = function( view, index )
     {
         var attributeID = view._vf.dracoId;
         var dracoAttribute = dracoDecoder.GetAttributeByUniqueId( dracoGeometry, attributeID );
@@ -1473,7 +1473,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
         return array;
     }
 
-    function decodeIndex ()
+    var decodeIndex = function ()
     {
         var numFaces = dracoGeometry.num_faces();
         var numIndices = numFaces * 3;
@@ -1484,7 +1484,13 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
         var index = new Uint32Array( dracoDecoderModule.HEAPU32.buffer, ptr, numIndices ).slice();
         dracoDecoderModule._free( ptr );
 
-        return index; //{ array: index, itemSize: 1 };
+        var indexAccessor = bufferGeo._cf.accessors.nodes.find( function ( a )
+        {
+            return a._vf.bufferType == "INDEX";
+        } );
+        var componentType = indexAccessor ? indexAccessor._vf.componentType : gl.UNSIGNED_SHORT;
+
+        return x3dom.BinaryContainerLoader.getArrayBufferFromType( componentType, index );
     }
 
     var getPositions = function ( arraybuffer )
@@ -1690,7 +1696,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
         {
             if ( isDraco )
             {
-                return DracoDecoderModule( { wasmBinary: DracoDecoderWASM.arrayBuffer } ).then( function ( module )
+                return DracoDecoderModule( { wasmBinary: DracoDecoderWASM.arrayBuffer } ).then( function ( module ) //TODO create/destroy per shape or per gltf
                 {
                     dracoDecoderModule = module;
                     dracoDecoder = new module.Decoder();
@@ -1724,6 +1730,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
             initAccessors();
             computeNormals( arraybuffer );
             linkCache( x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ] );
+
             if ( isDraco )
             {
                 dracoDecoderModule.destroy( dracoDecoder );
