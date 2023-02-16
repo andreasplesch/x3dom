@@ -1313,7 +1313,7 @@ x3dom.BinaryContainerLoader.setupPopGeo = function ( shape, sp, gl, viewarea, cu
 };
 
 x3dom.BinaryContainerLoader.bufferGeoCache = {};
-x3dom.BinaryContainerLoader.draco = { "DecoderModule" : null, "Decoder" : null };
+x3dom.BinaryContainerLoader.draco = { "DecoderModule": null, "Decoder": null };
 
 /** setup/download buffer geometry */
 x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea, currContext )
@@ -1455,7 +1455,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
         return new Uint8Array( arraybuffer, byteOffset, byteLength );
     };
 
-    var decodeAttribute = function( view, index )
+    var decodeAttribute = function ( view, index )
     {
         var attributeID = view._vf.dracoId;
         var dracoAttribute = dracoDecoder.GetAttributeByUniqueId( dracoGeometry, attributeID );
@@ -1472,7 +1472,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
         var array = x3dom.BinaryContainerLoader.getArrayBufferFromType( componentType, dracoDecoderModule.HEAPF32.buffer, ptr, numValues ).slice();
         dracoDecoderModule._free( ptr );
         return array;
-    }
+    };
 
     var decodeIndex = function ()
     {
@@ -1492,7 +1492,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
         var componentType = indexAccessor ? indexAccessor._vf.componentType : gl.UNSIGNED_SHORT;
 
         return x3dom.BinaryContainerLoader.getArrayBufferFromType( componentType, index );
-    }
+    };
 
     var getPositions = function ( arraybuffer )
     {
@@ -1712,7 +1712,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
                         dracoDecoder = new module.Decoder();
                         x3dom.BinaryContainerLoader.draco.DecoderModule = module;
                         x3dom.BinaryContainerLoader.draco.Decoder = dracoDecoder;
-    
+
                         return arraybuffer;
                     } );
                 }
@@ -1931,4 +1931,3 @@ x3dom.BinaryContainerLoader.getArrayBufferFromType = function ( componentType, a
         case 5126: return new Float32Array( arraybuffer, byteOffset, byteLength );
     }
 };
-
