@@ -1464,7 +1464,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
         } );
         var componentType = attributeAccessor._vf.componentType;
         var bytes_per_component = x3dom.BinaryContainerLoader.getArrayBufferFromType( componentType ).BYTES_PER_ELEMENT;
-        var numValues = dracoAttribute.size() * dracoAttribute.num_components();
+        var numValues = dracoGeometry.num_points() * dracoAttribute.num_components();
         var byteLength = numValues * bytes_per_component;
         var ptr = dracoDecoderModule._malloc( byteLength );
         var status = dracoDecoder.GetAttributeDataArrayForAllPoints( dracoGeometry, dracoAttribute, dracoAttribute.data_type(), byteLength, ptr );
@@ -1724,10 +1724,12 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
             initAccessors();
             computeNormals( arraybuffer );
             linkCache( x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ] );
-
-            dracoDecoderModule.destroy( dracoDecoder );
-            dracoDecoderModule.destroy( dracoGeometry );
-            dracoDecoderModule = null;
+            if ( isDraco )
+            {
+                dracoDecoderModule.destroy( dracoDecoder );
+                dracoDecoderModule.destroy( dracoGeometry );
+                dracoDecoderModule = null;
+            }
 
             if ( x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].decrementDownload )
             {
