@@ -1313,6 +1313,7 @@ x3dom.BinaryContainerLoader.setupPopGeo = function ( shape, sp, gl, viewarea, cu
 };
 
 x3dom.BinaryContainerLoader.bufferGeoCache = {};
+x3dom.BinaryContainerLoader.draco = { "DecoderModule" : null, "Decoder" : null };
 
 /** setup/download buffer geometry */
 x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea, currContext )
@@ -1454,7 +1455,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
         return new Uint8Array( arraybuffer, byteOffset, byteLength );
     };
 
-    var decodeAttribute = function ( view, index )
+    var decodeAttribute = function( view, index )
     {
         var attributeID = view._vf.dracoId;
         var dracoAttribute = dracoDecoder.GetAttributeByUniqueId( dracoGeometry, attributeID );
@@ -1471,7 +1472,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
         var array = x3dom.BinaryContainerLoader.getArrayBufferFromType( componentType, dracoDecoderModule.HEAPF32.buffer, ptr, numValues ).slice();
         dracoDecoderModule._free( ptr );
         return array;
-    };
+    }
 
     var decodeIndex = function ()
     {
@@ -1491,7 +1492,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
         var componentType = indexAccessor ? indexAccessor._vf.componentType : gl.UNSIGNED_SHORT;
 
         return x3dom.BinaryContainerLoader.getArrayBufferFromType( componentType, index );
-    };
+    }
 
     var getPositions = function ( arraybuffer )
     {
@@ -1696,26 +1697,25 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
         {
             if ( isDraco )
             {
-                return DracoDecoderModule( { wasmBinary: DracoDecoderWASM.arrayBuffer } ).then( function ( module ) //TODO create/destroy per shape or per gltf
+                if ( x3dom.BinaryContainerLoader.draco.DecoderModule )
                 {
-                    dracoDecoderModule = module;
-                    dracoDecoder = new module.Decoder();
-                    var view = bufferGeo._cf.views.nodes[ 0 ]; // all views the same for draco except dracoId
-                    var dracoArray = new Int8Array( arraybuffer ).slice( view._vf.byteOffset,
-                        view._vf.byteOffset + view._vf.byteLength );
-                    var geometryType = dracoDecoder.GetEncodedGeometryType( dracoArray );
-                    if ( geometryType == dracoDecoderModule.TRIANGULAR_MESH )
+                    dracoDecoderModule = x3dom.BinaryContainerLoader.draco.DecoderModule;
+                    dracoDecoder = x3dom.BinaryContainerLoader.draco.Decoder;
+
+                    return arraybuffer;
+                }
+                else
+                {
+                    return DracoDecoderModule( { wasmBinary: DracoDecoderWASM.arrayBuffer } ).then( function ( module )
                     {
-                        dracoGeometry = new dracoDecoderModule.Mesh();
-                        dracoDecoder.DecodeArrayToMesh( dracoArray, dracoArray.length, dracoGeometry );
-                    }
-                    if ( geometryType == dracoDecoderModule.POINT_CLOUD )
-                    {
-                        dracoGeometry = new dracoDecoderModule.PointCloud();
-                        dracoDecoder.DecodeArrayToPointCloud( dracoArray, dracoArray.length, dracoGeometry );
-                    }
-                    return dracoGeometry;
-                } );
+                        dracoDecoderModule = module;
+                        dracoDecoder = new module.Decoder();
+                        x3dom.BinaryContainerLoader.draco.DecoderModule = module;
+                        x3dom.BinaryContainerLoader.draco.Decoder = dracoDecoder;
+    
+                        return arraybuffer;
+                    } );
+                }
             }
             return arraybuffer;
         } ).then( function ( arraybuffer )
@@ -1726,6 +1726,24 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
                 return;
             }
 
+            if ( isDraco )
+            {
+                var view = bufferGeo._cf.views.nodes[ 0 ]; // all views the same for draco except dracoId
+                var dracoArray = new Int8Array( arraybuffer ).slice( view._vf.byteOffset,
+                    view._vf.byteOffset + view._vf.byteLength );
+                var geometryType = dracoDecoder.GetEncodedGeometryType( dracoArray );
+                if ( geometryType == dracoDecoderModule.TRIANGULAR_MESH )
+                {
+                    dracoGeometry = new dracoDecoderModule.Mesh();
+                    dracoDecoder.DecodeArrayToMesh( dracoArray, dracoArray.length, dracoGeometry );
+                }
+                if ( geometryType == dracoDecoderModule.POINT_CLOUD )
+                {
+                    dracoGeometry = new dracoDecoderModule.PointCloud();
+                    dracoDecoder.DecodeArrayToPointCloud( dracoArray, dracoArray.length, dracoGeometry );
+                }
+            }
+
             initBufferViews( arraybuffer );
             initAccessors();
             computeNormals( arraybuffer );
@@ -1733,9 +1751,9 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
 
             if ( isDraco )
             {
-                dracoDecoderModule.destroy( dracoDecoder );
+                //dracoDecoderModule.destroy( dracoDecoder );
                 dracoDecoderModule.destroy( dracoGeometry );
-                dracoDecoderModule = null;
+                //dracoDecoderModule = null;
             }
 
             if ( x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].decrementDownload )
@@ -1913,3 +1931,4 @@ x3dom.BinaryContainerLoader.getArrayBufferFromType = function ( componentType, a
         case 5126: return new Float32Array( arraybuffer, byteOffset, byteLength );
     }
 };
+
