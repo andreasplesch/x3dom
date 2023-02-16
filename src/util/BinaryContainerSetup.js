@@ -1454,7 +1454,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
         return new Uint8Array( arraybuffer, byteOffset, byteLength );
     };
 
-    var decodeAttribute = function( view, index )
+    var decodeAttribute = function ( view, index )
     {
         var attributeID = view._vf.dracoId;
         var dracoAttribute = dracoDecoder.GetAttributeByUniqueId( dracoGeometry, attributeID );
@@ -1471,7 +1471,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
         var array = x3dom.BinaryContainerLoader.getArrayBufferFromType( componentType, dracoDecoderModule.HEAPF32.buffer, ptr, numValues ).slice();
         dracoDecoderModule._free( ptr );
         return array;
-    }
+    };
 
     var decodeIndex = function ()
     {
@@ -1491,7 +1491,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
         var componentType = indexAccessor ? indexAccessor._vf.componentType : gl.UNSIGNED_SHORT;
 
         return x3dom.BinaryContainerLoader.getArrayBufferFromType( componentType, index );
-    }
+    };
 
     var getPositions = function ( arraybuffer )
     {
