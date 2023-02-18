@@ -1653,7 +1653,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
         cacheID = url;
         if ( isDraco )
         {
-            cacheID += " " + bufferGeo._cf.views.nodes[0]._vf.byteOffset;
+            cacheID += " " + bufferGeo._cf.views.nodes[ 0 ]._vf.byteOffset;
         }
 
         if ( x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ] == undefined )
