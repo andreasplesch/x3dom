@@ -984,7 +984,7 @@ x3dom.X3DDocument.prototype.onMutation = function ( records )
 {
     for ( var i = 0, n = records.length; i < n; i++ )
     {
-        if ( records[ i ].type === "attributes" && records[ i ].oldValue )
+        if ( records[ i ].type === "attributes" && ( records[ i ].oldValue != null ) )
         {
             this.onAttributeChanged( records[ i ].target,
                 records[ i ].attributeName,
