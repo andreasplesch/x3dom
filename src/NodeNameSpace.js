@@ -203,7 +203,10 @@ x3dom.setElementAttribute = function ( attrName, newVal )
     var x3dNode = this._x3domNode;
     if ( x3dNode )
     {
-        x3dNode.updateField( attrName, newVal );
+        if ( !x3dom.userAgentFeature.supportsMutationObserver )
+        {
+            x3dNode.updateField( attrName, newVal );
+        }
         x3dNode._nameSpace.doc.needRender = true;
     }
 };
