@@ -986,15 +986,18 @@ x3dom.X3DDocument.prototype.onMutation = function ( records )
         n,
         record,
         newValue;
+    var set_prefix = "set_";
     for ( i = 0, n = records.length; i < n; i++ )
     {
         record = records[ i ];
         if ( record.type === "attributes" ) // && ( record.oldValue != null ) )
-        {
-            newValue = record.target.getAttribute( record.attributeName );
-            this.onAttributeChanged( record.target,
-                record.attributeName,
-                newValue );
+        {   if ( record.oldValue != null || record.attributeName.startsWith( set_prefix )
+            {
+                newValue = record.target.getAttribute( record.attributeName );
+                this.onAttributeChanged( record.target,
+                    record.attributeName,
+                    newValue );
+            }
         }
         else if ( record.type === "childList" )
         {
