@@ -991,7 +991,7 @@ x3dom.X3DDocument.prototype.onMutation = function ( records )
     {
         record = records[ i ];
         if ( record.type === "attributes" ) // && ( record.oldValue != null ) )
-        {   if ( record.oldValue != null || record.attributeName.startsWith( set_prefix )
+        {   if ( record.oldValue != null || record.attributeName.startsWith( set_prefix ) )
             {
                 newValue = record.target.getAttribute( record.attributeName );
                 this.onAttributeChanged( record.target,
