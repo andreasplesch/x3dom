@@ -9,7 +9,7 @@ x3dom.glTF2Loader = function ( nameSpace )
     this._supportedExtensions = [
         "KHR_materials_pbrSpecularGlossiness",
         "KHR_materials_unlit",
-        "KHR_texture_transform",
+        "KHR_texture_transform"
     ];
     if ( x3dom.DracoDecoderModule )
     {
