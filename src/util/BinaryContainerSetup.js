@@ -1666,30 +1666,38 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
             x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].decrementDownload = true;
             x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].promise = new Promise( function ( resolve, reject )
             {
-                var xhr = new XMLHttpRequest();
-
-                xhr.open( "GET", url );
-
-                xhr.responseType = "arraybuffer";
-
-                xhr.onload = function ( e )
+                if ( x3dom.BinaryContainerLoader.bufferGeoCache[ "xhr " + url ] == undefined )
                 {
-                    if ( xhr.status != 200 )
+                    var xhr = new XMLHttpRequest();
+
+                    xhr.open( "GET", url );
+
+                    xhr.responseType = "arraybuffer";
+
+                    xhr.onload = function ( e )
+                    {
+                        if ( xhr.status != 200 )
+                        {
+                            reject();
+                        }
+                        else
+                        {
+                            x3dom.BinaryContainerLoader.bufferGeoCache[ "xhr " + url ] = xhr.response;
+                            resolve( xhr.response );
+                        }
+                    };
+
+                    xhr.onerror = function ( e )
                     {
                         reject();
-                    }
-                    else
-                    {
-                        resolve( xhr.response );
-                    }
-                };
+                    };
 
-                xhr.onerror = function ( e )
+                    x3dom.RequestManager.addRequest( xhr );
+                }
+                else
                 {
-                    reject();
-                };
-
-                x3dom.RequestManager.addRequest( xhr );
+                    resolve( x3dom.BinaryContainerLoader.bufferGeoCache[ "xhr " + url ] );
+                }
             } );
         }
 
