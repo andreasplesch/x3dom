@@ -178,7 +178,7 @@ x3dom.getElementAttribute = function ( attrName )
         attrib = this.__getAttribute( attrName.toLowerCase() );
     }
 
-    if ( attrib || !this._x3domNode )
+    if ( attrib != null || !this._x3domNode )
     {
         return attrib;
     }
