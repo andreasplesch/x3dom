@@ -119,7 +119,9 @@ typeof c&&(c=c.ptr);return B(Kc(d,b,c),C)};m.prototype.__destroy__=m.prototype._
 bd();a.DT_UINT16=cd();a.DT_INT32=dd();a.DT_UINT32=ed();a.DT_INT64=fd();a.DT_UINT64=gd();a.DT_FLOAT32=hd();a.DT_FLOAT64=id();a.DT_BOOL=jd();a.DT_TYPES_COUNT=kd();a.OK=ld();a.DRACO_ERROR=md();a.IO_ERROR=nd();a.INVALID_PARAMETER=od();a.UNSUPPORTED_VERSION=pd();a.UNKNOWN_VERSION=qd()}va?b():oa.unshift(b)})();if("function"===typeof a.onModuleParsed)a.onModuleParsed();a.Decoder.prototype.GetEncodedGeometryType=function(b){if(b.__class__&&b.__class__===a.DecoderBuffer)return a.Decoder.prototype.GetEncodedGeometryType_Deprecated(b);
 if(8>b.byteLength)return a.INVALID_GEOMETRY_TYPE;switch(b[7]){case 0:return a.POINT_CLOUD;case 1:return a.TRIANGULAR_MESH;default:return a.INVALID_GEOMETRY_TYPE}};return n.ready}}();"object"===typeof exports&&"object"===typeof module?module.exports=DracoDecoderModule:"function"===typeof define&&define.amd?define([],function(){return DracoDecoderModule}):"object"===typeof exports&&(exports.DracoDecoderModule=DracoDecoderModule);
                                        
-var DracoDecoderWASM = { 
+x3dom.DracoDecoderModule = DracoDecoderModule;
+
+x3dom.DracoDecoderWASM = { 
   //dataUrl: "data:text/plain;base64," + DracoDecoderWASM_base64(),
   arrayBuffer: Uint8Array.from( atob( DracoDecoderWASM_base64() ), function (c) { return c.charCodeAt( 0 ); }).buffer
 };

@@ -1426,8 +1426,8 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
             var byteOffset = view._vf.byteOffset;
             var byteLength = view._vf.byteLength;
 
-            if ( x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].buffers[ bufferID ] == undefined )// ||
-               //!gl.isBuffer( x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].buffers[ bufferID ] ) )
+            if ( x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].buffers[ bufferID ] == undefined ) ||
+               !gl.isBuffer( x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].buffers[ bufferID ] ) )
             {
                 var bufferData = getBufferData( arraybuffer, byteOffset, byteLength, view, i );
 
@@ -1666,38 +1666,30 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
             x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].decrementDownload = true;
             x3dom.BinaryContainerLoader.bufferGeoCache[ cacheID ].promise = new Promise( function ( resolve, reject )
             {
-                if ( x3dom.BinaryContainerLoader.bufferGeoCache[ "xhr " + url ] == undefined )
+                var xhr = new XMLHttpRequest();
+
+                xhr.open( "GET", url );
+
+                xhr.responseType = "arraybuffer";
+
+                xhr.onload = function ( e )
                 {
-                    var xhr = new XMLHttpRequest();
-
-                    xhr.open( "GET", url );
-
-                    xhr.responseType = "arraybuffer";
-
-                    xhr.onload = function ( e )
-                    {
-                        if ( xhr.status != 200 )
-                        {
-                            reject();
-                        }
-                        else
-                        {
-                            x3dom.BinaryContainerLoader.bufferGeoCache[ "xhr " + url ] = xhr.response;
-                            resolve( xhr.response );
-                        }
-                    };
-
-                    xhr.onerror = function ( e )
+                    if ( xhr.status != 200 )
                     {
                         reject();
-                    };
+                    }
+                    else
+                    {
+                        resolve( xhr.response );
+                    }
+                };
 
-                    x3dom.RequestManager.addRequest( xhr );
-                }
-                else
+                xhr.onerror = function ( e )
                 {
-                    resolve( x3dom.BinaryContainerLoader.bufferGeoCache[ "xhr " + url ] );
-                }
+                    reject();
+                };
+
+                x3dom.RequestManager.addRequest( xhr );
             } );
         }
 
@@ -1718,7 +1710,7 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
                 }
                 else
                 {
-                    return DracoDecoderModule( { wasmBinary: DracoDecoderWASM.arrayBuffer } ).then( function ( module )
+                    return x3dom.DracoDecoderModule( { wasmBinary: x3dom.DracoDecoderWASM.arrayBuffer } ).then( function ( module )
                     {
                         dracoDecoderModule = module;
                         dracoDecoder = new module.Decoder();

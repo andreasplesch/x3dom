@@ -10,22 +10,25 @@ x3dom.glTF2Loader = function ( nameSpace )
         "KHR_materials_pbrSpecularGlossiness",
         "KHR_materials_unlit",
         "KHR_texture_transform",
-        "KHR_draco_mesh_compression"
     ];
+    if ( x3dom.DracoDecoderModule )
+    {
+        this._supportedExtensions.push( "KHR_draco_mesh_compression" );
+    }
 };
 
 /**
  * Starts the loading/parsing of the glTF-Object
  * @param {Object} gltf
  */
-x3dom.glTF2Loader.prototype.dispose = function ()
-{
-    this._dracoDecoderModule.destroy( this._dracoDecoder );
-    //this._dracoDecoderModule.destroy( this._dracoGeometry );
-    this._dracoDecoderModule = null;
-    this._gltf = null;
-    this._definitions = null;
-};
+// x3dom.glTF2Loader.prototype.dispose = function ()
+// {
+//     this._dracoDecoderModule.destroy( this._dracoDecoder );
+//     //this._dracoDecoderModule.destroy( this._dracoGeometry );
+//     this._dracoDecoderModule = null;
+//     this._gltf = null;
+//     this._definitions = null;
+// };
 
 /**
  * Starts the loading/parsing of the glTF-Object
@@ -470,31 +473,15 @@ x3dom.glTF2Loader.prototype._generateX3DShape = function ( primitive )
         dracoExtension = primitive.extensions.KHR_draco_mesh_compression;
     }
 
+    if ( dracoExtension && !x3dom.DracoDecoderModule )
+    {
+        return shape;
+    }
+
     shape.appendChild( this._generateX3DBufferGeometry( primitive, dracoExtension ) );
 
     return shape;
 };
-
-// x3dom.glTF2Loader.prototype._handleDracoGeometry = function ( dracoExtension, primitive )
-// {
-//     var bufferView = this._gltf.bufferViews[ dracoExtension.bufferView ];
-//     var dracoBuffer = this._gltf.buffers[ bufferView.buffer ];
-//     this._decoderBuffer = null;
-//     return fetch( dracoBuffer.uri )
-//         .then( function ( r )
-//         {
-//             return r.arrayBuffer();
-//         } )
-//         .then( function ( r )
-//         {
-//             var actualBuffer = r.slice( bufferView.byteOffset,
-//                 bufferView.byteOffset + bufferView.byteLength );
-//             this._decoderBuffer = new this._dracoDecoderModule.DecoderBuffer();
-//             this._decoderBuffer.Init( actualBuffer, bufferView.byteLength );
-//             return this._decoderBuffer;
-//         }.bind( this ) );
-//     // ...
-// };
 
 /**
  * Generates a X3D appearance node
