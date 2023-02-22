@@ -280,7 +280,16 @@
         {
             if( e.keyCode == 13 )
             {
-                var url = document.querySelector("#externalURL").value;
+                var urlInput = document.querySelector("#externalURL");
+                url = urlInput.value;
+                var urls = document.querySelector('#enteredURLs');
+                if ( [...urls.querySelectorAll('option')].every ( option => option.value !== url ) )
+                {
+                    var option = document.createElement( 'option' );
+                    option.setAttribute( 'value', url );
+                    option.setAttribute( 'label', url.slice( url.lastIndexOf( "/") + 1 ) );
+                    urls.appendChild( option );        
+                }               
                 toggleURLInput();
                 updateInline(url);
             }
@@ -348,7 +357,8 @@
 
     <section class="inputbar">
         <i class="material-icons inputbar-icon">link</i>
-        <input id="externalURL" type="url" placeholder="URL to a glTF file..." onkeypress="onKeyPress(event)" onblur="onBlur()" tabindex="0">
+        <input id="externalURL" type="url" placeholder="URL to a glTF file..." onkeypress="onKeyPress(event)" onblur="onBlur()" tabindex="0" list="enteredURLs">
+        <datalist id="enteredURLs"></datalist>
         <i class="material-icons inputbar-icon" onclick="toggleURLInput();">clear</i>
     </section>  
 
