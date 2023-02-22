@@ -1632,6 +1632,10 @@ x3dom.BinaryContainerLoader.setupBufferGeo = function ( shape, sp, gl, viewarea,
         shape._cleanupGLObjects = function ( force, delGL )
         {
             var _cache = this._webgl._bufferGeoCache;
+            for ( var bufferID in _cache.buffers )
+            {
+                delete _cache.buffers[bufferID]; //make undefined to avoid isBuffer check
+            }
             var found = _cache.shapes.indexOf( this );
             if ( found > -1 )
             {
