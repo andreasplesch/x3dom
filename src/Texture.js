@@ -437,17 +437,17 @@ x3dom.Texture.prototype.updateTexture = function ()
                 // tex._video.load();
             }
 
-            tex._video.querySelectorAll("source").forEach( function (source)
-                                                          {
-                                                              source.remove();
-                                                          });
+            tex._video.querySelectorAll( "source" ).forEach( function ( source )
+            {
+                source.remove();
+            } );
 
             for ( var i = 0; i < tex._vf.url.length; i++ )
             {
                 var videoUrl = tex._nameSpace.getURL( tex._vf.url[ i ] );
                 x3dom.debug.logInfo( "Adding video file: " + videoUrl );
                 var src = document.createElement( "source" );
-                src.setAttribute( "src", videoUrl );   
+                src.setAttribute( "src", videoUrl );
                 tex._video.appendChild( src );
             }
             tex._video.defaultPlaybackRate = tex._vf.speed;
@@ -459,7 +459,7 @@ x3dom.Texture.prototype.updateTexture = function ()
 
         var updateMovie = function ()
         {
-            if ( requestFrameId == 0 ) return
+            if ( requestFrameId == 0 ) {return;}
             gl.bindTexture( that.type, that.texture );
             gl.texImage2D( that.type, 0, that.format, that.format, gl.UNSIGNED_BYTE, tex._video );
             if ( that.genMipMaps )
@@ -488,6 +488,8 @@ x3dom.Texture.prototype.updateTexture = function ()
                     if ( requestFrameId !== 0 )
                     {
                         x3dom.debug.logInfo( "The video has already started, startVideo() is called repeatedly." );
+                        window.cancelAnimationFrame( requestFrameId );
+                        requestFrameId = 0;
                     }
                     requestFrameId = window.requestAnimFrame( updateMovie );
                 } )
