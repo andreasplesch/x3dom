@@ -8,14 +8,54 @@
 <p>
     videos as texture
 </p>
-<x3d width='500px' height='400px' showlog='true'>
+<x3d width='500px' height='400px' showlog=false'>
     <scene>
-        <shape>
-           <appearance>
-               <MovieTexture repeatS="false" repeatT="false" loop='true' url='https://upload.wikimedia.org/wikipedia/commons/e/ee/Lava_Hijzelaar_-_Imagine_%282020%29.webm'></MovieTexture>
+        <shape DEF='moviebox'>
+           <appearance DEF='app'>
+               <material></material>
+               <MovieTexture DEF='tex' speed='4' repeatS="false" repeatT="false" loop='true' url='"https://upload.wikimedia.org/wikipedia/commons/e/ee/Lava_Hijzelaar_-_Imagine_%282020%29.webm"'></MovieTexture>
            </appearance>
             <box></box>
         </shape>
+        <transform translation='2.5 0 0'>
+            <shape USE='moviebox'></shape>
+        </transform>
+        <transform translation='2.5 -2.5 0'>
+            <shape>
+                <appearance USE='app'></appearance>
+                <cone></cone>
+            </shape>
+        </transform>
+        <transform translation='2.5 2.5 0'>
+            <shape>
+                <appearance>
+                    <MovieTexture USE='tex'></MovieTexture>
+                </appearance>
+                <cylinder></cylinder>
+            </shape>
+        </transform>
+        <transform translation='-5 2.5 0'>
+            <shape>
+                <appearance>
+                    <material></material>
+                </appearance>
+                <text string='"USE" "texture"'></text>
+            </shape>
+        </transform>
+        <transform translation='-5 0 0'>
+            <shape>
+                <appearance>
+                    <material></material>
+                </appearance>
+                <text string='"USE" "shape"'></text>
+            </shape>
+        </transform>
+        <transform translation='-5 -2.5 0'>
+            <shape>
+                <appearance USE='app'></appearance>
+                <text string='"USE" "appearance"'></text>
+            </shape>
+        </transform>
     </scene>
 </x3d>
 <a href="https://commons.wikimedia.org/wiki/File:Lava_Hijzelaar_-_Imagine_(2020).webm">Lava Hijzelaar (Lava Art)</a>, <a href="https://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>, via Wikimedia Commons
