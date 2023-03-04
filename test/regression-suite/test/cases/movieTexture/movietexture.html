@@ -13,7 +13,7 @@
         <shape DEF='moviebox'>
            <appearance DEF='app'>
                <material></material>
-               <MovieTexture DEF='tex' speed='4' repeatS="false" repeatT="false" loop='true' url='"https://upload.wikimedia.org/wikipedia/commons/e/ee/Lava_Hijzelaar_-_Imagine_%282020%29.webm"'></MovieTexture>
+               <MovieTexture DEF='tex' speed='2' repeatS="false" repeatT="false" loop='true' url='"https://upload.wikimedia.org/wikipedia/commons/e/ee/Lava_Hijzelaar_-_Imagine_%282020%29.webm"'></MovieTexture>
            </appearance>
             <box></box>
         </shape>
@@ -58,6 +58,22 @@
         </transform>
     </scene>
 </x3d>
-<a href="https://commons.wikimedia.org/wiki/File:Lava_Hijzelaar_-_Imagine_(2020).webm">Lava Hijzelaar (Lava Art)</a>, <a href="https://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>, via Wikimedia Commons
+    <button onclick='change()'>Switch video</button>
+    <div>
+        <a href="https://commons.wikimedia.org/wiki/File:Lava_Hijzelaar_-_Imagine_(2020).webm">Lava Hijzelaar (Lava Art)</a>, <a href="https://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>, via Wikimedia Commons
+    </div>
+    <div>
+        <a href="https://commons.wikimedia.org/wiki/File:SARS-CoV-2.webm">Alexey Solodovnikov (Idea, Producer, CG, Editor), Valeria Arkhipova (Scientific Сonsultant)</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons
+    </div>
 </body>
+    <script>
+        var flip = false;
+        function change () {
+            flip = !flip;
+            document.querySelector('MovieTexture')
+                .setAttribute('url', flip ?
+                              '"https://upload.wikimedia.org/wikipedia/commons/2/2d/SARS-CoV-2.webm", "https://upload.wikimedia.org/wikipedia/commons/9/9a/11742_SDO-Year_5_ProRes_1920x1080_2997.webm"'
+                             :'"https://upload.wikimedia.org/wikipedia/commons/e/ee/Lava_Hijzelaar_-_Imagine_%282020%29.webm"');
+        }
+    </script>
 </html>
