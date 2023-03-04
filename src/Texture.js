@@ -437,14 +437,20 @@ x3dom.Texture.prototype.updateTexture = function ()
                 // tex._video.load();
             }
 
+            tex._video.querySelectorAll("source").forEach( function (source)
+                                                          {
+                                                              source.remove();
+                                                          });
+
             for ( var i = 0; i < tex._vf.url.length; i++ )
             {
                 var videoUrl = tex._nameSpace.getURL( tex._vf.url[ i ] );
                 x3dom.debug.logInfo( "Adding video file: " + videoUrl );
                 var src = document.createElement( "source" );
-                src.setAttribute( "src", videoUrl );
+                src.setAttribute( "src", videoUrl );   
                 tex._video.appendChild( src );
             }
+            tex._video.defaultPlaybackRate = tex._vf.speed;
             tex._video.playbackRate = tex._vf.speed;
             tex._video.load();
         }
