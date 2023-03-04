@@ -423,7 +423,7 @@ x3dom.Texture.prototype.updateTexture = function ()
         }
         else
         {
-            if ( !childTex )
+            if ( !childTex && !tex._video )
             {
                 tex._video = document.createElement( "video" );
                 tex._video.setAttribute( "preload", "auto" );
@@ -434,7 +434,7 @@ x3dom.Texture.prototype.updateTexture = function ()
                 // p.appendChild( tex._video );
                 // tex._video.style.visibility = "hidden";
                 // tex._video.style.display = "none";
-                tex._video.load();
+                // tex._video.load();
             }
 
             for ( var i = 0; i < tex._vf.url.length; i++ )
@@ -445,10 +445,15 @@ x3dom.Texture.prototype.updateTexture = function ()
                 src.setAttribute( "src", videoUrl );
                 tex._video.appendChild( src );
             }
+            tex._video.playbackRate = tex._vf.speed;
+            tex._video.load();
         }
+
+        var requestFrameId = 0;
 
         var updateMovie = function ()
         {
+            if ( requestFrameId == 0 ) return
             gl.bindTexture( that.type, that.texture );
             gl.texImage2D( that.type, 0, that.format, that.format, gl.UNSIGNED_BYTE, tex._video );
             if ( that.genMipMaps )
@@ -458,6 +463,7 @@ x3dom.Texture.prototype.updateTexture = function ()
             gl.bindTexture( that.type, null );
             that.texture.ready = true;
             doc.needRender = true;
+            requestFrameId = window.requestAnimFrame( updateMovie );
         };
 
         var startVideo = function ()
@@ -473,13 +479,11 @@ x3dom.Texture.prototype.updateTexture = function ()
             tex._video.play()
                 .then( function fulfilled ()
                 {
-                    if ( tex._intervalID )
+                    if ( requestFrameId !== 0 )
                     {
                         x3dom.debug.logInfo( "The video has already started, startVideo() is called repeatedly." );
-                        clearInterval( tex._intervalID );
-                        tex._intervalID = null;
                     }
-                    tex._intervalID = setInterval( updateMovie, 16 );
+                    requestFrameId = window.requestAnimFrame( updateMovie );
                 } )
                 .catch( function rejected ( err )
                 {
@@ -495,18 +499,17 @@ x3dom.Texture.prototype.updateTexture = function ()
             window.removeEventListener( "mousedown", startVideo );
             window.removeEventListener( "keydown", startVideo );
             tex._video.pause();
-            clearInterval( tex._intervalID );
-            tex._intervalID = null;
+            window.cancelAnimationFrame( requestFrameId );
+            requestFrameId = 0;
         };
 
         var videoDone = function ()
         {
-            clearInterval( tex._intervalID );
-            tex._intervalID = null;
+            window.cancelAnimationFrame( requestFrameId );
+            requestFrameId = 0;
             if ( tex._vf.loop === true )
             {
-                tex._video.play();
-                tex._intervalID = setInterval( updateMovie, 16 );
+                startVideo();
             }
         };
 
