@@ -241,17 +241,17 @@ x3dom.registerNodeType(
                 {
                     return this._bboxShape;
                 }
-                var bb = new x3dom.nodeTypes.Shape();
-                bb._nameSpace = this._nameSpace;
-                bb._vf.visible = this._vf.bboxDisplay;
                 var bbDom = document.createElement('container');
-                bbDom.innerHTML=`<Shape isPickable='false' visible=${this._vf.bboxDisplay}>
-                  <Appeareance>
-                    <Material diffuseColor='0 0 0' emissiveColor='1 1 0'></Material>
-                  </Appearance>
-                  <Box size='1 1 1'></Box>
-                </Shape>`
-                this._bboxShape = this._nameSpace.setupTree( bbDom.children[0], this._xml.parentNode );
+                bbDom.innerHTML =
+                "<Transform>"
+                "<Shape isPickable='false' visible=" + this._vf.bboxDisplay +">" +
+                "  <Appeareance>" +
+                "   <Material transparency='0.8' diffuseColor='0 0 0' emissiveColor='1 1 0'></Material>" +
+                "   </Appearance>" +
+                "  <Box size='1 1 1'></Box>" +
+                "</Shape>" +
+                "</Transform>";
+                this._bboxShape = this._nameSpace.setupTree( bbDom.children[0], this._xmlNode.parentElement );
                 return this._bboxShape;
             }
         }
