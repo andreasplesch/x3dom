@@ -81,6 +81,17 @@ x3dom.registerNodeType(
              */
             this.addField_SFBool( ctx, "bboxDisplay", false );
 
+            /**
+             * Holds the internal bbox node.
+             * @var {x3dom.fields.SFNode} bboxTemplate
+             * @memberof x3dom.nodeTypes.X3DBoundedObject
+             * @initvalue x3dom.nodeTypes.X3DChildNode
+             * @field x3dom
+             * @instance
+             */
+            this.addField_SFNode( "bboxTemplate", x3dom.nodeTypes.X3DChildNode );
+
+
             this._graph = {
                 boundedNode  : this,    // backref to node object
                 localMatrix  : x3dom.fields.SFMatrix4f.identity(),   // usually identity
@@ -94,7 +105,8 @@ x3dom.registerNodeType(
             };
 
             this._render = true;
-            this._bboxShape = null;
+            this._bboxShape = this._cf.bboxTemplate.node;
+            this.getBboxShape();
         },
         {
             fieldChanged : function ( fieldName )
@@ -251,7 +263,8 @@ x3dom.registerNodeType(
                 "  <Box size='1 1 1'></Box>" +
                 "</Shape>" +
                 "</Transform>";
-                this._bboxShape = this._nameSpace.setupTree( bbDom.children[0], this._xmlNode.parentElement );
+                this._bboxShape = this._nameSpace.setupTree( bbDom.children[0], this._xmlNode );
+                //redefine custom collectDrawables
                 return this._bboxShape;
             }
         }
