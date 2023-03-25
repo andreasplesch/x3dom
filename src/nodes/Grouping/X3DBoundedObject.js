@@ -71,6 +71,16 @@ x3dom.registerNodeType(
              */
             this.addField_SFVec3f( ctx, "bboxSize", -1, -1, -1 );
 
+            /**
+             * Flag to enable display of the bounding box
+             * @var {x3dom.fields.SFVec3f} bboxDisplay
+             * @memberof x3dom.nodeTypes.X3DBoundedObject
+             * @initvalue false
+             * @field x3d
+             * @instance
+             */
+            this.addField_SFBool( ctx, "bboxDisplay", false );
+
             this._graph = {
                 boundedNode  : this,    // backref to node object
                 localMatrix  : x3dom.fields.SFMatrix4f.identity(),   // usually identity
@@ -84,6 +94,7 @@ x3dom.registerNodeType(
             };
 
             this._render = true;
+            this._bboxShape = null;
         },
         {
             fieldChanged : function ( fieldName )
@@ -222,6 +233,26 @@ x3dom.registerNodeType(
                 }
                 //nothing changed
                 return this._render;
+            },
+
+            getBboxShape : function ()
+            {
+                if ( this._bboxShape !== null )
+                {
+                    return this._bboxShape;
+                }
+                var bb = new x3dom.nodeTypes.Shape();
+                bb._nameSpace = this._nameSpace;
+                bb._vf.visible = this._vf.bboxDisplay;
+                var bbDom = document.createElement('container');
+                bbDom.innerHTML=`<Shape isPickable='false' visible=${this._vf.bboxDisplay}>
+                  <Appeareance>
+                    <Material diffuseColor='0 0 0' emissiveColor='1 1 0'></Material>
+                  </Appearance>
+                  <Box size='1 1 1'></Box>
+                </Shape>`
+                this._bboxShape = this._nameSpace.setupTree( bbDom.children[0], this._xml.parentNode );
+                return this._bboxShape;
             }
         }
     )
