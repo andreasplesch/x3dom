@@ -80,6 +80,16 @@ x3dom.registerNodeType(
              * @instance
              */
             this.addField_SFBool( ctx, "bboxDisplay", false );
+            
+            /**
+             * Flag to indicate bounding box
+             * @var {x3dom.fields.SFVec3f} bboxNeeded
+             * @memberof x3dom.nodeTypes.X3DBoundedObject
+             * @initvalue false
+             * @field x3d
+             * @instance
+             */
+            this.addField_SFBool( ctx, "bboxNeeded", true );
 
             /**
              * Holds the internal bbox node.
@@ -89,8 +99,9 @@ x3dom.registerNodeType(
              * @field x3dom
              * @instance
              */
-            this.addField_SFNode( "bboxTemplate", x3dom.nodeTypes.X3DChildNode );
-
+            if ( this._vf.bboxNeeded ) {
+                this.addField_SFNode( "bboxTemplate", x3dom.nodeTypes.X3DChildNode );
+            };
 
             this._graph = {
                 boundedNode  : this,    // backref to node object
@@ -255,8 +266,8 @@ x3dom.registerNodeType(
                 }
                 var bbDom = document.createElement('container');
                 bbDom.innerHTML =
-                "<Transform>"
-                "<Shape isPickable='false' visible=" + this._vf.bboxDisplay +">" +
+                "<Transform bboxNeeded='false'>"
+                "<Shape bboxNeeded='false' + isPickable='false' visible=" + this._vf.bboxDisplay +">" +
                 "  <Appeareance>" +
                 "   <Material transparency='0.8' diffuseColor='0 0 0' emissiveColor='1 1 0'></Material>" +
                 "   </Appearance>" +
