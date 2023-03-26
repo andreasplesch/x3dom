@@ -263,7 +263,7 @@ x3dom.registerNodeType(
                 {
                     var bbDom = document.createElement('container');
                     bbDom.innerHTML =
-                    "<Transform bboxNeeded='false'>"
+                    "<Transform bboxNeeded='false'>" +
                     "<Shape bboxNeeded='false' isPickable='false' visible=" + this._vf.bboxDisplay +">" +
                     "  <Appearance>" +
                     "   <Material transparency='0.8' diffuseColor='0 0 0' emissiveColor='1 1 0'></Material>" +
