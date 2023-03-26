@@ -263,20 +263,15 @@ x3dom.registerNodeType(
                 {
                     var bbDom = document.createElement('container');
                     bbDom.innerHTML =
-                    "<Transform bboxNeeded='false'>" +
-                    "<Shape bboxNeeded='false' isPickable='false' visible=" + this._vf.bboxDisplay +">" +
+                    "<Transform>" +
+                    "<Shape isPickable='false'>" +
                     "  <Appearance>" +
-                    "   <Material transparency='0.8' diffuseColor='0 0 0' emissiveColor='1 1 0'></Material>" +
+                    "   <Material transparency='0.7' diffuseColor='0.2 0.2 0' emissiveColor='1 1 0'></Material>" +
                     "   </Appearance>" +
                     "  <Box size='1 1 1'></Box>" +
                     "</Shape>" +
                     "</Transform>";
-                    this._bboxNode = this._nameSpace.setupTree( bbDom.children[ 0 ], this._xmlNode );
-                    //redefine custom collectDrawables
-                    // this._bboxShape.collectDrawableObjects = function ( transform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes )
-                    // {
-
-                    // }
+                    this._bboxNode = this._nameSpace.setupTree( bbDom.children[ 0 ], this._xmlNode.parentElement );
                 }
                 var bbox = this._graph.volume;
                 bboxNode = this._bboxNode;
