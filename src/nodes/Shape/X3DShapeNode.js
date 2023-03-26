@@ -134,6 +134,12 @@ x3dom.registerNodeType(
 
                 drawableCollection.addShape( this, transform, graphState );
 
+                if ( this._vf.bboxDisplay )
+                {
+                    var bboxShape = this.getBboxShape();
+                    bboxShape.collectDrawableObjects( transform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
+                }
+
                 return true;
             },
 

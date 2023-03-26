@@ -264,14 +264,14 @@ x3dom.registerNodeType(
                     var bbDom = document.createElement('container');
                     bbDom.innerHTML =
                     "<Transform bboxNeeded='false'>"
-                    "<Shape bboxNeeded='false' + isPickable='false' visible=" + this._vf.bboxDisplay +">" +
-                    "  <Appeareance>" +
+                    "<Shape bboxNeeded='false' isPickable='false' visible=" + this._vf.bboxDisplay +">" +
+                    "  <Appearance>" +
                     "   <Material transparency='0.8' diffuseColor='0 0 0' emissiveColor='1 1 0'></Material>" +
                     "   </Appearance>" +
                     "  <Box size='1 1 1'></Box>" +
                     "</Shape>" +
                     "</Transform>";
-                    this._bboxShape = this._nameSpace.setupTree( bbDom.children[0], this._xmlNode );
+                    this._bboxShape = this._nameSpace.setupTree( bbDom.children[ 0 ], this._xmlNode );
                     //redefine custom collectDrawables
                     // this._bboxShape.collectDrawableObjects = function ( transform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes )
                     // {
@@ -280,7 +280,7 @@ x3dom.registerNodeType(
                 }
                 var bbox = this._graph.volume;
                 bboxShape = this._bboxShape;
-                bboxShape._vf.center = bbox.center;
+                bboxShape._vf.translation = bbox.center;
                 bboxShape._vf.scale = bbox.max.subtract( bbox.min );
                 bboxShape.fieldChanged("scale");
                 return this._bboxShape;
