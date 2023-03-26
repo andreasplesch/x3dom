@@ -104,6 +104,12 @@ x3dom.registerNodeType(
                         cnode.collectDrawableObjects( childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
                     }
                 }
+
+                if ( this._vf.bboxDisplay )
+                {
+                    var bboxShape = this.getBboxShape();
+                    drawableCollection.addShape( bboxShape, childTransform.mult( bboxShape._trafo ), bboxShape.graphState() );
+                }
             }
         }
     )

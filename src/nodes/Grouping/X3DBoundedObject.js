@@ -89,7 +89,7 @@ x3dom.registerNodeType(
              * @field x3d
              * @instance
              */
-            this.addField_SFBool( ctx, "bboxNeeded", true );
+            //this.addField_SFBool( ctx, "bboxNeeded", true );
 
             /**
              * Holds the internal bbox node.
@@ -99,9 +99,9 @@ x3dom.registerNodeType(
              * @field x3dom
              * @instance
              */
-            if ( this._vf.bboxNeeded ) {
-                this.addField_SFNode( "bboxTemplate", x3dom.nodeTypes.X3DChildNode );
-            };
+            // if ( this._vf.bboxNeeded ) {
+            //     this.addField_SFNode( "bboxTemplate", x3dom.nodeTypes.X3DChildNode );
+            // };
 
             this._graph = {
                 boundedNode  : this,    // backref to node object
@@ -116,8 +116,7 @@ x3dom.registerNodeType(
             };
 
             this._render = true;
-            this._bboxShape = this._cf.bboxTemplate.node;
-            this.getBboxShape();
+            this._bboxShape = null;
         },
         {
             fieldChanged : function ( fieldName )
@@ -260,22 +259,26 @@ x3dom.registerNodeType(
 
             getBboxShape : function ()
             {
-                if ( this._bboxShape !== null )
+                if ( this._bboxShape == null )
                 {
-                    return this._bboxShape;
+                    var bbDom = document.createElement('container');
+                    bbDom.innerHTML =
+                    "<Transform bboxNeeded='false'>"
+                    "<Shape bboxNeeded='false' + isPickable='false' visible=" + this._vf.bboxDisplay +">" +
+                    "  <Appeareance>" +
+                    "   <Material transparency='0.8' diffuseColor='0 0 0' emissiveColor='1 1 0'></Material>" +
+                    "   </Appearance>" +
+                    "  <Box size='1 1 1'></Box>" +
+                    "</Shape>" +
+                    "</Transform>";
+                    this._bboxShape = this._nameSpace.setupTree( bbDom.children[0], this._xmlNode );
+                    //redefine custom collectDrawables
                 }
-                var bbDom = document.createElement('container');
-                bbDom.innerHTML =
-                "<Transform bboxNeeded='false'>"
-                "<Shape bboxNeeded='false' + isPickable='false' visible=" + this._vf.bboxDisplay +">" +
-                "  <Appeareance>" +
-                "   <Material transparency='0.8' diffuseColor='0 0 0' emissiveColor='1 1 0'></Material>" +
-                "   </Appearance>" +
-                "  <Box size='1 1 1'></Box>" +
-                "</Shape>" +
-                "</Transform>";
-                this._bboxShape = this._nameSpace.setupTree( bbDom.children[0], this._xmlNode );
-                //redefine custom collectDrawables
+                var bbox = this._graph.volume;
+                bboxShape = this._bboxShape;
+                bboxShape._vf.center = bbox.center;
+                bboxShape._vf.scale = bbox.max.subtract( bbox.min );
+                bboxShape.fieldChanged("scale");
                 return this._bboxShape;
             }
         }
