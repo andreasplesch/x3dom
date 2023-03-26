@@ -271,7 +271,7 @@ x3dom.registerNodeType(
                     "  <Box size='1 1 1'></Box>" +
                     "</Shape>" +
                     "</Transform>";
-                    this._bboxShape = this._nameSpace.setupTree( bbDom.children[ 0 ], this._xmlNode );
+                    this._bboxNode = this._nameSpace.setupTree( bbDom.children[ 0 ], this._xmlNode );
                     //redefine custom collectDrawables
                     // this._bboxShape.collectDrawableObjects = function ( transform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes )
                     // {
