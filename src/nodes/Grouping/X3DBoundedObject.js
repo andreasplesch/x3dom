@@ -273,6 +273,10 @@ x3dom.registerNodeType(
                     "</Transform>";
                     this._bboxShape = this._nameSpace.setupTree( bbDom.children[0], this._xmlNode );
                     //redefine custom collectDrawables
+                    // this._bboxShape.collectDrawableObjects = function ( transform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes )
+                    // {
+
+                    // }
                 }
                 var bbox = this._graph.volume;
                 bboxShape = this._bboxShape;
