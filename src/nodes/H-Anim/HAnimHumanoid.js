@@ -333,6 +333,8 @@ x3dom.registerNodeType(
                     cnode.collectDrawableObjects( childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
                 } );
 
+                this.collectBbox( childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
+
                 //force coord update
                 if ( this._cf.skinCoord.node )
                 {

@@ -114,6 +114,8 @@ x3dom.registerNodeType(
                         cnode.collectDrawableObjects( childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
                     }
                 }
+
+                this.collectBbox( childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
             }
         }
     )

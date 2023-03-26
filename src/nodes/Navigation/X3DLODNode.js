@@ -67,6 +67,8 @@ x3dom.registerNodeType(
 
                 this.visitChildren( transform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
 
+                this.collectBbox( transform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
+
                 //out.LODs.push( [transform, this] );
             },
 

@@ -190,6 +190,8 @@ x3dom.registerNodeType(
                 // at the moment, no caching here as children may change every frame
                 singlePath = false;
                 this.visitChildren( transform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
+
+                this.collectBbox( transform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
             },
 
             visitChildren : function ( transform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes )

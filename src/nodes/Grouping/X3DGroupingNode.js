@@ -105,11 +105,7 @@ x3dom.registerNodeType(
                     }
                 }
 
-                if ( this._vf.bboxDisplay )
-                {
-                    var bboxShape = this.getBboxShape();
-                    bboxShape.collectDrawableObjects( childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
-                }
+                this.collectBbox( childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
             }
         }
     )

@@ -116,7 +116,7 @@ x3dom.registerNodeType(
             };
 
             this._render = true;
-            this._bboxShape = null;
+            this._bboxNode = null;
         },
         {
             fieldChanged : function ( fieldName )
@@ -257,9 +257,9 @@ x3dom.registerNodeType(
                 return this._render;
             },
 
-            getBboxShape : function ()
+            getBboxNode : function ()
             {
-                if ( this._bboxShape == null )
+                if ( this._bboxNode == null )
                 {
                     var bbDom = document.createElement('container');
                     bbDom.innerHTML =
@@ -279,11 +279,20 @@ x3dom.registerNodeType(
                     // }
                 }
                 var bbox = this._graph.volume;
-                bboxShape = this._bboxShape;
-                bboxShape._vf.translation = bbox.center;
-                bboxShape._vf.scale = bbox.max.subtract( bbox.min );
-                bboxShape.fieldChanged("scale");
-                return this._bboxShape;
+                bboxNode = this._bboxNode;
+                bboxNode._vf.translation = bbox.center;
+                bboxNode._vf.scale = bbox.max.subtract( bbox.min );
+                bboxNode.fieldChanged("scale");
+                return this._bboxNode;
+            },
+
+            collectBbox : function ( transform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes )
+            {
+                if ( this._vf.bboxDisplay )
+                {
+                    var bboxNode = this.getBboxNode();
+                    bboxNode.collectDrawableObjects( transform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
+                }
             }
         }
     )
