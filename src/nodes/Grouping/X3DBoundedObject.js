@@ -80,28 +80,6 @@ x3dom.registerNodeType(
              * @instance
              */
             this.addField_SFBool( ctx, "bboxDisplay", false );
-            
-            /**
-             * Flag to indicate bounding box
-             * @var {x3dom.fields.SFVec3f} bboxNeeded
-             * @memberof x3dom.nodeTypes.X3DBoundedObject
-             * @initvalue false
-             * @field x3d
-             * @instance
-             */
-            //this.addField_SFBool( ctx, "bboxNeeded", true );
-
-            /**
-             * Holds the internal bbox node.
-             * @var {x3dom.fields.SFNode} bboxTemplate
-             * @memberof x3dom.nodeTypes.X3DBoundedObject
-             * @initvalue x3dom.nodeTypes.X3DChildNode
-             * @field x3dom
-             * @instance
-             */
-            // if ( this._vf.bboxNeeded ) {
-            //     this.addField_SFNode( "bboxTemplate", x3dom.nodeTypes.X3DChildNode );
-            // };
 
             this._graph = {
                 boundedNode  : this,    // backref to node object
@@ -261,14 +239,14 @@ x3dom.registerNodeType(
             {
                 if ( this._bboxNode == null )
                 {
-                    var bbDom = x3dom.bboxDom.cloneNode(true);
+                    var bbDom = x3dom.bboxDom.cloneNode( true );
                     this._bboxNode = this._nameSpace.setupTree( bbDom, this._xmlNode.parentElement );
                 }
                 var bbox = this._graph.volume;
                 bboxNode = this._bboxNode;
                 bboxNode._vf.translation = bbox.center;
                 bboxNode._vf.scale = bbox.max.subtract( bbox.min );
-                bboxNode.fieldChanged("scale");
+                bboxNode.fieldChanged( "scale" );
                 return this._bboxNode;
             },
 
@@ -285,12 +263,12 @@ x3dom.registerNodeType(
 );
 
 x3dom.bboxDom = new DOMParser().parseFromString(
-"<Transform>" +
-"<Shape isPickable='false'>" +
-"  <Appearance>" +
-"   <Material transparency='0.6' specularColor='0.3 0.3 0.3' diffuseColor='0 0.5 0' emissiveColor='1 0.5 0'></Material>" +
-"   </Appearance>" +
-"  <Box size='1 1 1'></Box>" +
-"</Shape>" +
-"</Transform>",
-'text/xml' ).children[0];
+    "<Transform>" +
+        "<Shape isPickable='false'>" +
+        "  <Appearance>" +
+        "   <Material transparency='0.6' specularColor='0.3 0.3 0.3' diffuseColor='0 0.5 0' emissiveColor='1 0.5 0'></Material>" +
+        "   </Appearance>" +
+        "  <Box size='1 1 1'></Box>" +
+        "</Shape>" +
+    "</Transform>",
+    "text/xml" ).children[ 0 ];

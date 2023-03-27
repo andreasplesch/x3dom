@@ -285,7 +285,6 @@ x3dom.registerNodeType(
                         cnode.collectDrawableObjects( childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
                     }
                 }
-
             }
         }
 
