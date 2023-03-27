@@ -81,6 +81,17 @@ x3dom.registerNodeType(
              */
             this.addField_SFBool( ctx, "bboxDisplay", false );
 
+            /**
+             * Size of the bounding box
+             * @var {x3dom.fields.SFVec3f} bboxSize
+             * @memberof x3dom.nodeTypes.X3DBoundedObject
+             * @initvalue -1,-1,-1
+             * @range [0, inf] or -1
+             * @field x3d
+             * @instance
+             */
+            this.addField_SFFloat( ctx, "bboxMargin", 0.01 );
+
             this._graph = {
                 boundedNode  : this,    // backref to node object
                 localMatrix  : x3dom.fields.SFMatrix4f.identity(),   // usually identity
@@ -245,7 +256,9 @@ x3dom.registerNodeType(
                 var bbox = this._graph.volume;
                 bboxNode = this._bboxNode;
                 bboxNode._vf.translation = bbox.center;
-                bboxNode._vf.scale = bbox.max.subtract( bbox.min );
+                var size = bbox.max.subtract( bbox.min );
+                var margin = bbox.diameter * this._vf.bboxMargin;
+                bboxNode._vf.scale.set( size.x + margin, size.y + margin, size.z + margin );
                 bboxNode.fieldChanged( "scale" );
                 return this._bboxNode;
             },
@@ -266,9 +279,14 @@ x3dom.bboxDom = new DOMParser().parseFromString(
     "<Transform>" +
         "<Shape isPickable='false'>" +
         "  <Appearance>" +
+        //    "<LineProperties lineWidthScaleFactor='0'></LineProperties>" +
         "   <Material transparency='0.6' specularColor='0.3 0.3 0.3' diffuseColor='0 0.5 0' emissiveColor='1 0.5 0'></Material>" +
         "   </Appearance>" +
         "  <Box size='1 1 1'></Box>" +
+        // "<IndexedLineSet coordIndex='0 1 -1 1 2 -1 2 3 -1 3 0 -1 6 7 -1 7 4 -1 4 5 -1 5 6 -1 0 6 -1 1 7 -1 2 4 -1 3 5 -1'>" +
+        //   "<Color color='0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0'/>" +
+        //   "<Coordinate point='-0.5 -0.5 0.5 0.5 -0.5 0.5 0.5 0.5 0.5 -0.5 0.5 0.5 0.5 0.5 -0.5 -0.5 0.5 -0.5 -0.5 -0.5 -0.5 0.5 -0.5 -0.5'/>" +
+        // "</IndexedLineSet>" +
         "</Shape>" +
     "</Transform>",
     "text/xml" ).children[ 0 ];
