@@ -61,7 +61,7 @@ x3dom.registerNodeType(
                     {
                         var child = this._childNodes[ this._vf.whichChoice ];
 
-                        var childVol = ( child && ( this._vf.bboxDisplay || this.renderFlag && this.renderFlag() ) ) ? child.getVolume() : null;
+                        var childVol = ( child && ( child._vf.bboxDisplay || child.renderFlag && child.renderFlag() ) ) ? child.getVolume() : null;
 
                         if ( childVol && childVol.isValid() )
                         {vol.extendBounds( childVol.min, childVol.max );}

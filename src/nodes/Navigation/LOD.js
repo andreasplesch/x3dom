@@ -110,7 +110,7 @@ x3dom.registerNodeType(
                     {
                         child = this._childNodes[ this._lastRangePos ];
 
-                        childVol = ( child && ( this._vf.bboxDisplay || this.renderFlag && this.renderFlag() ) ) ? child.getVolume() : null;
+                        childVol = ( child && ( child._vf.bboxDisplay || child.renderFlag && child.renderFlag() ) ) ? child.getVolume() : null;
 
                         if ( childVol && childVol.isValid() )
                         {vol.extendBounds( childVol.min, childVol.max );}

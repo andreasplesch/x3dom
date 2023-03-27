@@ -153,7 +153,7 @@ x3dom.registerNodeType(
                     {
                         var child = this._childNodes[ i ];
                         // render could be undefined, but undefined != true
-                        if ( !child || child.renderFlag && child.renderFlag() !== true && !this._vf.bboxDisplay )
+                        if ( !child || child.renderFlag && child.renderFlag() !== true && !child._vf.bboxDisplay )
                         {continue;}
 
                         var childVol = child.getVolume();

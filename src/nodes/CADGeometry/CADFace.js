@@ -57,7 +57,7 @@ x3dom.registerNodeType(
                 if ( !this.volumeValid() && ( this._vf.bboxDisplay || this.renderFlag && this.renderFlag() ) )
                 {
                     var child = this._cf.shape.node;
-                    var childVol = ( child && ( this._vf.bboxDisplay || this.renderFlag && this.renderFlag() ) ) ? child.getVolume() : null;
+                    var childVol = ( child && ( child._vf.bboxDisplay || child.renderFlag && child.renderFlag() ) ) ? child.getVolume() : null;
 
                     if ( childVol && childVol.isValid() )
                     {vol.extendBounds( childVol.min, childVol.max );}
