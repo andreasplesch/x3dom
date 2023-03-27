@@ -12,15 +12,15 @@
 	<div class="group">
 	    <!-- Use the same "x", "y", "width" and "height" attributes as SVG.
              Optionally support the "viewBox" and "preserveAspectRatio" just like SVG -->
-		<X3D xmlns="http://www.web3d.org/specifications/x3d-namespace" id="x3d" showLog='true' x="0px" y="0px" width="500px" height="500px">
- <Scene DEF='scene'>
+<X3D xmlns="http://www.web3d.org/specifications/x3d-namespace" id="x3d" showLog='true' x="0px" y="0px" width="500px" height="500px">
+  <Scene DEF='scene'>
 	<Viewpoint position='16.0328 13.056 34.2417' orientation='-0.624839 0.780206 0.0292506 0.543473' zNear="0.5" zFar="5000" ></Viewpoint>
     <Background skyColor='1 1 1'></Background>
     <DirectionalLight direction="-0.4 -0.9 0.3" intensity="0.5" shadowIntensity="0.0" ></DirectionalLight>
      <Transform scale='2.5 2.5 2.5'>
       <Shape DEF='CUBE1'>
         <Appearance>
-		      <Material specularColor='.2 .2 .2' ></Material>
+          <Material specularColor='.2 .2 .2' ></Material>
           <ImageTexture url='./x3d_256.jpg'></ImageTexture>
         </Appearance>
         <Box></Box>
@@ -29,9 +29,10 @@
         <Shape USE='CUBE1'></Shape>
       </Transform>
       <Transform DEF='XFORM0b' center='0 7 7'>
+        <TouchSensor DEF='touch'></TouchSensor>
         <Shape DEF='CUBE2' bboxDisplay='true'>
         <Appearance>
-		      <Material specularColor='.2 .2 .2' ></Material>
+          <Material specularColor='.2 .2 .2' ></Material>
           <ImageTexture url='./webgl_256.jpg'></ImageTexture>
         </Appearance>
         <Box></Box>
@@ -40,7 +41,7 @@
       <Transform DEF='XFORM0c' center='10 0 0'>
         <Shape DEF='CUBE3'>
         <Appearance>
-		      <Material specularColor='.2 .2 .2' ></Material>
+          <Material specularColor='.2 .2 .2' ></Material>
           <ImageTexture url='./w3c_256.jpg'></ImageTexture>
         </Appearance>
         <Box></Box>
@@ -111,7 +112,7 @@
       <Transform USE='XFORM2d'></Transform>
     </Transform>
 
-	  <TimeSensor DEF='TS' loop='true' cycleInterval='20'></TimeSensor>
+    <TimeSensor DEF='TS' loop='true' cycleInterval='20'></TimeSensor>
 	
     <OrientationInterpolator id="rotorA" DEF='ROTOR_A' key='0 0.5 1' keyValue='1 0 0 0, 1 0 0 3.14, 1 0 0 6.28'></OrientationInterpolator>
     <OrientationInterpolator id="rotorB" DEF='ROTOR_B' key='0 0.5 1' keyValue='0 1 0 0, 0 1 0 3.14, 0 1 0 6.28'></OrientationInterpolator>
@@ -123,7 +124,7 @@
     <ROUTE fromNode='TS' fromField='fraction_changed' toNode='ROTOR_C' toField='set_fraction'></ROUTE>
     <ROUTE fromNode='TS' fromField='fraction_changed' toNode='ROTOR_D' toField='set_fraction'></ROUTE>
     
-	  <ROUTE fromNode='ROTOR_A' fromField='value_changed' toNode='XFORM0a' toField='rotation'></ROUTE>
+    <ROUTE fromNode='ROTOR_A' fromField='value_changed' toNode='XFORM0a' toField='rotation'></ROUTE>
     <ROUTE fromNode='ROTOR_A' fromField='value_changed' toNode='XFORM1a' toField='rotation'></ROUTE>
     <ROUTE fromNode='ROTOR_A' fromField='value_changed' toNode='XFORM2a' toField='rotation'></ROUTE>
     <ROUTE fromNode='ROTOR_B' fromField='value_changed' toNode='XFORM0b' toField='rotation'></ROUTE>
@@ -135,6 +136,9 @@
     <ROUTE fromNode='ROTOR_D' fromField='value_changed' toNode='XFORM0d' toField='rotation'></ROUTE>
     <ROUTE fromNode='ROTOR_D' fromField='value_changed' toNode='XFORM1d' toField='rotation'></ROUTE>
     <ROUTE fromNode='ROTOR_D' fromField='value_changed' toNode='XFORM2d' toField='rotation'></ROUTE>
+
+    <ROUTE fromNode='touch' fromField='isOver' toNode='CUBE2' toField='bboxDisplay'></ROUTE>
+
   </Scene>
         </X3D>
 	</div>
