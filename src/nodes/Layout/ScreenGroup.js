@@ -39,6 +39,8 @@ x3dom.registerNodeType(
 
                 if ( singlePath && ( invalidateCache = invalidateCache || this.cacheInvalid() ) )
                 {this.invalidateCache();}
+                
+                this.collectBbox( transform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
 
                 planeMask = drawableCollection.cull( transform, this.graphState(), singlePath, planeMask );
                 if ( planeMask < 0 )
@@ -108,8 +110,6 @@ x3dom.registerNodeType(
                         cnode.collectDrawableObjects( childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
                     }
                 }
-
-                this.collectBbox( childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
             }
         }
     )

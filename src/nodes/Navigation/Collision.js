@@ -85,12 +85,6 @@ x3dom.registerNodeType(
                 if ( singlePath && ( invalidateCache = invalidateCache || this.cacheInvalid() ) )
                 {this.invalidateCache();}
 
-                planeMask = drawableCollection.cull( transform, this.graphState(), singlePath, planeMask );
-                if ( planeMask < 0 )
-                {
-                    return;
-                }
-
                 var cnode,
                     childTransform;
 
@@ -107,6 +101,14 @@ x3dom.registerNodeType(
                     childTransform = this.transformMatrix( transform );
                 }
 
+                this.collectBbox( childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
+
+                planeMask = drawableCollection.cull( transform, this.graphState(), singlePath, planeMask );
+                if ( planeMask < 0 )
+                {
+                    return;
+                }
+
                 for ( var i = 0, n = this._childNodes.length; i < n; i++ )
                 {
                     if ( ( cnode = this._childNodes[ i ] ) && ( cnode !== this._cf.proxy.node ) )
@@ -114,8 +116,6 @@ x3dom.registerNodeType(
                         cnode.collectDrawableObjects( childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
                     }
                 }
-
-                this.collectBbox( childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
             }
         }
     )

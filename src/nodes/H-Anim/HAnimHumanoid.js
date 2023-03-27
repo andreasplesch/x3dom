@@ -272,6 +272,8 @@ x3dom.registerNodeType(
                 if ( singlePath && ( invalidateCache = invalidateCache || this.cacheInvalid() ) )
                 {this.invalidateCache();}
 
+                this.collectBbox( transform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
+
                 // check if sub-graph can be culled away or render flag was set to false
                 planeMask = drawableCollection.cull( transform, this.graphState(), singlePath, planeMask );
                 if ( planeMask < 0 )
@@ -332,8 +334,6 @@ x3dom.registerNodeType(
                 {
                     cnode.collectDrawableObjects( childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
                 } );
-
-                this.collectBbox( childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
 
                 //force coord update
                 if ( this._cf.skinCoord.node )

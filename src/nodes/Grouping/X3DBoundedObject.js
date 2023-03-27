@@ -147,13 +147,13 @@ x3dom.registerNodeType(
             {
                 var vol = this._graph.volume;
 
-                if ( !this.volumeValid() && this.renderFlag && this.renderFlag() )
+                if ( !this.volumeValid() && ( this._vf.bboxDisplay || this.renderFlag && this.renderFlag() ) )
                 {
                     for ( var i = 0, n = this._childNodes.length; i < n; i++ )
                     {
                         var child = this._childNodes[ i ];
                         // render could be undefined, but undefined != true
-                        if ( !child || child.renderFlag && child.renderFlag() !== true )
+                        if ( !child || child.renderFlag && child.renderFlag() !== true && !this._vf.bboxDisplay )
                         {continue;}
 
                         var childVol = child.getVolume();

@@ -71,7 +71,7 @@ x3dom.registerNodeType(
                 }
 
                 // add bbox before cull
-                this.collectBbox( childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
+                this.collectBbox( transform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
 
                 // check if sub-graph can be culled away or render flag was set to false
                 planeMask = drawableCollection.cull( transform, this.graphState(), singlePath, planeMask );

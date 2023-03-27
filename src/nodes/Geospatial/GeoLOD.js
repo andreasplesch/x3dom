@@ -182,6 +182,9 @@ x3dom.registerNodeType(
                 {singlePath = false;}
                 if ( singlePath && ( invalidateCache = invalidateCache || this.cacheInvalid() ) )
                 {this.invalidateCache();}
+
+                this.collectBbox( transform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
+
                 planeMask = drawableCollection.cull( transform, this.graphState(), singlePath, planeMask );
                 if ( planeMask <= 0 )
                 {
@@ -190,8 +193,6 @@ x3dom.registerNodeType(
                 // at the moment, no caching here as children may change every frame
                 singlePath = false;
                 this.visitChildren( transform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
-
-                this.collectBbox( transform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
             },
 
             visitChildren : function ( transform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes )
@@ -321,14 +322,14 @@ x3dom.registerNodeType(
             {
                 var vol = this._graph.volume;
                 //below may not apply for GeoLOD
-                if ( !this.volumeValid() && this.renderFlag && this.renderFlag() )
+                if ( !this.volumeValid() && ( this._vf.bboxDisplay || this.renderFlag && this.renderFlag() ) )
                 {
                     var child,
                         childVol;
                     // use childUrlNodes ?
                     for ( var i = 0, n = this._childNodes.length; i < n; i++ )
                     {
-                        if ( !( child = this._childNodes[ i ] ) || child.renderFlag && child.renderFlag() !== true )
+                        if ( !( child = this._childNodes[ i ] ) || child.renderFlag && child.renderFlag() !== true  && !child._vf.bboxDisplay )
                         {continue;}
                         childVol = child.getVolume();
                         if ( childVol && childVol.isValid() )
