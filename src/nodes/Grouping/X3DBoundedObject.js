@@ -90,7 +90,7 @@ x3dom.registerNodeType(
             * @field x3dom
             * @instance
             */
-           this.addField_SFFloat( ctx, "bboxMargin", 0.01 );
+            this.addField_SFFloat( ctx, "bboxMargin", 0.01 );
 
             /**
              * Color of the bounding box
@@ -274,10 +274,10 @@ x3dom.registerNodeType(
                 if ( !this._bboxColor.equals( this._vf.bboxColor, 0.01 ) )
                 {
                     this._bboxColor.setValues( this._vf.bboxColor );
-                    var mat = this._bboxNode._cf.children.nodes[0]._cf.appearance.node._cf.material.node;
+                    var mat = this._bboxNode._cf.children.nodes[ 0 ]._cf.appearance.node._cf.material.node;
                     mat._vf.emissiveColor = this._bboxColor.multiply( 0.8 );
                     mat._vf.diffuseColor = this._bboxColor.multiply( 0.2 );
-                    mat.fieldChanged("emissiveColor");
+                    mat.fieldChanged( "emissiveColor" );
                 }
                 return this._bboxNode;
             },
