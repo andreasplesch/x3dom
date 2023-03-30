@@ -82,15 +82,25 @@ x3dom.registerNodeType(
             this.addField_SFBool( ctx, "bboxDisplay", false );
 
             /**
-             * Size of the bounding box
-             * @var {x3dom.fields.SFVec3f} bboxSize
+            * Size of additional margin around the bounding box scaled up by the diameter.
+            * @var {x3dom.fields.SFFloat} bboxMargin
+            * @memberof x3dom.nodeTypes.X3DBoundedObject
+            * @initvalue 0.01
+            * @range [-inf, inf]
+            * @field x3dom
+            * @instance
+            */
+           this.addField_SFFloat( ctx, "bboxMargin", 0.01 );
+
+            /**
+             * Color of the bounding box
+             * @var {x3dom.fields.SFColor} bboxColor
              * @memberof x3dom.nodeTypes.X3DBoundedObject
-             * @initvalue -1,-1,-1
-             * @range [0, inf] or -1
-             * @field x3d
+             * @initvalue 1, 1, 0
+             * @field x3dom
              * @instance
              */
-            this.addField_SFFloat( ctx, "bboxMargin", 0.01 );
+            this.addField_SFColor( ctx, "bboxColor", 1, 1, 0 );
 
             this._graph = {
                 boundedNode  : this,    // backref to node object
@@ -106,6 +116,7 @@ x3dom.registerNodeType(
 
             this._render = true;
             this._bboxNode = null;
+            this._bboxColor = new x3dom.fields.SFColor();
         },
         {
             fieldChanged : function ( fieldName )
@@ -260,6 +271,14 @@ x3dom.registerNodeType(
                 var margin = bbox.diameter * this._vf.bboxMargin;
                 bboxNode._vf.scale.set( size.x + margin, size.y + margin, size.z + margin );
                 bboxNode.fieldChanged( "scale" );
+                if ( !this._bboxColor.equals( this._vf.bboxColor, 0.01 ) )
+                {
+                    this._bboxColor.setValues( this._vf.bboxColor );
+                    var mat = this._bboxNode._cf.children.nodes[0]._cf.appearance.node._cf.material.node;
+                    mat._vf.emissiveColor = this._bboxColor.multiply( 0.8 );
+                    mat._vf.diffuseColor = this._bboxColor.multiply( 0.2 );
+                    mat.fieldChanged("emissiveColor");
+                }
                 return this._bboxNode;
             },
 
