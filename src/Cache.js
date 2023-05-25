@@ -276,9 +276,9 @@ x3dom.Cache.prototype.getShaderByProperties = function ( gl, shape, properties, 
  *
  * @returns {*}
  */
-x3dom.Cache.prototype.getShadowRenderingShader = function ( gl, shadowedLights )
+x3dom.Cache.prototype.getShadowRenderingShader = function ( gl, shadowedLights, propertis )
 {
-    var ID = "shadow";
+    var ID = "shadow"  + Object.values( properties ).join( "" );
     for ( var i = 0; i < shadowedLights.length; i++ )
     {
         if ( x3dom.isa( shadowedLights[ i ], x3dom.nodeTypes.SpotLight ) )

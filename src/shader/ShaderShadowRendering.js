@@ -12,10 +12,10 @@
 /**
  * Generate the final Shader program
  */
-x3dom.shader.ShadowRenderingShader = function (gl, shadowedLights) {
+x3dom.shader.ShadowRenderingShader = function (gl, shadowedLights, properties) {
     this.program = gl.createProgram();
     var vertexShader = this.generateVertexShader(gl);
-    var fragmentShader = this.generateFragmentShader(gl, shadowedLights);
+    var fragmentShader = this.generateFragmentShader(gl, shadowedLights, properties);
 
     gl.attachShader(this.program, vertexShader);
     gl.attachShader(this.program, fragmentShader);
@@ -56,7 +56,7 @@ x3dom.shader.ShadowRenderingShader.prototype.generateVertexShader = function (gl
 /**
  * Generate the fragment shader
  */
-x3dom.shader.ShadowRenderingShader.prototype.generateFragmentShader = function (gl, shadowedLights) {
+x3dom.shader.ShadowRenderingShader.prototype.generateFragmentShader = function (gl, shadowedLights, properties) {
     var shader = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n";
     shader += "precision highp float;\n";
     shader += "#else\n";
@@ -93,24 +93,8 @@ x3dom.shader.ShadowRenderingShader.prototype.generateFragmentShader = function (
 
     shader += x3dom.shader.gammaCorrectionDecl({});  //TODO shader properties?
 
-    shader += "uniform vec3  fogColor;\n" +
-        "uniform float fogType;\n" +
-        "uniform float fogRange;\n";
+    if (properties.FOG) { shader += x3dom.shader.fog(); }
 
-    shader += "float calcFog(in vec3 eye, in float fogType, in float fogRange) {\n" +
-        "   float f0 = 0.0;\n" +
-        "   if(fogType == 0.0) {\n" +
-        "       if(length(eye) < fogRange){\n" +
-        "           f0 = (fogRange-length(eye)) / fogRange;\n" +
-        "       }\n" +
-        "   }else{\n" +
-        "       if(length(eye) < fogRange){\n" +
-        "           f0 = exp(-length(eye) / (fogRange-length(eye) ) );\n" +
-        "       }\n" +
-        "   }\n" +
-        "   f0 = clamp(f0, 0.0, 1.0);\n" +
-        "   return f0; }\n";
-    
     shader += "void main(void) {\n" +
         "    float shadowValue = 1.0;\n" +
         "    vec2 texCoordsSceneMap = (vPosition + 1.0)*0.5;\n" +
@@ -164,16 +148,15 @@ x3dom.shader.ShadowRenderingShader.prototype.generateFragmentShader = function (
     //shader += "}\n" +
     //use color var
     shader += "    vec3 color = vec3(shadowValue, shadowValue, shadowValue);\n";
-    // BEGIN FOG ADDITION      
-    // ideally use fog uniforms from scene; fogColor, fogRange, fogType 
-    shader += 
-        // "    vec3 fogColor = vec3(0.6, 0.6, 1.0);\n" + 
-        // "    float fogRange = 15.0;\n" + 
-        // "    float fogType = 1.0;\n" + //exponential
-        "    float f0 = 0.0;\n" +
-        "    vec3 eye = eyeCoords.xyz / eyeCoords.w;\n" +
-        "    f0 = calcFog( eye, fogType, fogRange);" +
-        "    color = fogColor * (1.0 - f0) + f0 * (color);\n" +
+    // BEGIN FOG ADDITION
+    if (properties.FOG)
+    {
+        shader +=
+            "    float f0 = 0.0;\n" +
+            "    vec3 eye = eyeCoords.xyz / eyeCoords.w;\n" +
+            "    f0 = calcFog( eye, fogType, fogRange);" +
+            "    color = fogColor * (1.0 - f0) + f0 * (color);\n";
+    }
     // END FOG ADDITION
 
         // In principle we should fix the place where this is multplied in instead
@@ -181,6 +164,7 @@ x3dom.shader.ShadowRenderingShader.prototype.generateFragmentShader = function (
         // gamma correction explots the rule that (a*b)^x = a^x * b^x (x being the
         // gamma coefficient), i.e. the umbra is corrected for now, the penumbra
         // is incorrect and full light is zero here so unaffected as well.
+     shader +=
         "    gl_FragColor = " + x3dom.shader.encodeGamma({}, "vec4(color, 1.0)") + ";\n" +
         "}\n";
 

@@ -4994,7 +4994,12 @@ x3dom.gfx_webgl = ( function ()
             for ( k = startIndex; k < endIndex; k++ )
             {currentLights[ currentLights.length ] = shadowedLights[ k ];}
 
-            var sp = this.cache.getShadowRenderingShader( gl, currentLights );
+            // generate shadow shader properties
+            var properties = {};
+
+            properties.FOG = ( scene.getFog()._vf.visibilityRange > 0 ) ? 1 : 0;
+
+            var sp = this.cache.getShadowRenderingShader( gl, currentLights, properties );
 
             this.stateManager.useProgram( sp );
 
