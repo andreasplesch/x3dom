@@ -93,6 +93,10 @@ x3dom.shader.ShadowRenderingShader.prototype.generateFragmentShader = function (
 
     shader += x3dom.shader.gammaCorrectionDecl({});  //TODO shader properties?
 
+    shader += "uniform vec3  fogColor;\n" +
+        "uniform float fogType;\n" +
+        "uniform float fogRange;\n";
+
     shader += "float calcFog(in vec3 eye, in float fogType, in float fogRange) {\n" +
         "   float f0 = 0.0;\n" +
         "   if(fogType == 0.0) {\n" +
@@ -162,9 +166,10 @@ x3dom.shader.ShadowRenderingShader.prototype.generateFragmentShader = function (
     shader += "    vec3 color = vec3(shadowValue, shadowValue, shadowValue);\n";
     // BEGIN FOG ADDITION      
     // ideally use fog uniforms from scene; fogColor, fogRange, fogType 
-    shader += "    vec3 fogColor = vec3(0.6, 0.6, 1.0);\n" + 
-        "    float fogRange = 15.0;\n" + 
-        "    float fogType = 1.0;\n" + //exponential
+    shader += 
+        // "    vec3 fogColor = vec3(0.6, 0.6, 1.0);\n" + 
+        // "    float fogRange = 15.0;\n" + 
+        // "    float fogType = 1.0;\n" + //exponential
         "    float f0 = 0.0;\n" +
         "    vec3 eye = eyeCoords.xyz / eyeCoords.w;\n" +
         "    f0 = calcFog( eye, fogType, fogRange);" +

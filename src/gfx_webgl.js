@@ -5104,6 +5104,18 @@ x3dom.gfx_webgl = ( function ()
                 }
             }
 
+            // Set fog
+            // TODO: when no state/shader switch happens, all light/fog/... uniforms don't need to be set again
+            var fog = scene.getFog();
+    
+            // THINKABOUTME: changed flag only works as long as lights and fog are global
+            if ( fog )//&& changed )
+            {
+                sp.fogColor = fog._vf.color.toGL();
+                sp.fogRange = fog._vf.visibilityRange;
+                sp.fogType = ( fog._vf.fogType == "LINEAR" ) ? 0.0 : 1.0;
+            }
+
             gl.drawArrays( gl.TRIANGLES, 0, 6 );
 
             // cleanup
