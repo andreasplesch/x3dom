@@ -154,7 +154,7 @@ x3dom.shader.ShadowRenderingShader.prototype.generateFragmentShader = function (
         shader +=
             "    float f0 = 0.0;\n" +
             "    vec3 eye = eyeCoords.xyz / eyeCoords.w;\n" +
-            "    f0 = calcFog( eye, fogType, fogRange);" +
+            "    f0 = calcFog( eye );" +
             "    color = fogColor * (1.0 - f0) + f0 * (color);\n";
     }
     // END FOG ADDITION
