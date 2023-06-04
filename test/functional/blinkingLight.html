@@ -1,3 +1,4 @@
+
 <html>
     <head>
         <meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
@@ -6,15 +7,17 @@
     </head>
     <body>
         <h1>Blinking Light</h1>
+	<label>Fog  :</label>
+	<input type="range" min="1" max="100" style="transform:rotate(180deg);" oninput="FogX3d.setAttribute('visibilityRange',value);"></input>
         <div class="group">
             <X3D xmlns='http://www.web3d.org/specifications/x3d-namespace' id='someUniqueId' showStat='true' showLog='false' width='800px' height='600px'>
                 <Scene DEF='scene'>
                     <Environment frustumCulling='false'></Environment>
                     <NavigationInfo headlight='false'></NavigationInfo>
                     <Background skyColor='0.000 0.000 0.000'></Background>
-                    <Fog id='FogX3d' fogType="EXPONENTIAL" color="0.6 0.6 1.0" visibilityRange="15"></Fog>
-                    <DirectionalLight DEF='Direct01' on='TRUE' intensity='0.7000' ambientIntensity='0.0000' color='1.0000 1.0000 1.0000' direction='0.0000 -0.1000 0.9000'></DirectionalLight>
-                    <PointLight DEF='Omni01' on='TRUE' intensity='0.800' shadowIntensity='0.700' shadowMapSize='1024' shadowFilterSize='2' shadowCascades='2' ambientIntensity='0.000' color='1.000 0.000 0.000' location='-0.015 2.364 3.868' attenuation='1.000 0.000 0.000' radius='200.000'></PointLight>
+                    <Fog id='FogX3d' fogType="EXPONENTIAL" color="0.6 0.6 1.0" _visibilityRange="12"></Fog>
+                    <DirectionalLight DEF='Direct01' on='TRUE' intensity='0.7000' _shadowIntensity='0.0000' shadowMapSize='1024' shadowFilterSize='2' shadowCascades='3' ambientIntensity='0.0000' color='1.0000 1.0000 1.0000' direction='0.0000 -0.1000 0.9000'></DirectionalLight>
+                    <PointLight DEF='Omni01' on='TRUE' intensity='0.800' shadowIntensity='20.200' shadowMapSize='1024' shadowFilterSize='2' shadowCascades='2' ambientIntensity='0.000' color='1.000 0.000 0.000' location='-0.015 2.364 3.868' attenuation='1.000 0.000 0.000' radius='200.000'></PointLight>
                     <Transform DEF='Cylinder01' translation='1.425 1.464 0.000' rotation='-1.000 -0.000 -0.000 -1.571'>
                         <Shape>
                             <Appearance DEF='_08_-_Default'>
