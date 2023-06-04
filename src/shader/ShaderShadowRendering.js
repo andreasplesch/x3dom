@@ -67,6 +67,10 @@ x3dom.shader.ShadowRenderingShader.prototype.generateFragmentShader = function (
     shader += "uniform mat4 inverseProj;\n";
     shader += "varying vec2 vPosition;\n";
     shader += "uniform sampler2D sceneMap;\n";
+    if (properties.FOG)
+    {
+        shader += "uniform sampler2D sceneColorMap;\n";    
+    }
     for (var i = 0; i < 5; i++) { shader += "uniform float cascade" + i + "_Depth;\n"; }
 
     for (var l = 0; l < shadowedLights.length; l++) {
@@ -154,8 +158,12 @@ x3dom.shader.ShadowRenderingShader.prototype.generateFragmentShader = function (
         shader +=
             "    float f0 = 0.0;\n" +
             "    vec3 eye = eyeCoords.xyz / eyeCoords.w;\n" +
-            "    f0 = calcFog( eye );" +
-            "    color = fogColor * (1.0 - f0) + f0 * (color);\n";
+            "    f0 = max( 0.00001, calcFog( eye ) );\n" +
+            "    vec4 dst_color = texture2D(sceneColorMap, vec2(texCoordsSceneMap.x, 1.0 - texCoordsSceneMap.y));\n" +
+            "    vec3 nofog_color = ( dst_color.rgb - fogColor * ( 1.0 - f0 ) ) / f0;\n" +
+            "    nofog_color *= color;\n" +
+            "    color = fogColor * ( 1.0 - f0 ) + f0 * ( nofog_color );\n" +
+            "    color /= dst_color.rgb;\n";
     }
     // END FOG ADDITION
 
