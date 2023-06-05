@@ -163,7 +163,7 @@ x3dom.shader.ShadowRenderingShader.prototype.generateFragmentShader = function (
 
     //shader += "}\n" +
     //use color var
-    shader += "    vec3 color = vec3(shadowValue, shadowValue, shadowValue);\n";
+    shader += "    vec4 color = " + x3dom.shader.encodeGamma( {}, "vec4(shadowValue, shadowValue, shadowValue, 1.0)" ) + ";\n";
     // BEGIN FOG ADDITION
     if ( properties.FOG )
     {
@@ -173,9 +173,9 @@ x3dom.shader.ShadowRenderingShader.prototype.generateFragmentShader = function (
             "    f0 = max( 0.00001, calcFog( eye ) );\n" +
             "    vec4 dst_color = texture2D(sceneColorMap, vec2(texCoordsSceneMap.x, 1.0 - texCoordsSceneMap.y));\n" +
             "    vec3 nofog_color = ( dst_color.rgb - fogColor * ( 1.0 - f0 ) ) / f0;\n" +
-            "    nofog_color *= color;\n" +
-            "    color = fogColor * ( 1.0 - f0 ) + f0 * ( nofog_color );\n" +
-            "    color /= dst_color.rgb;\n";
+            "    nofog_color *= color.rgb;\n" +
+            "    color.rgb = fogColor * ( 1.0 - f0 ) + f0 * ( nofog_color );\n" +
+            "    color.rgb /= dst_color.rgb;\n";
     }
     // END FOG ADDITION
 
@@ -185,7 +185,8 @@ x3dom.shader.ShadowRenderingShader.prototype.generateFragmentShader = function (
     // gamma coefficient), i.e. the umbra is corrected for now, the penumbra
     // is incorrect and full light is zero here so unaffected as well.
     shader +=
-        "    gl_FragColor = " + x3dom.shader.encodeGamma( {}, "vec4(color, 1.0)" ) + ";\n" +
+        //"    gl_FragColor = " + x3dom.shader.encodeGamma( {}, "vec4(color, 1.0)" ) + ";\n" +
+        "    gl_FragColor = color;\n" +
         "}\n";
 
     var fragmentShader = gl.createShader( gl.FRAGMENT_SHADER );
