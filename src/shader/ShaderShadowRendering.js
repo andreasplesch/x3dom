@@ -103,12 +103,11 @@ x3dom.shader.ShadowRenderingShader.prototype.generateFragmentShader = function (
 
     shader += 
         "void main(void) {\n" +
-        "    vec4 color = vec4( 1.0 );\n";
-    if ( properties.FOG ) {
-        shader +=
-            "    if (fogType < 2.0) {\n" +
-            "        vec2 texCoordsSceneMap = (vPosition + 1.0)*0.5;\n" +
-            "        vec4 projCoords = texture2D(sceneMap, texCoordsSceneMap);\n";
+        "    vec4 color = vec4( 1.0 );\n" +
+    //reconstruct world and view coordinates from scene map
+        "    vec2 texCoordsSceneMap = (vPosition + 1.0)*0.5;\n" +
+        "    vec4 projCoords = texture2D(sceneMap, texCoordsSceneMap);\n" +
+        "    if ( projCoords == vec4(1.0, 1.0, 1.0, 0.0) ){ discard; }\n";
         if ( !x3dom.caps.FP_TEXTURES )
         {
             shader +=
@@ -116,9 +115,12 @@ x3dom.shader.ShadowRenderingShader.prototype.generateFragmentShader = function (
                 "        projCoords.w = 1.0;\n";
         }
         shader +=
-            "        projCoords = projCoords / projCoords.w;\n" +
-            "        projCoords.xy = vPosition;\n" +
-            "        vec4 eyeCoords = inverseProj*projCoords;\n" +
+            "    projCoords = projCoords / projCoords.w;\n" +
+            "    projCoords.xy = vPosition;\n" +
+            "    vec4 eyeCoords = inverseProj*projCoords;\n";            
+    if ( properties.FOG ) {
+        shader +=
+            "    if (fogType < 2.0) {\n" +
             "        vec3 eye = eyeCoords.xyz / eyeCoords.w;\n" +
             "        float f0 = calcFog( eye );\n" +
             "        color = vec4(  1.0 - f0, 1.0 - f0, 1.0 - f0, 1.0 );\n" +
@@ -127,19 +129,7 @@ x3dom.shader.ShadowRenderingShader.prototype.generateFragmentShader = function (
     }
     shader +=
         "    float shadowValue = 1.0;\n" +
-        "    vec2 texCoordsSceneMap = (vPosition + 1.0)*0.5;\n" +
-        "    vec4 projCoords = texture2D(sceneMap, texCoordsSceneMap);\n" +
-        "    if ( projCoords == vec4(1.0, 1.0, 1.0, 0.0) ){ discard; }\n";
-    if ( !x3dom.caps.FP_TEXTURES )
-    {
-        shader += "    projCoords.z = unpackDepth(projCoords);\n" +
-            "    projCoords.w = 1.0;\n";
-    }
-
     //reconstruct world and view coordinates from scene map
-    shader += "    projCoords = projCoords / projCoords.w;\n" +
-        "    projCoords.xy = vPosition;\n" +
-        "    vec4 eyeCoords = inverseProj*projCoords;\n" +
         "    vec4 worldCoords = inverseViewProj*projCoords;\n" +
         "    float lightInfluence = 0.0;\n";
 
