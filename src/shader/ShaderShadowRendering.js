@@ -101,24 +101,25 @@ x3dom.shader.ShadowRenderingShader.prototype.generateFragmentShader = function (
 
     if ( properties.FOG ) { shader += x3dom.shader.fog(); }
 
-    shader += 
+    shader +=
         "void main(void) {\n" +
         "    vec4 color = vec4( 1.0 );\n" +
-    //reconstruct world and view coordinates from scene map
+        //reconstruct world and view coordinates from scene map
         "    vec2 texCoordsSceneMap = (vPosition + 1.0)*0.5;\n" +
         "    vec4 projCoords = texture2D(sceneMap, texCoordsSceneMap);\n" +
         "    if ( projCoords == vec4(1.0, 1.0, 1.0, 0.0) ){ discard; }\n";
-        if ( !x3dom.caps.FP_TEXTURES )
-        {
-            shader +=
+    if ( !x3dom.caps.FP_TEXTURES )
+    {
+        shader +=
                 "        projCoords.z = unpackDepth(projCoords);\n" +
                 "        projCoords.w = 1.0;\n";
-        }
-        shader +=
+    }
+    shader +=
             "    projCoords = projCoords / projCoords.w;\n" +
             "    projCoords.xy = vPosition;\n" +
-            "    vec4 eyeCoords = inverseProj*projCoords;\n";            
-    if ( properties.FOG ) {
+            "    vec4 eyeCoords = inverseProj*projCoords;\n";
+    if ( properties.FOG )
+    {
         shader +=
             "    if (fogType < 2.0) {\n" +
             "        vec3 eye = eyeCoords.xyz / eyeCoords.w;\n" +
@@ -129,7 +130,7 @@ x3dom.shader.ShadowRenderingShader.prototype.generateFragmentShader = function (
     }
     shader +=
         "    float shadowValue = 1.0;\n" +
-    //reconstruct world and view coordinates from scene map
+        //reconstruct world and view coordinates from scene map
         "    vec4 worldCoords = inverseViewProj*projCoords;\n" +
         "    float lightInfluence = 0.0;\n";
 
@@ -180,7 +181,6 @@ x3dom.shader.ShadowRenderingShader.prototype.generateFragmentShader = function (
     // is incorrect and full light is zero here so unaffected as well.
     shader += "    gl_FragColor = color;\n" +
         "}\n";
-console.log(shader);
     var fragmentShader = gl.createShader( gl.FRAGMENT_SHADER );
     gl.shaderSource( fragmentShader, shader );
     gl.compileShader( fragmentShader );
