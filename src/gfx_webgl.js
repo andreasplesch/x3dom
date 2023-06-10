@@ -5109,33 +5109,24 @@ x3dom.gfx_webgl = ( function ()
                 }
             }
 
+            if ( properties.FOG ) { sp.fogType = 999.0; } // draw without fog first
+
+            gl.drawArrays( gl.TRIANGLES, 0, 6 ); //shadows
+
             // Set fog
             // TODO: when no state/shader switch happens, all light/fog/... uniforms don't need to be set again
-            var fog = scene.getFog();
-
+            
             // THINKABOUTME: changed flag only works as long as lights and fog are global
-            if ( fog )//&& changed )
+            if ( properties.FOG )
             {
+                var fog = scene.getFog();
+                this.stateManager.blendColor( fog._vf.color.r, fog._vf.color.g, fog._vf.color.b, 1.0 );
+                this.stateManager.blendFunc( gl.CONSTANT_COLOR, gl.ONE_MINUS_SRC_COLOR );
                 sp.fogColor = fog._vf.color.toGL();
                 sp.fogRange = fog._vf.visibilityRange;
                 sp.fogType = ( fog._vf.fogType == "LINEAR" ) ? 0.0 : 1.0;
-
-                var dst_color_tex = gl.createTexture();
-                gl.activeTexture( gl.TEXTURE1 + shadowIndex );
-                gl.bindTexture( gl.TEXTURE_2D, dst_color_tex );
-                gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR );
-                gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR );
-                gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE );
-                gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE );
-
-                gl.pixelStorei( gl.UNPACK_ALIGNMENT, 1 );
-                gl.texImage2D( gl.TEXTURE_2D, 0, gl.RGBA, this.canvas.width, this.canvas.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, this.canvas );
-                //gl.bindTexture( gl.TEXTURE_2D, null );
-                sp.sceneColorMap = shadowIndex + 1;
-                shadowIndex++;
+                gl.drawArrays( gl.TRIANGLES, 0, 6 ); // fog
             }
-
-            gl.drawArrays( gl.TRIANGLES, 0, 6 );
 
             // cleanup
             var nk = shadowIndex + 1;
@@ -5146,7 +5137,6 @@ x3dom.gfx_webgl = ( function ()
             }
             gl.disableVertexAttribArray( sp.position );
         }
-
         this.stateManager.blendFunc( gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA );
     };
 
