@@ -71,10 +71,6 @@ x3dom.shader.ShadowRenderingShader.prototype.generateFragmentShader = function (
     shader += "uniform mat4 inverseProj;\n";
     shader += "varying vec2 vPosition;\n";
     shader += "uniform sampler2D sceneMap;\n";
-    if ( properties.FOG )
-    {
-        shader += "uniform sampler2D sceneColorMap;\n";
-    }
     for ( var i = 0; i < 5; i++ ) { shader += "uniform float cascade" + i + "_Depth;\n"; }
 
     for ( var l = 0; l < shadowedLights.length; l++ )
@@ -105,11 +101,35 @@ x3dom.shader.ShadowRenderingShader.prototype.generateFragmentShader = function (
 
     if ( properties.FOG ) { shader += x3dom.shader.fog(); }
 
-    shader += "void main(void) {\n" +
+    shader += 
+        "void main(void) {\n" +
+        "    vec4 color = vec4( 1.0 );\n";
+    if ( properties.FOG ) {
+        shader +=
+            "    if (fogType < 2.0) {\n" +
+            "        vec2 texCoordsSceneMap = (vPosition + 1.0)*0.5;\n" +
+            "        vec4 projCoords = texture2D(sceneMap, texCoordsSceneMap);\n";
+        if ( !x3dom.caps.FP_TEXTURES )
+        {
+            shader +=
+                "        projCoords.z = unpackDepth(projCoords);\n" +
+                "        projCoords.w = 1.0;\n";
+        }
+        shader +=
+            "        projCoords = projCoords / projCoords.w;\n" +
+            "        projCoords.xy = vPosition;\n" +
+            "        vec4 eyeCoords = inverseProj*projCoords;\n" +
+            "        vec3 eye = eyeCoords.xyz / eyeCoords.w;\n" +
+            "        float f0 = calcFog( eye );\n" +
+            "        color = vec4(  1.0 - f0, 1.0 - f0, 1.0 - f0, 1.0 );\n" +
+            "    }\n" +
+            "    else {\n";
+    }
+    shader +=
         "    float shadowValue = 1.0;\n" +
         "    vec2 texCoordsSceneMap = (vPosition + 1.0)*0.5;\n" +
         "    vec4 projCoords = texture2D(sceneMap, texCoordsSceneMap);\n" +
-        "    if (projCoords == vec4(1.0, 1.0, 1.0, 0.0)){ discard; }\n";
+        "    if ( projCoords == vec4(1.0, 1.0, 1.0, 0.0) ){ discard; }\n";
     if ( !x3dom.caps.FP_TEXTURES )
     {
         shader += "    projCoords.z = unpackDepth(projCoords);\n" +
@@ -161,34 +181,16 @@ x3dom.shader.ShadowRenderingShader.prototype.generateFragmentShader = function (
         shader += "    }\n";
     }
 
-    //shader += "}\n" +
-    //use color var
-    shader += "    vec4 color = " + x3dom.shader.encodeGamma( {}, "vec4(shadowValue, shadowValue, shadowValue, 1.0)" ) + ";\n";
-    // BEGIN FOG ADDITION
-    if ( properties.FOG )
-    {
-        shader +=
-            "    float f0 = 0.0;\n" +
-            "    vec3 eye = eyeCoords.xyz / eyeCoords.w;\n" +
-            "    f0 = max( 0.00001, calcFog( eye ) );\n" +
-            "    vec4 dst_color = texture2D(sceneColorMap, vec2(texCoordsSceneMap.x, 1.0 - texCoordsSceneMap.y));\n" +
-            "    vec3 nofog_color = ( dst_color.rgb - fogColor * ( 1.0 - f0 ) ) / f0;\n" +
-            "    nofog_color *= color.rgb;\n" +
-            "    color.rgb = fogColor * ( 1.0 - f0 ) + f0 * ( nofog_color );\n" +
-            "    color.rgb /= dst_color.rgb;\n";
-    }
-    // END FOG ADDITION
-
+    shader += "    color = " + x3dom.shader.encodeGamma( {}, "vec4(shadowValue, shadowValue, shadowValue, 1.0)" ) + " ;\n";
+    if ( properties.FOG ) { shader += "    }\n"; }
     // In principle we should fix the place where this is multplied in instead
     // of overcompensating for the subsequent error from here. This way of doing
     // gamma correction explots the rule that (a*b)^x = a^x * b^x (x being the
     // gamma coefficient), i.e. the umbra is corrected for now, the penumbra
     // is incorrect and full light is zero here so unaffected as well.
-    shader +=
-        //"    gl_FragColor = " + x3dom.shader.encodeGamma( {}, "vec4(color, 1.0)" ) + ";\n" +
-        "    gl_FragColor = color;\n" +
+    shader += "    gl_FragColor = color;\n" +
         "}\n";
-
+console.log(shader);
     var fragmentShader = gl.createShader( gl.FRAGMENT_SHADER );
     gl.shaderSource( fragmentShader, shader );
     gl.compileShader( fragmentShader );
