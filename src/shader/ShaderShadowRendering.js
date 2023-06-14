@@ -107,7 +107,7 @@ x3dom.shader.ShadowRenderingShader.prototype.generateFragmentShader = function (
         //reconstruct world and view coordinates from scene map
         "    vec2 texCoordsSceneMap = (vPosition + 1.0)*0.5;\n" +
         "    vec4 projCoords = texture2D(sceneMap, texCoordsSceneMap);\n" +
-        "    if ( projCoords == vec4(1.0, 1.0, 1.0, 0.0) ){ discard; }\n";
+        "    if ( projCoords == vec4(1.0, 1.0, 1.0, 0.0) ){ gl_FragColor = vec4( 1.0 ); return; }\n";
     if ( !x3dom.caps.FP_TEXTURES )
     {
         shader +=
