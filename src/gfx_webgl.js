@@ -5114,9 +5114,6 @@ x3dom.gfx_webgl = ( function ()
             gl.drawArrays( gl.TRIANGLES, 0, 6 ); //shadows
 
             // Set fog
-            // TODO: when no state/shader switch happens, all light/fog/... uniforms don't need to be set again
-
-            // THINKABOUTME: changed flag only works as long as lights and fog are global
             if ( properties.FOG )
             {
                 var fog = scene.getFog();
