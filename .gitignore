@@ -10,7 +10,8 @@ test/my-tests
 *.pyc
 *.db
 version.js
-dist
+# try gh-pages
+# dist
 test/qunit
 tools/config/Data
 *~backup~
