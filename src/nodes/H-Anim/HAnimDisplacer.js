@@ -71,6 +71,17 @@ x3dom.registerNodeType(
 
             // TODO displacement (add functionality e.g. via matrix palette skinning in shader)
             x3dom.debug.logWarning( "HAnimDisplacer in Segments NYI." );
+        },
+        {
+            fieldChanged : function ( fieldName )
+            {
+                if ( fieldName === "weight" )
+                {
+                    const segments = this._parentNodes.filter( ( node ) => x3dom.isa( node, x3dom.nodeTypes.HAnimSegment ) );
+                    
+                    //debugger;
+                }
+            }
         }
     )
 );
