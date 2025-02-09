@@ -78,8 +78,18 @@ x3dom.registerNodeType(
                 if ( fieldName === "weight" )
                 {
                     const segments = this._parentNodes.filter( ( node ) => x3dom.isa( node, x3dom.nodeTypes.HAnimSegment ) );
-                    
-                    //debugger;
+                    segments.forEach( ( segment ) => {
+                        let new_points = segment._restCoord.copy();
+                        //accumulate all displacements
+                        segment._cf.displacers.nodes.forEach( ( displacer ) => {
+                            displacer._vf.coordIndex.forEach( ( index ) => {
+                                let point = new_points[ index ];
+                                new_points[ index ] = point.addScaled( displacer._vf.displacements[ index ], displacer._vf.weight );
+                            })                         
+                        })
+                        segment._cf.coord.node._vf.point = new_points;
+                        segment._cf.coord.node.fieldChanged('point');
+                    })
                 }
             }
         }
