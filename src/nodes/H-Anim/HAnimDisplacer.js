@@ -82,9 +82,9 @@ x3dom.registerNodeType(
                         let new_points = segment._restCoord.copy();
                         //accumulate all displacements
                         segment._cf.displacers.nodes.forEach( ( displacer ) => {
-                            displacer._vf.coordIndex.forEach( ( index ) => {
-                                let point = new_points[ index ];
-                                new_points[ index ] = point.addScaled( displacer._vf.displacements[ index ], displacer._vf.weight );
+                            displacer._vf.coordIndex.forEach( ( coordIndex, index ) => {
+                                let point = new_points[ coordIndex ];
+                                new_points[ coordIndex ] = point.addScaled( displacer._vf.displacements[ index ], displacer._vf.weight );
                             })                         
                         })
                         segment._cf.coord.node._vf.point = new_points;
