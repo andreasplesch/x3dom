@@ -70,14 +70,15 @@ x3dom.registerNodeType(
             this.addField_MFVec3f( ctx, "displacements", [] );
 
             // TODO displacement (add functionality e.g. via matrix palette skinning in shader)
-            x3dom.debug.logWarning( "HAnimDisplacer in Segments in progress" );
+            x3dom.debug.logWarning( "HAnimDisplacer in Segments in progress." );
         },
         {
             fieldChanged : function ( fieldName )
             {
                 if ( fieldName === "weight" )
                 {
-                    const segments = this._parentNodes.filter( ( node ) => x3dom.isa( node, x3dom.nodeTypes.HAnimSegment ) );
+                    const segments = this._parentNodes.filter( ( node ) => 
+                        x3dom.isa( node, x3dom.nodeTypes.HAnimSegment ) && node._restCoord );
                     segments.forEach( ( segment ) => {
                         let new_points = segment._restCoord.copy();
                         //accumulate all displacements
