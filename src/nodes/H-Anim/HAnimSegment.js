@@ -96,7 +96,7 @@ x3dom.registerNodeType(
         },
         {
             nodeChanged: function () {
-              this._restCoord = this._cf.coord.node._vf.point.copy();
+              this._restCoord = this._cf.coord.node?._vf.point.copy();
             }
             // TODO coord      add functionality
             // TODO displacers add functionality
