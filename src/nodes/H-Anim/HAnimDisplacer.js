@@ -80,16 +80,23 @@ x3dom.registerNodeType(
                     const segments = this._parentNodes.filter( ( node ) => 
                         x3dom.isa( node, x3dom.nodeTypes.HAnimSegment ) && node._restCoord );
                     segments.forEach( ( segment ) => {
-                        let new_points = segment._restCoord.copy();
+                        //let new_points = segment._restCoord.copy();
+                        let points = segment._cf.coord.node._vf.point;
+                        points.setValues( segment._restCoord );
                         //accumulate all displacements
                         segment._cf.displacers.nodes.forEach( ( displacer ) => {
+                            const displacements = displacer._vf.displacements;
+                            const w = displacer._vf.weight;
                             displacer._vf.coordIndex.forEach( ( coordIndex, index ) => {
-                                let point = new_points[ coordIndex ];
-                                new_points[ coordIndex ] = point.addScaled( displacer._vf.displacements[ index ], displacer._vf.weight );
+                                let point = points[ coordIndex ];
+                                const d = displacements[ index ];
+                                //new_points[ coordIndex ] = point.addScaled( displacer._vf.displacements[ index ], displacer._vf.weight );
+                                points[ coordIndex ].set( point.x + w * d.x, point.y + w * d.y, point.z + w * d.z );
                             })                         
                         })
-                        segment._cf.coord.node._vf.point = new_points;
+                        //segment._cf.coord.node._vf.point = new_points;
                         segment._cf.coord.node.fieldChanged('point');
+                        //debugger;
                     })
                 }
             }
