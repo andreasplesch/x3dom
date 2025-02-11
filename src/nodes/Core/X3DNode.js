@@ -733,7 +733,7 @@ x3dom.registerNodeType(
             addField_SFInt32 : function ( ctx, name, n = 0 )
             {
                 this._vf[ name ] = ctx && ctx.xmlNode && ctx.xmlNode.hasAttribute( name ) ?
-                    parseInt( ctx.xmlNode.getAttribute( name ), 10 ) : n;
+                    parseInt( ctx.xmlNode.getAttribute( name ), 10 ) : 1 * n;
 
                 if ( ctx && ctx.xmlNode ) { this.initSetter( ctx.xmlNode, name ); }
                 this._vfFieldTypes[ name ] = "SFInt32";
@@ -769,7 +769,7 @@ x3dom.registerNodeType(
             addField_SFBool : function ( ctx, name, n = false )
             {
                 this._vf[ name ] = ctx && ctx.xmlNode && ctx.xmlNode.hasAttribute( name ) ?
-                    ctx.xmlNode.getAttribute( name ).toLowerCase() === "true" : n ;
+                    ctx.xmlNode.getAttribute( name ).toLowerCase() === "true" : !!n ;
 
                 if ( ctx && ctx.xmlNode ) { this.initSetter( ctx.xmlNode, name ); }
                 this._vfFieldTypes[ name ] = "SFBool";

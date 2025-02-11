@@ -75,7 +75,7 @@ x3dom.ProtoDeclaration.prototype.registerNode = function ()
                                 ctx.xmlNode.setAttribute( field.name, field.value );
                             }
                         }
-                        this[ "addField_" + field.dataType ]( ctx, field.name, field.value );
+                        this[ "addField_" + field.dataType ]( ctx, field.name, field.value == null ? undefined : field.value );
                     }
                     else // _cf fields
                     {
