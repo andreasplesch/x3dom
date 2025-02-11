@@ -77,27 +77,30 @@ x3dom.registerNodeType(
             {
                 if ( fieldName === "weight" )
                 {
-                    const segments = this._parentNodes.filter( ( node ) => 
+                    const segments = this._parentNodes.filter( ( node ) =>
                         x3dom.isa( node, x3dom.nodeTypes.HAnimSegment ) && node._restCoord );
-                    segments.forEach( ( segment ) => {
+                    segments.forEach( ( segment ) =>
+                    {
                         //let new_points = segment._restCoord.copy();
-                        let points = segment._cf.coord.node._vf.point;
+                        const points = segment._cf.coord.node._vf.point;
                         points.setValues( segment._restCoord );
                         //accumulate all displacements
-                        segment._cf.displacers.nodes.forEach( ( displacer ) => {
+                        segment._cf.displacers.nodes.forEach( ( displacer ) =>
+                        {
                             const displacements = displacer._vf.displacements;
                             const w = displacer._vf.weight;
-                            displacer._vf.coordIndex.forEach( ( coordIndex, index ) => {
-                                let point = points[ coordIndex ];
+                            displacer._vf.coordIndex.forEach( ( coordIndex, index ) =>
+                            {
+                                const point = points[ coordIndex ];
                                 const d = displacements[ index ];
                                 //new_points[ coordIndex ] = point.addScaled( displacer._vf.displacements[ index ], displacer._vf.weight );
                                 points[ coordIndex ].set( point.x + w * d.x, point.y + w * d.y, point.z + w * d.z );
-                            })                         
-                        })
+                            } );
+                        } );
                         //segment._cf.coord.node._vf.point = new_points;
-                        segment._cf.coord.node.fieldChanged('point');
+                        segment._cf.coord.node.fieldChanged( "point" );
                         //debugger;
-                    })
+                    } );
                 }
             }
         }

@@ -95,8 +95,9 @@ x3dom.registerNodeType(
             this.addField_MFNode( "displacers", x3dom.nodeTypes.HAnimDisplacer );
         },
         {
-            nodeChanged: function () {
-              this._restCoord = this._cf.coord.node?._vf.point.copy();
+            nodeChanged : function ()
+            {
+                this._restCoord = this._cf.coord.node && this._cf.coord.node._vf.point.copy();
             }
             // TODO coord      add functionality
             // TODO displacers add functionality
