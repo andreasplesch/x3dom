@@ -100,6 +100,9 @@ x3dom.registerNodeType(
                     clipPlanes = localClipPlanes.concat( clipPlanes );
                 }
 
+                //hook for HAnim nodes (and others)
+                this.onBeforeCollectChildNodes( childTransform );
+
                 for ( var i = 0; i < n; i++ )
                 {
                     if ( ( cnode = this._childNodes[ i ] ) )
@@ -107,6 +110,11 @@ x3dom.registerNodeType(
                         cnode.collectDrawableObjects( childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
                     }
                 }
+            },
+            
+            onBeforeCollectChildNodes: function ( childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes )
+            {
+                //implemented by derived nodes
             }
         }
     )
