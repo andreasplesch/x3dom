@@ -146,7 +146,7 @@ x3dom.registerNodeType(
 
             graphState : function ()
             {
-                this._graph.needCulling = false; //never cull
+                this._graph.needCulling = !this._humanoid._cf.skinCoord.node; //never cull if skinned
                 return this._graph;
             },
 
