@@ -75,7 +75,7 @@ x3dom.registerNodeType(
         {
             fieldChanged : function ( fieldName )
             {
-                if ( fieldName === "weight" )
+                if ( fieldName === "weight" || fieldName === "displacements" )
                 {
                     const segments = this._parentNodes.filter( ( node ) =>
                         x3dom.isa( node, x3dom.nodeTypes.HAnimSegment ) && node._restCoord );
