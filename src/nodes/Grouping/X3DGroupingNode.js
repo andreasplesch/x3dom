@@ -112,7 +112,7 @@ x3dom.registerNodeType(
                 }
             },
             
-            onBeforeCollectChildNodes: function ( childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes )
+            onBeforeCollectChildNodes: function ( childTransform )//, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes )
             {
                 //implemented by derived nodes
             }
