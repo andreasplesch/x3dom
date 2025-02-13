@@ -98,6 +98,38 @@ x3dom.registerNodeType(
             nodeChanged : function ()
             {
                 this._restCoord = this._cf.coord.node && this._cf.coord.node._vf.point.copy();
+                this._weight_changed = false;
+            },
+         
+            graphState : function ()
+            {
+                //this._graph.needCulling = !this._humanoid._cf.skinCoord.node; //never cull if skinned
+                //this._graph.needCulling = false; //never cull
+                return this._graph;
+            },
+
+            onBeforeCollectChildNodes : function ( childTransform )
+            {
+                const segment = this;
+                if (!this._restCoord || !segment._weight_changed) return
+                const points = this._cf.coord.node._vf.point;
+                points.setValues( segment._restCoord );
+                //accumulate all displacements
+                segment._cf.displacers.nodes.forEach( ( displacer ) =>
+                {
+                    const displacements = displacer._vf.displacements;
+                    const w = displacer._vf.weight;
+                    displacer._vf.coordIndex.forEach( ( coordIndex, index ) =>
+                    {
+                        const point = points[ coordIndex ];
+                        const d = displacements[ index ];
+                        //new_points[ coordIndex ] = point.addScaled( displacer._vf.displacements[ index ], displacer._vf.weight );
+                        points[ coordIndex ].set( point.x + w * d.x, point.y + w * d.y, point.z + w * d.z );
+                    } );
+                } );
+                //segment._cf.coord.node._vf.point = new_points;
+                segment._cf.coord.node.fieldChanged( "point" );
+                segment._weight_changed = false;
             }
             // TODO coord      add functionality
             // TODO displacers add functionality
