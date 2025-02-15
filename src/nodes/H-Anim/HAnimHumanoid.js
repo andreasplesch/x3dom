@@ -262,9 +262,9 @@ x3dom.registerNodeType(
             this.addField_MFVec3f( ctx, "skinBindingNormals", [] );
         },
         {
-            collectChildNodes: function ( childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes )
+            collectChildNodes : function ( childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes )
             {
-                 //reset skin coords and normals before traversing skeleton
+                //reset skin coords and normals before traversing skeleton
                 if ( this._cf.skinCoord.node )
                 {this._cf.skinCoord.node._vf.point.setValues( this._restCoords );}
 

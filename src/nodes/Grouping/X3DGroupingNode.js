@@ -104,15 +104,15 @@ x3dom.registerNodeType(
                 this.onBeforeCollectChildNodes( childTransform );
 
                 //HAnimHumanoid overwrites this method
-                this.collectChildNodes( childTransform , drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
+                this.collectChildNodes( childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes );
             },
 
-            onBeforeCollectChildNodes: function ( childTransform )//, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes )
+            onBeforeCollectChildNodes : function ( childTransform )//, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes )
             {
                 //implemented by derived nodes
             },
 
-            collectChildNodes: function ( childTransform , drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes )
+            collectChildNodes : function ( childTransform, drawableCollection, singlePath, invalidateCache, planeMask, clipPlanes )
             {
                 for ( var i = 0; i < this._childNodes.length; i++ )
                 {

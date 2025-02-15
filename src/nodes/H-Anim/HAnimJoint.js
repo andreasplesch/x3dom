@@ -157,9 +157,9 @@ x3dom.registerNodeType(
                     humanoid,
                     trafo,
                     displacers;
-                
+
                 var skinCoord = this._humanoid._cf.skinCoord.node;
-                
+
                 if ( skinCoord )
                 {
                     humanoid = this._humanoid;
@@ -229,10 +229,6 @@ x3dom.registerNodeType(
                 }
             }
         }
-
-        //TODO: for skinned animation
-        //custom collectDrawableObjects which receives skinCoord and skinNormal fields
-        //or use fieldChanged and search for skinCoord
         //or search for Humanoid, skinCoord at nodeChanged
     )
 );
