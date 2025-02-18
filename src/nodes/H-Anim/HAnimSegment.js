@@ -128,6 +128,12 @@ x3dom.registerNodeType(
                 } );
                 segment._cf.coord.node.fieldChanged( "point" );
                 segment._field_changed = false;
+                // var _pointString = JSON.stringify( this._vf.point );
+                // if (  _pointString != this._lastPointString )
+                {
+                    // this._lastPointString = _pointString;
+                    segment._cf.coord.node.postMessage( "point", segment._cf.coord.node._vf.point );
+                }
             }
         }
     )
