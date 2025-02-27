@@ -817,9 +817,8 @@ x3dom.Texture.prototype.updateText = function ()
         lengths      : lengths
     };
 
-    this.renderScaledText( text_ctx, 1, renderConfig ).then
-    ( () => {
-
+    this.renderScaledText( text_ctx, 1, renderConfig ).then( () =>
+    {
         if ( this.texture === null )
         {
             this.texture = gl.createTexture();
@@ -843,7 +842,7 @@ x3dom.Texture.prototype.updateText = function ()
         {
             node.setAllDirty();
         } );
-    });
+    } );
 };
 
 x3dom.Texture.prototype.renderScaledText = function ( ctx2d, pot, txt )
@@ -854,13 +853,14 @@ x3dom.Texture.prototype.renderScaledText = function ( ctx2d, pot, txt )
         render();
         return Promise.resolve( true );
     }
-    return document.fonts.load(font_spec).then( () =>
-        {
-            render();
-        },
-        (err) => { x3dom.debug.logError( "font loading rejection:" + err ); }
+    return document.fonts.load( font_spec ).then( () =>
+    {
+        render();
+    },
+    ( err ) => { x3dom.debug.logError( "font loading rejection:" + err ); }
     );
-    function render () {
+    function render ()
+    {
         ctx2d.font = font_spec;
         var textYpos = txt.textY;
 
