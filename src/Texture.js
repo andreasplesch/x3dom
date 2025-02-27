@@ -842,6 +842,7 @@ x3dom.Texture.prototype.updateText = function ()
         {
             node.setAllDirty();
         } );
+        this.node.validateGLObject(); // undirty texture right away since async
     } );
 };
 
