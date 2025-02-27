@@ -132,13 +132,30 @@ x3dom.registerNodeType(
              * @instance
              */
             this.addField_SFFloat( ctx, "quality", 2.0 );
+
+            /**
+             * urls of web font files to use
+             * @var {x3dom.fields.MFString} url
+             * @memberof x3dom.nodeTypes.FontStyle
+             * @initvalue []
+             * @field x3dom
+             * @instance
+             */
+            this.addField_MFString( ctx, "url", [] );
+            this._hasFontFace = false;
         },
         {
+            nodeChanged : function ()
+            {
+                this.addFont();
+            },
+
             fieldChanged : function ( fieldName )
             {
                 if ( fieldName == "family" || fieldName == "horizontal" || fieldName == "justify" ||
                     fieldName == "language" || fieldName == "leftToRight" || fieldName == "size" ||
-                    fieldName == "spacing" || fieldName == "style" || fieldName == "topToBottom" )
+                    fieldName == "spacing" || fieldName == "style" || fieldName == "topToBottom" || 
+                    fieldName == "url" )
                 {
                     this._parentNodes.forEach( function ( node )
                     {
@@ -147,6 +164,76 @@ x3dom.registerNodeType(
                             textnode.setAllDirty();
                         } );
                     } );
+                    if ( this._hasFontFace )
+                    {
+                        document.fonts.delete( this._fontFace );
+                        this._hasFontFace = false;
+                    }
+                    this.addFont();
+                }
+            },
+
+            addFont : function ()
+            {
+                const url = this._vf.url[0];
+                if (!url) { return }
+                var fonts = this._vf.family.toString();
+                // clean attribute values and split in array
+                fonts = fonts.trim().replace( /\'/g, "" ).replace( /\,/, " " );
+                fonts = fonts.split( " " );
+        
+                var font_family = fonts.map( function ( s )
+                {
+                    if ( s == "SANS" )
+                    {
+                        return "Verdana, sans-serif";
+                    }
+                    else if ( s == "SERIF" )
+                    {
+                        return "Georgia, serif";
+                    }
+                    else if ( s == "TYPEWRITER" )
+                    {
+                        return "monospace";
+                    }
+                    else
+                    {
+                        return "" + s + "";
+                    }  // 'Verdana'
+                } ).join( "," );
+        
+                var font_style = this._vf.style.toString().replace( /\'/g, "" );
+                var font_weight = "normal";
+                switch ( font_style.toUpperCase() )
+                {
+                    case "PLAIN":
+                        font_style = "normal";
+                        break;
+                    case "BOLD":
+                        font_style = "normal";
+                        font_weight = "bold";
+                        break;
+                    case "ITALIC":
+                        font_style = "italic";
+                        break;
+                    case "BOLDITALIC":
+                        font_style = "italic"
+                        font_weight = "bold";
+                        break;
+                    default:
+                        font_style = "normal";
+                }
+                const urls = this._vf.url.map( (url) => "url(" + url + ")").join(",");
+                this._fontFace = new FontFace(
+                    font_family,
+                    urls, // same as src of @font-face, can have multiple urls
+                    { "style": font_style, "weight": font_weight, "display": "swap" } );
+                this._hasFontFace = true;
+                try {
+                    document.fonts.add( this._fontFace );
+                }
+                catch (error) {
+                    x3dom.debug.logError( error.message );
                 }
             }
         }
