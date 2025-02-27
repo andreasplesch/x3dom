@@ -817,13 +817,13 @@ x3dom.Texture.prototype.updateText = function ()
         lengths      : lengths
     };
 
+    if ( this.texture === null )
+    {
+        this.texture = gl.createTexture();
+    }
+
     this.renderScaledText( text_ctx, 1, renderConfig ).then( () =>
     {
-        if ( this.texture === null )
-        {
-            this.texture = gl.createTexture();
-        }
-
         gl.bindTexture( this.type, this.texture );
         this.uploadTextMipmap( text_canvas, renderConfig );
         gl.bindTexture( this.type, null );
