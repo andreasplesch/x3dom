@@ -825,7 +825,7 @@ x3dom.Texture.prototype.updateText = function ()
     this.renderScaledText( text_ctx, 1, renderConfig ).then( () =>
     {
         gl.bindTexture( this.type, this.texture );
-        this.uploadTextMipmap( text_canvas, renderConfig );
+        this.uploadTextMipmap( text_ctx, renderConfig );
         gl.bindTexture( this.type, null );
 
         //remove canvas after Texture creation
@@ -876,16 +876,15 @@ x3dom.Texture.prototype.renderScaledText = function ( ctx2d, pot, txt )
     }
 };
 
-x3dom.Texture.prototype.uploadTextMipmap = function ( canvas, txt )
+x3dom.Texture.prototype.uploadTextMipmap = function ( ctx2d, txt )
 {
     var gl = this.gl,
-        w = canvas.width,
-        h = canvas.height,
+        w = ctx2d.canvas.width,
+        h = ctx2d.canvas.height,
         level = 0,
         pot = 1,
         w2 = w,
-        h2 = h,
-        ctx2d = canvas.getContext( "2d", { willReadFrequently: true } );
+        h2 = h
     while ( true )
     {
         gl.texImage2D( this.type, level++, this.format, this.format, gl.UNSIGNED_BYTE, ctx2d.getImageData( 0, 0, w2, h2 ) );
