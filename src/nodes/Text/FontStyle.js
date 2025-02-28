@@ -202,32 +202,13 @@ x3dom.registerNodeType(
                     }  // 'Verdana'
                 } ).join( "," );
 
-                var font_style = this._vf.style.toString().replace( /\'/g, "" );
-                var font_weight = "normal";
-                switch ( font_style.toUpperCase() )
-                {
-                    case "PLAIN":
-                        font_style = "normal";
-                        break;
-                    case "BOLD":
-                        font_style = "normal";
-                        font_weight = "bold";
-                        break;
-                    case "ITALIC":
-                        font_style = "italic";
-                        break;
-                    case "BOLDITALIC":
-                        font_style = "italic";
-                        font_weight = "bold";
-                        break;
-                    default:
-                        font_style = "normal";
-                }
+                const { style, weight } = this.fontFaceStyleWeight(); 
+
                 const urls = this._vf.url.map( ( url ) => "url(" + url + ")" ).join( "," );
                 this._fontFace = new FontFace(
                     font_family,
                     urls, // same as src of @font-face, can have multiple urls
-                    { "style": font_style, "weight": font_weight, "display": "swap" } );
+                    { "style": style, "weight": weight, "display": "swap" } );
                 this._hasFontFace = true;
                 try
                 {
@@ -237,6 +218,31 @@ x3dom.registerNodeType(
                 {
                     x3dom.debug.logError( error.message );
                 }
+            },
+
+            fontFaceStyleWeight : function ()
+            {
+                const font_style = this._vf.style.toString().replace( /\'/g, "" );
+                let weight = "normal";
+                let style = "normal";
+                switch ( font_style.toUpperCase() )
+                {
+                    case "PLAIN":
+                        break;
+                    case "BOLD":
+                        weight = "bold";
+                        break;
+                    case "ITALIC":
+                        style = "italic";
+                        break;
+                    case "BOLDITALIC":
+                        style = "italic";
+                        weight = "bold";
+                        break;
+                    default:
+                        style = "normal";
+                }
+                return { "style": style, "weight": weight }
             }
         }
     )

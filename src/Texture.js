@@ -885,7 +885,7 @@ x3dom.Texture.prototype.uploadTextMipmap = function ( ctx2d, txt )
         level = 0,
         pot = 1,
         w2 = w,
-        h2 = h
+        h2 = h;
     while ( true )
     {
         gl.texImage2D( this.type, level++, this.format, this.format, gl.UNSIGNED_BYTE, ctx2d.getImageData( 0, 0, w2, h2 ) );
