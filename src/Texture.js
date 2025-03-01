@@ -566,50 +566,9 @@ x3dom.Texture.prototype.updateText = function ()
 
     if ( fontStyleNode !== null )
     {
-        var fonts = fontStyleNode._vf.family.toString();
-
-        // clean attribute values and split in array
-        fonts = fonts.trim().replace( /\'/g, "" ).replace( /\,/, " " );
-        fonts = fonts.split( " " );
-
-        font_family = fonts.map( function ( s )
-        {
-            if ( s == "SANS" )
-            {
-                return "Verdana, sans-serif";
-            }
-            else if ( s == "SERIF" )
-            {
-                return "Georgia, serif";
-            }
-            else if ( s == "TYPEWRITER" )
-            {
-                return "monospace";
-            }
-            else
-            {
-                return "" + s + "";
-            }  // 'Verdana'
-        } ).join( "," );
-
-        font_style = fontStyleNode._vf.style.toString().replace( /\'/g, "" );
-        switch ( font_style.toUpperCase() )
-        {
-            case "PLAIN":
-                font_style = "normal";
-                break;
-            case "BOLD":
-                font_style = "bold";
-                break;
-            case "ITALIC":
-                font_style = "italic";
-                break;
-            case "BOLDITALIC":
-                font_style = "italic bold";
-                break;
-            default:
-                font_style = "normal";
-        }
+        font_family = fontStyleNode.getCSSFamily();
+        const { "style": _style, "weight": _weight } = fontStyleNode.getCSSStyleWeight();
+        font_style = _style + " " + _weight;
 
         var leftToRight = fontStyleNode._vf.leftToRight ? "ltr" : "rtl";
         var topToBottom = fontStyleNode._vf.topToBottom;

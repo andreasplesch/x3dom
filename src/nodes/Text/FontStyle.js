@@ -177,32 +177,9 @@ x3dom.registerNodeType(
             {
                 const url = this._vf.url[ 0 ];
                 if ( !url ) { return; }
-                var fonts = this._vf.family.toString();
-                // clean attribute values and split in array
-                fonts = fonts.trim().replace( /\'/g, "" ).replace( /\,/, " " );
-                fonts = fonts.split( " " );
 
-                var font_family = fonts.map( function ( s )
-                {
-                    if ( s == "SANS" )
-                    {
-                        return "Verdana, sans-serif";
-                    }
-                    else if ( s == "SERIF" )
-                    {
-                        return "Georgia, serif";
-                    }
-                    else if ( s == "TYPEWRITER" )
-                    {
-                        return "monospace";
-                    }
-                    else
-                    {
-                        return "" + s + "";
-                    }  // 'Verdana'
-                } ).join( "," );
-
-                const { style, weight } = this.fontFaceStyleWeight(); 
+                const font_family = this.getCSSFamily();
+                const { style, weight } = this.getCSSStyleWeight();
 
                 const urls = this._vf.url.map( ( url ) => "url(" + url + ")" ).join( "," );
                 this._fontFace = new FontFace(
@@ -220,7 +197,27 @@ x3dom.registerNodeType(
                 }
             },
 
-            fontFaceStyleWeight : function ()
+            getCSSFamily : function ()
+            {
+                const font_family = this._vf.family.map( function ( s )
+                {
+                    s = s.trim().replace( /\'/g, "" ).replace( /\"/g, "" );
+                    switch ( s )
+                    {
+                        case "SANS":
+                            return "Verdana, sans-serif";
+                        case "SERIF":
+                            return "Georgia, serif";
+                        case "TYPEWRITER":
+                            return "monospace";
+                        default:
+                            return s;
+                    }
+                } ).join( "," );
+                return font_family;
+            },
+
+            getCSSStyleWeight : function ()
             {
                 const font_style = this._vf.style.toString().replace( /\'/g, "" );
                 let weight = "normal";
@@ -242,7 +239,7 @@ x3dom.registerNodeType(
                     default:
                         style = "normal";
                 }
-                return { "style": style, "weight": weight }
+                return { "style": style, "weight": weight };
             }
         }
     )
