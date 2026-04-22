@@ -15,6 +15,7 @@
     * MSFT_texture_dds
   * field values from metadata for non-standard nodes
 * Improvements
+  * sensors: show name and description in log on isOver
   * Inline: recognize .x3dj extension as X3DJ encoded content
   * Extrusion: fix for two point spines, smooth closed spine and xs 
   * hooks for HAnim in grouping node traversal
